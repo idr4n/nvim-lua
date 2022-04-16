@@ -55,7 +55,7 @@ dashboard.section.header.opts.hl = pick_color()
 dashboard.section.buttons.val = {
   dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
 	-- dashboard.button("f", "  Find file", ":Files<cr>"),
-  dashboard.button("f", "  Find file", ":lua require('fzf-lua').files()<CR><cr>"),
+  dashboard.button("f", "  Find file", ":lua require('fzf-lua').files()<cr>"),
 	dashboard.button("r", "  Recently used files", ":History<cr>"),
   dashboard.button("t", "  Find text", ":Rg<cr>"),
   -- dashboard.button("s", "  Open session", ":SearchSession <CR>"),
