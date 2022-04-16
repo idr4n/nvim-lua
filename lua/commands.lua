@@ -35,62 +35,74 @@ keymap("n", "<leader>cr", ":CodeRun<cr>", opts)
 -- Autocommands
 
 -- Autospelling for tex and md files
-vim.cmd([[
-  augroup spell_tex_md
-    autocmd!
-    autocmd FileType tex setlocal spell spelllang=en_us
-    autocmd FileType markdown setlocal spell spelllang=en_us
-    " autocmd FileType markdown setlocal nonumber nocursorline
-  augroup END
-]])
+vim.api.nvim_create_augroup("spell_tex_md", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "tex", "markdown" },
+	command = "setlocal spell spelllang=en_us",
+})
 
+-- Golang
+vim.api.nvim_create_augroup("golang", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "go" },
+	command = "setlocal shiftwidth=4 tabstop=4",
+	group = "golang",
+})
+-- format on save for golang files
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = { "*.go" },
+  callback = vim.lsp.buf.formatting_sync,
+	group = "golang",
+})
+
+-- Other Commands
 
 local function printDir()
-  local dir = vim.fn.getcwd()
-  print(string.format("Directory: %s", dir))
-  -- print("Directory: "..dir..". Vim did enter: "..vim.v.vim_did_enter)
+	local dir = vim.fn.getcwd()
+	print(string.format("Directory: %s", dir))
+	-- print("Directory: "..dir..". Vim did enter: "..vim.v.vim_did_enter)
 end
 
 local function writeFileSync(path, data)
-  local uv = require("luv")
-  local fd = assert(uv.fs_open(path, "w", -1))
-  uv.fs_write(fd, data.."\n", nil, function(_)
-    uv.fs_close(fd)
-  end)
+	local uv = require("luv")
+	local fd = assert(uv.fs_open(path, "w", -1))
+	uv.fs_write(fd, data .. "\n", nil, function(_)
+		uv.fs_close(fd)
+	end)
 end
 
 local function saveDir()
-  local cwd = vim.fn.getcwd()
+	local cwd = vim.fn.getcwd()
 
-  local ok
-  ok, _G.dirs = pcall(require, "workdirs")
-  if not ok then
-    _G.dirs = {}
-  end
+	local ok
+	ok, _G.dirs = pcall(require, "workdirs")
+	if not ok then
+		_G.dirs = {}
+	end
 
-  for _, dir in ipairs(_G.dirs) do
-    if dir == cwd then
-      return
-    end
-  end
+	for _, dir in ipairs(_G.dirs) do
+		if dir == cwd then
+			return
+		end
+	end
 
-  table.insert(_G.dirs, cwd)
-  table.sort(_G.dirs)
+	table.insert(_G.dirs, cwd)
+	table.sort(_G.dirs)
 
-  local new_dirs_str = vim.inspect(_G.dirs):gsub(" ", "\n\t")
+	local new_dirs_str = vim.inspect(_G.dirs):gsub(" ", "\n\t")
 
-  local path = vim.env.HOME.."/.config/nvim/lua/workdirs.lua"
-  writeFileSync(path, "return " .. new_dirs_str)
+	local path = vim.env.HOME .. "/.config/nvim/lua/workdirs.lua"
+	writeFileSync(path, "return " .. new_dirs_str)
 end
 
 local function onVimEnter()
-  printDir()
-  saveDir()
+	printDir()
+	saveDir()
 end
 
 vim.api.nvim_create_augroup("OnVimEnter", { clear = true })
 vim.api.nvim_create_autocmd("VimEnter", {
-  pattern = {"*"},
-  callback = onVimEnter,
-  group = "OnVimEnter",
+	pattern = { "*" },
+	callback = onVimEnter,
+	group = "OnVimEnter",
 })
