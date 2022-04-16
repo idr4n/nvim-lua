@@ -25,6 +25,10 @@ local function getColumn()
   return string.format("%03d", val)
 end
 
+local function getDir()
+  return " " .. tostring(vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t"))
+end
+
 local function diff_source()
   local gitsigns = vim.b.gitsigns_status_dict
   if gitsigns then
@@ -89,6 +93,7 @@ require("lualine").setup({
     lualine_x = { "filetype" },
     lualine_y = {},
     lualine_z = {
+      { getDir },
       { getColumn, padding = { left = 1, right = 0 } },
       { getLines, icon = "", padding = 1 },
     },
