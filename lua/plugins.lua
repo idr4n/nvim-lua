@@ -76,7 +76,7 @@ return packer.startup(function(use)
 		after = { "nvim-cmp" }, -- if a completion plugin is using tabs load it before
 	})
 	use({ "kyazdani42/nvim-tree.lua", config = get_setup("tree") })
-  use({ "simrat39/symbols-outline.nvim", config = get_setup("outline") })
+	use({ "simrat39/symbols-outline.nvim", config = get_setup("outline") })
 	use({ "folke/zen-mode.nvim", config = get_setup("zen-mode") })
 	use({
 		"mg979/vim-visual-multi",
@@ -142,7 +142,7 @@ return packer.startup(function(use)
 	--   config = get_setup("renamer"),
 	-- })
 	use({ "mfussenegger/nvim-jdtls", config = get_setup("jdtls") })
-  -- use({ "mfussenegger/nvim-jdtls" })
+	-- use({ "mfussenegger/nvim-jdtls" })
 
 	-- LuaLine
 	use({
