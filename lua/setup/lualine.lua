@@ -26,7 +26,11 @@ local function getColumn()
 end
 
 local function getDir()
-  return " " .. tostring(vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t"))
+  local dir = tostring(vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t"))
+  if #dir > 13 then
+    dir = dir:sub(1, 11) .. ".."
+  end
+  return " " .. dir
 end
 
 local function diff_source()
