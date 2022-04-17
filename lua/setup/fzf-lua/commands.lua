@@ -16,8 +16,16 @@ local function set_cwd(pwd, new_tab)
 			vim.cmd("tabnew")
 		end
 		vim.cmd("lcd " .. pwd)
-		require("fzf-lua").files()
-    -- vim.cmd("Files")
+		require("telescope.builtin").find_files({
+      previewer = false,
+			on_complete = {
+				function()
+					vim.cmd("startinsert")
+				end,
+			},
+		})
+		-- require("fzf-lua").files()
+		-- vim.cmd("Files")
 		require("fzf-lua.actions").ensure_insert_mode()
 		print(("Workingdir set to %s"):format(vim.fn.shellescape(pwd)))
 	else
@@ -31,12 +39,12 @@ function M.workdirs(new_tab)
 	end
 
 	-- workdirs.lua returns a table of workdirs
-  local ok, dirs = pcall(require, "workdirs")
-  if not ok then
-    dirs = {}
-  end
+	local ok, dirs = pcall(require, "workdirs")
+	if not ok then
+		dirs = {}
+	end
 	-- local dirs = {}
-  -- -- Get _G.paths defined in lua/commands.lua
+	-- -- Get _G.paths defined in lua/commands.lua
 	-- if _G.paths ~= nil then
 	-- 	dirs = _G.paths
 	-- end

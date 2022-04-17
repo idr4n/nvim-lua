@@ -14,24 +14,51 @@ telescope.setup({
 
 		prompt_prefix = " ",
 		selection_caret = " ",
-		path_display = { "smart" },
-		winblend = 0,
-		sorting_strategy = "descending",
-		layout_strategy = "flex",
 
-		layout_config = {
-			flex = {
-				flip_columns = 140,
-			},
-			vertical = {
-				preview_cutoff = 40,
-				prompt_position = "bottom",
-			},
-			horizontal = {
-				width = 0.9,
-				height = 0.8,
-			},
-		},
+    results_title = false,
+
+    sorting_strategy = "ascending",
+    layout_strategy = "center",
+    layout_config = {
+      preview_cutoff = 1, -- Preview should always show (unless previewer = false)
+
+      width = function(_, max_columns, _)
+        return math.min(max_columns, 80)
+      end,
+
+      height = function(_, _, max_lines)
+        return math.min(max_lines, 15)
+      end,
+    },
+
+    border = true,
+    borderchars = {
+      prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
+      results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
+      preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+    },
+
+    preview = {
+      hide_on_startup = false
+    },
+
+		-- winblend = 0,
+		-- sorting_strategy = "descending",
+		-- layout_strategy = "flex",
+
+		-- layout_config = {
+		-- 	flex = {
+		-- 		flip_columns = 140,
+		-- 	},
+		-- 	vertical = {
+		-- 		preview_cutoff = 40,
+		-- 		prompt_position = "bottom",
+		-- 	},
+		-- 	horizontal = {
+		-- 		width = 0.9,
+		-- 		height = 0.8,
+		-- 	},
+		-- },
 
 		mappings = {
 			i = {
@@ -43,6 +70,7 @@ telescope.setup({
 				["<C-k>"] = actions.move_selection_previous,
 
 				["<C-c>"] = actions.close,
+        ["<C-h>"] = require("telescope.actions.layout").toggle_preview,
 
 				["<Down>"] = actions.move_selection_next,
 				["<Up>"] = actions.move_selection_previous,
@@ -125,11 +153,11 @@ require("telescope").load_extension("file_browser")
 local opts = { noremap = true, silent = true }
 local keymap = vim.api.nvim_set_keymap
 
--- keymap("n", "<c-p>", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ winblend = 20 }))<cr>", opts)
--- keymap("n", "<c-p>", "<cmd>Telescope find_files<cr>", opts)
--- keymap("n", "<c-t>", "<cmd>Telescope live_grep<cr>", opts)
--- keymap("n", "<c-b>", "<cmd>Telescope buffers<cr>", opts)
--- keymap("n", "<leader>t", "<cmd>Telescope oldfiles<cr>", opts)
+-- keymap("n", "<c-p>", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
+keymap("n", "<c-p>", "<cmd>Telescope find_files<cr>", opts)
+keymap("n", "<leader>r", "<cmd>Telescope live_grep<cr>", opts)
+keymap("n", "<c-b>", "<cmd>Telescope buffers<cr>", opts)
+keymap("n", "<c-t>", "<cmd>Telescope oldfiles<cr>", opts)
 keymap("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", opts)
 keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", opts)
 keymap("n", "<leader>fb", "<cmd>Telescope file_browser<cr>", opts)

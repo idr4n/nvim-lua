@@ -69,10 +69,10 @@ autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 -- mappings
 
-local opts = { noremap = true, silent = true }
+-- local opts = { noremap = true, silent = true }
 -- vim.api.nvim_set_keymap("n", "<C-P>", ":Files<cr>", opts)
 -- vim.api.nvim_set_keymap("n", "<C-T>", ":History<cr>", opts)
 -- vim.api.nvim_set_keymap("n", "<C-B>", ":Buffers<cr>", opts)
-vim.api.nvim_set_keymap("n", "<leader>r", ":Rg<cr>", opts)
+-- vim.api.nvim_set_keymap("n", "<leader>r", ":Rg<cr>", opts)
 -- vim.api.nvim_set_keymap("n", "<leader>gs", ":GitFiles?<cr>", opts)
 
