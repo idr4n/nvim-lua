@@ -27,8 +27,8 @@ end
 
 local function getDir()
   local dir = tostring(vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t"))
-  if #dir > 13 then
-    dir = dir:sub(1, 11) .. ".."
+  if #dir > 20 then
+    dir = dir:sub(1, 17) .. "..."
   end
   return " " .. dir
 end
