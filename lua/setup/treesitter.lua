@@ -26,7 +26,24 @@ require("nvim-treesitter.configs").setup({
 -- Setup treesitter
 local ts = require("nvim-treesitter.configs")
 ts.setup({
-	ensure_installed = "maintained",
+	ensure_installed = {
+		"bash",
+		"css",
+		"go",
+		"html",
+		"javascript",
+		"lua",
+		"python",
+		"rust",
+		"tsx",
+		"typescript",
+    "cpp",
+    "java",
+    "json",
+    "latex",
+    "markdown",
+    "vim",
+	},
 	autopairs = { enable = true },
 	highlight = {
 		enable = true,
