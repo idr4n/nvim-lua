@@ -167,8 +167,15 @@ keymap("n", "gi", "<cmd>Telescope lsp_implementations<cr>", opts)
 keymap("n", "<leader>cs", "<cmd>Telescope lsp_document_symbols<cr>", opts)
 keymap("n", "<leader>cd", "<cmd>Telescope diagnostics<cr>", opts)
 keymap(
-  "n",
-  "<leader>fk",
-  "<cmd>lua require('telescope.builtin').keymaps({ layout_config = { width = 0.9, height = 0.5 } })<cr>",
-  opts
+	"n",
+	"<leader>fk",
+	"<cmd>lua require('telescope.builtin').keymaps({ layout_config = { width = 0.9, height = 0.5 } })<cr>",
+	opts
+)
+keymap(
+	"n",
+	"<leader>cc",
+	-- "<cmd>lua require('telescope.builtin').find_files({ cwd = '~/.config/nvim' })<cr>",
+  "<cmd>lcd ~/.config/nvim | Telescope find_files<cr>",
+	opts
 )
