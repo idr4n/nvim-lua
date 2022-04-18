@@ -130,6 +130,7 @@ return packer.startup(function(use)
 		requires = { "nvim-lua/plenary.nvim" },
 		config = get_setup("gitsigns"),
 	})
+	use("tpope/vim-fugitive")
 
 	-- LSP
 	use("neovim/nvim-lspconfig") -- enable LSP
