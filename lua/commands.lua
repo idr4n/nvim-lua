@@ -55,6 +55,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	group = "golang",
 })
 
+-- Lua
+vim.api.nvim_create_augroup("lua", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "lua" },
+	command = "setlocal shiftwidth=2 tabstop=2 noexpandtab",
+	group = "lua",
+})
+
 -- Other Commands
 
 local function printDir()

@@ -176,6 +176,6 @@ keymap(
 	"n",
 	"<leader>cc",
 	-- "<cmd>lua require('telescope.builtin').find_files({ cwd = '~/.config/nvim' })<cr>",
-  "<cmd>lcd ~/.config/nvim | Telescope find_files<cr>",
+	"<cmd>lcd ~/.config/nvim | Telescope find_files<cr>",
 	opts
 )
