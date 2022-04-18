@@ -48,13 +48,13 @@ end, {})
 -- :Lazygit
 vim.api.nvim_create_user_command("LazyGit", function()
 	if os.getenv("TERM_PROGRAM") == "tmux" then
-		vim.cmd("execute 'silent !tmux split-window -v -p 70 lazygit'")
+	vim.cmd("execute 'silent !tmux split-window -v -p 70 lazygit'")
 	else
 		lazygit:toggle()
 	end
 end, {})
 
-vim.api.nvim_set_keymap("n", "<leader>gi", ":GitUI<cr>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>gi", ":GitUI<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>gl", ":LazyGit<cr>", { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap(
 -- 	"n",
