@@ -37,7 +37,7 @@ local gitui = Terminal:new({ cmd = "gitui", hidden = true, float_opts = opts })
 local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, float_opts = opts })
 
 -- :GitUI
-vim.api.nvim_add_user_command("GitUI", function()
+vim.api.nvim_create_user_command("GitUI", function()
 	if os.getenv("TERM_PROGRAM") == "tmux" then
 		vim.cmd("execute 'silent !tmux split-window -v -p 70 gitui'")
 	else
@@ -46,7 +46,7 @@ vim.api.nvim_add_user_command("GitUI", function()
 end, {})
 
 -- :Lazygit
-vim.api.nvim_add_user_command("LazyGit", function()
+vim.api.nvim_create_user_command("LazyGit", function()
 	if os.getenv("TERM_PROGRAM") == "tmux" then
 		vim.cmd("execute 'silent !tmux split-window -v -p 70 lazygit'")
 	else

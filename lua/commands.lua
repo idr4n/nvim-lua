@@ -1,7 +1,7 @@
 -- Own commands
 
 -- Shorten function name
-local command = vim.api.nvim_add_user_command
+local command = vim.api.nvim_create_user_command
 local keymap = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
@@ -10,7 +10,7 @@ command("SublimeMerge", function()
 	vim.cmd("execute 'silent !smerge pwd'")
 end, {})
 
-keymap("n", "<leader>om", ":SublimeMerge<cr>", { noremap = true, silent = true })
+keymap("n", "<leader>om", ":SublimeMerge<cr>", opts)
 
 -- Open markdown file in Marked 2
 command("OpenMarked2", "execute 'silent !open -a Marked\\ 2 \"%\"'", {})
@@ -51,7 +51,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- format on save for golang files
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = { "*.go" },
-  callback = vim.lsp.buf.formatting_sync,
+	callback = vim.lsp.buf.formatting_sync,
 	group = "golang",
 })
 
