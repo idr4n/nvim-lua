@@ -60,7 +60,7 @@ map("n", "<leader>l", "<cmd>lua require('fzf-lua').resume()<CR>", opts)
 map("n", "<leader>ol", "<cmd>lua require('fzf-lua').blines()<CR>", opts)
 map("n", "<leader>oa", "<cmd>lua require('fzf-lua').lines()<CR>", opts)
 -- map("n", "<leader>r", "<cmd>lua require('fzf-lua').grep_project()<CR>", opts)
-map("n", "<leader>gs", "<cmd>lua require('fzf-lua').git_status()<CR>", opts)
+-- map("n", "<leader>gs", "<cmd>lua require('fzf-lua').git_status()<CR>", opts)
 
 -- sets workdir in current window
 map("n", "<leader><tab>", "<cmd>lua require('setup.fzf-lua.commands').workdirs()<CR>", opts)

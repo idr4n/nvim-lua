@@ -15,32 +15,32 @@ telescope.setup({
 		prompt_prefix = " ",
 		selection_caret = " ",
 
-    results_title = false,
+		results_title = false,
 
-    sorting_strategy = "ascending",
-    layout_strategy = "center",
-    layout_config = {
-      preview_cutoff = 1, -- Preview should always show (unless previewer = false)
+		sorting_strategy = "ascending",
+		layout_strategy = "center",
+		layout_config = {
+			preview_cutoff = 1, -- Preview should always show (unless previewer = false)
 
-      width = function(_, max_columns, _)
-        return math.min(max_columns, 80)
-      end,
+			width = function(_, max_columns, _)
+				return math.min(max_columns, 80)
+			end,
 
-      height = function(_, _, max_lines)
-        return math.min(max_lines, 15)
-      end,
-    },
+			height = function(_, _, max_lines)
+				return math.min(max_lines, 15)
+			end,
+		},
 
-    border = true,
-    borderchars = {
-      prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
-      results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
-      preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-    },
+		border = true,
+		borderchars = {
+			prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
+			results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
+			preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+		},
 
-    preview = {
-      hide_on_startup = false
-    },
+		preview = {
+			hide_on_startup = false,
+		},
 
 		-- winblend = 0,
 		-- sorting_strategy = "descending",
@@ -70,7 +70,7 @@ telescope.setup({
 				["<C-k>"] = actions.move_selection_previous,
 
 				["<C-c>"] = actions.close,
-        ["<C-h>"] = require("telescope.actions.layout").toggle_preview,
+				["<C-h>"] = require("telescope.actions.layout").toggle_preview,
 
 				["<Down>"] = actions.move_selection_next,
 				["<Up>"] = actions.move_selection_previous,
@@ -158,7 +158,7 @@ keymap("n", "<c-p>", "<cmd>Telescope find_files<cr>", opts)
 keymap("n", "<leader>r", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<c-b>", "<cmd>Telescope buffers<cr>", opts)
 keymap("n", "<c-t>", "<cmd>Telescope oldfiles<cr>", opts)
-keymap("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", opts)
+keymap("n", "<leader>gs", "<cmd>Telescope git_status<cr>", opts)
 keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", opts)
 keymap("n", "<leader>fb", "<cmd>Telescope file_browser<cr>", opts)
 keymap("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
@@ -166,3 +166,9 @@ keymap("n", "gr", "<cmd>Telescope lsp_references<cr>", opts)
 keymap("n", "gi", "<cmd>Telescope lsp_implementations<cr>", opts)
 keymap("n", "<leader>cs", "<cmd>Telescope lsp_document_symbols<cr>", opts)
 keymap("n", "<leader>cd", "<cmd>Telescope diagnostics<cr>", opts)
+keymap(
+  "n",
+  "<leader>fk",
+  "<cmd>lua require('telescope.builtin').keymaps({ layout_config = { width = 0.9, height = 0.5 } })<cr>",
+  opts
+)
