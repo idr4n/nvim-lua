@@ -16,7 +16,7 @@ else
 	-- vim.cmd('autocmd ColorScheme tokyobones lua require "setup.customize_zenbones"')
 	-- vim.cmd("colorscheme tokyobones")
 	-- vim.cmd('autocmd ColorScheme zenbones lua require "setup.customize_zenbones"')
-	-- vim.cmd("colorscheme zenbones")
-  vim.cmd("colorscheme nordbones")
+	vim.cmd("colorscheme zenbones")
+  -- vim.cmd("colorscheme nordbones")
 	-- vim.cmd("colorscheme zenburned")
 end

@@ -53,8 +53,8 @@ local function getZenbones()
     return "zenbones"
   end
   -- return night theme instead
-  -- return "zenbones"
-  return "nordbones"
+  return "zenbones"
+  -- return "nordbones"
   -- return "tokyonight"
 end
 
