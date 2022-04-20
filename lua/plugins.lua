@@ -144,6 +144,7 @@ return packer.startup(function(use)
 	-- })
 	use({ "mfussenegger/nvim-jdtls", config = get_setup("jdtls") })
 	-- use({ "mfussenegger/nvim-jdtls" })
+	-- use("crispgm/nvim-go")
 
 	-- LuaLine
 	use({
