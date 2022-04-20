@@ -90,7 +90,7 @@ keymap("v", "*", "y/<C-R>\"<CR>N", opts)
 
 -- substitute word previously searched
 -- on selection only
-keymap("v", "R", ":s///g<LEFT><LEFT>", { noremap = true })
+keymap("v", "<leader>R", ":s///g<LEFT><LEFT>", { noremap = true })
 -- on entire buffer
 keymap("n", "<leader>R", ":%s///g<LEFT><LEFT>", { noremap = true })
 
