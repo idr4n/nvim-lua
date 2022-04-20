@@ -59,11 +59,11 @@ keymap("n", "<A-Up>", "[e", { noremap = false, silent = true })
 
 -- search for word under cursor and stays there
 -- searches exact word (* forward, # backwards)
-keymap("n", "*", "*N", opts)
-keymap("n", "#", "#N", opts)
+keymap("n", "*", "*N", { noremap = true })
+keymap("n", "#", "#N", { noremap = true })
 -- searches but not the exact word (* forward, # backwards)
-keymap("n", "g*", "g*N", opts)
-keymap("n", "g#", "g#N", opts)
+keymap("n", "g*", "g*N", { noremap = true })
+keymap("n", "g#", "g#N", { noremap = true })
 
 -- set current file's directory as working directory
 keymap("n", "<leader>dc", "<cmd>cd %:p:h<CR>", opts)
@@ -86,7 +86,13 @@ keymap("v", "<A-Up>", ":m .-2<CR>==", opts)
 keymap("v", "p", '"_dP', opts)
 
 -- search for highlighted text
-keymap("v", "<leader>/", "y<C-O>/<C-R>\"<CR>", opts)
+keymap("v", "*", "y/<C-R>\"<CR>N", opts)
+
+-- substitute word previously searched
+-- on selection only
+keymap("v", "R", ":s///g<LEFT><LEFT>", { noremap = true })
+-- on entire buffer
+keymap("n", "<leader>R", ":%s///g<LEFT><LEFT>", { noremap = true })
 
 
 -- Visual Block --
