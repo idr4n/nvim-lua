@@ -86,7 +86,7 @@ keymap("v", "<A-Up>", ":m .-2<CR>==", opts)
 keymap("v", "p", '"_dP', opts)
 
 -- search for highlighted text
-keymap("v", "*", "y/<C-R>\"<CR>N", opts)
+keymap("v", "*", "y/\\V<C-R>=escape(@\",'/\')<CR><CR>", { noremap = true })
 
 -- substitute word previously searched
 -- on selection only
