@@ -136,12 +136,12 @@ return packer.startup(function(use)
 	use("neovim/nvim-lspconfig") -- enable LSP
 	use("williamboman/nvim-lsp-installer") -- simple to use language server installer
 	use({ "jose-elias-alvarez/null-ls.nvim", config = get_setup("null-ls") })
-	-- use ({
-	--   'filipdutescu/renamer.nvim',
-	--   branch = 'master',
-	--   requires = { {'nvim-lua/plenary.nvim'} },
-	--   config = get_setup("renamer"),
-	-- })
+	use ({
+	  'filipdutescu/renamer.nvim',
+	  branch = 'master',
+	  requires = { {'nvim-lua/plenary.nvim'} },
+	  config = get_setup("renamer"),
+	})
 	use({ "mfussenegger/nvim-jdtls", config = get_setup("jdtls") })
 	-- use({ "mfussenegger/nvim-jdtls" })
 	-- use("crispgm/nvim-go")
