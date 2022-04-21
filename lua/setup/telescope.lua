@@ -131,7 +131,18 @@ telescope.setup({
 		-- Default configuration for builtin pickers goes here:
 		find_files = {
 			-- find_command = { "fd", "--type", "f", "-L", "--hidden", "-E", ".git" },
-			find_command = { "rg", "--files", "--hidden", "-L", "--iglob", "!.git" },
+			-- find_command = { "rg", "--files", "--hidden", "-L", "--iglob", "!.git" },
+			find_command = {
+				"rg",
+				"--files",
+				"--hidden",
+				"--follow",
+				"--no-ignore",
+				"-g",
+				"!.git",
+				"-g",
+				"!node_modules",
+			},
 		},
 		-- Now the picker_config_key will be applied every time you call this
 		-- builtin picker
@@ -153,7 +164,7 @@ local opts = { noremap = true, silent = true }
 local keymap = vim.api.nvim_set_keymap
 
 -- keymap("n", "<c-p>", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
-keymap("n", "<c-p>", "<cmd>Telescope find_files<cr>", opts)
+keymap("n", "<space>ff", "<cmd>Telescope find_files<cr>", opts)
 keymap("n", "<leader>r", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<c-b>", "<cmd>Telescope buffers<cr>", opts)
 keymap("n", "<c-t>", "<cmd>Telescope oldfiles<cr>", opts)
