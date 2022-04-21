@@ -44,13 +44,19 @@ nvim_tree.setup({
 		"dashboard",
 		"alpha",
 	},
-	-- auto_close = true,
+	auto_close = false,
 	open_on_tab = false,
 	hijack_cursor = false,
 	update_cwd = false,
+	-- disable update_to_buf_dir if using vim-dirvish
+	hijack_directories = {
+		enable = true,
+		auto_open = true,
+	},
+	-- disable update_to_buf_dir if using vim-dirvish
 	update_to_buf_dir = {
-		enable = false,
-		auto_open = false,
+		enable = true,
+		auto_open = true,
 	},
 	diagnostics = {
 		enable = true,
@@ -84,7 +90,7 @@ nvim_tree.setup({
 		height = 30,
 		hide_root_folder = false,
 		side = "left",
-		auto_resize = true,
+		auto_resize = false,
 		mappings = {
 			custom_only = false,
 			list = {
@@ -100,7 +106,15 @@ nvim_tree.setup({
 		cmd = "trash",
 		require_confirm = true,
 	},
-	quit_on_open = 0,
+	actions = {
+		change_dir = {
+			global = false,
+		},
+		open_file = {
+			resize_window = true,
+			quit_on_open = false,
+		},
+	},
 	git_hl = 1,
 	disable_window_picker = 0,
 	root_folder_modifier = ":t",

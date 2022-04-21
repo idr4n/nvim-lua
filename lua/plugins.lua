@@ -93,8 +93,8 @@ return packer.startup(function(use)
 	}) -- Display colors, similar to colorizer
 	use({ "preservim/vim-markdown", config = get_setup("vim-markdown") })
 	use({ "luukvbaal/nnn.nvim", config = get_setup("nnn") })
-	use({ "justinmk/vim-dirvish", config = get_setup("dirvish") })
-	use({ "kristijanhusak/vim-dirvish-git" })
+	-- use({ "justinmk/vim-dirvish", config = get_setup("dirvish") })
+	-- use({ "kristijanhusak/vim-dirvish-git" })
 	use({ "tpope/vim-eunuch" })
 	use({ "phaazon/hop.nvim", config = get_setup("hop") })
 	-- use ({
@@ -164,7 +164,6 @@ return packer.startup(function(use)
 		},
 		config = get_setup("telescope"),
 	})
-	use("nvim-telescope/telescope-file-browser.nvim")
 
 	-- FZF
 	use({ "junegunn/fzf", run = ":call fzf#install()" })
