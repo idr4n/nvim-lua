@@ -3,14 +3,16 @@
 -- setup
 require("fzf-lua").setup({
 	winopts = {
-		height = 0.6,
-		width = 0.7,
-		row = 0.2,
+		height = 0.5,
+		width = 0.8,
+		-- row = 0.2,
 		preview = {
-			vertical = "up:30%",
+			-- vertical = "up:30%",
+			vertical = "right:50%",
 			flip_columns = 170,
 			delay = 60,
 			scrollbar = false,
+			hidden = "hidden",
 		},
 	},
 	fzf_opts = {
@@ -55,14 +57,18 @@ local map = vim.api.nvim_set_keymap
 
 map("n", "<leader>l", "<cmd>lua require('fzf-lua').resume()<CR>", opts)
 -- map("n", "<C-P>", "<cmd>lua require('fzf-lua').files()<CR>", opts)
+map("n", "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", opts)
 -- map("n", "<C-T>", "<cmd>lua require('fzf-lua').oldfiles()<CR>", opts)
 -- map("n", "<C-B>", "<cmd>lua require('fzf-lua').buffers()<CR>", opts)
 map("n", "<leader>ol", "<cmd>lua require('fzf-lua').blines()<CR>", opts)
 map("n", "<leader>oa", "<cmd>lua require('fzf-lua').lines()<CR>", opts)
 -- map("n", "<leader>r", "<cmd>lua require('fzf-lua').grep_project()<CR>", opts)
 -- map("n", "<leader>gs", "<cmd>lua require('fzf-lua').git_status()<CR>", opts)
+-- map("n", "<leader>cc", "<cmd>lcd ~/.config/nvim | lua require('fzf-lua').files()<cr>", opts)
 
 -- sets workdir in current window
 map("n", "<leader><tab>", "<cmd>lua require('setup.fzf-lua.commands').workdirs()<CR>", opts)
 -- sets workdit in new tab
 map("n", "<leader>t", "<cmd>lua require('setup.fzf-lua.commands').workdirs(true)<CR>", opts)
+
+

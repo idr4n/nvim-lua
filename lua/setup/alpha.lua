@@ -54,14 +54,14 @@ dashboard.section.header.opts.hl = pick_color()
 
 dashboard.section.buttons.val = {
 	dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-	-- dashboard.button("f", "  Find file", ":Files<cr>"),
+	dashboard.button("f", "  Find file", ":Files<cr>"),
 	-- dashboard.button("f", "  Find file", ":lua require('fzf-lua').files()<cr>"),
-	dashboard.button("f", "  Find file", ":Telescope find_files<cr>"),
-	dashboard.button("r", "  Recently used files", ":Telescope oldfiles<cr>"),
-	dashboard.button("t", "  Find text", ":Telescope live_grep<cr>"),
+	-- dashboard.button("f", "  Find file", ":Telescope find_files<cr>"),
+	dashboard.button("r", "  Recently used files", ":History<cr>"),
+	dashboard.button("t", "  Find text", ":Rg<cr>"),
 	-- dashboard.button("s", "  Open session", ":SearchSession <CR>"),
 	dashboard.button("s", "  Open directory", ":lua require('setup.fzf-lua.commands').workdirs()<CR>"),
-	dashboard.button("c", "  Configuration", ":lcd ~/.config/nvim | Telescope find_files<cr><CR>"),
+	dashboard.button("c", "  Configuration", "<cmd>lcd ~/.config/nvim | Files<cr>"),
 	dashboard.button("u", "  Update plugins", ":PackerSync<CR>"),
 	dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
 }

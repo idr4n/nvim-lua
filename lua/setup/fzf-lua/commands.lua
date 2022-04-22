@@ -16,16 +16,16 @@ local function set_cwd(pwd, new_tab)
 			vim.cmd("tabnew")
 		end
 		vim.cmd("lcd " .. pwd)
-		require("telescope.builtin").find_files({
-      previewer = false,
-			on_complete = {
-				function()
-					vim.cmd("startinsert")
-				end,
-			},
-		})
+		-- require("telescope.builtin").find_files({
+      -- previewer = false,
+		-- 	on_complete = {
+		-- 		function()
+		-- 			vim.cmd("startinsert")
+		-- 		end,
+		-- 	},
+		-- })
 		-- require("fzf-lua").files()
-		-- vim.cmd("Files")
+		vim.cmd("Files")
 		require("fzf-lua.actions").ensure_insert_mode()
 		print(("Workingdir set to %s"):format(vim.fn.shellescape(pwd)))
 	else
@@ -88,8 +88,8 @@ function M.workdirs(new_tab)
 	local opts = {}
 
 	opts.winopts = {
-		height = 0.25,
-		width = 0.60,
+		height = 0.4,
+		width = 0.70,
 		row = 0.40,
 	}
 

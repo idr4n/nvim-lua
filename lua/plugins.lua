@@ -174,7 +174,7 @@ return packer.startup(function(use)
 		requires = { "kyazdani42/nvim-web-devicons" },
 		config = get_setup("fzf-lua"),
 	}) -- alternative to fzf.vim
-	use({ "mfussenegger/nvim-fzy", config = get_setup("nvim-fzy") })
+	-- use({ "mfussenegger/nvim-fzy", config = get_setup("nvim-fzy") })
 
 	-- Treesitter
 	use({
