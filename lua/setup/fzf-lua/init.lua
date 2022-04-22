@@ -3,7 +3,7 @@
 -- setup
 require("fzf-lua").setup({
 	winopts = {
-		height = 0.5,
+		height = 0.4,
 		width = 0.8,
 		-- row = 0.2,
 		preview = {

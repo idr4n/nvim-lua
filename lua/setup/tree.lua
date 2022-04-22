@@ -131,5 +131,5 @@ nvim_tree.setup({
 
 local opts = { noremap = true, silent = true }
 
-vim.api.nvim_set_keymap("n", "<C-h>", ":NvimTreeToggle<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>a", ":NvimTreeToggle<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>u", ":NvimTreeFindFile<CR>", opts)

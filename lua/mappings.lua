@@ -12,7 +12,6 @@ vim.g.maplocalleader = " "
 
 -- Press jk fast to enter
 keymap("i", "jk", "<ESC>", opts)
-keymap("i", "fd", "<ESC>", opts)
 
 -- Move around while in insert mode
 -- keymap("i", "<C-a>", "<C-O>0", opts)
@@ -70,6 +69,21 @@ keymap("n", "<leader>dc", "<cmd>cd %:p:h<CR>", opts)
 
 -- close all other buffers (exept the current one)
 keymap("n", "<leader>Q", ':%bdelete|edit #|normal `"zz<CR>', opts)
+
+-- Better window navigation
+keymap("n", "<C-h>", "<C-w>h", opts)
+keymap("n", "<C-j>", "<C-w>j", opts)
+keymap("n", "<C-k>", "<C-w>k", opts)
+keymap("n", "<C-l>", "<C-w>l", opts)
+
+-- Resize windows with arrows
+keymap("n", "<C-Up>", ":resize -2<CR>", opts)
+keymap("n", "<C-Down>", ":resize +2<CR>", opts)
+keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
+keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+
+-- Clear search highlight
+keymap("n", "<leader>,", "<cmd>nohlsearch|diffupdate|normal! <C-L><CR>", opts)
 
 -- Visual --
 
