@@ -5,6 +5,9 @@ if not snip_status_ok then
 	return
 end
 
+-- load snippets from path/of/your/nvim/config/
+require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
+
 local opts = { noremap = true, silent = true }
 local keymap = vim.api.nvim_set_keymap
 
