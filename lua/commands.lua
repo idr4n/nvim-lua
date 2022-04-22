@@ -48,12 +48,13 @@ vim.api.nvim_create_autocmd("FileType", {
 	command = "setlocal shiftwidth=4 tabstop=4",
 	group = "golang",
 })
--- format on save for golang files
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = { "*.go" },
-	callback = vim.lsp.buf.formatting_sync,
-	group = "golang",
-})
+-- -- format on save for golang files
+-- -- no needed if 'crispgm/nvim-go' installed
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+-- 	pattern = { "*.go" },
+-- 	callback = vim.lsp.buf.formatting_sync,
+-- 	group = "golang",
+-- })
 
 -- Lua
 vim.api.nvim_create_augroup("lua", { clear = true })
