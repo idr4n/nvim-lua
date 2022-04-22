@@ -4,7 +4,7 @@
 local function calcWinSize()
 	return {
 		width = math.min(math.ceil(vim.fn.winwidth(0) * 0.8), 100),
-		height = math.min(math.ceil(vim.fn.winheight(0) * 0.7), 26),
+		height = math.min(math.ceil(vim.fn.winheight(0) * 0.7), 21),
 	}
 end
 
