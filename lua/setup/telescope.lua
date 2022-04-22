@@ -23,7 +23,7 @@ telescope.setup({
 			preview_cutoff = 1, -- Preview should always show (unless previewer = false)
 
 			width = function(_, max_columns, _)
-				return math.min(max_columns, 80)
+				return math.min(max_columns, 83)
 			end,
 
 			height = function(_, _, max_lines)
