@@ -1,11 +1,31 @@
 --  'junegunn/fzf.vim'
 
+-- calculate window width and height in columns
+local function calcWinSize()
+	return {
+		width = math.min(math.ceil(vim.fn.winwidth(0) * 0.8), 100),
+		height = math.min(math.ceil(vim.fn.winheight(0) * 0.7), 26),
+	}
+end
+
 -- settings
 -- vim.g.fzf_layout = { down = "50%" }
 -- vim.g.fzf_preview_window = { "right:50%", "ctrl-l" }
 vim.g.fzf_preview_window = { "right:50%:hidden", "ctrl-l" }
-vim.g.fzf_layout = { window = { width = 0.8, height = 0.50 }}
+vim.g.fzf_layout = { window = { width = calcWinSize().width, height = calcWinSize().height } }
 -- vim.g.fzf_preview_window = { "up:40%", "ctrl-l" }
+
+-- Recalculate fzf window size on Window resize
+local function recalcWinSize()
+	vim.g.fzf_layout = { window = { width = calcWinSize().width, height = calcWinSize().height } }
+end
+
+vim.api.nvim_create_augroup("fzf", { clear = true })
+vim.api.nvim_create_autocmd("VimResized", {
+	pattern = { "*" },
+	callback = recalcWinSize,
+	group = "fzf",
+})
 
 -- colors
 vim.g.fzf_colors = {
@@ -79,4 +99,3 @@ vim.api.nvim_set_keymap("n", "<C-T>", ":History<cr>", opts)
 vim.api.nvim_set_keymap("n", "<leader>r", ":Rg<cr>", opts)
 vim.api.nvim_set_keymap("n", "<leader>gs", ":GitFiles?<cr>", opts)
 vim.api.nvim_set_keymap("n", "<leader>cc", "<cmd>lcd ~/.config/nvim | Files<cr>", opts)
-
