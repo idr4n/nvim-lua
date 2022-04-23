@@ -61,6 +61,15 @@ end
 -- get colors from Nightfox to use in the words count
 -- local nfColors = require("nightfox.colors").init("nordfox")
 
+local sectionSeparetors = {}
+if vim.env.TERM == "xterm-kitty" then
+	sectionSeparetors = { left = "", right = "" }
+else
+	-- sectionSeparetors = { left = "", right = "" }
+	sectionSeparetors = { left = '', right = ''}
+	-- sectionSeparetors = { left = " ", right = " " }
+end
+
 -- print(vim.inspect(nfColors))
 require("lualine").setup({
   options = {
@@ -69,7 +78,8 @@ require("lualine").setup({
     -- component_separators = { left = ' ', right = ' '},
     -- section_separators = { left = '', right = ''},
     component_separators = { " ", " " },
-    section_separators = { left = "", right = "" },
+    -- section_separators = { left = "", right = "" },
+		section_separators = sectionSeparetors,
     -- section_separators = { left = "", right = " " },
     -- section_separators = { left = "", right = "" },
     disabled_filetypes = {},
