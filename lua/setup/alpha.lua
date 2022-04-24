@@ -72,5 +72,3 @@ dashboard.section.footer.val = footer()
 dashboard.section.footer.opts.hl = "Constant"
 
 require("alpha").setup(dashboard.opts)
-
-vim.api.nvim_set_keymap("n", "<leader>kf", ":Alpha<cr>", { noremap = true, silent = true })

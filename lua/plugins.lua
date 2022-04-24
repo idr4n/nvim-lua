@@ -97,6 +97,7 @@ return packer.startup(function(use)
 	-- use({ "kristijanhusak/vim-dirvish-git" })
 	use({ "tpope/vim-eunuch" })
 	use({ "phaazon/hop.nvim", config = get_setup("hop") })
+	use({"kazhala/close-buffers.nvim", config = get_setup("close-buffers")})
 	-- use ({
 	--   "numToStr/Comment.nvim",
 	--   config = get_setup("comment"),
