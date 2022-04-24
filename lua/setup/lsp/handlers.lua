@@ -14,13 +14,14 @@ M.setup = function()
 
 	local config = {
 		-- disable virtual text
-		virtual_text = false,
-		-- virtual_text = true,
+		virtual_text = true,
 		-- show signs
 		signs = {
 			active = signs,
 		},
-		update_in_insert = true,
+		-- update_in_insert = true,
+		-- update after leaving insert mode
+		update_in_insert = false,
 		underline = true,
 		severity_sort = true,
 		float = {
