@@ -48,6 +48,11 @@ vim.api.nvim_create_autocmd("FileType", {
 	command = "setlocal shiftwidth=4 tabstop=4",
 	group = "golang",
 })
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = { "*.tmpl" },
+	command = "set filetype=html",
+	group = "golang",
+})
 -- -- format on save for golang files
 -- -- no needed if 'crispgm/nvim-go' installed
 -- vim.api.nvim_create_autocmd("BufWritePre", {
