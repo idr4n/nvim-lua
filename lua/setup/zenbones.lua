@@ -10,7 +10,8 @@ vim.g.zenbones = { lightness = "bright", darkness = "stark", lighten_line_nr = 3
 if t >= 6 and t < 19 then
 	vim.cmd("set background=light")
 	vim.cmd("colorscheme zenbones")
-  vim.env.BAT_THEME = "Monokai Extended Light"
+  -- vim.env.BAT_THEME = "Monokai Extended Light"
+	vim.env.BAT_THEME = "gruvbox-light"
 else
 	vim.cmd("set background=dark")
 	-- vim.cmd('autocmd ColorScheme tokyobones lua require "setup.customize_zenbones"')
@@ -19,4 +20,6 @@ else
 	vim.cmd("colorscheme zenbones")
   -- vim.cmd("colorscheme nordbones")
 	-- vim.cmd("colorscheme zenburned")
+	vim.env.BAT_THEME = "gruvbox-dark"
+	-- vim.env.BAT_THEME = "Nord"
 end
