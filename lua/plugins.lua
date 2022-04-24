@@ -145,6 +145,7 @@ return packer.startup(function(use)
 	use({ "mfussenegger/nvim-jdtls", config = get_setup("jdtls") })
 	-- use({ "mfussenegger/nvim-jdtls" })
 	use("crispgm/nvim-go")
+	use({ "simrat39/rust-tools.nvim", config = get_setup("rust-tools") })
 
 	-- LuaLine
 	use({
