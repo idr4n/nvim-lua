@@ -49,7 +49,7 @@ local function getZenbones()
   local t = os.date("*t").hour
   -- local term = os.getenv("TERM_PROGRAM")
   -- if (t >= 7 and t < 18) and (term == 'iTerm.app' or term == 'tmux') then
-  if (t >= 7 and t < 18) then
+  if (t >= 6 and t < 19) then
     return "zenbones"
   end
   -- return night theme instead

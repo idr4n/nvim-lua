@@ -7,7 +7,7 @@ local t = os.date("*t").hour
 vim.g.zenbones = { lightness = "bright", darkness = "stark", lighten_line_nr = 30 }
 
 -- if (t >= 7 and t < 18) and (term == 'iTerm.app' or term == 'tmux') then
-if t >= 7 and t < 18 then
+if t >= 6 and t < 19 then
 	vim.cmd("set background=light")
 	vim.cmd("colorscheme zenbones")
   vim.env.BAT_THEME = "Monokai Extended Light"
