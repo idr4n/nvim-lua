@@ -31,8 +31,30 @@ lsp_installer.on_server_ready(function(server)
 		-- opts = vim.tbl_deep_extend("force", opts, jdtls_opts)
 		-- require("lspconfig").jdtls.setup(opts)
 
-    -- the jdtls server installed by nvim-lsp-installer is being passed to nvim-jdtls plugin
-    -- instead. See 'setup/jdtls.lua'
+		-- the jdtls server installed by nvim-lsp-installer is being passed to nvim-jdtls plugin
+		-- instead. See 'setup/jdtls.lua'
+		return
+	end
+
+	if server.name == "rust_analyzer" then
+		-- Initialize the LSP via rust-tools instead
+		require("rust-tools").setup({
+			tools = {
+				autoSetHints = true,
+				hover_with_actions = true,
+				inlay_hints = {
+					show_parameter_hints = true,
+					parameter_hints_prefix = "<- ",
+					other_hints_prefix = "=> ",
+				},
+			},
+			-- The "server" property provided in rust-tools setup function are the
+			-- settings rust-tools will provide to lspconfig during init.            --
+			-- We merge the necessary settings from nvim-lsp-installer (server:get_default_options())
+			-- with the user's own settings (opts).
+			server = vim.tbl_deep_extend("force", server:get_default_options(), opts),
+		})
+		server:attach_buffers()
 		return
 	end
 
