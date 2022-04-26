@@ -17,4 +17,4 @@ require("zen-mode").setup({
 })
 
 -- Mapping
-vim.api.nvim_set_keymap("n", "<leader>z", ":ZenMode<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>zz", ":ZenMode<cr>", { noremap = true, silent = true })

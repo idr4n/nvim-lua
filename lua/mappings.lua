@@ -49,7 +49,7 @@ keymap("n", "ga", ":b#<CR>", opts)
 -- Using Bbye plugin to close the current buffer
 keymap("n", "<leader>q", ":Bdelete<CR>", opts)
 -- wipeout current buffer
-keymap("n", "<leader>w", ":Bwipeout<CR>", opts)
+-- keymap("n", "<leader>w", ":Bwipeout<CR>", opts)
 keymap("n", "<leader>bd", ":bd<CR>", opts)
 
 -- Move text up and down

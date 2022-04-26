@@ -174,7 +174,8 @@ keymap("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
 keymap("n", "gr", "<cmd>Telescope lsp_references<cr>", opts)
 keymap("n", "gi", "<cmd>Telescope lsp_implementations<cr>", opts)
 keymap("n", "<leader>cs", "<cmd>Telescope lsp_document_symbols<cr>", opts)
-keymap("n", "<leader>cd", "<cmd>Telescope diagnostics<cr>", opts)
+keymap("n", "<leader>w", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", opts)
+keymap("n", "<leader>D", "<cmd>Telescope diagnostics<cr>", opts)
 keymap(
 	"n",
 	"<leader>fk",
