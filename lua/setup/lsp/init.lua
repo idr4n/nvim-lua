@@ -14,9 +14,3 @@ vim.cmd([[
   augroup END
 ]])
 
--- Other LSP not supported by nvim-lsp-installer
-
-require("lspconfig").vls.setup({
-	on_attach = require("setup.lsp.handlers").on_attach,
-	capabilities = require("setup.lsp.handlers").capabilities,
-})
