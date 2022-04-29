@@ -66,7 +66,7 @@ if vim.env.TERM == "xterm-kitty" then
 	sectionSeparetors = { left = "", right = "" }
 else
 	-- sectionSeparetors = { left = "", right = "" }
-	sectionSeparetors = { left = '', right = ''}
+	sectionSeparetors = { left = '', right = '' }
 	-- sectionSeparetors = { left = " ", right = " " }
 end
 
