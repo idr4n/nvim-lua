@@ -27,7 +27,7 @@ telescope.setup({
 			end,
 
 			height = function(_, _, max_lines)
-				return math.min(max_lines, 15)
+				return math.min(max_lines, 20)
 			end,
 		},
 
@@ -70,7 +70,7 @@ telescope.setup({
 				["<C-k>"] = actions.move_selection_previous,
 
 				["<C-c>"] = actions.close,
-				["<C-h>"] = require("telescope.actions.layout").toggle_preview,
+				["<C-l>"] = require("telescope.actions.layout").toggle_preview,
 
 				["<Down>"] = actions.move_selection_next,
 				["<Up>"] = actions.move_selection_previous,
@@ -90,7 +90,7 @@ telescope.setup({
 				["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
 				["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
 				["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-				["<C-l>"] = actions.complete_tag,
+				["<C-h>"] = actions.complete_tag,
 				["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
 			},
 
@@ -164,11 +164,11 @@ local opts = { noremap = true, silent = true }
 local keymap = vim.api.nvim_set_keymap
 
 -- keymap("n", "<c-p>", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
--- keymap("n", "<space>ff", "<cmd>Telescope find_files<cr>", opts)
+-- keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
 -- keymap("n", "<leader>r", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<c-b>", "<cmd>Telescope buffers<cr>", opts)
 -- keymap("n", "<c-t>", "<cmd>Telescope oldfiles<cr>", opts)
--- keymap("n", "<leader>gs", "<cmd>Telescope git_status<cr>", opts)
+keymap("n", "<leader>gs", "<cmd>Telescope git_status<cr>", opts)
 keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", opts)
 keymap("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
 keymap("n", "gr", "<cmd>Telescope lsp_references<cr>", opts)
