@@ -78,6 +78,7 @@ return packer.startup(function(use)
 	use({ "kyazdani42/nvim-tree.lua", config = get_setup("tree") })
 	use({ "simrat39/symbols-outline.nvim", config = get_setup("outline") })
 	use({ "folke/zen-mode.nvim", config = get_setup("zen-mode") })
+	use({ "folke/todo-comments.nvim", config = get_setup("todo-comments") })
 	use({
 		"mg979/vim-visual-multi",
 		branch = "master",
@@ -99,6 +100,7 @@ return packer.startup(function(use)
 	use({ "phaazon/hop.nvim", config = get_setup("hop") })
 	use({ "kazhala/close-buffers.nvim", config = get_setup("close-buffers") })
 	use({ "mickael-menu/zk-nvim", config = get_setup("zk-nvim") })
+	use("dag/vim-fish")
 	-- use ({
 	--   "numToStr/Comment.nvim",
 	--   config = get_setup("comment"),
@@ -146,7 +148,7 @@ return packer.startup(function(use)
 	})
 	use({ "mfussenegger/nvim-jdtls", config = get_setup("jdtls") })
 	-- use({ "mfussenegger/nvim-jdtls" })
-	use("crispgm/nvim-go")
+	-- use({ "crispgm/nvim-go", config = get_setup("nvim-go") })
 	use({ "simrat39/rust-tools.nvim", config = get_setup("rust-tools") })
 
 	-- LuaLine
