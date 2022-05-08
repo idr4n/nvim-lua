@@ -20,6 +20,7 @@ else
 	vim.cmd("colorscheme zenbones")
   -- vim.cmd("colorscheme nordbones")
 	-- vim.cmd("colorscheme zenburned")
-	vim.env.BAT_THEME = "gruvbox-dark"
+	-- vim.env.BAT_THEME = "gruvbox-dark"
+	vim.env.BAT_THEME = "Nord"
 	-- vim.env.BAT_THEME = "Nord"
 end
