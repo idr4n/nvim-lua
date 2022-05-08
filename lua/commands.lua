@@ -53,13 +53,14 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	command = "set filetype=html",
 	group = "golang",
 })
--- -- format on save for golang files
--- -- no needed if 'crispgm/nvim-go' installed
--- vim.api.nvim_create_autocmd("BufWritePre", {
--- 	pattern = { "*.go" },
--- 	callback = vim.lsp.buf.formatting_sync,
--- 	group = "golang",
--- })
+
+-- format on save for specific files
+vim.api.nvim_create_augroup("LspFormatting", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = { "*.go", "*.lua" },
+	callback = vim.lsp.buf.formatting_sync,
+	group = "LspFormatting",
+})
 
 -- Lua
 vim.api.nvim_create_augroup("lua", { clear = true })
