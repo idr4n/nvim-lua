@@ -44,7 +44,6 @@ nvim_tree.setup({
 		"dashboard",
 		"alpha",
 	},
-	auto_close = false,
 	open_on_tab = false,
 	hijack_cursor = false,
 	update_cwd = false,
@@ -54,10 +53,10 @@ nvim_tree.setup({
 		auto_open = true,
 	},
 	-- disable update_to_buf_dir if using vim-dirvish
-	update_to_buf_dir = {
-		enable = true,
-		auto_open = true,
-	},
+	-- update_to_buf_dir = {
+	-- 	enable = true,
+	-- 	auto_open = true,
+	-- },
 	diagnostics = {
 		enable = true,
 		icons = {
@@ -90,7 +89,6 @@ nvim_tree.setup({
 		height = 30,
 		hide_root_folder = false,
 		side = "left",
-		auto_resize = false,
 		mappings = {
 			custom_only = false,
 			list = {
@@ -114,16 +112,6 @@ nvim_tree.setup({
 			resize_window = true,
 			quit_on_open = false,
 		},
-	},
-	git_hl = 1,
-	disable_window_picker = 0,
-	root_folder_modifier = ":t",
-	show_icons = {
-		git = 1,
-		folders = 1,
-		files = 1,
-		folder_arrows = 1,
-		tree_width = 30,
 	},
 })
 
