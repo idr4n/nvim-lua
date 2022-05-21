@@ -34,4 +34,3 @@ end
 -- to make it more complicated... 😎
 keymap("i", "<C-j>", "v:lua.snip_jump_fwd()", vim.tbl_deep_extend("force", opts, { expr = true }))
 keymap("i", "<C-k>", "v:lua.snip_jump_bwd()", vim.tbl_deep_extend("force", opts, { expr = true }))
-
