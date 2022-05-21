@@ -49,7 +49,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	group = "golang",
 })
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-	pattern = { "*.tmpl" },
+	pattern = { "*.tmpl", "*.gohtml" },
 	command = "set filetype=html",
 	group = "golang",
 })
