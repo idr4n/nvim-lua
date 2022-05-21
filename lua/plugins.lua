@@ -140,12 +140,12 @@ return packer.startup(function(use)
 	use("neovim/nvim-lspconfig") -- enable LSP
 	use("williamboman/nvim-lsp-installer") -- simple to use language server installer
 	use({ "jose-elias-alvarez/null-ls.nvim", config = get_setup("null-ls") })
-	use({
-		"filipdutescu/renamer.nvim",
-		branch = "master",
-		requires = { { "nvim-lua/plenary.nvim" } },
-		config = get_setup("renamer"),
-	})
+	-- use({
+	-- 	"filipdutescu/renamer.nvim",
+	-- 	branch = "master",
+	-- 	requires = { { "nvim-lua/plenary.nvim" } },
+	-- 	config = get_setup("renamer"),
+	-- })
 	use({ "mfussenegger/nvim-jdtls", config = get_setup("jdtls") })
 	-- use({ "mfussenegger/nvim-jdtls" })
 	-- use({ "crispgm/nvim-go", config = get_setup("nvim-go") })
@@ -196,6 +196,22 @@ return packer.startup(function(use)
 
 	-- Rocks from Luarocks
 	-- use_rocks({ "dkjson" })
+
+	-- Copilot
+	-- use({
+	-- 	"zbirenbaum/copilot.lua",
+	-- 	event = { "VimEnter" },
+	-- 	config = function()
+	-- 		vim.defer_fn(function()
+	-- 			require("copilot").setup()
+	-- 		end, 100)
+	-- 	end,
+	-- })
+	-- use({
+	-- 	"zbirenbaum/copilot-cmp",
+	-- 	after = { "copilot.lua", "nvim-cmp" },
+	-- })
+	use({ "github/copilot.vim", config = get_setup("copilot") })
 
 	-- Colorschemes
 	use({
