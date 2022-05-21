@@ -46,10 +46,10 @@ end
 
 -- get zeobones lualine
 local function getZenbones()
-	local t = os.date("*t").hour
+	local t = os.date("*t").hour + os.date("*t").min / 60
 	-- local term = os.getenv("TERM_PROGRAM")
 	-- if (t >= 7 and t < 18) and (term == 'iTerm.app' or term == 'tmux') then
-	if t >= 6 and t < 19 then
+	if t >= 5.5 and t < 17.5 then
 		return "zenbones"
 	end
 	-- return night theme instead
@@ -66,8 +66,8 @@ if vim.env.TERM == "xterm-kitty" then
 	sectionSeparetors = { left = "", right = "" }
 else
 	-- sectionSeparetors = { left = "", right = "" }
-	-- sectionSeparetors = { left = "", right = "" }
-	sectionSeparetors = { left = " ", right = " " }
+	sectionSeparetors = { left = "", right = "" }
+	-- sectionSeparetors = { left = " ", right = " " }
 end
 
 -- print(vim.inspect(nfColors))

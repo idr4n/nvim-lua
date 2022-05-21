@@ -14,4 +14,4 @@ vim.g.tokyonight_italic_functions = true
 -- if not (t >= 7 and t < 18) then
 --   vim.cmd[[colorscheme tokyonight]]
 -- end
-
+-- vim.cmd("colorscheme tokyonight")
