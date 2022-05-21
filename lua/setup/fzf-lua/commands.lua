@@ -16,17 +16,17 @@ local function set_cwd(pwd, new_tab)
 			vim.cmd("tabnew")
 		end
 		vim.cmd("lcd " .. pwd)
-		-- require("telescope.builtin").find_files({
-      -- previewer = false,
-		-- 	on_complete = {
-		-- 		function()
-		-- 			vim.cmd("startinsert")
-		-- 		end,
-		-- 	},
-		-- })
+		require("telescope.builtin").find_files({
+			-- previewer = false,
+			on_complete = {
+				function()
+					vim.cmd("startinsert")
+				end,
+			},
+		})
 		-- require("fzf-lua").files()
-		vim.cmd("Files")
-		require("fzf-lua.actions").ensure_insert_mode()
+		-- vim.cmd("Files")
+		-- require("fzf-lua.actions").ensure_insert_mode()
 		print(("Workingdir set to %s"):format(vim.fn.shellescape(pwd)))
 	else
 		print(("Unable to set wd to %s, directory is not accessible"):format(vim.fn.shellescape(pwd)))

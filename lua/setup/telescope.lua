@@ -142,6 +142,8 @@ telescope.setup({
 				"!.git",
 				"-g",
 				"!node_modules",
+				"-g",
+				"!target",
 			},
 		},
 		-- Now the picker_config_key will be applied every time you call this
@@ -165,9 +167,10 @@ local keymap = vim.api.nvim_set_keymap
 
 -- keymap("n", "<c-p>", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
 -- keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
--- keymap("n", "<leader>r", "<cmd>Telescope live_grep<cr>", opts)
+keymap("n", "<c-p>", "<cmd>Telescope find_files<cr>", opts)
+keymap("n", "<leader>r", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<c-b>", "<cmd>Telescope buffers<cr>", opts)
--- keymap("n", "<c-t>", "<cmd>Telescope oldfiles<cr>", opts)
+keymap("n", "<c-t>", "<cmd>Telescope oldfiles<cr>", opts)
 keymap("n", "<leader>gs", "<cmd>Telescope git_status<cr>", opts)
 keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", opts)
 keymap("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
@@ -182,10 +185,10 @@ keymap(
 	"<cmd>lua require('telescope.builtin').keymaps({ layout_config = { width = 0.9, height = 0.5 } })<cr>",
 	opts
 )
--- keymap(
--- 	"n",
--- 	"<leader>cc",
--- 	-- "<cmd>lua require('telescope.builtin').find_files({ cwd = '~/.config/nvim' })<cr>",
--- 	"<cmd>lcd ~/.config/nvim | Telescope find_files<cr>",
--- 	opts
--- )
+keymap(
+	"n",
+	"<leader>cc",
+	-- "<cmd>lua require('telescope.builtin').find_files({ cwd = '~/.config/nvim' })<cr>",
+	"<cmd>lcd ~/.config/nvim | Telescope find_files<cr>",
+	opts
+)
