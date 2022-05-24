@@ -9,9 +9,9 @@ vim.g.tokyonight_italic_functions = true
 -- vim.g.tokyonight_colors = { hint = "orange", error = "#ff0000" }
 
 -- Load the colorscheme
--- local t = os.date("*t").hour
+-- local t = os.date("*t").hour + os.date("*t").min / 60
 
--- if not (t >= 7 and t < 18) then
---   vim.cmd[[colorscheme tokyonight]]
+-- if not (t >= 5.5 and t < 19.5) then
+-- 	vim.cmd([[colorscheme tokyonight]])
 -- end
 -- vim.cmd("colorscheme tokyonight")
