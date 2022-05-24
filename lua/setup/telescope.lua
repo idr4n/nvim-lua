@@ -17,48 +17,65 @@ telescope.setup({
 
 		results_title = false,
 
-		sorting_strategy = "ascending",
-		layout_strategy = "center",
-		layout_config = {
-			preview_cutoff = 1, -- Preview should always show (unless previewer = false)
+		-- sorting_strategy = "ascending",
+		-- layout_strategy = "center",
+		-- layout_config = {
+		-- 	preview_cutoff = 1, -- Preview should always show (unless previewer = false)
 
-			width = function(_, max_columns, _)
-				return math.min(max_columns, 83)
-			end,
+		-- 	width = function(_, max_columns, _)
+		-- 		return math.min(max_columns, 83)
+		-- 	end,
 
-			height = function(_, _, max_lines)
-				return math.min(max_lines, 20)
-			end,
-		},
+		-- 	height = function(_, _, max_lines)
+		-- 		return math.min(max_lines, 20)
+		-- 	end,
+		-- },
 
-		border = true,
-		borderchars = {
-			prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
-			results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
-			preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-		},
+		-- border = true,
+		-- borderchars = {
+		-- 	prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
+		-- 	results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
+		-- 	preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+		-- },
 
 		preview = {
 			hide_on_startup = false,
 		},
 
-		-- winblend = 0,
-		-- sorting_strategy = "descending",
-		-- layout_strategy = "flex",
+		winblend = 0,
+		sorting_strategy = "ascending",
+		layout_strategy = "flex",
 
-		-- layout_config = {
-		-- 	flex = {
-		-- 		flip_columns = 140,
-		-- 	},
-		-- 	vertical = {
-		-- 		preview_cutoff = 40,
-		-- 		prompt_position = "bottom",
-		-- 	},
-		-- 	horizontal = {
-		-- 		width = 0.9,
-		-- 		height = 0.8,
-		-- 	},
-		-- },
+		layout_config = {
+			preview_cutoff = 1, -- Preview should always show (unless previewer = false)
+			flex = {
+				flip_columns = 120,
+			},
+			vertical = {
+				preview_cutoff = 40,
+				prompt_position = "top",
+				preview_height = 0.4,
+				width = function(_, max_columns, _)
+					return math.min(max_columns, 83)
+				end,
+
+				height = function(_, _, max_lines)
+					return math.min(max_lines, 40)
+				end,
+			},
+			horizontal = {
+				-- width = 0.9,
+				width = function(_, max_columns, _)
+					return math.min(max_columns, 120)
+				end,
+				-- height = 0.7,
+				height = function(_, _, max_lines)
+					return math.min(max_lines, 30)
+				end,
+				prompt_position = "top",
+				preview_width = 0.54,
+			},
+		},
 
 		mappings = {
 			i = {
