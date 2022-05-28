@@ -211,7 +211,7 @@ return packer.startup(function(use)
 	-- 	"zbirenbaum/copilot-cmp",
 	-- 	after = { "copilot.lua", "nvim-cmp" },
 	-- })
-	use({ "github/copilot.vim", config = get_setup("copilot") })
+	-- use({ "github/copilot.vim", config = get_setup("copilot") })
 
 	-- Colorschemes
 	use({
@@ -221,6 +221,7 @@ return packer.startup(function(use)
 	})
 	use({ "folke/tokyonight.nvim", config = get_setup("tokyonight") })
 	use({ "EdenEast/nightfox.nvim", config = get_setup("nightfox") })
+	use({ "kvrohit/rasmus.nvim" })
 	-- use ({
 	--   "RRethy/nvim-base16",
 	--   config = get_setup("nvim-base16"),

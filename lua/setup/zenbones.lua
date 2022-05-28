@@ -18,6 +18,7 @@ else
 	-- vim.cmd("colorscheme tokyobones")
 	-- vim.cmd('autocmd ColorScheme zenbones lua require "setup.customize_zenbones"')
 	vim.cmd("colorscheme zenbones")
+	-- vim.cmd("colorscheme rasmus")
 	-- vim.cmd("colorscheme nordbones")
 	-- vim.env.BAT_THEME = "gruvbox-dark"
 	vim.env.BAT_THEME = "Nord"
