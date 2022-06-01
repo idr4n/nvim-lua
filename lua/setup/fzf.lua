@@ -10,8 +10,8 @@
 
 -- settings
 vim.g.fzf_layout = { down = "35%" }
--- vim.g.fzf_preview_window = { "right:50%", "ctrl-l" }
-vim.g.fzf_preview_window = { "right:50%:hidden", "ctrl-l" }
+vim.g.fzf_preview_window = { "right:50%", "ctrl-l" }
+-- vim.g.fzf_preview_window = { "right:50%:hidden", "ctrl-l" }
 -- vim.g.fzf_layout = { window = { width = calcWinSize().width, height = calcWinSize().height } }
 -- vim.g.fzf_preview_window = { "up:40%", "ctrl-l" }
 
@@ -54,7 +54,7 @@ vim.env.FZF_DEFAULT_OPTS = "--layout=default"
 -- exlclude file name from fuzzy matching in Rg command
 vim.cmd([[
 command! -bang -nargs=* Rg
-  \ call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case '
+  \ call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case -g !node_modules '
   \ . (len(<q-args>) > 0 ? <q-args> : '""'), 0,
   \ fzf#vim#with_preview({'options': ['--delimiter=:', '--nth=2..', '--layout=default', '--info=inline']}), <bang>0)
 ]])
@@ -93,11 +93,11 @@ autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 -- mappings
 
--- local opts = { noremap = true, silent = true }
+local opts = { noremap = true, silent = true }
 -- vim.api.nvim_set_keymap("n", "<C-P>", ":Files<cr>", opts)
 -- vim.api.nvim_set_keymap("n", "<leader>ff", ":Files<cr>", opts)
 -- vim.api.nvim_set_keymap("n", "<C-T>", ":History<cr>", opts)
 -- vim.api.nvim_set_keymap("n", "<C-B>", ":Buffers<cr>", opts)
--- vim.api.nvim_set_keymap("n", "<leader>r", ":Rg<cr>", opts)
+vim.api.nvim_set_keymap("n", "<leader>r", ":Rg<cr>", opts)
 -- vim.api.nvim_set_keymap("n", "<leader>gs", ":GitFiles?<cr>", opts)
 -- vim.api.nvim_set_keymap("n", "<leader>cc", "<cmd>lcd ~/.config/nvim | Files<cr>", opts)
