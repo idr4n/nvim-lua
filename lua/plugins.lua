@@ -151,7 +151,7 @@ return packer.startup(function(use)
 	-- use({ "crispgm/nvim-go", config = get_setup("nvim-go") })
 	use({ "simrat39/rust-tools.nvim", config = get_setup("rust-tools") })
 
-	-- LuaLine
+	-- Statusline
 	use({
 		"nvim-lualine/lualine.nvim",
 		config = get_setup("lualine"),
