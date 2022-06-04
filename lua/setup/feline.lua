@@ -88,7 +88,7 @@ local comps = {
 		right = {
 			-- provider = "▊",
 			provider = " ",
-			left_sep = " ",
+			left_sep = "  ",
 			hl = function()
 				return mode_colors[vim.fn.mode()]
 			end,
@@ -97,6 +97,8 @@ local comps = {
 	file = {
 		info = {
 			provider = "file_info",
+			left_sep = " ",
+			right_sep = " ",
 			hl = {
 				fg = colors.fg2,
 				style = "bold",
@@ -107,7 +109,7 @@ local comps = {
 			left_sep = " ",
 			right_sep = " ",
 			hl = {
-				fg = colors.fg2,
+				fg = colors.fg,
 				style = "bold",
 			},
 		},
@@ -122,7 +124,7 @@ local comps = {
 		type = {
 			provider = "file_type",
 		},
-		os = {
+		charcode = {
 			provider = charcode,
 			right_sep = " ",
 			hl = {
@@ -154,7 +156,6 @@ local comps = {
 	scroll_bar = {
 		provider = "scroll_bar",
 		left_sep = " ",
-		right_sep = " ",
 		hl = {
 			style = "bold",
 		},
@@ -162,7 +163,6 @@ local comps = {
 	diagnos = {
 		err = {
 			provider = "diagnostic_errors",
-			left_sep = " ",
 			hl = {
 				fg = colors.red,
 			},
@@ -204,7 +204,7 @@ local comps = {
 		branch = {
 			provider = "git_branch",
 			-- icon = icons.git,
-			left_sep = " ",
+			left_sep = "  ",
 			hl = {
 				fg = colors.fg2,
 				style = "bold",
@@ -234,29 +234,29 @@ local comps = {
 	},
 }
 
-local properties = {
-	force_inactive = {
-		filetypes = {
-			"NvimTree",
-			"dbui",
-			"packer",
-			"startify",
-			"fugitive",
-			"fugitiveblame",
-		},
-		buftypes = { "terminal" },
-		bufnames = {},
+local force_inactive = {
+	filetypes = {
+		"alpha",
+		"dbui",
+		"fugitive",
+		"fugitiveblame",
+		"lsp-installer",
+		"nnn",
+		"NvimTree",
+		"Outline",
+		"packer",
+		"startify",
+		"toggleterm",
 	},
+	buftypes = { "terminal" },
+	bufnames = {},
 }
 
 local components = {
 	active = {
 		{
 			comps.vi_mode.left,
-			comps.git.branch,
-			comps.git.add,
-			comps.git.change,
-			comps.git.remove,
+			comps.file.dir,
 			comps.diagnos.err,
 			comps.diagnos.warn,
 			comps.diagnos.hint,
@@ -267,11 +267,14 @@ local components = {
 			comps.file.info,
 		},
 		{
-			comps.file.os,
+			comps.file.charcode,
 			comps.position,
 			comps.line_percentage,
 			comps.scroll_bar,
-			comps.file.dir,
+			comps.git.branch,
+			comps.git.add,
+			comps.git.change,
+			comps.git.remove,
 			comps.vi_mode.right,
 		},
 	},
@@ -292,7 +295,7 @@ local components = {
 require("feline").setup({
 	theme = { bg = colors.bg, fg = colors.fg },
 	components = components,
-	properties = properties,
+	force_inactive = force_inactive,
 })
 
 -- References
