@@ -49,6 +49,7 @@ This is the list of plugins I currently have installed, auto-generated with `Pac
 - cmp-path
 - cmp_luasnip
 - emmet-vim
+- feline.nvim
 - friendly-snippets
 - fzf
 - fzf-lua

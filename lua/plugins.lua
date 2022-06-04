@@ -152,11 +152,16 @@ return packer.startup(function(use)
 	use({ "simrat39/rust-tools.nvim", config = get_setup("rust-tools") })
 
 	-- Statusline
+	-- use({
+	-- 	"nvim-lualine/lualine.nvim",
+	-- 	config = get_setup("lualine"),
+	-- 	event = "VimEnter",
+	-- 	requires = { "kyazdani42/nvim-web-devicons", opt = true },
+	-- })
 	use({
-		"nvim-lualine/lualine.nvim",
-		config = get_setup("lualine"),
-		event = "VimEnter",
-		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+		"feline-nvim/feline.nvim",
+		config = get_setup("feline"),
+		after = { "zenbones.nvim", "rasmus.nvim" },
 	})
 
 	-- Telescope
