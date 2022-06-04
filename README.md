@@ -35,6 +35,11 @@ And something similar for `lualine`. Although there are ways to make the switch 
 ![neovim-4](https://user-images.githubusercontent.com/20104703/171053849-cf0ee33e-a9bc-49a5-8cb6-e896807e1fd3.png)
 ![neovim-2](https://user-images.githubusercontent.com/20104703/170856125-eb76460c-6246-4317-8a71-1e59a6a7ced9.png)
 
+The **feline statusline** config auto-adapts to some of the themes I use (e.g., zenbones, rasmus, tokyonight, nightfox).
+
+![feline1](https://user-images.githubusercontent.com/20104703/171977772-8b2dc4d2-36d8-4fe1-87fb-6579a9544c07.png)
+![feline2](https://user-images.githubusercontent.com/20104703/171977774-4b20bcdd-78b2-4d0c-a3e5-52ea10f5fcf2.png)
+
 ## List of current plugins (not necessarily updated!)
 
 This is the list of plugins I currently have installed, auto-generated with `PackerStatus`. This list is not necessarily the most updated one.
