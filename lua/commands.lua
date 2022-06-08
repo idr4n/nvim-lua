@@ -86,25 +86,36 @@ local function writeFileSync(path, data)
 	end)
 end
 
+local function readFileSync(path)
+	local uv = require("luv")
+	local fd = assert(uv.fs_open(path, "r", 438))
+	local stat = assert(uv.fs_fstat(fd))
+	local data = assert(uv.fs_read(fd, stat.size, 0))
+	assert(uv.fs_close(fd))
+	return data
+end
+
 local function saveDir()
 	local cwd = vim.fn.getcwd()
 
-	local ok
-	ok, _G.dirs = pcall(require, "workdirs")
+	local ok, dirs = pcall(require, "workdirs")
 	if not ok then
-		_G.dirs = {}
+		print("couldn't find workdirs")
+		local prevData = readFileSync(vim.env.HOME .. "/.config/nvim/lua/workdirs.lua")
+		writeFileSync(vim.env.HOME .. "/.config/nvim/lua/workdirs_bk.lua", prevData)
+		dirs = {}
 	end
 
-	for _, dir in ipairs(_G.dirs) do
+	for _, dir in ipairs(dirs) do
 		if dir == cwd then
 			return
 		end
 	end
 
-	table.insert(_G.dirs, cwd)
-	table.sort(_G.dirs)
+	table.insert(dirs, cwd)
+	table.sort(dirs)
 
-	local new_dirs_str = vim.inspect(_G.dirs):gsub(" ", "\n\t")
+	local new_dirs_str = vim.inspect(dirs):gsub(", ", ",\n\t")
 
 	local path = vim.env.HOME .. "/.config/nvim/lua/workdirs.lua"
 	writeFileSync(path, "return " .. new_dirs_str)
