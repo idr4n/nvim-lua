@@ -9,7 +9,7 @@
 -- end
 
 -- settings
-vim.g.fzf_layout = { down = "35%" }
+vim.g.fzf_layout = { down = "40%" }
 vim.g.fzf_preview_window = { "right:50%", "ctrl-l" }
 -- vim.g.fzf_preview_window = { "right:50%:hidden", "ctrl-l" }
 -- vim.g.fzf_layout = { window = { width = calcWinSize().width, height = calcWinSize().height } }
@@ -95,7 +95,7 @@ autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 local opts = { noremap = true, silent = true }
 -- vim.api.nvim_set_keymap("n", "<C-P>", ":Files<cr>", opts)
--- vim.api.nvim_set_keymap("n", "<leader>ff", ":Files<cr>", opts)
+vim.api.nvim_set_keymap("n", "<leader>ff", ":Files<cr>", opts)
 -- vim.api.nvim_set_keymap("n", "<C-T>", ":History<cr>", opts)
 -- vim.api.nvim_set_keymap("n", "<C-B>", ":Buffers<cr>", opts)
 vim.api.nvim_set_keymap("n", "<leader>r", ":Rg<cr>", opts)

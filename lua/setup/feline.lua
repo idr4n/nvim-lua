@@ -236,7 +236,7 @@ local comps = {
 
 local force_inactive = {
 	filetypes = {
-		"alpha",
+		-- "alpha",
 		"dbui",
 		"fugitive",
 		"fugitiveblame",

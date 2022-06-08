@@ -57,7 +57,7 @@ local map = vim.api.nvim_set_keymap
 
 map("n", "<leader>l", "<cmd>lua require('fzf-lua').resume()<CR>", opts)
 -- map("n", "<C-P>", "<cmd>lua require('fzf-lua').files()<CR>", opts)
-map("n", "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", opts)
+-- map("n", "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", opts)
 -- map("n", "<C-T>", "<cmd>lua require('fzf-lua').oldfiles()<CR>", opts)
 -- map("n", "<C-B>", "<cmd>lua require('fzf-lua').buffers()<CR>", opts)
 map("n", "<leader>ol", "<cmd>lua require('fzf-lua').blines()<CR>", opts)
@@ -70,5 +70,3 @@ map("n", "<leader>oa", "<cmd>lua require('fzf-lua').lines()<CR>", opts)
 map("n", "<leader><tab>", "<cmd>lua require('setup.fzf-lua.commands').workdirs()<CR>", opts)
 -- sets workdit in new tab
 map("n", "<leader>t", "<cmd>lua require('setup.fzf-lua.commands').workdirs(true)<CR>", opts)
-
-
