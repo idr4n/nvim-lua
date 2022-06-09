@@ -20,7 +20,6 @@ keymap("i", "<C-a>", "<Home>", opts)
 keymap("i", "<C-e>", "<End>", opts)
 keymap("i", "<C-f>", "<right>", opts)
 
-
 -- Normal --
 
 -- Move up and down with wrapped lines
@@ -49,7 +48,7 @@ keymap("n", "ga", ":b#<CR>", opts)
 -- Using Bbye plugin to close the current buffer
 keymap("n", "<leader>q", ":Bdelete<CR>", opts)
 -- wipeout current buffer
--- keymap("n", "<leader>w", ":Bwipeout<CR>", opts)
+keymap("n", "<leader>W", ":Bwipeout<CR>", opts)
 keymap("n", "<leader>bd", ":bd<CR>", opts)
 
 -- Move text up and down
@@ -100,14 +99,13 @@ keymap("v", "<A-Up>", ":m .-2<CR>==", opts)
 keymap("v", "p", '"_dP', opts)
 
 -- search for highlighted text
-keymap("v", "*", "y/\\V<C-R>=escape(@\",'/\')<CR><CR>", { noremap = true })
+keymap("v", "*", "y/\\V<C-R>=escape(@\",'/')<CR><CR>", { noremap = true })
 
 -- substitute word previously searched
 -- on selection only
 keymap("v", "<leader>R", ":s///g<LEFT><LEFT>", { noremap = true })
 -- on entire buffer
 keymap("n", "<leader>R", ":%s///g<LEFT><LEFT>", { noremap = true })
-
 
 -- Visual Block --
 
@@ -116,4 +114,3 @@ keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("x", "<A-Down>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-Up>", ":move '<-2<CR>gv-gv", opts)
-
