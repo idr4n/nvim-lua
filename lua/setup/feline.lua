@@ -122,7 +122,12 @@ local comps = {
 			},
 		},
 		type = {
-			provider = "file_type",
+			provider = {
+				name = "file_type",
+				opts = { case = "lowercase" },
+			},
+			left_sep = " ",
+			right_sep = " ",
 		},
 		charcode = {
 			provider = charcode,
@@ -257,6 +262,7 @@ local components = {
 		{
 			comps.vi_mode.left,
 			comps.file.dir,
+			-- comps.file.type,
 			comps.diagnos.err,
 			comps.diagnos.warn,
 			comps.diagnos.hint,
