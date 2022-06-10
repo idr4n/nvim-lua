@@ -53,6 +53,7 @@ This is the list of plugins I currently have installed, auto-generated with `Pac
 - cmp-nvim-lua
 - cmp-path
 - cmp_luasnip
+- diffview.nvim
 - emmet-vim
 - feline.nvim
 - friendly-snippets
