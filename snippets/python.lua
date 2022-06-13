@@ -25,6 +25,10 @@ M.snips.pr = p({
 }, "print($TM_SELECTED_TEXT$1)")
 
 -- autosnippets
-M.autosnips.pr = p(";pr", "print($TM_SELECTED_TEXT$1)")
+M.autosnips.pr = p({
+	trig = ";pr",
+	name = "Autosnippet - print(|)",
+	dscr = "surrounds with print function",
+}, "print($TM_SELECTED_TEXT$1)")
 
 return getSnippetsList(M.snips), getSnippetsList(M.autosnips)

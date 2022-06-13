@@ -19,13 +19,16 @@ end
 
 -- snippets
 M.snips.cl = p({
-	-- local cl = p({
 	trig = "cl",
 	name = "console.log(|)",
 	dscr = "surrounds with console.log function",
 }, "console.log($TM_SELECTED_TEXT$1)")
 
 -- autosnippets
-M.autosnips.cl = p(";cl", "console.log($TM_SELECTED_TEXT$1)")
+M.autosnips.cl = p({
+	trig = ";cl",
+	name = "Autosnippet - console.log(|)",
+	dscr = "surrounds with console.log function",
+}, "console.log($TM_SELECTED_TEXT$1)")
 
 return getSnippetsList(M.snips), getSnippetsList(M.autosnips)

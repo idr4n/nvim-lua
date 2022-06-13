@@ -48,10 +48,24 @@ M.snips.fp = s(
 )
 
 -- autosnippets
-M.autosnips.ie = p(";ie", "if err != nil {\n\t${1}\n}")
-M.autosnips.ea = p(";ea", "${1:_}, err := $2")
+M.autosnips.ie = p({
+	trig = ";ie",
+	name = "Autosnippet - if err != nil",
+	dscr = "Snippet for if err != nil",
+}, "if err != nil {\n\t${1}\n}")
+
+M.autosnips.ea = p({
+	trig = ";ea",
+	name = "Autosnippet - _, err := ...",
+	dscr = "Var assignment with error _, err :=",
+}, "${1:_}, err := $2")
+
 M.autosnips.fp = s(
-	";fp",
+	{
+		trig = ";fp",
+		name = "Autosnippet - fmt.<choice>(|)",
+		dscr = { "Surrounds with fmt.<choice>(|)\n", "Choices are:", "- 'Println'", "- 'Printf'" },
+	},
 	fmt("fmt.{}({}{})", {
 		c(1, { t("Println"), t("Printf") }),
 		f(function(_, snip)

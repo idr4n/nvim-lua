@@ -176,6 +176,7 @@ telescope.setup({
 })
 
 require("telescope").load_extension("fzf")
+require("telescope").load_extension("luasnip")
 
 -- Mappings
 
@@ -196,6 +197,7 @@ keymap("n", "gi", "<cmd>Telescope lsp_implementations<cr>", opts)
 keymap("n", "<leader>cs", "<cmd>Telescope lsp_document_symbols<cr>", opts)
 keymap("n", "<leader>w", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", opts)
 keymap("n", "<leader>D", "<cmd>Telescope diagnostics<cr>", opts)
+keymap("n", "<leader>ts", "<cmd>Telescope luasnip<cr>", opts)
 keymap(
 	"n",
 	"<leader>fk",

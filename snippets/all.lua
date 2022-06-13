@@ -20,25 +20,39 @@ end
 -- snippets
 M.snips.sc = p({
 	trig = "sc",
-	name = "surronds with {|}",
+	name = "surrounds with {|}",
 	dscr = "surrounds selection with curly brackets",
 }, "${1:if (${2:cond})} {\n\t$TM_SELECTED_TEXT$3\n}")
 
 M.snips.sp = p({
 	trig = "sp",
-	name = "surronds with (|)",
+	name = "surrounds with (|)",
 	dscr = "surrounds selection with parenthesis",
 }, "$1($TM_SELECTED_TEXT$2)")
 
 M.snips.ss = p({
 	trig = "ss",
-	name = "surronds with [|]",
+	name = "surrounds with [|]",
 	dscr = "surrounds selection with square brackets",
 }, "$1[$TM_SELECTED_TEXT$2]")
 
 -- autosnippets
-M.autosnips.sc = p(";sc", "${1:if (${2:cond})} {\n\t$TM_SELECTED_TEXT$3\n}")
-M.autosnips.sp = p(";sp", "$1($TM_SELECTED_TEXT$2)")
-M.autosnips.ss = p(";ss", "$1[$TM_SELECTED_TEXT$2]")
+M.autosnips.sc = p({
+	trig = ";sc",
+	name = "Autosnippet - surrounds with {|}",
+	dscr = "surrounds selection with curly brackets",
+}, "${1:if (${2:cond})} {\n\t$TM_SELECTED_TEXT$3\n}")
+
+M.autosnips.sp = p({
+	trig = ";sp",
+	name = "Autosnippet - surrounds with (|)",
+	dscr = "surrounds selection with parenthesis",
+}, "$1($TM_SELECTED_TEXT$2)")
+
+M.autosnips.ss = p({
+	trig = ";ss",
+	name = "Autosnippet - surrounds with [|]",
+	dscr = "surrounds selection with square brackets",
+}, "$1[$TM_SELECTED_TEXT$2]")
 
 return getSnippetsList(M.snips), getSnippetsList(M.autosnips)
