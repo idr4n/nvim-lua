@@ -9,9 +9,9 @@ local p = ls.parser.parse_snippet
 local M = { snips = {}, autosnips = {} }
 
 -- helper function to get list of snippets
-local getSnippetsList = function(t)
+local getSnippetsList = function(tbl)
 	local snipList = {}
-	for _, v in pairs(t) do
+	for _, v in pairs(tbl) do
 		table.insert(snipList, v)
 	end
 	return snipList
