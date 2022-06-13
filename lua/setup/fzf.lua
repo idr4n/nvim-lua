@@ -98,6 +98,6 @@ local opts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap("n", "<leader>ff", ":Files<cr>", opts)
 -- vim.api.nvim_set_keymap("n", "<C-T>", ":History<cr>", opts)
 -- vim.api.nvim_set_keymap("n", "<C-B>", ":Buffers<cr>", opts)
-vim.api.nvim_set_keymap("n", "<leader>r", ":Rg<cr>", opts)
+-- vim.api.nvim_set_keymap("n", "<leader>r", ":Rg<cr>", opts)
 -- vim.api.nvim_set_keymap("n", "<leader>gs", ":GitFiles?<cr>", opts)
 -- vim.api.nvim_set_keymap("n", "<leader>cc", "<cmd>lcd ~/.config/nvim | Files<cr>", opts)

@@ -18,14 +18,13 @@ local getSnippetsList = function(t)
 end
 
 -- snippets
-M.snips.cl = p({
-	-- local cl = p({
-	trig = "cl",
-	name = "console.log(|)",
-	dscr = "surrounds with console.log function",
-}, "console.log($TM_SELECTED_TEXT$1)")
+M.snips.pr = p({
+	trig = "pr",
+	name = "print(|)",
+	dscr = "surrounds with print function",
+}, "print($TM_SELECTED_TEXT$1)")
 
 -- autosnippets
-M.autosnips.cl = p(";cl", "console.log($TM_SELECTED_TEXT$1)")
+M.autosnips.pr = p(";pr", "print($TM_SELECTED_TEXT$1)")
 
 return getSnippetsList(M.snips), getSnippetsList(M.autosnips)
