@@ -8,7 +8,7 @@ local p = ls.parser.parse_snippet
 
 local M = { snips = {}, autosnips = {} }
 
--- helper function to get list of snippets from M.all.<lang>
+-- helper function to get list of snippets
 local getSnippetsList = function(t)
 	local snipList = {}
 	for _, v in pairs(t) do
