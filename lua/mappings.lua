@@ -49,7 +49,7 @@ keymap("n", "ga", ":b#<CR>", opts)
 keymap("n", "<leader>q", ":Bdelete<CR>", opts)
 -- wipeout current buffer
 keymap("n", "<leader>W", ":Bwipeout<CR>", opts)
-keymap("n", "<leader>bd", ":bd<CR>", opts)
+-- keymap("n", "<leader>bd", ":bd<CR>", opts)
 
 -- Move text up and down
 keymap("n", "<A-Down>", "]e", { noremap = false, silent = true })

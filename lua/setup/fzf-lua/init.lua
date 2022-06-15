@@ -55,7 +55,7 @@ require("fzf-lua").setup({
 local opts = { noremap = true, silent = true }
 local map = vim.api.nvim_set_keymap
 
-map("n", "<leader>l", "<cmd>lua require('fzf-lua').resume()<CR>", opts)
+-- map("n", "<leader>l", "<cmd>lua require('fzf-lua').resume()<CR>", opts)
 -- map("n", "<C-P>", "<cmd>lua require('fzf-lua').files()<CR>", opts)
 -- map("n", "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", opts)
 -- map("n", "<C-T>", "<cmd>lua require('fzf-lua').oldfiles()<CR>", opts)
