@@ -101,6 +101,7 @@ return packer.startup(function(use)
 	use({ "kazhala/close-buffers.nvim", config = get_setup("close-buffers") })
 	use({ "mickael-menu/zk-nvim", config = get_setup("zk-nvim") })
 	use("dag/vim-fish")
+	use({ "ThePrimeagen/harpoon", requires = "nvim-lua/plenary.nvim", config = get_setup("harpoon") })
 	-- use ({
 	--   "numToStr/Comment.nvim",
 	--   config = get_setup("comment"),
