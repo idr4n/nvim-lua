@@ -62,7 +62,8 @@ dashboard.section.buttons.val = {
 	-- dashboard.button("s", "  Open session", ":SearchSession <CR>"),
 	dashboard.button("s", "  Open directory", ":lua require('setup.fzf-lua.commands').workdirs()<CR>"),
 	-- dashboard.button("c", "  Configuration", "<cmd>lcd ~/.config/nvim | Files<cr>"),
-	dashboard.button("c", "  Configuration", "<cmd>lcd ~/.config/nvim | Telescope find_files<cr>"),
+	-- dashboard.button("c", "  Configuration", "<cmd>lcd ~/.config/nvim | Telescope find_files<cr>"),
+	dashboard.button("c", "  Configuration", "<cmd>lcd ~/.config/nvim<cr>"),
 	dashboard.button("u", "  Update plugins", ":PackerSync<CR>"),
 	dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
 }
