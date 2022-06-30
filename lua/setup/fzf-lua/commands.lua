@@ -106,7 +106,7 @@ function M.workdirs(new_tab)
 			return
 		end
 		_previous_cwd = vim.loop.cwd()
-		local newcwd = selected[1]:match("[^ ]*$")
+		local newcwd = selected[1]:match("%s%s(.*)")
 		newcwd = fzf_lua.path.starts_with_separator(newcwd) and newcwd
 			or fzf_lua.path.join({ vim.fn.expand("$HOME"), newcwd })
 		set_cwd(newcwd, new_tab)
