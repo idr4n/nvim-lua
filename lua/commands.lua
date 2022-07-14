@@ -70,6 +70,14 @@ vim.api.nvim_create_autocmd("FileType", {
 	group = "lua",
 })
 
+-- Alpha
+vim.api.nvim_create_augroup("alpha", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "alpha" },
+	command = "nnoremap <silent> <buffer> - :bwipe <Bar> Dirvish<CR>",
+	group = "alpha",
+})
+
 -- Other Commands
 
 local function printDir()
