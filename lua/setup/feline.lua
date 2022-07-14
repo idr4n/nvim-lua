@@ -304,6 +304,33 @@ require("feline").setup({
 	force_inactive = force_inactive,
 })
 
+-- local winbarComponents = {
+-- 	{},
+-- 	{},
+-- 	{
+-- 		{
+-- 			provider = "file_info",
+-- 			-- left_sep = " ",
+-- 			-- right_sep = " ",
+-- 			hl = {
+-- 				fg = colors.fg2,
+-- 				bg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg"),
+-- 				style = "bold",
+-- 			},
+-- 		},
+-- 	},
+-- }
+
+-- require("feline").winbar.setup({
+-- 	components = {
+-- 		active = winbarComponents,
+-- 		inactive = winbarComponents,
+-- 	},
+-- })
+
+-- set winbar manually
+-- vim.cmd("set winbar=%=%m\\ %t\\ ")
+
 -- References
 -- https://github.com/kvrohit/dotfiles/blob/master/nvim/lua/config/statusline.lua
 -- https://github.com/6cdh/dotfiles/blob/62959d27344dade28d6dd638252cd82accb309ab/nvim/.config/nvim/lua/statusline.lua
