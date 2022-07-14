@@ -51,6 +51,9 @@ keymap("n", "<leader>q", ":Bdelete<CR>", opts)
 keymap("n", "<leader>B", ":Bwipeout<CR>", opts)
 -- keymap("n", "<leader>bd", ":bd<CR>", opts)
 
+-- Close tab
+keymap("n", "<leader>Q", ":tabclose<cr>", opts)
+
 -- Move text up and down
 keymap("n", "<A-Down>", "]e", { noremap = false, silent = true })
 keymap("n", "<A-Up>", "[e", { noremap = false, silent = true })
@@ -65,9 +68,6 @@ keymap("n", "g#", "g#N", { noremap = true })
 
 -- set current file's directory as working directory
 keymap("n", "<leader>dc", "<cmd>cd %:p:h<CR>", opts)
-
--- close all other buffers (exept the current one)
-keymap("n", "<leader>Q", ':%bdelete|edit #|normal `"zz<CR>', opts)
 
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
@@ -114,3 +114,6 @@ keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("x", "<A-Down>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-Up>", ":move '<-2<CR>gv-gv", opts)
+
+-- Explorer (netrw)
+keymap("n", "<leader>a", ":Explor<cr>", opts)
