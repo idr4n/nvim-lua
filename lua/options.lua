@@ -42,6 +42,7 @@ local options = {
 }
 
 vim.opt.shortmess:append("c")
+vim.opt.nrformats:append("alpha") -- increments letters sequences as well with <c-a>
 
 for k, v in pairs(options) do
 	vim.opt[k] = v
