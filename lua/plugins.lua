@@ -55,6 +55,7 @@ return packer.startup(function(use)
 	use("tpope/vim-unimpaired")
 	use("tpope/vim-repeat")
 	use("tpope/vim-commentary")
+	use("tpope/vim-vinegar")
 	use("moll/vim-bbye")
 	use("aymericbeaumet/vim-symlink")
 	use({
@@ -75,7 +76,7 @@ return packer.startup(function(use)
 		wants = { "nvim-treesitter" }, -- or require if not used so far
 		after = { "nvim-cmp" }, -- if a completion plugin is using tabs load it before
 	})
-	use({ "kyazdani42/nvim-tree.lua", config = get_setup("tree") })
+	-- use({ "kyazdani42/nvim-tree.lua", config = get_setup("tree") })
 	use({ "simrat39/symbols-outline.nvim", config = get_setup("outline") })
 	use({ "folke/zen-mode.nvim", config = get_setup("zen-mode") })
 	use({ "folke/todo-comments.nvim", config = get_setup("todo-comments") })
@@ -94,7 +95,7 @@ return packer.startup(function(use)
 	}) -- Display colors, similar to colorizer
 	use({ "preservim/vim-markdown", config = get_setup("vim-markdown") })
 	use({ "luukvbaal/nnn.nvim", config = get_setup("nnn") })
-	-- use({ "justinmk/vim-dirvish", config = get_setup("dirvish") })
+	use({ "justinmk/vim-dirvish", config = get_setup("dirvish") })
 	-- use({ "kristijanhusak/vim-dirvish-git" })
 	use({ "tpope/vim-eunuch" })
 	use({ "phaazon/hop.nvim", config = get_setup("hop") })
@@ -136,7 +137,7 @@ return packer.startup(function(use)
 		config = get_setup("gitsigns"),
 	})
 	use({ "tpope/vim-fugitive", config = get_setup("fugitive") })
-	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
+	use({ "sindrets/diffview.nvim", config = get_setup("diffview"), requires = "nvim-lua/plenary.nvim" })
 
 	-- LSP
 	use("neovim/nvim-lspconfig") -- enable LSP
