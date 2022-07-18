@@ -172,11 +172,21 @@ telescope.setup({
 		--   extension_config_key = value,
 		-- }
 		-- please take a look at the readme of the extension you want to configure
+		["ui-select"] = {
+			-- require("telescope.themes").get_dropdown({
+			-- 	layout_config = {
+			-- 		height = function(_, _, max_lines)
+			-- 			return math.min(max_lines, 10)
+			-- 		end,
+			-- 	},
+			require("telescope.themes").get_cursor(),
+		},
 	},
 })
 
 require("telescope").load_extension("fzf")
 require("telescope").load_extension("luasnip")
+require("telescope").load_extension("ui-select")
 
 -- Mappings
 

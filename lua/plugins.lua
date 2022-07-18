@@ -181,6 +181,7 @@ return packer.startup(function(use)
 		"benfowler/telescope-luasnip.nvim",
 		module = "telescope._extensions.luasnip", -- if you wish to lazy-load
 	})
+	use({ "nvim-telescope/telescope-ui-select.nvim" })
 
 	-- FZF
 	use({ "junegunn/fzf", run = ":call fzf#install()" })
