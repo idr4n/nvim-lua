@@ -41,13 +41,16 @@ vim.api.nvim_create_autocmd("FileType", {
 	command = "setlocal spell spelllang=en_us",
 })
 
+-- Indent four spaces
+vim.api.nvim_create_augroup("indent_4", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "sql", "go" },
+	command = "setlocal shiftwidth=4 tabstop=4",
+	group = "indent_4",
+})
+
 -- Golang
 vim.api.nvim_create_augroup("golang", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "go" },
-	command = "setlocal shiftwidth=4 tabstop=4",
-	group = "golang",
-})
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = { "*.tmpl", "*.gohtml" },
 	command = "set filetype=html",

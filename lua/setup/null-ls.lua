@@ -22,5 +22,10 @@ null_ls.setup({
 		-- diagnostics.golangci_lint,
 		diagnostics.revive,
 		formatting.goimports,
+		-- sqlfluff: extra config option set in ~/.sqlfluff
+		-- formatting.sql_formatter.with({ extra_args = { "--keywordCase", "upper" } }),
+		formatting.sqlfluff.with({
+			extra_args = { "--dialect", "postgres" },
+		}),
 	},
 })
