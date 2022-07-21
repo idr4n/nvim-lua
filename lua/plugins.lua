@@ -153,7 +153,7 @@ return packer.startup(function(use)
 	-- use({ "mfussenegger/nvim-jdtls" })
 	-- use({ "crispgm/nvim-go", config = get_setup("nvim-go") })
 	use({ "simrat39/rust-tools.nvim", config = get_setup("rust-tools") })
-	use({ "nanotee/sqls.nvim", config = get_setup("sqls") })
+	use({ "nanotee/sqls.nvim" })
 
 	-- Statusline
 	-- use({

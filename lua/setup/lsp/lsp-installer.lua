@@ -58,6 +58,30 @@ lsp_installer.on_server_ready(function(server)
 		return
 	end
 
+	if server.name == "sqls" then
+		opts = {
+			on_attach = function(client, bufnr)
+				require("setup.lsp.handlers").on_attach(client, bufnr)
+				require("sqls").on_attach(client, bufnr)
+			end,
+			capabilities = require("setup.lsp.handlers").capabilities,
+			settings = {
+				sqls = {
+					connections = {
+						{
+							driver = "postgresql",
+							dataSourceName = "host=127.0.0.1 port=5432 user=iduran dbname=test",
+						},
+						{
+							driver = "postgresql",
+							dataSourceName = "host=127.0.0.1 port=5432 user=iduran",
+						},
+					},
+				},
+			},
+		}
+	end
+
 	-- This setup() function is exactly the same as lspconfig's setup function.
 	-- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 	server:setup(opts)
