@@ -1,7 +1,8 @@
 -- 'folke/tokyonight.nvim'
 
 -- Example config in Lua
-vim.g.tokyonight_style = "storm"
+-- vim.g.tokyonight_style = "storm"
+-- vim.g.tokyonight_style = "night"
 vim.g.tokyonight_italic_functions = true
 -- vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 
@@ -11,7 +12,9 @@ vim.g.tokyonight_italic_functions = true
 -- Load the colorscheme
 -- local t = os.date("*t").hour + os.date("*t").min / 60
 
--- if not (t >= 5.5 and t < 19.5) then
--- 	vim.cmd([[colorscheme tokyonight]])
+-- if t >= 8 and t < 18 then
+-- 	vim.g.tokyonight_style = "storm"
+-- else
+-- 	vim.g.tokyonight_style = "night"
 -- end
 -- vim.cmd("colorscheme tokyonight")

@@ -15,9 +15,10 @@ require("nightfox").setup({
 -- local t = os.date("*t").hour
 -- local t = os.date("*t").hour + os.date("*t").min / 60
 
--- if t >= 5.5 and t < 19.5 then
+-- if t >= 8 and t < 18 then
 -- 	vim.cmd("colorscheme dawnfox")
 -- else
 -- 	-- vim.cmd("colorscheme nightfox")
--- 	vim.cmd("colorscheme duskfox")
+-- 	-- vim.cmd("colorscheme duskfox")
+-- 	vim.cmd("colorscheme nordfox")
 -- end
