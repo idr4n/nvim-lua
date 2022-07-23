@@ -1,3 +1,4 @@
 spell/
 workdirs.lua
+workdirs.txt
 plugin/packer_compiled.lua
