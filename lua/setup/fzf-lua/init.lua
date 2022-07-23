@@ -69,4 +69,4 @@ map("n", "<leader>oa", "<cmd>lua require('fzf-lua').lines()<CR>", opts)
 -- sets workdir in current window
 -- map("n", "<leader><tab>", "<cmd>lua require('setup.fzf-lua.commands').workdirs()<CR>", opts)
 -- sets workdit in new tab
--- map("n", "<leader>t", "<cmd>lua require('setup.fzf-lua.commands').workdirs(true)<CR>", opts)
+map("n", "<leader>cw", "<cmd>lua require('setup.fzf-lua.commands').workdirs(true)<CR>", opts)

@@ -45,8 +45,15 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_augroup("indent_4", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "sql", "go" },
-	command = "setlocal shiftwidth=4 tabstop=4",
+	command = "set nowrap",
 	group = "indent_4",
+})
+
+vim.api.nvim_create_augroup("no_wrap", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "sql" },
+	command = "setlocal shiftwidth=4 tabstop=4",
+	group = "no_wrap",
 })
 
 -- Golang
@@ -127,9 +134,12 @@ local function saveDir()
 	table.sort(dirs)
 
 	local new_dirs_str = vim.inspect(dirs):gsub(", ", ",\n\t")
+	local new_dirs_str_txt = vim.inspect(dirs):gsub("{ ", ""):gsub("}", ""):gsub(", ", "\n"):gsub('"', "")
 
 	local path = vim.env.HOME .. "/.config/nvim/lua/workdirs.lua"
+	local path_txt = vim.env.HOME .. "/.config/nvim/lua/workdirs.txt"
 	writeFileSync(path, "return " .. new_dirs_str)
+	writeFileSync(path_txt, new_dirs_str_txt)
 end
 
 local function onVimEnter()
