@@ -60,6 +60,7 @@ command! -bang -nargs=* Rg
   \ fzf#vim#with_preview({'options': ['--delimiter=:', '--nth=2..', '--layout=reverse', '--info=inline']}), <bang>0)
 ]])
 
+-- add preview to Blines
 vim.cmd([[
 command! -bang -nargs=* BLines
     \ call fzf#vim#grep(
