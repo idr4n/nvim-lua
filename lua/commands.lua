@@ -153,3 +153,13 @@ vim.api.nvim_create_autocmd("VimEnter", {
 	callback = onVimEnter,
 	group = "OnVimEnter",
 })
+
+-- new tmux window with nvm and current file
+vim.api.nvim_create_user_command("NewTmuxNvim", function()
+	if os.getenv("TERM_PROGRAM") == "tmux" and vim.fn.expand("%"):len() > 0 then
+		vim.cmd("execute 'silent !tmux new-window nvim %'")
+	else
+		print("Nothing to open...")
+	end
+end, {})
+keymap("n", "<leader>/", "<cmd>NewTmuxNvim<cr>", opts)
