@@ -82,7 +82,6 @@ local comps = {
 		left = {
 			-- provider = "▊",
 			provider = " ",
-			right_sep = " ",
 			hl = function()
 				return mode_colors[vim.fn.mode()]
 			end,
@@ -108,7 +107,7 @@ local comps = {
 		},
 		dir = {
 			provider = getDir,
-			left_sep = " ",
+			left_sep = "  ",
 			right_sep = " ",
 			hl = {
 				fg = colors.fg,
@@ -219,8 +218,7 @@ local comps = {
 		branch = {
 			provider = "git_branch",
 			-- icon = icons.git,
-			left_sep = " ",
-			right_sep = " ",
+			left_sep = "  ",
 			hl = {
 				-- fg = colors.fg2,
 				fg = colors.fg,
@@ -243,7 +241,6 @@ local comps = {
 		},
 		remove = {
 			provider = "git_diff_removed",
-			right_sep = " ",
 			hl = {
 				fg = colors.red,
 				-- style = "bold",
