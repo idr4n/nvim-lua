@@ -15,35 +15,91 @@ local check_backspace = function()
 	return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
 end
 
+local function border(hl_name)
+	return {
+		{ "╭", hl_name },
+		{ "─", hl_name },
+		{ "╮", hl_name },
+		{ "│", hl_name },
+		{ "╯", hl_name },
+		{ "─", hl_name },
+		{ "╰", hl_name },
+		{ "│", hl_name },
+	}
+end
+
 --   פּ ﯟ   some other good icons
 local kind_icons = {
+	Text = " ",
+	Method = "m ",
+	Function = " ",
+	Constructor = " ",
+	Field = " ",
+	Variable = " ",
+	Class = " ",
+	Interface = " ",
+	Module = " ",
+	Property = " ",
+	Unit = " ",
+	Value = " ",
+	Enum = " ",
+	Keyword = " ",
+	Snippet = " ",
+	Color = " ",
+	File = " ",
+	Reference = " ",
+	Folder = " ",
+	EnumMember = " ",
+	Constant = " ",
+	Struct = " ",
+	Event = " ",
+	Operator = " ",
+	TypeParameter = " ",
+}
+-- find more here: https://www.nerdfonts.com/cheat-sheet
+
+-- from https://github.com/NvChad/ui/blob/main/lua/nvchad_ui/icons.lua
+local nvchad_icons = {
+	Namespace = "",
 	Text = "",
-	Method = "m",
-	Function = "",
-	Constructor = "",
-	Field = "",
-	Variable = "",
-	Class = "",
+	Method = "",
+	Function = "",
+	Constructor = "",
+	Field = "ﰠ",
+	-- Variable = "",
+	Variable = "",
+	-- Class = "ﴯ",
+	Class = " ",
 	Interface = "",
 	Module = "",
-	Property = "",
-	Unit = "",
+	Property = "ﰠ",
+	Unit = "塞",
 	Value = "",
 	Enum = "",
 	Keyword = "",
-	Snippet = "",
+	Snippet = "",
 	Color = "",
 	File = "",
-	Reference = "",
+	Reference = "",
 	Folder = "",
 	EnumMember = "",
-	Constant = "",
-	Struct = "",
+	Constant = "",
+	Struct = "פּ",
 	Event = "",
 	Operator = "",
 	TypeParameter = "",
+	Table = "",
+	Object = "",
+	Tag = "",
+	Array = "[]",
+	Boolean = "",
+	Number = "",
+	Null = "ﳠ",
+	String = "",
+	Calendar = "",
+	Watch = "",
+	Package = "",
 }
--- find more here: https://www.nerdfonts.com/cheat-sheet
 
 cmp.setup({
 	snippet = {
@@ -101,18 +157,20 @@ cmp.setup({
 		end, { "i", "s" }),
 	},
 	formatting = {
-		fields = { "kind", "abbr", "menu" },
-		format = function(entry, vim_item)
+		-- fields = { "kind", "abbr", "menu" },
+		fields = { "abbr", "kind" },
+		-- format = function(entry, vim_item)
+		format = function(_, vim_item)
 			-- Kind icons
-			vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-			-- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-			vim_item.menu = ({
-				nvim_lsp = "[LSP]",
-				nvim_lua = "[NVIM_LUA]",
-				luasnip = "[Snippet]",
-				buffer = "[Buffer]",
-				path = "[Path]",
-			})[entry.source.name]
+			-- vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+			vim_item.kind = string.format("%s %s", nvchad_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+			-- vim_item.menu = ({
+			-- 	nvim_lsp = "[LSP]",
+			-- 	nvim_lua = "[NVIM_LUA]",
+			-- 	luasnip = "[Snippet]",
+			-- 	buffer = "[Buffer]",
+			-- 	path = "[Path]",
+			-- })[entry.source.name]
 			return vim_item
 		end,
 	},
@@ -129,8 +187,14 @@ cmp.setup({
 		select = false,
 	},
 	window = {
+		completion = {
+			border = border("CmpBorder"),
+			winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
+		},
 		documentation = {
-			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+			-- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+			border = border("CmpDocBorder"),
+			winhighlight = "Normal:CmpPmenu",
 		},
 	},
 	experimental = {

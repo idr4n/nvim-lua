@@ -44,7 +44,9 @@ local icons = {
 	hints = " ",
 
 	-- lsp = " ",
-	lsp = " ",
+	-- lsp = " ",
+	-- lsp = " LSP",
+	lsp = " LSP~",
 	git = "",
 }
 
@@ -196,8 +198,16 @@ local comps = {
 	},
 	lsp = {
 		name = {
-			provider = "lsp_client_names",
-			left_sep = " ",
+			-- provider = "lsp_client_names",
+			provider = function()
+				if #vim.lsp.buf_get_clients() == 0 then
+					return ""
+				else
+					return tostring(#vim.lsp.buf_get_clients())
+				end
+			end,
+			left_sep = "  ",
+			right_sep = "  ",
 			icon = icons.lsp,
 			hl = {
 				fg = colors.fg,
@@ -209,9 +219,11 @@ local comps = {
 		branch = {
 			provider = "git_branch",
 			-- icon = icons.git,
-			left_sep = "  ",
+			left_sep = " ",
+			right_sep = " ",
 			hl = {
-				fg = colors.fg2,
+				-- fg = colors.fg2,
+				fg = colors.fg,
 				style = "bold",
 			},
 		},
@@ -231,6 +243,7 @@ local comps = {
 		},
 		remove = {
 			provider = "git_diff_removed",
+			right_sep = " ",
 			hl = {
 				fg = colors.red,
 				-- style = "bold",
@@ -261,26 +274,31 @@ local components = {
 	active = {
 		{
 			comps.vi_mode.left,
-			comps.file.dir,
 			-- comps.file.type,
-			comps.diagnos.err,
-			comps.diagnos.warn,
-			comps.diagnos.hint,
-			comps.diagnos.info,
+			comps.git.branch,
+			comps.git.add,
+			comps.git.change,
+			comps.git.remove,
+			comps.file.dir,
 			-- comps.lsp.name,
 		},
 		{
 			comps.file.info,
 		},
 		{
+			comps.diagnos.err,
+			comps.diagnos.warn,
+			comps.diagnos.hint,
+			comps.diagnos.info,
+			comps.lsp.name,
 			comps.file.charcode,
 			comps.position,
 			comps.line_percentage,
 			comps.scroll_bar,
-			comps.git.branch,
-			comps.git.add,
-			comps.git.change,
-			comps.git.remove,
+			-- comps.git.branch,
+			-- comps.git.add,
+			-- comps.git.change,
+			-- comps.git.remove,
 			comps.vi_mode.right,
 		},
 	},
