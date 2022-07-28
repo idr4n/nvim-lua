@@ -97,7 +97,13 @@ local comps = {
 	},
 	file = {
 		info = {
-			provider = "file_info",
+			-- provider = "file_info",
+			provider = {
+				name = "file_info",
+				opts = {
+					colored_icon = false,
+				},
+			},
 			left_sep = " ",
 			right_sep = " ",
 			hl = {
