@@ -162,4 +162,4 @@ vim.api.nvim_create_user_command("NewTmuxNvim", function()
 		print("Nothing to open...")
 	end
 end, {})
-keymap("n", "<leader>/", "<cmd>NewTmuxNvim<cr>", opts)
+keymap("n", "<leader>cn", "<cmd>NewTmuxNvim<cr>", opts)

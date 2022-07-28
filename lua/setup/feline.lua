@@ -249,6 +249,7 @@ local comps = {
 		},
 		remove = {
 			provider = "git_diff_removed",
+			icon = "  ",
 			hl = {
 				fg = colors.red,
 				-- style = "bold",
