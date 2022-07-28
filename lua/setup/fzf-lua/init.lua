@@ -66,7 +66,6 @@ map("n", "<leader>oa", "<cmd>lua require('fzf-lua').lines()<CR>", opts)
 -- map("n", "<leader>gs", "<cmd>lua require('fzf-lua').git_status()<CR>", opts)
 -- map("n", "<leader>cc", "<cmd>lcd ~/.config/nvim | lua require('fzf-lua').files()<cr>", opts)
 
--- sets workdir in current window
--- map("n", "<leader><tab>", "<cmd>lua require('setup.fzf-lua.commands').workdirs()<CR>", opts)
--- sets workdit in new tab
-map("n", "<leader>cw", "<cmd>lua require('setup.fzf-lua.commands').workdirs(true)<CR>", opts)
+-- sets new working dir
+map("n", "<leader>cw", "<cmd>lua require('setup.fzf-lua.commands').workdirs()<CR>", opts)
+map("n", "<leader>/", "<cmd>lua require('setup.fzf-lua.commands').workdirs({ nvim_tmux = true })<CR>", opts)

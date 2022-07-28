@@ -27,27 +27,23 @@ local function set_cwd(pwd, new_tab)
 		-- require("fzf-lua").files()
 		-- vim.cmd("Files")
 		-- require("fzf-lua.actions").ensure_insert_mode()
-		print(("Workingdir set to %s"):format(vim.fn.shellescape(pwd)))
+		print(("Working dir set to %s"):format(vim.fn.shellescape(pwd)))
 	else
 		print(("Unable to set wd to %s, directory is not accessible"):format(vim.fn.shellescape(pwd)))
 	end
 end
 
-function M.workdirs(new_tab)
-	if not new_tab then
-		new_tab = false
-	end
+-- @args - table that takes into consideration two possible fields:
+-- new_tab: bool - if changing working directory in a new tab
+-- nvim_tmux: bool - if changing working directory in a new tab
+function M.workdirs(args)
+	args = args or {}
 
 	-- workdirs.lua returns a table of workdirs
 	local ok, dirs = pcall(require, "workdirs")
 	if not ok then
 		dirs = {}
 	end
-	-- local dirs = {}
-	-- -- Get _G.paths defined in lua/commands.lua
-	-- if _G.paths ~= nil then
-	-- 	dirs = _G.paths
-	-- end
 
 	local iconify = function(path, color, icon)
 		icon = fzf_lua.utils.ansi_codes[color](icon)
@@ -109,7 +105,13 @@ function M.workdirs(new_tab)
 		local newcwd = selected[1]:match("%s%s(.*)")
 		newcwd = fzf_lua.path.starts_with_separator(newcwd) and newcwd
 			or fzf_lua.path.join({ vim.fn.expand("$HOME"), newcwd })
-		set_cwd(newcwd, new_tab)
+
+		if os.getenv("TERM_PROGRAM") == "tmux" and args.nvim_tmux then
+			vim.cmd(string.format("execute 'silent !tmux new-window -c %s nvim'", newcwd))
+			return
+		end
+
+		set_cwd(newcwd, args.new_tab)
 	end)()
 end
 
