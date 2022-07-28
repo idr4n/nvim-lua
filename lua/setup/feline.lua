@@ -45,8 +45,8 @@ local icons = {
 
 	-- lsp = " ",
 	-- lsp = " ",
-	-- lsp = " LSP",
-	lsp = " LSP~",
+	lsp = " LSP~",
+	-- lsp = " LSP~",
 	git = "",
 }
 
