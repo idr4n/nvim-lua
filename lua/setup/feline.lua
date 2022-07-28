@@ -138,6 +138,7 @@ local comps = {
 		},
 		charcode = {
 			provider = charcode,
+			left_sep = "  ",
 			right_sep = " ",
 			hl = {
 				-- fg = colors.violet,
@@ -212,7 +213,7 @@ local comps = {
 				end
 			end,
 			left_sep = "  ",
-			right_sep = "  ",
+			-- right_sep = "  ",
 			icon = icons.lsp,
 			hl = {
 				fg = colors.fg,
