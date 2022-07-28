@@ -107,7 +107,8 @@ local comps = {
 			left_sep = " ",
 			right_sep = " ",
 			hl = {
-				fg = colors.fg2,
+				-- fg = colors.fg2,
+				fg = colors.fg,
 				style = "bold",
 			},
 		},
