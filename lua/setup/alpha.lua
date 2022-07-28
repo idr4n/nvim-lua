@@ -53,7 +53,7 @@ dashboard.section.header.opts.hl = pick_color()
 -- }
 
 dashboard.section.buttons.val = {
-	dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
+	dashboard.button("e", " New file", ":ene <BAR> startinsert <CR>"),
 	dashboard.button("f", "  Find file", ":Files<cr>"),
 	-- dashboard.button("f", "  Find file", ":lua require('fzf-lua').files()<cr>"),
 	-- dashboard.button("f", "  Find file", ":Telescope find_files<cr>"),
