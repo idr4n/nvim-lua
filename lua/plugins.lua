@@ -77,6 +77,16 @@ return packer.startup(function(use)
 		after = { "nvim-cmp" }, -- if a completion plugin is using tabs load it before
 	})
 	-- use({ "kyazdani42/nvim-tree.lua", config = get_setup("tree") })
+	use({
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v2.x",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+			"MunifTanjim/nui.nvim",
+		},
+		config = get_setup("neo-tree"),
+	})
 	use({ "simrat39/symbols-outline.nvim", config = get_setup("outline") })
 	use({ "folke/zen-mode.nvim", config = get_setup("zen-mode") })
 	use({ "folke/todo-comments.nvim", config = get_setup("todo-comments") })
