@@ -15,7 +15,7 @@ local function set_cwd(pwd, new_tab)
 		if new_tab then
 			vim.cmd("tabnew")
 		end
-		vim.cmd("lcd " .. pwd)
+		vim.cmd("tcd " .. pwd)
 		-- require("telescope.builtin").find_files({
 		-- 	-- previewer = false,
 		-- 	on_complete = {
