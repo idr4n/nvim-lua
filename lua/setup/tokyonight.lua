@@ -17,4 +17,4 @@ if t >= 8 and t < 18 then
 else
 	vim.g.tokyonight_style = "night"
 end
-vim.cmd("colorscheme tokyonight")
+-- vim.cmd("colorscheme tokyonight")

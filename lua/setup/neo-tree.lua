@@ -49,7 +49,9 @@ neotree.setup({
 				".DS_Store",
 			},
 		},
+		follow_current_file = true,
 		hijack_netrw_behavior = "disabled",
+		use_libuv_file_watcher = true,
 	},
 	git_status = {
 		window = {

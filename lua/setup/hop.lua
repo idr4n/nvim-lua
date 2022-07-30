@@ -9,5 +9,5 @@ vim.api.nvim_set_keymap("n", "t", "<cmd>lua require'hop'.hint_words()<cr>", { no
 vim.api.nvim_set_keymap("n", "T", "v<cmd>lua require'hop'.hint_words()<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", "T", "<cmd>lua require'hop'.hint_words()<cr>", { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap("n", "<C-f>", "<cmd>lua require'hop'.hint_lines()<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "L", "V<cmd>lua require'hop'.hint_lines()<cr>", { noremap = false, silent = true })
+vim.api.nvim_set_keymap("n", "L", "<cmd>lua require'hop'.hint_lines()<cr>", { noremap = false, silent = true })
 vim.api.nvim_set_keymap("v", "L", "<cmd>lua require'hop'.hint_lines()<cr>", { noremap = false, silent = true })
