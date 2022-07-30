@@ -7,8 +7,21 @@ local options = {
 	},
 }
 
+local groups = {
+	nightfox = {
+		CursorLine = { bg = "#1F2A38" },
+	},
+	nordfox = {
+		CursorLine = { bg = "#343946" },
+	},
+	dawnfox = {
+		CursorLine = { bg = "#F2E9ED" },
+	},
+}
+
 require("nightfox").setup({
 	options = options,
+	groups = groups,
 })
 
 -- Load the colorscheme
@@ -18,7 +31,8 @@ require("nightfox").setup({
 -- if t >= 8 and t < 18 then
 -- 	vim.cmd("colorscheme dawnfox")
 -- else
--- 	-- vim.cmd("colorscheme nightfox")
+-- 	vim.cmd("colorscheme nightfox")
 -- 	-- vim.cmd("colorscheme duskfox")
--- 	vim.cmd("colorscheme nordfox")
+-- 	-- vim.cmd("colorscheme terafox")
+-- 	-- vim.cmd("colorscheme nordfox")
 -- end
