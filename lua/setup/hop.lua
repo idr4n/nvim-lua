@@ -2,12 +2,31 @@
 
 require("hop").setup()
 
-vim.api.nvim_set_keymap("n", "f", "<cmd>lua require'hop'.hint_char1()<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "F", "v<cmd>lua require'hop'.hint_char1()<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "F", "<cmd>lua require'hop'.hint_char1()<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "t", "<cmd>lua require'hop'.hint_words()<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "T", "v<cmd>lua require'hop'.hint_words()<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "T", "<cmd>lua require'hop'.hint_words()<cr>", { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("n", "<C-f>", "<cmd>lua require'hop'.hint_lines()<cr>", { noremap = true, silent = true })
+-- place this in one of your configuration file(s)
+vim.api.nvim_set_keymap(
+	"",
+	"f",
+	"<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",
+	{}
+)
+vim.api.nvim_set_keymap(
+	"",
+	"F",
+	"<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>",
+	{}
+)
+vim.api.nvim_set_keymap(
+	"",
+	"t",
+	"<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<cr>",
+	{}
+)
+vim.api.nvim_set_keymap(
+	"",
+	"T",
+	"<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<cr>",
+	{}
+)
+
 vim.api.nvim_set_keymap("n", "L", "<cmd>lua require'hop'.hint_lines()<cr>", { noremap = false, silent = true })
 vim.api.nvim_set_keymap("v", "L", "<cmd>lua require'hop'.hint_lines()<cr>", { noremap = false, silent = true })
