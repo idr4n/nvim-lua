@@ -1,10 +1,11 @@
 local ls = require("luasnip")
 local p = ls.parser.parse_snippet
--- local s = ls.snippet
--- local sn = ls.snippet_node
--- local t = ls.text_node
--- local i = ls.insert_node
--- local fmt = require("luasnip.extras.fmt").fmt
+local s = ls.snippet
+local c = ls.choice_node
+local t = ls.text_node
+local i = ls.insert_node
+local f = ls.function_node
+local fmt = require("luasnip.extras.fmt").fmt
 
 local M = { snips = {}, autosnips = {} }
 
@@ -17,12 +18,20 @@ local getSnippetsList = function(tbl)
 	return snipList
 end
 
--- snippets
-M.snips.cl = p({
-	trig = "cl",
-	name = "console.log(|)",
-	dscr = "surrounds with console.log function",
-}, "console.log($TM_SELECTED_TEXT$1)")
+M.snips.cl = s(
+	{
+		trig = "cl",
+		name = "console.<choice>(|)",
+		dscr = { "Surrounds with console.<choice>(|)\n", "Choices are:", "- 'log'", "- 'table'" },
+	},
+	fmt("console.{}({}{})", {
+		c(1, { t("log"), t("table") }),
+		f(function(_, snip)
+			return snip.env.SELECT_DEDENT
+		end, {}),
+		i(2),
+	})
+)
 
 M.snips.af = p({
 	trig = "af",
@@ -37,11 +46,20 @@ M.snips.aa = p({
 }, " => {$1}")
 
 -- autosnippets
-M.autosnips.cl = p({
-	trig = ";cl",
-	name = "Autosnippet - console.log(|)",
-	dscr = "surrounds with console.log function",
-}, "console.log($TM_SELECTED_TEXT$1)")
+M.autosnips.cl = s(
+	{
+		trig = ";cl",
+		name = "console.<choice>(|)",
+		dscr = { "Surrounds with console.<choice>(|)\n", "Choices are:", "- 'log'", "- 'table'" },
+	},
+	fmt("console.{}({}{})", {
+		c(1, { t("log"), t("table") }),
+		f(function(_, snip)
+			return snip.env.SELECT_DEDENT
+		end, {}),
+		i(2),
+	})
+)
 
 M.autosnips.af = p({
 	trig = ";af",
