@@ -35,7 +35,7 @@ neotree.setup({
 		},
 	},
 	window = {
-		width = 30,
+		width = 25,
 		mappings = {
 			["o"] = "open",
 		},

@@ -269,6 +269,7 @@ local icons = {
 	["variable"] = "61960",
 }
 
+-- if vim.env.TERM == "xterm-kitty" or vim.env.TERM == "wezterm" then
 if vim.env.TERM == "xterm-kitty" then
 	local devicons = require("nvim-web-devicons")
 

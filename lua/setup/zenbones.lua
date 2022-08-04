@@ -8,8 +8,8 @@ vim.g.zenbones = { lightness = "bright", darkness = "stark", lighten_line_nr = 3
 
 -- if (t >= 7 and t < 18) and (term == 'iTerm.app' or term == 'tmux') then
 if t >= 8 and t < 18.0 then
-	vim.cmd("set background=light")
-	vim.cmd("colorscheme zenbones")
+	-- vim.cmd("set background=light")
+	-- vim.cmd("colorscheme zenbones")
 	-- vim.env.BAT_THEME = "Monokai Extended Light"
 	vim.env.BAT_THEME = "gruvbox-light"
 	-- vim.env.BAT_THEME = "Nord"
