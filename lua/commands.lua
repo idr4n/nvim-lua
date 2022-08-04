@@ -163,3 +163,16 @@ vim.api.nvim_create_user_command("NewTmuxNvim", function()
 	end
 end, {})
 keymap("n", "<leader>cn", "<cmd>NewTmuxNvim<cr>", opts)
+
+-- new (tmux or terminal) window at current working directory
+command("NewTerminalWindow", function()
+	local cwd = vim.fn.getcwd()
+	-- local cmd = {
+	-- 	alacritty = "open -na alacritty --args --working-directory %s'",
+	-- 	wezterm = "wezterm start --always-new-process --cwd %s'",
+	-- 	["xterm-kitty"] = "open -na kitty --args -d %s'",
+	-- }
+	-- vim.cmd(string.format("execute 'silent !" .. cmd[vim.env.TERM], cwd))
+	vim.cmd(string.format("execute 'silent !open -na alacritty --args --working-directory %s'", cwd))
+end, {})
+keymap("n", "<leader>\\", "<cmd>NewTerminalWindow<cr>", opts)
