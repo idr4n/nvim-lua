@@ -45,14 +45,14 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_augroup("indent_4", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "sql", "go" },
-	command = "set nowrap",
+	command = "setlocal shiftwidth=4 tabstop=4",
 	group = "indent_4",
 })
 
 vim.api.nvim_create_augroup("no_wrap", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "sql" },
-	command = "setlocal shiftwidth=4 tabstop=4",
+	command = "set nowrap",
 	group = "no_wrap",
 })
 
