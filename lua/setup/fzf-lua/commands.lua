@@ -109,7 +109,7 @@ function M.workdirs(args)
 		if os.getenv("TERM_PROGRAM") == "tmux" and args.nvim_tmux then
 			vim.cmd(string.format("execute 'silent !tmux new-window -c %s nvim'", newcwd))
 			return
-		elseif args.nvim_terminal then
+		elseif args.nvim_terminal or args.nvim_tmux then
 			local cmd = {
 				alacritty = "open -na alacritty --args --working-directory %s -e fish -ic nvim'",
 				wezterm = "wezterm start --always-new-process --cwd %s nvim'",

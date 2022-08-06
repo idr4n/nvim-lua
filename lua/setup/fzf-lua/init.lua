@@ -68,5 +68,5 @@ map("n", "<leader>oa", "<cmd>lua require('fzf-lua').lines()<CR>", opts)
 
 -- sets new working dir
 map("n", "<leader>cw", "<cmd>lua require('setup.fzf-lua.commands').workdirs()<CR>", opts)
--- map("n", "<leader>/", "<cmd>lua require('setup.fzf-lua.commands').workdirs({ nvim_tmux = true })<CR>", opts)
-map("n", "<leader>/", "<cmd>lua require('setup.fzf-lua.commands').workdirs({ nvim_alacritty = true })<CR>", opts)
+map("n", "<leader>/", "<cmd>lua require('setup.fzf-lua.commands').workdirs({ nvim_tmux = true })<CR>", opts)
+-- map("n", "<leader>/", "<cmd>lua require('setup.fzf-lua.commands').workdirs({ nvim_alacritty = true })<CR>", opts)
