@@ -1,9 +1,11 @@
 -- "EdenEast/nightfox.nvim"
 
 local options = {
+	transparent = true,
 	styles = {
 		comments = "italic",
-		functions = "italic,bold",
+		-- functions = "italic,bold",
+		functions = "italic",
 	},
 }
 
@@ -29,14 +31,14 @@ require("nightfox").setup({
 
 -- Load the colorscheme
 -- local t = os.date("*t").hour
-local t = os.date("*t").hour + os.date("*t").min / 60
+-- local t = os.date("*t").hour + os.date("*t").min / 60
 
-if t >= 8 and t < 18 then
-	-- vim.cmd("colorscheme dawnfox")
-	vim.cmd("colorscheme nordfox")
-else
-	-- vim.cmd("colorscheme nightfox")
-	vim.cmd("colorscheme duskfox")
-	-- vim.cmd("colorscheme terafox")
-	-- vim.cmd("colorscheme nordfox")
-end
+-- if t >= 8 and t < 18 then
+-- 	-- vim.cmd("colorscheme dawnfox")
+-- 	vim.cmd("colorscheme nordfox")
+-- else
+-- 	-- vim.cmd("colorscheme nightfox")
+-- 	-- vim.cmd("colorscheme duskfox")
+-- 	-- vim.cmd("colorscheme terafox")
+-- 	-- vim.cmd("colorscheme nordfox")
+-- end
