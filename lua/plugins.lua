@@ -178,6 +178,12 @@ return packer.startup(function(use)
 		config = get_setup("feline"),
 		after = { "zenbones.nvim", "rasmus.nvim" },
 	})
+	use({
+		"akinsho/bufferline.nvim",
+		tag = "v2.*",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = get_setup("bufferline"),
+	})
 
 	-- Telescope
 	use({

@@ -5,6 +5,16 @@ require("catppuccin").setup({
 	styles = {
 		functions = { "italic" },
 	},
+	integrations = {
+		native_lsp = {
+			underlines = {
+				errors = { "undercurl" },
+				hints = { "undercurl" },
+				warnings = { "undercurl" },
+				information = { "undercurl" },
+			},
+		},
+	},
 })
 
 local t = os.date("*t").hour + os.date("*t").min / 60
