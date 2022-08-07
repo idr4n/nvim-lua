@@ -84,8 +84,8 @@ function M.workdirs(args)
 	local opts = {}
 
 	opts.winopts = {
-		height = 0.4,
-		width = 0.70,
+		width = math.min(math.ceil(vim.fn.winwidth(0) * 0.7), 110),
+		height = math.min(math.ceil(vim.fn.winheight(0) * 0.8), 23),
 		row = 0.40,
 	}
 
