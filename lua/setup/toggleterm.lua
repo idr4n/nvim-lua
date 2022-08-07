@@ -20,7 +20,8 @@ toggleterm.setup({
 	close_on_exit = true,
 	shell = vim.o.shell,
 	float_opts = {
-		height = 25,
+		width = math.min(math.ceil(vim.fn.winwidth(0) * 0.8), 120),
+		height = math.min(math.ceil(vim.fn.winheight(0) * 0.8), 28),
 		border = "curved",
 		winblend = 0,
 		highlights = {
@@ -48,7 +49,7 @@ end, {})
 -- :Lazygit
 vim.api.nvim_create_user_command("LazyGit", function()
 	if os.getenv("TERM_PROGRAM") == "tmux" then
-	vim.cmd("execute 'silent !tmux split-window -v -p 70 lazygit'")
+		vim.cmd("execute 'silent !tmux split-window -v -p 70 lazygit'")
 	else
 		lazygit:toggle()
 	end
