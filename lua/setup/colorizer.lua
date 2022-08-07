@@ -1,3 +1,6 @@
--- "norcalli/nvim-colorizer.lua"
+-- 'NvChad/nvim-colorizer.lua'
 
-require("colorizer").setup()
+require("colorizer").setup({ "*" }, {
+	-- Available modes: foreground, background, virtualtext
+	mode = "virtualtext",
+})

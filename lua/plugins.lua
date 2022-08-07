@@ -97,12 +97,6 @@ return packer.startup(function(use)
 	})
 	use({ "akinsho/toggleterm.nvim", config = get_setup("toggleterm") })
 	use({ "goolord/alpha-nvim", config = get_setup("alpha") })
-	-- use ({ "norcalli/nvim-colorizer.lua", config = get_setup("colorizer") })
-	use({
-		"rrethy/vim-hexokinase",
-		run = "make hexokinase",
-		config = get_setup("hexokinase"),
-	}) -- Display colors, similar to colorizer
 	use({ "preservim/vim-markdown", config = get_setup("vim-markdown") })
 	use({ "luukvbaal/nnn.nvim", config = get_setup("nnn") })
 	use({ "justinmk/vim-dirvish", config = get_setup("dirvish") })
@@ -114,6 +108,7 @@ return packer.startup(function(use)
 	use("dag/vim-fish")
 	use({ "ThePrimeagen/harpoon", requires = "nvim-lua/plenary.nvim", config = get_setup("harpoon") })
 	use({ "kyazdani42/nvim-web-devicons", config = get_setup("devicons") })
+	use({ "NvChad/nvim-colorizer.lua", config = get_setup("colorizer") })
 	-- use ({
 	--   "numToStr/Comment.nvim",
 	--   config = get_setup("comment"),
