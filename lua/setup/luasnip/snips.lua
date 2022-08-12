@@ -23,6 +23,11 @@ local snippets = {
 		name = "surronds with [|]",
 		dscr = "surrounds selection with square brackets",
 	}, "$1[$TM_SELECTED_TEXT$2]"),
+	sf = p({
+		trig = "sf",
+		name = "surrounds with callback function",
+		dscr = "surrounds selection with a callback function",
+	}, "${1:name}(($3) => {\n\t$TM_SELECTED_TEXT$4\n})"),
 }
 
 return snippets

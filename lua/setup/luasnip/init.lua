@@ -54,3 +54,7 @@ end
 -- surrounds with {|}
 map_snippet(";cc", mappable.sc)
 vim.api.nvim_set_keymap("v", ";cc", "<c-s>;cc", { noremap = false, silent = false })
+
+-- surrounds with callback function
+map_snippet(";cf", mappable.sf)
+vim.api.nvim_set_keymap("v", ";cf", "<c-s>;cf", { noremap = false, silent = false })
