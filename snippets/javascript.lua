@@ -45,6 +45,18 @@ M.snips.aa = p({
 	dscr = "adds an arrow function",
 }, " => {$1}")
 
+M.snips.ac = p({
+	trig = "ac",
+	name = "(|) => {}",
+	dscr = "adds a callback function",
+}, "($1) => {$2}")
+
+M.snips.sf = p({
+	trig = "sf",
+	name = "surrounds with callback function",
+	dscr = "surrounds selection with a callback function",
+}, "${1:name}(($3) => {\n\t$TM_SELECTED_TEXT$4\n})")
+
 -- autosnippets
 M.autosnips.cl = s(
 	{
@@ -72,5 +84,17 @@ M.autosnips.aa = p({
 	name = "=> {|}",
 	dscr = "adds an arrow function",
 }, " => {$1}")
+
+M.autosnips.ac = p({
+	trig = ";ac",
+	name = "(|) => {}",
+	dscr = "adds a callback function",
+}, "($1) => {$2}")
+
+M.autosnips.sf = p({
+	trig = ";sf",
+	name = "surrounds with callback function",
+	dscr = "surrounds selection with a callback function",
+}, "${1:name}(($3) => {\n\t$TM_SELECTED_TEXT$4\n})")
 
 return getSnippetsList(M.snips), getSnippetsList(M.autosnips)
