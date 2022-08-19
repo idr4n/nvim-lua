@@ -36,6 +36,14 @@ local opts = { height = math.floor(vim.fn.winheight(0) * 0.85) }
 local Terminal = require("toggleterm.terminal").Terminal
 local gitui = Terminal:new({ cmd = "gitui", hidden = true, float_opts = opts })
 local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, float_opts = opts })
+local lf = Terminal:new({
+	cmd = "lf",
+	hidden = true,
+	float_opts = {
+		height = math.min(math.floor(vim.fn.winheight(0) * 0.8), 30),
+		width = math.min(math.floor(vim.fn.winwidth(0) * 0.95), 120),
+	},
+})
 
 -- :GitUI
 vim.api.nvim_create_user_command("GitUI", function()
@@ -55,8 +63,14 @@ vim.api.nvim_create_user_command("LazyGit", function()
 	end
 end, {})
 
+-- :LF
+vim.api.nvim_create_user_command("LF", function()
+	lf:toggle()
+end, {})
+
 -- vim.api.nvim_set_keymap("n", "<leader>gi", ":GitUI<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>gl", ":LazyGit<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", ",l", ":LF<cr>", { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap(
 -- 	"n",
 -- 	"<leader>cr",

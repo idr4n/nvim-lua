@@ -57,6 +57,12 @@ M.snips.sf = p({
 	dscr = "surrounds selection with a callback function",
 }, "${1:name}(($3) => {\n\t$TM_SELECTED_TEXT$4\n})")
 
+M.snips.ds = p({
+	trig = "ds",
+	name = "Docstring",
+	dscr = "creates a docstring comment block",
+}, "/**\n * $1\n */")
+
 -- autosnippets
 M.autosnips.cl = s(
 	{
@@ -96,5 +102,11 @@ M.autosnips.sf = p({
 	name = "surrounds with callback function",
 	dscr = "surrounds selection with a callback function",
 }, "${1:name}(($3) => {\n\t$TM_SELECTED_TEXT$4\n})")
+
+M.autosnips.ds = p({
+	trig = ";ds",
+	name = "Docstring",
+	dscr = "creates a docstring comment block",
+}, "/**\n * $1\n */")
 
 return getSnippetsList(M.snips), getSnippetsList(M.autosnips)
