@@ -116,4 +116,4 @@ keymap("x", "<A-Down>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-Up>", ":move '<-2<CR>gv-gv", opts)
 
 -- Explorer (netrw)
-keymap("n", "<leader>x", ":Explor<cr>", opts)
+keymap("n", "<leader>xe", ":Explor<cr>", opts)
