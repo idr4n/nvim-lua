@@ -31,6 +31,7 @@ end
 
 -- Have packer use a popup window
 packer.init({
+	max_jobs = 10,
 	display = {
 		open_fn = function()
 			return require("packer.util").float({ border = "rounded" })
@@ -90,6 +91,7 @@ return packer.startup(function(use)
 	use({ "simrat39/symbols-outline.nvim", config = get_setup("outline") })
 	use({ "folke/zen-mode.nvim", config = get_setup("zen-mode") })
 	use({ "folke/todo-comments.nvim", config = get_setup("todo-comments") })
+	use({ "folke/trouble.nvim", config = get_setup("trouble") })
 	use({
 		"mg979/vim-visual-multi",
 		branch = "master",

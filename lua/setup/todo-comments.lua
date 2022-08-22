@@ -8,4 +8,5 @@ require("todo-comments").setup({
 })
 
 -- mappings
-vim.api.nvim_set_keymap("n", "<leader>gt", "<cmd>TodoTelescope<cr>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>gt", "<cmd>TodoTelescope<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>gt", "<cmd>TodoTrouble<cr>", { noremap = true, silent = true })
