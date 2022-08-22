@@ -27,5 +27,8 @@ null_ls.setup({
 		formatting.sqlfluff.with({
 			extra_args = { "--dialect", "postgres" },
 		}),
+		formatting.beautysh.with({
+			extra_args = { "--indent-size", "2" },
+		}),
 	},
 })
