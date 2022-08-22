@@ -64,6 +64,17 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	group = "golang",
 })
 
+-- SQL
+vim.api.nvim_create_augroup("sql", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "sql" },
+	callback = function()
+		vim.api.nvim_buf_set_keymap(0, "n", ",e", ":SqlsExecuteQuery<cr>", { noremap = true, silent = true })
+		vim.api.nvim_buf_set_keymap(0, "v", ",e", ":SqlsExecuteQuery<cr>", { noremap = true, silent = true })
+	end,
+	group = "sql",
+})
+
 -- format on save for specific files
 vim.api.nvim_create_augroup("LspFormatting", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
