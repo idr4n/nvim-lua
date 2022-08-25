@@ -11,4 +11,6 @@ syn match mkdListItem3 /^>\=\s\{8\}[*+-]/ contained containedin=mkdListItem
 syn match mkdListItemBullet3 /[*+-]/ contained containedin=mkdListItem3 conceal cchar=✸
 
 hi clear Conceal
-hi link Conceal Keyword
+" hi link Conceal Keyword
+" hi link Conceal Function
+hi link Conceal DiagnosticInfo
