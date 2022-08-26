@@ -31,7 +31,7 @@ end
 
 -- Have packer use a popup window
 packer.init({
-	max_jobs = 10,
+	max_jobs = 20,
 	display = {
 		open_fn = function()
 			return require("packer.util").float({ border = "rounded" })
@@ -222,6 +222,7 @@ return packer.startup(function(use)
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		config = get_setup("textobjects"),
 	})
+	use("nvim-treesitter/playground")
 
 	-- Rocks from Luarocks
 	-- use_rocks({ "dkjson" })

@@ -1,5 +1,9 @@
 -- 'folke/trouble.nvim'
 
+require("trouble").setup({
+	height = 15,
+})
+
 -- Lua
 vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { silent = true, noremap = true })
 vim.api.nvim_set_keymap(

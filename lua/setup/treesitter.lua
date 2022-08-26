@@ -51,4 +51,5 @@ ts.setup({
 	},
 	indent = { enable = true },
 	context_commentstring = { enable = true },
+	playground = { enabled = true },
 })
