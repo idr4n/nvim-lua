@@ -100,6 +100,12 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Other Commands
+command("YankCwd", function()
+	local cwd = vim.fn.getcwd()
+	vim.cmd(string.format("call setreg('*', '%s')", cwd))
+	print("Cwd copied to clipboard!")
+end, {})
+keymap("n", "<leader>yy", "<cmd>YankCwd<cr>", opts)
 
 local function printDir()
 	local dir = vim.fn.getcwd()
