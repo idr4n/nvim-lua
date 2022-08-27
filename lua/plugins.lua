@@ -253,6 +253,7 @@ return packer.startup(function(use)
 	use({ "EdenEast/nightfox.nvim", config = get_setup("nightfox") })
 	use({ "kvrohit/rasmus.nvim" })
 	use({ "catppuccin/nvim", as = "catppuccin", config = get_setup("catppuccin") })
+	use({ "rebelot/kanagawa.nvim", config = get_setup("kanagawa") })
 	-- use ({
 	--   "RRethy/nvim-base16",
 	--   config = get_setup("nvim-base16"),

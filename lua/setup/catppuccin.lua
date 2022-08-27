@@ -15,6 +15,13 @@ require("catppuccin").setup({
 			},
 		},
 	},
+	compile = {
+		-- :CatppuccinCompile " Create/update the compile file
+		-- :CatppuccinClean " Delete compiled file
+		-- :CatppuccinStatus " Compile status
+		enabled = true,
+		path = vim.fn.stdpath("cache") .. "/catppuccin",
+	},
 })
 
 local t = os.date("*t").hour + os.date("*t").min / 60
