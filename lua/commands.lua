@@ -44,7 +44,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Indent four spaces
 vim.api.nvim_create_augroup("indent_4", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "sql", "go" },
+	pattern = { "sql", "go", "markdown" },
 	command = "setlocal shiftwidth=4 tabstop=4",
 	group = "indent_4",
 })

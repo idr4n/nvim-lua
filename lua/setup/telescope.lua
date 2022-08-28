@@ -56,7 +56,7 @@ telescope.setup({
 				prompt_position = "top",
 				preview_height = 0.4,
 				width = function(_, max_columns, _)
-					return math.min(max_columns, 83)
+					return math.min(max_columns, 90)
 				end,
 
 				height = function(_, _, max_lines)
@@ -66,7 +66,7 @@ telescope.setup({
 			horizontal = {
 				-- width = 0.9,
 				width = function(_, max_columns, _)
-					return math.min(max_columns, 120)
+					return math.min(max_columns, 140)
 				end,
 				-- height = 0.7,
 				height = function(_, _, max_lines)
@@ -163,8 +163,21 @@ telescope.setup({
 				"!target",
 			},
 		},
-		-- Now the picker_config_key will be applied every time you call this
-		-- builtin picker
+		live_grep = {
+			additional_args = function()
+				return {
+					"--hidden",
+					"--follow",
+					"--no-ignore",
+					"-g",
+					"!.git",
+					"-g",
+					"!node_modules",
+					"-g",
+					"!target",
+				}
+			end,
+		},
 	},
 	extensions = {
 		-- Your extension configuration goes here:
@@ -203,7 +216,7 @@ keymap("n", "<c-b>", "<cmd>Telescope buffers<cr>", opts)
 keymap("n", "<c-t>", "<cmd>Telescope oldfiles<cr>", opts)
 keymap("n", "<leader>gs", "<cmd>Telescope git_status<cr>", opts)
 keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", opts)
-keymap("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
+-- keymap("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
 -- keymap("n", "gr", "<cmd>Telescope lsp_references<cr>", opts)
 keymap("n", "gi", "<cmd>Telescope lsp_implementations<cr>", opts)
 keymap("n", "<leader>w", "<cmd>Telescope lsp_document_symbols<cr>", opts)

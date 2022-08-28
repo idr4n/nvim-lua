@@ -8,4 +8,7 @@ require("bufferline").setup({
 		indicator = { icon = "" },
 		offsets = { { filetype = "neo-tree", text = " Neo-Tree" } },
 	},
+	highlights = {
+		separator = { fg = "#000000" },
+	},
 })

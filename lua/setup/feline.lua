@@ -4,15 +4,15 @@ local colors = {
 	bg = vim.fn.synIDattr(vim.fn.hlID("StatusLineNC"), "bg"),
 	fg = vim.fn.synIDattr(vim.fn.hlID("Comment"), "fg"),
 	fg2 = vim.fn.synIDattr(vim.fn.hlID("StatusLine"), "fg"),
-	yellow = "#e0af68",
+	yellow = "#EED49F",
 	cyan = "#56b6c2",
 	darkblue = "#081633",
-	green = "#a7c080",
+	green = "#A6DA95",
 	orange = "#d19a66",
 	violet = "#a9a1e1",
-	magenta = "#c678dd",
-	blue = "#61afef",
-	red = "#ff6666",
+	magenta = "#F5BDE6",
+	blue = "#8AADF4",
+	red = "#ED8796",
 }
 
 local mode_colors = {
@@ -72,7 +72,7 @@ local function getDir()
 	if #dir > 20 then
 		dir = dir:sub(1, 17) .. "..."
 	end
-	return " " .. dir
+	return " " .. dir
 end
 
 -- LuaFormatter off
@@ -102,6 +102,7 @@ local comps = {
 				name = "file_info",
 				opts = {
 					colored_icon = false,
+					type = "relative",
 				},
 			},
 			left_sep = " ",
@@ -226,7 +227,7 @@ local comps = {
 		branch = {
 			provider = "git_branch",
 			-- icon = icons.git,
-			left_sep = "  ",
+			left_sep = " ",
 			hl = {
 				-- fg = colors.fg2,
 				fg = colors.fg,
@@ -281,11 +282,11 @@ local components = {
 		{
 			comps.vi_mode.left,
 			-- comps.file.type,
+			comps.file.dir,
 			comps.git.branch,
 			comps.git.add,
 			comps.git.change,
 			comps.git.remove,
-			comps.file.dir,
 			-- comps.lsp.name,
 		},
 		{
@@ -327,6 +328,20 @@ require("feline").setup({
 	components = components,
 	force_inactive = force_inactive,
 })
+
+-- [[ Catppuccin
+-- local ctp_feline = require("catppuccin.groups.integrations.feline")
+
+-- ctp_feline.setup({
+-- 	assets = {
+-- 		mode_icon = "",
+-- 	},
+-- })
+
+-- require("feline").setup({
+-- 	components = ctp_feline.get(),
+-- })
+-- ]]
 
 -- local winbarComponents = {
 -- 	{},

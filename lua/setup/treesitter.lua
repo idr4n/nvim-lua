@@ -43,6 +43,7 @@ ts.setup({
 		"latex",
 		"markdown",
 		"vim",
+		"org",
 	},
 	autopairs = { enable = true },
 	highlight = {
