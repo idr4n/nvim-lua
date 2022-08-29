@@ -32,6 +32,12 @@ M.snips.bb = p({
 	dscr = "Surrounds with bold text",
 }, "**$TM_SELECTED_TEXT$1**")
 
+M.snips.col = p({
+	trig = "col",
+	name = "collapsible block",
+	dscr = "Adds a collapsible/foldable block",
+}, "<details>\n<summary>$1</summary>\n$2\n</details>")
+
 -- autosnippets
 M.autosnips.tt = p({
 	trig = ";tt",
