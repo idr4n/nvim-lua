@@ -3,7 +3,7 @@
 -- calculate window width and height in columns
 local function calcWinSize()
 	return {
-		width = math.min(math.ceil(vim.fn.winwidth(0) * 0.95), 120),
+		width = math.min(math.ceil(vim.fn.winwidth(0) * 0.95), 140),
 		height = math.min(math.ceil(vim.fn.winheight(0) * 0.8), 30),
 	}
 end
@@ -55,7 +55,7 @@ vim.env.FZF_DEFAULT_OPTS = "--layout=reverse"
 -- exlclude file name from fuzzy matching in Rg command
 vim.cmd([[
 command! -bang -nargs=* Rg
-  \ call fzf#vim#grep('rg --column --hidden --line-number --no-heading --color=always --smart-case -g !node_modules '
+  \ call fzf#vim#grep('rg --column --hidden --line-number --no-heading --color=always --smart-case -g "!.git/*" -g !node_modules '
   \ . (len(<q-args>) > 0 ? <q-args> : '""'), 0,
   \ fzf#vim#with_preview({'options': ['--delimiter=:', '--nth=2..', '--layout=reverse', '--info=inline']}), <bang>0)
 ]])
@@ -107,7 +107,7 @@ local opts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap("n", "<leader>ff", ":Files<cr>", opts)
 -- vim.api.nvim_set_keymap("n", "<C-T>", ":History<cr>", opts)
 -- vim.api.nvim_set_keymap("n", "<C-B>", ":Buffers<cr>", opts)
--- vim.api.nvim_set_keymap("n", "<leader>r", ":Rg<cr>", opts)
+vim.api.nvim_set_keymap("n", "<leader>r", ":Rg<cr>", opts)
 -- vim.api.nvim_set_keymap("n", "<leader>gs", ":GitFiles?<cr>", opts)
 -- vim.api.nvim_set_keymap("n", "<leader>cc", "<cmd>lcd ~/.config/nvim | Files<cr>", opts)
 -- vim.api.nvim_set_keymap("n", "<leader>b", "<cmd>BLines<cr>", opts)
