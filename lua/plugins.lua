@@ -88,7 +88,7 @@ return packer.startup(function(use)
 		},
 		config = get_setup("neo-tree"),
 	})
-	use({ "simrat39/symbols-outline.nvim", config = get_setup("outline") })
+	-- use({ "simrat39/symbols-outline.nvim", config = get_setup("outline") })
 	use({ "folke/zen-mode.nvim", config = get_setup("zen-mode") })
 	use({ "folke/todo-comments.nvim", config = get_setup("todo-comments") })
 	use({ "folke/trouble.nvim", config = get_setup("trouble") })
@@ -105,7 +105,7 @@ return packer.startup(function(use)
 	use({ "justinmk/vim-dirvish", config = get_setup("dirvish") })
 	-- use({ "kristijanhusak/vim-dirvish-git" })
 	use({ "tpope/vim-eunuch" })
-	use({ "phaazon/hop.nvim", config = get_setup("hop") })
+	-- use({ "phaazon/hop.nvim", config = get_setup("hop") })
 	use({ "kazhala/close-buffers.nvim", config = get_setup("close-buffers") })
 	use({ "mickael-menu/zk-nvim", config = get_setup("zk-nvim") })
 	use("dag/vim-fish")
@@ -176,12 +176,12 @@ return packer.startup(function(use)
 		config = get_setup("feline"),
 		after = { "zenbones.nvim", "rasmus.nvim" },
 	})
-	use({
-		"akinsho/bufferline.nvim",
-		tag = "v2.*",
-		requires = "kyazdani42/nvim-web-devicons",
-		config = get_setup("bufferline"),
-	})
+	-- use({
+	-- 	"akinsho/bufferline.nvim",
+	-- 	tag = "v2.*",
+	-- 	requires = "kyazdani42/nvim-web-devicons",
+	-- 	config = get_setup("bufferline"),
+	-- })
 
 	-- Telescope
 	use({
@@ -227,22 +227,6 @@ return packer.startup(function(use)
 
 	-- Rocks from Luarocks
 	-- use_rocks({ "dkjson" })
-
-	-- Copilot
-	-- use({
-	-- 	"zbirenbaum/copilot.lua",
-	-- 	event = { "VimEnter" },
-	-- 	config = function()
-	-- 		vim.defer_fn(function()
-	-- 			require("copilot").setup()
-	-- 		end, 100)
-	-- 	end,
-	-- })
-	-- use({
-	-- 	"zbirenbaum/copilot-cmp",
-	-- 	after = { "copilot.lua", "nvim-cmp" },
-	-- })
-	-- use({ "github/copilot.vim", config = get_setup("copilot") })
 
 	-- Colorschemes
 	use({
