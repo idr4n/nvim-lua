@@ -223,6 +223,7 @@ return packer.startup(function(use)
 		config = get_setup("textobjects"),
 	})
 	use("nvim-treesitter/playground")
+	use({ "nvim-treesitter/nvim-treesitter-context" })
 
 	-- Rocks from Luarocks
 	-- use_rocks({ "dkjson" })

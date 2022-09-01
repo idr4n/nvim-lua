@@ -21,9 +21,12 @@ keymap("i", "<C-e>", "<End>", opts)
 keymap("i", "<C-f>", "<right>", opts)
 
 -- center screen around coursor
-vim.keymap.set({ "n", "i" }, "<C-F>", "<C-O>zz", opts)
+keymap("i", "<C-F>", "<C-O>zz", opts)
 
 -- Normal --
+
+-- center screen around coursor
+keymap("n", "<C-F>", "zz", opts)
 
 -- Move up and down with wrapped lines
 keymap("n", "j", "gj", opts)
