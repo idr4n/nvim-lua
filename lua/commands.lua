@@ -75,6 +75,17 @@ vim.api.nvim_create_autocmd("FileType", {
 	group = "sql",
 })
 
+-- Netrw
+vim.api.nvim_create_augroup("Netrw", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "netrw" },
+	callback = function()
+		vim.api.nvim_buf_set_keymap(0, "n", "h", "-", { silent = true })
+		vim.api.nvim_buf_set_keymap(0, "n", "l", "<CR>", { silent = true })
+	end,
+	group = "Netrw",
+})
+
 -- format on save for specific files
 vim.api.nvim_create_augroup("LspFormatting", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
