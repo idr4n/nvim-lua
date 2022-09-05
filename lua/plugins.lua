@@ -102,7 +102,7 @@ return packer.startup(function(use)
 	-- use({ "preservim/vim-markdown", config = get_setup("vim-markdown") })
 	use({ "ixru/nvim-markdown", config = get_setup("vim-markdown") })
 	-- use({ "luukvbaal/nnn.nvim", config = get_setup("nnn") })
-	use({ "justinmk/vim-dirvish", config = get_setup("dirvish") })
+	-- use({ "justinmk/vim-dirvish", config = get_setup("dirvish") })
 	-- use({ "kristijanhusak/vim-dirvish-git" })
 	use({ "tpope/vim-eunuch" })
 	-- use({ "phaazon/hop.nvim", config = get_setup("hop") })
@@ -112,6 +112,15 @@ return packer.startup(function(use)
 	use({ "ThePrimeagen/harpoon", requires = "nvim-lua/plenary.nvim", config = get_setup("harpoon") })
 	use({ "kyazdani42/nvim-web-devicons", config = get_setup("devicons") })
 	use({ "NvChad/nvim-colorizer.lua", config = get_setup("colorizer") })
+	use({ "jakewvincent/mkdnflow.nvim", config = get_setup("mkdnflow") })
+	use({
+		"jinh0/eyeliner.nvim",
+		config = function()
+			require("eyeliner").setup({
+				highlight_on_key = true,
+			})
+		end,
+	})
 	use({ "ptzz/lf.vim", requires = "voldikss/vim-floaterm", config = get_setup("floaterm") })
 	-- use ({
 	--   "numToStr/Comment.nvim",
