@@ -236,3 +236,4 @@ keymap(
 	"<cmd>lcd ~/.config/nvim | Telescope find_files<cr>",
 	opts
 )
+keymap("n", "<leader>cd", ":Telescope find_files cwd=", opts)

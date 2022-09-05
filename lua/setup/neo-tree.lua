@@ -72,8 +72,8 @@ neotree.setup({
 
 local opts = { noremap = true, silent = true }
 
--- vim.api.nvim_set_keymap("n", "<leader>a", ":Neotree reveal left toggle<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>a", ":Neotree show left toggle<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>a", ":Neotree reveal left toggle<CR>", opts)
+-- vim.api.nvim_set_keymap("n", "<leader>a", ":Neotree show left toggle<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>u", ":Neotree focus<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>i", ":Neotree float reveal toggle<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>A", ":Neotree toggle show buffers right<CR>", opts)

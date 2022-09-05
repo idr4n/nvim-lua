@@ -103,12 +103,12 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Alpha
-vim.api.nvim_create_augroup("alpha", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "alpha" },
-	command = "nnoremap <silent> <buffer> - :bwipe <Bar> Dirvish<CR>",
-	group = "alpha",
-})
+-- vim.api.nvim_create_augroup("alpha", { clear = true })
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = { "alpha" },
+-- 	command = "nnoremap <silent> <buffer> - :bwipe <Bar> Dirvish<CR>",
+-- 	group = "alpha",
+-- })
 
 -- Other Commands
 command("YankCwd", function()

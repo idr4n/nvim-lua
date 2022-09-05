@@ -108,9 +108,9 @@ local comps = {
 			left_sep = " ",
 			right_sep = " ",
 			hl = {
-				-- fg = colors.fg2,
-				fg = colors.fg,
-				style = "bold",
+				fg = colors.fg2,
+				-- fg = colors.fg,
+				-- style = "bold",
 			},
 		},
 		dir = {
@@ -118,8 +118,9 @@ local comps = {
 			left_sep = "  ",
 			right_sep = " ",
 			hl = {
-				fg = colors.fg,
-				style = "bold",
+				fg = colors.fg2,
+				-- fg = colors.fg,
+				-- style = "bold",
 			},
 		},
 		encoding = {
@@ -153,7 +154,8 @@ local comps = {
 		provider = "line_percentage",
 		left_sep = " ",
 		hl = {
-			style = "bold",
+			fg = colors.fg2,
+			-- style = "bold",
 		},
 	},
 	position = {
@@ -165,14 +167,16 @@ local comps = {
 			},
 		},
 		hl = {
-			style = "bold",
+			fg = colors.fg2,
+			-- style = "bold",
 		},
 	},
 	scroll_bar = {
 		provider = "scroll_bar",
 		left_sep = " ",
 		hl = {
-			style = "bold",
+			fg = colors.fg2,
+			-- style = "bold",
 		},
 	},
 	diagnos = {
