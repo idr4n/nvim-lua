@@ -16,7 +16,7 @@ keymap("n", "<leader>om", ":SublimeMerge<cr>", opts)
 command("OpenMarked2", "execute 'silent !open -a Marked\\ 2 \"%\"'", {})
 
 -- Open markdown in Deckset
--- command! OpenDeckset execute 'silent !open -a Deckset "%"'
+command("OpenDeckset", "execute 'silent !open -a Deckset \"%\"'", {})
 
 -- Convert markdown file to pdf using pandoc
 command("MdToPdf", 'execute \'silent !pandoc "%" -o "%:r.pdf"\'', {})
@@ -206,7 +206,7 @@ command("NewTerminalWindow", function()
 	vim.cmd(string.format(
 		-- "execute 'silent !open -na wezterm --args --config initial_rows=40 --config initial_cols=160 start lf %s'",
 		-- cwd
-		"execute 'silent !open -na wezterm --args --config initial_rows=40 --config initial_cols=160 start lf %s'",
+		"execute 'silent !open -na wezterm --args --config initial_rows=40 --config initial_cols=160 start lf \"%s\"'",
 		vim.fn.expand("%:p")
 	))
 end, {})
