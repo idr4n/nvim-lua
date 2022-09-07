@@ -32,6 +32,12 @@ M.snips.bb = p({
 	dscr = "Surrounds with bold text",
 }, "**$TM_SELECTED_TEXT$1**")
 
+M.snips.m = p({
+	trig = "mm",
+	name = "Math $$|$$",
+	dscr = "Surrounds with math symbols",
+}, "\\$\\$$TM_SELECTED_TEXT$1\\$\\$")
+
 M.snips.col = p({
 	trig = "col",
 	name = "collapsible block",
@@ -50,5 +56,11 @@ M.autosnips.bb = p({
 	name = "Autosnippet - Bold Text **|**",
 	dscr = "Surrounds with bold text",
 }, "**$TM_SELECTED_TEXT$1**")
+
+M.autosnips.m = p({
+	trig = ";mm",
+	name = "Math $$|$$",
+	dscr = "Surrounds with math symbols",
+}, "\\$\\$$TM_SELECTED_TEXT$1\\$\\$")
 
 return getSnippetsList(M.snips), getSnippetsList(M.autosnips)
