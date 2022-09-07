@@ -5,6 +5,17 @@ require("todo-comments").setup({
 		comments_only = false,
 		after = "",
 	},
+	search = {
+		command = "rg",
+		args = {
+			"--color=never",
+			"--no-heading",
+			"--with-filename",
+			"--line-number",
+			"--column",
+			"--glob=!node_modules",
+		},
+	},
 })
 
 -- mappings

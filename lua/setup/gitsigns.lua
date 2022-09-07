@@ -1,24 +1,20 @@
 -- "lewis6991/gitsigns.nvim"
 
-vim.cmd([[:highlight CustomSignsAdd guifg=#A6DA95]])
-vim.cmd([[:highlight CustomSignsChange guifg=#d19a66]])
-vim.cmd([[:highlight CustomSignsDelete guifg=#ED8796]])
-
 require("gitsigns").setup({
 	signcolumn = true,
 	numhl = false,
 	signs = {
-		add = { hl = "CustomSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-		change = { hl = "CustomSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-		delete = { hl = "CustomSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
+		add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+		change = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
+		delete = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
 		topdelete = {
-			hl = "CustomSignsDelete",
+			hl = "GitSignsDelete",
 			text = "契",
 			numhl = "GitSignsDeleteNr",
 			linehl = "GitSignsDeleteLn",
 		},
 		changedelete = {
-			hl = "CustomSignsChange",
+			hl = "GitSignsChange",
 			text = "▋",
 			numhl = "GitSignsChangeNr",
 			linehl = "GitSignsChangeLn",
