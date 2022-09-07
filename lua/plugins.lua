@@ -122,6 +122,7 @@ return packer.startup(function(use)
 		end,
 	})
 	use({ "ptzz/lf.vim", requires = "voldikss/vim-floaterm", config = get_setup("floaterm") })
+	use({ "ekickx/clipboard-image.nvim", config = get_setup("clipboard-image") })
 	-- use ({
 	--   "numToStr/Comment.nvim",
 	--   config = get_setup("comment"),
