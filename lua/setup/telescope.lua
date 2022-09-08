@@ -216,7 +216,12 @@ keymap("n", "<c-p>", "<cmd>Telescope find_files<cr>", opts)
 keymap("n", "<leader>b", "<cmd>Telescope current_buffer_fuzzy_find<cr>", opts)
 keymap("n", "<leader>l", "<cmd>Telescope resume<cr>", opts)
 keymap("n", "<c-b>", "<cmd>lua require('telescope.builtin').buffers({ initial_mode = 'normal' })<cr>", opts)
-keymap("n", "s", "<cmd>lua require('telescope.builtin').buffers({ initial_mode = 'normal' })<cr>", opts)
+keymap(
+	"n",
+	"s",
+	"<cmd>lua require('telescope.builtin').buffers({ initial_mode = 'normal', sort_lastused = true })<cr>",
+	opts
+)
 keymap("n", "<c-t>", "<cmd>Telescope oldfiles<cr>", opts)
 keymap("n", "<leader>gs", "<cmd>Telescope git_status<cr>", opts)
 keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", opts)
