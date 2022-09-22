@@ -2,13 +2,15 @@
 
 My Neovim configuation in Lua.
 
-![neovim](https://user-images.githubusercontent.com/20104703/170843418-ed863f0b-5199-4b82-a3ef-6dc410f39ee8.gif)
+![Nvim](https://user-images.githubusercontent.com/20104703/191853625-ad5ed48b-657e-4a06-b779-4258239f6bd3.gif)
 
 ## Basic setup
 
 - Theme: [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
 - Terminals: Kitty, WezTerm and Alacritty. To check my terminal configuration, take a look at my [dotfiles](https://github.com/idr4n/.dotfiles) 
 - Font: [MonoLisa](https://www.monolisa.dev/)
+
+![Nvim](https://user-images.githubusercontent.com/20104703/191853774-cc07c0ff-38e2-4fa9-8b86-1aeaeaeed8be.png)
 
 ## Switching between dark and light modes
 
