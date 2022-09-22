@@ -33,6 +33,8 @@ end
 This is the list of plugins I currently have installed, auto-generated with `PackerStatus`. This list is not necessarily the most updated one.
 </summary>
 
+<br>
+
 - alpha-nvim
 - catppuccin
 - clipboard-image.nvim
