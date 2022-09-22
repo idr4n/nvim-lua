@@ -108,3 +108,14 @@ This is the list of plugins I currently have installed, auto-generated with `Pac
 - zen-mode.nvim
 - zenbones.nvim
 - zk-nvim
+
+## Credits
+
+These are some repos I have often borrowed ideas from for my Neovim config:
+
+- [ChristianChiarulli/nvim](https://github.com/ChristianChiarulli/nvim)
+- [ThePrimeagen/.dotfiles](https://github.com/ThePrimeagen/.dotfiles)
+- [tjdevries/config_manager](https://github.com/tjdevries/config_manager)
+- [joshmedeski/dotfiles](https://github.com/joshmedeski/dotfiles)
+- [jonhoo/configs](https://github.com/jonhoo/configs)
+- [Ben Frain's config](https://gist.github.com/benfrain/97f2b91087121b2d4ba0dcc4202d252f)
