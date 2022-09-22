@@ -169,6 +169,7 @@ return packer.startup(function(use)
 	-- use({ "crispgm/nvim-go", config = get_setup("nvim-go") })
 	use({ "simrat39/rust-tools.nvim", config = get_setup("rust-tools") })
 	use({ "nanotee/sqls.nvim" })
+	use({ "ray-x/lsp_signature.nvim", config = get_setup("lsp_signature") })
 
 	-- Statusline
 	use({
