@@ -171,17 +171,17 @@ return packer.startup(function(use)
 	use({ "nanotee/sqls.nvim" })
 
 	-- Statusline
-	-- use({
-	-- 	"nvim-lualine/lualine.nvim",
-	-- 	config = get_setup("lualine"),
-	-- 	event = "VimEnter",
-	-- 	requires = { "kyazdani42/nvim-web-devicons", opt = true },
-	-- })
 	use({
-		"feline-nvim/feline.nvim",
-		config = get_setup("feline"),
-		after = { "zenbones.nvim", "rasmus.nvim" },
+		"nvim-lualine/lualine.nvim",
+		config = get_setup("lualineTwo"),
+		event = "VimEnter",
+		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
+	-- use({
+	-- 	"feline-nvim/feline.nvim",
+	-- 	config = get_setup("feline"),
+	-- 	after = { "zenbones.nvim", "rasmus.nvim" },
+	-- })
 	-- use({
 	-- 	"akinsho/bufferline.nvim",
 	-- 	tag = "v2.*",
