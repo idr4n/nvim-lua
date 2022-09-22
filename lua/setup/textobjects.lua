@@ -14,17 +14,17 @@ require("nvim-treesitter.configs").setup({
 				["if"] = "@function.inner",
 				["ac"] = "@conditional.outer",
 				["ic"] = "@conditional.inner",
-        ["al"] = "@loop.outer",
-        ["il"] = "@loop.inner",
+				["al"] = "@loop.outer",
+				["il"] = "@loop.inner",
 			},
 		},
-    lsp_interop = {
-      enable = true,
-      border = 'rounded',
-      peek_definition_code = {
-        ["<leader>df"] = "@function.outer",
-        ["<leader>dF"] = "@class.outer",
-      },
-    },
+		lsp_interop = {
+			enable = true,
+			border = "rounded",
+			peek_definition_code = {
+				["<leader>Pf"] = "@function.outer",
+				["<leader>Pc"] = "@class.outer",
+			},
+		},
 	},
 })

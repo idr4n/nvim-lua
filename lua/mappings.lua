@@ -21,19 +21,19 @@ keymap("i", "<C-e>", "<End>", opts)
 keymap("i", "<C-f>", "<right>", opts)
 
 -- center screen around coursor
-keymap("i", "<C-F>", "<C-O>zz", opts)
+keymap("i", "<C-F>", "<C-O>zt", opts)
 
 -- Normal --
 
 -- center screen around coursor
-keymap("n", "<C-F>", "zz", opts)
+keymap("n", "<C-F>", "zt", opts)
 
 -- Move up and down with wrapped lines
 keymap("n", "j", "gj", opts)
 keymap("n", "k", "gk", opts)
 
 -- Quicksave command
-keymap("n", "<leader>s", ":w<CR>", opts)
+keymap("n", "<leader>s", ":silent w<CR>", opts)
 
 -- Quit current window
 keymap("n", "<leader>e", ":quit<CR>", opts)
@@ -43,8 +43,7 @@ keymap("n", "<leader>E", ":q!<CR>", opts)
 keymap("n", "<Leader>S", "ggVG<c-$>", opts)
 
 -- Duplicate line and comment old line out
-keymap("n", "gcy", "gccyypgcc", { noremap = false, silent = true })
-keymap("n", "Y", "gccyypgcc", { noremap = false, silent = true })
+keymap("n", "gcy", "gcc:t.<cr>gcc", { noremap = false, silent = true })
 
 -- swtich buffers
 keymap("n", "<S-w>", ":bnext<CR>", opts)
@@ -73,7 +72,7 @@ keymap("n", "g*", "g*N", { noremap = true })
 keymap("n", "g#", "g#N", { noremap = true })
 
 -- set current file's directory as working directory
-keymap("n", "<leader>dc", "<cmd>cd %:p:h<CR>", opts)
+keymap("n", "<leader>cd", "<cmd>cd %:p:h<CR>", opts)
 
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
@@ -97,7 +96,7 @@ keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
 -- Duplicate and comment selection
-keymap("v", "gy", "gcgvyPgvgc", { noremap = false, silent = true })
+keymap("v", "gy", ":t'><cr>gvgcgv<esc>", { noremap = false, silent = true })
 
 -- Move text up and down
 keymap("v", "<A-Down>", ":m .+1<CR>==", opts)
@@ -123,3 +122,24 @@ keymap("x", "<A-Up>", ":move '<-2<CR>gv-gv", opts)
 
 -- Explorer (netrw)
 keymap("n", "<leader>xe", ":Explor<cr>", opts)
+
+-- some mapping ideas from thePrimeagen to replace the easy-clip plugin
+
+-- greatest remap ever
+keymap("x", "<leader>p", '"_dP', opts)
+
+-- next greatest remap ever (if not using system clipboard as main register)
+-- keymap("n", "<leader>y", '"+y', opts)
+-- keymap("v", "<leader>y", '"+y', opts)
+-- keymap("n", "<leader>Y", '"+Y', { noremap = false, silent = true })
+
+keymap("n", "d", '"_d', opts)
+keymap("v", "d", '"_d', opts)
+keymap("", "<leader>d", "d", opts)
+keymap("", "m", "d", opts)
+keymap("n", "x", '"_x', opts)
+keymap("n", "X", '"_X', opts)
+keymap("n", "c", '"_c', opts)
+keymap("n", "C", '"_C', opts)
+keymap("v", "x", '"_x', opts)
+keymap("v", "c", '"_c', opts)

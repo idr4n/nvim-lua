@@ -59,10 +59,6 @@ return packer.startup(function(use)
 	use("tpope/vim-vinegar")
 	use("moll/vim-bbye")
 	use("aymericbeaumet/vim-symlink")
-	use({
-		"svermeulen/vim-easyclip",
-		config = get_setup("easyclip"),
-	}) -- Adds m to cut and save to clipboard or register
 	use({ "mattn/emmet-vim", config = get_setup("emmet-vim") })
 	-- use({ "rmagatti/auto-session", config = get_setup("auto-session") })
 	-- use({
