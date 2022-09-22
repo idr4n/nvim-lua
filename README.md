@@ -28,7 +28,10 @@ end
 
 ## List of current plugins (not necessarily updated!)
 
+<details>
+<summary>
 This is the list of plugins I currently have installed, auto-generated with `PackerStatus`. This list is not necessarily the most updated one.
+</summary>
 
 - alpha-nvim
 - catppuccin
@@ -105,6 +108,7 @@ This is the list of plugins I currently have installed, auto-generated with `Pac
 - zen-mode.nvim
 - zenbones.nvim
 - zk-nvim
+</details>
 
 ## Credits
 
