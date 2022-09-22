@@ -6,15 +6,16 @@ local options = {
 	backup = false, -- creates a backup file
 	breakindent = true, -- Every wrapped line will continue visually indented
 	clipboard = "unnamedplus", -- allows neovim to access the system clipboard
-	cmdheight = 2, -- more space in the neovim command line for displaying messages
+	cmdheight = 1, -- more space in the neovim command line for displaying messages
 	completeopt = { "menuone", "noselect" }, -- mostly just for cmp
-	conceallevel = 2, -- so that `` is visible in markdown files
+	conceallevel = 0, -- so that `` is visible in markdown files
 	-- concealcursor = "nc", -- conceal in normal/command mode (not in insert/visual)
 	cursorline = true, -- highlight the current line
 	expandtab = true, -- convert tabs to spaces
 	fileencoding = "utf-8", -- the encoding written to a file
 	guifont = "monospace:h17", -- the font used in graphical neovim applications
-	hlsearch = true, -- highlight all matches on previous search pattern
+	hlsearch = false, -- highlight all matches on previous search pattern
+	incsearch = true,
 	ignorecase = true, -- ignore case in search patterns
 	linebreak = true, -- Break lines in spaces not in the middle of a word
 	mouse = "a", -- allow the mouse to be used in neovim
@@ -37,7 +38,7 @@ local options = {
 	termguicolors = true, -- set term gui colors (most terminals support this)
 	-- timeoutlen = 100,                        -- time to wait for a mapped sequence to complete (in milliseconds)
 	undofile = true, -- enable persistent undo
-	updatetime = 700, -- control CursorHold event waiting time (4000ms default)
+	updatetime = 300, -- control CursorHold event waiting time (4000ms default)
 	wrap = true, -- display lines as one long line
 	writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 }
@@ -69,7 +70,7 @@ vim.cmd([[
   augroup highlight_yank
   autocmd!
   " au TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=400, on_visual=false}
-  au TextYankPost * silent! lua vim.highlight.on_yank {timeout=400}
+  au TextYankPost * silent! lua vim.highlight.on_yank {timeout=100}
   augroup END
 ]])
 
