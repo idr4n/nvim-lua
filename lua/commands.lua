@@ -32,6 +32,10 @@ keymap("n", "<leader>;", ":RevealInFinder<cr>", opts)
 command("CodeRun", "execute '!~/scripts/code_run \"%\"'", {})
 keymap("n", "<leader>cr", ":CodeRun<cr>", opts)
 
+-- yank line after dash (-), i.e., bullet point in makrdown without the bullet
+command("YankBullet", "execute '.g/- \\zs.*$/normal ygn'", {})
+keymap("n", ",b", ":YankBullet<cr>", opts)
+
 -- Autocommands
 
 -- Autospelling for tex and md files
@@ -116,7 +120,7 @@ command("YankCwd", function()
 	vim.cmd(string.format("call setreg('*', '%s')", cwd))
 	print("Cwd copied to clipboard!")
 end, {})
-keymap("n", "<leader>yy", "<cmd>YankCwd<cr>", opts)
+keymap("n", "<leader>cp", "<cmd>YankCwd<cr>", opts)
 
 local function printDir()
 	local dir = vim.fn.getcwd()
