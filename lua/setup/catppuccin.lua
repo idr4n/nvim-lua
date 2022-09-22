@@ -33,4 +33,4 @@ else
 	vim.g.catppuccin_flavour = "macchiato" -- latte, frappe, macchiato, mocha
 end
 
-vim.cmd([[colorscheme catppuccin]])
+-- vim.cmd([[colorscheme catppuccin]])
