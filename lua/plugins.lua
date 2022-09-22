@@ -108,14 +108,6 @@ return packer.startup(function(use)
 	use({ "ThePrimeagen/harpoon", requires = "nvim-lua/plenary.nvim", config = get_setup("harpoon") })
 	use({ "kyazdani42/nvim-web-devicons" })
 	use({ "NvChad/nvim-colorizer.lua", config = get_setup("colorizer") })
-	use({
-		"jinh0/eyeliner.nvim",
-		config = function()
-			require("eyeliner").setup({
-				highlight_on_key = true,
-			})
-		end,
-	})
 	use({ "ptzz/lf.vim", requires = "voldikss/vim-floaterm", config = get_setup("floaterm") })
 	use({ "ekickx/clipboard-image.nvim", config = get_setup("clipboard-image") })
 	-- use ({
