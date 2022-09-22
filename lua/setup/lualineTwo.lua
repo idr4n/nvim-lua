@@ -124,12 +124,12 @@ local hide_in_width_60 = function()
 	return vim.o.columns > 60
 end
 
-local hide_in_width_80 = function()
-	return vim.o.columns > 80
+local hide_in_width_120 = function()
+	return vim.o.columns > 120
 end
 
-local hide_in_width_100 = function()
-	return vim.o.columns > 100
+local hide_in_width_140 = function()
+	return vim.o.columns > 140
 end
 
 local icons = require("icons")
@@ -305,7 +305,7 @@ local current_signature = {
 
 		return ""
 	end,
-	cond = hide_in_width_100,
+	cond = hide_in_width_140,
 	padding = 0,
 }
 
@@ -340,7 +340,7 @@ local spaces = {
 		return hl_str(" ", "SLSep") .. hl_str(" " .. shiftwidth .. space, "SLIndent") .. hl_str("", "SLSep")
 	end,
 	padding = 0,
-	cond = hide_in_width_100,
+	cond = hide_in_width_120,
 }
 
 local lanuage_server = {
@@ -429,7 +429,7 @@ local lanuage_server = {
 		end
 	end,
 	padding = 0,
-	cond = hide_in_width_100,
+	cond = hide_in_width_120,
 }
 
 local location = {
