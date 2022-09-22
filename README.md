@@ -6,11 +6,9 @@ My Neovim configuation in Lua.
 
 ## Basic setup
 
-- Theme: [mcchrish/zenbones.nvim: 🪨 A collection of contrast-based Vim/Neovim colorschemes](https://github.com/mcchrish/zenbones.nvim). I use both the light and dark themes. I like simple, almost monochromatic themes, and Zenbones for me is, so far, the perfect one.
-- Terminal: Alacritty. To check my terminal configuration, take a look at my [dotfiles](https://github.com/idr4n/.dotfiles) 
-- Font: [tonsky/FiraCode: Free monospaced font with programming ligatures](https://github.com/tonsky/FiraCode)
-
-![neovim-3](https://user-images.githubusercontent.com/20104703/170856117-70a11bb8-5ebb-434d-a781-bcb2475b4fa4.png)
+- Theme: [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
+- Terminals: Kitty, WezTerm and Alacritty. To check my terminal configuration, take a look at my [dotfiles](https://github.com/idr4n/.dotfiles) 
+- Font: [MonoLisa](https://www.monolisa.dev/)
 
 ## Switching between dark and light modes
 
@@ -19,26 +17,12 @@ Whenever I start Neovim, the color theme is set based on the time of the day (wh
 ```lua
 local t = os.date("*t").hour + os.date("*t").min / 60
 
-if t >= 5.5 and t < 19.5 then
-  vim.cmd("set background=light")
-  vim.env.BAT_THEME = "gruvbox-light"
+if t >= 8 and t < 18 then
+	vim.cmd("colorscheme tokyonight-storm")
 else
-  vim.cmd("set background=dark")
-  vim.env.BAT_THEME = "Nord"
+	vim.cmd("colorscheme tokyonight-night")
 end
-
-vim.cmd("colorscheme zenbones")
 ```
-
-And something similar for `lualine`. Although there are ways to make the switch between modes automatic, for me this is quite simple and good enough.
-
-![neovim-4](https://user-images.githubusercontent.com/20104703/171053849-cf0ee33e-a9bc-49a5-8cb6-e896807e1fd3.png)
-![neovim-2](https://user-images.githubusercontent.com/20104703/170856125-eb76460c-6246-4317-8a71-1e59a6a7ced9.png)
-
-The **feline statusline** config auto-adapts to some of the themes I use (e.g., zenbones, rasmus, tokyonight, nightfox).
-
-![feline1](https://user-images.githubusercontent.com/20104703/171977772-8b2dc4d2-36d8-4fe1-87fb-6579a9544c07.png)
-![feline2](https://user-images.githubusercontent.com/20104703/171977774-4b20bcdd-78b2-4d0c-a3e5-52ea10f5fcf2.png)
 
 ## List of current plugins (not necessarily updated!)
 
