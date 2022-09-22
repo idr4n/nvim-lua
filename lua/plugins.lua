@@ -108,7 +108,6 @@ return packer.startup(function(use)
 	use({ "ThePrimeagen/harpoon", requires = "nvim-lua/plenary.nvim", config = get_setup("harpoon") })
 	use({ "kyazdani42/nvim-web-devicons", config = get_setup("devicons") })
 	use({ "NvChad/nvim-colorizer.lua", config = get_setup("colorizer") })
-	use({ "jakewvincent/mkdnflow.nvim", config = get_setup("mkdnflow") })
 	use({
 		"jinh0/eyeliner.nvim",
 		config = function()
