@@ -23,6 +23,7 @@ null_ls.setup({
 		diagnostics.flake8,
 		-- diagnostics.vale,
 		-- diagnostics.golangci_lint,
+		-- For revive, there is a ~/revive.toml config file to exclude linting rules
 		diagnostics.revive,
 		formatting.goimports,
 		-- sqlfluff: extra config option set in ~/.sqlfluff
