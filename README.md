@@ -61,6 +61,8 @@ This is the list of plugins I currently have installed, auto-generated with `Pac
 - lualine.nvim
 - LuaSnip
 - lush.nvim
+- mason-lspconfig.nvim
+- mason.nvim
 - neo-tree.nvim
 - nightfox.nvim
 - nui.nvim
@@ -69,7 +71,6 @@ This is the list of plugins I currently have installed, auto-generated with `Pac
 - nvim-cmp
 - nvim-colorizer.lua
 - nvim-jdtls
-- nvim-lsp-installer
 - nvim-lspconfig
 - nvim-markdown
 - nvim-treesitter
