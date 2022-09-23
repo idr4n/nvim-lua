@@ -3,7 +3,7 @@ if not status_ok then
 	return
 end
 
-require("setup.lsp.lsp-installer")
+require("setup.lsp.mason")
 require("setup.lsp.handlers").setup()
 
 -- Convert JSON filetype to JSON with comments (jsonc)

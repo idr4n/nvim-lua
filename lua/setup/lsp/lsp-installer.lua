@@ -69,6 +69,10 @@ lsp_installer.on_server_ready(function(server)
 					connections = {
 						{
 							driver = "postgresql",
+							dataSourceName = "host=127.0.0.1 port=5432 user=iduran dbname=plants_dev",
+						},
+						{
+							driver = "postgresql",
 							dataSourceName = "host=127.0.0.1 port=5432 user=iduran dbname=test",
 						},
 						{
