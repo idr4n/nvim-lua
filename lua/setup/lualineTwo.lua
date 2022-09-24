@@ -55,6 +55,8 @@ vim.api.nvim_set_hl(0, "SLSeparator", { fg = "#6b727f", bg = "NONE", italic = tr
 vim.api.nvim_set_hl(0, "SLError", { fg = "#bf616a", bg = "NONE" })
 vim.api.nvim_set_hl(0, "SLWarning", { fg = "#D7BA7D", bg = "NONE" })
 vim.api.nvim_set_hl(0, "SLCopilot", { fg = "#6CC644", bg = "NONE" })
+vim.api.nvim_set_hl(0, "SLFormatter", { fg = green, bg = "NONE" })
+vim.api.nvim_set_hl(0, "SLLinter", { fg = yellow_orange, bg = "NONE" })
 vim.api.nvim_set_hl(0, "SLNone", { fg = "#6b727f", bg = "NONE" })
 vim.api.nvim_set_hl(0, "SLAdded", { fg = cyan, bg = "NONE" })
 vim.api.nvim_set_hl(0, "SLModified", { fg = orange, bg = "NONE" })
@@ -343,7 +345,7 @@ local spaces = {
 	cond = hide_in_width_120,
 }
 
-local lanuage_server = {
+local language_server = {
 	function()
 		local buf_ft = vim.bo.filetype
 		local ui_filetypes = {
@@ -399,11 +401,28 @@ local lanuage_server = {
 
 		local formatter = registered["NULL_LS_FORMATTING"]
 		local linter = registered["NULL_LS_DIAGNOSTICS"]
-		if formatter ~= nil then
-			vim.list_extend(client_names, formatter)
+		-- if formatter ~= nil then
+		-- 	vim.list_extend(client_names, formatter)
+		-- end
+		-- if linter ~= nil then
+		-- 	vim.list_extend(client_names, linter)
+		-- end
+
+		local formatter_icon = ""
+		if formatter then
+			formatter_icon = " " .. " "
 		end
-		if linter ~= nil then
-			vim.list_extend(client_names, linter)
+
+		local linter_icon = ""
+		if linter then
+			linter_icon = " " .. icons.ui.Fire
+		end
+
+		-- shorten clients names if needed
+		if #client_names > 2 then
+			for i, client in pairs(client_names) do
+				client_names[i] = string.sub(client, 1, 3)
+			end
 		end
 
 		-- join client names with commas
@@ -412,10 +431,14 @@ local lanuage_server = {
 		-- check client_names_str if empty
 		local language_servers = ""
 		local client_names_str_len = #client_names_str
-		if client_names_str_len ~= 0 then
+		if client_names_str_len ~= 0 or #formatter_icon > 0 or #linter_icon > 0 then
 			language_servers = hl_str("", "SLSep")
 				.. hl_str(client_names_str, "SLSeparator")
 				.. hl_str("", "SLSep")
+				.. "%#SLFormatter#"
+				.. formatter_icon
+				.. "%#SLLinter#"
+				.. linter_icon
 		end
 		if copilot_active then
 			language_servers = language_servers .. "%#SLCopilot#" .. " " .. icons.git.Octoface .. "%*"
@@ -455,7 +478,7 @@ lualine.setup({
 		lualine_a = { left_pad, mode, branch, right_pad },
 		lualine_b = { getDir, filename },
 		lualine_c = { diff, diagnostics, current_signature },
-		lualine_x = { lanuage_server, spaces, filetype },
+		lualine_x = { language_server, spaces, filetype },
 		lualine_y = {},
 		lualine_z = { location, progress },
 	},
