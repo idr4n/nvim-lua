@@ -1,8 +1,17 @@
 -- "rose-pine/neovim"
 
+local t = os.date("*t").hour + os.date("*t").min / 60
+local variant = ""
+
+if t >= 8 and t < 18 then
+	variant = "moon"
+else
+	variant = "main"
+end
+
 require("rose-pine").setup({
 	--- @usage 'main' | 'moon'
-	dark_variant = "moon",
+	dark_variant = variant,
 	bold_vert_split = false,
 	dim_nc_background = false,
 	disable_background = true,
@@ -53,10 +62,11 @@ require("rose-pine").setup({
 })
 
 -- Load the colorscheme
-local t = os.date("*t").hour + os.date("*t").min / 60
 
-if t >= 8 and t < 18 then
-	vim.cmd("colorscheme rose-pine")
-else
-	-- vim.cmd("colorscheme rose-pine")
-end
+-- if t >= 8 and t < 18 then
+-- 	vim.cmd("colorscheme rose-pine")
+-- else
+-- 	vim.cmd("colorscheme rose-pine")
+-- end
+
+vim.cmd("colorscheme rose-pine")
