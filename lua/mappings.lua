@@ -129,9 +129,9 @@ keymap("n", "<leader>xe", ":Explor<cr>", opts)
 keymap("x", "<leader>p", '"_dP', opts)
 
 -- next greatest remap ever (if not using system clipboard as main register)
--- keymap("n", "<leader>y", '"+y', opts)
--- keymap("v", "<leader>y", '"+y', opts)
--- keymap("n", "<leader>Y", '"+Y', { noremap = false, silent = true })
+keymap("n", "<leader>y", '"+y', opts)
+keymap("v", "<leader>y", '"+y', opts)
+keymap("n", "<leader>Y", '"+Y', { noremap = false, silent = true })
 
 keymap("n", "d", '"_d', opts)
 keymap("v", "d", '"_d', opts)
