@@ -32,8 +32,8 @@ keymap("n", "<leader>;", ":RevealInFinder<cr>", opts)
 command("CodeRun", "execute '!~/scripts/code_run \"%\"'", {})
 keymap("n", "<leader>cr", ":CodeRun<cr>", opts)
 
--- yank line after dash (-), i.e., bullet point in makrdown without the bullet
-command("YankBullet", "execute '.g/- \\zs.*$/normal ygn'", {})
+-- yank line after dash (-), i.e., bullet point in markdown without the bullet and the X
+command("YankBullet", "execute '.g/- \\(X\\s\\)\\?\\zs.*$/normal \"+ygn'", {})
 keymap("n", ",b", ":YankBullet<cr>", opts)
 
 -- Autocommands
