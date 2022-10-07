@@ -89,6 +89,10 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 -- Clear search highlight
 keymap("n", "<leader>,", "<cmd>nohlsearch|diffupdate|normal! <C-L><CR>", opts)
 
+-- home row goto end and start of line (same as in Helix editor)
+keymap("n", "gh", "0", opts)
+keymap("n", "gl", "$", opts)
+
 -- Visual --
 
 -- Stay in indent mode
