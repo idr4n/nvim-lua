@@ -232,6 +232,8 @@ keymap("n", "<leader>w", "<cmd>Telescope lsp_document_symbols<cr>", opts)
 keymap("n", "<leader>W", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", opts)
 keymap("n", "<leader>D", "<cmd>Telescope diagnostics<cr>", opts)
 keymap("n", "<leader>ts", "<cmd>Telescope luasnip<cr>", opts)
+keymap("n", "<leader>gr", "<cmd>Telescope registers<cr>", opts)
+keymap("n", "<leader>gj", "<cmd>Telescope jumplist<cr>", opts)
 keymap(
 	"n",
 	"<leader>fk",

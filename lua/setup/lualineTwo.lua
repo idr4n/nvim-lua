@@ -28,6 +28,39 @@ local function contains(t, value)
 	return false
 end
 
+local function hex_to_rgb(hex_str)
+	local hex = "[abcdef0-9][abcdef0-9]"
+	local pat = "^#(" .. hex .. ")(" .. hex .. ")(" .. hex .. ")$"
+	hex_str = string.lower(hex_str)
+
+	assert(string.find(hex_str, pat) ~= nil, "hex_to_rgb: invalid hex_str: " .. tostring(hex_str))
+
+	local red, green, blue = string.match(hex_str, pat)
+	return { tonumber(red, 16), tonumber(green, 16), tonumber(blue, 16) }
+end
+
+local function blend(fg, bg, alpha)
+	bg = hex_to_rgb(bg)
+	fg = hex_to_rgb(fg)
+
+	local function blendChannel(i)
+		local ret = (alpha * fg[i] + ((1 - alpha) * bg[i]))
+		return math.floor(math.min(math.max(0, ret), 255) + 0.5)
+	end
+
+	return string.format("#%02X%02X%02X", blendChannel(1), blendChannel(2), blendChannel(3))
+end
+
+local function darken(hex, amount, bg)
+	if bg == "bg" or bg == "" then
+		bg = "#222222"
+	end
+	return blend(hex, bg, math.abs(amount))
+end
+
+local base = vim.fn.synIDattr(vim.fn.hlID("Cursor"), "fg")
+local surface0 = vim.fn.synIDattr(vim.fn.hlID("Comment"), "fg")
+local sep = darken(surface0, 0.4, base)
 local gray = "#32363e"
 local dark_gray = "#2E3239"
 local red = "#D16969"
@@ -41,15 +74,15 @@ local yellow_orange = "#D7BA7D"
 local purple = "#C586C0"
 
 vim.api.nvim_set_hl(0, "SLGitIcon", { fg = "#E8AB53", bg = dark_gray })
-vim.api.nvim_set_hl(0, "SLTermIcon", { fg = purple, bg = gray })
+vim.api.nvim_set_hl(0, "SLTermIcon", { fg = purple, bg = sep })
 vim.api.nvim_set_hl(0, "SLBranchName", { fg = "#abb2bf", bg = dark_gray, bold = false })
-vim.api.nvim_set_hl(0, "SLProgress", { fg = purple, bg = gray })
-vim.api.nvim_set_hl(0, "SLLocation", { fg = blue, bg = gray })
-vim.api.nvim_set_hl(0, "SLFilename", { fg = blue, bg = gray, bold = true })
-vim.api.nvim_set_hl(0, "SLFT", { fg = cyan, bg = gray })
-vim.api.nvim_set_hl(0, "SLIndent", { fg = indent, bg = gray })
+vim.api.nvim_set_hl(0, "SLProgress", { fg = purple, bg = sep })
+vim.api.nvim_set_hl(0, "SLLocation", { fg = blue, bg = sep })
+vim.api.nvim_set_hl(0, "SLFilename", { fg = blue, bg = sep, bold = true })
+vim.api.nvim_set_hl(0, "SLFT", { fg = cyan, bg = sep })
+vim.api.nvim_set_hl(0, "SLIndent", { fg = indent, bg = sep })
 vim.api.nvim_set_hl(0, "SLLSP", { fg = "#6b727f", bg = "NONE" })
-vim.api.nvim_set_hl(0, "SLSep", { fg = gray, bg = "NONE" })
+vim.api.nvim_set_hl(0, "SLSep", { fg = sep, bg = "NONE" })
 vim.api.nvim_set_hl(0, "SLFG", { fg = "#abb2bf", bg = "NONE" })
 vim.api.nvim_set_hl(0, "SLSeparator", { fg = "#6b727f", bg = "NONE", italic = true })
 vim.api.nvim_set_hl(0, "SLError", { fg = "#bf616a", bg = "NONE" })
@@ -256,6 +289,7 @@ local filetype = {
 	end,
 	icons_enabled = false,
 	padding = 0,
+	cond = hide_in_width_120,
 }
 
 local branch = {

@@ -126,7 +126,11 @@ keymap("n", "<leader>xe", ":Explor<cr>", opts)
 -- some mapping ideas from thePrimeagen to replace the easy-clip plugin
 
 -- greatest remap ever
-keymap("x", "<leader>p", '"_dP', opts)
+-- keymap("x", "<leader>p", '"_dP', opts)
+keymap("n", "<leader>p", '"+p', opts)
+keymap("v", "<leader>p", '"+p', opts)
+keymap("n", "<leader>P", '"+P', opts)
+keymap("v", "<leader>P", '"+P', opts)
 
 -- next greatest remap ever (if not using system clipboard as main register)
 keymap("n", "<leader>y", '"+y', opts)
