@@ -75,6 +75,9 @@ vim.cmd([[
   augroup END
 ]])
 
+-- Statusline
+vim.o.statusline = "%f %{&modified?'●':''}%r%h %= %l,%c     %{fnamemodify(getcwd(), ':p:h:t')}   %3.3p%%"
+
 -- Explorer (netrw)
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
