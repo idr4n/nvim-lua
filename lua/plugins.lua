@@ -167,12 +167,12 @@ return packer.startup(function(use)
 	use({ "ray-x/lsp_signature.nvim", config = get_setup("lsp_signature") })
 
 	-- Statusline
-	use({
-		"nvim-lualine/lualine.nvim",
-		config = get_setup("lualineTwo"),
-		event = "VimEnter",
-		requires = { "kyazdani42/nvim-web-devicons", opt = true },
-	})
+	-- use({
+	-- 	"nvim-lualine/lualine.nvim",
+	-- 	config = get_setup("lualineTwo"),
+	-- 	event = "VimEnter",
+	-- 	requires = { "kyazdani42/nvim-web-devicons", opt = true },
+	-- })
 	-- use({
 	-- 	"feline-nvim/feline.nvim",
 	-- 	config = get_setup("feline"),
