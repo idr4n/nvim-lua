@@ -1,16 +1,24 @@
 # README
 
-My Neovim configuation in Lua.
+This is my Neovim configuation in Lua.
 
-![Nvim](https://user-images.githubusercontent.com/20104703/191853625-ad5ed48b-657e-4a06-b779-4258239f6bd3.gif)
+<img width="1331" alt="CleanShot 2022-10-21 at 06 57 55@2x" src="https://user-images.githubusercontent.com/20104703/197108584-4f114512-a798-4aa4-bf82-43929e9d807b.png">
 
 ## Basic setup
 
 - Theme: [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
 - Terminals: Kitty, WezTerm and Alacritty. To check my terminal configuration, take a look at my [dotfiles](https://github.com/idr4n/.dotfiles) 
 - Font: [MonoLisa](https://www.monolisa.dev/)
-
-![Nvim](https://user-images.githubusercontent.com/20104703/191853774-cc07c0ff-38e2-4fa9-8b86-1aeaeaeed8be.png)
+- <details><summary>Simple one line config status line (no plugins needed)</summary>
+ 
+    <br> 
+    
+    ```lua
+    vim.o.statusline = "%f %{&modified?'●':''}%r%h %= %l,%c     %{fnamemodify(getcwd(), ':p:h:t')}   %3.3p%%"
+    ```
+    
+    <br> 
+    </details>
 
 ## Switching between dark and light modes
 
