@@ -76,7 +76,44 @@ vim.cmd([[
 ]])
 
 -- Statusline
-vim.o.statusline = "%f %{&modified?'●':''}%r%h %= %l,%c     %{fnamemodify(getcwd(), ':p:h:t')}   %3.3p%%"
+
+-- GitChanges = ""
+local function getGitChanges()
+	local gitsigns = vim.b.gitsigns_status_dict
+	-- local git_icon = "   "
+	-- local git_icon = "   "
+	local git_icon = "   "
+	local changes = 0
+	local head = ""
+	local status = ""
+	if gitsigns then
+		head = gitsigns.head
+		changes = (gitsigns.added or 0) + (gitsigns.changed or 0) + (gitsigns.removed or 0)
+	end
+	if #head > 0 or changes > 0 then
+		status = git_icon
+		if head ~= "master" then
+			status = string.format("%s%s ", status, head)
+		end
+		if changes > 0 then
+			status = string.format("%s%d", status, changes)
+		end
+	end
+	return status
+end
+
+-- vim.o.statusline = "%f %{&modified?'●':''}%r%h %= %l,%c     %{fnamemodify(getcwd(), ':p:h:t')}   %3.3p%%"
+
+function Status_line()
+	local statusline = ""
+	statusline = statusline .. "%f %{&modified?'●':''}%r%h"
+	statusline = statusline .. getGitChanges()
+	statusline = statusline .. "%= %l,%c     %{fnamemodify(getcwd(), ':p:h:t')}   %3.3p%%"
+
+	return statusline
+end
+
+vim.o.statusline = "%!v:lua.Status_line()"
 
 -- Explorer (netrw)
 vim.g.netrw_browse_split = 0
