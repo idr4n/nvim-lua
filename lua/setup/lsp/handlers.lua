@@ -77,7 +77,7 @@ local function lsp_keymaps(bufnr)
 	vim.api.nvim_buf_set_keymap(
 		bufnr,
 		"n",
-		"gl",
+		"gs",
 		-- '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', -- depracated
 		"<cmd>lua vim.diagnostic.open_float()<CR>",
 		opts
