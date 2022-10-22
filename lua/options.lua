@@ -107,8 +107,11 @@ end
 function Status_line()
 	local statusline = ""
 	statusline = statusline .. "%f %{&modified?'●':''}%r%h"
+	-- statusline = statusline .. getGitChanges()
+	-- statusline = statusline .. "%= %l,%c     %{fnamemodify(getcwd(), ':p:h:t')}   %3.3p%%"
+	statusline = statusline .. "%= %l,%c  "
 	statusline = statusline .. getGitChanges()
-	statusline = statusline .. "%= %l,%c     %{fnamemodify(getcwd(), ':p:h:t')}   %3.3p%%"
+	statusline = statusline .. "  %{fnamemodify(getcwd(), ':p:h:t')}   %3.3p%%"
 
 	return statusline
 end
