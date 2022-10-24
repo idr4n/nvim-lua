@@ -99,7 +99,7 @@ local function getGitChanges()
 			status = string.format("%s%d", status, changes)
 		end
 	end
-	return status
+	return string.format("%s  ", status)
 end
 
 -- vim.o.statusline = "%f %{&modified?'●':''}%r%h %= %l,%c     %{fnamemodify(getcwd(), ':p:h:t')}   %3.3p%%"
