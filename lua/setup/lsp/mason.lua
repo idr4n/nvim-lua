@@ -132,4 +132,5 @@ for _, server in pairs(mason_lspconfig.get_installed_servers()) do
 
 	lspconfig[server].setup(opts)
 	::continue::
+	lspconfig[server].setup(opts)
 end
