@@ -6,8 +6,8 @@ This is my Neovim configuation in Lua.
 
 ## Basic setup
 
-- Theme: [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
-- Terminals: Kitty, WezTerm and Alacritty. To check my terminal configuration, take a look at my [dotfiles](https://github.com/idr4n/.dotfiles) 
+- Preferred themes: [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim) and [rose-pine/neovim](https://github.com/rose-pine/neovim)
+- Terminals: WezTerm (alternatively Alacritty and Kitty). To check my terminals configuration, take a look at my [dotfiles](https://github.com/idr4n/.dotfiles) and my [WezTerm configuration](https://github.com/idr4n/wezterm)
 - Font: I switch back and forth between [FiraCode](https://github.com/tonsky/FiraCode) and [MonoLisa](https://www.monolisa.dev/)
 - <details><summary>Simple one line config status line (no plugins needed)</summary>
  
