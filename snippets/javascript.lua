@@ -33,6 +33,12 @@ M.snips.cl = s(
 	})
 )
 
+M.snips.pp = p({
+	trig = "pp",
+	name = "console.log informative",
+	dscr = "console.log with variable description",
+}, 'console.log("$1: ", $1)')
+
 M.snips.af = p({
 	trig = "af",
 	name = "surrounds with arrow function",
@@ -51,11 +57,17 @@ M.snips.ac = p({
 	dscr = "adds a callback function",
 }, "($1) => {$2}")
 
-M.snips.sf = p({
-	trig = "sf",
+M.snips.sc = p({
+	trig = "sc",
 	name = "surrounds with callback function",
 	dscr = "surrounds selection with a callback function",
 }, "${1:name}(($3) => {\n\t$TM_SELECTED_TEXT$4\n})")
+
+M.snips.sf = p({
+	trig = "sf",
+	name = "surrounds with function",
+	dscr = "surrounds selection with a function",
+}, "function ${1:name}($3) {\n\t$TM_SELECTED_TEXT$4\n}")
 
 M.snips.ds = p({
 	trig = "ds",
@@ -79,6 +91,12 @@ M.autosnips.cl = s(
 	})
 )
 
+M.autosnips.pp = p({
+	trig = ";pp",
+	name = "console.log informative",
+	dscr = "console.log with variable description",
+}, 'console.log("$1: ", $1)')
+
 M.autosnips.af = p({
 	trig = ";af",
 	name = "surrounds with arrow function",
@@ -97,11 +115,17 @@ M.autosnips.ac = p({
 	dscr = "adds a callback function",
 }, "($1) => {$2}")
 
-M.autosnips.sf = p({
-	trig = ";sf",
+M.autosnips.sc = p({
+	trig = ";sc",
 	name = "surrounds with callback function",
 	dscr = "surrounds selection with a callback function",
 }, "${1:name}(($3) => {\n\t$TM_SELECTED_TEXT$4\n})")
+
+M.autosnips.sf = p({
+	trig = ";sf",
+	name = "surrounds with function",
+	dscr = "surrounds selection with a function",
+}, "function ${1:name}($3) {\n\t$TM_SELECTED_TEXT$4\n}")
 
 M.autosnips.ds = p({
 	trig = ";ds",
