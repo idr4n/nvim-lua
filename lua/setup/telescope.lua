@@ -117,6 +117,7 @@ telescope.setup({
 				["s"] = actions.close,
 				["<CR>"] = actions.select_default,
 				["f"] = actions.select_default,
+				["l"] = actions.select_default,
 				["<C-x>"] = actions.select_horizontal,
 				["<C-v>"] = actions.select_vertical,
 				["<C-t>"] = actions.select_tab,
@@ -223,7 +224,7 @@ keymap(
 	opts
 )
 keymap("n", "<c-t>", "<cmd>Telescope oldfiles<cr>", opts)
-keymap("n", "<leader>gs", "<cmd>Telescope git_status<cr>", opts)
+keymap("n", "<leader>gs", "<cmd>lua require('telescope.builtin').git_status({ initial_mode = 'normal' })<cr>", opts)
 keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", opts)
 keymap("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
 -- keymap("n", "gr", "<cmd>Telescope lsp_references<cr>", opts)

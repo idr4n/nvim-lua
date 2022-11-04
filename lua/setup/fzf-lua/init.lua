@@ -4,17 +4,27 @@
 require("fzf-lua").setup({
 	winopts = {
 		height = 0.4,
-		width = 0.8,
+		width = 0.9,
 		-- row = 0.2,
 		preview = {
-			-- vertical = "up:30%",
-			vertical = "right:50%",
-			flip_columns = 170,
+			vertical = "up:40%",
+			horizontal = "right:54%",
+			flip_columns = 120,
 			delay = 60,
 			scrollbar = false,
-			hidden = "hidden",
+			hidden = "nohidden",
 		},
 	},
+	winopts_fn = function()
+		-- smaller width if neovim win has over 80 columns
+		local max_width = 140 / vim.o.columns
+		local max_height = 30 / vim.o.lines
+		-- return { width = vim.o.columns > 140 and max_width or 1 }
+		return {
+			width = math.min(max_width, 1),
+			height = math.min(max_height, 1),
+		}
+	end,
 	fzf_opts = {
 		-- ["--layout"] = "default",
 		["--layout"] = "reverse",
@@ -44,6 +54,9 @@ require("fzf-lua").setup({
 			["<C-L>"] = "toggle-preview",
 			["<S-down>"] = "preview-page-down",
 			["<S-up>"] = "preview-page-up",
+		},
+		fzf = {
+			["ctrl-l"] = "toggle-preview",
 		},
 	},
 	-- needed for kitty for better icon rendering

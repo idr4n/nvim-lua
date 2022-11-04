@@ -23,3 +23,5 @@ vim.g.floaterm_width = calcFloatSize().width
 vim.g.floaterm_height = calcFloatSize().height
 
 vim.api.nvim_set_keymap("n", ",l", ":Lf<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "-", ":Lf<cr>", { noremap = true, silent = true })
+-- vim.g.lf_replace_netrw = 1 -- Open lf when vim opens a directory
