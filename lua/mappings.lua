@@ -71,6 +71,9 @@ keymap("n", "#", "#N", { noremap = true })
 keymap("n", "g*", "g*N", { noremap = true })
 keymap("n", "g#", "g#N", { noremap = true })
 
+-- toggle wrapping lines
+keymap("n", ",w", "<cmd>set wrap!<cr>", opts)
+
 -- set current file's directory as working directory
 keymap("n", "<leader>cd", "<cmd>cd %:p:h<CR>", opts)
 
