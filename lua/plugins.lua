@@ -242,6 +242,7 @@ return packer.startup(function(use)
 	use({ "catppuccin/nvim", as = "catppuccin", config = get_setup("catppuccin") })
 	use({ "rebelot/kanagawa.nvim", config = get_setup("kanagawa") })
 	use({ "rose-pine/neovim", config = get_setup("rose-pine") })
+	use({ "sainnhe/sonokai", config = get_setup("sonokai") })
 	-- use ({
 	--   "RRethy/nvim-base16",
 	--   config = get_setup("nvim-base16"),
