@@ -43,7 +43,7 @@ M.snips.af = p({
 	trig = "af",
 	name = "surrounds with arrow function",
 	dscr = "surrounds selection with an arrow function",
-}, "const ${1:name} = ($2) => {\n\t$TM_SELECTED_TEXT$3\n})")
+}, "const ${1:name} = ($2) => {\n\t$TM_SELECTED_TEXT$3\n}")
 
 M.snips.aa = p({
 	trig = "aa",
