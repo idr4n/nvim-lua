@@ -32,6 +32,12 @@ M.snips.ea = p({
 	dscr = "Var assignment with error _, err :=",
 }, "${1:_}, err := $2")
 
+M.snips.va = p({
+	trig = "va",
+	name = "Variable assignment with ':='",
+	dscr = "Adds ':= '",
+}, ":= ")
+
 M.snips.fp = s(
 	{
 		trig = "fp",
@@ -59,6 +65,12 @@ M.autosnips.ea = p({
 	name = "Autosnippet - _, err := ...",
 	dscr = "Var assignment with error _, err :=",
 }, "${1:_}, err := $2")
+
+M.autosnips.va = p({
+	trig = ";a",
+	name = " := ",
+	dscr = "Var assignment :=",
+}, ":= ")
 
 M.autosnips.fp = s(
 	{
