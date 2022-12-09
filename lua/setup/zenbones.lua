@@ -4,7 +4,7 @@ local t = os.date("*t").hour + os.date("*t").min / 60
 -- local term = os.getenv("TERM_PROGRAM")
 
 -- vim.g.zenbones = { lightness = "bright" }
-vim.g.zenbones = { lightness = "bright", darkness = "stark", lighten_line_nr = 30, transparent_background = true }
+vim.g.zenbones = { lightness = "default", darkness = "stark", lighten_line_nr = 30, transparent_background = true }
 
 -- if (t >= 7 and t < 18) and (term == 'iTerm.app' or term == 'tmux') then
 if t >= 8 and t < 18.0 then

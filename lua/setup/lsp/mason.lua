@@ -16,7 +16,7 @@ local servers = {
 	"cssls",
 	"cssmodules_ls",
 	"emmet_ls",
-	"gopls",
+	-- "gopls",
 	"html",
 	"jdtls",
 	"jsonls",

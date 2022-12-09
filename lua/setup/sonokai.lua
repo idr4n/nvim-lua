@@ -5,4 +5,4 @@ vim.g.sonokai_transparent_background = 1
 vim.g.sonokai_better_performance = 1
 
 -- Load the colorscheme
-vim.cmd("colorscheme sonokai")
+-- vim.cmd("colorscheme sonokai")

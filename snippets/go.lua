@@ -67,7 +67,7 @@ M.autosnips.ea = p({
 }, "${1:_}, err := $2")
 
 M.autosnips.va = p({
-	trig = ";a",
+	trig = ";=",
 	name = " := ",
 	dscr = "Var assignment :=",
 }, ":= ")

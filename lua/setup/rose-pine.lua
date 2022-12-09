@@ -6,7 +6,9 @@ local variant = ""
 if t >= 8 and t < 18 then
 	variant = "moon"
 else
-	variant = "main"
+	-- variant = "main"
+	variant = "moon"
+	-- vim.cmd("colorscheme rose-pine")
 end
 
 require("rose-pine").setup({
@@ -50,6 +52,7 @@ require("rose-pine").setup({
 	-- Change specific vim highlight groups
 	highlight_groups = {
 		IndentBlanklineChar = { fg = "overlay" },
+		-- IndentBlanklineChar = { fg = "highlight_med" },
 		-- CursorLine = { bg = "#302E45" },
 		TSVariable = { fg = "text", style = "NONE" },
 		TSParameter = { fg = "iris", style = "NONE" },
