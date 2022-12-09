@@ -29,8 +29,8 @@ keymap("i", "<C-F>", "<C-O>zt", opts)
 keymap("n", "<C-F>", "zt", opts)
 
 -- Move up and down with wrapped lines
-keymap("n", "j", "gj", opts)
-keymap("n", "k", "gk", opts)
+-- keymap("n", "j", "gj", opts)
+-- keymap("n", "k", "gk", opts)
 
 -- Quicksave command
 keymap("n", "<leader>s", ":silent w<CR>", opts)
@@ -46,8 +46,8 @@ keymap("n", "<Leader>S", "ggVG<c-$>", opts)
 keymap("n", "gcy", "gcc:t.<cr>gcc", { noremap = false, silent = true })
 
 -- swtich buffers
-keymap("n", "<S-w>", ":bnext<CR>", opts)
-keymap("n", "<S-q>", ":bprevious<CR>", opts)
+-- keymap("n", "<S-w>", ":bnext<CR>", opts)
+-- keymap("n", "<S-q>", ":bprevious<CR>", opts)
 keymap("n", "ga", ":b#<CR>", opts)
 
 -- Using Bbye plugin to close the current buffer
@@ -71,8 +71,25 @@ keymap("n", "#", "#N", { noremap = true })
 keymap("n", "g*", "g*N", { noremap = true })
 keymap("n", "g#", "g#N", { noremap = true })
 
+-- select line without end of line
+keymap("n", ",a", "^v$h", opts)
+
+-- paste register for printing (JavaScript)
+keymap("n", ",d", 'oconsole.log("<esc>pa")<esc>', opts)
+keymap("n", ",D", 'Oconsole.log("<esc>pa")<esc>', opts)
+
+-- Paste register for informative printing
+keymap("n", ",s", 'a"<esc>pa:", <esc>p', opts)
+
+-- select all buffer
+keymap("n", ",A", "ggVG", opts)
+
 -- toggle wrapping lines
 keymap("n", ",w", "<cmd>set wrap!<cr>", opts)
+
+-- center when scrolling page down and up
+keymap("n", "<c-d>", "<c-d>zz", opts)
+keymap("n", "<c-u>", "<c-u>zz", opts)
 
 -- set current file's directory as working directory
 keymap("n", "<leader>cd", "<cmd>cd %:p:h<CR>", opts)
