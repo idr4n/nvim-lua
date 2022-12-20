@@ -379,6 +379,21 @@ local spaces = {
 	cond = hide_in_width_120,
 }
 
+local function getWords()
+	if vim.bo.filetype == "md" or vim.bo.filetype == "txt" or vim.bo.filetype == "markdown" then
+		if vim.fn.wordcount().visual_words == nil then
+			return hl_str(" ", "SLSep")
+				.. hl_str(" " .. tostring(vim.fn.wordcount().words), "SLIndent")
+				.. hl_str("", "SLSep")
+		end
+		return hl_str(" ", "SLSep")
+			.. hl_str(" " .. tostring(vim.fn.wordcount().visual_words), "SLIndent")
+			.. hl_str("", "SLSep")
+	else
+		return ""
+	end
+end
+
 local language_server = {
 	function()
 		local buf_ft = vim.bo.filetype
