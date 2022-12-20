@@ -77,6 +77,20 @@ vim.cmd([[
 
 -- Statusline
 
+local function getWords()
+	if vim.bo.filetype == "md" or vim.bo.filetype == "txt" or vim.bo.filetype == "markdown" then
+		if vim.fn.wordcount().visual_words == 1 then
+			return tostring(vim.fn.wordcount().visual_words) .. " word"
+		elseif not (vim.fn.wordcount().visual_words == nil) then
+			return tostring(vim.fn.wordcount().visual_words) .. " words"
+		else
+			return tostring(vim.fn.wordcount().words) .. " words"
+		end
+	else
+		return ""
+	end
+end
+
 -- GitChanges = ""
 local function getGitChanges()
 	local gitsigns = vim.b.gitsigns_status_dict
@@ -98,6 +112,8 @@ local function getGitChanges()
 		if changes > 0 then
 			status = string.format("%s%d", status, changes)
 		end
+
+		-- status = string.format("%s%s", status, gitChangedFiles)
 	end
 	return string.format("%s  ", status)
 end
@@ -109,7 +125,7 @@ function Status_line()
 	statusline = statusline .. "%f %{&modified?'●':''}%r%h"
 	-- statusline = statusline .. getGitChanges()
 	-- statusline = statusline .. "%= %l,%c     %{fnamemodify(getcwd(), ':p:h:t')}   %3.3p%%"
-	statusline = statusline .. "%= %l,%c  "
+	statusline = statusline .. "%=" .. getWords() .. "    %l,%c  "
 	statusline = statusline .. getGitChanges()
 	statusline = statusline .. "  %{fnamemodify(getcwd(), ':p:h:t')}   %3.3p%%"
 
@@ -120,7 +136,7 @@ vim.o.statusline = "%!v:lua.Status_line()"
 
 -- Explorer (netrw)
 vim.g.netrw_browse_split = 0
-vim.g.netrw_banner = 0
+vim.g.netrw_banner = 1
 vim.g.netrw_winsize = 25
 vim.g.netrw_fastbrowse = 0
 vim.g.netrw_bufsettings = "noma nomod nu nowrap ro nobl"
