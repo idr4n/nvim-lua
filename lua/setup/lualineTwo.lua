@@ -134,7 +134,7 @@ local left_pad = {
 
 local right_pad = {
 	function()
-		return " "
+		return ""
 	end,
 	padding = 0,
 	color = function()
@@ -224,6 +224,7 @@ local filename = {
 	"filename",
 	path = 1,
 	symbols = { modified = "●" },
+	padding = 0,
 	fmt = function(str)
 		local ignored_filetypes = { "fzf", "neo-tree", "toggleterm", "TelescopePrompt" }
 		local buf_ft = vim.bo.filetype
@@ -239,7 +240,7 @@ local function getDir()
 	if #dir > 20 then
 		dir = dir:sub(1, 17) .. "..."
 	end
-	return hl_str("", "SLSep") .. "%#SLFT#" .. dir .. "%#SLNone#" .. hl_str("", "SLSep") .. "%#SLNone#"
+	return hl_str("", "SLSep") .. "%#SLFT#" .. " " .. dir .. "%#SLNone#" .. hl_str("", "SLSep") .. "%#SLNone#"
 end
 
 local filetype = {
@@ -310,7 +311,14 @@ local branch = {
 local progress = {
 	"progress",
 	fmt = function(str)
-		return hl_str("", "SLSep") .. hl_str("%P/%L", "SLProgress") .. hl_str(" ", "SLSep")
+		local newStr = ""
+		if str == "Top" or str == "Bot" then
+			newStr = str
+		else
+			newStr = "%2.3p%%"
+		end
+		-- return hl_str("", "SLSep") .. hl_str("%2.3p%%/%L", "SLProgress") .. hl_str(" ", "SLSep")
+		return hl_str("", "SLSep") .. hl_str(newStr .. "/%L", "SLProgress") .. hl_str(" ", "SLSep")
 	end,
 	-- color = "SLProgress",
 	padding = 0,
@@ -379,20 +387,24 @@ local spaces = {
 	cond = hide_in_width_120,
 }
 
-local function getWords()
-	if vim.bo.filetype == "md" or vim.bo.filetype == "txt" or vim.bo.filetype == "markdown" then
-		if vim.fn.wordcount().visual_words == nil then
+local getWords = {
+	"getWords",
+	padding = 0,
+	fmt = function()
+		if vim.bo.filetype == "md" or vim.bo.filetype == "txt" or vim.bo.filetype == "markdown" then
+			if vim.fn.wordcount().visual_words == nil then
+				return hl_str(" ", "SLSep")
+					.. hl_str(" " .. tostring(vim.fn.wordcount().words), "SLIndent")
+					.. hl_str("", "SLSep")
+			end
 			return hl_str(" ", "SLSep")
-				.. hl_str(" " .. tostring(vim.fn.wordcount().words), "SLIndent")
+				.. hl_str(" " .. tostring(vim.fn.wordcount().visual_words), "SLIndent")
 				.. hl_str("", "SLSep")
+		else
+			return ""
 		end
-		return hl_str(" ", "SLSep")
-			.. hl_str(" " .. tostring(vim.fn.wordcount().visual_words), "SLIndent")
-			.. hl_str("", "SLSep")
-	else
-		return ""
-	end
-end
+	end,
+}
 
 local language_server = {
 	function()
