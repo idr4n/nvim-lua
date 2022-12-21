@@ -41,6 +41,7 @@ keymap("n", "<leader>E", ":q!<CR>", opts)
 
 -- Easy select all of file
 keymap("n", "<Leader>S", "ggVG<c-$>", opts)
+keymap("n", ",A", "ggVG<c-$>", opts)
 
 -- Duplicate line and comment old line out
 keymap("n", "gcy", "gcc:t.<cr>gcc", { noremap = false, silent = true })
@@ -81,8 +82,8 @@ keymap("n", ",D", 'Oconsole.log("<esc>pa")<esc>', opts)
 -- Paste register for informative printing
 keymap("n", ",s", 'a"<esc>pa:", <esc>p', opts)
 
--- select all buffer
-keymap("n", ",A", "ggVG", opts)
+-- keep cursor at same position when joining lines
+keymap("n", "J", "mzJ`z", opts)
 
 -- toggle wrapping lines
 keymap("n", ",w", "<cmd>set wrap!<cr>", opts)
@@ -137,14 +138,17 @@ keymap("v", "*", "y/\\V<C-R>=escape(@\",'/')<CR><CR>", { noremap = true })
 keymap("v", "<leader>R", ":s///g<LEFT><LEFT>", { noremap = true })
 -- on entire buffer
 keymap("n", "<leader>R", ":%s///g<LEFT><LEFT>", { noremap = true })
+-- substitute current word
+vim.keymap.set("n", "<leader>X", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("v", "<leader>X", [[y:%s/<C-r>0/<C-r>0/gI<Left><Left><Left>]])
 
 -- Visual Block --
 
 -- Move text up and down
-keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
-keymap("x", "<A-Down>", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "<A-Up>", ":move '<-2<CR>gv-gv", opts)
+keymap("x", "J", ":move '>+1<CR>gv=gv", opts)
+keymap("x", "K", ":move '<-2<CR>gv=gv", opts)
+keymap("x", "<A-Down>", ":move '>+1<CR>gv=gv", opts)
+keymap("x", "<A-Up>", ":move '<-2<CR>gv=gv", opts)
 
 -- Explorer (netrw)
 keymap("n", "<leader>xe", ":Explor<cr>", opts)
@@ -166,6 +170,7 @@ keymap("n", "<leader>Y", '"+Y', { noremap = false, silent = true })
 keymap("n", "d", '"_d', opts)
 keymap("v", "d", '"_d', opts)
 keymap("", "<leader>d", "d", opts)
+vim.keymap.set("n", "gm", "m", opts)
 keymap("", "m", "d", opts)
 keymap("", "<leader>m", '"+d', opts)
 keymap("n", "x", '"_x', opts)
