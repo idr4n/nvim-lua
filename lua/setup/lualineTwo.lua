@@ -391,7 +391,7 @@ local getWords = {
 	"getWords",
 	padding = 0,
 	fmt = function()
-		if vim.bo.filetype == "md" or vim.bo.filetype == "txt" or vim.bo.filetype == "markdown" then
+		if vim.bo.filetype == "md" or vim.bo.filetype == "text" or vim.bo.filetype == "markdown" then
 			if vim.fn.wordcount().visual_words == nil then
 				return hl_str(" ", "SLSep")
 					.. hl_str(" " .. tostring(vim.fn.wordcount().words), "SLIndent")
