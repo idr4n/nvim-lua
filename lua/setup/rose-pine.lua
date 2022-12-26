@@ -54,11 +54,18 @@ require("rose-pine").setup({
 		IndentBlanklineChar = { fg = "overlay" },
 		-- IndentBlanklineChar = { fg = "highlight_med" },
 		-- CursorLine = { bg = "#302E45" },
+		Variable = { fg = "text", style = "NONE" },
 		TSVariable = { fg = "text", style = "NONE" },
+		["@variable"] = { fg = "text", style = "NONE" },
+		Parameter = { fg = "iris", style = "NONE" },
 		TSParameter = { fg = "iris", style = "NONE" },
+		["@parameter"] = { fg = "iris", style = "NONE" },
+		Property = { fg = "iris", style = "NONE" },
+		["@property"] = { fg = "iris", style = "NONE" },
 		TSProperty = { fg = "iris", style = "NONE" },
 		Keyword = { fg = "pine", style = "italic" },
 		TSKeyword = { fg = "pine", style = "italic" },
+		["@keyword"] = { fg = "pine", style = "italic" },
 		Function = { fg = "rose", style = "italic" },
 		TSFunction = { fg = "rose", style = "italic" },
 	},
@@ -66,10 +73,4 @@ require("rose-pine").setup({
 
 -- Load the colorscheme
 
--- if t >= 8 and t < 18 then
--- 	vim.cmd("colorscheme rose-pine")
--- else
--- 	vim.cmd("colorscheme rose-pine")
--- end
-
--- vim.cmd("colorscheme rose-pine")
+vim.cmd("colorscheme rose-pine")
