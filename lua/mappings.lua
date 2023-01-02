@@ -92,6 +92,10 @@ keymap("n", ",w", "<cmd>set wrap!<cr>", opts)
 keymap("n", "<c-d>", "<c-d>zz", opts)
 keymap("n", "<c-u>", "<c-u>zz", opts)
 
+-- center around next search result
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
 -- set current file's directory as working directory
 keymap("n", "<leader>cd", "<cmd>cd %:p:h<CR>", opts)
 
