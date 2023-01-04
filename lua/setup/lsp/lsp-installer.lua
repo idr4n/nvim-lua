@@ -1,3 +1,4 @@
+-- NOTE: this is not being used anymore. Using Mason instead!
 local status_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
 if not status_ok then
 	return
@@ -27,12 +28,6 @@ lsp_installer.on_server_ready(function(server)
 	end
 
 	if server.name == "jdtls" then
-		-- local jdtls_opts = require("setup.lsp.settings.jdtls")
-		-- opts = vim.tbl_deep_extend("force", opts, jdtls_opts)
-		-- require("lspconfig").jdtls.setup(opts)
-
-		-- the jdtls server installed by nvim-lsp-installer is being passed to nvim-jdtls plugin
-		-- instead. See 'setup/jdtls.lua'
 		return
 	end
 

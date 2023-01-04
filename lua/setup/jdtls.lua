@@ -41,10 +41,15 @@ local config = {
 	-- Here you can configure eclipse.jdt.ls specific settings
 	-- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
 	-- for a list of options
-	-- settings = {
-	--   java = {
-	--   }
-	-- },
+	settings = {
+		java = {
+			project = {
+				referencedLibraries = {
+					"/Users/iduran/Dev/Java-Libraries/*.jar",
+				},
+			},
+		},
+	},
 
 	-- Language server `initializationOptions`
 	-- You need to extend the `bundles` with paths to jar files

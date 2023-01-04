@@ -80,7 +80,7 @@ for _, server in pairs(mason_lspconfig.get_installed_servers()) do
 	end
 
 	if server == "jdtls" then
-		goto continue
+		goto theEnd
 	end
 
 	if server == "rust_analyzer" then
@@ -132,4 +132,5 @@ for _, server in pairs(mason_lspconfig.get_installed_servers()) do
 
 	::continue::
 	lspconfig[server].setup(opts)
+	::theEnd::
 end
