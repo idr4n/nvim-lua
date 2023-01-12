@@ -1,4 +1,5 @@
 spell/
+lazy-lock.json
 workdirs.lua
 workdirs.txt
 plugin/packer_compiled.lua

@@ -16,13 +16,16 @@ local function pick_color()
 	return colors[math.random(#colors)]
 end
 
+local stats = require("lazy").stats()
+
 local function footer()
-	local total_plugins = #vim.tbl_keys(packer_plugins)
 	local datetime = os.date(" %d-%m-%Y   %H:%M:%S")
 	return datetime
 		.. "   "
-		.. total_plugins
+		-- .. string.format("%s/%s", stats.loaded, stats.count)
+		.. stats.count
 		.. " plugins"
+		-- .. string.format(" (%s ms)", stats.startuptime)
 		.. "   v"
 		.. vim.version().major
 		.. "."
@@ -65,7 +68,7 @@ dashboard.section.buttons.val = {
 	-- dashboard.button("c", "  Configuration", "<cmd>lcd ~/.config/nvim | Telescope find_files<cr>"),
 	dashboard.button("c", "  Configuration", "<cmd>lcd ~/.config/nvim<cr>"),
 	dashboard.button("d", "  Dotfiles", "<cmd>lcd ~/dotfiles<cr>"),
-	dashboard.button("u", "  Update plugins", ":PackerSync<CR>"),
+	dashboard.button("u", "  Update plugins", ":Lazy<CR>"),
 	dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
 }
 
