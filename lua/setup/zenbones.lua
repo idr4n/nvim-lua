@@ -11,10 +11,10 @@ if t >= 8 and t < 18.0 then
 	-- vim.cmd("set background=light")
 	-- vim.cmd("colorscheme zenbones")
 	-- vim.env.BAT_THEME = "Monokai Extended Light"
-	vim.env.BAT_THEME = "gruvbox-light"
-	-- vim.env.BAT_THEME = "Nord"
+	-- vim.env.BAT_THEME = "gruvbox-light"
+	vim.env.BAT_THEME = "Nord"
 else
-	vim.cmd("set background=dark")
+	-- vim.cmd("set background=dark")
 	-- vim.cmd('autocmd ColorScheme tokyobones lua require "setup.customize_zenbones"')
 	-- vim.cmd("colorscheme tokyobones")
 	-- vim.cmd('autocmd ColorScheme zenbones lua require "setup.customize_zenbones"')

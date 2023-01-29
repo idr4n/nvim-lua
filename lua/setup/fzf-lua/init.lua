@@ -49,6 +49,10 @@ require("fzf-lua").setup({
 	files = {
 		cmd = "rg --files --hidden --follow --no-ignore -g '!.git/*' -g '!node_modules'",
 	},
+	grep = {
+		rg_opts = "--hidden --column --follow --line-number --no-heading "
+			.. "--color=always --smart-case -g '!{.git,node_modules}/*'",
+	},
 	keymap = {
 		builtin = {
 			["<C-L>"] = "toggle-preview",
@@ -70,12 +74,12 @@ local map = vim.api.nvim_set_keymap
 
 -- map("n", "<leader>l", "<cmd>lua require('fzf-lua').resume()<CR>", opts)
 -- map("n", "<C-P>", "<cmd>lua require('fzf-lua').files()<CR>", opts)
--- map("n", "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", opts)
+map("n", "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", opts)
 -- map("n", "<C-T>", "<cmd>lua require('fzf-lua').oldfiles()<CR>", opts)
 -- map("n", "<C-B>", "<cmd>lua require('fzf-lua').buffers()<CR>", opts)
 map("n", "<leader>ol", "<cmd>lua require('fzf-lua').blines()<CR>", opts)
 map("n", "<leader>oa", "<cmd>lua require('fzf-lua').lines()<CR>", opts)
--- map("n", "<leader>r", "<cmd>lua require('fzf-lua').grep_project()<CR>", opts)
+-- map("n", "<leader>r", "<cmd>lua require('fzf-lua').live_grep()<CR>", opts)
 -- map("n", "<leader>gs", "<cmd>lua require('fzf-lua').git_status()<CR>", opts)
 -- map("n", "<leader>cc", "<cmd>lcd ~/.config/nvim | lua require('fzf-lua').files()<cr>", opts)
 
