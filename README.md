@@ -1,50 +1,24 @@
-# README
+# Neovim Configuration
 
 This is my Neovim configuation in Lua.
-
-<img width="1331" alt="CleanShot 2022-10-21 at 06 57 55@2x" src="https://user-images.githubusercontent.com/20104703/197108584-4f114512-a798-4aa4-bf82-43929e9d807b.png">
 
 ## Basic setup
 
 - Preferred themes: [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim) and [rose-pine/neovim](https://github.com/rose-pine/neovim)
 - Terminals: WezTerm (alternatively Alacritty and Kitty). To check my terminals configuration, take a look at my [dotfiles](https://github.com/idr4n/.dotfiles) and my [WezTerm configuration](https://github.com/idr4n/wezterm)
 - Font: I switch back and forth between [FiraCode](https://github.com/tonsky/FiraCode) and [MonoLisa](https://www.monolisa.dev/)
-- <details><summary>Simple one line config status line (no plugins needed)</summary>
+- I'm using [lazy.nvim](https://github.com/folke/lazy.nvim) as my package manager, which allows me to start Neovim in around 30ms.
  
-    <br> 
-    
-    ```lua
-    vim.o.statusline = "%f %{&modified?'●':''}%r%h %= %l,%c     %{fnamemodify(getcwd(), ':p:h:t')}   %3.3p%%"
-    ```
-    
-    <br> 
-    </details>
-
-## Switching between dark and light modes
-
-Whenever I start Neovim, the color theme is set based on the time of the day (which is the same time interval I set for my MacOS night shift). It is just a simple if/else statement:
-
-```lua
-local t = os.date("*t").hour + os.date("*t").min / 60
-
-if t >= 8 and t < 18 then
-	vim.cmd("colorscheme tokyonight-storm")
-else
-	vim.cmd("colorscheme tokyonight-night")
-end
-```
-
 ## List of current plugins (not necessarily updated!)
 
 <details>
 <summary>
-This is the list of plugins I currently have installed, auto-generated with `PackerStatus`. This list is not necessarily the most updated one.
+This is the list of plugins I currently have installed.
 </summary>
 
 <br>
 
 - alpha-nvim
-- catppuccin
 - clipboard-image.nvim
 - close-buffers.nvim
 - cmp-buffer
@@ -55,44 +29,45 @@ This is the list of plugins I currently have installed, auto-generated with `Pac
 - cmp_luasnip
 - diffview.nvim
 - emmet-vim
-- eyeliner.nvim
 - friendly-snippets
 - fzf
 - fzf-lua
 - fzf.vim
 - gitsigns.nvim
 - harpoon
+- incline.nvim
 - indent-blankline.nvim
 - kanagawa.nvim
+- lazy.nvim
 - lf.vim
 - lsp_signature.nvim
 - lualine.nvim
-- LuaSnip
 - lush.nvim
+- LuaSnip
 - mason-lspconfig.nvim
 - mason.nvim
+- mini.comment
+- mini.pairs
 - neo-tree.nvim
-- nightfox.nvim
+- neovim
 - nui.nvim
 - null-ls.nvim
-- nvim-autopairs
 - nvim-cmp
 - nvim-colorizer.lua
 - nvim-jdtls
 - nvim-lspconfig
 - nvim-markdown
-- nvim-treesitter
 - nvim-treesitter-context
 - nvim-treesitter-textobjects
 - nvim-ts-autotag
 - nvim-ts-context-commentstring
 - nvim-web-devicons
-- packer.nvim
 - playground
 - plenary.nvim
 - popup.nvim
 - rasmus.nvim
 - rust-tools.nvim
+- sonokai
 - sqls.nvim
 - tabout.nvim
 - telescope-fzf-native.nvim
@@ -104,8 +79,7 @@ This is the list of plugins I currently have installed, auto-generated with `Pac
 - tokyonight.nvim
 - trouble.nvim
 - vim-bbye
-- vim-commentary
-- vim-eunuch
+- vim-dirvish
 - vim-fish
 - vim-floaterm
 - vim-fugitive
@@ -114,8 +88,6 @@ This is the list of plugins I currently have installed, auto-generated with `Pac
 - vim-surround
 - vim-symlink
 - vim-unimpaired
-- vim-vinegar
-- vim-visual-multi
 - zen-mode.nvim
 - zenbones.nvim
 - zk-nvim
