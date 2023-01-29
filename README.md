@@ -2,7 +2,11 @@
 
 This is my Neovim configuation in Lua.
 
+![neovim-29-01-23](https://user-images.githubusercontent.com/20104703/215353617-bdfe080a-c970-441d-b43f-c92a19bf1a41.png)
+![neovim2-29-01-23](https://user-images.githubusercontent.com/20104703/215353626-ef5fac1c-0422-4428-9fae-06bca2c9e951.png)
+
 ## Basic setup
+
 
 - Preferred themes: [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim) and [rose-pine/neovim](https://github.com/rose-pine/neovim)
 - Terminals: WezTerm (alternatively Alacritty and Kitty). To check my terminals configuration, take a look at my [dotfiles](https://github.com/idr4n/.dotfiles) and my [WezTerm configuration](https://github.com/idr4n/wezterm)
