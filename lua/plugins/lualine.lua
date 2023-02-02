@@ -56,14 +56,15 @@ local colors = {
 	red = "#ff757f", --
 	red1 = "#c53b53", --
 	red2 = "#D16969",
-	bg_statusline = "#16161E",
 }
+
+local bg_statusline = colors.bg_dark2
 
 local my_theme = {
 	normal = {
 		a = { bg = colors.blue, fg = colors.black },
 		b = { bg = colors.dark_gray, fg = colors.blue },
-		c = { bg = colors.bg_dark, fg = colors.fg_dark },
+		c = { bg = bg_statusline, fg = colors.fg_dark },
 	},
 	insert = {
 		a = { bg = colors.orange2, fg = colors.black },
@@ -71,29 +72,29 @@ local my_theme = {
 	},
 	visual = {
 		a = { bg = colors.magenta, fg = colors.black },
-		b = { bg = colors.bg_dark2, fg = colors.magenta },
+		b = { bg = bg_statusline, fg = colors.magenta },
 	},
 	command = {
 		a = { bg = colors.yellow, fg = colors.black },
-		b = { bg = colors.bg_dark2, fg = colors.yellow },
+		b = { bg = bg_statusline, fg = colors.yellow },
 	},
 	replace = {
 		a = { bg = colors.red, fg = colors.black },
-		b = { bg = colors.bg_dark2, fg = colors.red },
+		b = { bg = bg_statusline, fg = colors.red },
 	},
 	terminal = {
 		a = { bg = colors.green2, fg = colors.black },
-		b = { bg = colors.bg_dark2, fg = colors.green2 },
+		b = { bg = bg_statusline, fg = colors.green2 },
 	},
 	inactive = {
-		a = { bg = colors.bg_statusline, fg = colors.blue },
-		b = { bg = colors.bg_statusline, fg = colors.fg_gutter, gui = "bold" },
-		c = { bg = colors.bg_statusline, fg = colors.fg_gutter },
+		a = { bg = bg_statusline, fg = colors.blue },
+		b = { bg = bg_statusline, fg = colors.fg_gutter, gui = "bold" },
+		c = { bg = bg_statusline, fg = colors.fg_gutter },
 	},
 }
 
-vim.api.nvim_set_hl(0, "SLFormatter", { fg = colors.green, bg = colors.bg_dark })
-vim.api.nvim_set_hl(0, "SLLinter", { fg = colors.yellow_orange, bg = colors.bg_dark })
+vim.api.nvim_set_hl(0, "SLFormatter", { fg = colors.green, bg = bg_statusline })
+vim.api.nvim_set_hl(0, "SLLinter", { fg = colors.yellow_orange, bg = bg_statusline })
 vim.api.nvim_set_hl(0, "SLBranchIcon", { fg = colors.orange, bg = colors.bg_dark2 })
 
 local mode_color = {
@@ -307,7 +308,7 @@ local progress = {
 	-- 	return { fg = mode_color[vim.fn.mode()], bg = gray }
 	-- end,
 	padding = 1,
-	color = { gui = "bold" },
+	-- color = { gui = "bold" },
 }
 
 local function isempty(s)
