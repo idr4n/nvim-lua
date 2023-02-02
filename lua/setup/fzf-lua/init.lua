@@ -1,5 +1,8 @@
 -- config for 'ibhagwan/fzf-lua': fzf.vim written in lua for neovim
 
+-- define highlight group for the popup window border color
+vim.api.nvim_set_hl(0, "FZFLuaBorder", { fg = "#9D7CD8" })
+
 -- setup
 require("fzf-lua").setup({
 	winopts = {
@@ -28,7 +31,7 @@ require("fzf-lua").setup({
 	fzf_opts = {
 		-- ["--layout"] = "default",
 		["--layout"] = "reverse",
-		-- ["--pointer"] = "\xc2\xa0",
+		["--pointer"] = " ",
 	},
 	fzf_colors = {
 		["fg"] = { "fg", "CursorLine" },
@@ -39,6 +42,7 @@ require("fzf-lua").setup({
 		["bg+"] = { "bg", "CursorLine" },
 		["hl+"] = { "fg", "Statement" },
 		["info"] = { "fg", "PreProc" },
+		["border"] = { "fg", "FZFLuaBorder" },
 		["prompt"] = { "fg", "Conditional" },
 		["pointer"] = { "fg", "Exception" },
 		["marker"] = { "fg", "Keyword" },
@@ -48,11 +52,14 @@ require("fzf-lua").setup({
 	},
 	files = {
 		cmd = "rg --files --hidden --follow --no-ignore -g '!.git/*' -g '!node_modules'",
+		prompt = " ",
 	},
 	grep = {
 		rg_opts = "--hidden --column --follow --line-number --no-heading "
 			.. "--color=always --smart-case -g '!{.git,node_modules}/*'",
+		prompt = " ",
 	},
+	blines = { prompt = " " },
 	keymap = {
 		builtin = {
 			["<C-L>"] = "toggle-preview",
@@ -61,6 +68,7 @@ require("fzf-lua").setup({
 		},
 		fzf = {
 			["ctrl-l"] = "toggle-preview",
+			["ctrl-q"] = "select-all+accept", -- send all to quick list
 		},
 	},
 	-- needed for kitty for better icon rendering
@@ -74,11 +82,12 @@ local map = vim.api.nvim_set_keymap
 
 -- map("n", "<leader>l", "<cmd>lua require('fzf-lua').resume()<CR>", opts)
 -- map("n", "<C-P>", "<cmd>lua require('fzf-lua').files()<CR>", opts)
-map("n", "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", opts)
+-- map("n", "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", opts)
 -- map("n", "<C-T>", "<cmd>lua require('fzf-lua').oldfiles()<CR>", opts)
 -- map("n", "<C-B>", "<cmd>lua require('fzf-lua').buffers()<CR>", opts)
 map("n", "<leader>ol", "<cmd>lua require('fzf-lua').blines()<CR>", opts)
 map("n", "<leader>oa", "<cmd>lua require('fzf-lua').lines()<CR>", opts)
+map("n", "<leader>os", "<cmd>lua require'fzf-lua'.lsp_document_symbols({ fzf_cli_args = '--with-nth 3..' })<cr>", opts)
 -- map("n", "<leader>r", "<cmd>lua require('fzf-lua').live_grep()<CR>", opts)
 -- map("n", "<leader>gs", "<cmd>lua require('fzf-lua').git_status()<CR>", opts)
 -- map("n", "<leader>cc", "<cmd>lcd ~/.config/nvim | lua require('fzf-lua').files()<cr>", opts)

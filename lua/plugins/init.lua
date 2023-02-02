@@ -35,6 +35,7 @@ return {
 		cmd = "FzfLua",
 		keys = {
 			{ "<leader>r", "<cmd>lua require('fzf-lua').live_grep()<CR>", noremap = true, silent = true },
+			{ "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", noremap = true, silent = true },
 		},
 		-- optional for icon support
 		dependencies = { "kyazdani42/nvim-web-devicons" },
