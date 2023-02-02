@@ -21,26 +21,12 @@ return {
 	{ "moll/vim-bbye", event = "BufReadPost" },
 	{ "aymericbeaumet/vim-symlink", event = "VeryLazy" },
 	{ "dag/vim-fish", ft = "fish" },
+	{ "junegunn/fzf", build = ":call fzf#install()" },
 	-- { "edluffy/hologram.nvim", ft = "markdown", opts = { auto_display = true } },
 
 	-- LSP
 	"simrat39/rust-tools.nvim",
 	"nanotee/sqls.nvim",
-
-	-- FZF
-	{ "junegunn/fzf", build = ":call fzf#install()" },
-	{ "junegunn/fzf.vim", cmd = { "Files", "Rg" }, dependencies = "junegunn/fzf", config = get_setup("fzf") },
-	{
-		"ibhagwan/fzf-lua",
-		cmd = "FzfLua",
-		keys = {
-			{ "<leader>r", "<cmd>lua require('fzf-lua').live_grep()<CR>", noremap = true, silent = true },
-			{ "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", noremap = true, silent = true },
-		},
-		-- optional for icon support
-		dependencies = { "kyazdani42/nvim-web-devicons" },
-		config = get_setup("fzf-lua"),
-	},
 
 	-- Treesitter
 	"windwp/nvim-ts-autotag",

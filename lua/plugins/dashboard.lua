@@ -49,7 +49,7 @@ return {
 			dashboard.button("r", "  Recently used files", ":History<cr>"),
 			dashboard.button("t", "  Find text", ":Rg<cr>"),
 			-- dashboard.button("s", "  Open session", ":SearchSession <CR>"),
-			dashboard.button("s", "  Open directory", ":lua require('setup.fzf-lua.commands').workdirs()<CR>"),
+			dashboard.button("s", "  Open directory", ":lua require('plugins.fzf-lua.commands').workdirs()<CR>"),
 			-- dashboard.button("c", "  Configuration", "<cmd>lcd ~/.config/nvim | Files<cr>"),
 			-- dashboard.button("c", "  Configuration", "<cmd>lcd ~/.config/nvim | Telescope find_files<cr>"),
 			dashboard.button("c", "  Configuration", "<cmd>lcd ~/.config/nvim<cr>"),
