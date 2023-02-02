@@ -125,7 +125,7 @@ return {
 						["<CR>"] = actions.select_default,
 						["<C-x>"] = actions.select_horizontal,
 						["<C-v>"] = actions.select_vertical,
-						["<C-t>"] = actions.select_tab,
+						-- ["<C-t>"] = actions.select_tab,
 
 						["<C-u>"] = actions.preview_scrolling_up,
 						["<C-d>"] = actions.preview_scrolling_down,
@@ -136,7 +136,7 @@ return {
 						["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
 						["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
 						["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-						["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+						["<C-t>"] = actions.send_selected_to_qflist + actions.open_qflist,
 						["<C-h>"] = actions.complete_tag,
 						["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
 					},
