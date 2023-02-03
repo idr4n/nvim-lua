@@ -43,6 +43,7 @@ return {
 					InclineNormalNC = { guibg = colors.blue7, guifg = colors.fg },
 				},
 			},
+			hide = { only_win = true },
 			window = { margin = { vertical = 0, horizontal = 1 } },
 			render = function(props)
 				local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
