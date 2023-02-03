@@ -11,7 +11,7 @@ return {
 	-- Misc
 	"nvim-lua/popup.nvim", -- An implementation of the Popup API from vim in Neovim
 	"nvim-lua/plenary.nvim", -- Useful lua functions used ny lots of plugins
-	"kyazdani42/nvim-web-devicons",
+	"nvim-tree/nvim-web-devicons",
 	"JoosepAlviste/nvim-ts-context-commentstring",
 	{ "tpope/vim-surround", event = "VeryLazy" },
 	{ "michaeljsmith/vim-indent-object", event = "BufReadPost" },

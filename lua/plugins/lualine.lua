@@ -479,7 +479,7 @@ local charcode = {
 return {
 	"nvim-lualine/lualine.nvim",
 	event = "VeryLazy",
-	dependencies = { "kyazdani42/nvim-web-devicons", opt = true },
+	dependencies = { "nvim-tree/nvim-web-devicons", opt = true },
 	opts = function()
 		return {
 			options = {
@@ -496,6 +496,7 @@ return {
 				lualine_a = { mode },
 				lualine_b = { branch },
 				lualine_c = { getDir, fileIcon, filename, diff, current_signature },
+				-- lualine_c = { getDir, diff, current_signature },
 				lualine_x = { diagnostics, language_server, getWords, charcode, filetype },
 				lualine_y = { location },
 				lualine_z = { progress },

@@ -31,7 +31,7 @@ return {
 		},
 		-- { "<leader>/", "<cmd>lua require('plugins.fzf-lua.commands').workdirs({ nvim_alacritty = true })<CR>", noremap = true, silent = true },
 	},
-	dependencies = { "kyazdani42/nvim-web-devicons" },
+	dependencies = { "nvim-tree/nvim-web-devicons" },
 	opts = function()
 		vim.api.nvim_set_hl(0, "FZFLuaBorder", { fg = "#9D7CD8" })
 
