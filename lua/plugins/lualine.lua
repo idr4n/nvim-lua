@@ -206,9 +206,12 @@ local diff = {
 	padding = 1,
 }
 
+local fileIcon = { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } }
+
 local filename = {
 	"filename",
 	path = 1,
+	shorting_target = 60,
 	symbols = { modified = "●" },
 	fmt = function(str)
 		local ignored_filetypes = { "fzf", "neo-tree", "toggleterm", "TelescopePrompt" }
@@ -492,7 +495,7 @@ return {
 			sections = {
 				lualine_a = { mode },
 				lualine_b = { branch },
-				lualine_c = { getDir, filename, diff, current_signature },
+				lualine_c = { getDir, fileIcon, filename, diff, current_signature },
 				lualine_x = { diagnostics, language_server, getWords, charcode, filetype },
 				lualine_y = { location },
 				lualine_z = { progress },

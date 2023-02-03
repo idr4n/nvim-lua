@@ -20,4 +20,7 @@ vim.g.maplocalleader = " "
 require("lazy").setup("plugins", {
 	defaults = { lazy = true },
 	install = { colorscheme = { "tokyonight" } },
+	ui = {
+		border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+	},
 })
