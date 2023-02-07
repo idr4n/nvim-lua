@@ -108,14 +108,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	group = "LspFormatting",
 })
 
--- Lua
-vim.api.nvim_create_augroup("lua", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "lua" },
-	command = "setlocal shiftwidth=2 tabstop=2 noexpandtab",
-	group = "lua",
-})
-
 -- Alpha
 vim.api.nvim_create_augroup("alpha", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
