@@ -1,6 +1,6 @@
 return {
 	"nvim-treesitter/nvim-treesitter-textobjects",
-	event = "BufReadPre",
+	event = "LspAttach",
 	opts = {
 		textobjects = {
 			select = {
