@@ -60,17 +60,17 @@ local opts = {
 
 for _, server in pairs(mason_lspconfig.get_installed_servers()) do
 	if server == "jsonls" then
-		local jsonls_opts = require("setup.lsp.settings.jsonls")
+		local jsonls_opts = require("plugins.lsp.settings.jsonls")
 		opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
 	end
 
 	if server == "sumneko_lua" then
-		local sumneko_opts = require("setup.lsp.settings.sumneko_lua")
+		local sumneko_opts = require("plugins.lsp.settings.sumneko_lua")
 		opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
 	end
 
 	if server == "pyright" then
-		local pyright_opts = require("setup.lsp.settings.pyright")
+		local pyright_opts = require("plugins.lsp.settings.pyright")
 		opts = vim.tbl_deep_extend("force", pyright_opts, opts)
 	end
 
