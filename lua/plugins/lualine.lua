@@ -495,8 +495,9 @@ return {
 			sections = {
 				lualine_a = { mode },
 				lualine_b = { branch },
-				lualine_c = { getDir, fileIcon, filename, diff, current_signature },
-				-- lualine_c = { getDir, diff, current_signature },
+				-- lualine_c = { getDir, fileIcon, filename, diff, current_signature },
+				lualine_c = { getDir, fileIcon, filename, diff },
+				-- lualine_c = { getDir, diff },
 				lualine_x = { diagnostics, language_server, getWords, charcode, filetype },
 				lualine_y = { location },
 				lualine_z = { progress },

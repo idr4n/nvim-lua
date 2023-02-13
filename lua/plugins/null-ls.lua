@@ -17,7 +17,7 @@ return {
 				-- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
 				formatting.prettier.with({
 					extra_args = { "--single-quote", "--jsx-single-quote" },
-					disabled_filetypes = { "markdown" },
+					disabled_filetypes = { "markdown", "html" },
 				}),
 				formatting.black.with({ extra_args = { "--fast" } }),
 				formatting.stylua,

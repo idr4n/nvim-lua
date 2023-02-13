@@ -21,7 +21,7 @@ local servers = {
 	"rust_analyzer",
 	"sqls",
 	"stylelint_lsp",
-	"sumneko_lua",
+	"lua_ls",
 	"svelte",
 	"tailwindcss",
 	"tsserver",
@@ -64,8 +64,8 @@ for _, server in pairs(mason_lspconfig.get_installed_servers()) do
 		opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
 	end
 
-	if server == "sumneko_lua" then
-		local sumneko_opts = require("plugins.lsp.settings.sumneko_lua")
+	if server == "lua_ls" then
+		local sumneko_opts = require("plugins.lsp.settings.lua_ls")
 		opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
 	end
 
