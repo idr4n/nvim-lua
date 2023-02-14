@@ -167,18 +167,15 @@ local defaults = {
         -- mkd_bullets = { "⦿", "◎", "✺", "◌", "▶", "⤷" },
         mkd_bullets = { "◉", "○", "✸", "•", "◦" },
         -- mkd_bullets = { "●", "○", "•", "✿" },
-        checkboxes = {
-            half = { "", "OrgTSCheckboxHalfChecked" },
-            done = { "✓", "OrgDone" },
-            todo = { "˟", "OrgTODO" },
-        },
+        checkboxes = { "", "" },
+        -- checkboxes = { "", "" },
+        -- checkboxes = { "", "" },
+        -- checkboxes = { "", "✔", "✓" },
     },
-    -- mkd_highlights = { "Function", "Number", "Keyword", "String" },
-    mkd_highlights = { "DiagnosticInfo", "Number", "Keyword", "String" },
+    -- bullets_highlights = { "Function", "Number", "Keyword", "String" },
+    bullets_highlights = { "DiagnosticInfo", "Number", "Keyword", "String" },
+    checkbox_highlights = { "NoiceCompletionItemKindProperty", "NoiceCompletionItemKindConstant" },
     indent = true,
-    -- TODO: should this read from the user's conceal settings?
-    -- maybe but that option is a little complex and will make
-    -- the implementation more convoluted
     concealcursor = false,
 }
 
@@ -198,12 +195,12 @@ end
 ---Add padding to the given symbol
 ---@param symbol string
 ---@param padding_spaces number
----@param padding_in_front boolean
-local function add_symbol_padding(symbol, padding_spaces, padding_in_front)
-    if padding_in_front then
+---@param bullet boolean
+local function add_symbol_padding(symbol, padding_spaces, bullet)
+    if bullet then
         return string.rep(" ", padding_spaces - 1) .. symbol
     else
-        return symbol .. string.rep(" ", padding_spaces)
+        return string.rep(" ", padding_spaces) .. symbol .. " "
     end
 end
 
@@ -215,7 +212,7 @@ local markers = {
     ---@return table { string symbol, string highlight_group }
     bullet = function(str, level)
         local symbols_value = #config.symbols.mkd_bullets
-        local highlights_value = #config.mkd_highlights
+        local highlights_value = #config.bullets_highlights
         if level + 1 <= highlights_value then
             highlights_value = level + 1
         end
@@ -223,7 +220,15 @@ local markers = {
             symbols_value = level + 1
         end
         local symbol = add_symbol_padding(config.symbols.mkd_bullets[symbols_value], (#str - 1), true)
-        return { { symbol, config.mkd_highlights[highlights_value] } }
+        return { { symbol, config.bullets_highlights[highlights_value] } }
+    end,
+    todo = function(str, status)
+        local symbols_value = 1
+        if status == "checked" then
+            symbols_value = 2
+        end
+        local symbol = add_symbol_padding(config.symbols.checkboxes[symbols_value], #str, false)
+        return { { symbol, config.checkbox_highlights[symbols_value] } }
     end,
 }
 
@@ -245,7 +250,7 @@ local function set_mark(bufnr, virt_text, lnum, start_col, end_col, highlight)
     })
     if not ok then
         vim.schedule(function()
-            vim.notify_once(result, "error", { title = "Org bullets" })
+            vim.notify_once(result, vim.log.levels.ERROR, { title = "Markdown bullets" })
         end)
     end
 end
@@ -296,13 +301,15 @@ local function get_ts_positions(bufnr, start_row, end_row, root)
 			(list_marker_minus) @list_marker_minus
 			(list_marker_plus) @list_marker_plus
 			(list_marker_star) @list_marker_star
-    ]]
+			(task_list_marker_checked) @task_list_marker_checked
+			(task_list_marker_unchecked) @task_list_marker_unchecked
+        ]]
     )
     for _, match, _ in query:iter_matches(root, bufnr, start_row, end_row) do
         for id, node in pairs(match) do
             local name = query.captures[id]
             -- if not vim.startswith(name, "_") then
-            if vim.startswith(node:type(), "list_marker") then
+            if vim.startswith(node:type(), "list_marker") or vim.startswith(node:type(), "task_list_marker") then
                 positions[#positions + 1] = create_position(bufnr, name, node)
             end
         end
@@ -323,11 +330,21 @@ end
 ---@param conf BulletsConfig
 local function set_position_marks(bufnr, positions, conf)
     for _, position in ipairs(positions) do
+        local itemType = "bullet"
+        local status = "unchecked"
+
+        if vim.startswith(position.name, "task_list_marker") then
+            itemType = "todo"
+        end
+        if position.name == "task_list_marker_checked" then
+            status = "checked"
+        end
+
         local str = position.item
         local start_row = position.start_row
         local start_col = position.start_col
         local end_col = position.end_col
-        local handler = markers["bullet"]
+        local handler = markers[itemType]
         local level = position.level
 
         -- Don't add conceal on the current cursor line if the user doesn't want it
@@ -337,7 +354,12 @@ local function set_position_marks(bufnr, positions, conf)
             is_concealed = start_row ~= (cursor_row - 1)
         end
         if is_concealed and start_col > -1 and end_col > -1 and handler then
-            set_mark(bufnr, handler(str, level), start_row, start_col, end_col)
+            if itemType == "bullet" then
+                set_mark(bufnr, handler(str, level), start_row, start_col, end_col)
+            end
+            if itemType == "todo" then
+                set_mark(bufnr, handler(str, status), start_row, start_col - 2, end_col)
+            end
         end
     end
 end
@@ -353,7 +375,7 @@ local get_parser = (function()
     end
 end)()
 
---- Get the position of the relevant org mode items to conceal
+--- Get the position of the relevant items to conceal
 ---@param bufnr number
 ---@param start_row number
 ---@param end_row number
