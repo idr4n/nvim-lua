@@ -26,6 +26,12 @@ M.snips.tt = p({
     dscr = "TODO to be primpted by the fish shell",
 }, "[${1:Project}] ${2:todo...}")
 
+M.snips.td = p({
+    trig = "td",
+    name = "Snippet - Markdown TODO",
+    dscr = "TODO unchecked",
+}, "- [ ] ${1:todo...}")
+
 M.snips.bb = p({
     trig = "bb",
     name = "Bold Text **|**",
@@ -50,6 +56,12 @@ M.autosnips.tt = p({
     name = "Autosnippet - Fish Shell prompt TODO",
     dscr = "TODO to be primpted by the fish shell",
 }, "[${1:Project}] ${2:todo...}")
+
+M.autosnips.td = p({
+    trig = ";td",
+    name = "Autosnippet - Markdown TODO",
+    dscr = "TODO unchecked",
+}, "- [ ] ${1:todo...}")
 
 M.autosnips.bb = p({
     trig = ";bb",
