@@ -20,7 +20,7 @@ return {
                     disabled_filetypes = { "markdown", "html" },
                 }),
                 formatting.black.with({ extra_args = { "--fast" } }),
-                formatting.stylua,
+                formatting.stylua.with({ "--config-path", vim.fn.expand("~/.config/stylua.toml") }),
                 diagnostics.flake8,
                 -- diagnostics.vale,
                 -- diagnostics.golangci_lint,

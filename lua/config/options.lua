@@ -63,7 +63,7 @@ vim.cmd([[
     " au FileType * set fo-=o fo-=r
 		au FileType * set fo-=o
     " global statusline at the bottom instead of one for each window
-    au BufNewFile,BufRead * set laststatus=3 
+    au BufNewFile,BufRead * set laststatus=3
   augroup END
 ]])
 

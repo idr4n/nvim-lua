@@ -101,7 +101,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- format on save for specific files
 vim.api.nvim_create_augroup("LspFormatting", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = { "*.go" },
+    pattern = { "*.go", "*.lua" },
     callback = function()
         vim.lsp.buf.format()
     end,
