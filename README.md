@@ -101,6 +101,7 @@ This is the list of plugins I currently have installed.
 
 These are some repos I have often borrowed ideas from for my Neovim config:
 
+- [LazyVim](https://github.com/LazyVim/LazyVim)
 - [ChristianChiarulli/nvim](https://github.com/ChristianChiarulli/nvim)
 - [ThePrimeagen/.dotfiles](https://github.com/ThePrimeagen/.dotfiles)
 - [tjdevries/config_manager](https://github.com/tjdevries/config_manager)
