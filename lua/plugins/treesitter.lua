@@ -1,5 +1,6 @@
 return {
     "nvim-treesitter/nvim-treesitter",
+    version = false,
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     opts = {
@@ -42,12 +43,9 @@ return {
             "vim",
         },
         autopairs = { enable = true },
-        highlight = {
-            enable = true,
-            additional_vim_regex_highlighting = false,
-        },
+        highlight = { enable = true },
         indent = { enable = true },
-        context_commentstring = { enable = true },
+        context_commentstring = { enable = true, enable_autocmd = false },
         playground = { enabled = true },
     },
     config = function(_, opts)

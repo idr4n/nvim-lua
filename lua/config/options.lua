@@ -1,56 +1,48 @@
-local options = {
-    autoindent = true,
-    autowrite = true, -- saves buffer when changing files
-    autoread = true, -- Always reload buffer when external changes detected
-    backspace = { "indent", "eol", "start" }, -- Enable backspace
-    backup = false, -- creates a backup file
-    breakindent = true, -- Every wrapped line will continue visually indented
-    -- colorcolumn = "80",
-    clipboard = "", -- allows neovim to access the system clipboard
-    -- clipboard = "unnamedplus", -- allows neovim to access the system clipboard
-    cmdheight = 1,
-    completeopt = { "menuone", "noselect" }, -- mostly just for cmp
-    conceallevel = 0, -- so that `` is visible in markdown files
-    -- concealcursor = "nc", -- conceal in normal/command mode (not in insert/visual)
-    cursorline = true, -- highlight the current line
-    expandtab = true, -- convert tabs to spaces
-    fileencoding = "utf-8", -- the encoding written to a file
-    -- guicursor = "", -- no thin cursor on insert mode
-    hlsearch = false, -- highlight all matches on previous search pattern
-    incsearch = true,
-    ignorecase = true, -- ignore case in search patterns
-    linebreak = true, -- Break lines in spaces not in the middle of a word
-    mouse = "a", -- allow the mouse to be used in neovim
-    number = true, -- set numbered lines
-    -- numberwidth = 4,                         -- set number column width to 2 {default 4}
-    pumheight = 10, -- pop up menu height
-    relativenumber = true, -- set relative numbered lines
-    scrolloff = 8, -- is one of my fav
-    shiftwidth = 4, -- the number of spaces inserted for each indentation
-    showmode = true, -- show -- INSERT --
-    -- showtabline = 2,                         -- always show tabs
-    sidescrolloff = 8, -- the same as scrolloff but horizontally
-    signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
-    smartcase = true, -- smart case
-    smartindent = true, -- make indenting smarter again
-    splitbelow = true, -- force all horizontal splits to go below current window
-    splitright = true, -- force all vertical splits to go to the right of current window
-    swapfile = false, -- creates a swapfile
-    tabstop = 4, -- insert 4 spaces for a tab
-    termguicolors = true, -- set term gui colors (most terminals support this)
-    -- timeoutlen = 100,                        -- time to wait for a mapped sequence to complete (in milliseconds)
-    undofile = true, -- enable persistent undo
-    updatetime = 300, -- control CursorHold event waiting time (4000ms default)
-    wrap = true, -- display lines as one long line
-    writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
-}
+local opt = vim.opt
 
-vim.opt.shortmess:append("c")
-vim.opt.nrformats:append("alpha") -- increments letters sequences as well with <c-a>
+opt.autoindent = true
+opt.autowrite = true -- saves buffer when changing files
+opt.autoread = true -- Always reload buffer when external changes detected
+opt.backspace = { "indent", "eol", "start" } -- Enable backspace
+opt.backup = false -- creates a backup file
+opt.breakindent = true -- Every wrapped line will continue visually indented
+-- opt.colorcolumn = "80"
+opt.clipboard = "" -- allows neovim to access the system clipboard
+-- opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
+opt.cmdheight = 1
+opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
+opt.conceallevel = 0 -- so that `` is visible in markdown files
+-- opt.concealcursor = "nc" -- conceal in normal/command mode (not in insert/visual)
+opt.cursorline = true -- highlight the current line
+opt.expandtab = true -- convert tabs to spaces
+-- opt.guicursor = "" -- no thin cursor on insert mode
+opt.hlsearch = false -- highlight all matches on previous search pattern
+opt.incsearch = true
+opt.ignorecase = true -- ignore case in search patterns
+opt.linebreak = true -- Break lines in spaces not in the middle of a word
+opt.mouse = "a" -- allow the mouse to be used in neovim
+opt.number = true -- set numbered lines
+opt.pumheight = 10 -- pop up menu height
+opt.relativenumber = true -- set relative numbered lines
+opt.scrolloff = 8 -- is one of my fav
+opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
+opt.showmode = true -- show -- INSERT --
+opt.sidescrolloff = 8 -- the same as scrolloff but horizontally
+opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
+opt.smartcase = true -- smart case
+opt.smartindent = true -- make indenting smarter again
+opt.splitbelow = true -- force all horizontal splits to go below current window
+opt.splitright = true -- force all vertical splits to go to the right of current window
+opt.swapfile = false -- creates a swapfile
+opt.tabstop = 4 -- insert 4 spaces for a tab
+opt.termguicolors = true -- set term gui colors (most terminals support this)
+opt.undofile = true -- enable persistent undo
+opt.updatetime = 300 -- control CursorHold event waiting time (4000ms default)
+opt.wrap = true -- display lines as one long line
+opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 
-for k, v in pairs(options) do
-    vim.opt[k] = v
-end
+opt.shortmess:append("c")
+opt.nrformats:append("alpha") -- increments letters sequences as well with <c-a>
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.cmd([[set iskeyword+=-]])

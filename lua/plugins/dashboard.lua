@@ -10,25 +10,6 @@ return {
             return colors[math.random(#colors)]
         end
 
-        local stats = require("lazy").stats()
-
-        local function footer()
-            local datetime = os.date(" %d-%m-%Y   %H:%M:%S")
-            return datetime
-                .. "   "
-                -- .. string.format("%s/%s", stats.loaded, stats.count)
-                .. stats.count
-                .. " plugins in "
-                .. stats.startuptime
-                .. "ms"
-                .. "   v"
-                .. vim.version().major
-                .. "."
-                .. vim.version().minor
-                .. "."
-                .. vim.version().patch
-        end
-
         dashboard.section.header.val = {
             "                                                     ",
             "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
@@ -39,7 +20,6 @@ return {
             "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
             "                                                     ",
         }
-        dashboard.section.header.opts.hl = pick_color()
 
         dashboard.section.buttons.val = {
             dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
@@ -58,18 +38,29 @@ return {
             dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
         }
 
-        -- local fortune = require("alpha.fortune")
-        -- dashboard.section.footer.val = fortune()
-        -- dashboard.section.footer.val = footer()
-        dashboard.section.footer.opts.hl = "Constant"
+        dashboard.section.footer.opts.hl = "Type"
+        dashboard.section.header.opts.hl = pick_color()
+
+        if vim.o.filetype == "lazy" then
+            vim.cmd.close()
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "AlphaReady",
+                callback = function()
+                    require("lazy").show()
+                end,
+            })
+        end
+
+        require("alpha").setup(dashboard.opts)
 
         vim.api.nvim_create_autocmd("User", {
             pattern = "LazyVimStarted",
             callback = function()
-                dashboard.section.footer.val = footer()
+                local stats = require("lazy").stats()
+                local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+                dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
+                pcall(vim.cmd.AlphaRedraw)
             end,
         })
-
-        require("alpha").setup(dashboard.opts)
     end,
 }
