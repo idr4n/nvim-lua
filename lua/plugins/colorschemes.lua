@@ -1,9 +1,10 @@
 local t = os.date("*t").hour + os.date("*t").min / 60
+local duringDayTime = t >= 7 and t < 18
 
 return {
     {
         "folke/tokyonight.nvim",
-        lazy = false,
+        lazy = duringDayTime,
         priority = 1000,
         opts = function()
             local theme_style = "moon"
@@ -36,20 +37,19 @@ return {
             require("tokyonight").setup(opts)
 
             -- Load the colorscheme
-            vim.cmd("colorscheme tokyonight")
-
-            -- define gitsigns colors
-            vim.cmd([[:highlight CustomSignsAdd guifg=#73DACA]])
-            vim.cmd([[:highlight CustomSignsChange guifg=#FF9E64]])
-            vim.cmd([[:highlight CustomSignsDelete guifg=#F7768E]])
+            if not duringDayTime then
+                vim.cmd("colorscheme tokyonight")
+            end
         end,
     },
     {
         "mcchrish/zenbones.nvim",
+        -- lazy = false,
+        -- priority = 1000,
         dependencies = "rktjmp/lush.nvim",
         config = function()
             vim.g.zenbones =
-                { lightness = "default", darkness = "stark", lighten_line_nr = 30, transparent_background = true }
+                { lightness = "default", darkness = "stark", lighten_line_nr = 30, transparent_background = false }
 
             if t >= 7 and t < 18.0 then
                 -- vim.cmd("set background=light")
@@ -164,13 +164,16 @@ return {
     },
     {
         "rose-pine/neovim",
+        name = "rose-pine",
+        -- lazy = false,
+        -- priority = 1000,
         opts = {
             --- @usage 'main' | 'moon'
             dark_variant = "moon",
             bold_vert_split = false,
             dim_nc_background = false,
-            disable_background = true,
-            disable_float_background = true,
+            disable_background = false,
+            disable_float_background = false,
             disable_italics = false,
 
             --- @usage string hex value or named color from rosepinetheme.com/palette
@@ -224,8 +227,28 @@ return {
             },
         },
         -- config = function(_, opts)
-        -- 	require("rose-pine").setup(opts)
-        -- 	vim.cmd("colorscheme rose-pine")
+        --     require("rose-pine").setup(opts)
+        --     vim.cmd("set background=light")
+        --     vim.cmd("colorscheme rose-pine")
         -- end,
+    },
+    {
+        "projekt0n/github-nvim-theme",
+        lazy = not duringDayTime,
+        priority = 1000,
+        opts = {
+            theme_style = "light",
+            function_style = "italic",
+            sidebars = { "qf", "vista_kind", "terminal", "packer", "neo-tree" },
+            overrides = function()
+                return {
+                    CursorLine = { bg = "#F3F8FF" },
+                    LspReferenceText = { bg = "#E2FFE8" },
+                }
+            end,
+        },
+        config = function(_, opts)
+            require("github-theme").setup(opts)
+        end,
     },
 }

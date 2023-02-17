@@ -2,80 +2,96 @@ return {
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
     dependencies = { "nvim-lua/plenary.nvim" },
-    opts = {
-        signcolumn = true,
-        numhl = false,
-        signs = {
-            -- add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-            -- change = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-            -- delete = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-            add = { hl = "CustomSignsAdd", text = "▍", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-            change = { hl = "CustomSignsChange", text = "▍", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-            delete = { hl = "CustomSignsDelete", text = "▁", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-            topdelete = {
-                hl = "GitSignsDelete",
-                -- text = "契",
-                text = "▁",
-                numhl = "GitSignsDeleteNr",
-                linehl = "GitSignsDeleteLn",
+    opts = function()
+        -- define gitsigns colors
+        vim.cmd([[:highlight CustomSignsAdd guifg=#73DACA]])
+        vim.cmd([[:highlight CustomSignsChange guifg=#FF9E64]])
+        vim.cmd([[:highlight CustomSignsDelete guifg=#F7768E]])
+        return {
+            signcolumn = true,
+            numhl = false,
+            signs = {
+                -- add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+                -- change = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
+                -- delete = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
+                add = { hl = "CustomSignsAdd", text = "▍", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+                change = {
+                    hl = "CustomSignsChange",
+                    text = "▍",
+                    numhl = "GitSignsChangeNr",
+                    linehl = "GitSignsChangeLn",
+                },
+                delete = {
+                    hl = "CustomSignsDelete",
+                    text = "▁",
+                    numhl = "GitSignsDeleteNr",
+                    linehl = "GitSignsDeleteLn",
+                },
+                topdelete = {
+                    hl = "GitSignsDelete",
+                    -- text = "契",
+                    text = "▁",
+                    numhl = "GitSignsDeleteNr",
+                    linehl = "GitSignsDeleteLn",
+                },
+                changedelete = {
+                    -- hl = "GitSignsChange",
+                    hl = "CustomSignsDelete",
+                    text = "▋",
+                    numhl = "GitSignsChangeNr",
+                    linehl = "GitSignsChangeLn",
+                },
             },
-            changedelete = {
-                -- hl = "GitSignsChange",
-                hl = "CustomSignsDelete",
-                text = "▋",
-                numhl = "GitSignsChangeNr",
-                linehl = "GitSignsChangeLn",
-            },
-        },
-        on_attach = function(bufnr)
-            local gs = package.loaded.gitsigns
+            on_attach = function(bufnr)
+                local gs = package.loaded.gitsigns
 
-            local function map(mode, l, r, opts)
-                opts = opts or {}
-                opts.buffer = bufnr
-                vim.keymap.set(mode, l, r, opts)
-            end
-
-            -- Navigation
-            map("n", "]c", function()
-                if vim.wo.diff then
-                    return "]c"
+                local function map(mode, l, r, opts)
+                    opts = opts or {}
+                    opts.buffer = bufnr
+                    vim.keymap.set(mode, l, r, opts)
                 end
-                vim.schedule(function()
-                    gs.next_hunk()
+
+                -- Navigation
+                map("n", "]c", function()
+                    if vim.wo.diff then
+                        return "]c"
+                    end
+                    vim.schedule(function()
+                        gs.next_hunk()
+                    end)
+                    return "<Ignore>"
+                end, { expr = true })
+
+                map("n", "[c", function()
+                    if vim.wo.diff then
+                        return "[c"
+                    end
+                    vim.schedule(function()
+                        gs.prev_hunk()
+                    end)
+                    return "<Ignore>"
+                end, { expr = true })
+
+                -- Actions
+                map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
+                map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
+                map("n", "<leader>hS", gs.stage_buffer)
+                map("n", "<leader>hu", gs.undo_stage_hunk)
+                map("n", "<leader>hR", gs.reset_buffer)
+                map("n", "<leader>hp", gs.preview_hunk)
+                map("n", "<leader>hb", function()
+                    gs.blame_line({ full = true })
                 end)
-                return "<Ignore>"
-            end, { expr = true })
-
-            map("n", "[c", function()
-                if vim.wo.diff then
-                    return "[c"
-                end
-                vim.schedule(function()
-                    gs.prev_hunk()
+                map("n", "<leader>tb", gs.toggle_current_line_blame)
+                map("n", "<leader>hd", gs.diffthis)
+                map("n", "<leader>hD", function()
+                    gs.diffthis("~")
                 end)
-                return "<Ignore>"
-            end, { expr = true })
+                map("n", "<leader>td", gs.toggle_deleted)
 
-            -- Actions
-            map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
-            map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
-            map("n", "<leader>hS", gs.stage_buffer)
-            map("n", "<leader>hu", gs.undo_stage_hunk)
-            map("n", "<leader>hR", gs.reset_buffer)
-            map("n", "<leader>hp", gs.preview_hunk)
-            map("n", "<leader>hb", function()
-                gs.blame_line({ full = true })
-            end)
-            map("n", "<leader>tb", gs.toggle_current_line_blame)
-            map("n", "<leader>hd", gs.diffthis)
-            map("n", "<leader>hD", function()
-                gs.diffthis("~")
-            end)
-            map("n", "<leader>td", gs.toggle_deleted)
-
-            -- Text object
-            map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
-        end,
-    },
+                -- Text object
+                map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+            end,
+        }
+    end,
 }
