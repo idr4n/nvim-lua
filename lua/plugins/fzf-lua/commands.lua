@@ -5,7 +5,7 @@ end
 
 local M = {}
 
-local function set_cwd(pwd, new_tab)
+function set_cwd(pwd, new_tab)
     if not pwd then
         local parent = vim.fn.expand("%:h")
         pwd = M.git_root(parent, true) or parent
@@ -97,38 +97,39 @@ function M.workdirs(args)
         ["--layout"] = "reverse",
     }
 
-    fzf_lua.fzf_wrap(opts, fzf_fn, function(selected)
-        if not selected then
-            return
-        end
-        _previous_cwd = vim.loop.cwd()
-        local newcwd = selected[1]:match("%s%s(.*)")
-        newcwd = fzf_lua.path.starts_with_separator(newcwd) and newcwd
-            or fzf_lua.path.join({ vim.fn.expand("$HOME"), newcwd })
+    opts.actions = {
+        ["default"] = function(selected)
+            _previous_cwd = vim.loop.cwd()
+            local newcwd = selected[1]:match("[^ ]*$")
+            newcwd = fzf_lua.path.starts_with_separator(newcwd) and newcwd
+                or fzf_lua.path.join({ vim.env.HOME, newcwd })
 
-        if os.getenv("TERM_PROGRAM") == "tmux" and args.nvim_tmux then
-            vim.cmd(string.format("execute 'silent !tmux new-window -c %s nvim'", newcwd))
-            return
-        elseif args.nvim_terminal or args.nvim_tmux then
-            local cmd = {
-                alacritty = "open -na alacritty --args --working-directory %s -e fish -ic nvim'",
-                wezterm = "wezterm start --always-new-process --cwd %s nvim'",
-                ["xterm-kitty"] = "open -na kitty --args -d %s nvim'",
-            }
-            vim.cmd(string.format("execute 'silent !" .. cmd[vim.env.TERM], newcwd))
-            return
-        elseif args.nvim_alacritty then
-            vim.cmd(
-                string.format(
-                    "execute 'silent !open -na alacritty --args --working-directory %s -e fish -ic nvim'",
-                    newcwd
+            if os.getenv("TERM_PROGRAM") == "tmux" and args.nvim_tmux then
+                vim.cmd(string.format("execute 'silent !tmux new-window -c %s nvim'", newcwd))
+                return
+            elseif args.nvim_terminal or args.nvim_tmux then
+                local cmd = {
+                    alacritty = "open -na alacritty --args --working-directory %s -e fish -ic nvim'",
+                    wezterm = "wezterm start --always-new-process --cwd %s nvim'",
+                    ["xterm-kitty"] = "open -na kitty --args -d %s nvim'",
+                }
+                vim.cmd(string.format("execute 'silent !" .. cmd[vim.env.TERM], newcwd))
+                return
+            elseif args.nvim_alacritty then
+                vim.cmd(
+                    string.format(
+                        "execute 'silent !open -na alacritty --args --working-directory %s -e fish -ic nvim'",
+                        newcwd
+                    )
                 )
-            )
-            return
-        end
+                return
+            end
 
-        set_cwd(newcwd, args.new_tab)
-    end)()
+            set_cwd(newcwd, args.new_tab)
+        end,
+    }
+
+    fzf_lua.fzf_exec(fzf_fn, opts)
 end
 
 return M
