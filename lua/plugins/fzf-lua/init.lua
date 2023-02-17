@@ -2,7 +2,7 @@ return {
     "ibhagwan/fzf-lua",
     cmd = "FzfLua",
     keys = {
-        { "<leader>r", "<cmd>lua require('fzf-lua').live_grep()<CR>", noremap = true, silent = true },
+        -- { "<leader>r", "<cmd>lua require('fzf-lua').live_grep()<CR>", noremap = true, silent = true },
         { "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", noremap = true, silent = true },
         -- { "<leader>l", "<cmd>lua require('fzf-lua').resume()<CR>", noremap = true, silent = true },
         -- { "<C-P>", "<cmd>lua require('fzf-lua').files()<CR>", noremap = true, silent = true },
@@ -22,7 +22,7 @@ return {
         -- { "<leader>cc", "<cmd>lcd ~/.config/nvim | lua require('fzf-lua').files()<cr>", noremap = true, silent = true },
 
         -- sets new working dir,
-        { "<leader>cw", "<cmd>lua require('plugins.fzf-lua.commands').workdirs()<CR>", noremap = true, silent = true },
+        -- { "<leader>cw", "<cmd>lua require('plugins.fzf-lua.commands').workdirs()<CR>", noremap = true, silent = true },
         {
             "<leader>/",
             "<cmd>lua require('plugins.fzf-lua.commands').workdirs({ nvim_tmux = true })<CR>",

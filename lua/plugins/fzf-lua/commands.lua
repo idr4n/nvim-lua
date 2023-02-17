@@ -5,7 +5,7 @@ end
 
 local M = {}
 
-function set_cwd(pwd, new_tab)
+local function set_cwd(pwd, new_tab)
     if not pwd then
         local parent = vim.fn.expand("%:h")
         pwd = M.git_root(parent, true) or parent

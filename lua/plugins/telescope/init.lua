@@ -4,7 +4,7 @@ return {
     event = "BufReadPost",
     keys = {
         { "<c-p>", "<cmd>Telescope find_files<cr>", noremap = true, silent = true },
-        -- { "<leader>r", "<cmd>Telescope live_grep<cr>", opts },
+        { "<leader>r", "<cmd>Telescope live_grep<cr>", noremap = true, silent = true },
         { "<leader>b", "<cmd>Telescope current_buffer_fuzzy_find<cr>", noremap = true, silent = true },
         { "<leader>l", "<cmd>Telescope resume<cr>", noremap = true, silent = true },
         {
@@ -27,7 +27,7 @@ return {
             silent = true,
         },
         { "<leader>fh", "<cmd>Telescope help_tags<cr>", noremap = true, silent = true },
-        { "gd", "<cmd>Telescope lsp_definitions<cr>", noremap = true, silent = true },
+        -- { "gd", "<cmd>Telescope lsp_definitions<cr>", noremap = true, silent = true },
         -- {  "gr", "<cmd>Telescope lsp_references<cr>",  noremap = true, silent = true  },
         { "gi", "<cmd>Telescope lsp_implementations<cr>", noremap = true, silent = true },
         { "<leader>w", "<cmd>Telescope lsp_document_symbols<cr>", noremap = true, silent = true },
@@ -43,6 +43,12 @@ return {
             silent = true,
         },
         { "<leader>cc", "<cmd>lcd ~/.config/nvim | Telescope find_files<cr>", noremap = true, silent = true },
+        {
+            "<leader>cw",
+            "<cmd>lua require('plugins.telescope.workdirs-picker').set_workdir()<CR>",
+            noremap = true,
+            silent = true,
+        },
     },
     dependencies = {
         "nvim-lua/popup.nvim",
