@@ -1,6 +1,8 @@
 -- "nvim-lualine/lualine.nvim"
 -- modified from https://github.com/ChristianChiarulli/nvim (sept. 21, 2022)
 
+local t = os.date("*t").hour + os.date("*t").min / 60
+
 M = {}
 
 -- check if value in table
@@ -58,6 +60,24 @@ local colors = {
     red2 = "#D16969",
 }
 
+local colors_light = {
+    blue = "#82aaff", --
+    black = "black",
+    dark_gray = "#EFEFEF",
+    fg_dark = "#828bb8", --
+    bg_dark2 = "#f6f8fa", --
+    orange2 = "#DB8D18",
+    magenta = "#c099ff", --
+    yellow = "#FFC169", --
+    red = "#ff757f", --
+    green2 = "#41a6b5",
+    fg_gutter = "#3b4261",
+}
+
+if t >= 7 and t < 18 then
+    colors = colors_light
+end
+
 local bg_statusline = colors.bg_dark2
 
 local my_theme = {
@@ -67,24 +87,24 @@ local my_theme = {
         c = { bg = bg_statusline, fg = colors.fg_dark },
     },
     insert = {
+        a = { bg = colors.magenta, fg = colors.black },
+        b = { bg = colors.dark_gray, fg = colors.magenta },
+    },
+    visual = {
         a = { bg = colors.orange2, fg = colors.black },
         b = { bg = colors.dark_gray, fg = colors.orange2 },
     },
-    visual = {
-        a = { bg = colors.magenta, fg = colors.black },
-        b = { bg = bg_statusline, fg = colors.magenta },
-    },
     command = {
         a = { bg = colors.yellow, fg = colors.black },
-        b = { bg = bg_statusline, fg = colors.yellow },
+        b = { bg = colors.dark_gray, fg = colors.yellow },
     },
     replace = {
         a = { bg = colors.red, fg = colors.black },
-        b = { bg = bg_statusline, fg = colors.red },
+        b = { bg = colors.dark_gray, fg = colors.red },
     },
     terminal = {
         a = { bg = colors.green2, fg = colors.black },
-        b = { bg = bg_statusline, fg = colors.green2 },
+        b = { bg = colors.dark_gray, fg = colors.green2 },
     },
     inactive = {
         a = { bg = bg_statusline, fg = colors.blue },
