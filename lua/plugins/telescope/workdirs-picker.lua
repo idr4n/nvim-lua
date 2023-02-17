@@ -3,6 +3,7 @@ local finders = require("telescope.finders")
 local conf = require("telescope.config").values
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
+local entry_display = require("telescope.pickers.entry_display")
 local Path = require("plenary.path")
 
 local M = {}
@@ -37,11 +38,29 @@ local add_entry = function(path)
     entries[#entries + 1] = { path, Path:new(path):make_relative(vim.fn.expand("$HOME")) }
 end
 
+local displayer = entry_display.create({
+    separator = " ",
+    items = {
+        { remaining = true },
+    },
+})
+
+local make_display = function(entry)
+    if entry.value == _Previous_cwd then
+        return displayer({
+            { entry.relative_path, "Number" },
+        })
+    end
+
+    return displayer({
+        entry.relative_path,
+    })
+end
+
 local function workdirs(args)
     args = args or {}
     entries = {}
 
-    -- workdirs.lua returns a table of workdirs
     local ok, dirs = pcall(require, "workdirs")
     if not ok then
         dirs = {}
@@ -68,7 +87,8 @@ M.set_workdir = function(opts)
                 entry_maker = function(entry)
                     return {
                         value = entry[1],
-                        display = entry[2],
+                        relative_path = entry[2],
+                        display = make_display,
                         ordinal = entry[2],
                     }
                 end,
