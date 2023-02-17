@@ -161,6 +161,10 @@ end
 local function saveDir()
     local cwd = vim.fn.getcwd()
 
+    if cwd == vim.fn.expand("$HOME") then
+        return
+    end
+
     local ok, dirs = pcall(require, "workdirs")
     if not ok then
         print("couldn't find workdirs")
