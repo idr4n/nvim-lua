@@ -166,7 +166,8 @@ local defaults = {
     },
     -- bullets_highlights = { "Function", "Number", "Keyword", "String" },
     bullets_highlights = { "DiagnosticInfo", "Number", "Keyword", "String" },
-    checkbox_highlights = { "NoiceCompletionItemKindProperty", "NoiceCompletionItemKindConstant" },
+    -- checkbox_highlights = { "NoiceCompletionItemKindProperty", "NoiceCompletionItemKindConstant" },
+    checkbox_highlights = { "Function", "Keyword" },
     indent = true,
     concealcursor = false,
 }
@@ -237,7 +238,8 @@ local function set_mark(bufnr, virt_text, lnum, start_col, end_col, highlight)
         hl_group = highlight,
         virt_text = virt_text,
         virt_text_pos = "overlay",
-        hl_mode = "combine",
+        -- hl_mode = "combine",
+        hl_mode = "blend",
         ephemeral = true,
     })
     if not ok then
