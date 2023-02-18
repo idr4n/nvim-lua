@@ -1,6 +1,6 @@
 return {
     "junegunn/fzf.vim",
-    cmd = { "Files", "Rg", "Lines", "BLines" },
+    cmd = { "Files", "Rg", "Lines", "BLines", "History" },
     -- keys = {
     -- 	{ "<C-P>", ":Files<cr>", noremap = true, silent = true },
     -- 	{ "<leader>ff", ":Files<cr>", noremap = true, silent = true },
