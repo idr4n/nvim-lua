@@ -36,7 +36,20 @@ return {
             },
             presets = {
                 long_message_to_split = true,
-                command_palette = true,
+                command_palette = {
+                    views = {
+                        cmdline_popup = {
+                            position = {
+                                row = "30%",
+                            },
+                        },
+                        popupmenu = {
+                            position = {
+                                row = "38%",
+                            },
+                        },
+                    },
+                },
             },
         },
     },
