@@ -17,9 +17,31 @@ vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappin
 vim.g.maplocalleader = " "
 
 -- Install your plugins here
-require("lazy").setup("plugins", {
+require("lazy").setup({
+    spec = {
+        { import = "plugins" },
+    },
     defaults = { lazy = true },
     install = { colorscheme = { "tokyonight" } },
+    performance = {
+        cache = {
+            enabled = true,
+            -- disable_events = {},
+        },
+        rtp = {
+            disabled_plugins = {
+                "gzip",
+                -- "matchit",
+                -- "matchparen",
+                -- "netrwPlugin",
+                "rplugin",
+                "tarPlugin",
+                "tohtml",
+                "tutor",
+                "zipPlugin",
+            },
+        },
+    },
     ui = {
         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
     },

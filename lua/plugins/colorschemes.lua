@@ -49,7 +49,7 @@ return {
         dependencies = "rktjmp/lush.nvim",
         config = function()
             vim.g.zenbones =
-                { lightness = "default", darkness = "stark", lighten_line_nr = 30, transparent_background = false }
+                { lightness = "default", darkness = "stark", lighten_line_nr = 30, transparent_background = true }
 
             if t >= 7 and t < 18.0 then
                 -- vim.cmd("set background=light")

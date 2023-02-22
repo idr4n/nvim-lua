@@ -135,12 +135,6 @@ command("YankCwd", function()
 end, {})
 keymap("n", "<leader>cp", "<cmd>YankCwd<cr>", opts)
 
-local function printDir()
-    local dir = vim.fn.getcwd()
-    print(string.format("Directory: %s", dir))
-    -- print("Directory: "..dir..". Vim did enter: "..vim.v.vim_did_enter)
-end
-
 local function writeFileSync(path, data)
     local uv = require("luv")
     local fd = assert(uv.fs_open(path, "w", -1))
@@ -191,15 +185,12 @@ local function saveDir()
     writeFileSync(path_txt, new_dirs_str_txt)
 end
 
-local function onVimEnter()
-    printDir()
-    saveDir()
-end
-
 vim.api.nvim_create_augroup("OnVimEnter", { clear = true })
 vim.api.nvim_create_autocmd("VimEnter", {
     pattern = { "*" },
-    callback = onVimEnter,
+    callback = function()
+        saveDir()
+    end,
     group = "OnVimEnter",
 })
 

@@ -25,6 +25,16 @@ return {
             { "<leader>na", function() require("noice").cmd("all") end, desc = "Noice All" },
         },
         opts = {
+            routes = {
+                -- Avoid all messages with kind ""
+                {
+                    filter = {
+                        event = "msg_show",
+                        kind = "",
+                    },
+                    opts = { skip = true },
+                },
+            },
             lsp = {
                 override = {
                     ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -40,12 +50,12 @@ return {
                     views = {
                         cmdline_popup = {
                             position = {
-                                row = "30%",
+                                row = 6,
                             },
                         },
                         popupmenu = {
                             position = {
-                                row = "38%",
+                                row = 9,
                             },
                         },
                     },
