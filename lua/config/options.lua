@@ -15,6 +15,7 @@ opt.conceallevel = 0 -- so that `` is visible in markdown files
 -- opt.concealcursor = "nc" -- conceal in normal/command mode (not in insert/visual)
 opt.cursorline = true -- highlight the current line
 opt.expandtab = true -- convert tabs to spaces
+opt.foldmethod = "marker"
 -- opt.guicursor = "" -- no thin cursor on insert mode
 opt.hlsearch = false -- highlight all matches on previous search pattern
 opt.incsearch = true
