@@ -1,5 +1,6 @@
 return {
     "akinsho/toggleterm.nvim",
+    cmd = { "ToggleTerm" },
     opts = {
         -- size = 25,
         size = function(term)
@@ -34,6 +35,7 @@ return {
     },
     keys = {
         { "<leader>gl", ":LazyGit<cr>", noremap = true, silent = true },
+        { "<M-\\>", ":ToggleTerm<cr>", noremap = true, silent = true },
     },
     config = function(_, opts)
         require("toggleterm").setup(opts)

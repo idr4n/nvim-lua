@@ -33,7 +33,7 @@ keymap("n", "<C-F>", "zt", opts)
 -- keymap("n", "k", "gk", opts)
 
 -- Quicksave command
-keymap("n", "<leader>s", ":silent w<CR>", opts)
+vim.keymap.set({ "n", "i", "v", "s" }, "<C-s>", ":silent w<CR>", opts)
 
 -- Quit current window
 keymap("n", "<leader>e", ":quit<CR>", opts)
