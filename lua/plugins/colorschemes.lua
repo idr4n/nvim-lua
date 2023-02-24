@@ -236,10 +236,14 @@ return {
         "projekt0n/github-nvim-theme",
         lazy = not duringDayTime,
         priority = 1000,
+        init = function()
+            vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "#F6F8FA" })
+            vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "#F6F8FA" })
+        end,
         opts = {
             theme_style = "light",
             function_style = "italic",
-            sidebars = { "qf", "vista_kind", "terminal", "packer", "neo-tree" },
+            sidebars = { "qf", "vista_kind", "terminal", "packer" },
             overrides = function()
                 return {
                     CursorLine = { bg = "#F3F8FF" },
