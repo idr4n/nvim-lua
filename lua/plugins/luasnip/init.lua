@@ -80,5 +80,9 @@ return {
         -- surrounds with callback function
         map_snippet(";cf", mappable.sf)
         vim.api.nvim_set_keymap("v", ";cf", "<c-s>;cf", { noremap = false, silent = false })
+
+        -- surrounds with foldable comment
+        map_snippet(";cm", mappable.scm)
+        vim.api.nvim_set_keymap("v", ";cm", "<c-s>;cm", { noremap = false, silent = false })
     end,
 }

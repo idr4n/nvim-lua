@@ -1,10 +1,12 @@
 local ls = require("luasnip")
 local p = ls.parser.parse_snippet
--- local s = ls.snippet
--- local sn = ls.snippet_node
+local s = ls.snippet
+local i = ls.insert_node
+local f = ls.function_node
+local fmt = require("luasnip.extras.fmt").fmt
+-- local c = ls.choice_node
 -- local t = ls.text_node
--- local i = ls.insert_node
--- local fmt = require("luasnip.extras.fmt").fmt
+-- local sn = ls.snippet_node
 
 local M = { snips = {}, autosnips = {} }
 
@@ -35,6 +37,40 @@ M.snips.ss = p({
     name = "surrounds with [|]",
     dscr = "surrounds selection with square brackets",
 }, "$1[$TM_SELECTED_TEXT$2]")
+
+M.snips.cm = s(
+    {
+        trig = "cm",
+        name = "Comment folde marker",
+        dscr = { "Surrounds with fold marker comment" },
+    },
+    fmt(
+        [[
+        {1}: {2} {{{{{{
+
+        {3}{4}
+
+        {1}: }}}}}}
+    ]],
+        {
+            f(function()
+                local cm = vim.opt_local.commentstring["_value"]
+                local cmString = string.gmatch(cm, "[^ %%s]+")()
+
+                if cmString then
+                    return cmString
+                else
+                    return "#"
+                end
+            end, {}),
+            i(1, "comment..."),
+            f(function(_, snip)
+                return snip.env.SELECT_DEDENT
+            end, {}),
+            i(2),
+        }
+    )
+)
 
 -- autosnippets
 M.autosnips.sc = p({
