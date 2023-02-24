@@ -183,3 +183,6 @@ keymap("n", "c", '"_c', opts)
 keymap("n", "C", '"_C', opts)
 keymap("v", "x", '"_x', opts)
 keymap("v", "c", '"_c', opts)
+
+-- Other mappings
+vim.keymap.set("n", "<leader>L", "<cmd>:Lazy<cr>", { desc = "Lazy" })
