@@ -8,12 +8,6 @@ return {
         { "<leader>b", "<cmd>Telescope current_buffer_fuzzy_find<cr>", noremap = true, silent = true },
         { "<leader>l", "<cmd>Telescope resume<cr>", noremap = true, silent = true },
         {
-            "<c-b>",
-            "<cmd>lua require('telescope.builtin').buffers({ initial_mode = 'normal' })<cr>",
-            noremap = true,
-            silent = true,
-        },
-        {
             "s",
             "<cmd>lua require('telescope.builtin').buffers({ initial_mode = 'normal', sort_lastused = true })<cr>",
             noremap = true,

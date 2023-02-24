@@ -25,15 +25,13 @@ keymap("i", "<C-F>", "<C-O>zt", opts)
 
 -- Normal --
 
--- center screen around coursor
-keymap("n", "<C-F>", "zt", opts)
-
 -- Move up and down with wrapped lines
 -- keymap("n", "j", "gj", opts)
 -- keymap("n", "k", "gk", opts)
 
 -- Quicksave command
 vim.keymap.set({ "n", "i", "v", "s" }, "<C-s>", "<cmd>w<CR>")
+vim.keymap.set({ "n", "i", "v", "s" }, "<C-f>", "<cmd>w<CR>")
 
 -- Quit current window
 keymap("n", "<leader>e", ":quit<CR>", opts)
