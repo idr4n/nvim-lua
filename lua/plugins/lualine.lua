@@ -5,6 +5,14 @@ local t = os.date("*t").hour + os.date("*t").min / 60
 
 M = {}
 
+local function fg(name)
+    return function()
+        ---@type {foreground?:number}?
+        local hl = vim.api.nvim_get_hl_by_name(name, true)
+        return hl and hl.foreground and { fg = string.format("#%06x", hl.foreground) }
+    end
+end
+
 -- check if value in table
 local function contains(t, value)
     for _, v in pairs(t) do
@@ -496,6 +504,14 @@ local charcode = {
     cond = hide_in_width_120,
 }
 
+-- stylua: ignore
+local noice = {
+    function() return require("noice").api.status.command.get() end,
+    cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
+    color = fg("Statement"),
+    padding = 1,
+}
+
 return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
@@ -516,7 +532,7 @@ return {
                 lualine_a = { mode },
                 lualine_b = { branch },
                 lualine_c = { getDir, fileIcon, filename, diff, current_signature },
-                lualine_x = { diagnostics, language_server, getWords, charcode, filetype },
+                lualine_x = { noice, diagnostics, language_server, getWords, charcode, filetype },
                 lualine_y = { location },
                 lualine_z = { progress },
             },
