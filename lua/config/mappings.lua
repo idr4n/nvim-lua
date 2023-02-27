@@ -168,8 +168,6 @@ vim.keymap.set("v", "<leader>X", [[y:%s/<C-r>0/<C-r>0/gI<Left><Left><Left>]])
 --: }}}
 
 --: Move text up and down {{{
-keymap("x", "J", ":move '>+1<CR>gv=gv", opts)
-keymap("x", "K", ":move '<-2<CR>gv=gv", opts)
 keymap("x", "<A-Down>", ":move '>+1<CR>gv=gv", opts)
 keymap("x", "<A-Up>", ":move '<-2<CR>gv=gv", opts)
 --: }}}
