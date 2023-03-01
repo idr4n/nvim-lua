@@ -515,6 +515,7 @@ local noice = {
 return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
+    -- event = "BufReadPre",
     dependencies = { "nvim-tree/nvim-web-devicons", opt = true },
     opts = function()
         return {
@@ -524,7 +525,7 @@ return {
                 theme = my_theme,
                 component_separators = { left = "", right = "" },
                 section_separators = { left = "", right = "" },
-                disabled_filetypes = { "alpha", "dashboard" },
+                disabled_filetypes = { "alpha", "dashboard", "lazy" },
                 always_divide_middle = true,
                 -- ignore_focus = { "fzf", "neo-tree", "TelescopePrompt" },
             },
@@ -532,7 +533,8 @@ return {
                 lualine_a = { mode },
                 lualine_b = { branch },
                 lualine_c = { getDir, fileIcon, filename, diff, current_signature },
-                lualine_x = { noice, diagnostics, language_server, getWords, charcode, filetype },
+                -- lualine_x = { noice, diagnostics, language_server, getWords, charcode, filetype },
+                lualine_x = { noice, diagnostics, getWords, charcode, filetype },
                 lualine_y = { location },
                 lualine_z = { progress },
             },
