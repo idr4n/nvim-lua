@@ -29,7 +29,10 @@ command("RevealInFinder", "execute 'silent !open -R \"%\"'", {})
 keymap("n", "<leader>;", ":RevealInFinder<cr>", opts)
 
 -- Code Run Script
-command("CodeRun", "execute '!~/scripts/code_run \"%\"'", {})
+command("CodeRun", function()
+    vim.cmd("execute '!~/scripts/code_run \"%\"'")
+    require("noice").cmd("last")
+end, {})
 keymap("n", "<leader>cr", ":CodeRun<cr>", opts)
 
 -- yank line after dash (-), i.e., bullet point in markdown without the bullet and the X
