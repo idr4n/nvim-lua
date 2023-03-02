@@ -127,9 +127,6 @@ return {
             -- Default command
             vim.env.FZF_DEFAULT_COMMAND =
                 "rg --files --hidden --follow --no-ignore -g '!.git/*' -g '!node_modules' -g '!target'"
-            -- Default opts
-            vim.env.FZF_DEFAULT_OPTS = "--layout=reverse"
-            -- vim.env.FZF_DEFAULT_OPTS = "--layout=default"
 
             -- exlclude file name from fuzzy matching in Rg command
             vim.cmd([[
@@ -145,26 +142,6 @@ return {
                 \ call fzf#vim#grep(
                 \   'rg --with-filename --column --line-number --no-heading --smart-case . '.fnameescape(expand('%:p')), 1,
                 \   fzf#vim#with_preview({'options': '--layout reverse --query '.shellescape(<q-args>).' --with-nth=4.. --delimiter=":"'}, 'right:50%', 'ctrl-l'))
-            ]])
-
-            -- Remove statusline
-            -- vim.cmd[[
-            --   augroup fzf
-            -- autocmd!
-            -- autocmd! FileType fzf set laststatus=0 noshowmode noruler
-            --   \| autocmd BufLeave <buffer> set laststatus=3 showmode ruler
-            --   augroup END
-            -- ]]
-
-            -- change statusline color
-            vim.cmd([[
-                function! s:fzf_statusline()
-                highlight fzf1 guifg=#F55673
-                highlight fzf2 guifg=Normal
-                highlight fzf3 guifg=#F55673
-                setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
-                endfunction
-                autocmd! User FzfStatusLine call <SID>fzf_statusline()
             ]])
         end,
     },
