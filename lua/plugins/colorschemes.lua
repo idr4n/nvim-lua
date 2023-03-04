@@ -2,6 +2,7 @@ local t = os.date("*t").hour + os.date("*t").min / 60
 local duringDayTime = t >= 7 and t < 18
 
 return {
+    --: tokyonight {{{
     {
         "folke/tokyonight.nvim",
         lazy = duringDayTime,
@@ -42,6 +43,9 @@ return {
             end
         end,
     },
+    --: }}}
+
+    --: zenbones{{{
     {
         "mcchrish/zenbones.nvim",
         -- lazy = false,
@@ -66,6 +70,9 @@ return {
             end
         end,
     },
+    --: }}}
+
+    --: nightfox {{{
     {
         "EdenEast/nightfox.nvim",
         config = function()
@@ -99,6 +106,9 @@ return {
             })
         end,
     },
+    --: }}}
+
+    --: catppuccin {{{
     {
         "catppuccin/nvim",
         name = "catppuccin",
@@ -148,20 +158,23 @@ return {
             }
         end,
         -- config = function(_, opts)
-        -- 	require("catppuccin").setup(opts)
+        --  require("catppuccin").setup(opts)
         --
-        -- 	if t >= 7 and t < 18 then
-        -- 		-- vim.cmd([[colorscheme catppuccin-macchiato]])
-        -- 		vim.cmd([[colorscheme catppuccin-frappe]])
-        -- 	else
-        -- 		vim.cmd([[colorscheme catppuccin-macchiato]])
-        -- 		-- vim.cmd([[colorscheme catppuccin-frappe]])
-        -- 	end
+        --  if t >= 7 and t < 18 then
+        --      -- vim.cmd([[colorscheme catppuccin-macchiato]])
+        --      vim.cmd([[colorscheme catppuccin-frappe]])
+        --  else
+        --      vim.cmd([[colorscheme catppuccin-macchiato]])
+        --      -- vim.cmd([[colorscheme catppuccin-frappe]])
+        --  end
         --
-        -- 	vim.cmd([[colorscheme catppuccin-frappe]])
-        -- 	vim.cmd([[colorscheme catppuccin-macchiato]])
+        --  vim.cmd([[colorscheme catppuccin-frappe]])
+        --  vim.cmd([[colorscheme catppuccin-macchiato]])
         -- end,
     },
+    --: }}}
+
+    --: rose-pine {{{
     {
         "rose-pine/neovim",
         name = "rose-pine",
@@ -232,6 +245,9 @@ return {
         --     vim.cmd("colorscheme rose-pine")
         -- end,
     },
+    --: }}}
+
+    --: github {{{
     {
         "projekt0n/github-nvim-theme",
         lazy = not duringDayTime,
@@ -255,4 +271,5 @@ return {
             require("github-theme").setup(opts)
         end,
     },
+    --: }}}
 }

@@ -314,24 +314,35 @@ return {
             return {
                 debug = false,
                 sources = {
+                    -- Prettier
                     -- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
                     formatting.prettier.with({
                         extra_args = { "--single-quote", "--jsx-single-quote" },
                         disabled_filetypes = { "markdown", "html" },
                     }),
+
+                    -- Python
                     formatting.black.with({ extra_args = { "--fast" } }),
-                    formatting.stylua.with({ "--config-path", vim.fn.expand("~/.config/stylua.toml") }),
                     diagnostics.flake8,
+
+                    -- LUA
+                    formatting.stylua.with({ "--config-path", vim.fn.expand("~/.config/stylua.toml") }),
                     -- diagnostics.vale,
+
+                    -- GOLANG
                     -- diagnostics.golangci_lint,
                     -- For revive, there is a ~/revive.toml config file to exclude linting rules
                     diagnostics.revive,
                     formatting.goimports,
+
+                    -- SQL
                     -- sqlfluff: extra config option set in ~/.sqlfluff
                     -- formatting.sql_formatter.with({ extra_args = { "--keywordCase", "upper" } }),
                     formatting.sqlfluff.with({
                         extra_args = { "--dialect", "postgres" },
                     }),
+
+                    -- Bash
                     formatting.beautysh.with({
                         extra_args = { "--indent-size", "2" },
                     }),
