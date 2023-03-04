@@ -76,6 +76,7 @@ return {
                 "lua",
                 "markdown",
                 "python",
+                "regex",
                 "rust",
                 "tsx",
                 "typescript",
