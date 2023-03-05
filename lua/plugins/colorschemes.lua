@@ -1,5 +1,6 @@
-local t = os.date("*t").hour + os.date("*t").min / 60
-local duringDayTime = t >= 7 and t < 18
+-- system apperance
+local appearance = vim.fn.system("defaults read -g AppleInterfaceStyle")
+local duringDayTime = appearance:match("^Dark") == nil
 
 return {
     --: tokyonight {{{
@@ -8,14 +9,8 @@ return {
         lazy = duringDayTime,
         priority = 1000,
         opts = function()
-            local theme_style = "moon"
-
-            if t >= 7 and t < 18 then
-                theme_style = "moon"
-            end
-
             return {
-                style = theme_style,
+                style = "moon",
                 transparent = true,
                 styles = {
                     functions = "italic",
@@ -55,7 +50,7 @@ return {
             vim.g.zenbones =
                 { lightness = "default", darkness = "stark", lighten_line_nr = 30, transparent_background = true }
 
-            if t >= 7 and t < 18.0 then
+            if duringDayTime then
                 -- vim.cmd("set background=light")
                 -- vim.cmd("colorscheme zenbones")
                 -- vim.env.BAT_THEME = "Monokai Extended Light"
@@ -160,7 +155,7 @@ return {
         -- config = function(_, opts)
         --  require("catppuccin").setup(opts)
         --
-        --  if t >= 7 and t < 18 then
+        --  if duringDayTime then
         --      -- vim.cmd([[colorscheme catppuccin-macchiato]])
         --      vim.cmd([[colorscheme catppuccin-frappe]])
         --  else

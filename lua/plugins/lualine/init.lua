@@ -1,9 +1,6 @@
 -- "nvim-lualine/lualine.nvim"
--- modified from https://github.com/ChristianChiarulli/nvim (sept. 21, 2022)
 
-local t = os.date("*t").hour + os.date("*t").min / 60
-
-M = {}
+local colors = require("plugins.lualine.my_theme").colors
 
 local function fg(name)
     return function()
@@ -22,131 +19,6 @@ local function contains(t, value)
     end
     return false
 end
-
-local colors = {
-    diff_added = { fg = "#4EC9B0" },
-    diff_modified = { fg = "#CE9178" },
-    diff_removed = { fg = "#D16969" },
-    error = { fg = "#bf616a" },
-    warning = { fg = "#D7BA7D" },
-    gray = "#32363e",
-    dark_gray = "#292E42",
-    yellow_orange = "#D7BA7D",
-    none = "NONE",
-    bg = "#222436", --
-    bg_highlight = "#2f334d", --
-    terminal_black = "#444a73", --
-    black = "black",
-    fg = "#c8d3f5", --
-    bg_dark = "#16161E",
-    bg_dark2 = "#1e2030", --
-    fg_dark = "#828bb8", --
-    fg_gutter = "#3b4261",
-    blue0 = "#3e68d7", --
-    blue = "#82aaff", --
-    cyan = "#86e1fc", --
-    cyan2 = "#4EC9B0",
-    blue1 = "#65bcff", --
-    blue2 = "#0db9d7",
-    blue5 = "#89ddff",
-    blue6 = "#b4f9f8", --
-    blue7 = "#394b70",
-    blue8 = "#569CD6",
-    purple = "#fca7ea", --
-    purple2 = "#C586C0",
-    magenta2 = "#ff007c",
-    magenta = "#c099ff", --
-    orange = "#ff966c", --
-    orange2 = "#CE9178",
-    yellow = "#ffc777", --
-    green = "#c3e88d", --
-    green1 = "#4fd6be", --
-    green2 = "#41a6b5",
-    teal = "#4fd6be", --
-    red = "#ff757f", --
-    red1 = "#c53b53", --
-    red2 = "#D16969",
-}
-
-local colors_light = {
-    blue = "#82aaff", --
-    black = "black",
-    dark_gray = "#EFEFEF",
-    fg_dark = "#828bb8", --
-    bg_dark2 = "#f6f8fa", --
-    orange2 = "#DB8D18",
-    magenta = "#c099ff", --
-    yellow = "#FFC169", --
-    red = "#ff757f", --
-    green2 = "#41a6b5",
-    fg_gutter = "#3b4261",
-}
-
-if t >= 7 and t < 18 then
-    colors = colors_light
-end
-
-local bg_statusline = colors.bg_dark2
-
-local my_theme = {
-    normal = {
-        a = { bg = colors.blue, fg = colors.black },
-        b = { bg = colors.dark_gray, fg = colors.blue },
-        c = { bg = bg_statusline, fg = colors.fg_dark },
-    },
-    insert = {
-        a = { bg = colors.magenta, fg = colors.black },
-        b = { bg = colors.dark_gray, fg = colors.magenta },
-    },
-    visual = {
-        a = { bg = colors.orange2, fg = colors.black },
-        b = { bg = colors.dark_gray, fg = colors.orange2 },
-    },
-    command = {
-        a = { bg = colors.yellow, fg = colors.black },
-        b = { bg = colors.dark_gray, fg = colors.yellow },
-    },
-    replace = {
-        a = { bg = colors.red, fg = colors.black },
-        b = { bg = colors.dark_gray, fg = colors.red },
-    },
-    terminal = {
-        a = { bg = colors.green2, fg = colors.black },
-        b = { bg = colors.dark_gray, fg = colors.green2 },
-    },
-    inactive = {
-        a = { bg = bg_statusline, fg = colors.blue },
-        b = { bg = bg_statusline, fg = colors.fg_gutter, gui = "bold" },
-        c = { bg = bg_statusline, fg = colors.fg_gutter },
-    },
-}
-
-vim.api.nvim_set_hl(0, "SLFormatter", { fg = colors.green, bg = bg_statusline })
-vim.api.nvim_set_hl(0, "SLLinter", { fg = colors.yellow_orange, bg = bg_statusline })
-vim.api.nvim_set_hl(0, "SLBranchIcon", { fg = colors.orange, bg = colors.bg_dark2 })
-
-local mode_color = {
-    n = colors.blue,
-    i = colors.orange2,
-    v = "#b668cd",
-    [""] = "#b668cd",
-    V = "#b668cd",
-    c = "#46a6b2",
-    no = "#D16D9E",
-    s = colors.green,
-    S = colors.orange,
-    [""] = colors.orange,
-    ic = colors.red,
-    R = "#D16D9E",
-    Rv = colors.red,
-    cv = colors.blue,
-    ce = colors.blue,
-    r = colors.red,
-    rm = "#46a6b2",
-    ["r?"] = "#46a6b2",
-    ["!"] = "#46a6b2",
-    t = colors.red,
-}
 
 local mode = {
     function()
@@ -312,7 +184,6 @@ local filetype = {
 
 local branch = {
     "branch",
-    -- icon = "%#SLBranchIcon#" .. "" .. "%*",
     icon = "",
     fmt = function(str)
         if str == "" or str == nil then
@@ -385,108 +256,6 @@ local getWords = {
     color = { fg = colors.orange2 },
 }
 
-local language_server = {
-    function()
-        local buf_ft = vim.bo.filetype
-        local ui_filetypes = {
-            "help",
-            "packer",
-            "neogitstatus",
-            "NvimTree",
-            "neo-tree",
-            "Trouble",
-            "lir",
-            "Outline",
-            "spectre_panel",
-            "toggleterm",
-            "DressingSelect",
-            "TelescopePrompt",
-            "lspinfo",
-            "lsp-installer",
-            "",
-        }
-
-        if contains(ui_filetypes, buf_ft) then
-            if M.language_servers == nil then
-                return ""
-            else
-                return M.language_servers
-            end
-        end
-
-        local clients = vim.lsp.buf_get_clients()
-        local client_names = {}
-
-        -- add client
-        for _, client in pairs(clients) do
-            if client.name ~= "null-ls" then
-                table.insert(client_names, client.name)
-            end
-        end
-
-        -- add formatter
-        local s = require("null-ls.sources")
-        local available_sources = s.get_available(buf_ft)
-        local registered = {}
-        for _, source in ipairs(available_sources) do
-            for method in pairs(source.methods) do
-                registered[method] = registered[method] or {}
-                table.insert(registered[method], source.name)
-            end
-        end
-
-        local formatter = registered["NULL_LS_FORMATTING"]
-        local linter = registered["NULL_LS_DIAGNOSTICS"]
-
-        local formatter_icon = ""
-        if formatter then
-            formatter_icon = " " .. " "
-        end
-
-        local linter_icon = ""
-        if linter then
-            linter_icon = " " .. icons.ui.Fire
-        end
-
-        -- shorten clients names if needed
-        if #client_names > 2 then
-            for i, client in pairs(client_names) do
-                client_names[i] = string.sub(client, 1, 3)
-            end
-        end
-
-        -- join client names with commas
-        local client_names_str = table.concat(client_names, ", ")
-
-        -- check client_names_str if empty
-        local language_servers = ""
-        local client_names_str_len = #client_names_str
-        if client_names_str_len ~= 0 or #formatter_icon > 0 or #linter_icon > 0 then
-            language_servers = "["
-                .. client_names_str
-                .. "]"
-                .. "%#SLFormatter#"
-                .. formatter_icon
-                .. "%#SLLinter#"
-                .. linter_icon
-        end
-
-        if #client_names > 2 and vim.o.columns <= 140 then
-            return "[LSP]"
-        end
-
-        if client_names_str_len == 0 then
-            return ""
-        else
-            M.language_servers = language_servers
-            return language_servers:gsub(", anonymous source", "")
-        end
-    end,
-    padding = 1,
-    color = { gui = "italic" },
-    cond = hide_in_width_120,
-}
-
 local location = {
     "location",
     fmt = function(str)
@@ -522,7 +291,7 @@ return {
             options = {
                 globalstatus = true,
                 icons_enabled = true,
-                theme = my_theme,
+                theme = require("plugins.lualine.my_theme").setup(),
                 component_separators = { left = "", right = "" },
                 section_separators = { left = "", right = "" },
                 disabled_filetypes = { "alpha", "dashboard", "lazy" },
