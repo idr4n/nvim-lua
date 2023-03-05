@@ -23,6 +23,7 @@ return {
                 "prettier",
                 "pyright",
                 "revive",
+                "ruff",
                 "rust-analyzer",
                 "sqlfluff",
                 "sqls",
@@ -322,8 +323,10 @@ return {
                     }),
 
                     -- Python
-                    formatting.black.with({ extra_args = { "--fast" } }),
-                    diagnostics.flake8,
+                    -- diagnostics.flake8,
+                    formatting.black.with({ extra_args = { "--fast", "--preview" } }),
+                    formatting.ruff,
+                    diagnostics.ruff,
 
                     -- LUA
                     formatting.stylua.with({ "--config-path", vim.fn.expand("~/.config/stylua.toml") }),
