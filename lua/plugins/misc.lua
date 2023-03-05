@@ -169,6 +169,7 @@ return {
     {
         "folke/todo-comments.nvim",
         cmd = { "TodoTrouble", "TodoTelescope" },
+        event = { "BufReadPost", "BufNewFile" },
         keys = {
             { "<leader>gt", "<cmd>TodoTrouble<cr>", noremap = true, silent = true },
         },
