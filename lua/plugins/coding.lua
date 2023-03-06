@@ -163,6 +163,31 @@ return {
                 },
             }
         end,
+        config = function(_, opts)
+            local cmp = require("cmp")
+            cmp.setup(opts)
+
+            local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+            local handlers = require("nvim-autopairs.completion.handlers")
+
+            cmp.event:on(
+                "confirm_done",
+                cmp_autopairs.on_confirm_done({
+                    filetypes = {
+                        -- "*" is a alias to all filetypes
+                        ["*"] = {
+                            ["("] = {
+                                kind = {
+                                    cmp.lsp.CompletionItemKind.Function,
+                                    cmp.lsp.CompletionItemKind.Method,
+                                },
+                                handler = handlers["*"],
+                            },
+                        },
+                    },
+                })
+            )
+        end,
     },
     --: }}},
 
@@ -187,7 +212,7 @@ return {
     --: mini.pairs {{{
     {
         "echasnovski/mini.pairs",
-        -- event = "VeryLazy",
+        enabled = false,
         event = { "BufReadPost", "BufNewFile" },
         config = function()
             require("mini.pairs").setup({
@@ -200,4 +225,41 @@ return {
         end,
     },
     --: }}},
+
+    --: windwp/nvim-autopairs {{{
+    {
+        "windwp/nvim-autopairs",
+        event = { "BufReadPost", "BufNewFile" },
+        config = function()
+            local npairs = require("nvim-autopairs")
+            npairs.setup()
+
+            local Rule = require("nvim-autopairs.rule")
+
+            local brackets = { { "(", ")" }, { "[", "]" }, { "{", "}" } }
+            npairs.add_rules({
+                Rule(" ", " "):with_pair(function(opts)
+                    local pair = opts.line:sub(opts.col - 1, opts.col)
+                    return vim.tbl_contains({
+                        brackets[1][1] .. brackets[1][2],
+                        brackets[2][1] .. brackets[2][2],
+                        brackets[3][1] .. brackets[3][2],
+                    }, pair)
+                end),
+            })
+            for _, bracket in pairs(brackets) do
+                npairs.add_rules({
+                    Rule(bracket[1] .. " ", " " .. bracket[2])
+                        :with_pair(function()
+                            return false
+                        end)
+                        :with_move(function(opts)
+                            return opts.prev_char:match(".%" .. bracket[2]) ~= nil
+                        end)
+                        :use_key(bracket[2]),
+                })
+            end
+        end,
+    },
+    --: }}}
 }
