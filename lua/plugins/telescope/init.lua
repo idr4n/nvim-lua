@@ -4,7 +4,7 @@ return {
     event = "BufReadPost",
     keys = {
         { "<c-p>", "<cmd>Telescope find_files<cr>", noremap = true, silent = true },
-        -- { "<leader>r", "<cmd>Telescope live_grep<cr>", noremap = true, silent = true },
+        { "<leader>r", "<cmd>Telescope live_grep<cr>", noremap = true, silent = true },
         { "<leader>b", "<cmd>Telescope current_buffer_fuzzy_find<cr>", noremap = true, silent = true },
         { "<leader>l", "<cmd>Telescope resume<cr>", noremap = true, silent = true },
         {
