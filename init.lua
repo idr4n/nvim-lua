@@ -1,5 +1,1 @@
-require("config.lazy")
-require("config.options")
-require("config.mappings")
--- require("setup.lsp")
-require("config.commands")
+require("config")

@@ -12,10 +12,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.keymap.set("", "<Space>", "<Nop>")
-vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappings are correct
-vim.g.maplocalleader = " "
-
 -- Install your plugins here
 require("lazy").setup({
     spec = {
