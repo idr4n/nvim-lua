@@ -293,6 +293,9 @@ return {
                     on_yank = true,
                     timer = 70,
                 },
+                system_clipboard = {
+                    sync_with_ring = false,
+                },
                 picker = {
                     telescope = {
                         mappings = {
