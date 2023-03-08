@@ -271,7 +271,13 @@ return {
         cmd = { "YankyRingHistory", "YankyClearHistory" },
         keys = {
             -- { ",r", "<cmd>YankyRingHistory<cr>", noremap = true, silent = true },
-            { ",r", "<cmd>Telescope yank_history<cr>", noremap = true, silent = true },
+            -- { ",r", "<cmd>Telescope yank_history<cr>", noremap = true, silent = true },
+            {
+                ",r",
+                "<cmd>lua require('telescope').extensions.yank_history.yank_history({ initial_mode = 'normal' })<cr>",
+                noremap = true,
+                silent = true,
+            },
         },
         opts = function()
             require("telescope").load_extension("yank_history")
@@ -279,6 +285,9 @@ return {
             local mapping = require("yanky.telescope.mapping")
 
             return {
+                ring = {
+                    history_length = 50,
+                },
                 highlight = {
                     on_put = true,
                     on_yank = true,
