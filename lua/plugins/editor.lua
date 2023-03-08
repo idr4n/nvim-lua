@@ -153,26 +153,24 @@ return {
         event = "BufReadPre",
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = function()
-            -- define gitsigns colors
-            vim.cmd([[:highlight CustomSignsAdd guifg=#73DACA]])
-            vim.cmd([[:highlight CustomSignsChange guifg=#FF9E64]])
-            vim.cmd([[:highlight CustomSignsDelete guifg=#F7768E]])
+            -- redefine gitsigns colors
+            vim.cmd([[:highlight GitSignsAdd guifg=#73DACA]])
+            vim.cmd([[:highlight GitSignsChange guifg=#FF9E64]])
+            vim.cmd([[:highlight GitSignsDelete guifg=#F7768E]])
+
             return {
                 signcolumn = true,
                 numhl = false,
                 signs = {
-                    -- add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-                    -- change = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-                    -- delete = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-                    add = { hl = "CustomSignsAdd", text = "▍", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+                    add = { hl = "GitSignsAdd", text = "▍", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
                     change = {
-                        hl = "CustomSignsChange",
+                        hl = "GitSignsChange",
                         text = "▍",
                         numhl = "GitSignsChangeNr",
                         linehl = "GitSignsChangeLn",
                     },
                     delete = {
-                        hl = "CustomSignsDelete",
+                        hl = "GitSignsDelete",
                         text = "▁",
                         numhl = "GitSignsDeleteNr",
                         linehl = "GitSignsDeleteLn",
@@ -185,8 +183,7 @@ return {
                         linehl = "GitSignsDeleteLn",
                     },
                     changedelete = {
-                        -- hl = "GitSignsChange",
-                        hl = "CustomSignsDelete",
+                        hl = "GitSignsChange",
                         text = "▋",
                         numhl = "GitSignsChangeNr",
                         linehl = "GitSignsChangeLn",
