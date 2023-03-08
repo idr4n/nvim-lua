@@ -262,4 +262,49 @@ return {
         end,
     },
     --: }}}
+
+    --: yanky {{{
+    {
+        "gbprod/yanky.nvim",
+        -- enabled = false,
+        event = "BufReadPost",
+        cmd = { "YankyRingHistory", "YankyClearHistory" },
+        keys = {
+            -- { ",r", "<cmd>YankyRingHistory<cr>", noremap = true, silent = true },
+            { ",r", "<cmd>Telescope yank_history<cr>", noremap = true, silent = true },
+        },
+        opts = function()
+            require("telescope").load_extension("yank_history")
+            local utils = require("yanky.utils")
+            local mapping = require("yanky.telescope.mapping")
+
+            return {
+                highlight = {
+                    on_put = true,
+                    on_yank = true,
+                    timer = 70,
+                },
+                picker = {
+                    telescope = {
+                        mappings = {
+                            default = mapping.put("p"),
+                            i = {
+                                ["<c-p>"] = mapping.put("P"),
+                                ["<c-k>"] = nil,
+                                ["<c-x>"] = mapping.delete(),
+                                ["<c-r>"] = mapping.set_register(utils.get_default_register()),
+                            },
+                            n = {
+                                p = mapping.put("p"),
+                                P = mapping.put("P"),
+                                d = mapping.delete(),
+                                r = mapping.set_register(utils.get_default_register()),
+                            },
+                        },
+                    },
+                },
+            }
+        end,
+    },
+    --: }}}
 }
