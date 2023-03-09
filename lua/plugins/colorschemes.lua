@@ -6,8 +6,8 @@ return {
     --: tokyonight {{{
     {
         "folke/tokyonight.nvim",
-        lazy = duringDayTime,
-        priority = 1000,
+        -- lazy = duringDayTime,
+        -- priority = 1000,
         opts = function()
             return {
                 style = "moon",
@@ -33,9 +33,9 @@ return {
             require("tokyonight").setup(opts)
 
             -- Load the colorscheme
-            if not duringDayTime then
-                vim.cmd("colorscheme tokyonight")
-            end
+            -- if not duringDayTime then
+            --     vim.cmd("colorscheme tokyonight")
+            -- end
         end,
     },
     --: }}}
@@ -173,84 +173,100 @@ return {
     {
         "rose-pine/neovim",
         name = "rose-pine",
-        -- lazy = false,
-        -- priority = 1000,
-        opts = {
-            --- @usage 'main' | 'moon'
-            dark_variant = "moon",
-            bold_vert_split = false,
-            dim_nc_background = false,
-            disable_background = false,
-            disable_float_background = false,
-            disable_italics = false,
+        lazy = false,
+        priority = 1000,
+        opts = function()
+            return {
+                --- @usage 'main' | 'moon'
+                dark_variant = "moon",
+                bold_vert_split = false,
+                dim_nc_background = false,
+                disable_background = true,
+                disable_float_background = false,
+                disable_italics = false,
 
-            --- @usage string hex value or named color from rosepinetheme.com/palette
-            groups = {
-                background = "base",
-                panel = "surface",
-                border = "highlight_med",
-                comment = "muted",
-                link = "iris",
-                punctuation = "subtle",
+                --- @usage string hex value or named color from rosepinetheme.com/palette
+                groups = {
+                    background = "base",
+                    background_nc = "_experimental_nc",
+                    panel = "surface",
+                    panel_nc = "surface",
+                    border = "highlight_med",
+                    comment = "muted",
+                    link = "iris",
+                    punctuation = "subtle",
 
-                error = "love",
-                hint = "iris",
-                info = "foam",
-                warn = "gold",
+                    error = "love",
+                    hint = "iris",
+                    info = "foam",
+                    warn = "gold",
 
-                git_add = "pine",
-                git_rename = "foam",
+                    git_add = "pine",
+                    git_rename = "foam",
 
-                headings = {
-                    h1 = "iris",
-                    h2 = "foam",
-                    h3 = "rose",
-                    h4 = "gold",
-                    h5 = "pine",
-                    h6 = "foam",
+                    headings = {
+                        h1 = "iris",
+                        h2 = "foam",
+                        h3 = "rose",
+                        h4 = "gold",
+                        h5 = "pine",
+                        h6 = "foam",
+                    },
+                    -- or set all headings at once
+                    -- headings = 'subtle'
                 },
-                -- or set all headings at once
-                -- headings = 'subtle'
-            },
 
-            -- Change specific vim highlight groups
-            highlight_groups = {
-                IndentBlanklineChar = { fg = "overlay" },
-                -- IndentBlanklineChar = { fg = "highlight_med" },
-                -- CursorLine = { bg = "#302E45" },
-                Variable = { fg = "text", style = "NONE" },
-                TSVariable = { fg = "text", style = "NONE" },
-                ["@variable"] = { fg = "text", style = "NONE" },
-                Parameter = { fg = "iris", style = "NONE" },
-                TSParameter = { fg = "iris", style = "NONE" },
-                ["@parameter"] = { fg = "iris", style = "NONE" },
-                Property = { fg = "iris", style = "NONE" },
-                ["@property"] = { fg = "iris", style = "NONE" },
-                TSProperty = { fg = "iris", style = "NONE" },
-                Keyword = { fg = "pine", style = "italic" },
-                TSKeyword = { fg = "pine", style = "italic" },
-                ["@keyword"] = { fg = "pine", style = "italic" },
-                Function = { fg = "rose", style = "italic" },
-                TSFunction = { fg = "rose", style = "italic" },
-            },
-        },
-        -- config = function(_, opts)
-        --     require("rose-pine").setup(opts)
-        --     vim.cmd("set background=light")
-        --     vim.cmd("colorscheme rose-pine")
-        -- end,
+                -- Change specific vim highlight groups
+                highlight_groups = {
+                    CursorLine = { bg = "surface" },
+                    IndentBlanklineChar = { fg = "overlay" },
+                    -- IndentBlanklineChar = { fg = "highlight_med" },
+                    Variable = { fg = "text", italic = false },
+                    TSVariable = { fg = "text", italic = false },
+                    ["@variable"] = { fg = "text", italic = false },
+                    Parameter = { fg = "iris", italic = false },
+                    TSParameter = { fg = "iris", italic = false },
+                    ["@parameter"] = { fg = "iris", italic = false },
+                    Property = { fg = "iris", italic = false },
+                    ["@property"] = { fg = "iris", italic = false },
+                    TSProperty = { fg = "iris", italic = false },
+                    Keyword = { fg = "pine", italic = true },
+                    TSKeyword = { fg = "pine", italic = true },
+                    ["@keyword"] = { fg = "pine", italic = true },
+                    Function = { fg = "rose", italic = true },
+                    TSFunction = { fg = "rose", italic = true },
+
+                    -- nvim-telescope/telescope.nvim
+                    TelescopeBorder = { fg = "pine", bg = "none" },
+                    TelescopeMatching = { fg = "rose" },
+                    TelescopeNormal = { bg = "none" },
+                    TelescopePromptNormal = { bg = "none" },
+                    TelescopeSelection = { bg = "highlight_low" },
+                    TelescopeSelectionCaret = { bg = "highlight_low" },
+                },
+            }
+        end,
+        config = function(_, opts)
+            require("rose-pine").setup(opts)
+            if duringDayTime then
+                vim.o.background = "light"
+            else
+                vim.o.background = "dark"
+            end
+            vim.cmd("colorscheme rose-pine")
+        end,
     },
     --: }}}
 
     --: github {{{
     {
         "projekt0n/github-nvim-theme",
-        lazy = not duringDayTime,
-        priority = 1000,
-        init = function()
-            vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "#F6F8FA" })
-            vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "#F6F8FA" })
-        end,
+        -- lazy = not duringDayTime,
+        -- priority = 1000,
+        -- init = function()
+        --     vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "#F6F8FA" })
+        --     vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "#F6F8FA" })
+        -- end,
         opts = {
             theme_style = "light",
             function_style = "italic",
@@ -262,9 +278,9 @@ return {
                 }
             end,
         },
-        config = function(_, opts)
-            require("github-theme").setup(opts)
-        end,
+        -- config = function(_, opts)
+        --     require("github-theme").setup(opts)
+        -- end,
     },
     --: }}}
 }
