@@ -97,8 +97,8 @@ return {
     --: catppuccin {{{
     {
         "catppuccin/nvim",
-        lazy = duringDayTime,
-        priority = 1000,
+        -- lazy = duringDayTime,
+        -- priority = 1000,
         name = "catppuccin",
         opts = function()
             local ucolors = require("catppuccin.utils.colors")
@@ -136,21 +136,14 @@ return {
                     TSNamespace = { fg = cp.blue, style = {} },
                     VertSplit = { fg = "#15161e" },
                 },
-                compile = {
-                    -- :CatppuccinCompile " Create/update the compile file
-                    -- :CatppuccinClean " Delete compiled file
-                    -- :CatppuccinStatus " Compile status
-                    enabled = false,
-                    path = vim.fn.stdpath("cache") .. "/catppuccin",
-                },
             }
         end,
         config = function(_, opts)
             require("catppuccin").setup(opts)
 
-            if not duringDayTime then
-                vim.cmd([[colorscheme catppuccin-macchiato]])
-            end
+            -- if not duringDayTime then
+            --     vim.cmd([[colorscheme catppuccin-macchiato]])
+            -- end
         end,
     },
     --: }}}
@@ -266,6 +259,20 @@ return {
         },
         config = function(_, opts)
             require("github-theme").setup(opts)
+        end,
+    },
+    --: }}}
+
+    --: oxocarbon{{{
+    {
+        "nyoom-engineering/oxocarbon.nvim",
+        lazy = duringDayTime,
+        priority = 1000,
+        config = function()
+            if not duringDayTime then
+                vim.o.background = "dark"
+            end
+            vim.cmd.colorscheme("oxocarbon")
         end,
     },
     --: }}}
