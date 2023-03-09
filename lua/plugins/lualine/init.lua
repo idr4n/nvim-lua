@@ -274,12 +274,12 @@ local charcode = {
 }
 
 -- stylua: ignore
-local noice = {
-    function() return require("noice").api.status.command.get() end,
-    cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-    color = fg("Statement"),
-    padding = 1,
-}
+-- local noice = {
+--     function() return require("noice").api.status.command.get() end,
+--     cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
+--     color = fg("Statement"),
+--     padding = 1,
+-- }
 
 return {
     "nvim-lualine/lualine.nvim",
@@ -303,7 +303,7 @@ return {
                 lualine_b = { branch },
                 lualine_c = { getDir, fileIcon, filename, diff, current_signature },
                 -- lualine_x = { noice, diagnostics, language_server, getWords, charcode, filetype },
-                lualine_x = { noice, diagnostics, getWords, charcode, filetype },
+                lualine_x = { diagnostics, getWords, charcode, filetype },
                 lualine_y = { location },
                 lualine_z = { progress },
             },

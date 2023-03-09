@@ -29,6 +29,7 @@ return {
     --: notify {{{
     {
         "rcarriga/nvim-notify",
+        enabled = false,
         opts = {
             timeout = 3000,
             background_colour = "#000000",
@@ -45,6 +46,7 @@ return {
     --: noice {{{
     {
         "folke/noice.nvim",
+        enabled = false,
         event = "VeryLazy",
         dependencies = {
             "rcarriga/nvim-notify",

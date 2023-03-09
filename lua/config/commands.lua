@@ -31,7 +31,7 @@ keymap("n", "<leader>;", ":RevealInFinder<cr>", opts)
 -- Code Run Script
 command("CodeRun", function()
     vim.cmd("execute '!~/scripts/code_run \"%\"'")
-    require("noice").cmd("last")
+    -- require("noice").cmd("last")
 end, {})
 keymap("n", "<leader>cr", ":CodeRun<cr>", opts)
 
