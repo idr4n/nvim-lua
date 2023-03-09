@@ -218,7 +218,7 @@ return {
 
                 -- Change specific vim highlight groups
                 highlight_groups = {
-                    CursorLine = { bg = "surface" },
+                    -- CursorLine = { bg = "surface" },
                     IndentBlanklineChar = { fg = "overlay" },
                     -- IndentBlanklineChar = { fg = "highlight_med" },
                     Variable = { fg = "text", italic = false },
@@ -241,8 +241,8 @@ return {
                     TelescopeMatching = { fg = "rose" },
                     TelescopeNormal = { bg = "none" },
                     TelescopePromptNormal = { bg = "none" },
-                    TelescopeSelection = { bg = "highlight_low" },
-                    TelescopeSelectionCaret = { bg = "highlight_low" },
+                    -- TelescopeSelection = { bg = "highlight_low" },
+                    -- TelescopeSelectionCaret = { bg = "highlight_low" },
                 },
             }
         end,

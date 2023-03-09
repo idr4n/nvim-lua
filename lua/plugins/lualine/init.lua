@@ -291,7 +291,8 @@ return {
             options = {
                 globalstatus = true,
                 icons_enabled = true,
-                theme = require("plugins.lualine.my_theme").setup(),
+                -- theme = require("plugins.lualine.my_theme").setup(),
+                theme = "auto",
                 component_separators = { left = "", right = "" },
                 section_separators = { left = "", right = "" },
                 disabled_filetypes = { "alpha", "dashboard", "lazy" },
