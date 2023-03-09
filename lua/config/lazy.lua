@@ -19,6 +19,10 @@ require("lazy").setup({
     },
     defaults = { lazy = true },
     install = { colorscheme = { "tokyonight" } },
+    change_detection = {
+        enabled = true,
+        notify = false,
+    },
     performance = {
         cache = {
             enabled = true,
