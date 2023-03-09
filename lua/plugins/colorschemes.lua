@@ -43,26 +43,17 @@ return {
     --: zenbones{{{
     {
         "mcchrish/zenbones.nvim",
-        lazy = false,
-        priority = 1000,
+        -- lazy = not duringDayTime,
+        -- priority = 1000,
         -- dependencies = "rktjmp/lush.nvim",
         config = function()
             vim.g.zenbones_compat = 1
             -- vim.g.zenbones = { lightness = "default", darkness = "stark", lighten_line_nr = 30, transparent_background = true }
 
-            if duringDayTime then
-                vim.o.background = "light"
-                -- vim.env.BAT_THEME = "Monokai Extended Light"
-                -- vim.env.BAT_THEME = "gruvbox-light"
-                vim.env.BAT_THEME = "Nord"
-            else
-                vim.o.background = "dark"
-                -- vim.cmd("colorscheme nordbones")
-                -- vim.cmd("colorscheme tokyobones")
-                -- vim.env.BAT_THEME = "gruvbox-dark"
-                vim.env.BAT_THEME = "Nord"
-            end
-            vim.cmd("colorscheme zenbones")
+            -- if duringDayTime then
+            --     vim.o.background = "light"
+            --     vim.cmd("colorscheme zenbones")
+            -- end
         end,
     },
     --: }}}
@@ -106,6 +97,8 @@ return {
     --: catppuccin {{{
     {
         "catppuccin/nvim",
+        lazy = duringDayTime,
+        priority = 1000,
         name = "catppuccin",
         opts = function()
             local ucolors = require("catppuccin.utils.colors")
@@ -152,20 +145,13 @@ return {
                 },
             }
         end,
-        -- config = function(_, opts)
-        --  require("catppuccin").setup(opts)
-        --
-        --  if duringDayTime then
-        --      -- vim.cmd([[colorscheme catppuccin-macchiato]])
-        --      vim.cmd([[colorscheme catppuccin-frappe]])
-        --  else
-        --      vim.cmd([[colorscheme catppuccin-macchiato]])
-        --      -- vim.cmd([[colorscheme catppuccin-frappe]])
-        --  end
-        --
-        --  vim.cmd([[colorscheme catppuccin-frappe]])
-        --  vim.cmd([[colorscheme catppuccin-macchiato]])
-        -- end,
+        config = function(_, opts)
+            require("catppuccin").setup(opts)
+
+            if not duringDayTime then
+                vim.cmd([[colorscheme catppuccin-macchiato]])
+            end
+        end,
     },
     --: }}}
 
@@ -173,8 +159,8 @@ return {
     {
         "rose-pine/neovim",
         name = "rose-pine",
-        lazy = false,
-        priority = 1000,
+        -- lazy = false,
+        -- priority = 1000,
         opts = function()
             return {
                 --- @usage 'main' | 'moon'
@@ -248,12 +234,12 @@ return {
         end,
         config = function(_, opts)
             require("rose-pine").setup(opts)
-            if duringDayTime then
-                vim.o.background = "light"
-            else
-                vim.o.background = "dark"
-            end
-            vim.cmd("colorscheme rose-pine")
+            -- if duringDayTime then
+            --     vim.o.background = "light"
+            -- else
+            --     vim.o.background = "dark"
+            -- end
+            -- vim.cmd("colorscheme rose-pine")
         end,
     },
     --: }}}
@@ -261,12 +247,12 @@ return {
     --: github {{{
     {
         "projekt0n/github-nvim-theme",
-        -- lazy = not duringDayTime,
-        -- priority = 1000,
-        -- init = function()
-        --     vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "#F6F8FA" })
-        --     vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "#F6F8FA" })
-        -- end,
+        lazy = not duringDayTime,
+        priority = 1000,
+        init = function()
+            vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "#F6F8FA" })
+            vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "#F6F8FA" })
+        end,
         opts = {
             theme_style = "light",
             function_style = "italic",
@@ -278,9 +264,9 @@ return {
                 }
             end,
         },
-        -- config = function(_, opts)
-        --     require("github-theme").setup(opts)
-        -- end,
+        config = function(_, opts)
+            require("github-theme").setup(opts)
+        end,
     },
     --: }}}
 }
