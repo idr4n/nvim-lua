@@ -43,26 +43,26 @@ return {
     --: zenbones{{{
     {
         "mcchrish/zenbones.nvim",
-        -- lazy = false,
-        -- priority = 1000,
-        dependencies = "rktjmp/lush.nvim",
+        lazy = false,
+        priority = 1000,
+        -- dependencies = "rktjmp/lush.nvim",
         config = function()
-            vim.g.zenbones =
-                { lightness = "default", darkness = "stark", lighten_line_nr = 30, transparent_background = true }
+            vim.g.zenbones_compat = 1
+            -- vim.g.zenbones = { lightness = "default", darkness = "stark", lighten_line_nr = 30, transparent_background = true }
 
             if duringDayTime then
-                -- vim.cmd("set background=light")
-                -- vim.cmd("colorscheme zenbones")
+                vim.o.background = "light"
                 -- vim.env.BAT_THEME = "Monokai Extended Light"
                 -- vim.env.BAT_THEME = "gruvbox-light"
                 vim.env.BAT_THEME = "Nord"
             else
-                -- vim.cmd("set background=dark")
-                -- vim.cmd("colorscheme zenbones")
+                vim.o.background = "dark"
                 -- vim.cmd("colorscheme nordbones")
+                -- vim.cmd("colorscheme tokyobones")
                 -- vim.env.BAT_THEME = "gruvbox-dark"
                 vim.env.BAT_THEME = "Nord"
             end
+            vim.cmd("colorscheme zenbones")
         end,
     },
     --: }}}
