@@ -21,6 +21,7 @@ keymap("i", "jk", "<ESC>", opts)
 keymap("i", "<C-a>", "<Home>", opts)
 -- keymap("i", "<C-e>", "<C-O>$", opts)
 keymap("i", "<C-e>", "<End>", opts)
+keymap("i", "<C-f>", "<C-O>zt", opts)
 --: }}}
 
 --: Move up and down with wrapped lines {{{
@@ -30,7 +31,6 @@ keymap("n", "k", "gk", opts)
 
 --: Quicksave command {{{
 vim.keymap.set({ "n", "i", "v", "s" }, "<C-s>", "<cmd>w<CR>")
-vim.keymap.set({ "n", "i", "v", "s" }, "<C-f>", "<cmd>w<CR>")
 --: }}}
 
 --: Quit current window {{{
