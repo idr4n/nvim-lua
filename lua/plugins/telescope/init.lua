@@ -29,7 +29,12 @@ return {
         { "<leader>D", "<cmd>Telescope diagnostics<cr>", noremap = true, silent = true },
         { "<leader>ts", "<cmd>Telescope luasnip<cr>", noremap = true, silent = true },
         { "<leader>gr", "<cmd>Telescope registers<cr>", noremap = true, silent = true },
-        { "<leader>gj", "<cmd>Telescope jumplist<cr>", noremap = true, silent = true },
+        {
+            "<leader>gj",
+            "<cmd>lua require('telescope.builtin').jumplist({ initial_mode = 'normal' })<cr>",
+            noremap = true,
+            silent = true,
+        },
         {
             "<leader>fk",
             "<cmd>lua require('telescope.builtin').keymaps({ layout_config = { width = 0.9, height = 0.5 } })<cr>",
@@ -43,6 +48,7 @@ return {
             noremap = true,
             silent = true,
         },
+        { ",t", "<cmd>Telescope undo<cr>", noremap = true, silent = true },
     },
     dependencies = {
         "nvim-lua/popup.nvim",
@@ -53,6 +59,7 @@ return {
             module = "telescope._extensions.luasnip", -- if you wish to lazy-load
         },
         { "nvim-telescope/telescope-ui-select.nvim" },
+        "debugloop/telescope-undo.nvim",
     },
     opts = function()
         local actions = require("telescope.actions")
@@ -221,6 +228,20 @@ return {
                     -- 	},
                     require("telescope.themes").get_cursor(),
                 },
+                undo = {
+                    mappings = {
+                        i = {
+                            ["<cr>"] = require("telescope-undo.actions").yank_additions,
+                            ["<s-cr>"] = require("telescope-undo.actions").yank_deletions,
+                            ["<c-r>"] = require("telescope-undo.actions").restore,
+                        },
+                        n = {
+                            ["<cr>"] = require("telescope-undo.actions").yank_additions,
+                            ["<s-cr>"] = require("telescope-undo.actions").yank_deletions,
+                            ["<c-r>"] = require("telescope-undo.actions").restore,
+                        },
+                    },
+                },
             },
         }
     end,
@@ -230,5 +251,6 @@ return {
         telescope.load_extension("fzf")
         telescope.load_extension("luasnip")
         telescope.load_extension("ui-select")
+        telescope.load_extension("undo")
     end,
 }
