@@ -15,18 +15,20 @@ opt.conceallevel = 0 -- so that `` is visible in markdown files
 -- opt.concealcursor = "nc" -- conceal in normal/command mode (not in insert/visual)
 opt.cursorline = true -- highlight the current line
 opt.expandtab = true -- convert tabs to spaces
+opt.foldcolumn = "1"
 opt.foldmethod = "marker"
 -- opt.guicursor = "" -- no thin cursor on insert mode
-opt.hlsearch = false -- highlight all matches on previous search pattern
+opt.hlsearch = true -- highlight all matches on previous search pattern
 opt.incsearch = true
 opt.ignorecase = true -- ignore case in search patterns
 opt.linebreak = true -- Break lines in spaces not in the middle of a word
 opt.mouse = "a" -- allow the mouse to be used in neovim
-opt.number = true -- set numbered lines
+opt.number = false -- set numbered lines
 opt.pumheight = 10 -- pop up menu height
-opt.relativenumber = true -- set relative numbered lines
+opt.relativenumber = false -- set relative numbered lines
 opt.scrolloff = 8 -- is one of my fav
 opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
+opt.showbreak = "↪ "
 opt.showmode = true -- show -- INSERT --
 opt.sidescrolloff = 8 -- the same as scrolloff but horizontally
 opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
@@ -47,6 +49,13 @@ opt.nrformats:append("alpha") -- increments letters sequences as well with <c-a>
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.cmd([[set iskeyword+=-]])
+
+-- fill and list chars
+vim.o.fillchars = [[msgsep: ,eob: ,horiz: ,vert: ,diff:╱,fold: ,foldopen:,foldsep: ,foldclose:,]]
+-- vim.o.fillchars = [[msgsep: ,eob: ,horiz: ,vert: ,diff:╱,fold: ,foldopen:,foldclose:,]]
+vim.o.listchars = [[tab:──,trail:·,nbsp:␣,precedes:«,extends:»,]]
+
+opt.statuscolumn = "%C%s "
 
 -- Format
 vim.cmd([[
@@ -82,12 +91,10 @@ end
 
 local function getWords()
     if vim.bo.filetype == "md" or vim.bo.filetype == "txt" or vim.bo.filetype == "markdown" then
-        if vim.fn.wordcount().visual_words == 1 then
-            return tostring(vim.fn.wordcount().visual_words) .. " word"
-        elseif not (vim.fn.wordcount().visual_words == nil) then
-            return tostring(vim.fn.wordcount().visual_words) .. " words"
+        if not (vim.fn.wordcount().visual_words == nil) then
+            return "%#Normal#" .. " " .. tostring(vim.fn.wordcount().visual_words) .. " "
         else
-            return tostring(vim.fn.wordcount().words) .. " words"
+            return "%#Normal#" .. " " .. tostring(vim.fn.wordcount().words) .. " "
         end
     else
         return ""
@@ -97,45 +104,142 @@ end
 -- GitChanges = ""
 local function getGitChanges()
     local gitsigns = vim.b.gitsigns_status_dict
-    -- local git_icon = "   "
-    -- local git_icon = "   "
-    local git_icon = "   "
+    local git_icon = "  "
     local changes = 0
-    local head = ""
     local status = ""
     if gitsigns then
-        head = gitsigns.head
         changes = (gitsigns.added or 0) + (gitsigns.changed or 0) + (gitsigns.removed or 0)
     end
-    if #head > 0 or changes > 0 then
-        status = git_icon
-        if head ~= "master" then
-            status = string.format("%s%s ", status, head)
-        end
-        if changes > 0 then
-            status = string.format("%s%d", status, changes)
-        end
-
-        -- status = string.format("%s%s", status, gitChangedFiles)
+    if changes > 0 then
+        status = string.format("%s%d", git_icon, changes)
     end
-    return string.format("%s  ", status)
+    return status
 end
 
 -- vim.o.statusline = "%f %{&modified?'●':''}%r%h %= %l,%c     %{fnamemodify(getcwd(), ':p:h:t')}   %3.3p%%"
 
+local modes = {
+    n = "RW",
+    no = "RO",
+    v = "**",
+    V = "**",
+    ["\022"] = "**",
+    s = "S",
+    S = "SL",
+    ["\019"] = "SB",
+    i = "**",
+    ic = "**",
+    R = "RA",
+    Rv = "RV",
+    c = "VIEX",
+    cv = "VIEX",
+    ce = "EX",
+    r = "r",
+    rm = "r",
+    ["r?"] = "r",
+    ["!"] = "!",
+    t = "",
+}
+
+local function color()
+    local mode = vim.api.nvim_get_mode().mode
+    local mode_color = "%#Normal#"
+    if mode == "n" then
+        mode_color = "%#StatusNormal#"
+    elseif (mode == "i") or (mode == "ic") then
+        mode_color = "%#StatusInsert#"
+    elseif ((mode == "v") or (mode == "V")) or (mode == "\22") then
+        mode_color = "%#StatusVisual#"
+    elseif mode == "R" then
+        mode_color = "%#StatusReplace#"
+    elseif mode == "c" then
+        mode_color = "%#StatusCommand#"
+    elseif mode == "t" then
+        mode_color = "%#StatusTerminal#"
+    end
+    return mode_color
+end
+
+local function get_fileinfo()
+    local filename = (((vim.fn.expand("%") == "") and " nyoom-nvim ") or vim.fn.expand("%:t"))
+    if filename ~= " nyoom-nvim " then
+        filename = (" " .. filename)
+    end
+    return ("%#Normal#" .. filename .. "%#NormalNC#")
+end
+
+local function get_git_status()
+    local branch = (vim.b.gitsigns_status_dict or { head = "" })
+    local is_head_empty = (branch.head ~= "")
+    return ((is_head_empty and string.format("(λ • #%s%s) ", (branch.head or ""), getGitChanges())) or "")
+end
+
+local function get_bufnr()
+    return ("%#Comment#" .. vim.api.nvim_get_current_buf())
+end
+
+local function get_filetype()
+    return ("%#NormalNC#" .. vim.bo.filetype)
+end
+
+local function get_dir()
+    return ("%#NormalNC#" .. " %{fnamemodify(getcwd(), ':p:h:t')}")
+end
+
+local function get_lsp_diagnostic()
+    if not rawget(vim, "lsp") then
+        return ""
+    else
+    end
+    local function get_severity(s)
+        return #vim.diagnostic.get(0, { severity = s })
+    end
+    local result = {
+        errors = get_severity(vim.diagnostic.severity.ERROR),
+        warnings = get_severity(vim.diagnostic.severity.WARN),
+        info = get_severity(vim.diagnostic.severity.INFO),
+        hints = get_severity(vim.diagnostic.severity.HINT),
+    }
+    return string.format(
+        " %%#StatusLineDiagnosticWarn#%s %%#StatusLineDiagnosticError#%s ",
+        (result.warnings or 0),
+        (result.errors or 0)
+    )
+end
+
+local function get_searchcount()
+    if vim.v.hlsearch == 0 then
+        return "%#Normal# %2.3p%% %l:%c "
+    end
+    local ok, count = pcall(vim.fn.searchcount, { recompute = true })
+    if (not ok or (count.current == nil)) or (count.total == 0) then
+        return ""
+    end
+    if count.incomplete == 1 then
+        return "?/?"
+    end
+    local too_many = (">%d"):format(count.maxcount)
+    local total = (((count.total > count.maxcount) and too_many) or count.total)
+    return ("%#Normal#" .. (" %s matches "):format(total))
+end
+
 function Status_line()
     local statusline = ""
-    statusline = statusline .. "%f %{&modified?'●':''}%r%h"
-    -- statusline = statusline .. getGitChanges()
-    -- statusline = statusline .. "%= %l,%c     %{fnamemodify(getcwd(), ':p:h:t')}   %3.3p%%"
-    statusline = statusline .. "%=" .. getWords() .. "    %l,%c  "
-    statusline = statusline .. getGitChanges()
-    statusline = statusline .. "  %{fnamemodify(getcwd(), ':p:h:t')}   %3.3p%%"
+    statusline = color() .. string.format(" %s ", modes[vim.api.nvim_get_mode().mode]):upper()
+    statusline = statusline .. get_fileinfo() .. "%{&modified?' ●':''}%r%h "
+    statusline = statusline .. get_git_status()
+    statusline = statusline .. get_bufnr()
+    statusline = statusline .. "%="
+    statusline = statusline .. get_lsp_diagnostic()
+    statusline = statusline .. getWords()
+    statusline = statusline .. get_filetype()
+    -- statusline = statusline .. get_dir()
+    statusline = statusline .. get_searchcount()
 
     return statusline
 end
 
--- vim.o.statusline = "%!v:lua.Status_line()"
+vim.o.statusline = "%!v:lua.Status_line()"
 
 -- Explorer (netrw)
 vim.g.netrw_browse_split = 0
