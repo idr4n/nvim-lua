@@ -21,7 +21,9 @@ return {
     --: nvim-cmp {{{
     {
         "hrsh7th/nvim-cmp",
-        event = "InsertEnter",
+        -- event = "InsertEnter",
+        -- event = { "InsertEnter", "BufReadPost" },
+        event = { "InsertEnter", "CmdLineEnter" },
         dependencies = {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
@@ -54,6 +56,22 @@ return {
                     { "│", hl_name },
                 }
             end
+
+            cmp.setup.cmdline("/", {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = {
+                    { name = "buffer" },
+                },
+            })
+
+            cmp.setup.cmdline(":", {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = cmp.config.sources({
+                    { name = "path" },
+                }, {
+                    { name = "cmdline" },
+                }),
+            })
 
             return {
                 snippet = {
@@ -149,12 +167,15 @@ return {
                 },
                 window = {
                     completion = {
-                        border = border("CmpBorder"),
-                        winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
+                        -- border = border("CmpBorder"),
+                        -- winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
+                        winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,FloatBorder:Pmenu,Search:None",
+                        side_padding = 0,
                     },
                     documentation = {
                         -- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-                        border = border("CmpDocBorder"),
+                        -- border = border("CmpDocBorder"),
+                        border = "solid",
                         winhighlight = "Normal:CmpPmenu",
                     },
                 },
