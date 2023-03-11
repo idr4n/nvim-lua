@@ -10,6 +10,8 @@ return {
             -- context_char = "│",
             -- show_current_context = true,
             -- show_current_context_start = true,
+            show_first_indent_level = false,
+            show_trailing_blankline_indent = false,
             filetype_exclude = {
                 "alpha",
                 "NvimTree",
@@ -46,11 +48,11 @@ return {
     --: noice {{{
     {
         "folke/noice.nvim",
-        enabled = false,
+        enabled = true,
         event = "VeryLazy",
-        dependencies = {
-            "rcarriga/nvim-notify",
-        },
+        -- dependencies = {
+        --     "rcarriga/nvim-notify",
+        -- },
         -- stylua: ignore
         keys = {
             { "<leader>nl", function() require("noice").cmd("last") end, desc = "Noice Last Message" },
@@ -72,29 +74,72 @@ return {
                 override = {
                     ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
                     ["vim.lsp.util.stylize_markdown"] = true,
+                    ["cmp.entry.get_documentation"] = true,
                 },
                 hover = { enabled = false },
                 signature = { enabled = false },
                 progress = { enabled = false },
             },
-            presets = {
-                long_message_to_split = true,
-                command_palette = {
-                    views = {
-                        cmdline_popup = {
-                            position = {
-                                row = 6,
-                            },
-                        },
-                        popupmenu = {
-                            position = {
-                                row = 9,
-                            },
+            cmdline = {
+                format = {
+                    cmdline = { pattern = "^:", icon = " ", lang = "vim" },
+                    search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
+                    search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
+                    filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
+                    lua = { pattern = "^:%s*lua%s+", icon = "", lang = "lua" },
+                    help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
+                    input = {},
+                },
+                opts = {
+                    win_options = {
+                        winhighlight = {
+                            Normal = "NormalFloat",
+                            FloatBorder = "FloatBorder",
                         },
                     },
                 },
             },
+            views = {
+                cmdline_popup = {
+                    position = { row = 0, col = "50%" },
+                    size = { width = "98%" },
+                },
+            },
+            popupmenu = { backend = "cmp" },
+            presets = {
+                long_message_to_split = true,
+                lsp_doc_border = true,
+                -- command_palette = {
+                --     views = {
+                --         cmdline_popup = {
+                --             position = {
+                --                 row = 6,
+                --             },
+                --         },
+                --         popupmenu = {
+                --             position = {
+                --                 row = 9,
+                --             },
+                --         },
+                --     },
+                -- },
+            },
         },
     },
     --: }}},
+
+    --: modes.nvim {{{
+    {
+        "mvllow/modes.nvim",
+        event = "InsertEnter",
+        opts = {
+            colors = {
+                copy = "#42be65",
+                delete = "#ff7eb6",
+                insert = "#be95ff",
+                visual = "#82cfff",
+            },
+        },
+    },
+    --: }}}
 }
