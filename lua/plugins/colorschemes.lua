@@ -240,8 +240,8 @@ return {
     --: github {{{
     {
         "projekt0n/github-nvim-theme",
-        lazy = not duringDayTime,
-        priority = 1000,
+        -- lazy = not duringDayTime,
+        -- priority = 1000,
         opts = {
             theme_style = "light",
             function_style = "italic",
@@ -262,10 +262,14 @@ return {
     --: oxocarbon{{{
     {
         "nyoom-engineering/oxocarbon.nvim",
-        lazy = duringDayTime,
+        -- lazy = duringDayTime,
+        lazy = false,
         priority = 1000,
         config = function()
-            if not duringDayTime then
+            if duringDayTime then
+                vim.o.background = "dark"
+                -- vim.o.background = "light"
+            else
                 vim.o.background = "dark"
             end
             vim.cmd.colorscheme("oxocarbon")

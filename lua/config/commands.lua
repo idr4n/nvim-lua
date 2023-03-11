@@ -31,7 +31,7 @@ keymap("n", "<leader>;", ":RevealInFinder<cr>", opts)
 -- Code Run Script
 command("CodeRun", function()
     vim.cmd("execute '!~/scripts/code_run \"%\"'")
-    -- require("noice").cmd("last")
+    require("noice").cmd("last")
 end, {})
 keymap("n", "<leader>cr", ":CodeRun<cr>", opts)
 
@@ -187,6 +187,8 @@ local function saveDir()
     writeFileSync(path, "return " .. new_dirs_str)
     writeFileSync(path_txt, new_dirs_str_txt)
 end
+
+command("SaveDir", saveDir, {})
 
 vim.api.nvim_create_augroup("OnVimEnter", { clear = true })
 vim.api.nvim_create_autocmd("VimEnter", {

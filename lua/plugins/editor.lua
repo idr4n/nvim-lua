@@ -154,37 +154,41 @@ return {
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = function()
             -- redefine gitsigns colors
-            vim.cmd([[:highlight GitSignsAdd guifg=#73DACA]])
-            vim.cmd([[:highlight GitSignsChange guifg=#FF9E64]])
-            vim.cmd([[:highlight GitSignsDelete guifg=#F7768E]])
+            -- vim.cmd([[:highlight GitSignsAdd guifg=#73DACA]])
+            -- vim.cmd([[:highlight GitSignsChange guifg=#FF9E64]])
+            -- vim.cmd([[:highlight GitSignsDelete guifg=#F7768E]])
 
             return {
                 signcolumn = true,
                 numhl = false,
                 signs = {
-                    add = { hl = "GitSignsAdd", text = "▍", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+                    -- add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+                    add = { hl = "GitSignsAdd", text = "│", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
                     change = {
                         hl = "GitSignsChange",
-                        text = "▍",
+                        -- text = "▎",
+                        text = "│",
                         numhl = "GitSignsChangeNr",
                         linehl = "GitSignsChangeLn",
                     },
                     delete = {
                         hl = "GitSignsDelete",
-                        text = "▁",
+                        -- text = "▁",
+                        text = "",
                         numhl = "GitSignsDeleteNr",
                         linehl = "GitSignsDeleteLn",
                     },
                     topdelete = {
                         hl = "GitSignsDelete",
                         -- text = "契",
-                        text = "▁",
+                        text = "~",
                         numhl = "GitSignsDeleteNr",
                         linehl = "GitSignsDeleteLn",
                     },
                     changedelete = {
                         hl = "GitSignsChange",
-                        text = "▋",
+                        -- text = "▍",
+                        text = "‾",
                         numhl = "GitSignsChangeNr",
                         linehl = "GitSignsChangeLn",
                     },

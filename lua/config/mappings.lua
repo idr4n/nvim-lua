@@ -22,11 +22,12 @@ keymap("i", "<C-a>", "<Home>", opts)
 -- keymap("i", "<C-e>", "<C-O>$", opts)
 keymap("i", "<C-e>", "<End>", opts)
 keymap("i", "<C-f>", "<C-O>zt", opts)
+keymap("n", "<C-f>", "zt", opts)
 --: }}}
 
 --: Move up and down with wrapped lines {{{
-keymap("n", "j", "gj", opts)
-keymap("n", "k", "gk", opts)
+-- keymap("n", "j", "gj", opts)
+-- keymap("n", "k", "gk", opts)
 --: }}}
 
 --: Quicksave command {{{
@@ -129,6 +130,7 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 --: Clear search highlight {{{
 keymap("n", "<leader>,", "<cmd>nohlsearch|diffupdate|normal! <C-L><CR>", opts)
+keymap("n", "<esc>", "<esc><cmd>noh<cr>", { noremap = true, silent = true, desc = "No highlight escape" })
 --: }}}
 
 --: home row goto end and start of line (same as in Helix editor) {{{

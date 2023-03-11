@@ -107,7 +107,7 @@ return {
                         end,
                         -- height = 0.7,
                         height = function(_, _, max_lines)
-                            return math.min(max_lines, 30)
+                            return math.min(max_lines, 35)
                         end,
                         prompt_position = "top",
                         preview_width = 0.54,
