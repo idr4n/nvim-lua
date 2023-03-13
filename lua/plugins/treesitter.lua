@@ -74,6 +74,7 @@ return {
                 "json",
                 "latex",
                 "lua",
+                "luap",
                 "markdown",
                 "python",
                 "regex",
