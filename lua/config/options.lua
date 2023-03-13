@@ -15,7 +15,7 @@ opt.conceallevel = 0 -- so that `` is visible in markdown files
 -- opt.concealcursor = "nc" -- conceal in normal/command mode (not in insert/visual)
 opt.cursorline = true -- highlight the current line
 opt.expandtab = true -- convert tabs to spaces
-opt.foldcolumn = "1"
+-- opt.foldcolumn = "1"
 opt.foldmethod = "marker"
 -- opt.guicursor = "" -- no thin cursor on insert mode
 opt.hlsearch = true -- highlight all matches on previous search pattern
@@ -23,9 +23,9 @@ opt.incsearch = true
 opt.ignorecase = true -- ignore case in search patterns
 opt.linebreak = true -- Break lines in spaces not in the middle of a word
 opt.mouse = "a" -- allow the mouse to be used in neovim
-opt.number = false -- set numbered lines
+opt.number = true -- set numbered lines
 opt.pumheight = 10 -- pop up menu height
-opt.relativenumber = false -- set relative numbered lines
+opt.relativenumber = true -- set relative numbered lines
 opt.scrolloff = 8 -- is one of my fav
 opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
 -- opt.showbreak = "↪ "
@@ -55,7 +55,7 @@ vim.o.fillchars = [[msgsep: ,eob: ,horiz: ,vert: ,diff:╱,fold: ,foldopen:,f
 -- vim.o.fillchars = [[msgsep: ,eob: ,horiz: ,vert: ,diff:╱,fold: ,foldopen:,foldclose:,]]
 vim.o.listchars = [[tab:──,trail:·,nbsp:␣,precedes:«,extends:»,]]
 
-opt.statuscolumn = "%C%s "
+-- opt.statuscolumn = "%C%s "
 
 -- Format
 vim.cmd([[
@@ -161,11 +161,11 @@ local function color()
 end
 
 local function get_fileinfo()
-    local filename = (((vim.fn.expand("%") == "") and " nyoom-nvim ") or vim.fn.expand("%:t"))
+    local filename = (((vim.fn.expand("%") == "") and " nyoom-nvim ") or vim.fn.expand("%f"))
     if filename ~= " nyoom-nvim " then
         filename = (" " .. filename)
     end
-    return ("%#Normal#" .. filename .. "%#NormalNC#")
+    return ("%#Normal#" .. filename .. "%#NormalNC#" .. "%{&modified?' ●':''}%r%h ")
 end
 
 local function get_git_status()
@@ -226,7 +226,7 @@ end
 function Status_line()
     local statusline = ""
     statusline = color() .. string.format(" %s ", modes[vim.api.nvim_get_mode().mode]):upper()
-    statusline = statusline .. get_fileinfo() .. "%{&modified?' ●':''}%r%h "
+    statusline = statusline .. get_fileinfo()
     statusline = statusline .. get_git_status()
     statusline = statusline .. get_bufnr()
     statusline = statusline .. "%="
