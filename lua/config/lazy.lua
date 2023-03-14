@@ -18,7 +18,7 @@ require("lazy").setup({
         { import = "plugins" },
     },
     defaults = { lazy = true },
-    install = { colorscheme = { "catppuccin", "github-nvim-theme", "tokyonight" } },
+    install = { colorscheme = { "oxocarbon", "catppuccin", "github-nvim-theme", "tokyonight" } },
     change_detection = {
         enabled = true,
         notify = false,
