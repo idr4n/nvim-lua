@@ -70,7 +70,7 @@ return {
                     ".DS_Store",
                 },
 
-                prompt_prefix = " ",
+                prompt_prefix = "   ",
                 selection_caret = " ",
 
                 results_title = false,
