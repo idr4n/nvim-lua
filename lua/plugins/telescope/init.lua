@@ -71,7 +71,7 @@ return {
                 },
 
                 prompt_prefix = "   ",
-                selection_caret = " ",
+                selection_caret = "  ",
 
                 results_title = false,
 
