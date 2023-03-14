@@ -56,6 +56,21 @@ vim.o.fillchars = [[msgsep: ,eob: ,horiz: ,vert: ,diff:╱,fold: ,foldopen:,f
 vim.o.listchars = [[tab:──,trail:·,nbsp:␣,precedes:«,extends:»,]]
 
 -- opt.statuscolumn = "%C%s "
+opt.statuscolumn = "  %{v:relnum?'':v:lnum}%=%{v:relnum?v:relnum:''} %s "
+vim.api.nvim_create_augroup("statuscol", { clear = true })
+vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = { "alpha", "TelescopePrompt" },
+    callback = function()
+        opt.statuscolumn = ""
+    end,
+    group = "statuscol",
+})
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+    callback = function()
+        opt.statuscolumn = "  %{v:relnum?'':v:lnum}%=%{v:relnum?v:relnum:''} %s "
+    end,
+    group = "statuscol",
+})
 
 -- Format
 vim.cmd([[
