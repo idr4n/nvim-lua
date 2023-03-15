@@ -102,7 +102,7 @@ return {
             views = {
                 cmdline_popup = {
                     position = { row = 0, col = "50%" },
-                    size = { width = "98%" },
+                    size = { width = "97%" },
                 },
             },
             popupmenu = { backend = "cmp" },
