@@ -156,6 +156,16 @@ local modes = {
     t = "",
 }
 
+-- statusline highlight groups based on nvim-nyoom and oxocarbon
+vim.api.nvim_set_hl(0, "StatusReplace", { fg = "#161616", bg = "#3ddbd9" })
+vim.api.nvim_set_hl(0, "StatusInsert", { fg = "#161616", bg = "#ff7eb6" })
+vim.api.nvim_set_hl(0, "StatusVisual", { fg = "#161616", bg = "#be95ff" })
+vim.api.nvim_set_hl(0, "StatusTerminal", { fg = "#161616", bg = "#33b1ff" })
+vim.api.nvim_set_hl(0, "StatusNormal", { fg = "#161616", bg = "#82cfff" })
+vim.api.nvim_set_hl(0, "StatusCommand", { fg = "#161616", bg = "#42be65" })
+vim.api.nvim_set_hl(0, "StatusLineDiagnosticWarn", { fg = "#be95ff", bold = true })
+vim.api.nvim_set_hl(0, "StatusLineDiagnosticError", { fg = "#3ddbd9", bold = true })
+
 local function color()
     local mode = vim.api.nvim_get_mode().mode
     local mode_color = "%#Normal#"
