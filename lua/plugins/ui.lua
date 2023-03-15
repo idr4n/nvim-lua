@@ -76,8 +76,8 @@ return {
                     ["vim.lsp.util.stylize_markdown"] = true,
                     ["cmp.entry.get_documentation"] = true,
                 },
-                hover = { enabled = false },
-                signature = { enabled = false },
+                hover = { enabled = true },
+                signature = { enabled = true },
                 progress = { enabled = false },
             },
             cmdline = {
