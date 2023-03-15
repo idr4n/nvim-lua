@@ -296,7 +296,7 @@ return {
                 },
             },
             window = {
-                width = 30,
+                width = 27,
                 mappings = {
                     ["o"] = "open",
                     ["h"] = function(state)
