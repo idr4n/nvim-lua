@@ -21,7 +21,12 @@ return {
             silent = true,
         },
         { "<leader>fh", "<cmd>Telescope help_tags<cr>", noremap = true, silent = true },
-        -- { "gd", "<cmd>Telescope lsp_definitions<cr>", noremap = true, silent = true },
+        {
+            "gd",
+            "<cmd>lua require('telescope.builtin').lsp_definitions({ initial_mode = 'normal' })<cr>",
+            noremap = true,
+            silent = true,
+        },
         -- {  "gr", "<cmd>Telescope lsp_references<cr>",  noremap = true, silent = true  },
         { "gi", "<cmd>Telescope lsp_implementations<cr>", noremap = true, silent = true },
         { "<leader>w", "<cmd>Telescope lsp_document_symbols<cr>", noremap = true, silent = true },
