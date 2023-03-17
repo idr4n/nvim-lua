@@ -1,0 +1,126 @@
+return {
+    --: nvim-dap {{{
+    {
+        "mfussenegger/nvim-dap",
+        dependencies = {
+            {
+                "rcarriga/nvim-dap-ui",
+
+                config = function()
+                    require("dapui").setup()
+                end,
+            },
+            { "jbyuki/one-small-step-for-vimkind" },
+        },
+        -- stylua: ignore
+        keys = {
+            { "<leader>db", function() require("dap").toggle_breakpoint() end, { desc = "Toggle Breakpoint" }, },
+            { "<leader>dc", function() require("dap").continue() end, { desc = "Continue" }, },
+            { "<leader>do", function() require("dap").step_over() end, { desc = "Step Over" }, },
+            { "<leader>di", function() require("dap").step_into() end, { desc = "Step Into" }, },
+            { "<leader>dw", function() require("dap.ui.widgets").hover() end, { desc = "Widgets" }, },
+            { "<leader>dr", function() require("dap").repl.open() end, { desc = "Repl" }, },
+            { "<leader>du", function() require("dapui").toggle({}) end, { desc = "Dap UI" }, },
+            { "<leader>ds", function() require("osv").launch({ port = 8086 }) end, { desc = "Launch Lua Debugger Server" }, },
+            { "<leader>dd", function() require("osv").run_this() end, { desc = "Launch Lua Debugger" }, },
+        },
+        config = function()
+            local dap = require("dap")
+
+            dap.configurations.lua = {
+                {
+                    type = "nlua",
+                    request = "attach",
+                    name = "Attach to running Neovim instance",
+                },
+            }
+
+            dap.adapters.nlua = function(callback, config)
+                callback({ type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 })
+            end
+
+            local dapui = require("dapui")
+            dap.listeners.after.event_initialized["dapui_config"] = function()
+                dapui.open({})
+            end
+            -- dap.listeners.before.event_terminated["dapui_config"] = function()
+            --     dapui.close({})
+            -- end
+            -- dap.listeners.before.event_exited["dapui_config"] = function()
+            --     dapui.close({})
+            -- end
+
+            vim.api.nvim_set_hl(0, "red", { fg = "#F7768E" })
+            vim.api.nvim_set_hl(0, "green", { fg = "#73DACA" })
+            vim.api.nvim_set_hl(0, "yellow", { fg = "#F6C177" })
+            vim.api.nvim_set_hl(0, "orange", { fg = "#FF9E64" })
+
+            vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "red", linehl = "", numhl = "" })
+            vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "red", linehl = "", numhl = "" })
+            vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "orange", linehl = "", numhl = "" })
+            vim.fn.sign_define("DapStopped", { text = "", texthl = "green", linehl = "", numhl = "" })
+            vim.fn.sign_define("DapLogPoint", { text = "", texthl = "yellow", linehl = "", numhl = "" })
+        end,
+    },
+    --: }}}
+
+    --: nvim-dap-go {{{
+    {
+        "leoluz/nvim-dap-go",
+        ft = "go",
+        opts = {
+            dap_configurations = {
+                {
+                    -- Must be "go" or it will be ignored by the plugin
+                    type = "go",
+                    name = "Attach remote",
+                    mode = "remote",
+                    request = "attach",
+                },
+            },
+            -- delve configurations
+            delve = {
+                -- time to wait for delve to initialize the debug session.
+                -- default to 20 seconds
+                initialize_timeout_sec = 20,
+                -- a string that defines the port to start delve debugger.
+                -- default to string "${port}" which instructs nvim-dap
+                -- to start the process in a random available port
+                port = "${port}",
+            },
+        },
+        config = function(_, opts)
+            require("dap-go").setup(opts)
+        end,
+    },
+    --: }}}
+
+    --: nvim-dap-python {{{
+    {
+        "mfussenegger/nvim-dap-python",
+        ft = "python",
+        keys = {
+            { "<leader>ds", "<ESC>:lua require('dap-python').debug_selection()<CR>", mode = "v" },
+        },
+        config = function()
+            require("dap-python").setup("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
+        end,
+    },
+    --: }}}
+}
+
+-- - `DapBreakpoint` for breakpoints (default: `B`)
+-- - `DapBreakpointCondition` for conditional breakpoints (default: `C`)
+-- - `DapLogPoint` for log points (default: `L`)
+-- - `DapStopped` to indicate where the debugee is stopped (default: `→`)
+-- - `DapBreakpointRejected` to indicate breakpoints rejected by the debug
+--   adapter (default: `R`)
+--
+-- You can customize the signs by setting them with the |sign_define()| function.
+-- For example:
+--
+-- >
+--     lua << EOF
+--     vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
+--     EOF
+-- <
