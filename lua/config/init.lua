@@ -3,6 +3,9 @@
 -- after installing missing plugins
 require("config.options")
 
+-- load statusline
+require("config.statusline")
+
 -- make sure to set `mapleader` before lazy so your mappings are correct
 vim.keymap.set("", "<Space>", "<Nop>")
 vim.g.mapleader = " "
