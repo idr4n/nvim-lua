@@ -97,6 +97,7 @@ return {
                             FloatBorder = "FloatBorder",
                         },
                     },
+                    border = { style = "none", padding = { 1, 2 } },
                 },
             },
             views = {

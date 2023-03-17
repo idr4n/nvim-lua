@@ -334,6 +334,8 @@ return {
             vim.api.nvim_set_hl(0, "LspReferenceText", { fg = oxocarbon.none, bg = oxocarbon.base03 })
             vim.api.nvim_set_hl(0, "LspReferenceRead", { fg = oxocarbon.none, bg = oxocarbon.base03 })
             vim.api.nvim_set_hl(0, "LspReferenceWrite", { fg = oxocarbon.none, bg = oxocarbon.base03 })
+            vim.api.nvim_set_hl(0, "NormalFloat", { fg = oxocarbon.base05, bg = oxocarbon.base00 })
+            vim.api.nvim_set_hl(0, "FloatBorder", { fg = oxocarbon.base02, bg = oxocarbon.base00 })
             vim.api.nvim_set_hl(0, "Comment", { fg = oxocarbon.base03, bg = oxocarbon.none, italic = true })
         end,
     },
