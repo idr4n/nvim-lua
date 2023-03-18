@@ -27,6 +27,7 @@ return {
         config = function()
             local dap = require("dap")
 
+            --: Lua {{{
             dap.configurations.lua = {
                 {
                     type = "nlua",
@@ -38,7 +39,35 @@ return {
             dap.adapters.nlua = function(callback, config)
                 callback({ type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 })
             end
+            --: }}}
 
+            --: Rust {{{
+            local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/")
+            local codelldb_adapter = {
+                type = "server",
+                port = "${port}",
+                executable = {
+                    command = mason_path .. "bin/codelldb",
+                    args = { "--port", "${port}" },
+                },
+            }
+
+            dap.adapters.codelldb = codelldb_adapter
+            dap.configurations.rust = {
+                {
+                    name = "Launch file",
+                    type = "codelldb",
+                    request = "launch",
+                    program = function()
+                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                    end,
+                    cwd = "${workspaceFolder}",
+                    stopOnEntry = false,
+                },
+            }
+            --: }}}
+
+            --: nvim-dap-ui {{{
             local dapui = require("dapui")
             dap.listeners.after.event_initialized["dapui_config"] = function()
                 dapui.open({})
@@ -49,7 +78,9 @@ return {
             -- dap.listeners.before.event_exited["dapui_config"] = function()
             --     dapui.close({})
             -- end
+            --: }}}
 
+            --: Breakpoints highlights {{{
             vim.api.nvim_set_hl(0, "red", { fg = "#F7768E" })
             vim.api.nvim_set_hl(0, "green", { fg = "#73DACA" })
             vim.api.nvim_set_hl(0, "yellow", { fg = "#F6C177" })
@@ -60,6 +91,7 @@ return {
             vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "orange", linehl = "", numhl = "" })
             vim.fn.sign_define("DapStopped", { text = "", texthl = "green", linehl = "", numhl = "" })
             vim.fn.sign_define("DapLogPoint", { text = "", texthl = "yellow", linehl = "", numhl = "" })
+            --: }}}
         end,
     },
     --: }}}

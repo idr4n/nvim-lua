@@ -195,7 +195,17 @@ return {
                 -- ["*"] = function(server, opts) end,
 
                 -- rust_analyzer
-                rust_analyzer = function(_, opts)
+                rust_analyzer = function()
+                    local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/")
+                    local codelldb_adapter = {
+                        type = "server",
+                        port = "${port}",
+                        executable = {
+                            command = mason_path .. "bin/codelldb",
+                            args = { "--port", "${port}" },
+                        },
+                    }
+
                     require("rust-tools").setup({
                         tools = {
                             inlay_hints = {
@@ -203,8 +213,40 @@ return {
                                 parameter_hints_prefix = "<- ",
                                 other_hints_prefix = "=> ",
                             },
+                            on_initialized = function()
+                                vim.api.nvim_create_autocmd({ "BufWritePost", "BufRead", "CursorHold", "InsertLeave" }, {
+                                    pattern = { "*.rs" },
+                                    callback = function()
+                                        local _, _ = pcall(vim.lsp.codelens.refresh)
+                                    end,
+                                })
+                            end,
                         },
-                        server = opts,
+                        dap = {
+                            adapter = codelldb_adapter,
+                        },
+                        server = {
+                            on_attach = function(client, bufnr)
+                                require("plugins.lsp.handlers").on_attach(client, bufnr)
+                                local rt = require("rust-tools")
+                                vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
+                            end,
+
+                            capabilities = require("cmp_nvim_lsp").default_capabilities(
+                                vim.lsp.protocol.make_client_capabilities()
+                            ),
+                            settings = {
+                                ["rust-analyzer"] = {
+                                    lens = {
+                                        enable = true,
+                                    },
+                                    checkOnSave = {
+                                        enable = true,
+                                        command = "clippy",
+                                    },
+                                },
+                            },
+                        },
                     })
                     return true
                 end,
@@ -284,7 +326,7 @@ return {
 
             require("lspconfig").sourcekit.setup({
                 on_attach = require("plugins.lsp.handlers").on_attach,
-                capabilities = require("plugins.lsp.handlers").capabilities,
+                capabilities = capabilities,
             })
         end,
     },
