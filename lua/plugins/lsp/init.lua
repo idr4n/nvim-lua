@@ -33,6 +33,7 @@ return {
                 "tailwindcss-language-server",
                 "typescript-language-server",
                 "vim-language-server",
+                "vue-language-server",
             },
             ui = {
                 border = "rounded",
