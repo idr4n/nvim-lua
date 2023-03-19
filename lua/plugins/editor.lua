@@ -273,8 +273,8 @@ return {
             enable_diagnostics = false,
             default_component_configs = {
                 indent = {
-                    padding = 0,
-                    with_expanders = false,
+                    padding = 1,
+                    with_expanders = true,
                 },
                 icon = {
                     folder_closed = "",
