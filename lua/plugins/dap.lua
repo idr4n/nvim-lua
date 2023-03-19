@@ -41,7 +41,7 @@ return {
             end
             --: }}}
 
-            --: Rust {{{
+            --: Rust, C++ {{{
             local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/")
             local codelldb_adapter = {
                 type = "server",
@@ -65,6 +65,8 @@ return {
                     stopOnEntry = false,
                 },
             }
+
+            dap.configurations.cpp = dap.configurations.rust
             --: }}}
 
             --: nvim-dap-ui {{{
