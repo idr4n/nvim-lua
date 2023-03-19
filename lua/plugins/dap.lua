@@ -41,7 +41,7 @@ return {
             end
             --: }}}
 
-            --: Rust, C++ {{{
+            --: Rust {{{
             local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/")
             local codelldb_adapter = {
                 type = "server",
@@ -65,8 +65,28 @@ return {
                     stopOnEntry = false,
                 },
             }
+            --: }}}
 
-            dap.configurations.cpp = dap.configurations.rust
+            --: c and c++ {{{
+            dap.adapters.lldb = {
+                type = "executable",
+                command = "/opt/homebrew/opt/llvm/bin/lldb-vscode",
+                name = "lldb",
+            }
+
+            dap.configurations.cpp = {
+                {
+                    name = "Launch",
+                    type = "lldb",
+                    request = "launch",
+                    program = "./a.out",
+                    cwd = "${workspaceFolder}",
+                    stopOnEntry = false,
+                    args = {},
+                },
+            }
+
+            dap.configurations.c = dap.configurations.cpp
             --: }}}
 
             --: nvim-dap-ui {{{
