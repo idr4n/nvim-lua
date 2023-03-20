@@ -3,13 +3,27 @@ return {
     cmd = "Telescope",
     event = "BufReadPost",
     keys = {
-        { "<c-p>", "<cmd>Telescope find_files<cr>", noremap = true, silent = true },
+        {
+            "<leader><space>",
+            function()
+                require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({ previewer = false }))
+            end,
+            noremap = true,
+            silent = true,
+        },
         { "<leader>r", "<cmd>Telescope live_grep<cr>", noremap = true, silent = true },
         { "<leader>b", "<cmd>Telescope current_buffer_fuzzy_find<cr>", noremap = true, silent = true },
         { "<leader>l", "<cmd>Telescope resume<cr>", noremap = true, silent = true },
         {
             "s",
-            "<cmd>lua require('telescope.builtin').buffers({ initial_mode = 'normal', sort_lastused = true })<cr>",
+            function()
+                require("telescope.builtin").buffers(require("telescope.themes").get_dropdown({
+                    initial_mode = "normal",
+                    sort_lastused = true,
+                    ignore_current_buffer = true,
+                    previewer = false,
+                }))
+            end,
             noremap = true,
             silent = true,
         },
@@ -33,7 +47,14 @@ return {
         { "<leader>W", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", noremap = true, silent = true },
         { "<leader>D", "<cmd>Telescope diagnostics<cr>", noremap = true, silent = true },
         { "<leader>ts", "<cmd>Telescope luasnip<cr>", noremap = true, silent = true },
-        { "<leader>gr", "<cmd>Telescope registers<cr>", noremap = true, silent = true },
+        {
+            "<leader>gc",
+            function()
+                require("telescope.builtin").commands(require("telescope.themes").get_dropdown())
+            end,
+            noremap = true,
+            silent = true,
+        },
         {
             "<leader>gj",
             "<cmd>lua require('telescope.builtin').jumplist({ initial_mode = 'normal' })<cr>",

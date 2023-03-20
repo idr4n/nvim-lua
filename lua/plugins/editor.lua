@@ -377,4 +377,17 @@ return {
         },
     },
     --: }}}
+
+    --: glance {{{
+    {
+        "dnlhc/glance.nvim",
+        keys = {
+            { "<leader>gg", "<CMD>Glance definitions<CR>" },
+            { "<leader>gr", "<CMD>Glance references<CR>" },
+            { "<leader>gd", "<CMD>Glance type_definitions<CR>" },
+            { "<leader>gm", "<CMD>Glance implementations<CR>" },
+        },
+        config = true,
+    },
+    --: }}}
 }
