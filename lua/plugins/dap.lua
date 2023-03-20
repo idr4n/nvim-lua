@@ -68,11 +68,17 @@ return {
             --: }}}
 
             --: c and c++ {{{
-            dap.adapters.lldb = {
-                type = "executable",
-                command = "/opt/homebrew/opt/llvm/bin/lldb-vscode",
-                name = "lldb",
-            }
+            dap.adapters.lldb = function(cb, config)
+                if config.preLaunchTask then
+                    vim.fn.system(config.preLaunchTask)
+                end
+                local apapter = {
+                    type = "executable",
+                    command = "/opt/homebrew/opt/llvm/bin/lldb-vscode",
+                    name = "lldb",
+                }
+                cb(apapter)
+            end
 
             dap.configurations.cpp = {
                 {
@@ -81,6 +87,7 @@ return {
                     request = "launch",
                     program = "./a.out",
                     cwd = "${workspaceFolder}",
+                    preLaunchTask = "clang++ -g -o a.out -std=c++17 -stdlib=libc++ ${file}",
                     stopOnEntry = false,
                     args = {},
                 },
