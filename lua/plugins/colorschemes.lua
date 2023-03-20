@@ -6,8 +6,8 @@ return {
     --: tokyonight {{{
     {
         "folke/tokyonight.nvim",
-        -- lazy = duringDayTime,
-        -- priority = 1000,
+        lazy = duringDayTime,
+        priority = 1000,
         opts = function()
             return {
                 style = "moon",
@@ -18,12 +18,10 @@ return {
                     floats = "transparent",
                 },
                 on_highlights = function(hl, c)
-                    local purple = "#9d7cd8"
                     -- hl.CursorLine = { bg = c.bg_dark }
                     hl.CursorLine = { bg = "#16161E" }
                     hl.CursorLineNr = { fg = c.orange, bold = true }
-                    -- hl.TelescopeBorder = { bg = c.none, fg = c.magenta }
-                    hl.TelescopeBorder = { bg = c.none, fg = purple }
+                    hl.TelescopeBorder = { bg = c.none, fg = c.dark3 }
                     hl.TelescopePromptTitle = { bg = c.none, fg = c.orange }
                     hl.TelescopePreviewTitle = { bg = c.none, fg = c.orange }
                 end,
@@ -33,9 +31,9 @@ return {
             require("tokyonight").setup(opts)
 
             -- Load the colorscheme
-            -- if not duringDayTime then
-            --     vim.cmd("colorscheme tokyonight")
-            -- end
+            if not duringDayTime then
+                vim.cmd("colorscheme tokyonight")
+            end
         end,
     },
     --: }}}
@@ -262,9 +260,8 @@ return {
     --: oxocarbon{{{
     {
         "nyoom-engineering/oxocarbon.nvim",
-        lazy = duringDayTime,
-        -- lazy = false,
-        priority = 1000,
+        -- lazy = duringDayTime,
+        -- priority = 1000,
         config = function()
             if duringDayTime then
                 -- vim.o.background = "dark"
@@ -282,55 +279,28 @@ return {
             vim.o["termguicolors"] = true
             local base00 = "#161616"
             local base06 = "#ffffff"
-            local base09 = "#78a9ff"
 
             local oxocarbon = (
                 (
                     (vim.o.background == "dark")
                     and {
                         base00 = base00,
-                        base01 = blend_hex(base00, base06, 0.085),
                         base02 = blend_hex(base00, base06, 0.18),
                         base03 = blend_hex(base00, base06, 0.3),
-                        base04 = blend_hex(base00, base06, 0.82),
                         base05 = blend_hex(base00, base06, 0.95),
-                        base06 = base06,
-                        base07 = "#08bdba",
-                        base08 = "#3ddbd9",
-                        base09 = base09,
-                        base10 = "#ee5396",
-                        base11 = "#33b1ff",
-                        base12 = "#ff7eb6",
-                        base13 = "#42be65",
-                        base14 = "#be95ff",
-                        base15 = "#82cfff",
-                        blend = "#131313",
                         none = "NONE",
                     }
                 )
                 or {
                     base00 = base06,
-                    base01 = blend_hex(base00, base06, 0.95),
                     base02 = blend_hex(base00, base06, 0.82),
                     base03 = blend_hex(base00, base06, 0.80),
-                    base04 = "#37474F",
                     base05 = "#90A4AE",
-                    base06 = "#525252",
-                    base07 = "#08bdba",
-                    base08 = "#ff7eb6",
-                    base09 = "#ee5396",
-                    base10 = "#FF6F00",
-                    base11 = "#0f62fe",
-                    base12 = "#673AB7",
-                    base13 = "#42be65",
-                    base14 = "#be95ff",
-                    base15 = "#FFAB91",
-                    blend = "#FAFAFA",
                     none = "NONE",
                 }
             )
 
-            vim.cmd.colorscheme("oxocarbon")
+            -- vim.cmd.colorscheme("oxocarbon")
             vim.api.nvim_set_hl(0, "LspReferenceText", { fg = oxocarbon.none, bg = oxocarbon.base03 })
             vim.api.nvim_set_hl(0, "LspReferenceRead", { fg = oxocarbon.none, bg = oxocarbon.base03 })
             vim.api.nvim_set_hl(0, "LspReferenceWrite", { fg = oxocarbon.none, bg = oxocarbon.base03 })

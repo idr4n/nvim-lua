@@ -133,6 +133,7 @@ return {
     {
         "mvllow/modes.nvim",
         event = "InsertEnter",
+        enabled = false,
         opts = {
             colors = {
                 copy = "#42be65",
