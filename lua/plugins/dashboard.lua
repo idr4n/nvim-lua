@@ -25,7 +25,11 @@ return {
             dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
             -- dashboard.button("f", "  Find file", ":Files<cr>"),
             -- dashboard.button("f", "  Find file", ":lua require('fzf-lua').files()<cr>"),
-            dashboard.button("f", "  Find file", ":Telescope find_files<cr>"),
+            dashboard.button(
+                "f",
+                "  Find file",
+                ":lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>"
+            ),
             dashboard.button("r", "  Recently used files", ":Telescope oldfiles<cr>"),
             dashboard.button("t", "  Find text", ":Rg<cr>"),
             -- dashboard.button("s", "  Open session", ":SearchSession <CR>"),
