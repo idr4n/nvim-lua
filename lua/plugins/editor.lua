@@ -154,9 +154,9 @@ return {
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = function()
             -- redefine gitsigns colors
-            -- vim.cmd([[:highlight GitSignsAdd guifg=#73DACA]])
-            -- vim.cmd([[:highlight GitSignsChange guifg=#FF9E64]])
-            -- vim.cmd([[:highlight GitSignsDelete guifg=#F7768E]])
+            vim.cmd([[:highlight GitSignsAdd guifg=#73DACA]])
+            vim.cmd([[:highlight GitSignsChange guifg=#FF9E64]])
+            vim.cmd([[:highlight GitSignsDelete guifg=#F7768E]])
 
             return {
                 signcolumn = true,

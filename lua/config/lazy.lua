@@ -18,7 +18,8 @@ require("lazy").setup({
         { import = "plugins" },
     },
     defaults = { lazy = true },
-    install = { colorscheme = { "oxocarbon", "catppuccin", "github-theme", "tokyonight" } },
+    install = { colorscheme = { "tokyonight", "catppuccin", "github-theme" } },
+    --
     change_detection = {
         enabled = true,
         notify = false,
