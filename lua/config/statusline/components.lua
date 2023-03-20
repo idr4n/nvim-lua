@@ -48,8 +48,10 @@ function M.getGitChanges()
 end
 
 function M.get_fileinfo()
-    local filename = (((vim.fn.expand("%") == "") and " nyoom-nvim ") or vim.fn.expand("%f"))
-    if filename ~= " nyoom-nvim " then
+    local filename = (
+        ((vim.fn.expand("%") == "") and " nvim ") or ((vim.fn.expand("%:p:h:t")) .. "/" .. vim.fn.expand("%:t"))
+    )
+    if filename ~= " nvim " then
         filename = (" " .. filename)
     end
     return ("%#Normal#" .. filename .. "%#NormalNC#" .. "%{&modified?' ●':''}%r%h ")
