@@ -167,15 +167,15 @@ return {
                 },
                 window = {
                     completion = {
-                        -- border = border("CmpBorder"),
-                        -- winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
-                        winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,FloatBorder:Pmenu,Search:None",
+                        border = border("CmpBorder"),
+                        winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
                         side_padding = 0,
+                        -- For oxocarbon style (comment out border and use winhighlight below)
+                        -- winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,FloatBorder:Pmenu,Search:None",
                     },
                     documentation = {
                         -- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-                        -- border = border("CmpDocBorder"),
-                        border = "solid",
+                        border = border("CmpDocBorder"),
                         winhighlight = "Normal:CmpPmenu",
                     },
                 },
