@@ -67,7 +67,6 @@ return {
             noremap = true,
             silent = true,
         },
-        { "<leader>cc", "<cmd>lcd ~/.config/nvim | Telescope find_files<cr>", noremap = true, silent = true },
         {
             "<leader>cw",
             "<cmd>lua require('plugins.telescope.workdirs-picker').set_workdir()<CR>",
