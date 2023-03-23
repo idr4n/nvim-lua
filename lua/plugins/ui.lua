@@ -144,4 +144,60 @@ return {
         },
     },
     --: }}}
+
+    --: nvim-ufo "folding" {{{
+    {
+        "kevinhwang91/nvim-ufo",
+        dependencies = { "kevinhwang91/promise-async" },
+        event = { "BufReadPost", "BufNewFile" },
+        -- stylua: ignore
+        keys = {
+            { "zR", function() require("ufo").openAllFolds() end, },
+            { "zM", function() require("ufo").closeAllFolds() end, },
+        },
+        config = function()
+            vim.o.foldcolumn = "1"
+            vim.o.foldlevel = 99
+            vim.o.foldlevelstart = 99
+            vim.o.foldenable = true
+
+            local ftMap = {
+                markdown = "",
+            }
+
+            require("ufo").setup({
+                open_fold_hl_timeout = 0,
+                -- close_fold_kinds = { "imports", "regions", "comments" },
+                provider_selector = function(bufnr, filetype, buftype)
+                    -- return { "treesitter", "indent" }
+                    return ftMap[filetype] or { "treesitter", "indent" }
+                end,
+            })
+        end,
+    },
+    --: }}}
+
+    --: statucol {{{
+    {
+        "luukvbaal/statuscol.nvim",
+        event = { "BufReadPost", "BufNewFile" },
+        opts = function()
+            local builtin = require("statuscol.builtin")
+            return {
+                segments = {
+                    { text = { builtin.foldfunc, " " }, click = "v:lua.ScFa" },
+                    { text = { "%s" }, click = "v:lua.ScSa" },
+                    {
+                        text = { builtin.lnumfunc, "  " },
+                        condition = { true, builtin.not_empty },
+                        click = "v:lua.ScLa",
+                    },
+                },
+            }
+        end,
+        config = function(_, opts)
+            require("statuscol").setup(opts)
+        end,
+    },
+    --: }}}
 }

@@ -16,16 +16,16 @@ opt.conceallevel = 0 -- so that `` is visible in markdown files
 opt.cursorline = true -- highlight the current line
 opt.expandtab = true -- convert tabs to spaces
 -- opt.foldcolumn = "1"
-opt.foldmethod = "marker"
+-- opt.foldmethod = "marker"
 -- opt.guicursor = "" -- no thin cursor on insert mode
 opt.hlsearch = true -- highlight all matches on previous search pattern
 opt.incsearch = true
 opt.ignorecase = true -- ignore case in search patterns
 opt.linebreak = true -- Break lines in spaces not in the middle of a word
 opt.mouse = "a" -- allow the mouse to be used in neovim
-opt.number = true -- set numbered lines
+opt.number = false -- set numbered lines
 opt.pumheight = 10 -- pop up menu height
-opt.relativenumber = true -- set relative numbered lines
+opt.relativenumber = false -- set relative numbered lines
 opt.scrolloff = 8 -- is one of my fav
 opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
 -- opt.showbreak = "↪ "
@@ -54,22 +54,6 @@ vim.cmd([[set iskeyword+=-]])
 vim.o.fillchars = [[msgsep: ,eob: ,horiz: ,vert: ,diff:╱,fold: ,foldopen:,foldsep: ,foldclose:,]]
 -- vim.o.fillchars = [[msgsep: ,eob: ,horiz: ,vert: ,diff:╱,fold: ,foldopen:,foldclose:,]]
 vim.o.listchars = [[tab:──,trail:·,nbsp:␣,precedes:«,extends:»,]]
-
--- Statuscolumn
-vim.api.nvim_create_augroup("statuscol", { clear = true })
-vim.api.nvim_create_autocmd({ "FileType" }, {
-    pattern = { "alpha", "TelescopePrompt" },
-    callback = function()
-        opt.statuscolumn = ""
-    end,
-    group = "statuscol",
-})
-vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
-    callback = function()
-        opt.statuscolumn = "%s%{v:relnum?'':v:lnum}%=%3.3{v:relnum?v:relnum:''}  "
-    end,
-    group = "statuscol",
-})
 
 -- Format
 vim.cmd([[
