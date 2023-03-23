@@ -104,6 +104,15 @@ keymap("n", "J", "mzJ`z", opts)
 keymap("n", ",w", "<cmd>set wrap!<cr>", opts)
 --: }}}
 
+--: toggle line numbers {{{
+vim.keymap.set("n", "<C-N>", function()
+    vim.cmd([[
+        set invnumber
+        set invrelativenumber
+    ]])
+end)
+--: }}}
+
 --: center when scrolling page down and up {{{
 keymap("n", "<c-d>", "<c-d>zz", opts)
 keymap("n", "<c-u>", "<c-u>zz", opts)
