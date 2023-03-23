@@ -24,6 +24,8 @@ return {
                     hl.TelescopeBorder = { bg = c.none, fg = c.dark3 }
                     hl.TelescopePromptTitle = { bg = c.none, fg = c.orange }
                     hl.TelescopePreviewTitle = { bg = c.none, fg = c.orange }
+                    hl.Folded = { bg = c.none }
+                    hl.FoldColumn = { fg = c.bg_highlight }
                 end,
             }
         end,
@@ -244,10 +246,12 @@ return {
             theme_style = "light",
             function_style = "italic",
             sidebars = { "qf", "vista_kind", "terminal", "packer" },
-            overrides = function()
+            overrides = function(c)
                 return {
                     CursorLine = { bg = "#F3F8FF" },
                     LspReferenceText = { bg = "#E2FFE8" },
+                    Folded = { bg = "NONE" },
+                    FoldColumn = { fg = c.bg_visual, bg = "NONE" },
                 }
             end,
         },
