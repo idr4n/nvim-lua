@@ -157,6 +157,7 @@ return {
             vim.cmd([[:highlight GitSignsAdd guifg=#73DACA]])
             vim.cmd([[:highlight GitSignsChange guifg=#FF9E64]])
             vim.cmd([[:highlight GitSignsDelete guifg=#F7768E]])
+            vim.cmd([[:highlight GitSignsChangeDelete guifg=#BD73EC]])
 
             return {
                 signcolumn = true,
@@ -188,8 +189,9 @@ return {
                         linehl = "GitSignsDeleteLn",
                     },
                     changedelete = {
-                        hl = "GitSignsChange",
-                        text = "▍",
+                        hl = "GitSignsChangeDelete",
+                        -- text = "▍",
+                        text = "▎",
                         -- text = "‾",
                         -- text = "▋",
                         numhl = "GitSignsChangeNr",
