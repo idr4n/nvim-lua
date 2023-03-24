@@ -261,6 +261,17 @@ return {
     },
     --: }}}
 
+    --: onedarkpro {{{
+    {
+        "olimorris/onedarkpro.nvim",
+        -- lazy = not duringDayTime,
+        -- priority = 1000,
+        config = function()
+            vim.cmd("colorscheme onedark")
+        end,
+    },
+    --: }}}
+
     --: oxocarbon{{{
     {
         "nyoom-engineering/oxocarbon.nvim",
