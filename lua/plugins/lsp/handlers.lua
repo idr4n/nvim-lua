@@ -44,7 +44,7 @@ M.on_attach = function(client, bufnr)
             client.server_capabilities.hoverProvider = false
         end
     end
-    client.server_capabilities.semanticTokensProvider = nil
+    -- client.server_capabilities.semanticTokensProvider = nil
     lsp_keymaps(bufnr)
     lsp_highlight_document(client)
 end

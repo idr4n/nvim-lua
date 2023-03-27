@@ -25,7 +25,7 @@ return {
                     hl.TelescopePromptTitle = { bg = c.none, fg = c.orange }
                     hl.TelescopePreviewTitle = { bg = c.none, fg = c.orange }
                     hl.Folded = { bg = c.none }
-                    hl.FoldColumn = { fg = c.bg_highlight }
+                    hl.FoldColumn = { fg = c.fg_gutter }
                 end,
             }
         end,
@@ -97,8 +97,8 @@ return {
     --: catppuccin {{{
     {
         "catppuccin/nvim",
-        -- lazy = duringDayTime,
-        -- priority = 1000,
+        lazy = not duringDayTime,
+        priority = 1000,
         name = "catppuccin",
         opts = function()
             local ucolors = require("catppuccin.utils.colors")
@@ -142,8 +142,10 @@ return {
             require("catppuccin").setup(opts)
 
             -- if not duringDayTime then
-            --     vim.cmd([[colorscheme catppuccin-macchiato]])
-            -- end
+            if duringDayTime then
+                -- vim.cmd([[colorscheme catppuccin-macchiato]])
+                vim.cmd([[colorscheme catppuccin-frappe]])
+            end
         end,
     },
     --: }}}
@@ -240,18 +242,20 @@ return {
     --: github {{{
     {
         "projekt0n/github-nvim-theme",
-        lazy = not duringDayTime,
-        priority = 1000,
+        -- lazy = not duringDayTime,
+        -- priority = 1000,
         opts = {
             theme_style = "light",
             function_style = "italic",
             sidebars = { "qf", "vista_kind", "terminal", "packer" },
+            transparent = true,
             overrides = function(c)
                 return {
                     CursorLine = { bg = "#F3F8FF" },
                     LspReferenceText = { bg = "#E2FFE8" },
                     Folded = { bg = "NONE" },
                     FoldColumn = { fg = c.bg_visual, bg = "NONE" },
+                    LineNr = { fg = c.line_nr },
                 }
             end,
         },
