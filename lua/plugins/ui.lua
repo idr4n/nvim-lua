@@ -154,6 +154,8 @@ return {
         keys = {
             { "zR", function() require("ufo").openAllFolds() end, },
             { "zM", function() require("ufo").closeAllFolds() end, },
+            { "z1", function() require("ufo").closeFoldsWith(1) end, },
+            { "z2", function() require("ufo").closeFoldsWith(2) end, },
         },
         config = function()
             vim.o.foldcolumn = "1"
@@ -163,6 +165,7 @@ return {
 
             local ftMap = {
                 markdown = "",
+                vue = "lsp",
             }
 
             require("ufo").setup({
