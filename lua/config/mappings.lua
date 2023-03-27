@@ -30,10 +30,6 @@ keymap("n", "<C-f>", "zt", opts)
 -- keymap("n", "k", "gk", opts)
 --: }}}
 
---: Vim-ex or command lien {{{
-vim.keymap.set("n", ";", ":")
---: }}}
-
 --: Quicksave command {{{
 vim.keymap.set({ "n", "i", "v", "s" }, "<C-s>", "<cmd>w<CR>")
 --: }}}
