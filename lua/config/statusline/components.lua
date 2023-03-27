@@ -6,17 +6,23 @@ function M.color()
     local mode = vim.api.nvim_get_mode().mode
     local mode_color = "%#Normal#"
     if mode == "n" then
-        mode_color = "%#StatusNormal#"
+        -- mode_color = "%#StatusNormal#"
+        mode_color = "%#StatusNormalFg#"
     elseif (mode == "i") or (mode == "ic") then
-        mode_color = "%#StatusInsert#"
+        -- mode_color = "%#StatusInsert#"
+        mode_color = "%#String#"
     elseif ((mode == "v") or (mode == "V")) or (mode == "\22") then
-        mode_color = "%#StatusVisual#"
+        -- mode_color = "%#StatusVisual#"
+        mode_color = "%#StatusVisualFg#"
     elseif mode == "R" then
-        mode_color = "%#StatusReplace#"
+        -- mode_color = "%#StatusReplace#"
+        mode_color = "%#StatusReplaceFg#"
     elseif mode == "c" then
-        mode_color = "%#StatusCommand#"
+        -- mode_color = "%#StatusCommand#"
+        mode_color = "%#StatusCommandFg#"
     elseif mode == "t" then
-        mode_color = "%#StatusTerminal#"
+        -- mode_color = "%#StatusTerminal#"
+        mode_color = "%#StatusTerminalFg#"
     end
     return mode_color
 end
@@ -48,27 +54,43 @@ function M.getGitChanges()
 end
 
 function M.get_fileinfo()
-    local filename = (
-        ((vim.fn.expand("%") == "") and " nvim ") or ((vim.fn.expand("%:p:h:t")) .. "/" .. vim.fn.expand("%:t"))
-    )
-    if filename ~= " nvim " then
-        filename = (" " .. filename)
+    local filename = ""
+
+    if vim.fn.expand("%") == "" then
+        return "%#Normal#" .. "  nvim "
     end
-    return ("%#Normal#" .. filename .. "%#NormalNC#" .. "%{&modified?' ●':''}%r%h ")
+
+    filename = " "
+        .. "%#Normal#"
+        .. "%#StatusDir#"
+        .. (vim.fn.expand("%:p:h:t"))
+        .. "/"
+        .. "%#Normal#"
+        .. vim.fn.expand("%:t")
+
+    if vim.bo.modified then
+        filename = " " .. (vim.fn.expand("%:p:h:t")) .. "/" .. vim.fn.expand("%:t")
+        return ("%#StatusInsertFg#" .. "   " .. filename .. "%#NormalNC#" .. "%r%h")
+    end
+
+    return (" %#Normal#" .. filename .. "%#NormalNC#" .. "%r%h")
 end
 
 function M.get_git_status()
     local branch = (vim.b.gitsigns_status_dict or { head = "" })
     local is_head_empty = (branch.head ~= "")
-    return ((is_head_empty and string.format("(λ • #%s%s) ", (branch.head or ""), M.getGitChanges())) or "")
+    return (
+        (is_head_empty and "%#Normal#" .. string.format("(λ • #%s%s) ", (branch.head or ""), M.getGitChanges()))
+        or ""
+    )
 end
 
 function M.get_bufnr()
-    return ("%#Comment#" .. vim.api.nvim_get_current_buf())
+    return ("%#Comment#" .. "  " .. vim.api.nvim_get_current_buf())
 end
 
 function M.get_filetype()
-    return ("%#NormalNC#" .. vim.bo.filetype)
+    return ("%#NormalNC#" .. vim.bo.filetype .. " ")
 end
 
 function M.get_dir()
@@ -96,9 +118,21 @@ function M.get_lsp_diagnostic()
     )
 end
 
+local function progress()
+    local cur = vim.fn.line(".")
+    local total = vim.fn.line("$")
+    if cur == 1 then
+        return "Top"
+    elseif cur == total then
+        return "Bot"
+    else
+        return math.floor(cur / total * 100) .. "%%"
+    end
+end
+
 function M.get_searchcount()
     if vim.v.hlsearch == 0 then
-        return "%#Normal# %2.3p%% %l:%c "
+        return "%#Normal#  %l:%c " .. progress()
     end
     local ok, count = pcall(vim.fn.searchcount, { recompute = true })
     if (not ok or (count.current == nil)) or (count.total == 0) then
