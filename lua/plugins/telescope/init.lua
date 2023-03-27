@@ -4,14 +4,14 @@ return {
     event = "BufReadPost",
     keys = {
         {
-            "<C-P>",
+            "<leader><space>",
             function()
                 require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({ previewer = false }))
             end,
             noremap = true,
             silent = true,
         },
-        { "<leader>r", "<cmd>Telescope live_grep<cr>", noremap = true, silent = true },
+        -- { "<leader>r", "<cmd>Telescope live_grep<cr>", noremap = true, silent = true },
         { "<leader>b", "<cmd>Telescope current_buffer_fuzzy_find<cr>", noremap = true, silent = true },
         { "<leader>l", "<cmd>Telescope resume<cr>", noremap = true, silent = true },
         {

@@ -2,10 +2,9 @@ return {
     "ibhagwan/fzf-lua",
     cmd = "FzfLua",
     keys = {
-        -- { "<leader>r", "<cmd>lua require('fzf-lua').live_grep()<CR>", noremap = true, silent = true },
-        { "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", noremap = true, silent = true },
+        { "<leader>r", "<cmd>lua require('fzf-lua').live_grep()<CR>", noremap = true, silent = true },
         -- { "<leader>l", "<cmd>lua require('fzf-lua').resume()<CR>", noremap = true, silent = true },
-        -- { "<C-P>", "<cmd>lua require('fzf-lua').files()<CR>", noremap = true, silent = true },
+        { "<C-P>", "<cmd>lua require('fzf-lua').files()<CR>", noremap = true, silent = true },
         -- { "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", noremap = true, silent = true },
         -- { "<C-T>", "<cmd>lua require('fzf-lua').oldfiles()<CR>", noremap = true, silent = true },
         -- { "<C-B>", "<cmd>lua require('fzf-lua').buffers()<CR>", noremap = true, silent = true },
@@ -37,32 +36,32 @@ return {
 
         return {
             winopts = {
-                height = 0.4,
-                width = 0.9,
-                -- row = 0.2,
+                height = 0.45,
+                width = 1,
+                row = 1,
+                border = { "─", "─", "─", " ", "", "", "", " " },
                 preview = {
                     vertical = "up:40%",
                     horizontal = "right:54%",
                     flip_columns = 120,
                     delay = 60,
                     scrollbar = false,
-                    hidden = "nohidden",
+                    hidden = "hidden",
                 },
             },
-            winopts_fn = function()
-                -- smaller width if neovim win has over 80 columns
-                local max_width = 140 / vim.o.columns
-                local max_height = 30 / vim.o.lines
-                -- return { width = vim.o.columns > 140 and max_width or 1 }
-                return {
-                    width = math.min(max_width, 1),
-                    height = math.min(max_height, 1),
-                }
-            end,
+            -- winopts_fn = function()
+            --     -- smaller width if neovim win has over 80 columns
+            --     local max_width = 140 / vim.o.columns
+            --     local max_height = 30 / vim.o.lines
+            --     -- return { width = vim.o.columns > 140 and max_width or 1 }
+            --     return {
+            --         width = math.min(max_width, 1),
+            --         height = math.min(max_height, 1),
+            --     }
+            -- end,
             fzf_opts = {
                 -- ["--layout"] = "default",
                 ["--layout"] = "reverse",
-                ["--pointer"] = " ",
             },
             fzf_colors = {
                 ["fg"] = { "fg", "CursorLine" },
@@ -83,14 +82,14 @@ return {
             },
             files = {
                 cmd = "rg --files --hidden --follow --no-ignore -g '!.git/*' -g '!node_modules'",
-                prompt = " ",
+                prompt = "  ",
             },
             grep = {
                 rg_opts = "--hidden --column --follow --line-number --no-heading "
                     .. "--color=always --smart-case -g '!{.git,node_modules}/*'",
-                prompt = " ",
+                prompt = "  ",
             },
-            blines = { prompt = " " },
+            blines = { prompt = " " },
             keymap = {
                 builtin = {
                     ["<C-L>"] = "toggle-preview",
