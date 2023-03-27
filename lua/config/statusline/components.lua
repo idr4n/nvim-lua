@@ -143,7 +143,7 @@ function M.get_searchcount()
     end
     local too_many = (">%d"):format(count.maxcount)
     local total = (((count.total > count.maxcount) and too_many) or count.total)
-    return ("%#Normal#" .. (" %s matches "):format(total))
+    return ("%#Normal#" .. ("  %s matches"):format(total))
 end
 
 function M.python_env()
