@@ -127,7 +127,7 @@ function M.get_lsp_diagnostic()
         hints = get_severity(vim.diagnostic.severity.HINT),
     }
     return string.format(
-        " %%#StatusLineDiagnosticWarn#%s %%#StatusLineDiagnosticError#%s ",
+        " %%#StatusLineDiagnosticWarn#%s %%#StatusLineDiagnosticError#%s  ",
         (result.warnings or 0),
         (result.errors or 0)
     )
