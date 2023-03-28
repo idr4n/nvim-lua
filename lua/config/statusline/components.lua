@@ -83,8 +83,8 @@ function M.get_fileicon()
         icon_highlight_group = "DevIconDefault"
     end
     if not vim.bo.modifiable then
-        -- icon = ""
-        icon = devicons.get_icon("lock")
+        -- icon = devicons.get_icon("lock")
+        icon = ""
         icon_highlight_group = "StatusIconLock"
     end
 
