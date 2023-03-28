@@ -57,16 +57,10 @@ function M.get_fileinfo()
     local filename = ""
 
     if vim.fn.expand("%") == "" then
-        return "%#Normal#" .. "  nvim "
+        return "%#Normal#" .. " nvim "
     end
 
-    filename = " "
-        .. "%#Normal#"
-        .. "%#StatusDir#"
-        .. (vim.fn.expand("%:p:h:t"))
-        .. "/"
-        .. "%#Normal#"
-        .. vim.fn.expand("%:t")
+    filename = "%#Normal#" .. "%#StatusDir#" .. (vim.fn.expand("%:p:h:t")) .. "/" .. "%#Normal#" .. vim.fn.expand("%:t")
 
     if vim.bo.modified then
         filename = " " .. (vim.fn.expand("%:p:h:t")) .. "/" .. vim.fn.expand("%:t")
@@ -74,6 +68,27 @@ function M.get_fileinfo()
     end
 
     return (" %#Normal#" .. filename .. "%#NormalNC#" .. "%r%h")
+end
+
+function M.get_fileicon()
+    local icon, icon_highlight_group
+    local devicons = require("nvim-web-devicons")
+    icon, icon_highlight_group = devicons.get_icon(vim.fn.expand("%:t"))
+    if icon == nil then
+        icon, icon_highlight_group = devicons.get_icon_by_filetype(vim.bo.filetype)
+    end
+
+    if icon == nil and icon_highlight_group == nil then
+        icon = ""
+        icon_highlight_group = "DevIconDefault"
+    end
+    if not vim.bo.modifiable then
+        -- icon = ""
+        icon = devicons.get_icon("lock")
+        icon_highlight_group = "StatusIconLock"
+    end
+
+    return "  %#" .. icon_highlight_group .. "#" .. icon .. "%#Normal#"
 end
 
 function M.get_git_status()

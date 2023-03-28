@@ -24,6 +24,7 @@ local modes = {
 }
 
 -- statusline highlight groups based on nvim-nyoom and oxocarbon
+vim.api.nvim_set_hl(0, "StatusIconLock", { fg = "#f6c177" })
 vim.api.nvim_set_hl(0, "StatusReplace", { fg = "#161616", bg = "#3ddbd9" })
 vim.api.nvim_set_hl(0, "StatusReplaceFg", { fg = "#3ddbd9" })
 vim.api.nvim_set_hl(0, "StatusInsert", { fg = "#161616", bg = "#ff7eb6" })
@@ -43,7 +44,8 @@ vim.api.nvim_set_hl(0, "StatusLineDiagnosticError", { fg = "#3ddbd9", bold = tru
 function Status_line()
     local statusline = ""
     -- statusline = c.color() .. string.format(" %s ", modes[vim.api.nvim_get_mode().mode]):upper()
-    statusline = c.color() .. "  "
+    statusline = c.color() .. "▍  " .. "%#Normal#"
+    statusline = statusline .. c.get_fileicon()
     statusline = statusline .. c.get_fileinfo()
     statusline = statusline .. c.get_searchcount()
     statusline = statusline .. c.get_bufnr()
