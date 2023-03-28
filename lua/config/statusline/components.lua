@@ -64,10 +64,10 @@ function M.get_fileinfo()
 
     if vim.bo.modified then
         filename = " " .. (vim.fn.expand("%:p:h:t")) .. "/" .. vim.fn.expand("%:t")
-        return ("%#StatusInsertFg#" .. "   " .. filename .. "%#NormalNC#" .. "%r%h")
+        return ("%#StatusInsertFg#" .. "  " .. filename .. "%#NormalNC#" .. "%r%h")
     end
 
-    return (" %#Normal#" .. filename .. "%#NormalNC#" .. "%r%h")
+    return ("%#Normal#" .. filename .. "%#NormalNC#" .. "%r%h")
 end
 
 function M.get_fileicon()
@@ -88,7 +88,7 @@ function M.get_fileicon()
         icon_highlight_group = "StatusIconLock"
     end
 
-    return "  %#" .. icon_highlight_group .. "#" .. icon .. "%#Normal#"
+    return "  %#" .. icon_highlight_group .. "#" .. icon .. " %#Normal#"
 end
 
 function M.get_git_status()
@@ -113,24 +113,54 @@ function M.get_dir()
 end
 
 function M.get_lsp_diagnostic()
-    if not rawget(vim, "lsp") then
-        return ""
-    else
-    end
     local function get_severity(s)
         return #vim.diagnostic.get(0, { severity = s })
     end
+
     local result = {
         errors = get_severity(vim.diagnostic.severity.ERROR),
         warnings = get_severity(vim.diagnostic.severity.WARN),
         info = get_severity(vim.diagnostic.severity.INFO),
         hints = get_severity(vim.diagnostic.severity.HINT),
     }
-    return string.format(
-        " %%#StatusLineDiagnosticWarn#%s %%#StatusLineDiagnosticError#%s  ",
-        (result.warnings or 0),
-        (result.errors or 0)
-    )
+
+    local total = result.errors + result.warnings + result.hints + result.info
+    local errors = ""
+    local warnings = ""
+    local info = ""
+    local hints = ""
+
+    if result.errors > 0 then
+        errors = " " .. result.errors .. " "
+    end
+    if result.warnings > 0 then
+        warnings = " " .. result.warnings .. " "
+    end
+    if result.info > 0 then
+        info = " " .. result.warnings .. " "
+    end
+    if result.hints > 0 then
+        hints = " " .. result.hints .. " "
+    end
+
+    -- if vim.bo.modifiable then
+    if vim.bo.modifiable then
+        if #vim.lsp.buf_get_clients() == 0 then
+            return ""
+        elseif total == 0 then
+            return " %#StatusReplaceFg#" .. " "
+        else
+            return string.format(
+                " %%#StatusLineDiagnosticWarn#%s%%#StatusLineDiagnosticError#%s%%#StatusLineDiagnosticInfo#%s%%#StatusLineDiagnosticHints#%s",
+                warnings,
+                errors,
+                info,
+                hints
+            )
+        end
+    else
+        return ""
+    end
 end
 
 local function progress()

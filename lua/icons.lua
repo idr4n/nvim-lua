@@ -184,7 +184,7 @@ else
             Dashboard = " ",
             History = " ",
             Comment = " ",
-            Bug = " ",
+            Bug = " ",
             Code = " ",
             Telescope = " ",
             Gear = " ",
