@@ -28,12 +28,12 @@ return {
             silent = true,
         },
         { "<c-t>", "<cmd>Telescope oldfiles<cr>", noremap = true, silent = true },
-        {
-            "<leader>gs",
-            "<cmd>lua require('telescope.builtin').git_status({ initial_mode = 'normal' })<cr>",
-            noremap = true,
-            silent = true,
-        },
+        -- {
+        --     "<leader>gs",
+        --     "<cmd>lua require('telescope.builtin').git_status({ initial_mode = 'normal' })<cr>",
+        --     noremap = true,
+        --     silent = true,
+        -- },
         { "<leader>fh", "<cmd>Telescope help_tags<cr>", noremap = true, silent = true },
         {
             "gd",
