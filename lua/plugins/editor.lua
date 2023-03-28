@@ -389,7 +389,9 @@ return {
             { "<leader>gd", "<CMD>Glance type_definitions<CR>" },
             { "<leader>gm", "<CMD>Glance implementations<CR>" },
         },
-        config = true,
+        opts = {
+            border = { enable = true, top_char = "─", bottom_char = "─" },
+        },
     },
     --: }}}
 }
