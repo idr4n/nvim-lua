@@ -105,7 +105,10 @@ function M.get_bufnr()
 end
 
 function M.get_filetype()
-    return ("%#NormalNC#" .. vim.bo.filetype .. " ")
+    -- return ("%#NormalNC#" .. vim.bo.filetype .. " ")
+    local filetype = vim.bo.filetype
+    filetype = filetype:sub(1, 1):upper() .. filetype:sub(2)
+    return ("%#StatusDir#" .. filetype .. " ")
 end
 
 function M.get_dir()
