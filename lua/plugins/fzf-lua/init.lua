@@ -89,7 +89,7 @@ return {
                     .. "--color=always --smart-case -g '!{.git,node_modules}/*'",
                 prompt = "  ",
             },
-            blines = { prompt = " " },
+            blines = { prompt = "  " },
             keymap = {
                 builtin = {
                     ["<C-L>"] = "toggle-preview",

@@ -78,7 +78,7 @@ end
 
 -- our picker function: colors
 M.set_workdir = function(opts)
-    opts = opts or require("telescope.themes").get_dropdown({})
+    opts = opts or require("telescope.themes").get_ivy({})
     pickers
         .new(opts, {
             prompt_title = "Workdirs",

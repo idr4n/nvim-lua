@@ -6,18 +6,27 @@ return {
         {
             "<leader><space>",
             function()
-                require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({ previewer = false }))
+                require("telescope.builtin").find_files(require("telescope.themes").get_ivy({ previewer = false }))
             end,
             noremap = true,
             silent = true,
         },
         -- { "<leader>r", "<cmd>Telescope live_grep<cr>", noremap = true, silent = true },
-        { "<leader>b", "<cmd>Telescope current_buffer_fuzzy_find<cr>", noremap = true, silent = true },
+        {
+            "<leader>b",
+            function()
+                require("telescope.builtin").current_buffer_fuzzy_find(
+                    require("telescope.themes").get_ivy({ previewer = false })
+                )
+            end,
+            noremap = true,
+            silent = true,
+        },
         { "<leader>l", "<cmd>Telescope resume<cr>", noremap = true, silent = true },
         {
             "s",
             function()
-                require("telescope.builtin").buffers(require("telescope.themes").get_dropdown({
+                require("telescope.builtin").buffers(require("telescope.themes").get_ivy({
                     initial_mode = "normal",
                     sort_lastused = true,
                     ignore_current_buffer = true,
@@ -27,30 +36,40 @@ return {
             noremap = true,
             silent = true,
         },
-        { "<c-t>", "<cmd>Telescope oldfiles<cr>", noremap = true, silent = true },
+        {
+            "<c-t>",
+            function()
+                require("telescope.builtin").oldfiles(require("telescope.themes").get_ivy({ previewer = false }))
+            end,
+            noremap = true,
+            silent = true,
+        },
         -- {
         --     "<leader>gs",
         --     "<cmd>lua require('telescope.builtin').git_status({ initial_mode = 'normal' })<cr>",
         --     noremap = true,
         --     silent = true,
         -- },
-        { "<leader>fh", "<cmd>Telescope help_tags<cr>", noremap = true, silent = true },
+        { "<leader>fh", "<cmd>Telescope help_tags theme=ivy<cr>", noremap = true, silent = true },
         {
             "gd",
-            "<cmd>lua require('telescope.builtin').lsp_definitions({ initial_mode = 'normal' })<cr>",
+            function()
+                require("telescope.builtin").lsp_definitions(
+                    require("telescope.themes").get_ivy({ initial_mode = "normal" })
+                )
+            end,
             noremap = true,
             silent = true,
         },
         -- {  "gr", "<cmd>Telescope lsp_references<cr>",  noremap = true, silent = true  },
-        { "gi", "<cmd>Telescope lsp_implementations<cr>", noremap = true, silent = true },
-        { "<leader>w", "<cmd>Telescope lsp_document_symbols<cr>", noremap = true, silent = true },
-        { "<leader>W", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", noremap = true, silent = true },
-        { "<leader>D", "<cmd>Telescope diagnostics<cr>", noremap = true, silent = true },
-        { "<leader>ts", "<cmd>Telescope luasnip<cr>", noremap = true, silent = true },
+        { "<leader>w", "<cmd>Telescope lsp_document_symbols theme=ivy<cr>", noremap = true, silent = true },
+        { "<leader>W", "<cmd>Telescope lsp_dynamic_workspace_symbols theme=ivy<cr>", noremap = true, silent = true },
+        { "<leader>D", "<cmd>Telescope diagnostics theme=ivy<cr>", noremap = true, silent = true },
+        { "<leader>ts", "<cmd>Telescope luasnip theme=ivy<cr>", noremap = true, silent = true },
         {
             "<leader>gc",
             function()
-                require("telescope.builtin").commands(require("telescope.themes").get_dropdown())
+                require("telescope.builtin").commands(require("telescope.themes").get_ivy())
             end,
             noremap = true,
             silent = true,
@@ -63,7 +82,9 @@ return {
         },
         {
             "<leader>fk",
-            "<cmd>lua require('telescope.builtin').keymaps({ layout_config = { width = 0.9, height = 0.5 } })<cr>",
+            function()
+                require("telescope.builtin").keymaps(require("telescope.themes").get_ivy())
+            end,
             noremap = true,
             silent = true,
         },
