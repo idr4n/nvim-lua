@@ -6,8 +6,8 @@ return {
     --: tokyonight {{{
     {
         "folke/tokyonight.nvim",
-        lazy = duringDayTime,
-        priority = 1000,
+        -- lazy = duringDayTime,
+        -- priority = 1000,
         opts = function()
             return {
                 style = "moon",
@@ -33,9 +33,9 @@ return {
             require("tokyonight").setup(opts)
 
             -- Load the colorscheme
-            if not duringDayTime then
-                vim.cmd("colorscheme tokyonight")
-            end
+            -- if not duringDayTime then
+            --     vim.cmd("colorscheme tokyonight")
+            -- end
         end,
     },
     --: }}}
@@ -97,8 +97,8 @@ return {
     --: catppuccin {{{
     {
         "catppuccin/nvim",
-        lazy = not duringDayTime,
-        priority = 1000,
+        -- lazy = not duringDayTime,
+        -- priority = 1000,
         name = "catppuccin",
         opts = function()
             local ucolors = require("catppuccin.utils.colors")
@@ -141,11 +141,11 @@ return {
         config = function(_, opts)
             require("catppuccin").setup(opts)
 
-            -- if not duringDayTime then
-            if duringDayTime then
-                -- vim.cmd([[colorscheme catppuccin-macchiato]])
-                vim.cmd([[colorscheme catppuccin-frappe]])
-            end
+            -- -- if not duringDayTime then
+            -- if duringDayTime then
+            --     -- vim.cmd([[colorscheme catppuccin-macchiato]])
+            --     vim.cmd([[colorscheme catppuccin-frappe]])
+            -- end
         end,
     },
     --: }}}
@@ -326,6 +326,34 @@ return {
             vim.api.nvim_set_hl(0, "NormalFloat", { fg = oxocarbon.base05, bg = oxocarbon.base00 })
             vim.api.nvim_set_hl(0, "FloatBorder", { fg = oxocarbon.base02, bg = oxocarbon.base00 })
             vim.api.nvim_set_hl(0, "Comment", { fg = oxocarbon.base03, bg = oxocarbon.none, italic = true })
+        end,
+    },
+    --: }}}
+
+    --: monokai-pro {{{
+    {
+        "loctvl842/monokai-pro.nvim",
+        -- lazy = not duringDayTime,
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require("monokai-pro").setup({
+                transparent_background = true,
+                override = function(c)
+                    return {
+                        FoldColumn = { fg = c.base.dimmed5 },
+                        CursorLineFold = { fg = c.base.dimmed5 },
+                        LspReferenceText = { bg = c.base.dimmed5 },
+                        LspReferenceRead = { bg = c.base.dimmed5 },
+                        LspReferenceWrite = { bg = c.base.dimmed5 },
+                    }
+                end,
+            })
+
+            -- if duringDayTime then
+            --     vim.cmd([[colorscheme monokai-pro]])
+            -- end
+            vim.cmd([[colorscheme monokai-pro]])
         end,
     },
     --: }}}
