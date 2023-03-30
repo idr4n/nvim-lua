@@ -1,5 +1,6 @@
 local icons = require("icons")
 local colors = require("plugins.lualine.my_theme").colors
+local devicons = require("nvim-web-devicons")
 
 local mode_color = {
     ["n"] = "#82cfff",
@@ -115,9 +116,7 @@ M.get_fileinfo = {
 
 M.get_fileicon = {
     function()
-        local icon, icon_highlight_group
-        local devicons = require("nvim-web-devicons")
-        icon, icon_highlight_group = devicons.get_icon(vim.fn.expand("%:t"))
+        local icon, icon_highlight_group = devicons.get_icon(vim.fn.expand("%:t"))
         if icon == nil then
             icon, icon_highlight_group = devicons.get_icon_by_filetype(vim.bo.filetype)
         end
@@ -167,8 +166,10 @@ M.get_bufnr = {
 M.get_filetype = {
     function()
         local filetype = vim.bo.filetype
+        -- local _, icon_highlight_group = devicons.get_icon(vim.fn.expand("%:t"))
         filetype = filetype:sub(1, 1):upper() .. filetype:sub(2)
         return ("%#StatusDir#" .. filetype .. " ")
+        -- return "  %#" .. icon_highlight_group .. "#" .. filetype .. " "
     end,
 }
 
@@ -323,9 +324,13 @@ M.current_signature = {
 
 M.charcode = {
     function()
-        return "Ux%04B"
+        if _G.charcode then
+            return "Ux%04B"
+        end
+        return ""
     end,
     padding = 1,
+    color = "Comment",
     cond = hide_in_width_120,
 }
 
