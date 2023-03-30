@@ -1,6 +1,6 @@
 -- system apperance
-local appearance = vim.fn.system("defaults read -g AppleInterfaceStyle")
-local duringDayTime = appearance:match("^Dark") == nil
+-- local appearance = vim.fn.system("defaults read -g AppleInterfaceStyle")
+-- local duringDayTime = appearance:match("^Dark") == nil
 
 return {
     --: tokyonight {{{

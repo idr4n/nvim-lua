@@ -16,8 +16,12 @@ return {
             noremap = true,
             silent = true,
         },
-        -- { "<leader>r", "<cmd>lua require('fzf-lua').live_grep()<CR>", noremap = true, silent = true },
-        { "<leader>gs", "<cmd>lua require('fzf-lua').git_status()<CR>", noremap = true, silent = true },
+        {
+            "<leader>gs",
+            "<cmd>lua require('fzf-lua').git_status({ winopts = { preview = { hidden = 'nohidden' } } })<CR>",
+            noremap = true,
+            silent = true,
+        },
         -- { "<leader>cc", "<cmd>lcd ~/.config/nvim | lua require('fzf-lua').files()<cr>", noremap = true, silent = true },
 
         -- sets new working dir,
