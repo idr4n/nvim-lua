@@ -1,13 +1,13 @@
 -- system apperance
--- local appearance = vim.fn.system("defaults read -g AppleInterfaceStyle")
--- local duringDayTime = appearance:match("^Dark") == nil
+local appearance = vim.fn.system("defaults read -g AppleInterfaceStyle")
+local duringDayTime = appearance:match("^Dark") == nil
 
 return {
     --: tokyonight {{{
     {
         "folke/tokyonight.nvim",
-        -- lazy = duringDayTime,
-        -- priority = 1000,
+        lazy = duringDayTime,
+        priority = 1000,
         opts = function()
             return {
                 style = "moon",
@@ -26,6 +26,8 @@ return {
                     hl.TelescopePreviewTitle = { bg = c.none, fg = c.orange }
                     hl.Folded = { bg = c.none }
                     hl.FoldColumn = { fg = c.fg_gutter }
+                    hl.NeoTreeNormal = { bg = c.bg_dark }
+                    hl.NeoTreeNormalNC = { bg = c.bg_dark }
                 end,
             }
         end,
@@ -33,9 +35,9 @@ return {
             require("tokyonight").setup(opts)
 
             -- Load the colorscheme
-            -- if not duringDayTime then
-            --     vim.cmd("colorscheme tokyonight")
-            -- end
+            if not duringDayTime then
+                vim.cmd("colorscheme tokyonight")
+            end
         end,
     },
     --: }}}
@@ -43,8 +45,8 @@ return {
     --: monokai-pro {{{
     {
         "loctvl842/monokai-pro.nvim",
-        -- lazy = not duringDayTime,
-        lazy = false,
+        lazy = not duringDayTime,
+        -- lazy = false,
         priority = 1000,
         config = function()
             require("monokai-pro").setup({
@@ -62,10 +64,10 @@ return {
                 end,
             })
 
-            -- if duringDayTime then
-            --     vim.cmd([[colorscheme monokai-pro]])
-            -- end
-            vim.cmd([[colorscheme monokai-pro]])
+            if duringDayTime then
+                vim.cmd([[colorscheme monokai-pro]])
+            end
+            -- vim.cmd([[colorscheme monokai-pro]])
         end,
     },
     --: }}}
