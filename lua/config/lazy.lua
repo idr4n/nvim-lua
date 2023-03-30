@@ -18,7 +18,7 @@ require("lazy").setup({
         { import = "plugins" },
     },
     defaults = { lazy = true },
-    install = { colorscheme = { "tokyonight", "catppuccin", "github-theme" } },
+    install = { colorscheme = { "tokyonight", "monokai-pro" } },
     --
     change_detection = {
         enabled = true,
