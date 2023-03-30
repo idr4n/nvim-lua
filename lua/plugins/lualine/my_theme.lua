@@ -9,7 +9,7 @@ M.colors = {
     hint = { fg = "#f6c177" },
     info = { fg = "#3ddbd9" },
     -- normal = "#d2d2d2",
-    normal = "#C4B6C4",
+    normal = "#c8d3f5",
     gray = "#32363e",
     none = "NONE",
     bg_highlight = "#2f334d",

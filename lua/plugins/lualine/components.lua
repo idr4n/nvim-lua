@@ -229,12 +229,6 @@ M.diagnostics = {
     "diagnostics",
     sources = { "nvim_diagnostic" },
     sections = { "error", "warn", "info", "hint" },
-    diagnostics_color = {
-        error = colors.error,
-        warn = colors.warning,
-        info = colors.info,
-        hint = "SLDiagnosticHints", -- colors.hint is not working for some reason
-    },
     symbols = {
         error = icons.diagnostics.Error,
         warn = icons.diagnostics.Warning,
