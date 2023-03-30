@@ -39,6 +39,11 @@ keymap("n", "<leader>cr", ":CodeRun<cr>", opts)
 command("YankBullet", "execute '.g/- \\(X\\s\\)\\?\\zs.*$/normal \"+ygn'", {})
 keymap("n", ",b", ":YankBullet<cr>", opts)
 
+-- toggle charcode in statusline
+command("CharcodeToggle", function()
+    _G.charcode = not _G.charcode
+end, {})
+
 -- Autocommands
 
 -- Autospelling for tex and md files
