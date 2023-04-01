@@ -32,6 +32,7 @@ keymap("n", "<C-f>", "zt", opts)
 
 --: Quicksave command {{{
 vim.keymap.set({ "n", "i", "v", "s" }, "<C-s>", "<cmd>w<CR>")
+vim.keymap.set("n", "<leader>s", "<cmd>w<CR>")
 --: }}}
 
 --: Quit current window {{{
