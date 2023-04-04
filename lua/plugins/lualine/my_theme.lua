@@ -8,10 +8,10 @@ M.colors = {
     warning = { fg = "#ff9e64" },
     hint = { fg = "#f6c177" },
     info = { fg = "#3ddbd9" },
-    -- normal = "#d2d2d2",
-    normal = "#c8d3f5",
+    normal = "#A6ACCD",
     gray = "#32363e",
     none = "NONE",
+    bg = "#171822",
     bg_highlight = "#2f334d",
     black = "black",
     fg = "#c8d3f5",
@@ -52,35 +52,33 @@ M.setup = function()
 
     local colors = M.colors
 
+    local statusline_hl = vim.api.nvim_get_hl_by_name("StatusLine", true)
+    local comment_hl = vim.api.nvim_get_hl_by_name("Comment", true)
+    local string_hl = vim.api.nvim_get_hl_by_name("String", true)
+
+    vim.api.nvim_set_hl(0, "StatusDir", { fg = string_hl.foreground, bg = statusline_hl.background, bold = true })
+    vim.api.nvim_set_hl(0, "SLFileName", { fg = statusline_hl.foreground, bg = statusline_hl.background, bold = true })
+    vim.api.nvim_set_hl(0, "StatusIconLock", { fg = "#f6c177", bg = statusline_hl.background })
+    -- vim.api.nvim_set_hl(0, "SLNormal", { fg = statusline_hl.foreground, bg = statusline_hl.background })
+    -- vim.api.nvim_set_hl(0, "SLNormalBg", { bg = statusline_hl.background })
+    vim.api.nvim_set_hl(0, "SLBufNr", { fg = comment_hl.foreground, bg = statusline_hl.background })
+    vim.api.nvim_set_hl(0, "SLModified", { fg = "#ff7eb6", bg = statusline_hl.background, bold = true })
+    vim.api.nvim_set_hl(0, "SLMatches", { fg = "#2c2a2e", bg = "#3ddbd9" })
+    vim.api.nvim_set_hl(0, "SLDiagnosticOK", { fg = colors.green, bg = statusline_hl.background })
+    vim.api.nvim_set_hl(0, "SLDiagnosticWarn", { fg = "#ff9e64", bg = statusline_hl.background, bold = true })
+    vim.api.nvim_set_hl(0, "SLDiagnosticInfo", { fg = "#3ddbd9", bg = statusline_hl.background, bold = true })
+    vim.api.nvim_set_hl(0, "SLDiagnosticHints", { fg = "#f6c177", bg = statusline_hl.background, bold = true })
+    vim.api.nvim_set_hl(0, "SLDiagnosticError", { fg = "#ff7eb6", bg = statusline_hl.background, bold = true })
+
     -- if not isDark then
     --     colors = colors_light
     -- end
 
     return {
         normal = {
-            a = { fg = colors.normal },
-            b = { fg = colors.normal },
-            c = { fg = colors.normal },
-        },
-        insert = {
-            a = { fg = colors.normal },
-            b = { fg = colors.normal },
-        },
-        visual = {
-            a = { fg = colors.normal },
-            b = { fg = colors.normal },
-        },
-        command = {
-            a = { fg = colors.normal },
-            b = { fg = colors.normal },
-        },
-        replace = {
-            a = { fg = colors.normal },
-            b = { fg = colors.normal },
-        },
-        terminal = {
-            a = { fg = colors.normal },
-            b = { fg = colors.normal },
+            a = "StatusLine",
+            b = "StatusLine",
+            c = "StatusLine",
         },
         inactive = {
             a = { fg = colors.fg_gutter },

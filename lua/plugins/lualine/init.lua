@@ -21,7 +21,7 @@ return {
             },
             sections = {
                 lualine_a = { c.mode },
-                lualine_b = { c.get_fileicon, c.get_fileinfo },
+                lualine_b = { c.get_fileinfo },
                 lualine_c = { c.get_searchcount, c.get_bufnr },
                 lualine_x = { c.getWords, c.charcode },
                 lualine_y = { c.get_git_status, c.get_filetype },

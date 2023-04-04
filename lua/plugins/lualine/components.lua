@@ -32,22 +32,10 @@ local mode_color = {
 --         return hl and hl.foreground and { fg = string.format("#%06x", hl.foreground) }
 --     end
 -- end
--- vim.api.nvim_set_hl(0, "SLNormal", { fg = vim.api.nvim_get_hl_by_name("Normal", true) })
 
 local function isempty(s)
     return s == nil or s == ""
 end
-
-vim.api.nvim_set_hl(0, "StatusDir", { fg = "#be95ff" })
-vim.api.nvim_set_hl(0, "StatusIconLock", { fg = "#f6c177" })
-vim.api.nvim_set_hl(0, "SLNormal", { fg = colors.normal })
-vim.api.nvim_set_hl(0, "SLModified", { fg = "#ff7eb6" })
-vim.api.nvim_set_hl(0, "SLMatches", { fg = "#2c2a2e", bg = "#3ddbd9" })
-vim.api.nvim_set_hl(0, "SLDiagnosticOK", { fg = colors.green })
-vim.api.nvim_set_hl(0, "SLDiagnosticWarn", { fg = "#ff9e64", bold = true })
-vim.api.nvim_set_hl(0, "SLDiagnosticInfo", { fg = "#3ddbd9", bold = true })
-vim.api.nvim_set_hl(0, "SLDiagnosticHints", { fg = "#f6c177", bold = true })
-vim.api.nvim_set_hl(0, "SLDiagnosticError", { fg = "#ff7eb6", bold = true })
 
 local M = {}
 
@@ -89,6 +77,30 @@ M.getWords = {
     color = { fg = colors.orange },
 }
 
+local function file_icon()
+    local icon, icon_highlight_group = devicons.get_icon(vim.fn.expand("%:t"))
+    if icon == nil then
+        icon, icon_highlight_group = devicons.get_icon_by_filetype(vim.bo.filetype)
+    end
+
+    if icon == nil and icon_highlight_group == nil then
+        icon = ""
+        icon_highlight_group = "DevIconDefault"
+    end
+
+    local icon_hl = vim.api.nvim_get_hl_by_name(icon_highlight_group, true)
+    local status_hl = vim.api.nvim_get_hl_by_name("StatusLine", true)
+    vim.api.nvim_set_hl(0, "SLIcon", { fg = icon_hl.foreground, bg = status_hl.background })
+
+    if not vim.bo.modifiable then
+        icon = ""
+        icon_highlight_group = "StatusIconLock"
+        return "  %#StatusIconLock#" .. icon
+    end
+
+    return "  %#SLIcon#" .. icon
+end
+
 M.get_fileinfo = {
     function()
         local filename = ""
@@ -103,34 +115,20 @@ M.get_fileinfo = {
         --     return ""
         -- end
 
-        filename = "%#StatusDir#" .. (vim.fn.expand("%:p:h:t")) .. "/" .. "%#SLNormal#" .. vim.fn.expand("%:t")
+        local icon = file_icon() .. " "
+        filename = icon
+            .. "%#StatusDir#"
+            .. (vim.fn.expand("%:p:h:t"))
+            .. "/"
+            .. "%#SLFileName#"
+            .. vim.fn.expand("%:t")
 
         if vim.bo.modified then
             filename = (vim.fn.expand("%:p:h:t")) .. "/" .. vim.fn.expand("%:t")
-            return ("%#SLModified#" .. " " .. filename)
+            return (icon .. "%#SLModified#" .. "  " .. filename)
         end
 
         return filename
-    end,
-}
-
-M.get_fileicon = {
-    function()
-        local icon, icon_highlight_group = devicons.get_icon(vim.fn.expand("%:t"))
-        if icon == nil then
-            icon, icon_highlight_group = devicons.get_icon_by_filetype(vim.bo.filetype)
-        end
-
-        if icon == nil and icon_highlight_group == nil then
-            icon = ""
-            icon_highlight_group = "DevIconDefault"
-        end
-        if not vim.bo.modifiable then
-            icon = ""
-            icon_highlight_group = "StatusIconLock"
-        end
-
-        return "  %#" .. icon_highlight_group .. "#" .. icon
     end,
 }
 
@@ -151,8 +149,10 @@ end
 M.get_git_status = {
     function()
         local branch = (vim.b.gitsigns_status_dict or { head = "" })
+        local git_icon = "%#SLModified#" .. "󰊢 " .. "%#SLFileName#"
         local is_head_empty = (branch.head ~= "")
-        return ((is_head_empty and string.format("(λ • #%s%s)", (branch.head or ""), getGitChanges())) or "")
+        -- return ((is_head_empty and string.format("(λ • #%s%s)", (branch.head or ""), getGitChanges())) or "")
+        return ((is_head_empty and string.format("%s%s%s", git_icon, (branch.head or ""), getGitChanges())) or "")
     end,
 }
 
@@ -160,7 +160,7 @@ M.get_bufnr = {
     function()
         return vim.api.nvim_get_current_buf()
     end,
-    color = "Comment",
+    color = "SLBufNr",
 }
 
 M.get_filetype = {
@@ -333,7 +333,7 @@ M.python_env = {
         if vim.bo.filetype == "python" then
             local venv = os.getenv("CONDA_DEFAULT_ENV") or os.getenv("VIRTUAL_ENV")
             if venv then
-                local icons = require("nvim-web-devicons")
+                -- local icons = require("nvim-web-devicons")
                 local py_icon, _ = icons.get_icon(".py")
                 local venv_name = string.match(venv, "/(%w+)$")
                 return string.format(" (" .. py_icon .. " %s)", venv_name)
