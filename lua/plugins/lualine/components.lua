@@ -116,6 +116,7 @@ M.get_fileinfo = {
         -- end
 
         local icon = file_icon() .. " "
+        -- local icon = "%#SLNormal#" .. file_icon() .. " "
         filename = icon
             .. "%#StatusDir#"
             .. (vim.fn.expand("%:p:h:t"))
@@ -269,6 +270,7 @@ M.get_searchcount = {
     function()
         if vim.v.hlsearch == 0 then
             return "%l:%c " .. progress()
+            -- return "%#SLNormal#%l:%c " .. progress()
         end
         local ok, count = pcall(vim.fn.searchcount, { recompute = true })
         if (not ok or (count.current == nil)) or (count.total == 0) then
@@ -324,7 +326,7 @@ M.charcode = {
         return ""
     end,
     padding = 1,
-    color = "Comment",
+    color = "SLBufNr",
     cond = hide_in_width_120,
 }
 

@@ -59,7 +59,7 @@ M.setup = function()
     vim.api.nvim_set_hl(0, "StatusDir", { fg = string_hl.foreground, bg = statusline_hl.background, bold = true })
     vim.api.nvim_set_hl(0, "SLFileName", { fg = statusline_hl.foreground, bg = statusline_hl.background, bold = true })
     vim.api.nvim_set_hl(0, "StatusIconLock", { fg = "#f6c177", bg = statusline_hl.background })
-    -- vim.api.nvim_set_hl(0, "SLNormal", { fg = statusline_hl.foreground, bg = statusline_hl.background })
+    vim.api.nvim_set_hl(0, "SLNormal", { fg = statusline_hl.foreground, bg = statusline_hl.background })
     -- vim.api.nvim_set_hl(0, "SLNormalBg", { bg = statusline_hl.background })
     vim.api.nvim_set_hl(0, "SLBufNr", { fg = comment_hl.foreground, bg = statusline_hl.background })
     vim.api.nvim_set_hl(0, "SLModified", { fg = "#ff7eb6", bg = statusline_hl.background, bold = true })
@@ -76,14 +76,14 @@ M.setup = function()
 
     return {
         normal = {
-            a = "StatusLine",
-            b = "StatusLine",
-            c = "StatusLine",
+            a = "SLNormal",
+            b = "SLNormal",
+            c = "SLNormal",
         },
         inactive = {
-            a = { fg = colors.fg_gutter },
-            b = { fg = colors.fg_gutter },
-            c = { fg = colors.fg_gutter },
+            a = { fg = colors.fg_gutter, bg = string.format("#%06x", statusline_hl.background) },
+            b = { fg = colors.fg_gutter, bg = string.format("#%06x", statusline_hl.background) },
+            c = { fg = colors.fg_gutter, bg = string.format("#%06x", statusline_hl.background) },
         },
     }
 end
