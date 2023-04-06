@@ -1,7 +1,7 @@
 return {
     on_attach = function(client, bufnr)
         require("plugins.lsp.handlers").on_attach(client, bufnr)
-        require("sqls").on_attach(client, bufnr)
+        require("sqlls").on_attach(client, bufnr)
     end,
     settings = {
         sqls = {

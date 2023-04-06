@@ -26,7 +26,7 @@ return {
                 "ruff",
                 "rust-analyzer",
                 "sqlfluff",
-                "sqls",
+                "sqlls",
                 "stylelint-lsp",
                 "stylua",
                 "svelte-language-server",
@@ -183,7 +183,7 @@ return {
                 jsonls = require("plugins.lsp.settings.jsonls"),
                 lua_ls = require("plugins.lsp.settings.lua_ls"),
                 pyright = require("plugins.lsp.settings.pyright"),
-                sqls = require("plugins.lsp.settings.sqls"),
+                sqlls = require("plugins.lsp.settings.sqls"),
             },
 
             setup = {
