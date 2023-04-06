@@ -23,7 +23,7 @@ return {
                 lualine_a = { c.mode },
                 lualine_b = { c.get_fileinfo },
                 lualine_c = { c.get_searchcount, c.get_bufnr },
-                lualine_x = { c.getWords, c.charcode },
+                lualine_x = { c.lsp_running, c.getWords, c.charcode },
                 lualine_y = { c.get_git_status, c.get_filetype },
                 -- lualine_z = { c.get_lsp_diagnostic },
                 lualine_z = { c.diagnostics },

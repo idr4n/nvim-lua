@@ -169,7 +169,7 @@ M.get_filetype = {
         local filetype = vim.bo.filetype
         -- local _, icon_highlight_group = devicons.get_icon(vim.fn.expand("%:t"))
         filetype = filetype:sub(1, 1):upper() .. filetype:sub(2)
-        return ("%#StatusDir#" .. filetype .. " ")
+        return ("%#SLFileType#" .. filetype .. " ")
         -- return "  %#" .. icon_highlight_group .. "#" .. filetype .. " "
     end,
 }
@@ -328,6 +328,16 @@ M.charcode = {
     padding = 1,
     color = "SLBufNr",
     cond = hide_in_width_120,
+}
+
+M.lsp_running = {
+    function()
+        if #vim.lsp.buf_get_clients() > 0 then
+            return "%#SLFileType# "
+        else
+            return ""
+        end
+    end,
 }
 
 M.python_env = {
