@@ -57,7 +57,7 @@ return {
             -- size = 25,
             size = function(term)
                 if term.direction == "horizontal" then
-                    return 17
+                    return 20
                 elseif term.direction == "vertical" then
                     return vim.o.columns * 0.4
                 end
@@ -70,8 +70,8 @@ return {
             start_in_insert = true,
             insert_mappings = false,
             persist_size = true,
-            direction = "float",
-            -- direction = "horizontal",
+            -- direction = "float",
+            direction = "horizontal",
             close_on_exit = true,
             shell = vim.o.shell,
             float_opts = {
@@ -104,6 +104,19 @@ return {
                     lazygit:toggle()
                 end
             end, {})
+            function _G.set_terminal_keymaps()
+                local op = { buffer = 0 }
+                vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], op)
+                vim.keymap.set("t", "jk", [[<C-\><C-n>]], op)
+                vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], op)
+                vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], op)
+                vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], op)
+                -- vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], op)
+                vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], op)
+            end
+
+            -- if you only want these mappings for toggle term use term://*toggleterm#* instead
+            vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
         end,
     },
     --: }}}
