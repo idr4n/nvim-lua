@@ -19,15 +19,16 @@ return {
                 },
                 on_highlights = function(hl, c)
                     -- hl.CursorLine = { bg = c.bg_dark }
-                    hl.CursorLine = { bg = "#16161E" }
+                    -- hl.CursorLine = { bg = "#16161E" }
                     hl.CursorLineNr = { fg = c.orange, bold = true }
+                    hl.StatusLine = { bg = "#1A1B25" }
                     hl.TelescopeBorder = { bg = c.none, fg = c.dark3 }
                     hl.TelescopePromptTitle = { bg = c.none, fg = c.orange }
                     hl.TelescopePreviewTitle = { bg = c.none, fg = c.orange }
                     hl.Folded = { bg = c.none }
                     hl.FoldColumn = { fg = c.fg_gutter }
-                    hl.NeoTreeNormal = { bg = c.bg_dark }
-                    hl.NeoTreeNormalNC = { bg = c.bg_dark }
+                    hl.NeoTreeNormal = { bg = "#1A1B25" }
+                    hl.NeoTreeNormalNC = { bg = "#1A1B25" }
                 end,
             }
         end,
@@ -42,12 +43,71 @@ return {
     },
     --: }}}
 
+    --: catppuccin {{{
+    {
+        "catppuccin/nvim",
+        -- lazy = not duringDayTime,
+        -- priority = 1000,
+        name = "catppuccin",
+        opts = function()
+            local ucolors = require("catppuccin.utils.colors")
+            local cp = require("catppuccin.palettes").get_palette()
+
+            return {
+                transparent_background = true,
+                styles = {
+                    functions = { "italic" },
+                    keywords = { "italic" },
+                    conditionals = {},
+                },
+                integrations = {
+                    native_lsp = {
+                        underlines = {
+                            errors = { "undercurl" },
+                            hints = { "undercurl" },
+                            warnings = { "undercurl" },
+                            information = { "undercurl" },
+                        },
+                    },
+                },
+                custom_highlights = {
+                    CursorLine = {
+                        bg = ucolors.vary_color(
+                            { latte = ucolors.lighten(cp.mantle, 0.70, cp.base) },
+                            ucolors.darken(cp.surface0, 0.70, cp.base)
+                        ),
+                    },
+                    TSParameter = { fg = cp.maroon, style = {} },
+                    ["@parameter"] = { fg = cp.maroon, style = {} },
+                    TSInclude = { fg = cp.mauve, style = {} },
+                    ["@include"] = { fg = cp.mauve, style = {} },
+                    ["@namespace"] = { fg = cp.blue, style = {} },
+                    TSNamespace = { fg = cp.blue, style = {} },
+                    VertSplit = { fg = "#15161E" },
+                    StatusLine = { bg = "#282C34" },
+                    NeoTreeNormal = { bg = "#282C34" },
+                    NeoTreeNormalNC = { bg = "#282C34" },
+                },
+            }
+        end,
+        config = function(_, opts)
+            require("catppuccin").setup(opts)
+
+            -- -- if not duringDayTime then
+            if duringDayTime then
+                -- vim.cmd([[colorscheme catppuccin-macchiato]])
+                vim.cmd([[colorscheme catppuccin-frappe]])
+            end
+        end,
+    },
+    --: }}}
+
     --: monokai-pro {{{
     {
         "loctvl842/monokai-pro.nvim",
-        lazy = not duringDayTime,
+        -- lazy = not duringDayTime,
         -- lazy = false,
-        priority = 1000,
+        -- priority = 1000,
         config = function()
             require("monokai-pro").setup({
                 transparent_background = true,
@@ -64,10 +124,39 @@ return {
                 end,
             })
 
-            if duringDayTime then
-                vim.cmd([[colorscheme monokai-pro]])
-            end
+            -- if duringDayTime then
+            --     vim.cmd([[colorscheme monokai-pro]])
+            -- end
             -- vim.cmd([[colorscheme monokai-pro]])
+        end,
+    },
+    --: }}}
+
+    --: github {{{
+    {
+        "projekt0n/github-nvim-theme",
+        lazy = not duringDayTime,
+        priority = 1000,
+        opts = {
+            theme_style = "light",
+            function_style = "italic",
+            sidebars = { "qf", "vista_kind", "terminal", "packer" },
+            transparent = true,
+            overrides = function(c)
+                return {
+                    CursorLine = { bg = "#F4F8FF" },
+                    LspReferenceText = { bg = "#E2FFE8" },
+                    Folded = { bg = "NONE" },
+                    FoldColumn = { fg = c.bg_visual, bg = "NONE" },
+                    LineNr = { fg = c.line_nr },
+                    StatusLine = { bg = "#F6F8FA", fg = "#7A83A4" },
+                }
+            end,
+        },
+        config = function(_, opts)
+            require("github-theme").setup(opts)
+            vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "#F6F8FA" })
+            vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "#F6F8FA" })
         end,
     },
     --: }}}
