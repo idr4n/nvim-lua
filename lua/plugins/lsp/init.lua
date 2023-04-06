@@ -3,7 +3,7 @@ return {
     {
         "williamboman/mason.nvim",
         cmd = "Mason",
-        keys = { { "<leader>cm", "<cmd>Mason<cr> " } },
+        keys = { { "<leader>om", "<cmd>Mason<cr> " } },
         opts = {
             ensure_installed = {
                 "astro-language-server",

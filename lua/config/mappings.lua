@@ -1,5 +1,7 @@
 --: opts {{{
+local keyset = vim.keymap.set
 local opts = { noremap = true, silent = true }
+local od = require("util").opts_and_desc
 --: }}}
 
 --: Shorten function name {{{
@@ -13,16 +15,16 @@ local keymap = vim.api.nvim_set_keymap
 --: }}}
 
 --: Press jk fast to enter {{{
-keymap("i", "jk", "<ESC>", opts)
+keymap("i", "jk", "<ESC>", od())
 --: }}}
 
 --: Move around while in insert mode {{{
 -- keymap("i", "<C-a>", "<C-O>0", opts)
-keymap("i", "<C-a>", "<Home>", opts)
+keymap("i", "<C-a>", "<Home>", od())
 -- keymap("i", "<C-e>", "<C-O>$", opts)
-keymap("i", "<C-e>", "<End>", opts)
-keymap("i", "<C-f>", "<C-O>zt", opts)
-keymap("n", "<C-f>", "zt", opts)
+keymap("i", "<C-e>", "<End>", od())
+keymap("i", "<C-f>", "<C-O>zt", od())
+keymap("n", "<C-f>", "zt", od("Top current line"))
 --: }}}
 
 --: Move up and down with wrapped lines {{{
@@ -31,39 +33,40 @@ keymap("n", "<C-f>", "zt", opts)
 --: }}}
 
 --: Quicksave command {{{
-vim.keymap.set({ "n", "i", "v", "s" }, "<C-s>", "<cmd>w<CR>")
-vim.keymap.set("n", "<leader>s", "<cmd>w<CR>")
+keyset("n", "<leader>s", "<cmd>w<CR>", od("Save file"))
+keyset("n", "<leader>fs", "<cmd>w<CR>", od("Save file"))
 --: }}}
 
 --: Quit current window {{{
-keymap("n", "<leader>e", ":quit<CR>", opts)
-keymap("n", "<leader>E", ":q!<CR>", opts)
+keymap("n", "<leader>e", ":quit<CR>", od("Quit"))
+keymap("n", "<leader>E", ":q!<CR>", od("Force Quit"))
 --: }}}
 
 --: Easy select all of file {{{
-keymap("n", "<Leader>S", "ggVG<c-$>", opts)
-keymap("n", ",A", "ggVG<c-$>", opts)
+keymap("n", "<Leader>S", "ggVG<c-$>", od("Select All"))
+keymap("n", ",A", "ggVG<c-$>", od("Select All"))
 --: }}}
 
 --: Duplicate line and comment old line out {{{
-keymap("n", "gcy", "gcc:t.<cr>gcc", { noremap = false, silent = true })
+keymap("n", "gcy", "gcc:t.<cr>gcc", { noremap = false, silent = true, desc = "Duplicate-comment line" })
 --: }}}
 
 --: Switch buffers {{{
 -- keymap("n", "<S-w>", ":bnext<CR>", opts)
 -- keymap("n", "<S-q>", ":bprevious<CR>", opts)
-keymap("n", "ga", ":b#<CR>", opts)
+keymap("n", "ga", ":b#<CR>", od("Last buffer"))
 --: }}}
 
 --: Using Bbye plugin to close the current buffer {{{
-keymap("n", "<leader>q", ":Bdelete<CR>", opts)
+keymap("n", "<leader>q", ":Bdelete<CR>", od("Delete buffer"))
+keymap("n", "<leader>bd", ":Bdelete<CR>", od("Delete buffer"))
 -- wipeout current buffer
-keymap("n", "<leader>B", ":Bwipeout<CR>", opts)
+keymap("n", "<leader>bw", ":Bwipeout<CR>", od("Wipeout buffer"))
 -- keymap("n", "<leader>bd", ":bd<CR>", opts)
 --: }}}
 
 --: Close tab {{{
-keymap("n", "<leader>Q", ":tabclose<cr>", opts)
+keymap("n", "<leader>Q", ":tabclose<cr>", od("Close tab"))
 --: }}}
 
 --: Move text up and down {{{
@@ -76,21 +79,21 @@ keymap("n", "<A-Up>", "[e==", { noremap = false, silent = true })
 keymap("n", "*", "*N", { noremap = true })
 keymap("n", "#", "#N", { noremap = true })
 -- searches but not the exact word (* forward, # backwards)
-keymap("n", "g*", "g*N", { noremap = true })
-keymap("n", "g#", "g#N", { noremap = true })
+keymap("n", "g*", "g*N", { noremap = true, desc = "Search not exact" })
+keymap("n", "g#", "g#N", { noremap = true, desc = "BckSearch not exact" })
 --: }}}
 
 --: select line without end of line {{{
-keymap("n", ",a", "^v$h", opts)
+keymap("n", ",a", "^v$h", od("Select line-no-end"))
 --: }}}
 
 --: paste register for printing (JavaScript) {{{
-keymap("n", ",d", 'oconsole.log("<esc>pa")<esc>', opts)
-keymap("n", ",D", 'Oconsole.log("<esc>pa")<esc>', opts)
+keymap("n", ",d", 'oconsole.log("<esc>pa")<esc>', od("Paste for printing - JS"))
+keymap("n", ",D", 'Oconsole.log("<esc>pa")<esc>', od("Paste for printing - JS"))
 --: }}}
 
 --: Paste register for informative printing {{{
-keymap("n", ",s", 'a"<esc>pa:", <esc>p', opts)
+keymap("n", ",s", 'a"<esc>pa:", <esc>p', od("Paste for info printing"))
 --: }}}
 
 --: keep cursor at same position when joining lines {{{
@@ -98,16 +101,16 @@ keymap("n", "J", "mzJ`z", opts)
 --: }}}
 
 --: toggle wrapping lines {{{
-keymap("n", ",w", "<cmd>set wrap!<cr>", opts)
+keymap("n", "<leader>tw", "<cmd>set wrap!<cr>", od("Line wrap"))
 --: }}}
 
 --: toggle line numbers {{{
-vim.keymap.set("n", "<C-N>", function()
+keyset("n", "<leader>tn", function()
     vim.cmd([[
         set invnumber
         set invrelativenumber
     ]])
-end)
+end, od("Line numbers"))
 --: }}}
 
 --: center when scrolling page down and up {{{
@@ -116,12 +119,12 @@ keymap("n", "<c-u>", "<c-u>zz", opts)
 --: }}}
 
 --: center around next search result {{{
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+keyset("n", "n", "nzzzv")
+keyset("n", "N", "Nzzzv")
 --: }}}
 
---: cset current file's directory as working directoryomment... {{{
-keymap("n", "<leader>cd", "<cmd>cd %:p:h<CR>", opts)
+--: set current file's directory as working directory {{{
+keymap("n", "<leader>cd", "<cmd>cd %:p:h<CR>", od("Set directory as wd"))
 --: }}}
 
 --: Better window navigation {{{
@@ -139,15 +142,13 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 --: }}}
 
 --: Clear search highlight {{{
-keymap("n", "<leader>,", "<cmd>nohlsearch|diffupdate|normal! <C-L><CR>", opts)
+keymap("n", "<leader>,", "<cmd>nohlsearch|diffupdate|normal! <C-L><CR>", od("Clear search highlight"))
 keymap("n", "<esc>", "<esc><cmd>noh<cr>", { noremap = true, silent = true, desc = "No highlight escape" })
 --: }}}
 
 --: home row goto end and start of line (same as in Helix editor) {{{
-keymap("n", "gh", "^", opts)
-keymap("n", "gl", "$", opts)
-keymap("v", "gh", "^", opts)
-keymap("v", "gl", "$", opts)
+keyset({ "n", "v", "o" }, "gh", "^", od("Go to start of line"))
+keyset({ "n", "v", "o" }, "gl", "$", od("Go to end of line"))
 --: }}}
 
 --: Stay in indent mode {{{
@@ -156,12 +157,17 @@ keymap("v", ">", ">gv", opts)
 --: }}}
 
 --: Duplicate and comment selection {{{
-keymap("v", "gy", ":t'><cr>gvgcgv<esc>", { noremap = false, silent = true })
+keymap("v", "gy", ":t'><cr>gvgcgv<esc>", { noremap = false, silent = true, desc = "Duplicate and comment" })
 --: }}}
 
 --: Move text up and down {{{
 keymap("v", "<A-Down>", ":m .+1<CR>==", opts)
 keymap("v", "<A-Up>", ":m .-2<CR>==", opts)
+keymap("x", "<A-Down>", ":move '>+1<CR>gv=gv", opts)
+keymap("x", "<A-Up>", ":move '<-2<CR>gv=gv", opts)
+--: }}}
+
+--: paste and replace selection {{{
 keymap("v", "p", '"_dP', opts)
 --: }}}
 
@@ -171,42 +177,29 @@ keymap("v", "*", "y/\\V<C-R>=escape(@\",'/')<CR><CR>", { noremap = true })
 
 --: substitute word previously searched {{{
 -- on selection only
-keymap("v", "<leader>R", ":s///g<LEFT><LEFT>", { noremap = true })
+keymap("v", "<leader>R", ":s///g<LEFT><LEFT>", { noremap = true, desc = "Replace search" })
 -- on entire buffer
-keymap("n", "<leader>R", ":%s///g<LEFT><LEFT>", { noremap = true })
+keymap("n", "<leader>R", ":%s///g<LEFT><LEFT>", { noremap = true, desc = "Replace search" })
 -- substitute current word
-vim.keymap.set("n", "<leader>X", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-vim.keymap.set("v", "<leader>X", [[y:%s/<C-r>0/<C-r>0/gI<Left><Left><Left>]])
---: }}}
-
---: Move text up and down {{{
-keymap("x", "<A-Down>", ":move '>+1<CR>gv=gv", opts)
-keymap("x", "<A-Up>", ":move '<-2<CR>gv=gv", opts)
+keyset("n", "<leader>X", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Substitute current word" })
+keyset("v", "<leader>X", [[y:%s/<C-r>0/<C-r>0/gI<Left><Left><Left>]], { desc = "Substitute selection" })
 --: }}}
 
 --: Explorer (netrw) {{{
-keymap("n", "<leader>xe", ":Explor<cr>", opts)
+keymap("n", "<leader>oe", ":Explor<cr>", od("Netrw"))
 --: }}}
 
---: Some mapping ideas from thePrimeagen to replace the easy-clip plugin {{{
--- greatest remap ever
+--: Replace the easy-clip plugin {{{
 -- keymap("x", "<leader>p", '"_dP', opts)
-keymap("n", "<leader>p", '"+p', opts)
-keymap("v", "<leader>p", '"+p', opts)
-keymap("n", "<leader>P", '"+P', opts)
-keymap("v", "<leader>P", '"+P', opts)
-
--- next greatest remap ever (if not using system clipboard as main register)
-keymap("n", "<leader>y", '"+y', opts)
-keymap("v", "<leader>y", '"+y', opts)
-keymap("n", "<leader>Y", '"+Y', { noremap = false, silent = true })
-
+keyset({ "n", "v", "o" }, "<leader>p", '"+p', od("Paste from clipboard"))
+keyset({ "n", "v", "o" }, "<leader>P", '"+P', od("Paste from clipboard"))
+keyset({ "n", "v", "o" }, "<leader>y", '"+y', od("Yank to clipboard"))
+keymap("n", "<leader>Y", '"+Y', { noremap = false, silent = true, desc = "Yank to clipboard line-end" })
 keymap("n", "d", '"_d', opts)
 keymap("v", "d", '"_d', opts)
-keymap("", "<leader>d", "d", opts)
-vim.keymap.set("n", "gm", "m", opts)
+keyset("n", "gm", "m", opts)
 keymap("", "m", "d", opts)
-keymap("", "<leader>m", '"+d', opts)
+keymap("", "<leader>m", '"+d', od("Cut to clipboard"))
 keymap("n", "x", '"_x', opts)
 keymap("n", "X", '"_X', opts)
 keymap("n", "c", '"_c', opts)
@@ -216,5 +209,5 @@ keymap("v", "c", '"_c', opts)
 --: }}}
 
 --: Other mappings {{{
-vim.keymap.set("n", "<leader>L", "<cmd>:Lazy<cr>", { desc = "Lazy" })
+keyset("n", "<leader>ol", "<cmd>:Lazy<cr>", { desc = "Lazy Dashboard" })
 --: }}}

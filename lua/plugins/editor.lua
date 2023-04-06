@@ -4,17 +4,19 @@ return {
         "kazhala/close-buffers.nvim",
         keys = {
             {
-                "<leader>kf",
+                "<leader>bk",
                 "<cmd>lua vim.cmd('Alpha'); require('close_buffers').wipe({ type = 'other', force = false })<CR>",
                 noremap = true,
                 silent = false,
+                desc = "Close all and show Alpha",
             },
 
             {
-                "<leader>ko",
+                "<leader>bo",
                 "<cmd>lua require('close_buffers').wipe({ type = 'other', force = false })<CR>",
                 noremap = true,
                 silent = false,
+                desc = "Close all other buffers",
             },
         },
     },
@@ -243,7 +245,6 @@ return {
                     map("n", "<leader>hD", function()
                         gs.diffthis("~")
                     end)
-                    map("n", "<leader>td", gs.toggle_deleted)
 
                     -- Text object
                     map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
@@ -259,10 +260,10 @@ return {
         cmd = "Neotree",
         branch = "v2.x",
         keys = {
-            { "<leader>a", ":Neotree reveal left toggle<CR>", noremap = true, silent = true },
-            { "<leader>u", ":Neotree focus<CR>", noremap = true, silent = true },
-            { "<leader>i", ":Neotree float reveal toggle<CR>", noremap = true, silent = true },
-            { "<leader>A", ":Neotree toggle show buffers right<CR>", noremap = true, silent = true },
+            { "<leader>na", ":Neotree reveal left toggle<CR>", noremap = true, silent = true, desc = "Toggle" },
+            { "<leader>nn", ":Neotree focus<CR>", noremap = true, silent = true, desc = "Focus" },
+            { "<leader>nf", ":Neotree float reveal toggle<CR>", noremap = true, silent = true, desc = "Float" },
+            { "<leader>nb", ":Neotree toggle show buffers right<CR>", noremap = true, silent = true, desc = "Buffers" },
         },
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -366,12 +367,31 @@ return {
     {
         "folke/trouble.nvim",
         keys = {
-            { "<leader>xx", "<cmd>TroubleToggle<cr>", silent = true, noremap = true },
-            { "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", silent = true, noremap = true },
-            { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", silent = true, noremap = true },
-            { "<leader>xl", "<cmd>TroubleToggle loclist<cr>", silent = true, noremap = true },
-            { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", silent = true, noremap = true },
-            { "gr", "<cmd>TroubleToggle lsp_references<cr>", silent = true, noremap = true },
+            { "<leader>xx", "<cmd>TroubleToggle<cr>", silent = true, noremap = true, desc = "Toggle" },
+            {
+                "<leader>xw",
+                "<cmd>TroubleToggle workspace_diagnostics<cr>",
+                silent = true,
+                noremap = true,
+                desc = "workspace_diagnostics",
+            },
+            {
+                "<leader>ld",
+                "<cmd>TroubleToggle workspace_diagnostics<cr>",
+                silent = true,
+                noremap = true,
+                desc = "workspace_diagnostics",
+            },
+            {
+                "<leader>xd",
+                "<cmd>TroubleToggle document_diagnostics<cr>",
+                silent = true,
+                noremap = true,
+                desc = "document_diagnostics",
+            },
+            { "<leader>xl", "<cmd>TroubleToggle loclist<cr>", silent = true, noremap = true, desc = "loclist" },
+            { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", silent = true, noremap = true, desc = "quickfix" },
+            { "gr", "<cmd>TroubleToggle lsp_references<cr>", silent = true, noremap = true, desc = "LSP references" },
             -- { "gd", "<cmd>TroubleToggle lsp_definitions<cr>", silent = true, noremap = true },
         },
         opts = {
@@ -384,10 +404,11 @@ return {
     {
         "dnlhc/glance.nvim",
         keys = {
-            { "<leader>gg", "<CMD>Glance definitions<CR>" },
-            { "<leader>gr", "<CMD>Glance references<CR>" },
-            { "<leader>gd", "<CMD>Glance type_definitions<CR>" },
-            { "<leader>gm", "<CMD>Glance implementations<CR>" },
+            { "<leader>gg", "<CMD>Glance definitions<CR>", desc = "Glance definitions" },
+            { "<leader>gr", "<CMD>Glance references<CR>", desc = "Glance references" },
+            { "<leader>lr", "<CMD>Glance references<CR>", desc = "LSP references" },
+            { "<leader>gd", "<CMD>Glance type_definitions<CR>", desc = "Glance type definitions" },
+            { "<leader>gm", "<CMD>Glance implementations<CR>", desc = "Glance implementations" },
         },
         opts = {
             border = { enable = true, top_char = "─", bottom_char = "─" },

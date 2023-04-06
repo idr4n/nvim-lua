@@ -106,7 +106,7 @@ return {
         cmd = { "TodoTrouble", "TodoTelescope" },
         event = { "BufReadPost", "BufNewFile" },
         keys = {
-            { "<leader>gt", "<cmd>TodoTrouble<cr>", noremap = true, silent = true },
+            { "<leader>xt", "<cmd>TodoTrouble<cr>", noremap = true, silent = true, desc = "TodoTrouble" },
         },
         opts = {
             highlight = {
@@ -147,7 +147,7 @@ return {
             -- }
         },
         keys = {
-            { "<leader>zz", ":ZenMode<cr>", noremap = true, silent = true },
+            { "<leader>zz", ":ZenMode<cr>", noremap = true, silent = true, desc = "Zen mode" },
         },
     },
     --: }}}

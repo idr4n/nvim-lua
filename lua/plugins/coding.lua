@@ -295,10 +295,11 @@ return {
             -- { ",r", "<cmd>YankyRingHistory<cr>", noremap = true, silent = true },
             -- { ",r", "<cmd>Telescope yank_history<cr>", noremap = true, silent = true },
             {
-                ",r",
+                ",y",
                 "<cmd>lua require('telescope').extensions.yank_history.yank_history({ initial_mode = 'normal' })<cr>",
                 noremap = true,
                 silent = true,
+                desc = "Yank history",
             },
         },
         opts = function()

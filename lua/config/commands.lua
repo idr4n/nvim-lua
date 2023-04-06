@@ -3,14 +3,14 @@
 -- Shorten function name
 local command = vim.api.nvim_create_user_command
 local keymap = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
+local od = require("util").opts_and_desc
 
 -- :SublimeMerge
 command("SublimeMerge", function()
     vim.cmd("execute 'silent !smerge pwd'")
 end, {})
 
-keymap("n", "<leader>om", ":SublimeMerge<cr>", opts)
+keymap("n", "<leader>oS", ":SublimeMerge<cr>", od("SublimeMerge"))
 
 -- Open markdown file in Marked 2
 command("OpenMarked2", "execute 'silent !open -a Marked\\ 2 \"%\"'", {})
@@ -26,23 +26,24 @@ command("MdToBeamer", 'execute \'silent !pandoc "%" -t beamer -o "%:r.pdf"\'', {
 
 -- Reveal file in finder without changing the working dir in vim
 command("RevealInFinder", "execute 'silent !open -R \"%\"'", {})
-keymap("n", "<leader>;", ":RevealInFinder<cr>", opts)
+keymap("n", "<leader>;", ":RevealInFinder<cr>", od("Reveal in finder"))
 
 -- Code Run Script
 command("CodeRun", function()
     vim.cmd("execute '!~/scripts/code_run \"%\"'")
     require("noice").cmd("last")
 end, {})
-keymap("n", "<leader>cr", ":CodeRun<cr>", opts)
+keymap("n", "<leader>cr", ":CodeRun<cr>", od("Run code - own script"))
 
 -- yank line after dash (-), i.e., bullet point in markdown without the bullet and the X
 command("YankBullet", "execute '.g/- \\(X\\s\\)\\?\\zs.*$/normal \"+ygn'", {})
-keymap("n", ",b", ":YankBullet<cr>", opts)
+keymap("n", ",b", ":YankBullet<cr>", od("Yank line no bullet"))
 
 -- toggle charcode in statusline
 command("CharcodeToggle", function()
     _G.charcode = not _G.charcode
 end, {})
+keymap("n", "<leader>tc", ":CharcodeToggle<cr>", od("Charcode"))
 
 -- Autocommands
 
@@ -141,7 +142,7 @@ command("YankCwd", function()
     vim.cmd(string.format("call setreg('*', '%s')", cwd))
     print("Cwd copied to clipboard!")
 end, {})
-keymap("n", "<leader>cp", "<cmd>YankCwd<cr>", opts)
+keymap("n", "<leader>cp", "<cmd>YankCwd<cr>", od("Yank current dir"))
 
 local function writeFileSync(path, data)
     local uv = require("luv")
@@ -213,7 +214,7 @@ vim.api.nvim_create_user_command("NewTmuxNvim", function()
         print("Nothing to open...")
     end
 end, {})
-keymap("n", "<leader>cn", "<cmd>NewTmuxNvim<cr>", opts)
+keymap("n", "<leader>on", "<cmd>NewTmuxNvim<cr>", od("Same file in TMUX window"))
 
 -- new (tmux or terminal) window at current working directory
 command("NewTerminalWindow", function()
@@ -232,4 +233,4 @@ command("NewTerminalWindow", function()
         vim.fn.expand("%:p")
     ))
 end, {})
-keymap("n", "<leader>\\", "<cmd>NewTerminalWindow<cr>", opts)
+keymap("n", "<leader>\\", "<cmd>NewTerminalWindow<cr>", od("Open LF Ext-Window"))

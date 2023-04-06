@@ -4,7 +4,7 @@ return {
         "ptzz/lf.vim",
         dependencies = "voldikss/vim-floaterm",
         keys = {
-            { ",l", ":Lf<cr>", noremap = true, silent = true },
+            { ",l", ":Lf<cr>", noremap = true, silent = true, desc = "Open LF" },
         },
         config = function()
             local function calcFloatSize()
@@ -36,8 +36,8 @@ return {
     {
         "ThePrimeagen/harpoon",
         keys = {
-            { "<leader><tab>", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>" },
-            { "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<cr>" },
+            { "<leader>hh", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "Toggle Harpoon" },
+            { "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<cr>", desc = "Add Harpoon" },
             { "<M-u>", "<cmd>lua require('harpoon.ui').nav_file(1)<cr>" },
             { "<M-i>", "<cmd>lua require('harpoon.ui').nav_file(2)<cr>" },
             { "<M-o>", "<cmd>lua require('harpoon.ui').nav_file(3)<cr>" },
@@ -86,7 +86,7 @@ return {
             },
         },
         keys = {
-            { "<leader>gl", ":LazyGit<cr>", noremap = true, silent = true },
+            { "<leader>gl", ":LazyGit<cr>", noremap = true, silent = true, desc = "LazyGit" },
             { "<M-\\>", ":ToggleTerm<cr>", noremap = true, silent = true },
         },
         config = function(_, opts)
@@ -147,7 +147,7 @@ return {
     {
         "tpope/vim-fugitive",
         keys = {
-            { "<leader>gi", ":Git<cr>", noremap = true, silent = true },
+            { "<leader>gi", ":Git<cr>", noremap = true, silent = true, desc = "Git Fugitive" },
         },
     },
     --: }}}
@@ -157,8 +157,8 @@ return {
         "CRAG666/code_runner.nvim",
         dependencies = "nvim-lua/plenary.nvim",
         keys = {
-            { "<leader>cc", ":RunCode<CR>", noremap = true, silent = false },
-            { "<leader>cf", ":RunFile float<CR>", noremap = true, silent = false },
+            { "<leader>cc", ":RunCode<CR>", noremap = true, silent = false, desc = "Code run" },
+            { "<leader>cf", ":RunFile float<CR>", noremap = true, silent = false, desc = "File run" },
         },
         config = function()
             require("code_runner").setup({
@@ -176,6 +176,47 @@ return {
                     y = 0.3,
                 },
             })
+        end,
+    },
+    --: }}}
+
+    --: which-key {{{
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        opts = {
+            window = {
+                padding = { 1, 1, 1, 1 }, -- extra window padding [top, right, bottom, left]
+            },
+            layout = {
+                height = { min = 4, max = 20 },
+                width = { min = 10, max = 40 },
+            },
+        },
+        config = function(_, opts)
+            vim.o.timeout = true
+            vim.o.timeoutlen = 600
+            local wk = require("which-key")
+            wk.setup(opts)
+            local keymaps = {
+                ["gc"] = { name = "comment" },
+                ["<leader>"] = {
+                    b = { name = "buffer" },
+                    c = { name = "coding" },
+                    d = { name = "debug" },
+                    f = { name = "file" },
+                    g = { name = "Git/Glance" },
+                    h = { name = "Gitsings/Harpoon" },
+                    l = { name = "LSP" },
+                    o = { name = "open" },
+                    n = { name = "Neotree" },
+                    t = { name = "toggle" },
+                    x = { name = "Trouble" },
+                    z = { name = "misc" },
+                    ["tb"] = "Blame current line",
+                },
+            }
+            wk.register(keymaps)
         end,
     },
     --: }}}

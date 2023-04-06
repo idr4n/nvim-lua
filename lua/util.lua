@@ -1,5 +1,10 @@
 local M = {}
 
+local opts = { noremap = true, silent = true }
+M.opts_and_desc = function(msg)
+    return vim.tbl_deep_extend("force", opts, { desc = msg })
+end
+
 --   פּ ﯟ   some other good icons
 M.kind_icons = {
     Class = " ",

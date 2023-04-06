@@ -24,10 +24,6 @@ return {
                 lsp_interop = {
                     enable = true,
                     border = "rounded",
-                    peek_definition_code = {
-                        ["<leader>Pf"] = "@function.outer",
-                        ["<leader>Pc"] = "@class.outer",
-                    },
                 },
             },
         },
