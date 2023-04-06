@@ -48,7 +48,7 @@ return {
     --: noice {{{
     {
         "folke/noice.nvim",
-        enabled = true,
+        enabled = false,
         event = "VeryLazy",
         -- dependencies = {
         --     "rcarriga/nvim-notify",

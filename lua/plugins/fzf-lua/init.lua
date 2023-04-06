@@ -3,7 +3,7 @@ return {
     cmd = "FzfLua",
     keys = {
         { "<leader>r", "<cmd>lua require('fzf-lua').live_grep()<CR>", noremap = true, silent = true },
-        -- { "<leader>l", "<cmd>lua require('fzf-lua').resume()<CR>", noremap = true, silent = true },
+        { "<leader>l", "<cmd>lua require('fzf-lua').resume()<CR>", noremap = true, silent = true },
         { "<C-P>", "<cmd>lua require('fzf-lua').files()<CR>", noremap = true, silent = true },
         -- { "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", noremap = true, silent = true },
         -- { "<C-T>", "<cmd>lua require('fzf-lua').oldfiles()<CR>", noremap = true, silent = true },

@@ -22,7 +22,7 @@ return {
             noremap = true,
             silent = true,
         },
-        { "<leader>l", "<cmd>Telescope resume<cr>", noremap = true, silent = true },
+        -- { "<leader>l", "<cmd>Telescope resume<cr>", noremap = true, silent = true },
         {
             "s",
             function()

@@ -32,7 +32,7 @@ end
 
 M.on_attach = function(client, bufnr)
     -- disable client specific features, e.g. to use null-ls formating instead
-    local clientsNoFormat = { "tsserver", "gopls", "lua_ls", "sqls" }
+    local clientsNoFormat = { "tsserver", "gopls", "lua_ls", "sqlls" }
     for _, v in ipairs(clientsNoFormat) do
         if client.name == v then
             client.server_capabilities.documentFormattingProvider = false
