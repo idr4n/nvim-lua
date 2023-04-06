@@ -3,7 +3,7 @@ local colors = require("plugins.lualine.my_theme").colors
 local devicons = require("nvim-web-devicons")
 
 local mode_color = {
-    ["n"] = "#82cfff",
+    ["n"] = "#65bcff",
     ["i"] = "#ff7eb6",
     -- ["i"] = "String",
     ["ic"] = "#ff7eb6",
@@ -53,7 +53,8 @@ end
 
 M.mode = {
     function()
-        return "▍  "
+        -- return "▍  "
+        return "▍ ⬤ "
         -- return "  "
     end,
     color = function()
