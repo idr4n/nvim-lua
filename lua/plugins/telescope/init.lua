@@ -24,6 +24,17 @@ return {
             silent = true,
             desc = "Fuzzy find in current file",
         },
+        {
+            "<C-s>",
+            function()
+                require("telescope.builtin").current_buffer_fuzzy_find(
+                    require("telescope.themes").get_ivy({ previewer = false })
+                )
+            end,
+            noremap = true,
+            silent = true,
+            desc = "Fuzzy find in current file",
+        },
         -- { "<leader>l", "<cmd>Telescope resume<cr>", noremap = true, silent = true },
         {
             "s",
