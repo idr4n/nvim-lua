@@ -282,7 +282,7 @@ M.get_searchcount = {
         end
         local too_many = (">%d"):format(count.maxcount)
         local total = (((count.total > count.maxcount) and too_many) or count.total)
-        return ("%#SLMatches#" .. ("%s matches"):format(total))
+        return ("%#SLMatches#" .. ("%s/%s matches"):format(count.current, total))
     end,
 }
 
