@@ -6,22 +6,23 @@ return {
     --: tokyonight {{{
     {
         "folke/tokyonight.nvim",
-        -- lazy = duringDayTime,
-        -- priority = 1000,
+        lazy = duringDayTime,
+        priority = 1000,
         opts = function()
             return {
                 style = "moon",
-                transparent = true,
+                -- transparent = true,
                 styles = {
                     functions = "italic",
                     sidebars = "transparent",
                     floats = "transparent",
                 },
                 on_highlights = function(hl, c)
-                    local acc_bg = "#2E3145"
-                    -- hl.CursorLine = { bg = c.bg_dark }
-                    -- hl.CursorLine = { bg = "#16161E" }
-                    hl.CursorLineNr = { fg = "#FFFFFF", bg = "#555978", bold = true }
+                    local acc_bg = "#212225"
+                    hl.CursorLine = { bg = c.bg_dark }
+                    hl.Normal = { bg = "#1A1B26" }
+                    hl.NormalNC = { bg = "#1A1B26" }
+                    hl.CursorLineNr = { fg = "#FFFFFF", bg = "#3F4145", bold = true }
                     hl.StatusLine = { bg = acc_bg }
                     hl.TelescopeBorder = { bg = c.none, fg = c.dark3 }
                     hl.TelescopePromptTitle = { bg = c.none, fg = c.orange }
@@ -43,9 +44,9 @@ return {
             require("tokyonight").setup(opts)
 
             -- Load the colorscheme
-            -- if not duringDayTime then
-            --     vim.cmd("colorscheme tokyonight")
-            -- end
+            if not duringDayTime then
+                vim.cmd("colorscheme tokyonight")
+            end
         end,
     },
     --: }}}
@@ -112,9 +113,9 @@ return {
     --: monokai-pro {{{
     {
         "loctvl842/monokai-pro.nvim",
-        lazy = duringDayTime,
+        -- lazy = duringDayTime,
         -- lazy = false,
-        priority = 1000,
+        -- priority = 1000,
         config = function()
             require("monokai-pro").setup({
                 -- transparent_background = true,
@@ -146,9 +147,9 @@ return {
                 end,
             })
 
-            if not duringDayTime then
-                vim.cmd([[colorscheme monokai-pro]])
-            end
+            -- if not duringDayTime then
+            --     vim.cmd([[colorscheme monokai-pro]])
+            -- end
             -- vim.cmd([[colorscheme monokai-pro]])
         end,
     },
