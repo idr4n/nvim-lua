@@ -139,7 +139,7 @@ return {
                 options = {
                     number = false,
                     relativenumber = false,
-                    signcolumn = "yes",
+                    signcolumn = "no",
                     cursorcolumn = false,
                 },
             },

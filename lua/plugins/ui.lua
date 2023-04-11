@@ -158,7 +158,7 @@ return {
             { "z2", function() require("ufo").closeFoldsWith(2) end, },
         },
         config = function()
-            vim.o.foldcolumn = "1"
+            -- vim.o.foldcolumn = "1"
             vim.o.foldlevel = 99
             vim.o.foldlevelstart = 99
             vim.o.foldenable = true
@@ -183,6 +183,7 @@ return {
     --: statuscol {{{
     {
         "luukvbaal/statuscol.nvim",
+        enabled = false,
         event = { "BufReadPost", "BufNewFile" },
         opts = function()
             local builtin = require("statuscol.builtin")
