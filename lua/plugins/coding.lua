@@ -214,40 +214,18 @@ return {
     },
     --: }}},
 
-    --: mini.comment {{{
+    --: Comment.nvim {{{
     {
-        "echasnovski/mini.comment",
-        -- event = "VeryLazy",
+        "numToStr/Comment.nvim",
         event = { "BufReadPost", "BufNewFile" },
         opts = {
-            hooks = {
-                pre = function()
-                    require("ts_context_commentstring.internal").update_commentstring({})
-                end,
-            },
+            pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
         },
         config = function(_, opts)
-            require("mini.comment").setup(opts)
+            require("Comment").setup(opts)
         end,
     },
     --: }}}
-
-    --: mini.pairs {{{
-    {
-        "echasnovski/mini.pairs",
-        enabled = false,
-        event = { "BufReadPost", "BufNewFile" },
-        config = function()
-            require("mini.pairs").setup({
-                mappings = {
-                    [" "] = { action = "open", pair = "  ", neigh_pattern = "[%(%[{][%)%]}]" },
-                    -- ["<"] = { action = "open", pair = "<>" },
-                    -- [">"] = { action = "close", pair = "<>" },
-                },
-            })
-        end,
-    },
-    --: }}},
 
     --: windwp/nvim-autopairs {{{
     {

@@ -64,7 +64,7 @@ return {
                 "css",
                 "go",
                 "help",
-                -- "html",
+                "html",
                 "java",
                 "javascript",
                 "json",
