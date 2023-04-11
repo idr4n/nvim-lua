@@ -27,3 +27,6 @@ require("config.commands")
 
 -- load lazy.nvim
 require("config.lazy")
+
+-- load statusline
+require("config.statusline")

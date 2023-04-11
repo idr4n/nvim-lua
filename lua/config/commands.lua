@@ -31,7 +31,7 @@ keymap("n", "<leader>;", ":RevealInFinder<cr>", od("Reveal in finder"))
 -- Code Run Script
 command("CodeRun", function()
     vim.cmd("execute '!~/scripts/code_run \"%\"'")
-    require("noice").cmd("last")
+    -- require("noice").cmd("last")
 end, {})
 keymap("n", "<leader>cr", ":CodeRun<cr>", od("Run code - own script"))
 
@@ -42,6 +42,7 @@ keymap("n", ",b", ":YankBullet<cr>", od("Yank line no bullet"))
 -- toggle charcode in statusline
 command("CharcodeToggle", function()
     _G.charcode = not _G.charcode
+    vim.cmd("redrawstatus!")
 end, {})
 keymap("n", "<leader>tc", ":CharcodeToggle<cr>", od("Charcode"))
 

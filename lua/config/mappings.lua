@@ -28,8 +28,8 @@ keymap("n", "<C-f>", "zt", od("Top current line"))
 --: }}}
 
 --: Move up and down with wrapped lines {{{
--- keymap("n", "j", "gj", opts)
--- keymap("n", "k", "gk", opts)
+keymap("n", "j", "gj", opts)
+keymap("n", "k", "gk", opts)
 --: }}}
 
 --: Quicksave command {{{

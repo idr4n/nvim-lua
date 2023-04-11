@@ -134,9 +134,10 @@ return {
         opts = {
             window = {
                 width = 85,
+                height = 0.95,
                 backdrop = 1,
                 options = {
-                    number = true,
+                    number = false,
                     relativenumber = false,
                     signcolumn = "yes",
                     cursorcolumn = false,

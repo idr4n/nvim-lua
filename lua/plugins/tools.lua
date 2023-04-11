@@ -106,18 +106,33 @@ return {
             end, {})
             function _G.set_terminal_keymaps()
                 local op = { buffer = 0 }
-                vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], op)
+                -- vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], op)
                 vim.keymap.set("t", "jk", [[<C-\><C-n>]], op)
-                vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], op)
-                vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], op)
-                vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], op)
-                -- vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], op)
+                vim.keymap.set("t", "<C-left>", [[<Cmd>wincmd h<CR>]], op)
+                vim.keymap.set("t", "<C-down>", [[<Cmd>wincmd j<CR>]], op)
+                vim.keymap.set("t", "<C-up>", [[<Cmd>wincmd k<CR>]], op)
+                vim.keymap.set("t", "<M-`>", [[<Cmd>wincmd k<CR>]], op)
+                vim.keymap.set("n", "<M-`>", "<Cmd>wincmd j<CR>")
+                vim.keymap.set("t", "<C-right>", [[<Cmd>wincmd l<CR>]], op)
                 vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], op)
             end
 
             -- if you only want these mappings for toggle term use term://*toggleterm#* instead
             vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
         end,
+    },
+    --: }}}
+
+    -- stylua: ignore
+    --: windex (max. window) {{{
+    {
+        "declancm/windex.nvim",
+        keys = {
+            { "<Leader>tm", "<Cmd>lua require('windex').toggle_maximize()<CR>", desc = "Toggle Maximize Window" },
+            { "<C-Bslash>", "<Cmd>lua require('windex').toggle_terminal()<CR>", mode = { "n", "t" }, desc = "Toggle terminal" },
+            { "<C-n>", "<C-Bslash><C-n>", mode = "t", desc = "Enter normal mode" },
+        },
+        config = true,
     },
     --: }}}
 
@@ -195,7 +210,7 @@ return {
         },
         config = function(_, opts)
             vim.o.timeout = true
-            vim.o.timeoutlen = 600
+            vim.o.timeoutlen = 900
             local wk = require("which-key")
             wk.setup(opts)
             local keymaps = {

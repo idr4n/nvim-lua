@@ -6,8 +6,8 @@ return {
     --: tokyonight {{{
     {
         "folke/tokyonight.nvim",
-        lazy = duringDayTime,
-        priority = 1000,
+        -- lazy = duringDayTime,
+        -- priority = 1000,
         opts = function()
             return {
                 style = "moon",
@@ -18,17 +18,24 @@ return {
                     floats = "transparent",
                 },
                 on_highlights = function(hl, c)
+                    local acc_bg = "#2E3145"
                     -- hl.CursorLine = { bg = c.bg_dark }
                     -- hl.CursorLine = { bg = "#16161E" }
-                    hl.CursorLineNr = { fg = c.orange, bold = true }
-                    hl.StatusLine = { bg = "#1A1B25" }
+                    hl.CursorLineNr = { fg = "#FFFFFF", bg = "#555978", bold = true }
+                    hl.StatusLine = { bg = acc_bg }
                     hl.TelescopeBorder = { bg = c.none, fg = c.dark3 }
                     hl.TelescopePromptTitle = { bg = c.none, fg = c.orange }
                     hl.TelescopePreviewTitle = { bg = c.none, fg = c.orange }
                     hl.Folded = { bg = c.none }
-                    hl.FoldColumn = { fg = c.fg_gutter }
-                    hl.NeoTreeNormal = { bg = "#1A1B25" }
-                    hl.NeoTreeNormalNC = { bg = "#1A1B25" }
+                    hl.FoldColumn = { fg = c.dark3, bg = acc_bg }
+                    hl.LineNr = { fg = c.dark3, bg = acc_bg }
+                    hl.SignColumn = { bg = acc_bg }
+                    -- hl.NeoTreeNormal = { bg = acc_bg }
+                    -- hl.NeoTreeNormalNC = { bg = "#1A1B25" }
+                    hl.DiagnosticError = { fg = c.error, bg = acc_bg }
+                    hl.DiagnosticWarn = { fg = c.warning, bg = acc_bg }
+                    hl.DiagnosticInfo = { fg = c.info, bg = acc_bg }
+                    hl.DiagnosticHint = { fg = c.hint, bg = acc_bg }
                 end,
             }
         end,
@@ -36,9 +43,9 @@ return {
             require("tokyonight").setup(opts)
 
             -- Load the colorscheme
-            if not duringDayTime then
-                vim.cmd("colorscheme tokyonight")
-            end
+            -- if not duringDayTime then
+            --     vim.cmd("colorscheme tokyonight")
+            -- end
         end,
     },
     --: }}}
@@ -105,28 +112,43 @@ return {
     --: monokai-pro {{{
     {
         "loctvl842/monokai-pro.nvim",
-        -- lazy = not duringDayTime,
+        lazy = duringDayTime,
         -- lazy = false,
-        -- priority = 1000,
+        priority = 1000,
         config = function()
             require("monokai-pro").setup({
-                transparent_background = true,
+                -- transparent_background = true,
+                background_clear = {
+                    "float_win",
+                    "telescope",
+                    -- "neo-tree",
+                },
                 override = function()
+                    local acc_bg = "#221F22"
+                    local background = "#121212"
                     return {
-                        FoldColumn = { fg = "#4f4e4f" },
-                        CursorLineFold = { fg = "#4f4e4f" },
-                        CursorLineNr = { fg = "#fc9867", bold = true },
-                        LspReferenceText = { bg = "#4f4e4f" },
-                        LspReferenceRead = { bg = "#4f4e4f" },
-                        LspReferenceWrite = { bg = "#4f4e4f" },
+                        Normal = { bg = background },
+                        NormalNC = { bg = "#121212" },
+                        FoldColumn = { fg = "#535353", bg = acc_bg },
+                        Folded = { bg = "NONE" },
+                        CursorLine = { bg = "#29272A" },
+                        CursorLineFold = { fg = "#4f4e4f", bg = acc_bg },
+                        CursorLineNr = { fg = "#FFFFFF", bg = "#535353", bold = true },
+                        LineNr = { fg = "#676667", bg = acc_bg },
+                        SignColumn = { bg = acc_bg },
+                        LspReferenceText = { bg = "#4F4E4F" },
+                        LspReferenceRead = { bg = "#4F4E4F" },
+                        LspReferenceWrite = { bg = "#4F4E4F" },
                         NormalFloat = { bg = "NONE" },
+                        FloatBorder = { bg = "NONE" },
+                        StatusLine = { bg = acc_bg },
                     }
                 end,
             })
 
-            -- if duringDayTime then
-            --     vim.cmd([[colorscheme monokai-pro]])
-            -- end
+            if not duringDayTime then
+                vim.cmd([[colorscheme monokai-pro]])
+            end
             -- vim.cmd([[colorscheme monokai-pro]])
         end,
     },
@@ -143,20 +165,29 @@ return {
             sidebars = { "qf", "vista_kind", "terminal", "packer" },
             transparent = true,
             overrides = function(c)
+                local acc_bg = "#F0F0F0"
                 return {
-                    CursorLine = { bg = "#F4F8FF" },
+                    -- CursorLine = { bg = "#F4F8FF" },
+                    CursorLine = { bg = "#F6F6F6" },
                     LspReferenceText = { bg = "#E2FFE8" },
                     Folded = { bg = "NONE" },
-                    FoldColumn = { fg = c.bg_visual, bg = "NONE" },
-                    LineNr = { fg = c.line_nr },
-                    StatusLine = { bg = "#F6F8FA", fg = "#7A83A4" },
+                    FoldColumn = { fg = "#595959", bg = acc_bg },
+                    LineNr = { fg = "#595959", bg = acc_bg },
+                    CursorLineNr = { fg = "#000000", bg = "#C4C4C4", style = "bold" },
+                    SignColumn = { bg = acc_bg },
+                    -- StatusLine = { bg = "#F6F8FA", fg = "#7A83A4" },
+                    StatusLine = { bg = acc_bg, fg = "#7A83A4" },
+                    DiagnosticError = { fg = c.error, bg = acc_bg },
+                    DiagnosticWarn = { fg = c.warning, bg = acc_bg },
+                    DiagnosticInfo = { fg = c.info, bg = acc_bg },
+                    DiagnosticHint = { fg = c.hint, bg = acc_bg },
                 }
             end,
         },
         config = function(_, opts)
             require("github-theme").setup(opts)
-            vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "#F6F8FA" })
-            vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "#F6F8FA" })
+            -- vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "#F6F8FA" })
+            -- vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "#F6F8FA" })
         end,
     },
     --: }}}

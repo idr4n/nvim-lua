@@ -3,6 +3,7 @@ local c = require("plugins.lualine.components")
 
 return {
     "nvim-lualine/lualine.nvim",
+    enabled = false,
     event = "VeryLazy",
     -- event = "BufReadPre",
     dependencies = { "nvim-tree/nvim-web-devicons", opt = true },

@@ -35,7 +35,7 @@ return {
             silent = true,
             desc = "Fuzzy find in current file",
         },
-        -- { "<leader>l", "<cmd>Telescope resume<cr>", noremap = true, silent = true },
+        { "<leader>ot", "<cmd>Telescope resume<cr>", noremap = true, silent = true, desc = "Telescope Resume" },
         {
             "s",
             function()

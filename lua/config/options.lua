@@ -29,7 +29,7 @@ opt.relativenumber = true -- set relative numbered lines
 opt.scrolloff = 8 -- is one of my fav
 opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
 -- opt.showbreak = "↪ "
-opt.showmode = true -- show -- INSERT --
+opt.showmode = false -- show -- INSERT --
 opt.sidescrolloff = 8 -- the same as scrolloff but horizontally
 opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
 opt.smartcase = true -- smart case
@@ -44,7 +44,7 @@ opt.updatetime = 300 -- control CursorHold event waiting time (4000ms default)
 opt.wrap = true -- display lines as one long line
 opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 
-opt.shortmess:append("c")
+opt.shortmess:append("cS")
 opt.nrformats:append("alpha") -- increments letters sequences as well with <c-a>
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")

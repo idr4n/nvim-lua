@@ -156,10 +156,11 @@ return {
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = function()
             -- redefine gitsigns colors
-            vim.cmd([[:highlight GitSignsAdd guifg=#73DACA]])
-            vim.cmd([[:highlight GitSignsChange guifg=#FF9E64]])
-            vim.cmd([[:highlight GitSignsDelete guifg=#F7768E]])
-            vim.cmd([[:highlight GitSignsChangeDelete guifg=#BD73EC]])
+            local linenr_hl = vim.api.nvim_get_hl_by_name("LineNr", true)
+            vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#73DACA", bg = linenr_hl.background })
+            vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#FF9E64", bg = linenr_hl.background })
+            vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#F7768E", bg = linenr_hl.background })
+            vim.api.nvim_set_hl(0, "GitSignsChangeDelete", { fg = "#BD73EC", bg = linenr_hl.background })
 
             return {
                 signcolumn = true,
