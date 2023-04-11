@@ -160,7 +160,6 @@ return {
         lazy = not duringDayTime,
         priority = 1000,
         opts = {
-            theme_style = "light",
             function_style = "italic",
             sidebars = { "qf", "vista_kind", "terminal", "packer" },
             transparent = true,
@@ -188,6 +187,9 @@ return {
             require("github-theme").setup(opts)
             -- vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "#F6F8FA" })
             -- vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "#F6F8FA" })
+            if duringDayTime then
+                vim.cmd("colorscheme github_light")
+            end
         end,
     },
     --: }}}
