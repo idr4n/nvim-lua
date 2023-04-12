@@ -126,10 +126,10 @@ return {
                 },
                 override = function()
                     local acc_bg = "#221F22"
-                    local background = "#121212"
+                    local background = "#2A2A2A"
                     return {
                         Normal = { bg = background },
-                        NormalNC = { bg = "#121212" },
+                        NormalNC = { bg = background },
                         FoldColumn = { fg = "#535353", bg = acc_bg },
                         Folded = { bg = "NONE" },
                         CursorLine = { bg = "#29272A" },
@@ -161,7 +161,9 @@ return {
         lazy = not duringDayTime,
         priority = 1000,
         opts = {
-            function_style = "italic",
+            styles = {
+                functions = "italic",
+            },
             sidebars = { "qf", "vista_kind", "terminal", "packer" },
             transparent = true,
             overrides = function(c)
