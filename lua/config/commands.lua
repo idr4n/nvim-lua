@@ -53,6 +53,7 @@ vim.api.nvim_create_augroup("spell_tex_md", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "tex", "markdown" },
     command = "setlocal spell spelllang=en_us",
+    group = "spell_tex_md",
 })
 
 -- Indent four spaces

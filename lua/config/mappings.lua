@@ -54,7 +54,7 @@ keymap("n", "gcy", "gcc:t.<cr>gcc", { noremap = false, silent = true, desc = "Du
 --: Switch buffers {{{
 -- keymap("n", "<S-w>", ":bnext<CR>", opts)
 -- keymap("n", "<S-q>", ":bprevious<CR>", opts)
-keymap("n", "ga", ":b#<CR>", od("Last buffer"))
+keymap("n", "ga", ":b#<CR>zz", od("Last buffer"))
 --: }}}
 
 --: Using Bbye plugin to close the current buffer {{{
