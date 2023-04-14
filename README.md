@@ -17,12 +17,24 @@ This is my Neovim configuation in Lua.
 
 <details>
 <summary>
-This is the list of plugins I currently have installed.
+This is the list of plugins I currently have installed, based on the Lazy.nvim's report.
 </summary>
 
 <br>
 
+**Loaded (5)**
+
 - alpha-nvim
+- lazy.nvim
+- tokyonight.nvim
+- vim-symlink
+- which-key.nvim
+
+**Not Loaded (79)**
+
+- Comment.nvim
+- LuaSnip
+- catppuccin 
 - clipboard-image.nvim
 - close-buffers.nvim
 - cmp-buffer
@@ -31,70 +43,86 @@ This is the list of plugins I currently have installed.
 - cmp-nvim-lua
 - cmp-path
 - cmp_luasnip
+- code_runner.nvim
 - diffview.nvim
 - emmet-vim
 - friendly-snippets
 - fzf
 - fzf-lua
 - fzf.vim
+- github-nvim-theme
 - gitsigns.nvim
+- glance.nvim
+- gruvbox-material
 - harpoon
 - incline.nvim
 - indent-blankline.nvim
-- kanagawa.nvim
-- lazy.nvim
 - lf.vim
-- lsp_signature.nvim
-- lualine.nvim
-- lush.nvim
-- LuaSnip
 - mason-lspconfig.nvim
 - mason.nvim
-- mini.comment
-- mini.pairs
+- monokai-pro.nvim
 - neo-tree.nvim
-- neovim
+- neogit
 - nui.nvim
 - null-ls.nvim
+- nvim-autopairs
 - nvim-cmp
 - nvim-colorizer.lua
+- nvim-dap
+- nvim-dap-go
+- nvim-dap-python
+- nvim-dap-ui
 - nvim-jdtls
 - nvim-lspconfig
 - nvim-markdown
+- nvim-treesitter
 - nvim-treesitter-context
 - nvim-treesitter-textobjects
 - nvim-ts-autotag
 - nvim-ts-context-commentstring
+- nvim-ufo
 - nvim-web-devicons
+- one-small-step-for-vimkind
 - playground
 - plenary.nvim
 - popup.nvim
-- rasmus.nvim
+- promise-async
 - rust-tools.nvim
-- sonokai
 - sqls.nvim
 - tabout.nvim
+- telescope-file-browser.nvim
 - telescope-fzf-native.nvim
 - telescope-luasnip.nvim
 - telescope-ui-select.nvim
+- telescope-undo.nvim
 - telescope.nvim
 - todo-comments.nvim
 - toggleterm.nvim
-- tokyonight.nvim
 - trouble.nvim
+- vgit.nvim
 - vim-bbye
-- vim-dirvish
 - vim-fish
 - vim-floaterm
 - vim-fugitive
 - vim-indent-object
 - vim-repeat
 - vim-surround
-- vim-symlink
 - vim-unimpaired
+- windex.nvim
+- yanky.nvim
 - zen-mode.nvim
-- zenbones.nvim
-- zk-nvim
+
+**Disabled (8)**
+
+- barbecue
+- lualine.nvim
+- modes.nvim
+- noice.nvim
+- nvim-navic
+- nvim-notify
+- statuscol.nvim
+- vim-dirvish
+
 </details>
 
 ## Credits
