@@ -22,6 +22,7 @@ return {
                     hl.CursorLine = { bg = c.bg_dark }
                     hl.CursorLineNr = { fg = c.fg, bg = c.bg_highlight, bold = true }
                     hl.StatusLine = { bg = acc_bg }
+                    hl.WinSeparator = { fg = acc_bg, bg = acc_bg }
                     hl.TelescopeBorder = { bg = c.none, fg = c.dark3 }
                     hl.TelescopePromptTitle = { bg = c.none, fg = c.orange }
                     hl.TelescopePreviewTitle = { bg = c.none, fg = c.orange }
