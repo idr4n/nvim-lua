@@ -58,9 +58,10 @@ return {
         opts = function()
             local ucolors = require("catppuccin.utils.colors")
             local cp = require("catppuccin.palettes").get_palette()
+            local acc_bg = "#24273A"
 
             return {
-                transparent_background = true,
+                transparent_background = false,
                 styles = {
                     functions = { "italic" },
                     keywords = { "italic" },
@@ -83,16 +84,25 @@ return {
                             ucolors.darken(cp.surface0, 0.70, cp.base)
                         ),
                     },
+                    LineNr = { bg = acc_bg },
+                    CursorLineNr = { fg = cp.text, bg = cp.surface1, style = { "bold" } },
+                    SignColumn = { bg = acc_bg },
+                    StatusLine = { bg = acc_bg },
+                    Folded = { bg = "NONE" },
+                    DiagnosticSignError = { bg = acc_bg },
+                    DiagnosticSignWarn = { bg = acc_bg },
+                    DiagnosticSignInfo = { bg = acc_bg },
+                    DiagnosticSignHint = { bg = acc_bg },
                     TSParameter = { fg = cp.maroon, style = {} },
                     ["@parameter"] = { fg = cp.maroon, style = {} },
                     TSInclude = { fg = cp.mauve, style = {} },
                     ["@include"] = { fg = cp.mauve, style = {} },
                     ["@namespace"] = { fg = cp.blue, style = {} },
                     TSNamespace = { fg = cp.blue, style = {} },
-                    VertSplit = { fg = "#15161E" },
-                    StatusLine = { bg = "#282C34" },
-                    NeoTreeNormal = { bg = "#282C34" },
-                    NeoTreeNormalNC = { bg = "#282C34" },
+                    VertSplit = { fg = "#000000" },
+                    NeoTreeNormal = { bg = acc_bg },
+                    NeoTreeNormalNC = { bg = acc_bg },
+                    -- NeoTreeWinSeparator = { bg = acc_bg },
                 },
             }
         end,
