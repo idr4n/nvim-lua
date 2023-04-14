@@ -24,6 +24,7 @@ require("lazy").setup({
         enabled = true,
         notify = false,
     },
+    dev = { path = "~/other_repos", patterns = { "idr4n" } },
     performance = {
         cache = {
             enabled = true,
