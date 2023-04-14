@@ -25,4 +25,8 @@ return {
     "windwp/nvim-ts-autotag",
     "nvim-treesitter/nvim-treesitter-context",
     { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
+    {
+        "nvim-telescope/telescope-file-browser.nvim",
+        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+    },
 }

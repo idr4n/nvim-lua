@@ -136,6 +136,27 @@ return {
             desc = "Change workdir",
         },
         { ",u", "<cmd>Telescope undo<cr>", noremap = true, silent = true },
+        {
+            "-",
+            function()
+                require("telescope").extensions.file_browser.file_browser({
+                    initial_mode = "normal",
+                    path = "%:p:h",
+                    select_buffer = true,
+                })
+            end,
+            desc = "Telescope file_browser",
+        },
+        {
+            "<leader>ob",
+            function()
+                require("telescope").extensions.file_browser.file_browser({
+                    initial_mode = "normal",
+                    files = false,
+                })
+            end,
+            desc = "Telescope folder_browser",
+        },
     },
     dependencies = {
         "nvim-lua/popup.nvim",
@@ -250,6 +271,7 @@ return {
                         ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
                         ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
                         ["<C-t>"] = actions.send_selected_to_qflist + actions.open_qflist,
+                        ["<C-l>"] = require("telescope.actions.layout").toggle_preview,
 
                         ["j"] = actions.move_selection_next,
                         ["k"] = actions.move_selection_previous,
@@ -329,6 +351,19 @@ return {
                         },
                     },
                 },
+                file_browser = {
+                    theme = "ivy",
+                    hide_parent_dir = true,
+                    mappings = {
+                        ["i"] = {
+                            -- your custom insert mode mappings
+                        },
+                        ["n"] = {
+                            ["-"] = require("telescope").extensions.file_browser.actions.goto_parent_dir,
+                            ["h"] = require("telescope").extensions.file_browser.actions.goto_parent_dir,
+                        },
+                    },
+                },
             },
         }
     end,
@@ -339,5 +374,6 @@ return {
         telescope.load_extension("luasnip")
         telescope.load_extension("ui-select")
         telescope.load_extension("undo")
+        require("telescope").load_extension("file_browser")
     end,
 }
