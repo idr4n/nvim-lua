@@ -21,6 +21,8 @@ This is my Neovim configuation written in Lua.
 This is the list of plugins I currently have installed, based on the Lazy.nvim's report.
 </summary>
 
+<br>
+
 **Loaded (5)**
 
 - alpha-nvim
