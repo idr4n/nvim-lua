@@ -239,7 +239,7 @@ end
 ---@return Position[]
 local function get_ts_positions(bufnr, start_row, end_row, root)
     local positions = {}
-    local query = vim.treesitter.parse_query(
+    local query = vim.treesitter.query.parse(
         "markdown",
         [[
 			(list_marker_minus) @list_marker_minus
@@ -375,7 +375,7 @@ function Get_ts_positions()
         -- local positions = {}
         local nodes = {}
         local root = tstree:root()
-        local query = vim.treesitter.parse_query(
+        local query = vim.treesitter.query.parse(
             "markdown",
             [[
 				(list_marker_minus) @list_marker_minus
