@@ -416,4 +416,40 @@ return {
         },
     },
     --: }}}
+
+    --: vgit {{{
+    {
+        "tanvirtin/vgit.nvim",
+        -- enabled = false,
+        -- dev = true,
+        -- event = "BufReadPre",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+        -- stylua: ignore
+        keys = {
+            { "<leader>gp", function() require('vgit').buffer_hunk_preview() end, desc = "Hunk preview" }
+        },
+        opts = {
+            settings = {
+                live_blame = { enabled = false },
+                live_gutter = { enabled = false },
+                authorship_code_lens = { enabled = false },
+                scene = {
+                    diff_preference = "split",
+                    keymaps = {
+                        quit = "q",
+                    },
+                },
+                signs = {
+                    definitions = {
+                        GitSignsAdd = { text = "▎" },
+                        GitSignsDelete = { text = "" },
+                        GitSignsChange = { text = "▎" },
+                    },
+                },
+            },
+        },
+    },
+    --: }}}
 }

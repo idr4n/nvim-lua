@@ -168,6 +168,25 @@ return {
     },
     --: }}}
 
+    --: neogit (magit for neovim) {{{
+    {
+        "TimUntersberger/neogit",
+        dependencies = "nvim-lua/plenary.nvim",
+        keys = {
+            { "<leader>gn", ":Neogit<cr>", noremap = true, silent = true, desc = "Neogit" },
+        },
+        opts = {
+            disable_signs = false,
+            signs = {
+                -- { CLOSED, OPENED }
+                section = { "", "" },
+                item = { "", "" },
+            },
+            integrations = { diffview = true },
+        },
+    },
+    --: }}}
+
     --: code_runner {{{
     {
         "CRAG666/code_runner.nvim",
