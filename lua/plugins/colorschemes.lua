@@ -18,11 +18,9 @@ return {
                     floats = "transparent",
                 },
                 on_highlights = function(hl, c)
-                    local acc_bg = "#212225"
+                    local acc_bg = "#1A1B26"
                     hl.CursorLine = { bg = c.bg_dark }
-                    hl.Normal = { bg = "#1A1B26" }
-                    hl.NormalNC = { bg = "#1A1B26" }
-                    hl.CursorLineNr = { fg = "#FFFFFF", bg = "#3F4145", bold = true }
+                    hl.CursorLineNr = { fg = c.fg, bg = c.bg_highlight, bold = true }
                     hl.StatusLine = { bg = acc_bg }
                     hl.TelescopeBorder = { bg = c.none, fg = c.dark3 }
                     hl.TelescopePromptTitle = { bg = c.none, fg = c.orange }
@@ -32,7 +30,7 @@ return {
                     hl.LineNr = { fg = c.dark3, bg = acc_bg }
                     hl.SignColumn = { bg = acc_bg }
                     -- hl.NeoTreeNormal = { bg = acc_bg }
-                    -- hl.NeoTreeNormalNC = { bg = "#1A1B25" }
+                    -- hl.NeoTreeNormalNC = { bg = "#1A1B26" }
                     hl.DiagnosticError = { fg = c.error, bg = acc_bg }
                     hl.DiagnosticWarn = { fg = c.warning, bg = acc_bg }
                     hl.DiagnosticInfo = { fg = c.info, bg = acc_bg }
@@ -114,7 +112,6 @@ return {
     {
         "loctvl842/monokai-pro.nvim",
         -- lazy = duringDayTime,
-        -- lazy = false,
         -- priority = 1000,
         config = function()
             require("monokai-pro").setup({
@@ -193,6 +190,40 @@ return {
             if duringDayTime then
                 vim.cmd("colorscheme github_light")
             end
+        end,
+    },
+    --: }}}
+
+    --: gruvbox-material{{{
+    -- stylua: ignore
+    {
+        "sainnhe/gruvbox-material",
+        -- lazy = duringDayTime,
+        -- priority = 1000,
+        config = function()
+            -- vim.g.gruvbox_material_background = "hard"
+            vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
+            -- if not duringDayTime then
+            --     vim.cmd([[colorscheme gruvbox-material]])
+            -- end
+            local acc_bg = "#32302F"
+            local warn_hl = vim.api.nvim_get_hl_by_name("YellowSign", true)
+            local info_hl = vim.api.nvim_get_hl_by_name("BlueSign", true)
+            local hint_hl = vim.api.nvim_get_hl_by_name("GreenSign", true)
+            local error_hl = vim.api.nvim_get_hl_by_name("RedSign", true)
+            local statusline_hl = vim.api.nvim_get_hl_by_name("StatusLine", true)
+            vim.api.nvim_set_hl(0, "LineNr", { fg = "#5A524C", bg = acc_bg })
+            vim.api.nvim_set_hl(0, "SignColumn", { fg = "#5A524C", bg = acc_bg })
+            vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#A89984", bg = "#444241", bold = true })
+            vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = warn_hl.foreground, bg = statusline_hl.background, bold = true })
+            vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = info_hl.foreground, bg = statusline_hl.background, bold = true })
+            vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = hint_hl.foreground, bg = statusline_hl.background, bold = true })
+            vim.api.nvim_set_hl(0, "DiagnosticError", { fg = error_hl.foreground, bg = statusline_hl.background, bold = true })
+            vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = warn_hl.foreground, bg = statusline_hl.background, bold = true })
+            vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { fg = info_hl.foreground, bg = statusline_hl.background, bold = true })
+            vim.api.nvim_set_hl(0, "DiagnosticSignHint", { fg = hint_hl.foreground, bg = statusline_hl.background, bold = true })
+            vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = error_hl.foreground, bg = statusline_hl.background, bold = true })
+
         end,
     },
     --: }}}
