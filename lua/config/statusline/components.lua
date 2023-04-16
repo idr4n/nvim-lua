@@ -13,8 +13,10 @@ end
 _G.lang_versions = {}
 
 vim.api.nvim_create_augroup("lang_version", { clear = true })
-vim.api.nvim_create_autocmd("BufRead", {
-    pattern = { "*.py", "*.lua", "*.go", "*.rs", "*.js", "*.ts", "*.jsx", "*.tsx", "*.cpp" },
+-- vim.api.nvim_create_autocmd("BufWinEnter", {
+vim.api.nvim_create_autocmd("LspAttach", {
+    pattern = { "*.py", "*.lua", "*.go", "*.rs", "*.js", "*.ts", "*.jsx", "*.tsx", "*.cpp", "*.java" },
+    -- pattern = { "*.py", "*.lua", "*.go", "*.rs", "*.js", "*.ts", "*.jsx", "*.tsx", "*.java" },
     callback = function()
         local filetype = vim.bo.filetype
         local lang_v = _G.lang_versions[filetype]
@@ -22,6 +24,7 @@ vim.api.nvim_create_autocmd("BufRead", {
             _G.lang_versions[filetype] = _G.get_lang_version(filetype)
         end
         -- vim.cmd("redrawstatus!")
+        -- vim.o.statusline = "%!v:lua.Status_line()"
     end,
     group = "lang_version",
 })
@@ -194,6 +197,7 @@ function M.get_filetype()
     -- local lang_v = ""
     local version = lang_v and lang_v or ""
     filetype = filetype:sub(1, 1):upper() .. filetype:sub(2)
+    -- return " " .. "%#SLFileType#" .. filetype .. "%#SLNormal#" .. " "
     return " " .. "%#SLFileType#" .. filetype .. " " .. version .. "%#SLNormal#" .. ""
 end
 

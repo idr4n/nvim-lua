@@ -62,8 +62,8 @@ vim.api.nvim_create_augroup("statusline", { clear = true })
 vim.api.nvim_create_autocmd("DiagnosticChanged", {
     pattern = { "*" },
     callback = function()
-        -- vim.o.statusline = "%!v:lua.Status_line()"
-        vim.cmd("redrawstatus!")
+        vim.o.statusline = "%!v:lua.Status_line()"
+        -- vim.cmd("redrawstatus")
     end,
     group = "statusline",
 })
