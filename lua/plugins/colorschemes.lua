@@ -53,8 +53,9 @@ return {
     --: catppuccin {{{
     {
         "catppuccin/nvim",
-        -- lazy = not duringDayTime,
-        -- priority = 1000,
+        lazy = not duringDayTime,
+        -- lazy = duringDayTime,
+        priority = 1000,
         name = "catppuccin",
         opts = function()
             local ucolors = require("catppuccin.utils.colors")
@@ -82,7 +83,7 @@ return {
                     CursorLine = {
                         bg = ucolors.vary_color(
                             { latte = ucolors.lighten(cp.mantle, 0.70, cp.base) },
-                            ucolors.darken(cp.surface0, 0.70, cp.base)
+                            ucolors.darken(cp.surface0, 0.85, cp.base)
                         ),
                     },
                     LineNr = { bg = acc_bg },
@@ -100,9 +101,11 @@ return {
                     ["@include"] = { fg = cp.mauve, style = {} },
                     ["@namespace"] = { fg = cp.blue, style = {} },
                     TSNamespace = { fg = cp.blue, style = {} },
-                    VertSplit = { fg = "#000000" },
-                    NeoTreeNormal = { bg = acc_bg },
-                    NeoTreeNormalNC = { bg = acc_bg },
+                    -- VertSplit = { fg = "#000000" },
+                    WinSeparator = { fg = acc_bg, bg = acc_bg },
+                    -- NeoTreeNormal = { bg = acc_bg },
+                    -- NeoTreeNormalNC = { bg = acc_bg },
+                    TelescopeNormal = { bg = "NONE" },
                     -- NeoTreeWinSeparator = { bg = acc_bg },
                 },
             }
@@ -110,7 +113,7 @@ return {
         config = function(_, opts)
             require("catppuccin").setup(opts)
 
-            -- -- if not duringDayTime then
+            -- if not duringDayTime then
             if duringDayTime then
                 -- vim.cmd([[colorscheme catppuccin-macchiato]])
                 vim.cmd([[colorscheme catppuccin-frappe]])
@@ -166,14 +169,21 @@ return {
     --: github {{{
     {
         "projekt0n/github-nvim-theme",
-        lazy = not duringDayTime,
-        priority = 1000,
+        -- lazy = not duringDayTime,
+        -- priority = 1000,
         opts = {
-            styles = {
-                functions = "italic",
+            options = {
+                styles = {
+                    functions = "italic",
+                },
+                transparent = false,
+                darken = {
+                    sidebars = {
+                        enable = false,
+                        list = { "qf", "vista_kind", "terminal", "packer" },
+                    },
+                },
             },
-            sidebars = { "qf", "vista_kind", "terminal", "packer" },
-            transparent = true,
             overrides = function(c)
                 local acc_bg = "#F0F0F0"
                 return {
@@ -186,7 +196,9 @@ return {
                     CursorLineNr = { fg = "#000000", bg = "#C4C4C4", style = "bold" },
                     SignColumn = { bg = acc_bg },
                     -- StatusLine = { bg = "#F6F8FA", fg = "#7A83A4" },
-                    StatusLine = { bg = acc_bg, fg = "#7A83A4" },
+                    -- StatusLine = { bg = acc_bg, fg = "#7A83A4" },
+                    VertSplit = { fg = acc_bg, bg = acc_bg },
+                    StatusLine = { bg = "#E6E6E6", fg = "#7A83A4" },
                     DiagnosticError = { fg = c.error, bg = acc_bg },
                     DiagnosticWarn = { fg = c.warning, bg = acc_bg },
                     DiagnosticInfo = { fg = c.info, bg = acc_bg },
@@ -198,9 +210,9 @@ return {
             require("github-theme").setup(opts)
             -- vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "#F6F8FA" })
             -- vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "#F6F8FA" })
-            if duringDayTime then
-                vim.cmd("colorscheme github_light")
-            end
+            -- if duringDayTime then
+            --     vim.cmd("colorscheme github_light")
+            -- end
         end,
     },
     --: }}}
@@ -288,3 +300,33 @@ return {
 -- teal = "#4fd6be", --
 -- red = "#ff757f", --
 -- red1 = "#c53b53", --
+
+-- Catppuccin-Frappe
+-- rosewater = "#F2D5CF",
+-- flamingo = "#EEBEBE",
+-- pink = "#F4B8E4",
+-- mauve = "#CA9EE6",
+-- red = "#E78284",
+-- maroon = "#EA999C",
+-- peach = "#EF9F76",
+-- yellow = "#E5C890",
+-- green = "#A6D189",
+-- teal = "#81C8BE",
+-- sky = "#99D1DB",
+-- sapphire = "#85C1DC",
+-- blue = "#8CAAEE",
+-- lavender = "#BABBF1",
+--
+-- text = "#c6d0f5",
+-- subtext1 = "#b5bfe2",
+-- subtext0 = "#a5adce",
+-- overlay2 = "#949cbb",
+-- overlay1 = "#838ba7",
+-- overlay0 = "#737994",
+-- surface2 = "#626880",
+-- surface1 = "#51576d",
+-- surface0 = "#414559",
+--
+-- base = "#303446",
+-- mantle = "#292C3C",
+-- crust = "#232634",
