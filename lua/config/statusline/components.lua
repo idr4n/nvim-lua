@@ -148,7 +148,7 @@ function M.lsp_running()
     end
 
     if #vim.lsp.buf_get_clients() > 0 then
-        return " " .. "%#SLFileType# " .. "%#SLNormal#" .. " "
+        return " " .. "%#SLFileType#󱓞 " .. "%#SLNormal#" .. " "
     else
         return ""
     end

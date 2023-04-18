@@ -52,8 +52,8 @@ keymap("n", "gcy", "gcc:t.<cr>gcc", { noremap = false, silent = true, desc = "Du
 --: }}}
 
 --: Switch buffers {{{
--- keymap("n", "<S-w>", ":bnext<CR>", opts)
--- keymap("n", "<S-q>", ":bprevious<CR>", opts)
+keymap("n", "<S-w>", ":bnext<CR>", opts)
+keymap("n", "<S-q>", ":bprevious<CR>", opts)
 keymap("n", "ga", ":b#<CR>zz", od("Last buffer"))
 --: }}}
 
@@ -172,7 +172,7 @@ keymap("v", "p", '"_dP', opts)
 --: }}}
 
 --: search for highlighted text {{{
-keymap("v", "*", "y/\\V<C-R>=escape(@\",'/')<CR><CR>", { noremap = true })
+keymap("v", "*", "y/\\V<C-R>=escape(@\",'/')<CR><CR>N", { noremap = true })
 --: }}}
 
 --: substitute word previously searched {{{

@@ -120,12 +120,12 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 -- Alpha
-vim.api.nvim_create_augroup("alpha", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "alpha" },
-    command = "nnoremap <silent> <buffer> - :bwipe <Bar> Dirvish<CR>",
-    group = "alpha",
-})
+-- vim.api.nvim_create_augroup("alpha", { clear = true })
+-- vim.api.nvim_create_autocmd("FileType", {
+--     pattern = { "alpha" },
+--     command = "nnoremap <silent> <buffer> - :bwipe <Bar> Dirvish<CR>",
+--     group = "alpha",
+-- })
 
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {

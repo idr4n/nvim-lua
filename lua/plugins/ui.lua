@@ -10,7 +10,7 @@ return {
             -- context_char = "│",
             -- show_current_context = true,
             -- show_current_context_start = true,
-            show_first_indent_level = false,
+            -- show_first_indent_level = false,
             show_trailing_blankline_indent = false,
             filetype_exclude = {
                 "alpha",
@@ -183,19 +183,19 @@ return {
     --: statuscol {{{
     {
         "luukvbaal/statuscol.nvim",
-        enabled = false,
+        enabled = true,
         event = { "BufReadPost", "BufNewFile" },
         opts = function()
             local builtin = require("statuscol.builtin")
             return {
-                relculright = true,
+                -- relculright = true,
                 ft_ignore = { "toggleterm" },
                 bt_ignore = { "terminal" },
                 segments = {
-                    { text = { builtin.foldfunc, "" }, click = "v:lua.ScFa" },
+                    -- { text = { builtin.foldfunc, "" }, click = "v:lua.ScFa" },
                     { text = { "%s" }, click = "v:lua.ScSa" },
                     {
-                        text = { " ", builtin.lnumfunc, "  " },
+                        text = { "", builtin.lnumfunc, "   " },
                         condition = { true, builtin.not_empty },
                         click = "v:lua.ScLa",
                     },
@@ -204,6 +204,63 @@ return {
         end,
         config = function(_, opts)
             require("statuscol").setup(opts)
+        end,
+    },
+    --: }}}
+
+    --: tabby {{{
+    {
+        "nanozuki/tabby.nvim",
+        -- enabled = false,
+        event = { "BufReadPost", "BufNewFile" },
+        config = function()
+            -- vim.o.showtabline = 2
+            local theme = {
+                fill = "TabLineFill",
+                -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
+                head = "TabLine",
+                current_tab = "TabLineSel",
+                tab = "TabLine",
+                win = "TabLine",
+                tail = "TabLine",
+            }
+            require("tabby.tabline").set(function(line)
+                return {
+                    {
+                        { "  ", hl = theme.head },
+                        line.sep("", theme.head, theme.fill),
+                    },
+                    line.tabs().foreach(function(tab)
+                        local hl = tab.is_current() and theme.current_tab or theme.tab
+                        return {
+                            line.sep("", hl, theme.fill),
+                            tab.is_current() and "" or "",
+                            tab.number(),
+                            tab.name(),
+                            tab.close_btn("󱎘"),
+                            line.sep("", hl, theme.fill),
+                            hl = hl,
+                            margin = " ",
+                        }
+                    end),
+                    line.spacer(),
+                    -- line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
+                    --     return {
+                    --         line.sep("", theme.win, theme.fill),
+                    --         win.is_current() and "" or "",
+                    --         win.buf_name(),
+                    --         line.sep("", theme.win, theme.fill),
+                    --         hl = theme.win,
+                    --         margin = " ",
+                    --     }
+                    -- end),
+                    -- {
+                    --     line.sep("", theme.tail, theme.fill),
+                    --     { "  ", hl = theme.tail },
+                    -- },
+                    hl = theme.fill,
+                }
+            end)
         end,
     },
     --: }}}
