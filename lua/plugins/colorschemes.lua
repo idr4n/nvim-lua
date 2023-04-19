@@ -18,28 +18,8 @@ return {
                     floats = "transparent",
                 },
                 on_highlights = function(hl, c)
-                    -- local acc_bg = "#1A1B26"
-                    local win_sep = "#1A1B26"
-                    local acc_bg = c.bg
                     hl.CursorLine = { bg = c.bg_dark }
-                    hl.CursorLineNr = { fg = c.fg, bg = c.bg_highlight, bold = true }
-                    -- hl.StatusLine = { bg = acc_bg }
-                    hl.StatusLine = { bg = win_sep }
-                    -- hl.WinSeparator = { fg = acc_bg, bg = acc_bg }
-                    hl.WinSeparator = { fg = win_sep, bg = win_sep }
-                    hl.TelescopeBorder = { bg = c.none, fg = c.dark3 }
-                    hl.TelescopePromptTitle = { bg = c.none, fg = c.orange }
-                    hl.TelescopePreviewTitle = { bg = c.none, fg = c.orange }
                     hl.Folded = { bg = c.none }
-                    hl.FoldColumn = { fg = c.dark3, bg = acc_bg }
-                    hl.LineNr = { fg = c.dark3, bg = acc_bg }
-                    hl.SignColumn = { bg = acc_bg }
-                    -- hl.NeoTreeNormal = { bg = acc_bg }
-                    -- hl.NeoTreeNormalNC = { bg = "#1A1B26" }
-                    hl.DiagnosticError = { fg = c.error, bg = acc_bg }
-                    hl.DiagnosticWarn = { fg = c.warning, bg = acc_bg }
-                    hl.DiagnosticInfo = { fg = c.info, bg = acc_bg }
-                    hl.DiagnosticHint = { fg = c.hint, bg = acc_bg }
                 end,
             }
         end,
@@ -94,6 +74,50 @@ return {
                 vim.api.nvim_set_hl(0, "TabLineSel", { bg = "#453C39" })
             end
             -- vim.cmd("colorscheme zenbones")
+        end,
+    },
+    --: }}}
+
+    --: monokai-pro {{{
+    {
+        "loctvl842/monokai-pro.nvim",
+        -- lazy = not duringDayTime,
+        -- priority = 1000,
+        config = function()
+            require("monokai-pro").setup({
+                -- transparent_background = true,
+                background_clear = {
+                    "float_win",
+                    "telescope",
+                    -- "neo-tree",
+                },
+                override = function()
+                    local acc_bg = "#221F22"
+                    local background = "#2A2A2A"
+                    return {
+                        Normal = { bg = background },
+                        NormalNC = { bg = background },
+                        FoldColumn = { fg = "#535353", bg = acc_bg },
+                        Folded = { bg = "NONE" },
+                        CursorLine = { bg = "#29272A" },
+                        CursorLineFold = { fg = "#4f4e4f", bg = acc_bg },
+                        CursorLineNr = { fg = "#FFFFFF", bg = "#535353", bold = true },
+                        LineNr = { fg = "#676667", bg = acc_bg },
+                        SignColumn = { bg = acc_bg },
+                        LspReferenceText = { bg = "#4F4E4F" },
+                        LspReferenceRead = { bg = "#4F4E4F" },
+                        LspReferenceWrite = { bg = "#4F4E4F" },
+                        NormalFloat = { bg = "NONE" },
+                        FloatBorder = { bg = "NONE" },
+                        StatusLine = { bg = acc_bg },
+                    }
+                end,
+            })
+
+            -- if not duringDayTime then
+            --     vim.cmd([[colorscheme monokai-pro]])
+            -- end
+            -- vim.cmd([[colorscheme monokai-pro]])
         end,
     },
     --: }}}
