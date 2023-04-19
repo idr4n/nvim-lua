@@ -15,8 +15,8 @@ _G.lang_versions = {}
 vim.api.nvim_create_augroup("lang_version", { clear = true })
 -- vim.api.nvim_create_autocmd("BufWinEnter", {
 vim.api.nvim_create_autocmd("LspAttach", {
-    pattern = { "*.py", "*.lua", "*.go", "*.rs", "*.js", "*.ts", "*.jsx", "*.tsx", "*.cpp", "*.java" },
-    -- pattern = { "*.py", "*.lua", "*.go", "*.rs", "*.js", "*.ts", "*.jsx", "*.tsx", "*.java" },
+    pattern = { "*.py", "*.lua", "*.go", "*.rs", "*.js", "*.ts", "*.jsx", "*.tsx", "*.cpp", "*.java", "*.vue" },
+    -- pattern = { "*.py", "*.lua", "*.go", "*.rs", "*.js", "*.ts", "*.jsx", "*.tsx", "*.java", "*.vue" },
     callback = function()
         local filetype = vim.bo.filetype
         local lang_v = _G.lang_versions[filetype]
