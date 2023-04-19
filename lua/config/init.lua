@@ -14,7 +14,10 @@ if vim.fn.argc(-1) == 0 then
         group = vim.api.nvim_create_augroup("LazyVim", { clear = true }),
         pattern = "VeryLazy",
         callback = function()
+            -- load mappings
             require("config.mappings")
+            -- load statusline
+            require("config.statusline")
         end,
     })
 else
@@ -27,6 +30,3 @@ require("config.commands")
 
 -- load lazy.nvim
 require("config.lazy")
-
--- load statusline
-require("config.statusline")
