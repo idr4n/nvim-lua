@@ -156,6 +156,24 @@ keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 --: }}}
 
+--: Comment {{{
+-- toggle comment in normal mode
+keyset("n", "<C-c>", function()
+    return vim.v.count == 0 and "<Plug>(comment_toggle_linewise_current)" or "<Plug>(comment_toggle_linewise_count)"
+end, { expr = true })
+keyset("n", "<C-b>", "<Plug>(comment_toggle_blockwise_current)")
+
+-- toggle comment using C-/
+keyset("n", "<C-_>", function()
+    return vim.v.count == 0 and "<Plug>(comment_toggle_linewise_current)" or "<Plug>(comment_toggle_linewise_count)"
+end, { expr = true })
+vim.keymap.set("x", "<C-_>", "<Plug>(comment_toggle_blockwise_visual)")
+
+-- toggle comment in visual mode
+vim.keymap.set("x", "<C-c>", "<Plug>(comment_toggle_linewise_visual)")
+vim.keymap.set("x", "<C-b>", "<Plug>(comment_toggle_blockwise_visual)")
+--: }}}
+
 --: Duplicate and comment selection {{{
 keymap("v", "gy", ":t'><cr>gvgcgv<esc>", { noremap = false, silent = true, desc = "Duplicate and comment" })
 --: }}}
