@@ -428,7 +428,7 @@ return {
         },
         -- stylua: ignore
         keys = {
-            { "<leader>gp", function() require('vgit').buffer_hunk_preview() end, desc = "Hunk preview" }
+            { "<leader>gp", function() require('vgit').buffer_hunk_preview() end, desc = "Hunk preview (vgit)" }
         },
         opts = {
             settings = {
