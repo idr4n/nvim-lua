@@ -55,7 +55,7 @@ return {
                 -- vim.api.nvim_set_hl(0, "StatusLine", { bg = "#F2E9E5" })
                 -- vim.api.nvim_set_hl(0, "LineNr", { fg = "#D6CAC4" })
                 vim.api.nvim_set_hl(0, "CursorLine", { bg = "#F8F9FB" })
-                vim.api.nvim_set_hl(0, "StatusLine", { bg = "#E6E6E6" })
+                vim.api.nvim_set_hl(0, "StatusLine", { bg = "#EFF2F6" })
                 vim.api.nvim_set_hl(0, "Visual", { bg = "#DBE9F9" })
                 vim.api.nvim_set_hl(0, "LineNr", { fg = "#BABBBD" })
                 vim.api.nvim_set_hl(0, "Comment", { fg = "#A5ABB0" })

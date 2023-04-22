@@ -1,9 +1,15 @@
 local c = require("config.statusline.components")
+local appearance = vim.fn.system("defaults read -g AppleInterfaceStyle")
+local isDark = appearance:match("^Dark") ~= nil
 
 local colors = {
     green = "#4fd6be",
     orange = "#ff966c",
     yellow = "#f6c177",
+    red = isDark and "#DE6E7C" or "#D73A4A",
+    blue = isDark and "#65bcff" or "#0A407F",
+    insert = isDark and "#FF7EB6" or "#8754FF",
+    select = isDark and "#9FBFE4" or "#2188FF",
 }
 
 local statusline_hl = vim.api.nvim_get_hl_by_name("StatusLine", true)
@@ -15,12 +21,18 @@ local info_hl = vim.api.nvim_get_hl_by_name("DiagnosticInfo", true)
 local hint_hl = vim.api.nvim_get_hl_by_name("DiagnosticHint", true)
 local error_hl = vim.api.nvim_get_hl_by_name("DiagnosticError", true)
 
-vim.api.nvim_set_hl(0, "StatusReplace", { fg = "#3ddbd9", bg = statusline_hl.background, bold = true })
-vim.api.nvim_set_hl(0, "StatusInsert", { fg = "#ff7eb6", bg = statusline_hl.background, bold = true })
-vim.api.nvim_set_hl(0, "StatusVisual", { fg = "#be95ff", bg = statusline_hl.background, bold = true })
+vim.api.nvim_set_hl(0, "StatusReplace", { fg = colors.red, bg = statusline_hl.background, bold = true })
+vim.api.nvim_set_hl(0, "StatusReplaceBg", { bg = colors.red, fg = statusline_hl.background, bold = true })
+vim.api.nvim_set_hl(0, "StatusInsert", { fg = colors.insert, bg = statusline_hl.background, bold = true })
+vim.api.nvim_set_hl(0, "StatusInsertBg", { bg = colors.insert, fg = statusline_hl.background, bold = true })
+vim.api.nvim_set_hl(0, "StatusVisual", { fg = colors.select, bg = statusline_hl.background, bold = true })
+vim.api.nvim_set_hl(0, "StatusVisualBg", { bg = colors.select, fg = statusline_hl.background, bold = true })
 vim.api.nvim_set_hl(0, "StatusTerminal", { fg = "#33b1ff", bg = statusline_hl.background, bold = true })
-vim.api.nvim_set_hl(0, "StatusNormal", { fg = "#65bcff", bg = statusline_hl.background, bold = true })
+vim.api.nvim_set_hl(0, "StatusTerminalBg", { bg = "#33b1ff", fg = statusline_hl.background, bold = true })
+vim.api.nvim_set_hl(0, "StatusNormal", { fg = colors.blue, bg = statusline_hl.background, bold = true })
+vim.api.nvim_set_hl(0, "StatusNormalBg", { bg = colors.blue, fg = statusline_hl.background, bold = true })
 vim.api.nvim_set_hl(0, "StatusCommand", { fg = colors.yellow, bg = statusline_hl.background, bold = true })
+vim.api.nvim_set_hl(0, "StatusCommandBg", { bg = colors.yellow, fg = statusline_hl.background, bold = true })
 vim.api.nvim_set_hl(0, "StatusDir", { fg = string_hl.foreground, bg = statusline_hl.background, bold = true })
 vim.api.nvim_set_hl(0, "SLFileName", { fg = statusline_hl.foreground, bg = statusline_hl.background, bold = true })
 vim.api.nvim_set_hl(0, "SLFileType", { fg = keyword_hl.foreground, bg = statusline_hl.background, bold = true })

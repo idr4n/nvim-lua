@@ -16,7 +16,6 @@ vim.api.nvim_create_augroup("lang_version", { clear = true })
 -- vim.api.nvim_create_autocmd("BufWinEnter", {
 vim.api.nvim_create_autocmd("LspAttach", {
     pattern = { "*.py", "*.lua", "*.go", "*.rs", "*.js", "*.ts", "*.jsx", "*.tsx", "*.cpp", "*.java", "*.vue" },
-    -- pattern = { "*.py", "*.lua", "*.go", "*.rs", "*.js", "*.ts", "*.jsx", "*.tsx", "*.java", "*.vue" },
     callback = function()
         local filetype = vim.bo.filetype
         local lang_v = _G.lang_versions[filetype]
@@ -30,20 +29,30 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 local mode_color = {
-    ["n"] = "%#StatusNormal#",
-    ["i"] = "%#StatusInsert#",
-    ["ic"] = "%#StatusInsert#",
-    ["v"] = "%#StatusVisual#",
-    ["V"] = "%#StatusVisual#",
-    ["\22"] = "%#StatusVisual#",
-    ["R"] = "%#StatusReplace#",
-    ["c"] = "%#StatusCommand#",
-    ["t"] = "%#StatusCommand#",
+    -- ["n"] = "%#StatusNormal#",
+    ["n"] = "%#StatusNormalBg# NOR %#SLNormal#",
+    -- ["i"] = "%#StatusInsert#",
+    ["i"] = "%#StatusInsertBg# INS %#SLNormal#",
+    -- ["ic"] = "%#StatusInsert#",
+    ["ic"] = "%#StatusInsertBg# INS %#SLNormal#",
+    -- ["v"] = "%#StatusVisual#",
+    ["v"] = "%#StatusVisualBg# VIS %#SLNormal#",
+    -- ["V"] = "%#StatusVisual#",
+    ["V"] = "%#StatusVisualBg# VIS %#SLNormal#",
+    -- ["\22"] = "%#StatusVisual#",
+    ["\22"] = "%#StatusVisualBg#",
+    -- ["R"] = "%#StatusReplace#",
+    ["R"] = "%#StatusReplaceBg# REP %#SLNormal#",
+    -- ["c"] = "%#StatusCommand#",
+    ["c"] = "%#StatusCommandBg# COM %#SLNormal#",
+    -- ["t"] = "%#StatusCommand#",
+    ["t"] = "%#StatusCommandBg# TER %#SLNormal#",
 }
 
 function M.mode()
     if mode_color[vim.fn.mode()] then
-        return mode_color[vim.fn.mode()] .. "▍ ⬤ "
+        -- return mode_color[vim.fn.mode()] .. "▍ ⬤ "
+        return mode_color[vim.fn.mode()]
     else
         return "%#StatusNormal#" .. "▍ ⬤ "
     end
