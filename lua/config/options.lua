@@ -52,7 +52,8 @@ vim.cmd([[set iskeyword+=-]])
 
 -- fill and list chars
 -- vim.o.fillchars = [[msgsep: ,eob: ,horiz: ,vert: ,diff:╱,fold: ,foldopen:,foldsep: ,foldclose:,]]
-vim.o.fillchars = [[msgsep: ,eob: ,diff:╱,fold: ,foldopen:,foldclose:,]]
+-- vim.o.fillchars = [[msgsep: ,eob: ,diff:╱,fold: ,foldopen:,foldclose:,]]
+vim.o.fillchars = [[msgsep: ,eob: ,vert: ,diff:╱,fold: ,foldopen:,foldsep: ,foldclose:,]]
 vim.o.listchars = [[tab:──,trail:·,nbsp:␣,precedes:«,extends:»,]]
 
 -- Format

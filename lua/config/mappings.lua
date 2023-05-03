@@ -18,13 +18,22 @@ local keymap = vim.api.nvim_set_keymap
 keymap("i", "jk", "<ESC>", od())
 --: }}}
 
+--: esc with c-g {{{
+keyset("v", "<C-g>", "<ESC>")
+--: }}}
+
 --: Move around while in insert mode {{{
 -- keymap("i", "<C-a>", "<C-O>0", opts)
 keymap("i", "<C-a>", "<Home>", od())
 -- keymap("i", "<C-e>", "<C-O>$", opts)
 keymap("i", "<C-e>", "<End>", od())
-keymap("i", "<C-f>", "<C-O>zt", od())
+-- keymap("i", "<C-f>", "<C-O>zt", od())
 keymap("n", "<C-f>", "zt", od("Top current line"))
+--: }}}
+
+--: center around cursor using <C-/> {{{
+keyset("n", "<C-_>", "zz", od("Center around cursor"))
+keyset("i", "<C-_>", "<C-O>zz", od("Center around cursor"))
 --: }}}
 
 --: Move up and down with wrapped lines {{{
@@ -52,8 +61,8 @@ keymap("n", "gcy", "gcc:t.<cr>gcc", { noremap = false, silent = true, desc = "Du
 --: }}}
 
 --: Switch buffers {{{
-keymap("n", "<S-w>", ":bnext<CR>", opts)
-keymap("n", "<S-q>", ":bprevious<CR>", opts)
+-- keymap("n", "<S-w>", ":bnext<CR>", opts)
+-- keymap("n", "<S-q>", ":bprevious<CR>", opts)
 keymap("n", "ga", ":b#<CR>zz", od("Last buffer"))
 --: }}}
 
@@ -164,10 +173,10 @@ end, { expr = true })
 keyset("n", "<C-b>", "<Plug>(comment_toggle_blockwise_current)")
 
 -- toggle comment using C-/
-keyset("n", "<C-_>", function()
-    return vim.v.count == 0 and "<Plug>(comment_toggle_linewise_current)" or "<Plug>(comment_toggle_linewise_count)"
-end, { expr = true })
-vim.keymap.set("x", "<C-_>", "<Plug>(comment_toggle_blockwise_visual)")
+-- keyset("n", "<C-_>", function()
+--     return vim.v.count == 0 and "<Plug>(comment_toggle_linewise_current)" or "<Plug>(comment_toggle_linewise_count)"
+-- end, { expr = true })
+-- vim.keymap.set("x", "<C-_>", "<Plug>(comment_toggle_linewise_visual)")
 
 -- toggle comment in visual mode
 vim.keymap.set("x", "<C-c>", "<Plug>(comment_toggle_linewise_visual)")
