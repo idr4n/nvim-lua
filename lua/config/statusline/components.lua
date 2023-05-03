@@ -115,12 +115,18 @@ local function progress()
     elseif cur == total then
         return "Bot"
     else
-        return math.floor(cur / total * 100) .. "%%"
+        -- return math.floor(cur / total * 100) .. "%%"
+        return string.format("%2d", math.floor(cur / total * 100)) .. "%%"
     end
 end
 
 function M.get_position()
-    return "%#SLNormal#%l:%c " .. progress()
+    -- return "%#SLNormal#%l:%c " .. progress()
+    return "%#SLNormal#%3l:%-3c " .. progress()
+end
+
+function M.total_lines()
+    return "%#SLBufNr#" .. "%-3L" .. "%#SLNormal#"
 end
 
 function M.get_search_count()
@@ -148,7 +154,7 @@ function M.get_bufnr()
 end
 
 function M.maximized_status()
-    return vim.t.maximized and "   %#SLModified# %#SLNormal#" or ""
+    return vim.t.maximized and "  %#SLModified# %#SLNormal#" or ""
 end
 
 function M.lsp_running()

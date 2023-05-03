@@ -52,9 +52,10 @@ vim.api.nvim_set_hl(0, "SLDiagnosticError", { fg = error_hl.foreground, bg = sta
 function Status_line()
     local statusline = ""
     statusline = c.mode()
-    statusline = statusline .. " " .. c.get_fileinfo()
     statusline = statusline .. "  " .. c.get_position()
-    statusline = statusline .. "  " .. c.get_bufnr()
+    statusline = statusline .. "  " .. c.total_lines()
+    -- statusline = statusline .. "  " .. c.get_bufnr()
+    statusline = statusline .. "%=" .. c.get_fileinfo()
     statusline = statusline .. c.get_search_count()
     statusline = statusline .. c.maximized_status()
     statusline = statusline .. "%="
