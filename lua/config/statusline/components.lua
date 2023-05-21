@@ -187,7 +187,7 @@ end
 function M.git_status()
     local function getGitChanges()
         local gitsigns = vim.b.gitsigns_status_dict
-        local git_icon = "  "
+        local git_icon = "  "
         local changes = 0
         local status = ""
         if gitsigns then
