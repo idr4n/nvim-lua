@@ -180,13 +180,13 @@ return {
                     delete = {
                         hl = "GitSignsDelete",
                         -- text = "▁",
-                        text = "",
+                        text = "󰍵",
                         numhl = "GitSignsDeleteNr",
                         linehl = "GitSignsDeleteLn",
                     },
                     topdelete = {
                         hl = "GitSignsDelete",
-                        -- text = "契",
+                        -- text = "󰐊",
                         text = "~",
                         numhl = "GitSignsDeleteNr",
                         linehl = "GitSignsDeleteLn",
@@ -444,7 +444,7 @@ return {
                 signs = {
                     definitions = {
                         GitSignsAdd = { text = "▎" },
-                        GitSignsDelete = { text = "" },
+                        GitSignsDelete = { text = "󰍵" },
                         GitSignsChange = { text = "▎" },
                     },
                 },
