@@ -187,23 +187,25 @@ end
 function M.git_status()
     local function getGitChanges()
         local gitsigns = vim.b.gitsigns_status_dict
-        local git_icon = "  "
+        -- local git_icon = "  "
         local changes = 0
         local status = ""
         if gitsigns then
             changes = (gitsigns.added or 0) + (gitsigns.changed or 0) + (gitsigns.removed or 0)
         end
         if changes > 0 then
-            status = string.format("%s%d", git_icon, changes)
+            -- status = string.format("%s%d", git_icon, changes)
+            status = string.format("%d ", changes)
         end
         return status
     end
 
     local branch = (vim.b.gitsigns_status_dict or { head = "" })
-    local git_icon = "%#SLModified#" .. "󰊢 " .. "%#SLFileName#"
+    -- local git_icon = "%#SLModified#" .. "󰊢 " .. "%#SLFileName#"
+    local git_icon = (getGitChanges() ~= "") and " " or " "
     local is_head_empty = (branch.head ~= "")
     -- return ((is_head_empty and string.format("(λ • #%s%s)", (branch.head or ""), getGitChanges())) or "")
-    return ((is_head_empty and string.format(" %s%s%s ", git_icon, (branch.head or ""), getGitChanges())) or "")
+    return ((is_head_empty and string.format(" %s%s%s ", git_icon, getGitChanges(), (branch.head or ""))) or "")
 end
 
 function M.get_filetype()
