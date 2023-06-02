@@ -63,7 +63,6 @@ return {
                 "cpp",
                 "css",
                 "go",
-                "help",
                 "html",
                 "java",
                 "javascript",

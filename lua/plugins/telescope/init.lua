@@ -361,6 +361,7 @@ return {
                         ["n"] = {
                             ["-"] = require("telescope").extensions.file_browser.actions.goto_parent_dir,
                             ["h"] = require("telescope").extensions.file_browser.actions.goto_parent_dir,
+                            ["."] = require("telescope").extensions.file_browser.actions.toggle_hidden,
                         },
                     },
                 },

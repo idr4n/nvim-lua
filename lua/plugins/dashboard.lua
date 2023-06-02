@@ -40,8 +40,8 @@ return {
             ),
             -- dashboard.button("c", "  Configuration", "<cmd>lcd ~/.config/nvim | Files<cr>"),
             -- dashboard.button("c", "  Configuration", "<cmd>lcd ~/.config/nvim | Telescope find_files<cr>"),
-            dashboard.button("c", "  Configuration", "<cmd>lcd ~/.config/nvim<cr>"),
-            dashboard.button("d", "  Dotfiles", "<cmd>lcd ~/dotfiles<cr>"),
+            dashboard.button("c", "  Configuration", "<cmd>lcd ~/.config/nvim | echo 'Directory:' getcwd()<cr>"),
+            dashboard.button("d", "  Dotfiles", "<cmd>lcd ~/dotfiles | echo 'Directory:' getcwd()<cr>"),
             dashboard.button("u", "  Update plugins", ":Lazy<CR>"),
             dashboard.button("q", "󰅚  Quit Neovim", ":qa<CR>"),
         }

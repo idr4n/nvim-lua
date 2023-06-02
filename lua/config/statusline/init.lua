@@ -1,6 +1,9 @@
 local c = require("config.statusline.components")
 local appearance = vim.fn.system("defaults read -g AppleInterfaceStyle")
 local isDark = appearance:match("^Dark") ~= nil
+if vim.fn.has("linux") == 1 then
+    isDark = true
+end
 
 local colors = {
     green = "#4fd6be",

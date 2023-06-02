@@ -1,6 +1,9 @@
 -- system apperance
 local appearance = vim.fn.system("defaults read -g AppleInterfaceStyle")
 local duringDayTime = appearance:match("^Dark") == nil
+if vim.fn.has("linux") == 1 then
+    duringDayTime = false
+end
 
 return {
     --: tokyonight {{{
@@ -37,8 +40,8 @@ return {
     --: zenbones{{{
     {
         "mcchrish/zenbones.nvim",
-        -- lazy = duringDayTime,
-        lazy = false,
+        lazy = not duringDayTime,
+        -- lazy = false,
         priority = 1000,
         dependencies = "rktjmp/lush.nvim",
         config = function()
@@ -67,7 +70,7 @@ return {
                 vim.api.nvim_set_hl(0, "TabLineSel", { bg = "#D6CAC4" })
             else
                 vim.o.background = "dark"
-                vim.cmd("colorscheme zenbones")
+                -- vim.cmd("colorscheme zenbones")
                 vim.api.nvim_set_hl(0, "Type", { bold = true })
                 vim.api.nvim_set_hl(0, "TabLineFill", { bg = "#171210" })
                 vim.api.nvim_set_hl(0, "TabLine", { bg = "#302825" })
@@ -118,6 +121,31 @@ return {
             --     vim.cmd([[colorscheme monokai-pro]])
             -- end
             -- vim.cmd([[colorscheme monokai-pro]])
+        end,
+    },
+    --: }}}
+
+    --: gruber-darker {{{
+    {
+        "blazkowolf/gruber-darker.nvim",
+        lazy = duringDayTime,
+        -- lazy = false,
+        priority = 1000,
+        -- opts = {
+        --     bold = false,
+        --     italic = {
+        --         comments = true,
+        --         strings = true,
+        --         operators = true,
+        --         folds = true,
+        --     },
+        -- },
+        config = function()
+            vim.cmd.colorscheme("gruber-darker")
+            vim.api.nvim_set_hl(0, "Folded", { bg = "#181818" })
+            vim.api.nvim_set_hl(0, "LspReferenceText", { bg = "#4F4E4F" })
+            vim.api.nvim_set_hl(0, "LspReferenceRead", { bg = "#4F4E4F" })
+            vim.api.nvim_set_hl(0, "LspReferenceWrite", { bg = "#4F4E4F" })
         end,
     },
     --: }}}
