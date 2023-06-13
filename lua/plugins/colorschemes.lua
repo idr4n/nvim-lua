@@ -163,8 +163,10 @@ return {
                     NormalNC = { bg = "#0D1117" }, -- Non-current windows
                     CursorLine = { bg = "#161B22" },
                     Folded = { bg = "#161B22" },
-                    Cursor = { fg = "#0D1117", bg = "#2F81F7" },
-                    lCursor = { fg = "#0D1117", bg = "#2F81F7" },
+                    -- Cursor = { fg = "#0D1117", bg = "#2F81F7" },
+                    -- lCursor = { fg = "#0D1117", bg = "#2F81F7" },
+                    Cursor = { fg = "#0D1117", bg = "#FFDD33" },
+                    lCursor = { fg = "#0D1117", bg = "#FFDD33" },
                     NormalFloat = { bg = "NONE" },
                     FloatBorder = { fg = "#30363D", bg = "NONE" },
                     StatusLine = { bg = "#181E27" },
