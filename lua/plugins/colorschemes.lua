@@ -128,9 +128,9 @@ return {
     --: gruber-darker {{{
     {
         "blazkowolf/gruber-darker.nvim",
-        lazy = duringDayTime,
+        -- lazy = duringDayTime,
         -- lazy = false,
-        priority = 1000,
+        -- priority = 1000,
         -- opts = {
         --     bold = false,
         --     italic = {
@@ -141,7 +141,7 @@ return {
         --     },
         -- },
         config = function()
-            vim.cmd.colorscheme("gruber-darker")
+            -- vim.cmd.colorscheme("gruber-darker")
             vim.api.nvim_set_hl(0, "Folded", { bg = "#181818" })
             vim.api.nvim_set_hl(0, "LspReferenceText", { bg = "#4F4E4F" })
             vim.api.nvim_set_hl(0, "LspReferenceRead", { bg = "#4F4E4F" })
@@ -149,6 +149,45 @@ return {
         end,
     },
     --: }}}
+
+    --: github {{{
+    {
+        "projekt0n/github-nvim-theme",
+        lazy = duringDayTime,
+        priority = 1000,
+        opts = {
+            groups = {
+                -- Custom duskfox with black background
+                github_dark = {
+                    Normal = { bg = "#0D1117" }, -- Non-current windows
+                    NormalNC = { bg = "#0D1117" }, -- Non-current windows
+                    CursorLine = { bg = "#161B22" },
+                    Folded = { bg = "#161B22" },
+                    Cursor = { fg = "#0D1117", bg = "#2F81F7" },
+                    lCursor = { fg = "#0D1117", bg = "#2F81F7" },
+                    NormalFloat = { bg = "NONE" },
+                    FloatBorder = { fg = "#30363D", bg = "NONE" },
+                    StatusLine = { bg = "#181E27" },
+                    NeogitHunkHeader = { bg = "#161B22" },
+                    NeogitHunkHeaderHighlight = { bg = "#161B22" },
+                    NeogitDiffAddHighlight = { bg = "#161B22" },
+                    NeogitDiffDeleteHighlight = { bg = "#161B22" },
+                    NeogitDiffContextHighlight = { bg = "#161B22" },
+                    NeoTreeNormal = { bg = "#04070D" },
+                    NeoTreeNormalNC = { bg = "#04070D" },
+                },
+            },
+        },
+        config = function(_, opts)
+            require("github-theme").setup(opts)
+            if not duringDayTime then
+                -- vim.cmd("colorscheme github_dark_colorblind")
+                vim.cmd("colorscheme github_dark")
+                vim.opt.guicursor:append("a:Cursor/lCursor")
+            end
+        end,
+    },
+    -- : }}}
 }
 
 -- Monokai-pro palette
