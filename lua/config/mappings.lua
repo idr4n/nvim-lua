@@ -157,7 +157,8 @@ keymap("n", "<esc>", "<esc><cmd>noh<cr>", { noremap = true, silent = true, desc 
 
 --: home row goto end and start of line (same as in Helix editor) {{{
 keyset({ "n", "v", "o" }, "gh", "^", od("Go to start of line"))
-keyset({ "n", "v", "o" }, "gl", "$", od("Go to end of line"))
+keyset({ "n", "o" }, "gl", "$", od("Go to end of line"))
+keyset("v", "gl", "$h", od("Go to end of line"))
 --: }}}
 
 --: Stay in indent mode {{{
