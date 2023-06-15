@@ -40,8 +40,8 @@ return {
     --: zenbones{{{
     {
         "mcchrish/zenbones.nvim",
-        lazy = not duringDayTime,
-        -- lazy = false,
+        -- lazy = not duringDayTime,
+        lazy = false,
         priority = 1000,
         dependencies = "rktjmp/lush.nvim",
         config = function()
@@ -70,13 +70,16 @@ return {
                 vim.api.nvim_set_hl(0, "TabLineSel", { bg = "#D6CAC4" })
             else
                 vim.o.background = "dark"
-                -- vim.cmd("colorscheme zenbones")
+                vim.cmd("colorscheme zenbones")
                 vim.api.nvim_set_hl(0, "Type", { bold = true })
                 vim.api.nvim_set_hl(0, "TabLineFill", { bg = "#171210" })
                 vim.api.nvim_set_hl(0, "TabLine", { bg = "#302825" })
                 vim.api.nvim_set_hl(0, "TabLineSel", { bg = "#453C39" })
             end
             -- vim.cmd("colorscheme zenbones")
+            -- vim.api.nvim_set_hl(0, "Cursor", { bg = "#FFC22D" })
+            -- vim.api.nvim_set_hl(0, "lCursor", { bg = "#FFC22D" })
+            -- vim.opt.guicursor:append("a:Cursor/lCursor")
         end,
     },
     --: }}}
@@ -153,8 +156,8 @@ return {
     --: github {{{
     {
         "projekt0n/github-nvim-theme",
-        lazy = duringDayTime,
-        priority = 1000,
+        -- lazy = duringDayTime,
+        -- priority = 1000,
         opts = {
             groups = {
                 -- Custom duskfox with black background
@@ -182,11 +185,11 @@ return {
         },
         config = function(_, opts)
             require("github-theme").setup(opts)
-            if not duringDayTime then
-                -- vim.cmd("colorscheme github_dark_colorblind")
-                vim.cmd("colorscheme github_dark")
-                vim.opt.guicursor:append("a:Cursor/lCursor")
-            end
+            -- if not duringDayTime then
+            --     -- vim.cmd("colorscheme github_dark_colorblind")
+            --     vim.cmd("colorscheme github_dark")
+            --     vim.opt.guicursor:append("a:Cursor/lCursor")
+            -- end
         end,
     },
     -- : }}}
