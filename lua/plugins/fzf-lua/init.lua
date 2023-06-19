@@ -2,13 +2,13 @@ return {
     "ibhagwan/fzf-lua",
     cmd = "FzfLua",
     keys = {
-        {
-            "<leader>r",
-            "<cmd>lua require('fzf-lua').live_grep()<CR>",
-            noremap = true,
-            silent = true,
-            desc = "Live Grep",
-        },
+        -- {
+        --     "<leader>r",
+        --     "<cmd>lua require('fzf-lua').live_grep()<CR>",
+        --     noremap = true,
+        --     silent = true,
+        --     desc = "Live Grep",
+        -- },
         {
             "<leader>or",
             "<cmd>lua require('fzf-lua').resume()<CR>",
