@@ -75,11 +75,11 @@ return {
                 vim.api.nvim_set_hl(0, "TabLineFill", { bg = "#171210" })
                 vim.api.nvim_set_hl(0, "TabLine", { bg = "#302825" })
                 vim.api.nvim_set_hl(0, "TabLineSel", { bg = "#453C39" })
+                vim.api.nvim_set_hl(0, "Cursor", { bg = "#FFC22D" })
+                vim.api.nvim_set_hl(0, "lCursor", { bg = "#FFC22D" })
+                vim.opt.guicursor:append("a:Cursor/lCursor")
             end
             -- vim.cmd("colorscheme zenbones")
-            -- vim.api.nvim_set_hl(0, "Cursor", { bg = "#FFC22D" })
-            -- vim.api.nvim_set_hl(0, "lCursor", { bg = "#FFC22D" })
-            -- vim.opt.guicursor:append("a:Cursor/lCursor")
         end,
     },
     --: }}}
