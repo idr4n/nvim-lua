@@ -30,8 +30,8 @@ return {
             --     "  Find file",
             --     ":lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>"
             -- ),
-            dashboard.button("r", "󰄉  Recently used files", ":Telescope oldfiles<cr>"),
-            dashboard.button("t", "󰺮  Find text", ":Rg<cr>"),
+            dashboard.button("t", "󰄉  File History", ":Telescope oldfiles<cr>"),
+            dashboard.button("r", "󰺮  Find text", ":Rg<cr>"),
             -- dashboard.button("s", "  Open session", ":SearchSession <CR>"),
             dashboard.button(
                 "s",

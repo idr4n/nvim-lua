@@ -128,7 +128,7 @@ return {
     {
         "declancm/windex.nvim",
         keys = {
-            { "<Leader>tm", "<Cmd>lua require('windex').toggle_maximize()<CR>", desc = "Toggle Maximize Window" },
+            { "<Leader>tm", "<Cmd>lua require('windex').toggle_nvim_maximize()<CR>", desc = "Toggle Maximize Window" },
             { "<C-Bslash>", "<Cmd>lua require('windex').toggle_terminal()<CR>", mode = { "n", "t" }, desc = "Toggle terminal" },
             { "<C-n>", "<C-Bslash><C-n>", mode = "t", desc = "Enter normal mode" },
         },
@@ -140,7 +140,7 @@ return {
     {
         "justinmk/vim-dirvish",
         event = "VimEnter",
-        enabled = false,
+        -- enabled = false,
         config = function()
             vim.g.dirvish_git_show_ignored = 1
 
@@ -259,11 +259,36 @@ return {
     --: oil - file manager {{{
     {
         "stevearc/oil.nvim",
-        -- enabled = false,
+        enabled = false,
         cmd = "Oil",
         keys = { { "<leader>oo", "<cmd>Oil<cr>", desc = "Oil - Parent Dir" } },
         opts = {},
         dependencies = { "nvim-tree/nvim-web-devicons" },
+    },
+    --: }}}
+
+    --: quarto {{{
+    {
+        "quarto-dev/quarto-nvim",
+        dev = false,
+        ft = { "quarto" },
+        dependencies = {
+            {
+                "jmbuhr/otter.nvim",
+                dependencies = {
+                    { "neovim/nvim-lspconfig" },
+                },
+                config = true,
+            },
+        },
+        opts = {
+            lspFeatures = {
+                languages = { "r", "python", "julia", "bash", "lua", "html" },
+            },
+        },
+        config = function(_, opts)
+            require("quarto").setup(opts)
+        end,
     },
     --: }}}
 }

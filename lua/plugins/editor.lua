@@ -25,6 +25,7 @@ return {
     --: colorizer {{{
     {
         "NvChad/nvim-colorizer.lua",
+        -- enabled = false,
         event = "BufReadPre",
         keys = {
             { ",c", "<cmd>ColorizerToggle<cr>", noremap = true, silent = true },
@@ -35,13 +36,14 @@ return {
             user_default_options = {
                 RGB = true, -- #RGB hex codes
                 RRGGBB = true, -- #RRGGBB hex codes
-                names = false, -- "Name" codes like Blue
+                names = true, -- "Name" codes like Blue
                 RRGGBBAA = true, -- #RRGGBBAA hex codes
-                AARRGGBB = false, -- 0xAARRGGBB hex codes
+                AARRGGBB = true, -- 0xAARRGGBB hex codes
                 rgb_fn = true, -- CSS rgb() and rgba() functions
                 hsl_fn = true, -- CSS hsl() and hsla() functions
-                css = false, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+                css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
                 css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+                tailwind = true,
                 -- Available modes: foreground, background
                 -- Available modes for `mode`: foreground, background,  virtualtext
                 -- mode = "background", -- Set the display mode.
@@ -157,22 +159,22 @@ return {
         opts = function()
             -- redefine gitsigns colors
             local linenr_hl = vim.api.nvim_get_hl_by_name("LineNr", true)
-            vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#73DACA", bg = linenr_hl.background })
-            vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#FF9E64", bg = linenr_hl.background })
-            vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#F7768E", bg = linenr_hl.background })
-            vim.api.nvim_set_hl(0, "GitSignsChangeDelete", { fg = "#BD73EC", bg = linenr_hl.background })
+            -- vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#73DACA", bg = linenr_hl.background })
+            -- vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#FF9E64", bg = linenr_hl.background })
+            -- vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#F7768E", bg = linenr_hl.background })
+            -- vim.api.nvim_set_hl(0, "GitSignsChangeDelete", { fg = "#BD73EC", bg = linenr_hl.background })
 
             return {
                 signcolumn = true,
                 numhl = false,
                 signs = {
-                    -- add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+                    add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
                     -- add = { hl = "GitSignsAdd", text = "│", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-                    add = { hl = "GitSignsAdd", text = "▍", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+                    -- add = { hl = "GitSignsAdd", text = "▍", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
                     change = {
                         hl = "GitSignsChange",
-                        text = "▍",
-                        -- text = "▎",
+                        -- text = "▍",
+                        text = "▎",
                         -- text = "│",
                         numhl = "GitSignsChangeNr",
                         linehl = "GitSignsChangeLn",
@@ -193,8 +195,8 @@ return {
                     },
                     changedelete = {
                         hl = "GitSignsChangeDelete",
-                        text = "▍",
-                        -- text = "▎",
+                        -- text = "▍",
+                        text = "▎",
                         -- text = "‾",
                         -- text = "▋",
                         numhl = "GitSignsChangeNr",

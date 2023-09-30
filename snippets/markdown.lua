@@ -50,6 +50,12 @@ M.snips.col = p({
     dscr = "Adds a collapsible/foldable block",
 }, "<details>\n<summary>$1</summary>\n$2\n</details>")
 
+M.snips.cq = p({
+    trig = "cq",
+    name = "code block in quarto",
+    dscr = "Code block in Quarto document",
+}, "```{${1:python}}\n$TM_SELECTED_TEXT$2\n```")
+
 -- autosnippets
 M.autosnips.tt = p({
     trig = ";tt",
@@ -74,5 +80,11 @@ M.autosnips.m = p({
     name = "Math $$|$$",
     dscr = "Surrounds with math symbols",
 }, "\\$\\$$TM_SELECTED_TEXT$1\\$\\$")
+
+M.autosnips.cq = p({
+    trig = ";cq",
+    name = "code block in quarto",
+    dscr = "Code block in Quarto document",
+}, "```{${1:python}}\n$TM_SELECTED_TEXT$2\n```")
 
 return getSnippetsList(M.snips), getSnippetsList(M.autosnips)

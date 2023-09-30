@@ -31,6 +31,7 @@ return {
             "saadparwaiz1/cmp_luasnip",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-nvim-lua",
+            { "js-everts/cmp-tailwind-colors", config = true },
         },
         opts = function()
             local cmp = require("cmp")
@@ -135,6 +136,19 @@ return {
                     format = function(entry, vim_item)
                         -- format = function(_, vim_item)
                         -- Kind icons
+
+                        -- START extra config for cmp-tailwind-colors (remove if not used)
+                        if vim_item.kind == "Color" then
+                            vim_item = require("cmp-tailwind-colors").format(entry, vim_item)
+
+                            if vim_item.kind ~= "Color" then
+                                vim_item.menu = "Color"
+                                vim_item.kind = string.format(" %s", vim_item.kind)
+                                return vim_item
+                            end
+                        end
+                        -- END extra config for cmp-tailwind-colors
+
                         vim_item.menu = vim_item.kind
                         vim_item.kind = string.format(" %s ", nvchad_icons[vim_item.kind])
                         -- vim_item.kind = string.format("%s %s", nvchad_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
@@ -159,6 +173,7 @@ return {
                     { name = "luasnip" },
                     { name = "buffer" },
                     { name = "path" },
+                    { name = "otter" },
                     -- { name = "copilot" },
                 },
                 confirm_opts = {

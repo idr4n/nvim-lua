@@ -50,6 +50,15 @@ return {
             silent = true,
         },
         {
+            "<C-T>",
+            function()
+                require("telescope.builtin").oldfiles(require("telescope.themes").get_ivy({ previewer = false }))
+            end,
+            noremap = true,
+            silent = true,
+            desc = "Recent files",
+        },
+        {
             "<leader>fh",
             function()
                 require("telescope.builtin").oldfiles(require("telescope.themes").get_ivy({ previewer = false }))
@@ -136,17 +145,17 @@ return {
             desc = "Change workdir",
         },
         { ",u", "<cmd>Telescope undo<cr>", noremap = true, silent = true },
-        {
-            "-",
-            function()
-                require("telescope").extensions.file_browser.file_browser({
-                    initial_mode = "normal",
-                    path = "%:p:h",
-                    select_buffer = true,
-                })
-            end,
-            desc = "Telescope file_browser",
-        },
+        -- {
+        --     "-",
+        --     function()
+        --         require("telescope").extensions.file_browser.file_browser({
+        --             initial_mode = "normal",
+        --             path = "%:p:h",
+        --             select_buffer = true,
+        --         })
+        --     end,
+        --     desc = "Telescope file_browser",
+        -- },
         {
             "<leader>ob",
             function()

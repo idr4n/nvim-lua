@@ -12,7 +12,7 @@ return {
                 "clangd",
                 "css-lsp",
                 "cssmodules-language-server",
-                "emmet-ls",
+                -- "emmet-ls",
                 "flake8",
                 "goimports",
                 "gopls",
@@ -34,6 +34,7 @@ return {
                 "typescript-language-server",
                 "vim-language-server",
                 "vue-language-server",
+                "zls",
             },
             ui = {
                 border = "rounded",
@@ -184,6 +185,7 @@ return {
                 lua_ls = require("plugins.lsp.settings.lua_ls"),
                 pyright = require("plugins.lsp.settings.pyright"),
                 sqlls = require("plugins.lsp.settings.sqls"),
+                cssls = require("plugins.lsp.settings.cssls"),
             },
 
             setup = {
@@ -215,12 +217,15 @@ return {
                                 other_hints_prefix = "=> ",
                             },
                             on_initialized = function()
-                                vim.api.nvim_create_autocmd({ "BufWritePost", "BufRead", "CursorHold", "InsertLeave" }, {
-                                    pattern = { "*.rs" },
-                                    callback = function()
-                                        local _, _ = pcall(vim.lsp.codelens.refresh)
-                                    end,
-                                })
+                                vim.api.nvim_create_autocmd(
+                                    { "BufWritePost", "BufRead", "CursorHold", "InsertLeave" },
+                                    {
+                                        pattern = { "*.rs" },
+                                        callback = function()
+                                            local _, _ = pcall(vim.lsp.codelens.refresh)
+                                        end,
+                                    }
+                                )
                             end,
                         },
                         dap = {
@@ -285,6 +290,12 @@ return {
                 lineFoldingOnly = true,
             }
 
+            capabilities.workspace = {
+                didChangeWatchedFiles = {
+                    dynamicRegistration = true,
+                },
+            }
+
             local function setup(server)
                 local server_opts = vim.tbl_deep_extend("force", {
                     on_attach = require("plugins.lsp.handlers").on_attach,
@@ -341,6 +352,7 @@ return {
             require("lspconfig").sourcekit.setup({
                 on_attach = require("plugins.lsp.handlers").on_attach,
                 capabilities = capabilities,
+                filetypes = { "swift" },
             })
         end,
     },
@@ -367,7 +379,8 @@ return {
                     -- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
                     formatting.prettier.with({
                         extra_args = { "--single-quote", "--jsx-single-quote" },
-                        disabled_filetypes = { "markdown", "html" },
+                        disabled_filetypes = { "markdown", "html", "vue" },
+                        extra_filetype = { "svelte" },
                     }),
 
                     -- Python

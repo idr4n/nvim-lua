@@ -9,7 +9,7 @@ return {
             -- show_end_of_line = true,
             -- char = "",
             -- context_char = "│",
-            -- show_current_context = true,
+            show_current_context = true,
             -- show_current_context_start = true,
             -- show_first_indent_level = false,
             show_trailing_blankline_indent = false,
@@ -194,12 +194,16 @@ return {
                 bt_ignore = { "terminal" },
                 segments = {
                     -- { text = { builtin.foldfunc, "" }, click = "v:lua.ScFa" },
-                    { text = { "%s" }, click = "v:lua.ScSa" },
+                    -- { text = { "%s" }, click = "v:lua.ScSa" },
+                    { sign = { name = { "Diagnostic" } }, click = "v:lua.ScSa" },
                     {
-                        text = { "", builtin.lnumfunc, "   " },
+                        -- text = { "", builtin.lnumfunc, "   " },
+                        text = { "", builtin.lnumfunc, " " },
                         condition = { true, builtin.not_empty },
                         click = "v:lua.ScLa",
                     },
+                    -- { text = { "%s" }, click = "v:lua.ScSa" },
+                    { sign = { name = { ".*" } }, click = "v:lua.ScSa" },
                 },
             }
         end,
