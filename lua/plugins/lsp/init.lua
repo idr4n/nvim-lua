@@ -358,9 +358,10 @@ return {
     },
     --: }}}
 
-    --: null-ls {{{
+    --: null-ls/none-ls {{{
     {
-        "jose-elias-alvarez/null-ls.nvim",
+        -- "jose-elias-alvarez/null-ls.nvim",
+        "nvimtools/none-ls.nvim",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = { "mason.nvim" },
         opts = function()
@@ -374,6 +375,7 @@ return {
 
             return {
                 debug = false,
+                border = "rounded",
                 sources = {
                     -- Prettier
                     -- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
