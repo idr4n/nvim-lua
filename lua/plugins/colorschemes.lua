@@ -24,7 +24,7 @@ return {
                 on_highlights = function(hl, c)
                     hl.CursorLine = { bg = c.bg_dark }
                     hl.Folded = { bg = c.none }
-                    hl.IndentBlanklineChar = { fg = "#272936" }
+                    hl.IblIndent = { fg = "#272936" }
                     hl.NeoTreeCursorLine = { bg = "#2F344C" }
                 end,
             }
@@ -75,8 +75,8 @@ return {
                 vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "#F6F8FA" })
                 vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { bg = "#F6F8FA" })
                 vim.api.nvim_set_hl(0, "NeoTreeCursorLine", { bg = "#E8EAED" })
-                vim.api.nvim_set_hl(0, "IndentBlanklineChar", { fg = "#EFF2F6" })
-                vim.api.nvim_set_hl(0, "IndentBlanklineContextChar", { fg = "#D7DBE0" })
+                vim.api.nvim_set_hl(0, "IblIndent", { fg = "#EFF2F6" })
+                vim.api.nvim_set_hl(0, "IblScope", { fg = "#D7DBE0" })
             else
                 -- vim.o.background = "dark"
                 -- vim.cmd("colorscheme zenbones")
