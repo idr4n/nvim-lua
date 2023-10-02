@@ -63,9 +63,9 @@ return {
         -- require("luasnip.loaders.from_snipmate").lazy_load({ paths = { "./snippets" } })
 
         -- Settings --
-        ls.filetype_extend("typescript", { "javascript" })
-        ls.filetype_extend("javascriptreact", { "javascript" })
-        ls.filetype_extend("typescriptreact", { "javascript" })
+        ls.filetype_extend("typescript", { "javascriptreact" })
+        ls.filetype_extend("javascript", { "javascriptreact" })
+        ls.filetype_extend("typescript", { "javascriptreact" })
         ls.filetype_extend("quarto", { "markdown" })
 
         ls.config.set_config({
