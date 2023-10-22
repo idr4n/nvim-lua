@@ -12,16 +12,16 @@ return {
             silent = true,
             desc = "Telescope-find_files",
         },
-        {
-            "<C-P>",
-            function()
-                require("telescope.builtin").find_files()
-            end,
-            noremap = true,
-            silent = true,
-            desc = "Telescope-find_files",
-        },
-        { "<leader>r", "<cmd>Telescope live_grep<cr>", noremap = true, silent = true },
+        -- {
+        --     "<C-P>",
+        --     function()
+        --         require("telescope.builtin").find_files()
+        --     end,
+        --     noremap = true,
+        --     silent = true,
+        --     desc = "Telescope-find_files",
+        -- },
+        -- { "<leader>r", "<cmd>Telescope live_grep<cr>", noremap = true, silent = true },
         {
             "<leader>ff",
             function()

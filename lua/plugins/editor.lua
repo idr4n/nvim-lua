@@ -69,7 +69,7 @@ return {
     --: fzf.vim {{{
     {
         "junegunn/fzf.vim",
-        enabled = false,
+        -- enabled = false,
         cmd = { "Files", "Rg", "Lines", "BLines", "History" },
         keys = {
             --  { "<C-P>", ":Files<cr>", noremap = true, silent = true },

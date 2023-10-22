@@ -3,7 +3,6 @@ return {
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
         event = "LspAttach",
-        cmd = { "TSUpdateSync", "TSUpdate", "TSInstallSync", "TSUninstall" },
         opts = {
             textobjects = {
                 select = {
@@ -39,7 +38,8 @@ return {
         "nvim-treesitter/nvim-treesitter",
         version = false,
         build = ":TSUpdate",
-        event = { "BufReadPost", "BufNewFile" },
+        event = { "BufReadPost", "BufNewFile", "VeryLazy" },
+        cmd = { "TSUpdateSync", "TSUpdate", "TSInstall", "TSUninstall" },
         opts = {
             autotag = {
                 enable = true,
@@ -94,6 +94,32 @@ return {
         config = function(_, opts)
             require("nvim-treesitter.configs").setup(opts)
         end,
+    },
+    --: }}}
+
+    --: Automatically add closing tags for HTML and JSX {{{
+    {
+        "windwp/nvim-ts-autotag",
+        event = { "BufReadPost", "BufNewFile" },
+        opts = {},
+    },
+    --: }}}
+
+    --: Show context of the current function {{{
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+        event = { "BufReadPost", "BufNewFile" },
+        enabled = true,
+        opts = { mode = "cursor", max_lines = 3 },
+        keys = {
+            {
+                "<leader>tt",
+                function()
+                    require("treesitter-context").toggle()
+                end,
+                desc = "Toggle Treesitter Context",
+            },
+        },
     },
     --: }}}
 }

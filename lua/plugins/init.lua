@@ -23,8 +23,6 @@ return {
     "nanotee/sqls.nvim",
 
     -- Treesitter
-    "windwp/nvim-ts-autotag",
-    "nvim-treesitter/nvim-treesitter-context",
     { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
     {
         "nvim-telescope/telescope-file-browser.nvim",
