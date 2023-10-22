@@ -54,7 +54,7 @@ return {
                 enable = true,
                 keymaps = {
                     init_selection = "<CR>",
-                    scope_incremental = "<CR>",
+                    scope_incremental = false,
                     node_incremental = "<CR>",
                     node_decremental = "<TAB>",
                 },
