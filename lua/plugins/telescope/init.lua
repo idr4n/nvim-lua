@@ -12,7 +12,16 @@ return {
             silent = true,
             desc = "Telescope-find_files",
         },
-        -- { "<leader>r", "<cmd>Telescope live_grep<cr>", noremap = true, silent = true },
+        {
+            "<C-P>",
+            function()
+                require("telescope.builtin").find_files()
+            end,
+            noremap = true,
+            silent = true,
+            desc = "Telescope-find_files",
+        },
+        { "<leader>r", "<cmd>Telescope live_grep<cr>", noremap = true, silent = true },
         {
             "<leader>ff",
             function()
@@ -39,10 +48,11 @@ return {
         {
             "s",
             function()
-                require("telescope.builtin").buffers(require("telescope.themes").get_ivy({
+                -- require("telescope.builtin").buffers(require("telescope.themes").get_ivy({
+                require("telescope.builtin").buffers(require("telescope.themes").get_dropdown({
                     initial_mode = "normal",
                     sort_lastused = true,
-                    ignore_current_buffer = true,
+                    ignore_current_buffer = false,
                     previewer = false,
                 }))
             end,
@@ -67,12 +77,12 @@ return {
             silent = true,
             desc = "Recent files",
         },
-        -- {
-        --     "<leader>gs",
-        --     "<cmd>lua require('telescope.builtin').git_status({ initial_mode = 'normal' })<cr>",
-        --     noremap = true,
-        --     silent = true,
-        -- },
+        {
+            "<leader>gs",
+            "<cmd>lua require('telescope.builtin').git_status({ initial_mode = 'normal' })<cr>",
+            noremap = true,
+            silent = true,
+        },
         { "<leader>oh", "<cmd>Telescope help_tags theme=ivy<cr>", noremap = true, silent = true, desc = "Help" },
         {
             "gd",

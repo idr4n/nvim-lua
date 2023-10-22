@@ -43,7 +43,7 @@ return {
                 hsl_fn = true, -- CSS hsl() and hsla() functions
                 css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
                 css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-                tailwind = true,
+                tailwind = "lsp",
                 -- Available modes: foreground, background
                 -- Available modes for `mode`: foreground, background,  virtualtext
                 -- mode = "background", -- Set the display mode.
@@ -69,6 +69,7 @@ return {
     --: fzf.vim {{{
     {
         "junegunn/fzf.vim",
+        enabled = false,
         cmd = { "Files", "Rg", "Lines", "BLines", "History" },
         keys = {
             --  { "<C-P>", ":Files<cr>", noremap = true, silent = true },

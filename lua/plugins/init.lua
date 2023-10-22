@@ -14,7 +14,7 @@ return {
     { "moll/vim-bbye", event = "BufReadPost" },
     { "aymericbeaumet/vim-symlink", event = "VeryLazy" },
     { "dag/vim-fish", ft = "fish" },
-    { "junegunn/fzf", build = ":call fzf#install()" },
+    -- { "junegunn/fzf", build = ":call fzf#install()" },
     { "mg979/vim-visual-multi", event = "VeryLazy" },
     -- { "edluffy/hologram.nvim", ft = "markdown", opts = { auto_display = true } },
 

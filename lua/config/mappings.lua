@@ -44,6 +44,7 @@ keymap("n", "k", "gk", opts)
 --: Quicksave command {{{
 keyset("n", "<leader>s", "<cmd>w<CR>", od("Save file"))
 keyset("n", "<leader>fs", "<cmd>w<CR>", od("Save file"))
+keymap("n", "<Leader>S", "<cmd>w!<CR>", od("Save file override"))
 --: }}}
 
 --: Quit current window {{{
@@ -52,7 +53,6 @@ keymap("n", "<leader>E", ":q!<CR>", od("Force Quit"))
 --: }}}
 
 --: Easy select all of file {{{
-keymap("n", "<Leader>S", "ggVG<c-$>", od("Select All"))
 keymap("n", ",A", "ggVG<c-$>", od("Select All"))
 --: }}}
 

@@ -3,6 +3,7 @@ return {
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
         event = "LspAttach",
+        cmd = { "TSUpdateSync", "TSUpdate", "TSInstallSync", "TSUninstall" },
         opts = {
             textobjects = {
                 select = {
@@ -62,6 +63,7 @@ return {
                 "bash",
                 "cpp",
                 "css",
+                "elixir",
                 "go",
                 "html",
                 "java",

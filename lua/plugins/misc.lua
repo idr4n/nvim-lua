@@ -3,7 +3,7 @@ return {
     {
         "utilyre/barbecue.nvim",
         name = "barbecue",
-        enabled = false,
+        -- enabled = false,
         event = "BufReadPre",
         dependencies = {
             "SmiteshP/nvim-navic",
@@ -144,9 +144,12 @@ return {
                     cursorcolumn = false,
                 },
             },
-            -- plugins = {
-            --   gitsigns = { enabled = false },
-            -- }
+            plugins = {
+                -- gitsigns = { enabled = false },
+                options = {
+                    laststatus = 3,
+                },
+            },
         },
         keys = {
             { "<leader>zz", ":ZenMode<cr>", noremap = true, silent = true, desc = "Zen mode" },

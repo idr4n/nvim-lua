@@ -38,6 +38,7 @@ return {
                             "IfStatement",
                             "import",
                             "InitList",
+                            "jsx_self_closing_element",
                             "list_literal",
                             "method",
                             "object",
@@ -237,7 +238,7 @@ return {
     --: statuscol {{{
     {
         "luukvbaal/statuscol.nvim",
-        enabled = true,
+        -- enabled = false,
         event = { "BufReadPost", "BufNewFile" },
         opts = function()
             local builtin = require("statuscol.builtin")
@@ -249,6 +250,7 @@ return {
                     -- { text = { builtin.foldfunc, "" }, click = "v:lua.ScFa" },
                     -- { text = { "%s" }, click = "v:lua.ScSa" },
                     { sign = { name = { "Diagnostic" } }, click = "v:lua.ScSa" },
+                    { sign = { name = { "Dap*" }, auto = true }, click = "v:lua.ScSa" },
                     {
                         -- text = { "", builtin.lnumfunc, "   " },
                         text = { "", builtin.lnumfunc, " " },
@@ -256,7 +258,8 @@ return {
                         click = "v:lua.ScLa",
                     },
                     -- { text = { "%s" }, click = "v:lua.ScSa" },
-                    { sign = { name = { ".*" } }, click = "v:lua.ScSa" },
+                    -- { sign = { name = { ".*" } }, click = "v:lua.ScSa" },
+                    { sign = { namespace = { "gitsign*" } }, click = "v:lua.ScSa" },
                 },
             }
         end,

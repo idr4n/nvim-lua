@@ -9,8 +9,8 @@ return {
     --: tokyonight {{{
     {
         "folke/tokyonight.nvim",
-        lazy = duringDayTime,
-        priority = 1000,
+        -- lazy = duringDayTime,
+        -- priority = 1000,
         opts = function()
             return {
                 -- style = "moon",
@@ -26,16 +26,17 @@ return {
                     hl.Folded = { bg = c.none }
                     hl.IblIndent = { fg = "#272936" }
                     hl.NeoTreeCursorLine = { bg = "#2F344C" }
+                    hl.TelescopeBorder = { fg = c.purple, bg = c.none }
                 end,
             }
         end,
         config = function(_, opts)
             require("tokyonight").setup(opts)
 
-            -- Load the colorscheme
-            if not duringDayTime then
-                vim.cmd("colorscheme tokyonight")
-            end
+            -- -- Load the colorscheme
+            -- if not duringDayTime then
+            --     vim.cmd("colorscheme tokyonight")
+            -- end
         end,
     },
     --: }}}
@@ -43,8 +44,8 @@ return {
     --: zenbones{{{
     {
         "mcchrish/zenbones.nvim",
-        lazy = not duringDayTime,
-        -- lazy = false,
+        -- lazy = not duringDayTime,
+        lazy = false,
         priority = 1000,
         dependencies = "rktjmp/lush.nvim",
         config = function()
@@ -78,12 +79,16 @@ return {
                 vim.api.nvim_set_hl(0, "IblIndent", { fg = "#EFF2F6" })
                 vim.api.nvim_set_hl(0, "IblScope", { fg = "#D7DBE0" })
             else
-                -- vim.o.background = "dark"
-                -- vim.cmd("colorscheme zenbones")
+                vim.o.background = "dark"
+                vim.cmd("colorscheme zenbones")
                 vim.api.nvim_set_hl(0, "Type", { bold = true })
                 vim.api.nvim_set_hl(0, "TabLineFill", { bg = "#171210" })
                 vim.api.nvim_set_hl(0, "TabLine", { bg = "#302825" })
                 vim.api.nvim_set_hl(0, "TabLineSel", { bg = "#453C39" })
+                vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "#241E1B" })
+                vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "#241E1B" })
+                vim.api.nvim_set_hl(0, "NeoTreeCursorLine", { bg = "#3A322D" })
+                vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { bg = "#241E1B" })
                 vim.api.nvim_set_hl(0, "Cursor", { bg = "#FFC22D" })
                 vim.api.nvim_set_hl(0, "lCursor", { bg = "#FFC22D" })
                 vim.opt.guicursor:append("a:Cursor/lCursor")
