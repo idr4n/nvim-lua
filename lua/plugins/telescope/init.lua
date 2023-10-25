@@ -3,24 +3,25 @@ return {
     cmd = "Telescope",
     event = "BufReadPost",
     keys = {
-        {
-            "<leader><space>",
-            function()
-                require("telescope.builtin").find_files(require("telescope.themes").get_ivy({ previewer = false }))
-            end,
-            noremap = true,
-            silent = true,
-            desc = "Telescope-find_files",
-        },
         -- {
-        --     "<C-P>",
+        --     "<leader><space>",
         --     function()
+        --         -- require("telescope.builtin").find_files(require("telescope.themes").get_ivy({ previewer = false }))
         --         require("telescope.builtin").find_files()
         --     end,
         --     noremap = true,
         --     silent = true,
         --     desc = "Telescope-find_files",
         -- },
+        {
+            "<C-P>",
+            function()
+                require("telescope.builtin").find_files()
+            end,
+            noremap = true,
+            silent = true,
+            desc = "Telescope-find_files",
+        },
         -- { "<leader>r", "<cmd>Telescope live_grep<cr>", noremap = true, silent = true },
         {
             "<leader>ff",
