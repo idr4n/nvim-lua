@@ -61,18 +61,10 @@ return {
             silent = true,
         },
         {
-            "<C-T>",
-            function()
-                require("telescope.builtin").oldfiles(require("telescope.themes").get_ivy({ previewer = false }))
-            end,
-            noremap = true,
-            silent = true,
-            desc = "Recent files",
-        },
-        {
             "<leader>fh",
             function()
-                require("telescope.builtin").oldfiles(require("telescope.themes").get_ivy({ previewer = false }))
+                -- require("telescope.builtin").oldfiles(require("telescope.themes").get_ivy({ previewer = false }))
+                require("telescope.builtin").oldfiles()
             end,
             noremap = true,
             silent = true,

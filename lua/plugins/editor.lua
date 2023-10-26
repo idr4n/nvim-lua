@@ -262,8 +262,9 @@ return {
     {
         "nvim-neo-tree/neo-tree.nvim",
         cmd = "Neotree",
-        branch = "v2.x",
+        branch = "v3.x",
         keys = {
+            { "<C-T>", ":Neotree reveal left toggle<CR>", noremap = true, silent = true, desc = "Toggle" },
             { "<leader>na", ":Neotree reveal left toggle<CR>", noremap = true, silent = true, desc = "Toggle" },
             { "<leader>nn", ":Neotree focus<CR>", noremap = true, silent = true, desc = "Focus" },
             { "<leader>nf", ":Neotree float reveal toggle<CR>", noremap = true, silent = true, desc = "Float" },
@@ -304,7 +305,7 @@ return {
                 },
             },
             window = {
-                width = 27,
+                width = 30,
                 mappings = {
                     ["o"] = "open",
                     ["h"] = function(state)
@@ -338,7 +339,7 @@ return {
                         ".DS_Store",
                     },
                 },
-                follow_current_file = true,
+                follow_current_file = { enabled = true },
                 hijack_netrw_behavior = "disabled",
                 use_libuv_file_watcher = true,
             },
