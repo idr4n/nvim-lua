@@ -27,7 +27,7 @@ keyset("v", "<C-g>", "<ESC>")
 keymap("i", "<C-a>", "<Home>", od())
 -- keymap("i", "<C-e>", "<C-O>$", opts)
 keymap("i", "<C-e>", "<End>", od())
--- keymap("i", "<C-f>", "<C-O>zt", od())
+keymap("i", "<C-f>", "<C-O>zt", od())
 keymap("n", "<C-f>", "zt", od("Top current line"))
 --: }}}
 
@@ -99,6 +99,7 @@ keymap("n", "g#", "g#N", { noremap = true, desc = "BckSearch not exact" })
 
 --: select line without end of line {{{
 keymap("n", ",a", "^v$h", od("Select line-no-end"))
+keymap("n", "g;", "^v$h", od("Select line-no-end"))
 --: }}}
 
 --: paste register for printing (JavaScript) {{{
