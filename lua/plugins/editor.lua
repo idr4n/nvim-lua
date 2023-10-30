@@ -269,6 +269,13 @@ return {
             { "<leader>nn", ":Neotree focus<CR>", noremap = true, silent = true, desc = "Focus" },
             { "<leader>nf", ":Neotree float reveal toggle<CR>", noremap = true, silent = true, desc = "Float" },
             { "<leader>nb", ":Neotree toggle show buffers right<CR>", noremap = true, silent = true, desc = "Buffers" },
+            {
+                "<leader>ns",
+                ":Neotree toggle document_symbols right<CR>",
+                noremap = true,
+                silent = true,
+                desc = "Doc Symbols",
+            },
         },
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -362,6 +369,14 @@ return {
                     end,
                     id = "statuscol",
                 },
+            },
+            sources = {
+                "filesystem",
+                "buffers",
+                "document_symbols",
+            },
+            document_symbols = {
+                follow_cursor = true,
             },
         },
         -- config = require("setup.neo-tree"),
