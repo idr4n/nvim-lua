@@ -244,6 +244,11 @@ return {
                         ["<C-k>"] = actions.move_selection_previous,
 
                         ["<C-c>"] = actions.close,
+                        ["<C-g>"] = {
+                            actions.close,
+                            type = "action",
+                            opts = { nowait = true, silent = true },
+                        },
                         ["<C-l>"] = require("telescope.actions.layout").toggle_preview,
 
                         ["<Down>"] = actions.move_selection_next,
@@ -271,6 +276,7 @@ return {
                     n = {
                         ["<esc>"] = actions.close,
                         ["<C-c>"] = actions.close,
+                        ["<C-g>"] = actions.close,
                         ["s"] = actions.close,
                         ["<CR>"] = actions.select_default,
                         ["f"] = actions.select_default,

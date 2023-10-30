@@ -22,13 +22,13 @@ return {
         -- { "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", noremap = true, silent = true },
         -- { "<C-T>", "<cmd>lua require('fzf-lua').oldfiles()<CR>", noremap = true, silent = true },
         -- { "<C-B>", "<cmd>lua require('fzf-lua').buffers()<CR>", noremap = true, silent = true },
-        {
-            "<leader>gs",
-            "<cmd>lua require('fzf-lua').git_status({ winopts = { preview = { hidden = 'nohidden' } } })<CR>",
-            noremap = true,
-            silent = true,
-            desc = "Git Status",
-        },
+        -- {
+        --     "<leader>gs",
+        --     "<cmd>lua require('fzf-lua').git_status({ winopts = { preview = { hidden = 'nohidden' } } })<CR>",
+        --     noremap = true,
+        --     silent = true,
+        --     desc = "Git Status",
+        -- },
         {
             "<leader>/",
             "<cmd>lua require('plugins.fzf-lua.commands').workdirs({ nvim_tmux = true })<CR>",

@@ -41,6 +41,11 @@ keymap("n", "j", "gj", opts)
 keymap("n", "k", "gk", opts)
 --: }}}
 
+--: new line above {{{
+-- "<C-o>O" is equivalent to "<esc>O" while in insert mode
+keyset("i", "<C-O>", "<C-o>O", od("Insert line above"))
+--: }}}
+
 --: Quicksave command {{{
 keyset("n", "<leader>s", "<cmd>w<CR>", od("Save file"))
 keyset("n", "<leader>fs", "<cmd>w<CR>", od("Save file"))
