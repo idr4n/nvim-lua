@@ -45,8 +45,8 @@ return {
     {
         "mcchrish/zenbones.nvim",
         -- lazy = not duringDayTime,
-        lazy = false,
-        priority = 1000,
+        -- lazy = false,
+        -- priority = 1000,
         dependencies = "rktjmp/lush.nvim",
         config = function()
             vim.g.zenbones =
@@ -226,6 +226,39 @@ return {
             if not duringDayTime then
                 vim.o.background = "dark"
                 -- vim.cmd("colorscheme nightfly")
+                vim.api.nvim_set_hl(0, "Cursor", { bg = "#FFC22D" })
+                vim.api.nvim_set_hl(0, "lCursor", { bg = "#FFC22D" })
+                vim.opt.guicursor:append("a:Cursor/lCursor")
+            end
+        end,
+    },
+    --: }}}
+
+    --: Onedark.nvim {{{
+    {
+        "navarasu/onedark.nvim",
+        -- lazy = duringDayTime,
+        lazy = false,
+        priority = 1000,
+        config = function()
+            local opts = {}
+            if duringDayTime then
+                opts.style = "light"
+                opts.highlights = {}
+            end
+            if not duringDayTime then
+                -- opts.style = "dark"
+                opts.style = "darker"
+                opts.highlights = {
+                    IblScope = { fg = "#626873" },
+                }
+            end
+            require("onedark").setup({
+                style = opts.style,
+                highlights = opts.highlights,
+            })
+            require("onedark").load()
+            if not duringDayTime then
                 vim.api.nvim_set_hl(0, "Cursor", { bg = "#FFC22D" })
                 vim.api.nvim_set_hl(0, "lCursor", { bg = "#FFC22D" })
                 vim.opt.guicursor:append("a:Cursor/lCursor")
