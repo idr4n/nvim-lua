@@ -44,9 +44,9 @@ return {
     --: zenbones{{{
     {
         "mcchrish/zenbones.nvim",
-        -- lazy = not duringDayTime,
+        lazy = not duringDayTime,
         -- lazy = false,
-        -- priority = 1000,
+        priority = 1000,
         dependencies = "rktjmp/lush.nvim",
         config = function()
             vim.g.zenbones =
@@ -61,8 +61,8 @@ return {
                 -- vim.api.nvim_set_hl(0, "CursorLine", { bg = "#F8F5F3" })
                 -- vim.api.nvim_set_hl(0, "StatusLine", { bg = "#F2E9E5" })
                 -- vim.api.nvim_set_hl(0, "LineNr", { fg = "#D6CAC4" })
-                vim.api.nvim_set_hl(0, "CursorLine", { bg = "#F8F9FB" })
-                vim.api.nvim_set_hl(0, "StatusLine", { bg = "#EFF2F6" })
+                vim.api.nvim_set_hl(0, "CursorLine", { bg = "#EDF0F3" })
+                vim.api.nvim_set_hl(0, "StatusLine", { bg = "#E9ECEF" })
                 vim.api.nvim_set_hl(0, "Visual", { bg = "#DBE9F9" })
                 vim.api.nvim_set_hl(0, "LineNr", { fg = "#BABBBD" })
                 vim.api.nvim_set_hl(0, "Comment", { fg = "#A5ABB0" })
@@ -72,10 +72,10 @@ return {
                 vim.api.nvim_set_hl(0, "TabLineFill", { bg = "#FFFFFF" })
                 vim.api.nvim_set_hl(0, "TabLine", { fg = "#A5ABB0", bg = "#E6E6E6" })
                 vim.api.nvim_set_hl(0, "TabLineSel", { bg = "#D6CAC4" })
-                vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "#F6F8FA" })
-                vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "#F6F8FA" })
-                vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { bg = "#F6F8FA" })
-                vim.api.nvim_set_hl(0, "NeoTreeCursorLine", { bg = "#E8EAED" })
+                vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "#E9ECEF" })
+                vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "#E9ECEF" })
+                vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { bg = "#E9ECEF" })
+                vim.api.nvim_set_hl(0, "NeoTreeCursorLine", { bg = "#E1E4E6" })
                 vim.api.nvim_set_hl(0, "IblIndent", { fg = "#EFF2F6" })
                 vim.api.nvim_set_hl(0, "IblScope", { fg = "#D7DBE0" })
             else
@@ -237,28 +237,17 @@ return {
     --: Onedark.nvim {{{
     {
         "navarasu/onedark.nvim",
-        -- lazy = duringDayTime,
-        lazy = false,
+        lazy = duringDayTime,
         priority = 1000,
         config = function()
-            local opts = {}
-            if duringDayTime then
-                opts.style = "light"
-                opts.highlights = {}
-            end
-            if not duringDayTime then
-                -- opts.style = "dark"
-                opts.style = "darker"
-                opts.highlights = {
-                    IblScope = { fg = "#626873" },
-                }
-            end
             require("onedark").setup({
-                style = opts.style,
-                highlights = opts.highlights,
+                style = "dark",
+                highlights = {
+                    IblScope = { fg = "#626873" },
+                },
             })
-            require("onedark").load()
             if not duringDayTime then
+                require("onedark").load()
                 vim.api.nvim_set_hl(0, "Cursor", { bg = "#FFC22D" })
                 vim.api.nvim_set_hl(0, "lCursor", { bg = "#FFC22D" })
                 vim.opt.guicursor:append("a:Cursor/lCursor")
