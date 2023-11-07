@@ -12,7 +12,7 @@ return {
             scope = {
                 -- enabled = false,
                 show_start = false,
-                -- show_end = false,
+                show_end = false,
                 include = {
                     node_type = {
                         ["*"] = {
