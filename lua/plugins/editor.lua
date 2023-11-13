@@ -299,10 +299,10 @@ return {
                 },
                 git_status = {
                     symbols = {
-                        added = "ﰂ",
+                        added = "󰜄",
                         deleted = "",
                         modified = "",
-                        renamed = "凜",
+                        renamed = "󰑕",
                         untracked = "",
                         ignored = "",
                         unstaged = "",
@@ -312,7 +312,7 @@ return {
                 },
             },
             window = {
-                width = 30,
+                width = 35,
                 mappings = {
                     ["o"] = "open",
                     ["h"] = function(state)
