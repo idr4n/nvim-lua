@@ -76,8 +76,8 @@ return {
                 vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "#EEEEEE" })
                 vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { bg = "#EEEEEE" })
                 vim.api.nvim_set_hl(0, "NeoTreeCursorLine", { bg = "#E1E4E6" })
-                vim.api.nvim_set_hl(0, "IblIndent", { fg = "#EAEAEA" })
-                vim.api.nvim_set_hl(0, "IblScope", { fg = "#AFAFAF" })
+                vim.api.nvim_set_hl(0, "IblIndent", { fg = "#DDDDDD" })
+                vim.api.nvim_set_hl(0, "IblScope", { fg = "#898989" })
                 vim.api.nvim_set_hl(0, "WhichKeyFloat", { bg = "#EFEFEF" })
             else
                 vim.o.background = "dark"
