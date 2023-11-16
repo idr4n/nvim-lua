@@ -76,7 +76,18 @@ return {
             noremap = true,
             silent = true,
         },
-        { "<leader>oh", "<cmd>Telescope help_tags theme=ivy<cr>", noremap = true, silent = true, desc = "Help" },
+        { "<leader>oh", "<cmd>Telescope help_tags<cr>", noremap = true, silent = true, desc = "Help" },
+        {
+            "<leader>oh",
+            function()
+                local text = vim.getVisualSelection()
+                require("telescope.builtin").help_tags({ default_text = text })
+            end,
+            mode = "v",
+            noremap = true,
+            silent = true,
+            desc = "Help",
+        },
         {
             "gd",
             function()

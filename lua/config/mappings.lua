@@ -1,3 +1,19 @@
+--: helpers {{{
+--: https://github.com/nvim-telescope/telescope.nvim/issues/1923 {{{
+function vim.getVisualSelection()
+    vim.cmd('noau normal! "vy"')
+    local text = tostring(vim.fn.getreg("v"))
+    vim.fn.setreg("v", {})
+
+    text = string.gsub(text, "\n", "")
+    if #text > 0 then
+        return text
+    else
+        return ""
+    end
+end
+--: }}}
+
 --: opts {{{
 local keyset = vim.keymap.set
 local opts = { noremap = true, silent = true }
