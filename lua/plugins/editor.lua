@@ -76,7 +76,7 @@ return {
             --  { "<leader>ff", ":Files<cr>", noremap = true, silent = true },
             --  { "<C-T>", ":History<cr>", noremap = true, silent = true },
             --  { "<C-B>", ":Buffers<cr>", noremap = true, silent = true },
-            { "<leader>r", ":Rg<cr>", noremap = true, silent = true },
+            { "<leader>r", ":Rg<cr>", noremap = true, silent = true, desc = "Live Grep" },
             --  { "<leader>gs", ":GitFiles?<cr>", noremap = true, silent = true },
             --  { "<leader>cc", "<cmd>lcd ~/.config/nvim | Files<cr>", noremap = true, silent = true },
             --  { "<leader>b", "<cmd>BLines<cr>", noremap = true, silent = true },
