@@ -233,7 +233,7 @@ return {
             vim.o.timeoutlen = 900
             local wk = require("which-key")
             wk.setup(opts)
-            local keymaps = {
+            local keymaps_n = {
                 ["gc"] = { name = "comment" },
                 ["<leader>"] = {
                     b = { name = "buffer" },
@@ -251,7 +251,15 @@ return {
                     ["tb"] = "Blame current line",
                 },
             }
-            wk.register(keymaps)
+            local keymaps_v = {
+                ["<leader>"] = {
+                    h = { name = "Gitsings" },
+                    l = { name = "LSP" },
+                    o = { name = "open" },
+                },
+            }
+            wk.register(keymaps_n)
+            wk.register(keymaps_v, { mode = "v" })
         end,
     },
     --: }}}

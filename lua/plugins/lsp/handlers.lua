@@ -19,18 +19,22 @@ end
 -- stylua: ignore
 local function lsp_keymaps(bufnr)
     local opts = { noremap = true, silent = true }
-    local od = require("util").opts_and_desc
+    local buf_keymap = function(mode, keys, cmd, options)
+        options = options or {}
+        options = vim.tbl_deep_extend("force", opts, options)
+        vim.api.nvim_buf_set_keymap(bufnr, mode, keys, cmd, options)
+    end
 
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-    -- vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", od("Code actions"))
-    vim.api.nvim_buf_set_keymap(bufnr, "v", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", od("Code actions"))
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.diagnostic.open_float()<CR>", od("Diagnostics float"))
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+    buf_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
+    -- buf_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
+    buf_keymap("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>")
+    buf_keymap("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Code actions" })
+    buf_keymap("v", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Code actions" })
+    buf_keymap("n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>')
+    buf_keymap("n", "<leader>lf", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "Diagnostics float" })
+    buf_keymap("n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>')
     vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format({ async = true })' ]])
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<M-F>", ":Format<cr>", opts)
+    buf_keymap( "n", "<M-F>", ":Format<cr>")
 end
 
 M.on_attach = function(client, bufnr)

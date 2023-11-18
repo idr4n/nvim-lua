@@ -264,8 +264,8 @@ return {
         cmd = "Neotree",
         branch = "v3.x",
         keys = {
-            { "<C-T>", ":Neotree reveal left toggle<CR>", noremap = true, silent = true, desc = "Toggle" },
-            { "<leader>na", ":Neotree reveal left toggle<CR>", noremap = true, silent = true, desc = "Toggle" },
+            { ",e", ":Neotree reveal left toggle<CR>", noremap = true, silent = true, desc = "Toggle Neo-Tree" },
+            { "<leader>nt", ":Neotree reveal left toggle<CR>", noremap = true, silent = true, desc = "Toggle" },
             { "<leader>nn", ":Neotree focus<CR>", noremap = true, silent = true, desc = "Focus" },
             { "<leader>nf", ":Neotree float reveal toggle<CR>", noremap = true, silent = true, desc = "Float" },
             { "<leader>nb", ":Neotree toggle show buffers right<CR>", noremap = true, silent = true, desc = "Buffers" },
