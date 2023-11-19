@@ -471,4 +471,1169 @@ return {
         },
     },
     --: }}}
+
+    --: indent-blankline {{{
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
+        -- enabled = false,
+        event = { "BufReadPre", "BufNewFile" },
+        opts = {
+            indent = {
+                char = "│",
+            },
+            scope = {
+                -- enabled = false,
+                show_start = false,
+                show_end = false,
+                include = {
+                    node_type = {
+                        ["*"] = {
+                            "argument_list",
+                            "arguments",
+                            "assignment_statement",
+                            "Block",
+                            "chunk",
+                            "class",
+                            "ContainerDecl",
+                            "dictionary",
+                            "do_block",
+                            "do_statement",
+                            "element",
+                            "except",
+                            "FnCallArguments",
+                            "for",
+                            "for_statement",
+                            "function",
+                            "function_declaration",
+                            "function_definition",
+                            "if_statement",
+                            "IfExpr",
+                            "IfStatement",
+                            "import",
+                            "InitList",
+                            "jsx_self_closing_element",
+                            "list_literal",
+                            "method",
+                            "object",
+                            "ParamDeclList",
+                            "repeat_statement",
+                            "return_statement",
+                            "selector",
+                            "SwitchExpr",
+                            "table",
+                            "table_constructor",
+                            "try",
+                            "tuple",
+                            "type",
+                            "var",
+                            "while",
+                            "while_statement",
+                            "with",
+                        },
+                    },
+                },
+            },
+            whitespace = {
+                remove_blankline_trail = true,
+            },
+            exclude = {
+                filetypes = {
+                    "",
+                    "alpha",
+                    "dashboard",
+                    "NvimTree",
+                    "help",
+                    "markdown",
+                    "dirvish",
+                    "nnn",
+                    "packer",
+                    "toggleterm",
+                    "lsp-installer",
+                    "Outline",
+                },
+            },
+        },
+    },
+    --: }}},
+
+    --: mini.indentscope with animations {{{
+    {
+        "echasnovski/mini.indentscope",
+        enabled = false,
+        event = { "BufReadPre", "BufNewFile" },
+        opts = {
+            -- symbol = "▏",
+            symbol = "│",
+            options = { try_as_border = true },
+        },
+        init = function()
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = {
+                    "help",
+                    "alpha",
+                    "dashboard",
+                    "neo-tree",
+                    "Trouble",
+                    "lazy",
+                    "mason",
+                    "notify",
+                    "toggleterm",
+                    "lazyterm",
+                },
+                callback = function()
+                    vim.b.miniindentscope_disable = true
+                end,
+            })
+        end,
+    },
+    --: }}}
+
+    --: notify {{{
+    {
+        "rcarriga/nvim-notify",
+        enabled = false,
+        opts = {
+            timeout = 3000,
+            background_colour = "#000000",
+            max_height = function()
+                return math.floor(vim.o.lines * 0.75)
+            end,
+            max_width = function()
+                return math.floor(vim.o.columns * 0.75)
+            end,
+        },
+    },
+    --: }}}
+
+    --: noice {{{
+    {
+        "folke/noice.nvim",
+        enabled = false,
+        event = "VeryLazy",
+        -- dependencies = {
+        --     "rcarriga/nvim-notify",
+        -- },
+        -- stylua: ignore
+        keys = {
+            { "<leader>nl", function() require("noice").cmd("last") end, desc = "Noice Last Message" },
+            { "<leader>nh", function() require("noice").cmd("history") end, desc = "Noice History" },
+            { "<leader>na", function() require("noice").cmd("all") end, desc = "Noice All" },
+        },
+        opts = {
+            routes = {
+                -- Avoid all messages with kind ""
+                {
+                    filter = {
+                        event = "msg_show",
+                        kind = "",
+                    },
+                    opts = { skip = true },
+                },
+            },
+            lsp = {
+                override = {
+                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                    ["vim.lsp.util.stylize_markdown"] = true,
+                    ["cmp.entry.get_documentation"] = true,
+                },
+                hover = { enabled = true },
+                signature = { enabled = true },
+                progress = { enabled = false },
+            },
+            cmdline = {
+                format = {
+                    cmdline = { pattern = "^:", icon = " ", lang = "vim" },
+                    search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
+                    search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
+                    filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
+                    lua = { pattern = "^:%s*lua%s+", icon = "", lang = "lua" },
+                    help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
+                    input = {},
+                },
+                opts = {
+                    win_options = {
+                        winhighlight = {
+                            Normal = "NormalFloat",
+                            FloatBorder = "FloatBorder",
+                        },
+                    },
+                    border = { style = "none", padding = { 1, 2 } },
+                },
+            },
+            views = {
+                cmdline_popup = {
+                    position = { row = 0, col = "50%" },
+                    size = { width = "97%" },
+                },
+            },
+            popupmenu = { backend = "cmp" },
+            presets = {
+                long_message_to_split = true,
+                lsp_doc_border = true,
+                -- command_palette = {
+                --     views = {
+                --         cmdline_popup = {
+                --             position = {
+                --                 row = 6,
+                --             },
+                --         },
+                --         popupmenu = {
+                --             position = {
+                --                 row = 9,
+                --             },
+                --         },
+                --     },
+                -- },
+            },
+        },
+    },
+    --: }}},
+
+    --: modes.nvim {{{
+    {
+        "mvllow/modes.nvim",
+        event = "InsertEnter",
+        enabled = false,
+        opts = {
+            colors = {
+                copy = "#42be65",
+                delete = "#ff7eb6",
+                insert = "#be95ff",
+                visual = "#82cfff",
+            },
+        },
+    },
+    --: }}}
+
+    --: nvim-ufo "folding" {{{
+    {
+        "kevinhwang91/nvim-ufo",
+        dependencies = { "kevinhwang91/promise-async" },
+        event = { "BufReadPost", "BufNewFile" },
+        -- stylua: ignore
+        keys = {
+            { "zR", function() require("ufo").openAllFolds() end, },
+            { "zM", function() require("ufo").closeAllFolds() end, },
+            { "z1", function() require("ufo").closeFoldsWith(1) end, },
+            { "z2", function() require("ufo").closeFoldsWith(2) end, },
+        },
+        config = function()
+            -- vim.o.foldcolumn = "1"
+            vim.o.foldlevel = 99
+            vim.o.foldlevelstart = 99
+            vim.o.foldenable = true
+
+            local ftMap = {
+                markdown = "",
+                vue = "lsp",
+            }
+
+            require("ufo").setup({
+                open_fold_hl_timeout = 0,
+                -- close_fold_kinds = { "imports", "regions", "comments" },
+                provider_selector = function(bufnr, filetype, buftype)
+                    -- return { "treesitter", "indent" }
+                    return ftMap[filetype] or { "treesitter", "indent" }
+                end,
+            })
+        end,
+    },
+    --: }}}
+
+    --: statuscol {{{
+    {
+        "luukvbaal/statuscol.nvim",
+        enabled = false,
+        event = { "BufReadPost", "BufNewFile" },
+        opts = function()
+            local builtin = require("statuscol.builtin")
+            return {
+                -- relculright = true,
+                ft_ignore = { "toggleterm" },
+                bt_ignore = { "terminal" },
+                segments = {
+                    -- { text = { builtin.foldfunc, "" }, click = "v:lua.ScFa" },
+                    -- { text = { "%s" }, click = "v:lua.ScSa" },
+                    { sign = { name = { "Diagnostic" } }, click = "v:lua.ScSa" },
+                    { sign = { name = { "Dap*" }, auto = true }, click = "v:lua.ScSa" },
+                    {
+                        -- text = { "", builtin.lnumfunc, "   " },
+                        text = { "", builtin.lnumfunc, " " },
+                        condition = { true, builtin.not_empty },
+                        click = "v:lua.ScLa",
+                    },
+                    -- { text = { "%s" }, click = "v:lua.ScSa" },
+                    -- { sign = { name = { ".*" } }, click = "v:lua.ScSa" },
+                    { sign = { namespace = { "gitsign*" } }, click = "v:lua.ScSa" },
+                },
+            }
+        end,
+        config = function(_, opts)
+            require("statuscol").setup(opts)
+        end,
+    },
+    --: }}}
+
+    --: tabby {{{
+    {
+        "nanozuki/tabby.nvim",
+        -- enabled = false,
+        event = { "BufReadPost", "BufNewFile" },
+        config = function()
+            -- vim.o.showtabline = 2
+            local theme = {
+                fill = "TabLineFill",
+                -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
+                head = "TabLine",
+                current_tab = "TabLineSel",
+                tab = "TabLine",
+                win = "TabLine",
+                tail = "TabLine",
+            }
+            require("tabby.tabline").set(function(line)
+                return {
+                    {
+                        { "  ", hl = theme.head },
+                        line.sep("", theme.head, theme.fill),
+                    },
+                    line.tabs().foreach(function(tab)
+                        local hl = tab.is_current() and theme.current_tab or theme.tab
+                        return {
+                            line.sep("", hl, theme.fill),
+                            tab.is_current() and "" or "",
+                            tab.number(),
+                            tab.name(),
+                            tab.close_btn("󱎘"),
+                            line.sep("", hl, theme.fill),
+                            hl = hl,
+                            margin = " ",
+                        }
+                    end),
+                    line.spacer(),
+                    -- line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
+                    --     return {
+                    --         line.sep("", theme.win, theme.fill),
+                    --         win.is_current() and "" or "",
+                    --         win.buf_name(),
+                    --         line.sep("", theme.win, theme.fill),
+                    --         hl = theme.win,
+                    --         margin = " ",
+                    --     }
+                    -- end),
+                    -- {
+                    --     line.sep("", theme.tail, theme.fill),
+                    --     { "  ", hl = theme.tail },
+                    -- },
+                    hl = theme.fill,
+                }
+            end)
+        end,
+    },
+    --: }}}
+
+    --: clipboard-image {{{
+    {
+        "ekickx/clipboard-image.nvim",
+        ft = "markdown",
+        opts = {
+            -- Default configuration for all filetype
+            default = {
+                img_dir = { "%:p:h", "assets" },
+            },
+            markdown = {
+                img_dir_txt = "./assets",
+            },
+        },
+        config = function(_, opts)
+            require("clipboard-image").setup(opts)
+        end,
+    },
+    --: }}}
+
+    --: nvim-cmp {{{
+    {
+        "hrsh7th/nvim-cmp",
+        -- event = "InsertEnter",
+        event = { "InsertEnter", "BufReadPost" },
+        -- event = { "InsertEnter", "CmdLineEnter" },
+        dependencies = {
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-cmdline",
+            "saadparwaiz1/cmp_luasnip",
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-nvim-lua",
+            { "js-everts/cmp-tailwind-colors", config = true },
+        },
+        opts = function()
+            local cmp = require("cmp")
+            local luasnip = require("luasnip")
+            local nvchad_icons = require("util").nvchad_icons
+
+            -- require("luasnip/loaders/from_vscode").lazy_load()
+
+            local check_backspace = function()
+                local col = vim.fn.col(".") - 1
+                return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+            end
+
+            local function border(hl_name)
+                return {
+                    { "╭", hl_name },
+                    { "─", hl_name },
+                    { "╮", hl_name },
+                    { "│", hl_name },
+                    { "╯", hl_name },
+                    { "─", hl_name },
+                    { "╰", hl_name },
+                    { "│", hl_name },
+                }
+            end
+
+            cmp.setup.cmdline("/", {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = {
+                    { name = "buffer" },
+                },
+            })
+
+            cmp.setup.cmdline(":", {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = cmp.config.sources({
+                    { name = "path" },
+                }, {
+                    { name = "cmdline" },
+                }),
+            })
+
+            return {
+                snippet = {
+                    expand = function(args)
+                        luasnip.lsp_expand(args.body)
+                    end,
+                },
+                preselect = cmp.PreselectMode.None,
+                mapping = {
+                    -- ["<C-k>"] = cmp.mapping.select_prev_item(),
+                    -- ["<C-j>"] = cmp.mapping.select_next_item(),
+                    ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+                    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
+                    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+                    ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+                    ["<C-e>"] = cmp.config.disable,
+                    ["<C-x>"] = cmp.mapping({
+                        i = cmp.mapping.abort(),
+                        c = cmp.mapping.close(),
+                    }),
+                    -- Accept currently selected item. If none selected, `select` first item.
+                    -- Set `select` to `false` to only confirm explicitly selected items.
+                    ["<C-l>"] = cmp.mapping.confirm({ select = true }),
+                    ["<Tab>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_next_item()
+                        elseif check_backspace() then
+                            fallback()
+                        else
+                            fallback()
+                        end
+                        -- if luasnip.jumpable(1) then
+                        --   luasnip.jump(1)
+                        -- elseif cmp.visible() then
+                        --   cmp.select_next_item()
+                        -- elseif check_backspace() then
+                        --   fallback()
+                        -- else
+                        --   fallback()
+                        -- end
+                    end, { "i", "s" }),
+                    ["<S-Tab>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_prev_item()
+                        else
+                            fallback()
+                        end
+                        -- if luasnip.jumpable(-1) then
+                        --   luasnip.jump(-1)
+                        -- elseif cmp.visible() then
+                        --   cmp.select_prev_item()
+                        -- else
+                        --   fallback()
+                        -- end
+                    end, { "i", "s" }),
+                },
+                formatting = {
+                    fields = { "kind", "abbr", "menu" },
+                    -- fields = { "abbr", "kind" },
+                    -- fields = { "abbr", "kind", "menu" },
+                    format = function(entry, vim_item)
+                        -- format = function(_, vim_item)
+                        -- Kind icons
+
+                        -- START extra config for cmp-tailwind-colors (remove if not used)
+                        if vim_item.kind == "Color" then
+                            vim_item = require("cmp-tailwind-colors").format(entry, vim_item)
+
+                            if vim_item.kind ~= "Color" then
+                                vim_item.menu = "Color"
+                                vim_item.kind = string.format(" %s", vim_item.kind)
+                                return vim_item
+                            end
+                        end
+                        -- END extra config for cmp-tailwind-colors
+
+                        vim_item.menu = vim_item.kind
+                        vim_item.kind = string.format(" %s ", nvchad_icons[vim_item.kind])
+                        -- vim_item.kind = string.format("%s %s", nvchad_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+                        -- vim_item.menu = ({
+                        --     -- nvim_lsp = "[LSP]",
+                        --     -- nvim_lua = "[NVIM_LUA]",
+                        --     -- luasnip = "[Snippet]",
+                        --     -- buffer = "[Buffer]",
+                        --     -- path = "[Path]",
+                        --     nvim_lsp = "",
+                        --     nvim_lua = "",
+                        --     luasnip = "",
+                        --     buffer = "",
+                        --     path = "",
+                        -- })[entry.source.name]
+                        return vim_item
+                    end,
+                },
+                sources = {
+                    { name = "nvim_lsp" },
+                    { name = "nvim_lua" },
+                    { name = "luasnip" },
+                    { name = "buffer" },
+                    { name = "path" },
+                    { name = "otter" },
+                    -- { name = "copilot" },
+                },
+                confirm_opts = {
+                    behavior = cmp.ConfirmBehavior.Replace,
+                    select = false,
+                },
+                window = {
+                    completion = {
+                        border = border("CmpBorder"),
+                        -- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+                        winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
+                        side_padding = 0,
+                        -- For oxocarbon style (comment out border and use winhighlight below)
+                        -- winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,FloatBorder:Pmenu,Search:None",
+                    },
+                    documentation = {
+                        -- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+                        border = border("CmpDocBorder"),
+                        winhighlight = "Normal:CmpPmenu",
+                    },
+                },
+                experimental = {
+                    ghost_text = false,
+                    native_menu = false,
+                },
+            }
+        end,
+        config = function(_, opts)
+            local cmp = require("cmp")
+            cmp.setup(opts)
+
+            local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+            local handlers = require("nvim-autopairs.completion.handlers")
+
+            cmp.event:on(
+                "confirm_done",
+                cmp_autopairs.on_confirm_done({
+                    filetypes = {
+                        -- "*" is a alias to all filetypes
+                        ["*"] = {
+                            ["("] = {
+                                kind = {
+                                    cmp.lsp.CompletionItemKind.Function,
+                                    cmp.lsp.CompletionItemKind.Method,
+                                },
+                                handler = handlers["*"],
+                            },
+                        },
+                    },
+                })
+            )
+        end,
+    },
+    --: }}},
+
+    --: Comment.nvim {{{
+    {
+        "numToStr/Comment.nvim",
+        event = { "BufReadPost", "BufNewFile" },
+        opts = {
+            pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+        },
+        config = function(_, opts)
+            require("Comment").setup(opts)
+        end,
+    },
+    --: }}}
+
+    --: windwp/nvim-autopairs {{{
+    {
+        "windwp/nvim-autopairs",
+        event = { "BufReadPost", "BufNewFile" },
+        config = function()
+            local npairs = require("nvim-autopairs")
+            npairs.setup()
+
+            local Rule = require("nvim-autopairs.rule")
+
+            local brackets = { { "(", ")" }, { "[", "]" }, { "{", "}" } }
+            npairs.add_rules({
+                Rule(" ", " "):with_pair(function(opts)
+                    local pair = opts.line:sub(opts.col - 1, opts.col)
+                    return vim.tbl_contains({
+                        brackets[1][1] .. brackets[1][2],
+                        brackets[2][1] .. brackets[2][2],
+                        brackets[3][1] .. brackets[3][2],
+                    }, pair)
+                end),
+            })
+            for _, bracket in pairs(brackets) do
+                npairs.add_rules({
+                    Rule(bracket[1] .. " ", " " .. bracket[2])
+                        :with_pair(function()
+                            return false
+                        end)
+                        :with_move(function(opts)
+                            return opts.prev_char:match(".%" .. bracket[2]) ~= nil
+                        end)
+                        :use_key(bracket[2]),
+                })
+            end
+        end,
+    },
+    --: }}}
+
+    --: yanky {{{
+    {
+        "gbprod/yanky.nvim",
+        -- enabled = false,
+        event = "BufReadPost",
+        cmd = { "YankyRingHistory", "YankyClearHistory" },
+        keys = {
+            -- { ",r", "<cmd>YankyRingHistory<cr>", noremap = true, silent = true },
+            -- { ",r", "<cmd>Telescope yank_history<cr>", noremap = true, silent = true },
+            {
+                ",y",
+                "<cmd>lua require('telescope').extensions.yank_history.yank_history({ initial_mode = 'normal' })<cr>",
+                noremap = true,
+                silent = true,
+                desc = "Yank history",
+            },
+        },
+        opts = function()
+            require("telescope").load_extension("yank_history")
+            local utils = require("yanky.utils")
+            local mapping = require("yanky.telescope.mapping")
+
+            return {
+                ring = {
+                    history_length = 50,
+                },
+                highlight = {
+                    on_put = true,
+                    on_yank = true,
+                    timer = 70,
+                },
+                system_clipboard = {
+                    sync_with_ring = false,
+                },
+                picker = {
+                    telescope = {
+                        mappings = {
+                            -- default = mapping.put("p"),
+                            default = mapping.special_put("YankyPutIndentAfter"),
+                            i = {
+                                ["<c-p>"] = mapping.special_put("YankyPutIndentBefore"),
+                                ["<c-k>"] = nil,
+                                ["<c-x>"] = mapping.delete(),
+                                ["<c-r>"] = mapping.set_register(utils.get_default_register()),
+                            },
+                            n = {
+                                p = mapping.special_put("YankyPutIndentAfter"),
+                                P = mapping.special_put("YankyPutIndentBefore"),
+                                d = mapping.delete(),
+                                r = mapping.set_register(utils.get_default_register()),
+                            },
+                        },
+                    },
+                },
+            }
+        end,
+    },
+    --: }}}
+
+    --: lf {{{
+    {
+        "ptzz/lf.vim",
+        dependencies = "voldikss/vim-floaterm",
+        keys = {
+            { ",l", ":Lf<cr>", noremap = true, silent = true, desc = "Open LF" },
+        },
+        config = function()
+            local function calcFloatSize()
+                return {
+                    width = math.min(math.ceil(vim.fn.winwidth(0) * 0.9), 140),
+                    height = math.min(math.ceil(vim.fn.winheight(0) * 0.9), 35),
+                }
+            end
+
+            local function recalcFloatermSize()
+                vim.g.floaterm_width = calcFloatSize().width
+                vim.g.floaterm_height = calcFloatSize().height
+            end
+
+            vim.api.nvim_create_augroup("floaterm", { clear = true })
+            vim.api.nvim_create_autocmd("VimResized", {
+                pattern = { "*" },
+                callback = recalcFloatermSize,
+                group = "floaterm",
+            })
+
+            vim.g.floaterm_width = calcFloatSize().width
+            vim.g.floaterm_height = calcFloatSize().height
+        end,
+    },
+    --: }}},
+
+    --: harpoon {{{
+    {
+        "ThePrimeagen/harpoon",
+        keys = {
+            { "<leader>hh", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "Toggle Harpoon" },
+            { "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<cr>", desc = "Add Harpoon" },
+            { "<M-u>", "<cmd>lua require('harpoon.ui').nav_file(1)<cr>" },
+            { "<M-i>", "<cmd>lua require('harpoon.ui').nav_file(2)<cr>" },
+            { "<M-o>", "<cmd>lua require('harpoon.ui').nav_file(3)<cr>" },
+            { "<M-p>", "<cmd>lua require('harpoon.ui').nav_file(4)<cr>" },
+            { "<M-[>", "<cmd>lua require('harpoon.ui').nav_file(5)<cr>" },
+            { "<M-]>", "<cmd>lua require('harpoon.ui').nav_file(6)<cr>" },
+        },
+        dependencies = "nvim-lua/plenary.nvim",
+    },
+    --: }}}
+
+    --: toggleterm {{{
+    {
+        "akinsho/toggleterm.nvim",
+        cmd = { "ToggleTerm" },
+        opts = {
+            -- size = 25,
+            size = function(term)
+                if term.direction == "horizontal" then
+                    return 20
+                elseif term.direction == "vertical" then
+                    return vim.o.columns * 0.4
+                end
+            end,
+            open_mapping = [[<M-\>]],
+            hide_numbers = true,
+            shade_filetypes = {},
+            shade_terminals = true,
+            shading_factor = 2,
+            start_in_insert = true,
+            insert_mappings = false,
+            persist_size = true,
+            -- direction = "float",
+            direction = "horizontal",
+            close_on_exit = true,
+            shell = vim.o.shell,
+            float_opts = {
+                width = math.min(math.ceil(vim.fn.winwidth(0) * 0.8), 120),
+                height = math.min(math.ceil(vim.fn.winheight(0) * 0.8), 28),
+                border = "curved",
+                winblend = 0,
+                highlights = {
+                    border = "Normal",
+                    background = "Normal",
+                },
+            },
+        },
+        keys = {
+            { "<leader>gl", ":LazyGit<cr>", noremap = true, silent = true, desc = "LazyGit" },
+            { "<M-\\>", ":ToggleTerm<cr>", noremap = true, silent = true },
+        },
+        config = function(_, opts)
+            require("toggleterm").setup(opts)
+            local float_opts = { height = math.floor(vim.fn.winheight(0) * 0.85) }
+
+            local Terminal = require("toggleterm.terminal").Terminal
+            local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, float_opts = float_opts })
+
+            -- :Lazygit
+            vim.api.nvim_create_user_command("LazyGit", function()
+                if os.getenv("TERM_PROGRAM") == "tmux" then
+                    vim.cmd("execute 'silent !tmux split-window -v -p 80 lazygit'")
+                else
+                    lazygit:toggle()
+                end
+            end, {})
+            function _G.set_terminal_keymaps()
+                local op = { buffer = 0 }
+                -- vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], op)
+                vim.keymap.set("t", "jk", [[<C-\><C-n>]], op)
+                vim.keymap.set("t", "<C-left>", [[<Cmd>wincmd h<CR>]], op)
+                vim.keymap.set("t", "<C-down>", [[<Cmd>wincmd j<CR>]], op)
+                vim.keymap.set("t", "<C-up>", [[<Cmd>wincmd k<CR>]], op)
+                vim.keymap.set("t", "<M-`>", [[<Cmd>wincmd k<CR>]], op)
+                vim.keymap.set("n", "<M-`>", "<Cmd>wincmd j<CR>")
+                vim.keymap.set("t", "<C-right>", [[<Cmd>wincmd l<CR>]], op)
+                vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], op)
+            end
+
+            -- if you only want these mappings for toggle term use term://*toggleterm#* instead
+            vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
+        end,
+    },
+    --: }}}
+
+    -- stylua: ignore
+    --: windex (max. window) {{{
+    {
+        "declancm/windex.nvim",
+        keys = {
+            { "<Leader>tm", "<Cmd>lua require('windex').toggle_nvim_maximize()<CR>", desc = "Toggle Maximize Window" },
+            { "<C-Bslash>", "<Cmd>lua require('windex').toggle_terminal()<CR>", mode = { "n", "t" }, desc = "Toggle terminal" },
+            { "<C-n>", "<C-Bslash><C-n>", mode = "t", desc = "Enter normal mode" },
+        },
+        config = true,
+    },
+    --: }}}
+
+    --: vim-dirvish {{{
+    {
+        "justinmk/vim-dirvish",
+        event = "VimEnter",
+        -- enabled = false,
+        config = function()
+            vim.g.dirvish_git_show_ignored = 1
+
+            -- sort folders at the top
+            vim.g.dirvish_mode = ":sort ,^.*[\\/],"
+
+            -- use h and l to navigate back and forward
+            vim.cmd([[
+            augroup dirvish_mappings
+                autocmd!
+                autocmd FileType dirvish nnoremap <silent><buffer> l :<C-U>.call dirvish#open("edit", 0)<CR>
+                autocmd FileType dirvish nnoremap <silent><buffer> h :<C-U>exe "Dirvish %:h".repeat(":h",v:count1)<CR>
+            augroup END
+            ]])
+        end,
+    },
+    --: }}}
+
+    --: vim-fugitive {{{
+    {
+        "tpope/vim-fugitive",
+        keys = {
+            { "<leader>gi", ":Git<cr>", noremap = true, silent = true, desc = "Git Fugitive" },
+        },
+    },
+    --: }}}
+
+    --: neogit (magit for neovim) {{{
+    {
+        "TimUntersberger/neogit",
+        dependencies = "nvim-lua/plenary.nvim",
+        keys = {
+            { "<leader>gn", ":Neogit<cr>", noremap = true, silent = true, desc = "Neogit" },
+        },
+        opts = {
+            disable_signs = false,
+            signs = {
+                -- { CLOSED, OPENED }
+                section = { "", "" },
+                item = { "", "" },
+            },
+            integrations = { diffview = true },
+        },
+    },
+    --: }}}
+
+    --: code_runner {{{
+    {
+        "CRAG666/code_runner.nvim",
+        dependencies = "nvim-lua/plenary.nvim",
+        keys = {
+            { "<leader>cc", ":RunCode<CR>", noremap = true, silent = false, desc = "Code run" },
+            { "<leader>cf", ":RunFile float<CR>", noremap = true, silent = false, desc = "File run" },
+        },
+        config = function()
+            require("code_runner").setup({
+                focus = false,
+                term = {
+                    position = "vert",
+                    size = 50,
+                },
+                float = {
+                    close_key = "q",
+                    border = "rounded",
+                    height = 0.4,
+                    width = 0.8,
+                    x = 0.5,
+                    y = 0.3,
+                },
+            })
+        end,
+    },
+    --: }}}
+
+    --: which-key {{{
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        opts = {
+            window = {
+                padding = { 1, 1, 1, 1 }, -- extra window padding [top, right, bottom, left]
+            },
+            layout = {
+                height = { min = 4, max = 20 },
+                width = { min = 10, max = 40 },
+            },
+        },
+        config = function(_, opts)
+            vim.o.timeout = true
+            vim.o.timeoutlen = 900
+            local wk = require("which-key")
+            wk.setup(opts)
+            local keymaps_n = {
+                ["gc"] = { name = "comment" },
+                ["<leader>"] = {
+                    b = { name = "buffer" },
+                    c = { name = "coding" },
+                    d = { name = "debug" },
+                    f = { name = "file" },
+                    g = { name = "Git/Glance" },
+                    h = { name = "Gitsings/Harpoon" },
+                    l = { name = "LSP" },
+                    o = { name = "open" },
+                    n = { name = "Neotree" },
+                    t = { name = "toggle" },
+                    x = { name = "Trouble" },
+                    z = { name = "misc" },
+                    ["tb"] = "Blame current line",
+                },
+            }
+            local keymaps_v = {
+                ["<leader>"] = {
+                    h = { name = "Gitsings" },
+                    l = { name = "LSP" },
+                    o = { name = "open" },
+                },
+            }
+            wk.register(keymaps_n)
+            wk.register(keymaps_v, { mode = "v" })
+        end,
+    },
+    --: }}}
+
+    --: oil - file manager {{{
+    {
+        "stevearc/oil.nvim",
+        enabled = false,
+        cmd = "Oil",
+        keys = { { "<leader>oo", "<cmd>Oil<cr>", desc = "Oil - Parent Dir" } },
+        opts = {},
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+    },
+    --: }}}
+
+    --: quarto {{{
+    {
+        "quarto-dev/quarto-nvim",
+        dev = false,
+        ft = { "quarto" },
+        dependencies = {
+            {
+                "jmbuhr/otter.nvim",
+                dependencies = {
+                    { "neovim/nvim-lspconfig" },
+                },
+                config = true,
+            },
+        },
+        opts = {
+            lspFeatures = {
+                languages = { "r", "python", "julia", "bash", "lua", "html" },
+            },
+        },
+        config = function(_, opts)
+            require("quarto").setup(opts)
+        end,
+    },
+    --: }}}
+
+    --: barbecue {{{
+    {
+        "utilyre/barbecue.nvim",
+        name = "barbecue",
+        -- enabled = false,
+        event = "BufReadPre",
+        dependencies = {
+            "SmiteshP/nvim-navic",
+            "nvim-tree/nvim-web-devicons", -- optional dependency
+        },
+        opts = {
+            show_navic = true,
+            show_dirname = true,
+            show_modified = true,
+            theme = {
+                basename = { fg = "#9D7CD8", bold = true },
+            },
+        },
+    },
+    --: }}},
+
+    --: emmet {{{
+    {
+        "mattn/emmet-vim",
+        event = "InsertEnter",
+        init = function()
+            vim.g.user_emmet_leader_key = "<C-W>"
+        end,
+    },
+    --: }}},
+
+    --: incline {{{
+    {
+        "b0o/incline.nvim",
+        enabled = false,
+        event = "BufReadPre",
+        config = function()
+            local colors = require("tokyonight.colors").setup()
+            require("incline").setup({
+                highlight = {
+                    groups = {
+                        InclineNormal = { guifg = "#9d7cd8", guibg = colors.black },
+                        InclineNormalNC = { guibg = colors.blue7, guifg = colors.fg },
+                    },
+                },
+                hide = { cursorline = "focused_win", only_win = true },
+                window = { margin = { vertical = 0, horizontal = 1 } },
+                render = function(props)
+                    local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
+                    local icon, color = require("nvim-web-devicons").get_icon_color(filename)
+                    return { { icon, guifg = color }, { " " }, { filename } }
+                end,
+            })
+        end,
+    },
+    --: }}},
+
+    --: tabout {{{
+    {
+        "abecodes/tabout.nvim",
+        event = "InsertEnter",
+        dependencies = { "nvim-treesitter" },
+        opts = {
+            tabkey = [[<C-\>]], -- key to trigger tabout, set to an empty string to disable
+            backwards_tabkey = [[<C-S-\>]], -- key to trigger backwards tabout, set to an empty string to disable
+            act_as_tab = false, -- shift content if tab out is not possible
+            act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+            enable_backwards = true, -- well ...
+            completion = true, -- if the tabkey is used in a completion pum
+            tabouts = {
+                { open = "'", close = "'" },
+                { open = '"', close = '"' },
+                { open = "`", close = "`" },
+                { open = "(", close = ")" },
+                { open = "[", close = "]" },
+                { open = "{", close = "}" },
+            },
+            ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+            exclude = {}, -- tabout will ignore these filetypes
+        },
+        -- config = function(_, opts)
+        --  require("tabout").setup(opts)
+        -- end,
+    },
+    --: }}}
+
+    --: todo-comments {{{
+    {
+        "folke/todo-comments.nvim",
+        cmd = { "TodoTrouble", "TodoTelescope" },
+        event = { "BufReadPost", "BufNewFile" },
+        keys = {
+            { "<leader>xt", "<cmd>TodoTrouble<cr>", noremap = true, silent = true, desc = "TodoTrouble" },
+        },
+        opts = {
+            highlight = {
+                comments_only = false,
+                after = "",
+            },
+            search = {
+                command = "rg",
+                args = {
+                    "--color=never",
+                    "--no-heading",
+                    "--with-filename",
+                    "--line-number",
+                    "--column",
+                    "--glob=!node_modules",
+                },
+            },
+        },
+    },
+    --: }}}
+
+    --: zen-mode {{{
+    {
+        "folke/zen-mode.nvim",
+        opts = {
+            window = {
+                width = 85,
+                height = 0.95,
+                backdrop = 1,
+                options = {
+                    number = false,
+                    relativenumber = false,
+                    signcolumn = "no",
+                    cursorcolumn = false,
+                },
+            },
+            plugins = {
+                -- gitsigns = { enabled = false },
+                options = {
+                    laststatus = 3,
+                },
+            },
+        },
+        keys = {
+            { "<leader>zz", ":ZenMode<cr>", noremap = true, silent = true, desc = "Zen mode" },
+        },
+    },
+    --: }}}
+
+    --: no-neck-pain (another zen-mode plugin) {{{
+    {
+        "shortcuts/no-neck-pain.nvim",
+        cmd = { "NoNeckPain" },
+        keys = {
+            {
+                "<leader>tz",
+                function()
+                    vim.cmd([[
+                        NoNeckPain
+                        set invnumber
+                        set invrelativenumber
+                    ]])
+                end,
+                desc = "Zen-mode (No-neck-pain)",
+            },
+        },
+        opts = {
+            buffers = { wo = { number = false, relativenumber = false } },
+        },
+    },
+    --: }}}
 }
