@@ -198,6 +198,10 @@ function M.charcode()
     return _G.charcode and " %#SLBufNr#Ux%04B%#SLNormal# " or ""
 end
 
+function M.colemak()
+    return _G.colemak and " %#SLBufNr#󰯳 󰌌 %#SLNormal#  " or ""
+end
+
 function M.git_status()
     local function getGitChanges()
         local gitsigns = vim.b.gitsigns_status_dict

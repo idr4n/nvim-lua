@@ -62,6 +62,7 @@ function Status_line()
     statusline = statusline .. c.get_search_count()
     statusline = statusline .. c.maximized_status()
     statusline = statusline .. "%="
+    statusline = statusline .. c.colemak()
     statusline = statusline .. c.lsp_running()
     statusline = statusline .. c.get_words()
     statusline = statusline .. c.charcode()

@@ -273,3 +273,58 @@ keymap("v", "c", '"_c')
 --: Other mappings {{{
 keyset("n", "<leader>ol", "<cmd>:Lazy<cr>", { desc = "Lazy Dashboard" })
 --: }}}
+
+--: toggle Colemak DH(m) layout keybindings {{{
+vim.api.nvim_create_user_command("ColemakToggle", function()
+    if not colemak then
+        keymap("i", "ne", "<ESC>")
+        keymap("", "n", "j")
+        keymap("", "e", "k")
+        keymap("n", "N", "J")
+        keyset({ "n", "o" }, "i", "l")
+        keymap("n", "I", "L")
+        keymap("", "j", "e")
+        keymap("n", "J", "E")
+        keymap("n", "k", "n")
+        keymap("n", "K", "N")
+        keyset({ "n", "o" }, "l", "i")
+        keymap("n", "L", "I")
+        keymap("", "m", "h")
+        keymap("", "h", "d")
+        keymap("", "t", "l")
+        keymap("", "gm", "^", { desc = "Go to start of line" })
+        keyset({ "n", "o" }, "gi", "$", { desc = "Go to end of line" })
+        keymap("v", "gi", "$h", { desc = "Go to end of line" })
+        keyset("n", "gl", "`^i", { desc = "Move to the last insertion" })
+        _G.colemak = true
+    else
+        keymap("i", "jk", "<ESC>")
+        keymap("", "n", "n")
+        keymap("", "e", "e")
+        keymap("n", "N", "N")
+        keyset({ "n", "o" }, "i", "i")
+        keymap("n", "I", "I")
+        keymap("n", "j", "j")
+        keymap("n", "J", "J")
+        keymap("n", "k", "k")
+        keymap("n", "K", "K")
+        keyset({ "n", "o" }, "l", "l")
+        keymap("n", "L", "L")
+        keymap("", "m", "d")
+        keymap("", "h", "h")
+        keymap("", "t", "t")
+        keymap("v", "gl", "$h", { desc = "Go to end of line" })
+        keyset({ "n", "o" }, "gl", "$", { desc = "Go to end of line" })
+        keymap("n", "gi", "`^i", { desc = "Move to the last insertion" })
+        _G.colemak = false
+    end
+    vim.cmd("redrawstatus!")
+end, {})
+keymap("n", "<leader>tC", ":ColemakToggle<cr>", { desc = "Colemak Layout" })
+
+--: }}}
+
+local M = {}
+M.keymap = keymap
+M.keyset = keyset
+return M
