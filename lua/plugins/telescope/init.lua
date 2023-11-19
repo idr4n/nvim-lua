@@ -34,20 +34,9 @@ return {
             silent = true,
             desc = "Fuzzy find in current file",
         },
-        {
-            "<C-s>",
-            function()
-                require("telescope.builtin").current_buffer_fuzzy_find(
-                    require("telescope.themes").get_ivy({ previewer = false })
-                )
-            end,
-            noremap = true,
-            silent = true,
-            desc = "Fuzzy find in current file",
-        },
         { "<leader>ot", "<cmd>Telescope resume<cr>", noremap = true, silent = true, desc = "Telescope Resume" },
         {
-            "s",
+            "<C-S>",
             function()
                 -- require("telescope.builtin").buffers(require("telescope.themes").get_ivy({
                 require("telescope.builtin").buffers(require("telescope.themes").get_dropdown({
@@ -288,7 +277,7 @@ return {
                         ["<esc>"] = actions.close,
                         ["<C-c>"] = actions.close,
                         ["<C-g>"] = actions.close,
-                        ["s"] = actions.close,
+                        ["<C-s>"] = actions.close,
                         ["<CR>"] = actions.select_default,
                         ["f"] = actions.select_default,
                         ["l"] = actions.select_default,
