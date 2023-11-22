@@ -34,7 +34,7 @@ local function lsp_keymaps(bufnr)
     buf_keymap("n", "<leader>lf", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "Diagnostics float" })
     buf_keymap("n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>')
     vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format({ async = true })' ]])
-    buf_keymap( "n", "<M-F>", ":Format<cr>")
+    buf_keymap( "n", "<leader>bf", ":Format<cr>", { desc = "Format buffer" })
 end
 
 M.on_attach = function(client, bufnr)
