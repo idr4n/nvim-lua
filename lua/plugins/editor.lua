@@ -167,6 +167,7 @@ return {
 
             return {
                 signcolumn = true,
+                _extmark_signs = false,
                 numhl = false,
                 signs = {
                     add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
@@ -744,7 +745,7 @@ return {
     --: statuscol {{{
     {
         "luukvbaal/statuscol.nvim",
-        enabled = false,
+        -- enabled = false,
         event = { "BufReadPost", "BufNewFile" },
         opts = function()
             local builtin = require("statuscol.builtin")
