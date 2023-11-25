@@ -159,7 +159,7 @@ return {
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = function()
             -- redefine gitsigns colors
-            local linenr_hl = vim.api.nvim_get_hl_by_name("LineNr", true)
+            local linenr_hl = vim.api.nvim_get_hl(0, { name = "LineNr" })
             -- vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#73DACA", bg = linenr_hl.background })
             -- vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#FF9E64", bg = linenr_hl.background })
             -- vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#F7768E", bg = linenr_hl.background })

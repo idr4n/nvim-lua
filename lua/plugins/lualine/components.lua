@@ -28,8 +28,8 @@ local mode_color = {
 -- local function fg(name)
 --     return function()
 --         ---@type {foreground?:number}?
---         local hl = vim.api.nvim_get_hl_by_name(name, true)
---         return hl and hl.foreground and { fg = string.format("#%06x", hl.foreground) }
+--         local hl = vim.api.nvim_get_hl(0, { name = name })
+--         return hl and hl.fg and { fg = string.format("#%06x", hl.fg) }
 --     end
 -- end
 
@@ -89,9 +89,9 @@ local function file_icon()
         icon_highlight_group = "DevIconDefault"
     end
 
-    local icon_hl = vim.api.nvim_get_hl_by_name(icon_highlight_group, true)
-    local status_hl = vim.api.nvim_get_hl_by_name("StatusLine", true)
-    vim.api.nvim_set_hl(0, "SLIcon", { fg = icon_hl.foreground, bg = status_hl.background })
+    local icon_hl = vim.api.nvim_get_hl(0, { name = icon_highlight_group })
+    local status_hl = vim.api.nvim_get_hl(0, { name = "StatusLine" })
+    vim.api.nvim_set_hl(0, "SLIcon", { fg = icon_hl.fg, bg = status_hl.bg })
 
     if not vim.bo.modifiable then
         icon = ""
