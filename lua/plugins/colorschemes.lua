@@ -44,17 +44,17 @@ return {
     --: zenbones{{{
     {
         "mcchrish/zenbones.nvim",
-        lazy = not duringDayTime,
+        -- lazy = not duringDayTime,
         -- lazy = false,
-        priority = 1000,
+        -- priority = 1000,
         dependencies = "rktjmp/lush.nvim",
         config = function()
             vim.g.zenbones =
                 { lightness = "bright", darkness = "stark", lighten_line_nr = 30, transparent_background = true }
 
             if duringDayTime then
-                vim.o.background = "light"
-                vim.cmd("colorscheme zenbones")
+                -- vim.o.background = "light"
+                -- vim.cmd("colorscheme zenbones")
                 vim.api.nvim_set_hl(0, "LspReferenceText", { bg = "#E2E2E2" })
                 vim.api.nvim_set_hl(0, "LspReferenceRead", { bg = "#E2E2E2" })
                 vim.api.nvim_set_hl(0, "LspReferenceWrite", { bg = "#E2E2E2" })
@@ -80,8 +80,8 @@ return {
                 vim.api.nvim_set_hl(0, "IblScope", { fg = "#898989" })
                 vim.api.nvim_set_hl(0, "WhichKeyFloat", { bg = "#EFEFEF" })
             else
-                vim.o.background = "dark"
-                vim.cmd("colorscheme zenbones")
+                -- vim.o.background = "dark"
+                -- vim.cmd("colorscheme zenbones")
                 vim.api.nvim_set_hl(0, "Type", { bold = true })
                 vim.api.nvim_set_hl(0, "TabLineFill", { bg = "#171210" })
                 vim.api.nvim_set_hl(0, "TabLine", { bg = "#302825" })
@@ -238,7 +238,7 @@ return {
     --: Onedark.nvim {{{
     {
         "navarasu/onedark.nvim",
-        lazy = duringDayTime,
+        lazy = not duringDayTime,
         priority = 1000,
         config = function()
             require("onedark").setup({
@@ -247,11 +247,104 @@ return {
                     IblScope = { fg = "#626873" },
                 },
             })
-            if not duringDayTime then
+            if duringDayTime then
                 require("onedark").load()
                 vim.api.nvim_set_hl(0, "Cursor", { bg = "#528BFE" })
                 vim.api.nvim_set_hl(0, "lCursor", { bg = "#528BFE" })
                 vim.opt.guicursor:append("a:Cursor/lCursor")
+            end
+        end,
+    },
+    --: }}}
+
+    --: rose-pine {{{
+    {
+        "rose-pine/neovim",
+        name = "rose-pine",
+        lazy = duringDayTime,
+        -- lazy = false,
+        priority = 1000,
+        opts = function()
+            return {
+                --- @usage 'main' | 'moon'
+                dark_variant = "moon",
+                bold_vert_split = false,
+                dim_nc_background = false,
+                disable_background = false,
+                disable_float_background = false,
+                disable_italics = false,
+
+                --- @usage string hex value or named color from rosepinetheme.com/palette
+                groups = {
+                    background = "base",
+                    background_nc = "_experimental_nc",
+                    panel = "surface",
+                    panel_nc = "surface",
+                    border = "highlight_med",
+                    comment = "muted",
+                    link = "iris",
+                    punctuation = "subtle",
+
+                    error = "love",
+                    hint = "iris",
+                    info = "foam",
+                    warn = "gold",
+
+                    git_add = "pine",
+                    git_rename = "foam",
+
+                    headings = {
+                        h1 = "iris",
+                        h2 = "foam",
+                        h3 = "rose",
+                        h4 = "gold",
+                        h5 = "pine",
+                        h6 = "foam",
+                    },
+                    -- or set all headings at once
+                    -- headings = 'subtle'
+                },
+
+                -- Change specific vim highlight groups
+                highlight_groups = {
+                    -- CursorLine = { bg = "surface" },
+                    IndentBlanklineChar = { fg = "overlay" },
+                    -- IndentBlanklineChar = { fg = "highlight_med" },
+                    Variable = { fg = "text", italic = false },
+                    TSVariable = { fg = "text", italic = false },
+                    ["@variable"] = { fg = "text", italic = false },
+                    Parameter = { fg = "iris", italic = false },
+                    TSParameter = { fg = "iris", italic = false },
+                    ["@parameter"] = { fg = "iris", italic = false },
+                    Property = { fg = "iris", italic = false },
+                    ["@property"] = { fg = "iris", italic = false },
+                    TSProperty = { fg = "iris", italic = false },
+                    Keyword = { fg = "pine", italic = true },
+                    TSKeyword = { fg = "pine", italic = true },
+                    ["@keyword"] = { fg = "pine", italic = true },
+                    Function = { fg = "rose", italic = true },
+                    TSFunction = { fg = "rose", italic = true },
+
+                    -- nvim-telescope/telescope.nvim
+                    TelescopeBorder = { fg = "pine", bg = "none" },
+                    TelescopeMatching = { fg = "rose" },
+                    TelescopeNormal = { bg = "none" },
+                    TelescopePromptNormal = { bg = "none" },
+                    -- TelescopeSelection = { bg = "highlight_low" },
+                    -- TelescopeSelectionCaret = { bg = "highlight_low" },
+                    NeoTreeNormal = { bg = "nc" },
+                    NeoTreeNormalNC = { bg = "nc" },
+                    NeoTreeEndOfBuffer = { bg = "nc" },
+                    NeoTreeCursorLine = { bg = "p.highlight_low" },
+                    IblIndent = { fg = "#323048" },
+                    IblScope = { fg = "#525069" },
+                },
+            }
+        end,
+        config = function(_, opts)
+            if not duringDayTime then
+                require("rose-pine").setup(opts)
+                vim.cmd("colorscheme rose-pine")
             end
         end,
     },
