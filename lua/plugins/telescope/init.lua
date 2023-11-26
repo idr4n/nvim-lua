@@ -22,7 +22,7 @@ return {
             silent = true,
             desc = "Telescope-find_files",
         },
-        -- { "<leader>r", "<cmd>Telescope live_grep<cr>", noremap = true, silent = true },
+        { "<leader>r", "<cmd>Telescope live_grep<cr>", noremap = true, silent = true },
         {
             "<leader>ff",
             function()

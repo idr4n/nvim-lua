@@ -32,8 +32,8 @@ return {
             --     ":lua require('telescope.builtin').find_files()<cr>"
             -- ),
             dashboard.button("t", "󰄉  File History", ":Telescope oldfiles<cr>"),
-            dashboard.button("r", "󰺮  Find text", ":Rg<cr>"),
-            -- dashboard.button("r", "󰺮  Find text", "<cmd>Telescope live_grep<cr>"),
+            -- dashboard.button("r", "󰺮  Find text", ":Rg<cr>"),
+            dashboard.button("r", "󰺮  Find text", "<cmd>Telescope live_grep<cr>"),
             -- dashboard.button("s", "  Open session", ":SearchSession <CR>"),
             dashboard.button(
                 "s",
