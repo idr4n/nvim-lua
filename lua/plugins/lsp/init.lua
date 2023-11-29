@@ -186,6 +186,7 @@ return {
                 pyright = require("plugins.lsp.settings.pyright"),
                 sqlls = require("plugins.lsp.settings.sqls"),
                 cssls = require("plugins.lsp.settings.cssls"),
+                solargraph = require("plugins.lsp.settings.solargraph"),
             },
 
             setup = {
