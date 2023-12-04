@@ -47,12 +47,15 @@ keymap("n", "<leader>tc", ":CharcodeToggle<cr>", { desc = "Charcode" })
 
 -- Autocommands
 
--- Autospelling for tex and md files
-vim.api.nvim_create_augroup("spell_tex_md", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "tex", "markdown" },
-    command = "setlocal spell spelllang=en_us",
-    group = "spell_tex_md",
+-- Autospelling and zen mode for tex and md files
+vim.api.nvim_create_augroup("tex-md_group", { clear = true })
+vim.api.nvim_create_autocmd("VimEnter", {
+    pattern = { "*.tex", "*.md" },
+    callback = function()
+        vim.cmd("setlocal spell spelllang=en_us")
+        vim.cmd("ZenMode")
+    end,
+    group = "tex-md_group",
 })
 
 -- Indent four spaces
