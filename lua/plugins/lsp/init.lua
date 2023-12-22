@@ -187,6 +187,7 @@ return {
                 sqlls = require("plugins.lsp.settings.sqls"),
                 cssls = require("plugins.lsp.settings.cssls"),
                 solargraph = require("plugins.lsp.settings.solargraph"),
+                tailwindcss = require("plugins.lsp.settings.tailwindcss"),
             },
 
             setup = {
