@@ -17,7 +17,7 @@ opt.cursorline = true -- highlight the current line
 opt.expandtab = true -- convert tabs to spaces
 -- opt.foldcolumn = "1"
 -- opt.foldmethod = "marker"
-opt.guicursor = "" -- no thin cursor on insert mode
+-- opt.guicursor = "" -- no thin cursor on insert mode
 opt.hlsearch = true -- highlight all matches on previous search pattern
 opt.incsearch = true
 opt.ignorecase = true -- ignore case in search patterns
@@ -44,7 +44,7 @@ opt.updatetime = 300 -- control CursorHold event waiting time (4000ms default)
 opt.wrap = true -- display lines as one long line
 opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 
-opt.shortmess:append("cS")
+opt.shortmess:append({ W = true, I = true, c = true, C = true })
 opt.nrformats:append("alpha") -- increments letters sequences as well with <c-a>
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")
