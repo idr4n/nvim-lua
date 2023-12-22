@@ -1,20 +1,21 @@
 -- system apperance
-local appearance = vim.fn.system("defaults read -g AppleInterfaceStyle")
-local duringDayTime = appearance:match("^Dark") == nil
-if vim.fn.has("linux") == 1 then
-    duringDayTime = false
-end
+-- local appearance = vim.fn.system("defaults read -g AppleInterfaceStyle")
+-- local duringDayTime = appearance:match("^Dark") == nil
+local duringDayTime = false
+-- if vim.fn.has("linux") == 1 then
+--     duringDayTime = false
+-- end
 
 return {
     --: tokyonight {{{
     {
         "folke/tokyonight.nvim",
-        -- lazy = duringDayTime,
-        -- priority = 1000,
+        lazy = duringDayTime,
+        priority = 1000,
         opts = function()
             return {
-                -- style = "moon",
-                style = "night",
+                style = "moon",
+                -- style = "night",
                 -- transparent = true,
                 styles = {
                     functions = "italic",
@@ -24,9 +25,10 @@ return {
                 on_highlights = function(hl, c)
                     hl.CursorLine = { bg = c.bg_dark }
                     hl.Folded = { bg = c.none }
-                    hl.IblIndent = { fg = "#272936" }
+                    -- hl.IblIndent = { fg = "#303342" }
+                    hl.IblScope = { fg = "#634E89" }
                     hl.NeoTreeCursorLine = { bg = "#2F344C" }
-                    hl.TelescopeBorder = { fg = c.purple, bg = c.none }
+                    -- hl.TelescopeBorder = { fg = c.purple, bg = c.none }
                 end,
             }
         end,
@@ -37,6 +39,7 @@ return {
             -- if not duringDayTime then
             --     vim.cmd("colorscheme tokyonight")
             -- end
+            vim.cmd("colorscheme tokyonight")
         end,
     },
     --: }}}
@@ -238,8 +241,8 @@ return {
     --: Onedark.nvim {{{
     {
         "navarasu/onedark.nvim",
-        lazy = not duringDayTime,
-        priority = 1000,
+        -- lazy = not duringDayTime,
+        -- priority = 1000,
         config = function()
             require("onedark").setup({
                 style = "dark",
@@ -247,12 +250,12 @@ return {
                     IblScope = { fg = "#626873" },
                 },
             })
-            if duringDayTime then
-                require("onedark").load()
-                vim.api.nvim_set_hl(0, "Cursor", { bg = "#528BFE" })
-                vim.api.nvim_set_hl(0, "lCursor", { bg = "#528BFE" })
-                vim.opt.guicursor:append("a:Cursor/lCursor")
-            end
+            -- if duringDayTime then
+            --     require("onedark").load()
+            --     vim.api.nvim_set_hl(0, "Cursor", { bg = "#528BFE" })
+            --     vim.api.nvim_set_hl(0, "lCursor", { bg = "#528BFE" })
+            --     vim.opt.guicursor:append("a:Cursor/lCursor")
+            -- end
         end,
     },
     --: }}}
@@ -261,16 +264,16 @@ return {
     {
         "rose-pine/neovim",
         name = "rose-pine",
-        lazy = duringDayTime,
+        -- lazy = duringDayTime,
         -- lazy = false,
-        priority = 1000,
+        -- priority = 1000,
         opts = function()
             return {
                 --- @usage 'main' | 'moon'
                 dark_variant = "moon",
                 bold_vert_split = false,
                 dim_nc_background = false,
-                disable_background = false,
+                disable_background = true,
                 disable_float_background = false,
                 disable_italics = false,
 
@@ -342,10 +345,12 @@ return {
             }
         end,
         config = function(_, opts)
-            if not duringDayTime then
-                require("rose-pine").setup(opts)
-                vim.cmd("colorscheme rose-pine")
-            end
+            require("rose-pine").setup(opts)
+            -- vim.cmd("colorscheme rose-pine")
+            -- if not duringDayTime then
+            --     require("rose-pine").setup(opts)
+            --     vim.cmd("colorscheme rose-pine")
+            -- end
         end,
     },
     --: }}}

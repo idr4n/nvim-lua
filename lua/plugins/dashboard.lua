@@ -48,8 +48,10 @@ return {
             dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
         }
 
-        dashboard.section.footer.opts.hl = "Type"
         dashboard.section.header.opts.hl = pick_color()
+        dashboard.section.buttons.opts.hl = "AlphaButtons"
+        dashboard.section.footer.opts.hl = pick_color()
+        dashboard.opts.layout[1].val = 8
 
         if vim.o.filetype == "lazy" then
             vim.cmd.close()
