@@ -592,15 +592,27 @@ return {
     --: notify {{{
     {
         "rcarriga/nvim-notify",
-        enabled = false,
+        -- enabled = false,
+        keys = {
+            {
+                "<leader>nn",
+                function()
+                    require("notify").dismiss({ silent = true, pending = true })
+                end,
+                desc = "Dismiss all Notifications",
+            },
+        },
         opts = {
             timeout = 3000,
-            background_colour = "#000000",
+            -- background_colour = "#000000",
             max_height = function()
                 return math.floor(vim.o.lines * 0.75)
             end,
             max_width = function()
                 return math.floor(vim.o.columns * 0.75)
+            end,
+            on_open = function(win)
+                vim.api.nvim_win_set_config(win, { zindex = 100 })
             end,
         },
     },
@@ -609,26 +621,30 @@ return {
     --: noice {{{
     {
         "folke/noice.nvim",
-        enabled = false,
+        -- enabled = false,
         event = "VeryLazy",
-        -- dependencies = {
-        --     "rcarriga/nvim-notify",
-        -- },
         -- stylua: ignore
         keys = {
             { "<leader>nl", function() require("noice").cmd("last") end, desc = "Noice Last Message" },
             { "<leader>nh", function() require("noice").cmd("history") end, desc = "Noice History" },
             { "<leader>na", function() require("noice").cmd("all") end, desc = "Noice All" },
+            { "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline" },
+            { "<leader>nd", function() require("noice").cmd("dismiss") end, desc = "Dismiss All" },
+            { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll forward", mode = {"i", "n", "s"} },
+            { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll backward", mode = {"i", "n", "s"}},
         },
         opts = {
             routes = {
-                -- Avoid all messages with kind ""
                 {
                     filter = {
                         event = "msg_show",
-                        kind = "",
+                        any = {
+                            { find = "%d+L, %d+B" },
+                            { find = "; after #%d+" },
+                            { find = "; before #%d+" },
+                        },
                     },
-                    opts = { skip = true },
+                    view = "mini",
                 },
             },
             lsp = {
@@ -641,50 +657,26 @@ return {
                 signature = { enabled = true },
                 progress = { enabled = false },
             },
-            cmdline = {
-                format = {
-                    cmdline = { pattern = "^:", icon = " ", lang = "vim" },
-                    search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
-                    search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
-                    filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
-                    lua = { pattern = "^:%s*lua%s+", icon = "", lang = "lua" },
-                    help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
-                    input = {},
-                },
-                opts = {
-                    win_options = {
-                        winhighlight = {
-                            Normal = "NormalFloat",
-                            FloatBorder = "FloatBorder",
-                        },
-                    },
-                    border = { style = "none", padding = { 1, 2 } },
-                },
-            },
-            views = {
-                cmdline_popup = {
-                    position = { row = 0, col = "50%" },
-                    size = { width = "97%" },
-                },
-            },
+            -- cmdline = {
+            --     opts = {
+            --         -- -- remover border
+            --         border = { style = "none", padding = { 1, 2 } },
+            --     },
+            -- },
+            -- -- if want to position cmdline and search popup in the top instead
+            -- views = {
+            --     cmdline_popup = {
+            --         position = { row = 0, col = "50%" },
+            --         size = { width = "97%" },
+            --     },
+            -- },
             popupmenu = { backend = "cmp" },
             presets = {
+                bottom_search = true,
+                command_palette = true,
+                inc_rename = true,
                 long_message_to_split = true,
                 lsp_doc_border = true,
-                -- command_palette = {
-                --     views = {
-                --         cmdline_popup = {
-                --             position = {
-                --                 row = 6,
-                --             },
-                --         },
-                --         popupmenu = {
-                --             position = {
-                --                 row = 9,
-                --             },
-                --         },
-                --     },
-                -- },
             },
         },
     },

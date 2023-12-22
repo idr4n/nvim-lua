@@ -29,8 +29,7 @@ keymap("n", "<leader>;", ":RevealInFinder<cr>", { desc = "Reveal in finder" })
 
 -- Code Run Script
 command("CodeRun", function()
-    vim.cmd("execute '!~/scripts/code_run \"%\"'")
-    -- require("noice").cmd("last")
+    require("noice").redirect("execute '!~/scripts/code_run \"%\"'")
 end, {})
 keymap("n", "<leader>cr", ":CodeRun<cr>", { desc = "Run code - own script" })
 
