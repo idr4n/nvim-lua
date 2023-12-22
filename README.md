@@ -8,8 +8,9 @@ This is my Neovim configuation written in Lua.
 
 ## Basic setup
 
+- My setup is based, to great extend, on [LazyVim](https://github.com/LazyVim/LazyVim). I have borrowed many things from this config and if I was to start from scratch, I would probably just use LazyVim with some customization.
 - **Preferred themes**: [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim), [catppuccin/nvim](https://github.com/catppuccin/nvim), [projekt0n/github-nvim-theme](https://github.com/projekt0n/github-nvim-theme), and [loctvl842/monokai-pro.nvim](https://github.com/loctvl842/monokai-pro.nvim).
-- **I am using my own statusline**, as an alternative to Lualine, as I found it easier to customize it for my own needs. Lualine, however, is as excellent alternative. The theme I try to follow for my statusline is closed to **[Doom Emacs modeline](https://github.com/seagle0128/doom-modeline)**.
+- **I am using my own statusline**, as an alternative to Lualine, as I found it easier to customize it for my own needs. Lualine, however, is as excellent alternative.
 - **Terminals**: WezTerm (alternatively Alacritty and Kitty). To check my terminals configuration, take a look at my [dotfiles](https://github.com/idr4n/.dotfiles) and my [WezTerm configuration](https://github.com/idr4n/wezterm).
 - **Font**: I switch back and forth between [FiraCode](https://github.com/tonsky/FiraCode) and [MonoLisa](https://www.monolisa.dev/).
 - I'm using **[lazy.nvim](https://github.com/folke/lazy.nvim) as my package manager**, which allows me to start Neovim in around 30ms⚡️.
@@ -23,19 +24,27 @@ This is the list of plugins I currently have installed, based on the Lazy.nvim's
 
 <br>
 
-**Loaded (5)**
+**Total: 104 plugins**
+
+**Loaded (14)**
 
 - alpha-nvim
+- bufferline.nvim
 - lazy.nvim
+- noice.nvim
+- nui.nvim
+- nvim-notify
+- nvim-treesitter
+- nvim-ts-context-commentstring
 - tokyonight.nvim
+- vim-dirvish
 - vim-symlink
+- vim-vinegar
+- vim-visual-multi
 - which-key.nvim
 
-**Not Loaded (79)**
+**Not Loaded (84)**
 
-- Comment.nvim
-- LuaSnip
-- catppuccin 
 - clipboard-image.nvim
 - close-buffers.nvim
 - cmp-buffer
@@ -43,8 +52,10 @@ This is the list of plugins I currently have installed, based on the Lazy.nvim's
 - cmp-nvim-lsp
 - cmp-nvim-lua
 - cmp-path
+- cmp-tailwind-colors
 - cmp_luasnip
 - code_runner.nvim
+- Comment.nvim
 - diffview.nvim
 - emmet-vim
 - friendly-snippets
@@ -54,18 +65,21 @@ This is the list of plugins I currently have installed, based on the Lazy.nvim's
 - github-nvim-theme
 - gitsigns.nvim
 - glance.nvim
-- gruvbox-material
+- gruber-darker.nvim
 - harpoon
-- incline.nvim
 - indent-blankline.nvim
 - lf.vim
+- LuaSnip
+- lush.nvim
 - mason-lspconfig.nvim
 - mason.nvim
+- mini.indentscope
 - monokai-pro.nvim
 - neo-tree.nvim
 - neogit
-- nui.nvim
-- null-ls.nvim
+- nightfly
+- no-neck-pain.nvim
+- none-ls.nvim
 - nvim-autopairs
 - nvim-cmp
 - nvim-colorizer.lua
@@ -75,21 +89,23 @@ This is the list of plugins I currently have installed, based on the Lazy.nvim's
 - nvim-dap-ui
 - nvim-jdtls
 - nvim-lspconfig
-- nvim-markdown
-- nvim-treesitter
 - nvim-treesitter-context
 - nvim-treesitter-textobjects
 - nvim-ts-autotag
-- nvim-ts-context-commentstring
 - nvim-ufo
 - nvim-web-devicons
 - one-small-step-for-vimkind
+- onedark.nvim
+- otter.nvim
 - playground
 - plenary.nvim
 - popup.nvim
 - promise-async
+- quarto-nvim
+- rose-pine
 - rust-tools.nvim
 - sqls.nvim
+- statuscol.nvim
 - tabout.nvim
 - telescope-file-browser.nvim
 - telescope-fzf-native.nvim
@@ -112,17 +128,17 @@ This is the list of plugins I currently have installed, based on the Lazy.nvim's
 - windex.nvim
 - yanky.nvim
 - zen-mode.nvim
+- zenbones.nvim
 
-**Disabled (8)**
+**Disabled (6)**
 
-- barbecue
-- lualine.nvim
-- modes.nvim
-- noice.nvim
-- nvim-navic
-- nvim-notify
-- statuscol.nvim
-- vim-dirvish
+- barbecue 
+- incline.nvim 
+- lualine.nvim 
+- modes.nvim 
+- oil.nvim 
+- tabby.nvim 
+
 
 </details>
 
