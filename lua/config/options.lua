@@ -13,6 +13,7 @@ opt.cmdheight = 1
 opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
 opt.conceallevel = 0 -- so that `` is visible in markdown files
 -- opt.concealcursor = "nc" -- conceal in normal/command mode (not in insert/visual)
+opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.cursorline = true -- highlight the current line
 opt.expandtab = true -- convert tabs to spaces
 -- opt.foldcolumn = "1"
