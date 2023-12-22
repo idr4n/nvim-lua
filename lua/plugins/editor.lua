@@ -263,6 +263,7 @@ return {
         "nvim-neo-tree/neo-tree.nvim",
         cmd = "Neotree",
         branch = "v3.x",
+        -- stylua: ignore
         keys = {
             { ",e", ":Neotree reveal left toggle<CR>", noremap = true, silent = true, desc = "Toggle Neo-Tree" },
             { "<leader>nt", ":Neotree reveal left toggle<CR>", noremap = true, silent = true, desc = "Toggle" },
@@ -312,7 +313,7 @@ return {
                 },
             },
             window = {
-                width = 35,
+                -- width = 35,
                 mappings = {
                     ["o"] = "open",
                     ["h"] = function(state)
@@ -481,9 +482,10 @@ return {
         opts = {
             indent = {
                 char = "│",
+                tab_char = "│",
             },
             scope = {
-                -- enabled = false,
+                enabled = false,
                 show_start = false,
                 show_end = false,
                 include = {
@@ -560,7 +562,7 @@ return {
     --: mini.indentscope with animations {{{
     {
         "echasnovski/mini.indentscope",
-        enabled = false,
+        -- enabled = false,
         event = { "BufReadPre", "BufNewFile" },
         opts = {
             -- symbol = "▏",
@@ -770,7 +772,7 @@ return {
     --: tabby {{{
     {
         "nanozuki/tabby.nvim",
-        -- enabled = false,
+        enabled = false,
         event = { "BufReadPost", "BufNewFile" },
         config = function()
             -- vim.o.showtabline = 2
@@ -1432,7 +1434,7 @@ return {
     {
         "utilyre/barbecue.nvim",
         name = "barbecue",
-        -- enabled = false,
+        enabled = false,
         event = "BufReadPre",
         dependencies = {
             "SmiteshP/nvim-navic",
@@ -1591,5 +1593,48 @@ return {
             buffers = { wo = { number = false, relativenumber = false } },
         },
     },
+    --: }}}
+
+    --: bufferline... {{{
+    {
+        "akinsho/bufferline.nvim",
+        -- enabled = false,
+        event = "VeryLazy",
+        keys = {
+            { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
+            { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
+            { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete buffers to the right" },
+            { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete buffers to the left" },
+            { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
+            { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
+        },
+        opts = function()
+            local bufferline = require("bufferline")
+            return {
+                options = {
+                    buffer_close_icon = "",
+                    diagnostics = "nvim_lsp",
+                    always_show_bufferline = false,
+                    offsets = {
+                        {
+                            filetype = "neo-tree",
+                            text = "Neo-tree",
+                            highlight = "Directory",
+                            text_align = "center",
+                        },
+                    },
+                    style_preset = {
+                        bufferline.style_preset.no_italic,
+                        bufferline.style_preset.no_bold,
+                    },
+                    separator_style = "slope",
+                },
+            }
+        end,
+        config = function(_, opts)
+            require("bufferline").setup(opts)
+        end,
+    },
+
     --: }}}
 }
