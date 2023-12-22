@@ -75,14 +75,16 @@ keyset("i", "<C-O>", "<C-o>O", { desc = "Insert line above" })
 --: }}}
 
 --: Quicksave command {{{
-keyset("n", "<leader>s", "<cmd>w<CR>", { desc = "Save file" })
+keyset({ "n", "i", "x", "s" }, "<C-S>", "<cmd>w<CR><esc>", { desc = "Save file" })
 keyset("n", "<leader>fs", "<cmd>w<CR>", { desc = "Save file" })
 keymap("n", "<Leader>S", "<cmd>w!<CR>", { desc = "Save file override" })
+keymap("n", "<Leader>w", "<cmd>noa w<CR>", { desc = "Save file no formatting" })
 --: }}}
 
 --: Quit current window {{{
-keymap("n", "<leader>e", ":quit<CR>", { desc = "Quit" })
-keymap("n", "<leader>E", ":q!<CR>", { desc = "Force Quit" })
+keymap("n", "<leader>qq", ":qa<CR>", { desc = "Quit all" })
+keymap("n", "<leader>qw", ":q<CR>", { desc = "Quit window" })
+keymap("n", "<leader>qQ", ":q!<CR>", { desc = "Force Quit" })
 --: }}}
 
 --: Easy select all of file {{{
@@ -100,15 +102,19 @@ keymap("n", "ga", ":b#<CR>zz", { desc = "Last buffer" })
 --: }}}
 
 --: Using Bbye plugin to close the current buffer {{{
-keymap("n", "<leader>q", ":Bdelete<CR>", { desc = "Close (delete) Buffer" })
 keymap("n", "<leader>bd", ":Bdelete<CR>", { desc = "Close (delete) Buffer" })
 -- wipeout current buffer
 keymap("n", "<leader>bw", ":Bwipeout<CR>", { desc = "Wipeout Buffer" })
 -- keymap("n", "<leader>bd", ":bd<CR>")
 --: }}}
 
---: Close tab {{{
-keymap("n", "<leader>Q", ":tabclose<cr>", { desc = "Close tab" })
+--: tabs {{{
+keymap("n", "<leader><tab>d", ":tabclose<cr>", { desc = "Close tab" })
+keymap("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
+keymap("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+keymap("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
+keymap("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+keymap("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 --: }}}
 
 --: Move text up and down {{{
@@ -185,7 +191,12 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>")
 --: }}}
 
 --: Clear search highlight {{{
-keymap("n", "<leader>,", "<cmd>nohlsearch|diffupdate|normal! <C-L><CR>", { desc = "Clear search highlight" })
+keymap(
+    "n",
+    "<leader>tr",
+    "<cmd>nohlsearch|diffupdate|normal! <C-L><CR>",
+    { desc = "Redraw / clear hlsearch / diff update" }
+)
 keymap("n", "<esc>", "<esc><cmd>noh<cr>", { noremap = true, desc = "No highlight escape" })
 --: }}}
 
@@ -260,8 +271,6 @@ keymap("n", "<leader>Y", '"+Y', { noremap = false, desc = "Yank to clipboard lin
 keymap("n", "d", '"_d')
 keymap("n", "D", '"_D')
 keymap("v", "d", '"_d')
-keymap("", "s", "h")
-keymap("", "f", "l")
 keyset("n", "gm", "m")
 keymap("", "m", "d")
 keymap("", "<leader>m", '"+d', { desc = "Cut to clipboard" })
@@ -277,6 +286,13 @@ keymap("v", "c", '"_c')
 keyset("n", "<leader>ol", "<cmd>:Lazy<cr>", { desc = "Lazy Dashboard" })
 --: }}}
 
+--: Add undo break-points {{{
+keymap("i", ",", ",<c-g>u")
+keymap("i", ".", ".<c-g>u")
+keymap("i", ";", ";<c-g>u")
+keymap("i", "<Space>", "<Space><c-g>u")
+--: }}}
+
 --: toggle Colemak DH(m) layout keybindings {{{
 vim.api.nvim_create_user_command("ColemakToggle", function()
     if not colemak then
@@ -284,13 +300,13 @@ vim.api.nvim_create_user_command("ColemakToggle", function()
         keymap("", "n", "j")
         keymap("", "e", "k")
         keymap("n", "N", "J")
-        keyset({ "n", "o" }, "i", "l")
+        -- keyset({ "n", "o" }, "i", "l")
         keymap("n", "I", "L")
         keymap("", "j", "e")
         keymap("n", "J", "E")
         keymap("n", "k", "n")
         keymap("n", "K", "N")
-        keyset({ "n", "o" }, "l", "i")
+        -- keyset({ "n", "o" }, "l", "i")
         keymap("n", "L", "I")
         keymap("", "m", "h")
         keymap("", "h", "d")
@@ -305,13 +321,13 @@ vim.api.nvim_create_user_command("ColemakToggle", function()
         keymap("", "n", "n")
         keymap("", "e", "e")
         keymap("n", "N", "N")
-        keyset({ "n", "o" }, "i", "i")
+        -- keyset({ "n", "o" }, "i", "i")
         keymap("n", "I", "I")
         keymap("n", "j", "j")
         keymap("n", "J", "J")
         keymap("n", "k", "k")
         keymap("n", "K", "K")
-        keyset({ "n", "o" }, "l", "l")
+        -- keyset({ "n", "o" }, "l", "l")
         keymap("n", "L", "L")
         keymap("", "m", "d")
         keymap("", "h", "h")

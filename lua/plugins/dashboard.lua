@@ -32,8 +32,8 @@ return {
             --     ":lua require('telescope.builtin').find_files()<cr>"
             -- ),
             dashboard.button("t", "󰄉  File History", ":Telescope oldfiles<cr>"),
-            -- dashboard.button("r", "󰺮  Find text", ":Rg<cr>"),
-            dashboard.button("r", "󰺮  Find text", "<cmd>Telescope live_grep<cr>"),
+            dashboard.button("r", "󰺮  Find text", ":Rg<cr>"),
+            -- dashboard.button("r", "󰺮  Find text", "<cmd>Telescope live_grep<cr>"),
             -- dashboard.button("s", "  Open session", ":SearchSession <CR>"),
             dashboard.button(
                 "s",
@@ -42,10 +42,10 @@ return {
             ),
             -- dashboard.button("c", "  Configuration", "<cmd>lcd ~/.config/nvim | Files<cr>"),
             -- dashboard.button("c", "  Configuration", "<cmd>lcd ~/.config/nvim | Telescope find_files<cr>"),
-            dashboard.button("c", "  Configuration", "<cmd>lcd ~/.config/nvim | echo 'Directory:' getcwd()<cr>"),
+            dashboard.button("c", "  Config", "<cmd>lcd ~/.config/nvim | echo 'Directory:' getcwd()<cr>"),
             dashboard.button("d", "  Dotfiles", "<cmd>lcd ~/dotfiles | echo 'Directory:' getcwd()<cr>"),
-            dashboard.button("u", "  Update plugins", ":Lazy<CR>"),
-            dashboard.button("q", "󰅚  Quit Neovim", ":qa<CR>"),
+            dashboard.button("l", "󰒲  Lazy", ":Lazy<CR>"),
+            dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
         }
 
         dashboard.section.footer.opts.hl = "Type"

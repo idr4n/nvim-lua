@@ -265,11 +265,10 @@ return {
         branch = "v3.x",
         -- stylua: ignore
         keys = {
-            { ",e", ":Neotree reveal left toggle<CR>", noremap = true, silent = true, desc = "Toggle Neo-Tree" },
-            { "<leader>nt", ":Neotree reveal left toggle<CR>", noremap = true, silent = true, desc = "Toggle" },
-            { "<leader>nn", ":Neotree focus<CR>", noremap = true, silent = true, desc = "Focus" },
-            { "<leader>nf", ":Neotree float reveal toggle<CR>", noremap = true, silent = true, desc = "Float" },
-            { "<leader>nb", ":Neotree toggle show buffers right<CR>", noremap = true, silent = true, desc = "Buffers" },
+            { "<leader>e", ":Neotree reveal left toggle<CR>", noremap = true, silent = true, desc = "Toggle Neo-Tree" },
+            { "<leader>nt", ":Neotree reveal left toggle<CR>", noremap = true, silent = true, desc = "Toggle Neo-Tree" },
+            { "<leader>nf", ":Neotree float reveal toggle<CR>", noremap = true, silent = true, desc = "Neo-tree Float" },
+            { "<leader>nb", ":Neotree toggle show buffers right<CR>", noremap = true, silent = true, desc = "Neo-tree Buffers" },
             {
                 "<leader>ns",
                 ":Neotree toggle document_symbols right<CR>",
@@ -1374,10 +1373,14 @@ return {
                     h = { name = "Gitsings/Harpoon" },
                     l = { name = "LSP" },
                     o = { name = "open" },
-                    n = { name = "Neotree" },
+                    n = { name = "Neotree/Noice" },
+                    q = { name = "Quit" },
+                    s = { name = "Search" },
                     t = { name = "toggle" },
+                    v = { name = "diffview" },
                     x = { name = "Trouble" },
                     z = { name = "misc" },
+                    ["<tab>"] = { name = "Tabs" },
                     ["tb"] = "Blame current line",
                 },
             }
@@ -1547,6 +1550,7 @@ return {
     --: zen-mode {{{
     {
         "folke/zen-mode.nvim",
+        cmd = { "ZenMode" },
         opts = {
             window = {
                 width = 85,
