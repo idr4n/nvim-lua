@@ -48,7 +48,7 @@ keymap("n", "<leader>tc", ":CharcodeToggle<cr>", { desc = "Charcode" })
 
 -- Autospelling and zen mode for tex and md files
 vim.api.nvim_create_augroup("tex-md_group", { clear = true })
-vim.api.nvim_create_autocmd("VimEnter", {
+vim.api.nvim_create_autocmd("BufRead", {
     pattern = { "*.tex", "*.md" },
     callback = function()
         vim.cmd("setlocal spell spelllang=en_us")
