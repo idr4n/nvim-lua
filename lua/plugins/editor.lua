@@ -69,14 +69,13 @@ return {
     --: fzf.vim {{{
     {
         "junegunn/fzf.vim",
-        enabled = false,
         cmd = { "Files", "Rg", "Lines", "BLines", "History" },
         keys = {
             -- { "<C-P>", ":Files<cr>", noremap = true, silent = true },
             -- { "<leader>ff", ":Files<cr>", noremap = true, silent = true },
             -- { "<C-T>", ":History<cr>", noremap = true, silent = true },
             -- { "<C-B>", ":Buffers<cr>", noremap = true, silent = true },
-            -- { "<leader>r", ":Rg<cr>", noremap = true, silent = true, desc = "Live Grep" },
+            { "<leader>r", ":Rg<cr>", noremap = true, silent = true, desc = "Live Grep" },
             -- { "<leader>gs", ":GitFiles?<cr>", noremap = true, silent = true },
             -- { "<leader>cc", "<cmd>lcd ~/.config/nvim | Files<cr>", noremap = true, silent = true },
             -- { "<leader>b", "<cmd>BLines<cr>", noremap = true, silent = true },
@@ -131,12 +130,12 @@ return {
 
             -- Default command
             vim.env.FZF_DEFAULT_COMMAND =
-                "rg --files --hidden --follow --no-ignore -g '!.git/*' -g '!node_modules' -g '!target'"
+                "rg --files --hidden --follow --no-ignore -g '!{node_modules,.git,**/_build,deps,.elixir_ls,**/target,**/assets/node_modules,**/assets/vendor,**/.next,**/.vercel,**/build,**/out}'"
 
             -- exlclude file name from fuzzy matching in Rg command
             vim.cmd([[
                 command! -bang -nargs=* Rg
-                \ call fzf#vim#grep('rg --column --hidden --line-number --no-heading --color=always --smart-case -g "!.git/*" -g !node_modules '
+                \ call fzf#vim#grep('rg --column --hidden --line-number --no-heading --color=always --smart-case -g "!{node_modules,.git,**/_build,deps,.elixir_ls,**/target,**/assets/node_modules,**/assets/vendor,**/.next,**/.vercel,**/build,**/out}" '
                 \ . (len(<q-args>) > 0 ? <q-args> : '""'), 0,
                 \ fzf#vim#with_preview({'options': ['--delimiter=:', '--nth=2..', '--layout=reverse', '--info=inline']}), <bang>0)
             ]])

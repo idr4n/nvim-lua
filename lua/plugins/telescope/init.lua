@@ -22,9 +22,9 @@ return {
             silent = true,
             desc = "Telescope-find_files",
         },
-        { "<leader>r", "<cmd>Telescope live_grep<cr>", noremap = true, silent = true },
+        -- { "<leader>r", "<cmd>Telescope live_grep<cr>", noremap = true, silent = true },
         {
-            "<leader>ff",
+            "<leader>sb",
             function()
                 require("telescope.builtin").current_buffer_fuzzy_find(
                     require("telescope.themes").get_ivy({ previewer = false })
@@ -32,11 +32,11 @@ return {
             end,
             noremap = true,
             silent = true,
-            desc = "Fuzzy find in current file",
+            desc = "Fuzzy find in current buffer",
         },
         { "<leader>ot", "<cmd>Telescope resume<cr>", noremap = true, silent = true, desc = "Telescope Resume" },
         {
-            "<C-S>",
+            "<leader>,",
             function()
                 -- require("telescope.builtin").buffers(require("telescope.themes").get_ivy({
                 require("telescope.builtin").buffers(require("telescope.themes").get_dropdown({
@@ -48,6 +48,7 @@ return {
             end,
             noremap = true,
             silent = true,
+            desc = "Switch buffers",
         },
         {
             "<leader>fh",
@@ -65,9 +66,9 @@ return {
             noremap = true,
             silent = true,
         },
-        { "<leader>oh", "<cmd>Telescope help_tags<cr>", noremap = true, silent = true, desc = "Help" },
+        { "<leader>sh", "<cmd>Telescope help_tags<cr>", noremap = true, silent = true, desc = "Help pages" },
         {
-            "<leader>oh",
+            "<leader>sh",
             function()
                 local text = vim.getVisualSelection()
                 require("telescope.builtin").help_tags({ default_text = text })
@@ -75,7 +76,7 @@ return {
             mode = "v",
             noremap = true,
             silent = true,
-            desc = "Help",
+            desc = "Help pages with selection",
         },
         {
             "gd",
@@ -116,7 +117,7 @@ return {
         },
         { "<leader>os", "<cmd>Telescope luasnip theme=ivy<cr>", noremap = true, silent = true, desc = "LuaSnips" },
         {
-            "<leader>oc",
+            "<leader>sc",
             function()
                 require("telescope.builtin").commands(require("telescope.themes").get_ivy())
             end,
@@ -125,20 +126,20 @@ return {
             desc = "Commands",
         },
         {
-            "<leader>oj",
+            "<leader>sj",
             "<cmd>lua require('telescope.builtin').jumplist({ initial_mode = 'normal' })<cr>",
             noremap = true,
             silent = true,
             desc = "Jumplist",
         },
         {
-            "<leader>ok",
+            "<leader>sk",
             function()
                 require("telescope.builtin").keymaps(require("telescope.themes").get_ivy())
             end,
             noremap = true,
             silent = true,
-            desc = "Keymaps",
+            desc = "Key maps",
         },
         {
             "<leader>zw",
@@ -277,7 +278,7 @@ return {
                         ["<esc>"] = actions.close,
                         ["<C-c>"] = actions.close,
                         ["<C-g>"] = actions.close,
-                        ["<C-s>"] = actions.close,
+                        ["<leader>,"] = actions.close,
                         ["<CR>"] = actions.select_default,
                         ["f"] = actions.select_default,
                         ["l"] = actions.select_default,
@@ -322,11 +323,7 @@ return {
                         "--follow",
                         "--no-ignore",
                         "-g",
-                        "!.git",
-                        "-g",
-                        "!node_modules",
-                        "-g",
-                        "!target",
+                        "!{node_modules,.git,**/_build,deps,.elixir_ls,**/target,**/assets/node_modules,**/assets/vendor,**/.next,**/.vercel,**/build,**/out}",
                     },
                 },
                 live_grep = {
@@ -336,11 +333,7 @@ return {
                             "--follow",
                             "--no-ignore",
                             "-g",
-                            "!.git",
-                            "-g",
-                            "!node_modules",
-                            "-g",
-                            "!target",
+                            "!{node_modules,.git,**/_build,deps,.elixir_ls,**/target,**/assets/node_modules,**/assets/vendor,**/.next,**/.vercel,**/build,**/out}",
                         }
                     end,
                 },

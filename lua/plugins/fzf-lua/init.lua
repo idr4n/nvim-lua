@@ -89,12 +89,12 @@ return {
                 ["gutter"] = { "bg", "Normal" },
             },
             files = {
-                cmd = "rg --files --hidden --follow --no-ignore -g '!.git/*' -g '!node_modules'",
+                cmd = "rg --files --hidden --follow --no-ignore -g '!{node_modules,.git,**/_build,deps,.elixir_ls,**/target,**/assets/node_modules,**/assets/vendor,**/.next,**/.vercel,**/build,**/out}'",
                 prompt = "  ",
             },
             grep = {
                 rg_opts = "--hidden --column --follow --line-number --no-heading "
-                    .. "--color=always --smart-case -g '!{.git,node_modules}/*'",
+                    .. "--color=always --smart-case -g '!{node_modules,.git,**/_build,deps,.elixir_ls,**/target,**/assets/node_modules,**/assets/vendor,**/.next,**/.vercel,**/build,**/out}'",
                 prompt = "  ",
             },
             blines = { prompt = "  " },
