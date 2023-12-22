@@ -915,8 +915,6 @@ return {
                 },
                 preselect = cmp.PreselectMode.None,
                 mapping = {
-                    -- ["<C-k>"] = cmp.mapping.select_prev_item(),
-                    -- ["<C-j>"] = cmp.mapping.select_next_item(),
                     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
                     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
                     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
@@ -937,15 +935,6 @@ return {
                         else
                             fallback()
                         end
-                        -- if luasnip.jumpable(1) then
-                        --   luasnip.jump(1)
-                        -- elseif cmp.visible() then
-                        --   cmp.select_next_item()
-                        -- elseif check_backspace() then
-                        --   fallback()
-                        -- else
-                        --   fallback()
-                        -- end
                     end, { "i", "s" }),
                     ["<S-Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
@@ -953,23 +942,11 @@ return {
                         else
                             fallback()
                         end
-                        -- if luasnip.jumpable(-1) then
-                        --   luasnip.jump(-1)
-                        -- elseif cmp.visible() then
-                        --   cmp.select_prev_item()
-                        -- else
-                        --   fallback()
-                        -- end
                     end, { "i", "s" }),
                 },
                 formatting = {
                     fields = { "kind", "abbr", "menu" },
-                    -- fields = { "abbr", "kind" },
-                    -- fields = { "abbr", "kind", "menu" },
                     format = function(entry, vim_item)
-                        -- format = function(_, vim_item)
-                        -- Kind icons
-
                         -- START extra config for cmp-tailwind-colors (remove if not used)
                         if vim_item.kind == "Color" then
                             vim_item = require("cmp-tailwind-colors").format(entry, vim_item)
@@ -984,19 +961,6 @@ return {
 
                         vim_item.menu = vim_item.kind
                         vim_item.kind = string.format(" %s ", nvchad_icons[vim_item.kind])
-                        -- vim_item.kind = string.format("%s %s", nvchad_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-                        -- vim_item.menu = ({
-                        --     -- nvim_lsp = "[LSP]",
-                        --     -- nvim_lua = "[NVIM_LUA]",
-                        --     -- luasnip = "[Snippet]",
-                        --     -- buffer = "[Buffer]",
-                        --     -- path = "[Path]",
-                        --     nvim_lsp = "",
-                        --     nvim_lua = "",
-                        --     luasnip = "",
-                        --     buffer = "",
-                        --     path = "",
-                        -- })[entry.source.name]
                         return vim_item
                     end,
                 },
