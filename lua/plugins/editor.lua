@@ -75,7 +75,7 @@ return {
             -- { "<leader>ff", ":Files<cr>", noremap = true, silent = true },
             -- { "<C-T>", ":History<cr>", noremap = true, silent = true },
             -- { "<C-B>", ":Buffers<cr>", noremap = true, silent = true },
-            { "<leader>r", ":Rg<cr>", noremap = true, silent = true, desc = "Live Grep" },
+            { "<leader>r", ":Rg<cr>", noremap = true, silent = true, desc = "Fzf Live Grep" },
             -- { "<leader>gs", ":GitFiles?<cr>", noremap = true, silent = true },
             -- { "<leader>cc", "<cmd>lcd ~/.config/nvim | Files<cr>", noremap = true, silent = true },
             -- { "<leader>b", "<cmd>BLines<cr>", noremap = true, silent = true },
@@ -85,14 +85,15 @@ return {
             -- calculate window width and height in columns
             local function calcWinSize()
                 return {
-                    width = math.min(math.ceil(vim.fn.winwidth(0) * 0.95), 140),
-                    height = math.min(math.ceil(vim.fn.winheight(0) * 0.8), 30),
+                    width = math.min(math.ceil(vim.fn.winwidth(0) * 0.95), 170),
+                    -- height = math.min(math.ceil(vim.fn.winheight(0) * 0.8), 30),
+                    height = 0.9,
                 }
             end
 
             -- settings
             -- vim.g.fzf_layout = { down = "40%" }
-            vim.g.fzf_preview_window = { "right:50%", "ctrl-l" }
+            vim.g.fzf_preview_window = { "right:45%", "ctrl-l" }
             -- vim.g.fzf_preview_window = { "right:50%:hidden", "ctrl-l" }
             -- vim.g.fzf_layout = { window = { width = calcWinSize().width, height = calcWinSize().height, yoffset = 0.45 } }
             vim.g.fzf_layout = { window = { width = calcWinSize().width, height = calcWinSize().height } }
@@ -137,7 +138,7 @@ return {
                 command! -bang -nargs=* Rg
                 \ call fzf#vim#grep('rg --column --hidden --line-number --no-heading --color=always --smart-case -g "!{node_modules,.git,**/_build,deps,.elixir_ls,**/target,**/assets/node_modules,**/assets/vendor,**/.next,**/.vercel,**/build,**/out}" '
                 \ . (len(<q-args>) > 0 ? <q-args> : '""'), 0,
-                \ fzf#vim#with_preview({'options': ['--delimiter=:', '--nth=2..', '--layout=reverse', '--info=inline']}), <bang>0)
+                \ fzf#vim#with_preview({'options': ['--delimiter=:', '--nth=2..', '--layout=default', '--info=inline']}), <bang>0)
             ]])
 
             -- add preview to Blines
