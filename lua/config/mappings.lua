@@ -117,18 +117,13 @@ keymap("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 keymap("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 --: }}}
 
---: Move text up and down {{{
-keymap("n", "<A-Down>", "]e==", { noremap = false, silent = true })
-keymap("n", "<A-Up>", "[e==", { noremap = false, silent = true })
---: }}}
-
 --: search for word under cursor and stays there {{{
 -- searches exact word (* forward, # backwards)
-keymap("n", "*", "*N", { noremap = true })
-keymap("n", "#", "#N", { noremap = true })
+keymap("n", "*", "*N")
+keymap("n", "#", "#N")
 -- searches but not the exact word (* forward, # backwards)
-keymap("n", "g*", "g*N", { noremap = true, desc = "Search not exact" })
-keymap("n", "g#", "g#N", { noremap = true, desc = "BckSearch not exact" })
+keymap("n", "g*", "g*N", { desc = "Search not exact" })
+keymap("n", "g#", "g#N", { desc = "BckSearch not exact" })
 --: }}}
 
 --: select line without end of line {{{
@@ -197,7 +192,7 @@ keymap(
     "<cmd>nohlsearch|diffupdate|normal! <C-L><CR>",
     { desc = "Redraw / clear hlsearch / diff update" }
 )
-keymap("n", "<esc>", "<esc><cmd>noh<cr>", { noremap = true, desc = "No highlight escape" })
+keymap("n", "<esc>", "<esc><cmd>noh<cr>", { desc = "No highlight escape" })
 --: }}}
 
 --: home row goto end and start of line (same as in Helix editor) {{{
@@ -234,10 +229,12 @@ keymap("v", "gy", ":t'><cr>gvgcgv<esc>", { noremap = false, desc = "Duplicate an
 --: }}}
 
 --: Move text up and down {{{
-keymap("v", "<A-Down>", ":m .+1<CR>==")
-keymap("v", "<A-Up>", ":m .-2<CR>==")
-keymap("x", "<A-Down>", ":move '>+1<CR>gv=gv")
-keymap("x", "<A-Up>", ":move '<-2<CR>gv=gv")
+keymap("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move line down" })
+keymap("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move line up" })
+keymap("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move line down" })
+keymap("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move line up" })
+keymap("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move line down" })
+keymap("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move line up" })
 --: }}}
 
 --: paste and replace selection {{{
@@ -245,14 +242,14 @@ keymap("v", "p", '"_dP')
 --: }}}
 
 --: search for highlighted text {{{
-keymap("v", "*", "y/\\V<C-R>=escape(@\",'/')<CR><CR>N", { noremap = true })
+keymap("v", "*", "y/\\V<C-R>=escape(@\",'/')<CR><CR>N")
 --: }}}
 
 --: substitute word previously searched {{{
 -- on selection only
-keymap("v", "<leader>R", ":s///g<LEFT><LEFT>", { noremap = true, desc = "Replace search" })
+keymap("v", "<leader>R", ":s///g<LEFT><LEFT>", { desc = "Replace search" })
 -- on entire buffer
-keymap("n", "<leader>R", ":%s///g<LEFT><LEFT>", { noremap = true, desc = "Replace search" })
+keymap("n", "<leader>R", ":%s///g<LEFT><LEFT>", { desc = "Replace search" })
 -- substitute current word
 keyset("n", "<leader>X", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Substitute current word" })
 keyset("v", "<leader>X", [[y:%s/<C-r>0/<C-r>0/gI<Left><Left><Left>]], { desc = "Substitute selection" })
@@ -263,7 +260,6 @@ keymap("n", "<leader>oe", ":Explor<cr>", { desc = "Netrw" })
 --: }}}
 
 --: Replace the easy-clip plugin {{{
--- keymap("x", "<leader>p", '"_dP')
 keyset({ "n", "v", "o" }, "<leader>p", '"+p', { desc = "Paste from clipboard" })
 keyset({ "n", "v", "o" }, "<leader>P", '"+P', { desc = "Paste from clipboard" })
 keyset({ "n", "v", "o" }, "<leader>y", '"+y', { desc = "Yank to clipboard" })
