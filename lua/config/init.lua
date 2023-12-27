@@ -19,8 +19,14 @@ vim.api.nvim_create_autocmd("User", {
     end,
 })
 
--- load commands and autocmds
+--: load commands and autocmds
 require("config.commands")
 
--- load lazy.nvim
+--: load lazy.nvim
 require("config.lazy")
+
+--: load colorscheme
+require("tokyonight").load()
+-- require("onedark").load()
+-- vim.cmd("colorscheme rose-pine")
+-- vim.cmd("colorscheme monokai-pro")

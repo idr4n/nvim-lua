@@ -1,17 +1,8 @@
--- system apperance
--- local appearance = vim.fn.system("defaults read -g AppleInterfaceStyle")
--- local duringDayTime = appearance:match("^Dark") == nil
-local duringDayTime = false
--- if vim.fn.has("linux") == 1 then
---     duringDayTime = false
--- end
-
 return {
     --: tokyonight {{{
     {
         "folke/tokyonight.nvim",
-        lazy = duringDayTime,
-        priority = 1000,
+        lazy = true,
         opts = function()
             return {
                 style = "moon",
@@ -32,241 +23,70 @@ return {
                 end,
             }
         end,
-        config = function(_, opts)
-            require("tokyonight").setup(opts)
-
-            -- -- Load the colorscheme
-            -- if not duringDayTime then
-            --     vim.cmd("colorscheme tokyonight")
-            -- end
-            vim.cmd("colorscheme tokyonight")
-        end,
-    },
-    --: }}}
-
-    --: zenbones{{{
-    {
-        "mcchrish/zenbones.nvim",
-        -- lazy = not duringDayTime,
-        -- lazy = false,
-        -- priority = 1000,
-        dependencies = "rktjmp/lush.nvim",
-        config = function()
-            vim.g.zenbones =
-                { lightness = "bright", darkness = "stark", lighten_line_nr = 30, transparent_background = true }
-
-            if duringDayTime then
-                -- vim.o.background = "light"
-                -- vim.cmd("colorscheme zenbones")
-                vim.api.nvim_set_hl(0, "LspReferenceText", { bg = "#E2E2E2" })
-                vim.api.nvim_set_hl(0, "LspReferenceRead", { bg = "#E2E2E2" })
-                vim.api.nvim_set_hl(0, "LspReferenceWrite", { bg = "#E2E2E2" })
-                -- vim.api.nvim_set_hl(0, "CursorLine", { bg = "#F8F5F3" })
-                -- vim.api.nvim_set_hl(0, "StatusLine", { bg = "#F2E9E5" })
-                -- vim.api.nvim_set_hl(0, "LineNr", { fg = "#D6CAC4" })
-                vim.api.nvim_set_hl(0, "CursorLine", { bg = "#EDEDED" })
-                vim.api.nvim_set_hl(0, "StatusLine", { bg = "#E9E9E9" })
-                vim.api.nvim_set_hl(0, "Visual", { bg = "#DBE9F9" })
-                vim.api.nvim_set_hl(0, "LineNr", { fg = "#BABBBD" })
-                vim.api.nvim_set_hl(0, "Comment", { fg = "#A2A2A2" })
-                vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#E6E6E6" })
-                vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
-                vim.api.nvim_set_hl(0, "Type", { bold = true })
-                vim.api.nvim_set_hl(0, "TabLineFill", { bg = "#FFFFFF" })
-                vim.api.nvim_set_hl(0, "TabLine", { fg = "#A5ABB0", bg = "#E6E6E6" })
-                vim.api.nvim_set_hl(0, "TabLineSel", { bg = "#D6CAC4" })
-                vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "#EEEEEE" })
-                vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "#EEEEEE" })
-                vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { bg = "#EEEEEE" })
-                vim.api.nvim_set_hl(0, "NeoTreeCursorLine", { bg = "#E1E4E6" })
-                vim.api.nvim_set_hl(0, "IblIndent", { fg = "#DDDDDD" })
-                vim.api.nvim_set_hl(0, "IblScope", { fg = "#898989" })
-                vim.api.nvim_set_hl(0, "WhichKeyFloat", { bg = "#EFEFEF" })
-            else
-                -- vim.o.background = "dark"
-                -- vim.cmd("colorscheme zenbones")
-                vim.api.nvim_set_hl(0, "Type", { bold = true })
-                vim.api.nvim_set_hl(0, "TabLineFill", { bg = "#171210" })
-                vim.api.nvim_set_hl(0, "TabLine", { bg = "#302825" })
-                vim.api.nvim_set_hl(0, "TabLineSel", { bg = "#453C39" })
-                vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "#241E1B" })
-                vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "#241E1B" })
-                vim.api.nvim_set_hl(0, "NeoTreeCursorLine", { bg = "#3A322D" })
-                vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { bg = "#241E1B" })
-                vim.api.nvim_set_hl(0, "Cursor", { bg = "#FFC22D" })
-                vim.api.nvim_set_hl(0, "lCursor", { bg = "#FFC22D" })
-                vim.opt.guicursor:append("a:Cursor/lCursor")
-            end
-            -- vim.cmd("colorscheme zenbones")
-        end,
     },
     --: }}}
 
     --: monokai-pro {{{
     {
         "loctvl842/monokai-pro.nvim",
-        -- lazy = duringDayTime,
-        -- priority = 1000,
-        config = function()
-            require("monokai-pro").setup({
-                -- transparent_background = true,
-                background_clear = {
-                    "float_win",
-                    "telescope",
-                    -- "neo-tree",
-                },
-                override = function()
-                    local acc_bg = "#221F22"
-                    -- local background = "#2A2A2A"
-                    local background = "#1D1F21"
-                    return {
-                        Normal = { bg = background },
-                        NormalNC = { bg = background },
-                        FoldColumn = { fg = "#535353", bg = acc_bg },
-                        Folded = { bg = "NONE" },
-                        CursorLine = { bg = "#29272A" },
-                        CursorLineFold = { fg = "#4f4e4f", bg = acc_bg },
-                        CursorLineNr = { bg = "#29272A", bold = true },
-                        LineNr = { fg = "#676667", bg = background },
-                        SignColumn = { bg = background },
-                        LspReferenceText = { bg = "#3F3F3F" },
-                        LspReferenceRead = { bg = "#3F3F3F" },
-                        LspReferenceWrite = { bg = "#3F3F3F" },
-                        NormalFloat = { bg = "NONE" },
-                        FloatBorder = { bg = "NONE" },
-                        -- StatusLine = { bg = acc_bg },
-                        StatusLine = { bg = "#111314" },
-                        WinSeparator = { fg = "#111314" },
-                        NeoTreeNormal = { bg = "#111314" },
-                        NeoTreeNormalNC = { bg = "#111314" },
-                        NeoTreeWinSeparator = { bg = "#111314" },
-                        NeoTreeEndOfBuffer = { bg = "#111314" },
-                    }
-                end,
-            })
-
-            -- if not duringDayTime then
-            --     vim.cmd([[colorscheme monokai-pro]])
-            -- end
-            -- vim.cmd([[colorscheme monokai-pro]])
-        end,
-    },
-    --: }}}
-
-    --: gruber-darker {{{
-    {
-        "blazkowolf/gruber-darker.nvim",
-        -- lazy = duringDayTime,
-        -- lazy = false,
-        -- priority = 1000,
-        -- opts = {
-        --     bold = false,
-        --     italic = {
-        --         comments = true,
-        --         strings = true,
-        --         operators = true,
-        --         folds = true,
-        --     },
-        -- },
-        config = function()
-            -- vim.cmd.colorscheme("gruber-darker")
-            vim.api.nvim_set_hl(0, "Folded", { bg = "#181818" })
-            vim.api.nvim_set_hl(0, "LspReferenceText", { bg = "#4F4E4F" })
-            vim.api.nvim_set_hl(0, "LspReferenceRead", { bg = "#4F4E4F" })
-            vim.api.nvim_set_hl(0, "LspReferenceWrite", { bg = "#4F4E4F" })
-        end,
-    },
-    --: }}}
-
-    --: github {{{
-    {
-        "projekt0n/github-nvim-theme",
-        -- lazy = duringDayTime,
-        -- priority = 1000,
+        lazy = true,
         opts = {
-            groups = {
-                -- Custom duskfox with black background
-                github_dark = {
-                    Normal = { bg = "#0D1117" }, -- Non-current windows
-                    NormalNC = { bg = "#0D1117" }, -- Non-current windows
-                    CursorLine = { bg = "#161B22" },
-                    Folded = { bg = "#161B22" },
-                    -- Cursor = { fg = "#0D1117", bg = "#2F81F7" },
-                    -- lCursor = { fg = "#0D1117", bg = "#2F81F7" },
-                    Cursor = { fg = "#0D1117", bg = "#FFDD33" },
-                    lCursor = { fg = "#0D1117", bg = "#FFDD33" },
-                    NormalFloat = { bg = "NONE" },
-                    FloatBorder = { fg = "#30363D", bg = "NONE" },
-                    StatusLine = { bg = "#181E27" },
-                    NeogitHunkHeader = { bg = "#161B22" },
-                    NeogitHunkHeaderHighlight = { bg = "#161B22" },
-                    NeogitDiffAddHighlight = { bg = "#161B22" },
-                    NeogitDiffDeleteHighlight = { bg = "#161B22" },
-                    NeogitDiffContextHighlight = { bg = "#161B22" },
-                    NeoTreeNormal = { bg = "#04070D" },
-                    NeoTreeNormalNC = { bg = "#04070D" },
-                },
+            -- transparent_background = true,
+            background_clear = {
+                "float_win",
+                "telescope",
+                -- "neo-tree",
             },
+            override = function()
+                local acc_bg = "#221F22"
+                -- local background = "#2A2A2A"
+                local background = "#1D1F21"
+                return {
+                    Normal = { bg = background },
+                    NormalNC = { bg = background },
+                    FoldColumn = { fg = "#535353", bg = acc_bg },
+                    Folded = { bg = "NONE" },
+                    CursorLine = { bg = "#29272A" },
+                    CursorLineFold = { fg = "#4f4e4f", bg = acc_bg },
+                    CursorLineNr = { bg = "#29272A", bold = true },
+                    LineNr = { fg = "#676667", bg = background },
+                    SignColumn = { bg = background },
+                    LspReferenceText = { bg = "#3F3F3F" },
+                    LspReferenceRead = { bg = "#3F3F3F" },
+                    LspReferenceWrite = { bg = "#3F3F3F" },
+                    NormalFloat = { bg = "NONE" },
+                    FloatBorder = { bg = "NONE" },
+                    -- StatusLine = { bg = acc_bg },
+                    StatusLine = { bg = "#111314" },
+                    WinSeparator = { fg = "#111314" },
+                    NeoTreeNormal = { bg = "#111314" },
+                    NeoTreeNormalNC = { bg = "#111314" },
+                    NeoTreeWinSeparator = { bg = "#111314" },
+                    NeoTreeEndOfBuffer = { bg = "#111314" },
+                }
+            end,
         },
-        config = function(_, opts)
-            require("github-theme").setup(opts)
-            -- if not duringDayTime then
-            --     -- vim.cmd("colorscheme github_dark_colorblind")
-            --     vim.cmd("colorscheme github_dark")
-            --     vim.opt.guicursor:append("a:Cursor/lCursor")
-            -- end
-        end,
-    },
-    -- : }}}
-
-    --: nightlfy {{{
-    {
-        "bluz71/vim-nightfly-colors",
-        name = "nightfly",
-        -- lazy = duringDayTime,
-        -- lazy = false,
-        -- priority = 1000,
-        config = function()
-            if not duringDayTime then
-                vim.o.background = "dark"
-                -- vim.cmd("colorscheme nightfly")
-                vim.api.nvim_set_hl(0, "Cursor", { bg = "#FFC22D" })
-                vim.api.nvim_set_hl(0, "lCursor", { bg = "#FFC22D" })
-                vim.opt.guicursor:append("a:Cursor/lCursor")
-            end
-        end,
     },
     --: }}}
 
     --: Onedark.nvim {{{
     {
         "navarasu/onedark.nvim",
-        -- lazy = not duringDayTime,
-        -- priority = 1000,
-        config = function()
-            require("onedark").setup({
-                style = "dark",
-                highlights = {
-                    IblScope = { fg = "#626873" },
-                },
-            })
-            -- if duringDayTime then
-            --     require("onedark").load()
-            --     vim.api.nvim_set_hl(0, "Cursor", { bg = "#528BFE" })
-            --     vim.api.nvim_set_hl(0, "lCursor", { bg = "#528BFE" })
-            --     vim.opt.guicursor:append("a:Cursor/lCursor")
-            -- end
-        end,
+        lazy = true,
+        opts = {
+            style = "darker",
+            highlights = {
+                IblScope = { fg = "#626873" },
+            },
+        },
     },
     --: }}}
 
     --: rose-pine {{{
     {
         "rose-pine/neovim",
+        lazy = true,
         name = "rose-pine",
-        -- lazy = duringDayTime,
-        -- lazy = false,
-        -- priority = 1000,
         opts = function()
             return {
                 --- @usage 'main' | 'moon'
@@ -343,14 +163,6 @@ return {
                     IblScope = { fg = "#525069" },
                 },
             }
-        end,
-        config = function(_, opts)
-            require("rose-pine").setup(opts)
-            -- vim.cmd("colorscheme rose-pine")
-            -- if not duringDayTime then
-            --     require("rose-pine").setup(opts)
-            --     vim.cmd("colorscheme rose-pine")
-            -- end
         end,
     },
     --: }}}
