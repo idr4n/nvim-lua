@@ -22,6 +22,7 @@ opt.expandtab = true -- convert tabs to spaces
 opt.hlsearch = true -- highlight all matches on previous search pattern
 opt.incsearch = true
 opt.ignorecase = true -- ignore case in search patterns
+opt.laststatus = 3 -- global statusline
 opt.linebreak = true -- Break lines in spaces not in the middle of a word
 opt.mouse = "a" -- allow the mouse to be used in neovim
 opt.number = true -- set numbered lines
@@ -56,18 +57,6 @@ vim.cmd([[set iskeyword+=-]])
 -- vim.o.fillchars = [[msgsep: ,eob: ,diff:╱,fold: ,foldopen:,foldclose:,]]
 vim.o.fillchars = [[msgsep: ,eob: ,vert: ,diff:╱,fold: ,foldopen:,foldsep: ,foldclose:,]]
 vim.o.listchars = [[tab:──,trail:·,nbsp:␣,precedes:«,extends:»,]]
-
--- Format
-vim.cmd([[
-  augroup Format
-    autocmd!
-    " don't add comment in new line
-    " au FileType * set fo-=o fo-=r
-		au FileType * set fo-=o
-    " global statusline at the bottom instead of one for each window
-    au BufNewFile,BufRead * set laststatus=3
-  augroup END
-]])
 
 -- Highlight on Yank
 vim.cmd([[
