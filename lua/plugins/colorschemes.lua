@@ -9,8 +9,9 @@ return {
                 -- style = "night",
                 -- transparent = true,
                 styles = {
-                    functions = "italic",
+                    -- functions = { italic = true },
                     -- sidebars = "transparent",
+                    keywords = { italic = false },
                     floats = "transparent",
                 },
                 on_highlights = function(hl, c)
@@ -77,6 +78,7 @@ return {
             style = "darker",
             highlights = {
                 IblScope = { fg = "#626873" },
+                NeoTreeWinSeparator = { bg = "none" },
             },
         },
     },
@@ -93,7 +95,7 @@ return {
                 dark_variant = "moon",
                 bold_vert_split = false,
                 dim_nc_background = false,
-                disable_background = true,
+                disable_background = false,
                 disable_float_background = false,
                 disable_italics = false,
 
@@ -172,9 +174,9 @@ return {
         "catppuccin/nvim",
         name = "catppuccin",
         opts = function()
-            local ucolors = require("catppuccin.utils.colors")
+            -- local ucolors = require("catppuccin.utils.colors")
             local cp = require("catppuccin.palettes").get_palette()
-            local acc_bg = "#1E2030"
+            local acc_bg = "#181825"
             -- local acc_bg = cp.none
             -- local win_sep = "#24273A"
             return {
@@ -202,7 +204,7 @@ return {
                     ["@namespace"] = { fg = cp.blue, style = {} },
                     TSNamespace = { fg = cp.blue, style = {} },
                     Folded = { bg = "NONE" },
-                    StatusLine = { bg = acc_bg },
+                    -- StatusLine = { bg = acc_bg },
                     NeoTreeNormal = { bg = acc_bg },
                     NeoTreeNormalNC = { bg = acc_bg },
                     NotifyBackground = { bg = "#000000" },
