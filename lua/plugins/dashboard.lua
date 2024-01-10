@@ -35,8 +35,9 @@ return {
           { action = "Rg",                                                             desc = " Find text",       icon = "󰺮 ", key = "r" },
           { action = "lcd ~/.config/nvim | echo 'Directory:' getcwd()",                desc = " Config",          icon = " ", key = "c" },
           { action = "lcd ~/dotfiles | echo 'Directory:' getcwd()",                    desc = " Dotfiles",        icon = " ", key = "d" },
-          { action = "lua require('plugins.telescope.workdirs-picker').set_workdir()", desc = " Open directory",  icon = " ", key = "s" },
+          { action = 'lua require("persistence").load()',                              desc = " Restore Session", icon = " ", key = "s" },
           { action = "Lazy",                                                           desc = " Lazy",            icon = "󰒲 ", key = "l" },
+          { action = "lua require('plugins.telescope.workdirs-picker').set_workdir()", desc = " Open directory",  icon = " ", key = "S" },
           { action = "qa",                                                             desc = " Quit",            icon = " ", key = "q" },
         },
                     footer = function()
