@@ -20,6 +20,7 @@ return {
                     -- hl.IblIndent = { fg = "#303342" }
                     hl.IblScope = { fg = "#634E89" }
                     hl.NeoTreeCursorLine = { bg = "#2F344C" }
+                    hl.MiniIndentscopeSymbol = { fg = "#646FA1" }
                     -- hl.TelescopeBorder = { fg = c.purple, bg = c.none }
                 end,
             }
@@ -172,6 +173,7 @@ return {
     --: Catppuccin {{{
     {
         "catppuccin/nvim",
+        lazy = true,
         name = "catppuccin",
         opts = function()
             -- local ucolors = require("catppuccin.utils.colors")
