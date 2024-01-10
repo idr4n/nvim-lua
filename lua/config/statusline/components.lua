@@ -43,32 +43,31 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 local mode_color = {
-    -- ["n"] = "%#StatusNormal#",
-    ["n"] = "%#StatusNormalBg# NOR %#SLNormal#",
-    -- ["i"] = "%#StatusInsert#",
-    ["i"] = "%#StatusInsertBg# INS %#SLNormal#",
-    -- ["ic"] = "%#StatusInsert#",
-    ["ic"] = "%#StatusInsertBg# INS %#SLNormal#",
-    -- ["v"] = "%#StatusVisual#",
-    ["v"] = "%#StatusVisualBg# VIS %#SLNormal#",
-    -- ["V"] = "%#StatusVisual#",
-    ["V"] = "%#StatusVisualBg# VIS %#SLNormal#",
-    -- ["\22"] = "%#StatusVisual#",
-    ["\22"] = "%#StatusVisualBg#",
-    -- ["R"] = "%#StatusReplace#",
-    ["R"] = "%#StatusReplaceBg# REP %#SLNormal#",
-    -- ["c"] = "%#StatusCommand#",
-    ["c"] = "%#StatusCommandBg# COM %#SLNormal#",
-    -- ["t"] = "%#StatusCommand#",
-    ["t"] = "%#StatusCommandBg# TER %#SLNormal#",
+    ["n"] = { "NOR", "%#StatusNormal#", "%#StatusNormalBg#" },
+    ["i"] = { "INS", "%#StatusInsert#", "%#StatusInsertBg#" },
+    ["ic"] = { "INS", "%#StatusInsert#", "%#StatusInsertBg#" },
+    ["v"] = { "VIS", "%#StatusVisual#", "%#StatusVisualBg#" },
+    ["V"] = { "VIS", "%#StatusVisual#", "%#StatusVisualBg#" },
+    ["\22"] = { "VBL", "%#StatusVisual#", "%#StatusVisualBg#" },
+    ["\22s"] = { "VBL", "%#StatusVisual#", "%#StatusVisualBg#" },
+    ["R"] = { "REP", "%#StatusReplace#", "%#StatusReplaceBg#" },
+    ["c"] = { "COM", "%#StatusCommand#", "%#StatusCommandBg#" },
+    ["t"] = { "TER", "%#StatusCommand#", "%#StatusCommandBg#" },
 }
 
+---@return string
+---@param name string
+function M.decorator(name)
+    return "%#StatusNormalBg# " .. name .. " %#SLNormal#"
+end
+
 function M.mode()
-    if mode_color[vim.fn.mode()] then
-        -- return mode_color[vim.fn.mode()] .. "▍ ⬤ "
-        return mode_color[vim.fn.mode()]
+    local mode_hl = mode_color[vim.fn.mode()]
+    local text = " "
+    if mode_color then
+        return mode_hl[3] .. text .. "%#SLNormal#"
     else
-        return "%#StatusNormal#" .. "▍ ⬤ "
+        return mode_color["n"][3] .. text .. "%#SLNormal#"
     end
 end
 
@@ -115,7 +114,7 @@ function M.get_fileinfo()
 
     if vim.bo.modified then
         filename = (vim.fn.expand("%:p:h:t")) .. "/" .. vim.fn.expand("%:t")
-        return (icon .. "%#SLModified#" .. "  " .. filename)
+        return icon .. "%#SLModified#" .. "  " .. filename .. "%#SLNormal#"
     end
 
     return filename
@@ -136,7 +135,7 @@ end
 
 function M.get_position()
     -- return "%#SLNormal#%l:%c " .. progress()
-    return "%#SLNormal#%3l:%-3c " .. progress()
+    return "%#SLNormal#%3l:%-2c " .. progress()
 end
 
 function M.total_lines()
@@ -176,7 +175,7 @@ function M.lsp_running()
         return ""
     end
 
-    if #vim.lsp.buf_get_clients() > 0 then
+    if #vim.lsp.get_clients() > 0 then
         return " " .. "%#SLFileType#󱓞 " .. "%#SLNormal#" .. " "
     else
         return ""
@@ -202,10 +201,24 @@ function M.colemak()
     return _G.colemak and " %#SLBufNr#󰯳 󰌌 %#SLNormal#  " or ""
 end
 
+function M.status_command()
+    local command = require("noice").api.status.command.get()
+    local mode = require("noice").api.status.mode.get()
+    -- local command_str = command and " %#SLNormal#" .. command .. "%#SLNormal#" or ""
+    local command_str = command and " %#SLNormal#" .. string.format("%-3s", command) .. "%#SLNormal#" or ""
+    local mode_str = mode and "  %#SLWords#" .. mode .. "%#SLNormal#" or ""
+    return command_str .. mode_str
+end
+
 function M.git_status()
     local function getGitChanges()
         local gitsigns = vim.b.gitsigns_status_dict
         -- local git_icon = "  "
+        local hunks = require("gitsigns").get_hunks()
+        local nhunks = nil
+        if hunks then
+            nhunks = #hunks
+        end
         local changes = 0
         local status = ""
         if gitsigns then
@@ -213,7 +226,7 @@ function M.git_status()
         end
         if changes > 0 then
             -- status = string.format("%s%d", git_icon, changes)
-            status = string.format("%d ", changes)
+            status = string.format("%d", changes) .. (nhunks and string.format("(%d) ", nhunks) or " ")
         end
         return status
     end
@@ -255,20 +268,20 @@ function M.get_lsp_diagnostic()
     local hints = ""
 
     if result.errors > 0 then
-        errors = " " .. " " .. result.errors
+        errors = " " .. " " .. result.errors
     end
     if result.warnings > 0 then
-        warnings = " " .. " " .. result.warnings
+        warnings = " " .. " " .. result.warnings
     end
     if result.info > 0 then
-        info = " " .. " " .. result.info
+        info = " " .. " " .. result.info
     end
     if result.hints > 0 then
-        hints = " " .. " " .. result.hints
+        hints = " " .. " " .. result.hints
     end
 
     if vim.bo.modifiable then
-        if #vim.lsp.buf_get_clients() == 0 then
+        if #vim.lsp.get_clients() == 0 then
             return ""
         elseif total == 0 then
             return " %#SLDiagnosticOK#" .. "  "
@@ -283,6 +296,16 @@ function M.get_lsp_diagnostic()
         end
     else
         return ""
+    end
+end
+
+function M.scrollbar()
+    local sbar = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" }
+    local curr_line = vim.api.nvim_win_get_cursor(0)[1]
+    local lines = vim.api.nvim_buf_line_count(0)
+    local i = math.floor((curr_line - 1) / lines * #sbar) + 1
+    if sbar[i] then
+        return "%#StatusCommand#" .. string.rep(sbar[i], 2) .. "%#SLNormal# "
     end
 end
 
