@@ -2,7 +2,12 @@
 
 -- Shorten function name
 local command = vim.api.nvim_create_user_command
-local keymap = require("config.mappings").keymap
+local opts = { noremap = true, silent = true }
+local keymap = function(mode, keys, cmd, options)
+    options = options or {}
+    options = vim.tbl_deep_extend("force", opts, options)
+    vim.api.nvim_set_keymap(mode, keys, cmd, options)
+end
 
 -- :SublimeMerge
 command("SublimeMerge", function()
@@ -52,7 +57,7 @@ vim.api.nvim_create_autocmd("BufRead", {
     pattern = { "*.tex", "*.md" },
     callback = function()
         vim.cmd("setlocal spell spelllang=en_us")
-        vim.cmd("ZenMode")
+        -- vim.cmd("ZenMode")
     end,
     group = "tex-md_group",
 })
@@ -120,13 +125,13 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     group = "LspFormatting",
 })
 
--- Alpha
-vim.api.nvim_create_augroup("alpha", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "alpha" },
-    command = "nnoremap <silent> <buffer> - :bwipe <Bar> Dirvish<CR>",
-    group = "alpha",
-})
+-- -- Alpha
+-- vim.api.nvim_create_augroup("alpha", { clear = true })
+-- vim.api.nvim_create_autocmd("FileType", {
+--     pattern = { "alpha" },
+--     command = "nnoremap <silent> <buffer> - :bwipe <Bar> Dirvish<CR>",
+--     group = "alpha",
+-- })
 
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
@@ -234,7 +239,7 @@ vim.api.nvim_create_augroup("OnVimEnter", { clear = true })
 vim.api.nvim_create_autocmd("VimEnter", {
     pattern = { "*" },
     callback = function()
-        printDir()
+        -- printDir()
         saveDir()
     end,
     group = "OnVimEnter",

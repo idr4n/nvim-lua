@@ -18,24 +18,21 @@ require("lazy").setup({
         { import = "plugins" },
     },
     defaults = { lazy = true },
-    install = { colorscheme = { "tokyonight", "monokai-pro" } },
+    install = { colorscheme = { "tokyonight" } },
     --
     change_detection = {
         enabled = true,
         notify = false,
     },
     dev = { path = "~/other_repos", patterns = { "idr4n" } },
+    checker = { enabled = true },
     performance = {
-        cache = {
-            enabled = true,
-            -- disable_events = {},
-        },
         rtp = {
             disabled_plugins = {
                 "gzip",
                 -- "matchit",
                 -- "matchparen",
-                -- "netrwPlugin",
+                "netrwPlugin",
                 "rplugin",
                 "tarPlugin",
                 "tohtml",
