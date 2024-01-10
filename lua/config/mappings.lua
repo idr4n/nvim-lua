@@ -74,6 +74,14 @@ keymap("n", "k", "gk")
 keyset("i", "<C-O>", "<C-o>O", { desc = "Insert line above" })
 --: }}}
 
+--: insert line below or above {{{
+-- source: https://arc.net/l/quote/bexrxjgz
+-- stylua: ignore
+keymap("n", "]<space>", "<cmd>call append(line('.'),   repeat([''], v:count1))<cr>", { desc = "Insert line below" })
+-- stylua: ignore
+keymap("n", "[<space>", "<cmd>call append(line('.')-1, repeat([''], v:count1))<cr>", { desc = "Insert line above" })
+--: }}}
+
 --: Quicksave command {{{
 keyset({ "n", "i", "x", "s" }, "<C-S>", "<cmd>w<CR><esc>", { desc = "Save file" })
 keyset("n", "<leader>fs", "<cmd>w<CR>", { desc = "Save file" })
@@ -168,7 +176,7 @@ keyset("n", "N", "Nzzzv")
 --: }}}
 
 --: set current file's directory as working directory {{{
-keymap("n", "<leader>cd", "<cmd>cd %:p:h<CR>", { desc = "Set directory as wd" })
+-- keymap("n", "<leader>cd", "<cmd>cd %:p:h<CR>", { desc = "Set directory as wd" })
 --: }}}
 
 --: Better window navigation {{{
@@ -192,7 +200,7 @@ keymap(
     "<cmd>nohlsearch|diffupdate|normal! <C-L><CR>",
     { desc = "Redraw / clear hlsearch / diff update" }
 )
-keymap("n", "<esc>", "<esc><cmd>noh<cr>", { desc = "No highlight escape" })
+keymap("n", "<esc>", "<esc><cmd>noh<cr><cmd>redrawstatus<cr>", { desc = "No highlight escape" })
 --: }}}
 
 --: home row goto end and start of line (same as in Helix editor) {{{
@@ -210,7 +218,7 @@ keymap("v", ">", ">gv")
 -- toggle comment in normal mode
 keyset("n", "<C-c>", function()
     return vim.v.count == 0 and "<Plug>(comment_toggle_linewise_current)" or "<Plug>(comment_toggle_linewise_count)"
-end, { expr = true })
+end, { expr = true, desc = "Comment line" })
 keyset("n", "<C-b>", "<Plug>(comment_toggle_blockwise_current)")
 
 -- toggle comment using C-/
@@ -220,8 +228,8 @@ keyset("n", "<C-b>", "<Plug>(comment_toggle_blockwise_current)")
 -- vim.keymap.set("x", "<C-_>", "<Plug>(comment_toggle_linewise_visual)")
 
 -- toggle comment in visual mode
-vim.keymap.set("x", "<C-c>", "<Plug>(comment_toggle_linewise_visual)")
-vim.keymap.set("x", "<C-b>", "<Plug>(comment_toggle_blockwise_visual)")
+keyset("x", "<C-c>", "<Plug>(comment_toggle_linewise_visual)", { desc = "Comment line(s)" })
+keyset("x", "<C-b>", "<Plug>(comment_toggle_blockwise_visual)", { desc = "Comment block" })
 --: }}}
 
 --: Duplicate and comment selection {{{
@@ -235,6 +243,24 @@ keymap("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move line down" })
 keymap("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move line up" })
 keymap("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move line down" })
 keymap("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move line up" })
+--: }}}
+
+--: diagnostics {{{
+-- souce: https://github.com/LazyVim/LazyVim
+local diagnostic_goto = function(next, severity)
+    local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+    severity = severity and vim.diagnostic.severity[severity] or nil
+    return function()
+        go({ severity = severity })
+    end
+end
+keyset("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+keyset("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
+keyset("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
+keyset("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
+keyset("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
+keyset("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
+keyset("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 --: }}}
 
 --: paste and replace selection {{{
@@ -256,7 +282,7 @@ keyset("v", "<leader>X", [[y:%s/<C-r>0/<C-r>0/gI<Left><Left><Left>]], { desc = "
 --: }}}
 
 --: Explorer (netrw) {{{
-keymap("n", "<leader>oe", ":Explor<cr>", { desc = "Netrw" })
+-- keymap("n", "<leader>oe", ":Explor<cr>", { desc = "Netrw" })
 --: }}}
 
 --: Replace the easy-clip plugin {{{
@@ -267,7 +293,7 @@ keymap("n", "<leader>Y", '"+Y', { noremap = false, desc = "Yank to clipboard lin
 keymap("n", "d", '"_d')
 keymap("n", "D", '"_D')
 keymap("v", "d", '"_d')
-keyset("n", "gm", "m")
+keyset("n", "gm", "m", { desc = "Add mark" })
 keymap("", "m", "d")
 keymap("", "<leader>m", '"+d', { desc = "Cut to clipboard" })
 keymap("n", "x", '"_x')
@@ -338,8 +364,3 @@ end, {})
 keymap("n", "<leader>tC", ":ColemakToggle<cr>", { desc = "Colemak Layout" })
 
 --: }}}
-
-local M = {}
-M.keymap = keymap
-M.keyset = keyset
-return M
