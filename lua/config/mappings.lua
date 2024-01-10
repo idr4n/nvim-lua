@@ -107,6 +107,8 @@ keymap("n", "gcy", "gcc:t.<cr>gcc", { noremap = false, desc = "Duplicate-comment
 -- keymap("n", "<S-w>", ":bnext<CR>")
 -- keymap("n", "<S-q>", ":bprevious<CR>")
 keymap("n", "ga", ":b#<CR>zz", { desc = "Last buffer" })
+keymap("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+keymap("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 --: }}}
 
 --: Using Bbye plugin to close the current buffer {{{

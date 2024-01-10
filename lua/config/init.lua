@@ -26,7 +26,7 @@ require("config.commands")
 require("config.lazy")
 
 --: load colorscheme
-require("tokyonight").load()
+-- require("tokyonight").load()
 -- vim.cmd("colorscheme kanagawa")
 -- require("onedark").load()
 -- vim.cmd("colorscheme rose-pine")
@@ -35,6 +35,7 @@ require("tokyonight").load()
 -- vim.cmd("colorscheme catppuccin-macchiato")
 -- vim.cmd("colorscheme catppuccin-mocha")
 
+-- stylua: ignore
 if vim.g.colors_name == "default" or vim.g.colors_name == nil then
     local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
     -- local diff_changed = vim.api.nvim_get_hl(0, { name = "DiffChange" })
@@ -52,4 +53,6 @@ if vim.g.colors_name == "default" or vim.g.colors_name == nil then
     -- vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#4F5258" })
     vim.api.nvim_set_hl(0, "IblIndent", { fg = "#323539" })
     vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#51555B" })
+    vim.api.nvim_set_hl(0, "CursorLine", { bg = "#212226" })
+    vim.api.nvim_set_hl( 0, "Comment", vim.tbl_extend("force", vim.api.nvim_get_hl(0, { name = "Comment" }), { italic = true }))
 end
