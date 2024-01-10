@@ -27,7 +27,10 @@ return {
     {
         "NvChad/nvim-colorizer.lua",
         -- enabled = false,
-        event = "BufReadPre",
+        -- event = "BufReadPre",
+        init = function()
+            require("util").lazy_load("nvim-colorizer.lua")
+        end,
         keys = {
             { ",c", "<cmd>ColorizerToggle<cr>", noremap = true, silent = true },
         },
@@ -479,7 +482,10 @@ return {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
         -- enabled = false,
-        event = { "BufReadPre", "BufNewFile" },
+        -- event = { "BufReadPre", "BufNewFile" },
+        init = function()
+            require("util").lazy_load("indent-blankline.nvim")
+        end,
         opts = {
             indent = {
                 char = "│",
