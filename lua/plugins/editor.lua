@@ -287,7 +287,8 @@ return {
         branch = "v3.x",
         -- stylua: ignore
         keys = {
-            { "<leader>e", ":Neotree reveal left toggle<CR>", noremap = true, silent = true, desc = "Toggle Neo-Tree" },
+            { "<leader>e", ":Neotree reveal show left toggle<CR>", noremap = true, silent = true, desc = "Toggle Neo-Tree" },
+            { "<leader>ng", function() require("neo-tree.command").execute({ source = "git_status", toggle = true }) end, desc = "Neo-tree Git", },
             { "<leader>nt", ":Neotree reveal left toggle<CR>", noremap = true, silent = true, desc = "Toggle Neo-Tree" },
             { "<leader>nf", ":Neotree float reveal toggle<CR>", noremap = true, silent = true, desc = "Neo-tree Float" },
             { "<leader>nb", ":Neotree toggle show buffers right<CR>", noremap = true, silent = true, desc = "Neo-tree Buffers" },
@@ -380,11 +381,6 @@ return {
                 hijack_netrw_behavior = "open_current",
                 use_libuv_file_watcher = true,
             },
-            git_status = {
-                window = {
-                    position = "float",
-                },
-            },
             event_handlers = {
                 {
                     event = "neo_tree_buffer_enter",
@@ -404,6 +400,7 @@ return {
                 "filesystem",
                 "buffers",
                 "document_symbols",
+                "git_status",
             },
             document_symbols = {
                 follow_cursor = true,
@@ -447,6 +444,20 @@ return {
                 delete = "ds", -- Delete surrounding
                 replace = "cs", -- Replace surrounding
             },
+        },
+    },
+    --: }}}
+
+    --: persistence (sessions) {{{
+    {
+        "folke/persistence.nvim",
+        event = "BufReadPre",
+        opts = { options = vim.opt.sessionoptions:get() },
+        -- stylua: ignore
+        keys = {
+            { "<leader>qs", function() require("persistence").load() end, desc = "Restore Session" },
+            { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
+            { "<leader>qd", function() require("persistence").stop() end, desc = "Don't Save Current Session" },
         },
     },
     --: }}}
