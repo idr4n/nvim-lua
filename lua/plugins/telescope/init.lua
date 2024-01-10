@@ -26,9 +26,7 @@ return {
         {
             "<leader>sb",
             function()
-                require("telescope.builtin").current_buffer_fuzzy_find(
-                    require("telescope.themes").get_ivy({ previewer = false })
-                )
+                require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_ivy())
             end,
             noremap = true,
             silent = true,
@@ -201,7 +199,7 @@ return {
                 },
 
                 winblend = 0,
-                -- sorting_strategy = "ascending",
+                sorting_strategy = "ascending",
                 layout_strategy = "flex",
 
                 layout_config = {
@@ -209,30 +207,30 @@ return {
                     flex = {
                         flip_columns = 120,
                     },
-                    -- vertical = {
-                    --     preview_cutoff = 40,
-                    --     prompt_position = "top",
-                    --     preview_height = 0.4,
-                    --     width = function(_, max_columns, _)
-                    --         return math.min(max_columns, 90)
-                    --     end,
-                    --
-                    --     height = function(_, _, max_lines)
-                    --         return math.min(max_lines, 40)
-                    --     end,
-                    -- },
-                    -- horizontal = {
-                    --     -- width = 0.9,
-                    --     width = function(_, max_columns, _)
-                    --         return math.min(max_columns, 140)
-                    --     end,
-                    --     -- height = 0.7,
-                    --     height = function(_, _, max_lines)
-                    --         return math.min(max_lines, 35)
-                    --     end,
-                    --     prompt_position = "top",
-                    --     preview_width = 0.54,
-                    -- },
+                    vertical = {
+                        preview_cutoff = 40,
+                        prompt_position = "top",
+                        preview_height = 0.4,
+                        -- width = function(_, max_columns, _)
+                        --     return math.min(max_columns, 90)
+                        -- end,
+
+                        -- height = function(_, _, max_lines)
+                        --     return math.min(max_lines, 40)
+                        -- end,
+                    },
+                    horizontal = {
+                        -- width = 0.9,
+                        -- width = function(_, max_columns, _)
+                        --     return math.min(max_columns, 140)
+                        -- end,
+                        height = 0.78,
+                        -- height = function(_, _, max_lines)
+                        --     return math.min(max_lines, 35)
+                        -- end,
+                        prompt_position = "top",
+                        preview_width = 0.54,
+                    },
                 },
 
                 mappings = {

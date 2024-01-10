@@ -38,7 +38,10 @@ return {
         "nvim-treesitter/nvim-treesitter",
         version = false,
         build = ":TSUpdate",
-        event = { "BufReadPost", "BufNewFile", "VeryLazy" },
+        init = function()
+            require("util").lazy_load("nvim-treesitter")
+        end,
+        -- event = { "BufReadPost", "BufNewFile", "VeryLazy" },
         cmd = { "TSUpdateSync", "TSUpdate", "TSInstall", "TSUninstall" },
         opts = {
             autotag = {

@@ -89,9 +89,9 @@ return {
             -- calculate window width and height in columns
             local function calcWinSize()
                 return {
-                    width = math.min(math.ceil(vim.fn.winwidth(0) * 0.95), 170),
+                    width = math.min(math.ceil(vim.fn.winwidth(0) * 0.8), 170),
                     -- height = math.min(math.ceil(vim.fn.winheight(0) * 0.8), 30),
-                    height = 0.9,
+                    height = 0.8,
                 }
             end
 
@@ -142,7 +142,7 @@ return {
                 command! -bang -nargs=* Rg
                 \ call fzf#vim#grep('rg --column --hidden --line-number --no-heading --color=always --smart-case -g "!{node_modules,.git,**/_build,deps,.elixir_ls,**/target,**/assets/node_modules,**/assets/vendor,**/.next,**/.vercel,**/build,**/out}" '
                 \ . (len(<q-args>) > 0 ? <q-args> : '""'), 0,
-                \ fzf#vim#with_preview({'options': ['--delimiter=:', '--nth=2..', '--layout=default', '--info=inline']}), <bang>0)
+                \ fzf#vim#with_preview({'options': ['--delimiter=:', '--nth=2..', '--layout=reverse', '--info=inline']}), <bang>0)
             ]])
 
             -- add preview to Blines
@@ -156,6 +156,23 @@ return {
     },
     --: }}},
 
+    --: flash {{{
+    {
+        "folke/flash.nvim",
+        enabled = false,
+        event = "VeryLazy",
+        opts = {},
+        -- stylua: ignore
+        keys = {
+            { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+            -- { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+            { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+            { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+            { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+        },
+    },
+    --: }}}
+
     --: gitsigns {{{
     {
         "lewis6991/gitsigns.nvim",
@@ -163,7 +180,7 @@ return {
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = function()
             -- redefine gitsigns colors
-            local linenr_hl = vim.api.nvim_get_hl(0, { name = "LineNr" })
+            -- local linenr_hl = vim.api.nvim_get_hl(0, { name = "LineNr" })
             -- vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#73DACA", bg = linenr_hl.background })
             -- vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#FF9E64", bg = linenr_hl.background })
             -- vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#F7768E", bg = linenr_hl.background })
@@ -171,7 +188,7 @@ return {
 
             return {
                 signcolumn = true,
-                _extmark_signs = false,
+                -- _extmark_signs = false,
                 numhl = false,
                 signs = {
                     add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
@@ -227,7 +244,7 @@ return {
                             gs.next_hunk()
                         end)
                         return "<Ignore>"
-                    end, { expr = true })
+                    end, { expr = true, desc = "Next hunk" })
 
                     map("n", "[c", function()
                         if vim.wo.diff then
@@ -237,7 +254,7 @@ return {
                             gs.prev_hunk()
                         end)
                         return "<Ignore>"
-                    end, { expr = true })
+                    end, { expr = true, desc = "Previous hunk" })
 
                     -- Actions
                     map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", { desc = "Stage hunk" })
@@ -282,6 +299,14 @@ return {
                 desc = "Doc Symbols",
             },
         },
+        init = function()
+            if vim.fn.argc(-1) == 1 then
+                local stat = vim.loop.fs_stat(vim.fn.argv(0))
+                if stat and stat.type == "directory" then
+                    require("neo-tree")
+                end
+            end
+        end,
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
@@ -352,7 +377,7 @@ return {
                     },
                 },
                 follow_current_file = { enabled = true },
-                hijack_netrw_behavior = "disabled",
+                hijack_netrw_behavior = "open_current",
                 use_libuv_file_watcher = true,
             },
             git_status = {
@@ -385,6 +410,44 @@ return {
             },
         },
         -- config = require("setup.neo-tree"),
+    },
+    --: }}}
+
+    --: Mini.ai {{{
+    {
+        "echasnovski/mini.ai",
+        event = "VeryLazy",
+    },
+    --: }}}
+
+    --: mini.surround {{{
+    {
+        "echasnovski/mini.surround",
+        keys = function(_, keys)
+            -- Populate the keys based on the user's options
+            local plugin = require("lazy.core.config").spec.plugins["mini.surround"]
+            local opts = require("lazy.core.plugin").values(plugin, "opts", false)
+            local mappings = {
+                { opts.mappings.add, desc = "Add surrounding", mode = { "n", "v" } },
+                { opts.mappings.delete, desc = "Delete surrounding" },
+                { opts.mappings.find, desc = "Find right surrounding" },
+                { opts.mappings.find_left, desc = "Find left surrounding" },
+                { opts.mappings.highlight, desc = "Highlight surrounding" },
+                { opts.mappings.replace, desc = "Replace surrounding" },
+                { opts.mappings.update_n_lines, desc = "Update `MiniSurround.config.n_lines`" },
+            }
+            mappings = vim.tbl_filter(function(m)
+                return m[1] and #m[1] > 0
+            end, mappings)
+            return vim.list_extend(mappings, keys)
+        end,
+        opts = {
+            mappings = {
+                add = "S", -- Add surrounding
+                delete = "ds", -- Delete surrounding
+                replace = "cs", -- Replace surrounding
+            },
+        },
     },
     --: }}}
 
@@ -666,22 +729,25 @@ return {
                 signature = { enabled = true },
                 progress = { enabled = true },
             },
-            -- cmdline = {
-            --     opts = {
-            --         -- -- remover border
-            --         border = { style = "none", padding = { 1, 2 } },
-            --     },
-            -- },
+            cmdline = {
+                opts = {
+                    -- -- remover border
+                    border = { style = "none", padding = { 0, 1 } },
+                    -- border = { padding = { 0, 2 } },
+                },
+            },
             -- -- if want to position cmdline and search popup in the top instead
-            -- views = {
-            --     cmdline_popup = {
-            --         position = { row = 0, col = "50%" },
-            --         size = { width = "97%" },
-            --     },
-            -- },
+            views = {
+                cmdline_popup = {
+                    -- position = { row = "0%", col = "50%" },
+                    position = { row = "99%", col = "50%" },
+                    size = { width = "100%" },
+                    -- size = { width = "98%" },
+                },
+            },
             popupmenu = { backend = "cmp" },
             presets = {
-                bottom_search = true,
+                -- bottom_search = true,
                 command_palette = true,
                 inc_rename = true,
                 long_message_to_split = true,
@@ -1278,7 +1344,7 @@ return {
     {
         "justinmk/vim-dirvish",
         event = "VimEnter",
-        -- enabled = false,
+        enabled = false,
         config = function()
             vim.g.dirvish_git_show_ignored = 1
 
@@ -1357,18 +1423,9 @@ return {
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
-        opts = {
-            window = {
-                padding = { 1, 1, 1, 1 }, -- extra window padding [top, right, bottom, left]
-            },
-            layout = {
-                height = { min = 4, max = 20 },
-                width = { min = 10, max = 40 },
-            },
-        },
         config = function(_, opts)
             vim.o.timeout = true
-            vim.o.timeoutlen = 900
+            vim.o.timeoutlen = 300
             local wk = require("which-key")
             wk.setup(opts)
             local keymaps_n = {
@@ -1623,7 +1680,19 @@ return {
         },
         opts = function()
             local bufferline = require("bufferline")
+            local hl_separator_bg = { bg = { attribute = "bg", highlight = "StatusLine" } }
+            local hl_separator_fg = { fg = { attribute = "bg", highlight = "StatusLine" } }
+            -- local hl_separator_fg = { fg = "#1E2030" }
+            -- local hl_separator_bg = { bg = "#1E2030" }
             return {
+                highlights = {
+                    separator = hl_separator_fg,
+                    tab_separator = hl_separator_fg,
+                    tab_separator_selected = hl_separator_fg,
+                    separator_selected = hl_separator_fg,
+                    separator_visible = hl_separator_fg,
+                    fill = hl_separator_bg,
+                },
                 options = {
                     buffer_close_icon = "",
                     diagnostics = "nvim_lsp",
