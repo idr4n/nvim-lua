@@ -745,13 +745,14 @@ return {
     --: statuscol {{{
     {
         "luukvbaal/statuscol.nvim",
-        -- enabled = false,
+        enabled = false,
         event = { "BufReadPost", "BufNewFile" },
+        -- branch = "0.10",
         opts = function()
             local builtin = require("statuscol.builtin")
             return {
                 -- relculright = true,
-                ft_ignore = { "toggleterm" },
+                ft_ignore = { "toggleterm", "neogitstatus" },
                 bt_ignore = { "terminal" },
                 segments = {
                     -- { text = { builtin.foldfunc, "" }, click = "v:lua.ScFa" },
