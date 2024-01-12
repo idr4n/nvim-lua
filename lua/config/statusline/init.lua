@@ -13,7 +13,7 @@ local colors = {
     red = isDark and "#DE6E7C" or "#D73A4A",
     blue = isDark and "#65bcff" or "#0A407F",
     -- insert = isDark and "#AE7CFF" or "#8754FF",
-    insert = isDark and "#C3E88D" or "#8754FF",
+    insert = isDark and "#C882E7" or "#8754FF",
     select = isDark and "#FCA7EA" or "#2188FF",
 }
 
@@ -42,11 +42,10 @@ vim.api.nvim_set_hl(0, "StatusCommandBg", { bg = colors.yellow, fg = statusline_
 vim.api.nvim_set_hl(0, "StatusDir", { fg = string_hl.fg, bg = statusline_hl.bg, bold = true })
 vim.api.nvim_set_hl(0, "SLFileName", { fg = statusline_hl.fg, bg = statusline_hl.bg, bold = true })
 vim.api.nvim_set_hl(0, "SLFileType", { fg = keyword_hl.fg, bg = statusline_hl.bg, bold = true })
-vim.api.nvim_set_hl(0, "SLWords", { fg = colors.orange, bg = statusline_hl.bg })
 vim.api.nvim_set_hl(0, "StatusIconLock", { fg = colors.yellow, bg = statusline_hl.bg })
 vim.api.nvim_set_hl(0, "SLNormal", { fg = statusline_hl.fg, bg = statusline_hl.bg })
 -- vim.api.nvim_set_hl(0, "SLNormalBg", { bg = statusline_hl.bg })
-vim.api.nvim_set_hl(0, "SLBufNr", { fg = comment_hl.fg, bg = statusline_hl.bg })
+vim.api.nvim_set_hl(0, "SLBufNr", { fg = "#4E546B", bg = statusline_hl.bg })
 vim.api.nvim_set_hl(0, "SLModified", { fg = "#ff7eb6", bg = statusline_hl.bg, bold = true })
 vim.api.nvim_set_hl(0, "SLMatches", { fg = "#2c2a2e", bg = "#3ddbd9" })
 vim.api.nvim_set_hl(0, "SLDiagnosticOK", { fg = colors.green, bg = statusline_hl.bg })
@@ -81,7 +80,7 @@ function Status_line()
     statusline = statusline .. c.get_filetype()
     statusline = statusline .. " " .. c.get_position()
     statusline = statusline .. " " .. c.scrollbar()
-    statusline = statusline .. " " .. c.total_lines()
+    -- statusline = statusline .. " " .. c.total_lines()
     statusline = statusline .. " " .. c.get_lsp_diagnostic()
     statusline = statusline .. " " .. c.mode()
 

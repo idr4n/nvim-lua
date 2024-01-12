@@ -62,9 +62,9 @@ function M.decorator(name)
 end
 
 function M.mode()
-    local mode_hl = mode_color[vim.fn.mode()]
+    local mode_hl = mode_color[vim.fn.mode()] or nil
     local text = " "
-    if mode_color then
+    if mode_hl then
         return mode_hl[3] .. text .. "%#SLNormal#"
     else
         return mode_color["n"][3] .. text .. "%#SLNormal#"
@@ -110,11 +110,17 @@ function M.get_fileinfo()
 
     local icon = file_icon() .. " "
     -- local icon = "%#SLNormal#" .. file_icon() .. " "
-    filename = icon .. "%#StatusDir#" .. (vim.fn.expand("%:p:h:t")) .. "/" .. "%#SLFileName#" .. vim.fn.expand("%:t")
+    filename = icon
+        .. "%#StatusDir#"
+        .. (vim.fn.expand("%:p:h:t"))
+        .. "/"
+        .. "%#SLFileName#"
+        .. vim.fn.expand("%:t")
+        .. "%#SLNormal#"
 
     if vim.bo.modified then
         filename = (vim.fn.expand("%:p:h:t")) .. "/" .. vim.fn.expand("%:t")
-        return icon .. "%#SLModified#" .. "  " .. filename .. "%#SLNormal#"
+        return icon .. "%#SLModified#" .. filename .. "  " .. "%#SLNormal#"
     end
 
     return filename
@@ -176,7 +182,7 @@ function M.lsp_running()
     end
 
     if #vim.lsp.get_clients() > 0 then
-        return " " .. "%#SLFileType#󱓞 " .. "%#SLNormal#" .. " "
+        return " " .. "%#SLBufNr#󱓞 " .. "%#SLNormal#" .. " "
     else
         return ""
     end
@@ -185,9 +191,9 @@ end
 function M.get_words()
     if vim.bo.filetype == "md" or vim.bo.filetype == "text" or vim.bo.filetype == "markdown" then
         if vim.fn.wordcount().visual_words == nil then
-            return " " .. "%#SLWords#" .. " " .. tostring(vim.fn.wordcount().words) .. "%#SLNormal#" .. " "
+            return " " .. "%#SLBufNr#" .. " " .. tostring(vim.fn.wordcount().words) .. "%#SLNormal#" .. " "
         end
-        return " " .. "%#SLWords#" .. " " .. tostring(vim.fn.wordcount().visual_words) .. "%#SLNormal#" .. " "
+        return " " .. "%#SLBufNr#" .. " " .. tostring(vim.fn.wordcount().visual_words) .. "%#SLNormal#" .. " "
     else
         return ""
     end
@@ -205,8 +211,8 @@ function M.status_command()
     local command = require("noice").api.status.command.get()
     local mode = require("noice").api.status.mode.get()
     -- local command_str = command and " %#SLNormal#" .. command .. "%#SLNormal#" or ""
-    local command_str = command and " %#SLNormal#" .. string.format("%-3s", command) .. "%#SLNormal#" or ""
-    local mode_str = mode and "  %#SLWords#" .. mode .. "%#SLNormal#" or ""
+    local command_str = command and " %#SLBufNr#" .. string.format("%-3s", command) .. "%#SLNormal#" or ""
+    local mode_str = mode and "  %#SLBufNr#" .. mode .. "%#SLNormal#" or ""
     return command_str .. mode_str
 end
 
@@ -233,20 +239,19 @@ function M.git_status()
 
     local branch = (vim.b.gitsigns_status_dict or { head = "" })
     -- local git_icon = "%#SLModified#" .. "󰊢 " .. "%#SLFileName#"
-    local git_icon = (getGitChanges() ~= "") and " " or " "
+    -- local git_icon = (getGitChanges() ~= "") and " " or " "
+    local git_icon = " "
     local is_head_empty = (branch.head ~= "")
     -- return ((is_head_empty and string.format("(λ • #%s%s)", (branch.head or ""), getGitChanges())) or "")
-    return ((is_head_empty and string.format(" %s%s%s ", git_icon, getGitChanges(), (branch.head or ""))) or "")
+    return ((is_head_empty and string.format(" %s%s %s ", git_icon, (branch.head or ""), getGitChanges())) or "")
 end
 
 function M.get_filetype()
     local filetype = vim.bo.filetype
     local lang_v = _G.lang_versions[filetype]
-    -- local lang_v = ""
     local version = lang_v and lang_v or ""
     filetype = filetype:sub(1, 1):upper() .. filetype:sub(2)
-    -- return " " .. "%#SLFileType#" .. filetype .. "%#SLNormal#" .. " "
-    return " " .. "%#SLFileType#" .. filetype .. " " .. version .. "%#SLNormal#" .. ""
+    return " " .. "%#SLBufNr#" .. filetype .. " " .. version .. "%#SLNormal#" .. ""
 end
 
 function M.get_lsp_diagnostic()

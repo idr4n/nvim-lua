@@ -26,7 +26,7 @@ require("config.commands")
 require("config.lazy")
 
 --: load colorscheme
--- require("tokyonight").load()
+require("tokyonight").load()
 -- vim.cmd("colorscheme kanagawa")
 -- require("onedark").load()
 -- vim.cmd("colorscheme rose-pine")

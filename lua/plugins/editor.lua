@@ -40,7 +40,7 @@ return {
             user_default_options = {
                 RGB = true, -- #RGB hex codes
                 RRGGBB = true, -- #RRGGBB hex codes
-                names = true, -- "Name" codes like Blue
+                names = false, -- "Name" codes like Blue
                 RRGGBBAA = true, -- #RRGGBBAA hex codes
                 AARRGGBB = true, -- 0xAARRGGBB hex codes
                 rgb_fn = true, -- CSS rgb() and rgba() functions
@@ -50,8 +50,8 @@ return {
                 tailwind = "lsp",
                 -- Available modes: foreground, background
                 -- Available modes for `mode`: foreground, background,  virtualtext
-                -- mode = "background", -- Set the display mode.
-                mode = "virtualtext", -- Set the display mode.
+                mode = "background", -- Set the display mode.
+                -- mode = "virtualtext", -- Set the display mode.
                 virtualtext = "■",
             },
         },
@@ -316,7 +316,7 @@ return {
         opts = {
             close_if_last_window = true,
             popup_border_style = "rounded",
-            enable_diagnostics = false,
+            enable_diagnostics = true,
             default_component_configs = {
                 indent = {
                     padding = 1,
@@ -326,7 +326,7 @@ return {
                     folder_closed = "",
                     folder_open = "",
                     folder_empty = "",
-                    default = "",
+                    -- default = "󰈚",
                 },
                 git_status = {
                     symbols = {
@@ -343,7 +343,7 @@ return {
                 },
             },
             window = {
-                -- width = 35,
+                width = 35,
                 mappings = {
                     ["o"] = "open",
                     ["h"] = function(state)
@@ -566,8 +566,8 @@ return {
                 tab_char = "│",
             },
             scope = {
-                enabled = false,
-                show_start = false,
+                enabled = true,
+                show_start = true,
                 show_end = false,
                 include = {
                     node_type = {
@@ -637,13 +637,21 @@ return {
                 },
             },
         },
+        config = function(_, opts)
+            require("ibl").setup(opts)
+            for i = 1, 41 do
+                local hl_group = string.format("@ibl.scope.underline.%s", i)
+                -- vim.api.nvim_set_hl(0, hl_group, { link = "LspReferenceText" })
+                vim.api.nvim_set_hl(0, hl_group, { bg = "#363C58" })
+            end
+        end,
     },
     --: }}},
 
     --: mini.indentscope with animations {{{
     {
         "echasnovski/mini.indentscope",
-        -- enabled = false,
+        enabled = false,
         event = { "BufReadPre", "BufNewFile" },
         opts = {
             -- symbol = "▏",
@@ -1541,32 +1549,6 @@ return {
     },
     --: }}},
 
-    --: incline {{{
-    {
-        "b0o/incline.nvim",
-        enabled = false,
-        event = "BufReadPre",
-        config = function()
-            local colors = require("tokyonight.colors").setup()
-            require("incline").setup({
-                highlight = {
-                    groups = {
-                        InclineNormal = { guifg = "#9d7cd8", guibg = colors.black },
-                        InclineNormalNC = { guibg = colors.blue7, guifg = colors.fg },
-                    },
-                },
-                hide = { cursorline = "focused_win", only_win = true },
-                window = { margin = { vertical = 0, horizontal = 1 } },
-                render = function(props)
-                    local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
-                    local icon, color = require("nvim-web-devicons").get_icon_color(filename)
-                    return { { icon, guifg = color }, { " " }, { filename } }
-                end,
-            })
-        end,
-    },
-    --: }}},
-
     --: tabout {{{
     {
         "abecodes/tabout.nvim",
@@ -1708,6 +1690,12 @@ return {
                     buffer_close_icon = "",
                     diagnostics = "nvim_lsp",
                     always_show_bufferline = false,
+                    diagnostics_indicator = function(_, _, diag)
+                        local ret = diag.error and (" " .. diag.error)
+                            or (diag.warning and (" " .. diag.warning))
+                            or diag.hint and (" " .. diag.hint)
+                        return vim.trim(ret)
+                    end,
                     offsets = {
                         {
                             filetype = "neo-tree",
@@ -1720,7 +1708,7 @@ return {
                         bufferline.style_preset.no_italic,
                         bufferline.style_preset.no_bold,
                     },
-                    separator_style = "slope",
+                    separator_style = "slant", -- slope is also nice
                 },
             }
         end,
