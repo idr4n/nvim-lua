@@ -255,6 +255,7 @@ function M.get_filetype()
 end
 
 function M.get_lsp_diagnostic()
+    local icons = require("util").diagnostic_icons
     local function get_severity(s)
         return #vim.diagnostic.get(0, { severity = s })
     end
@@ -273,16 +274,16 @@ function M.get_lsp_diagnostic()
     local hints = ""
 
     if result.errors > 0 then
-        errors = " " .. " " .. result.errors
+        errors = " " .. icons.Error .. result.errors
     end
     if result.warnings > 0 then
-        warnings = " " .. " " .. result.warnings
+        warnings = " " .. icons.Warn .. result.warnings
     end
     if result.info > 0 then
-        info = " " .. " " .. result.info
+        info = " " .. icons.Info .. result.info
     end
     if result.hints > 0 then
-        hints = " " .. " " .. result.hints
+        hints = " " .. icons.Hint .. result.hints
     end
 
     if vim.bo.modifiable then

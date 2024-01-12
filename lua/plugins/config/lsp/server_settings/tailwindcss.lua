@@ -7,7 +7,7 @@ return {
             eruby = "erb",
         },
     },
-    root_dir = require("lspconfig").util.root_pattern(
+    root_dir = vim.g.root_pattern(
         "tailwind.config.js",
         "tailwind.config.cjs",
         "tailwind.config.mjs",

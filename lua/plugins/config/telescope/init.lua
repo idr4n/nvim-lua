@@ -1,7 +1,4 @@
 return {
-    "nvim-telescope/telescope.nvim",
-    cmd = "Telescope",
-    event = "BufReadPost",
     keys = {
         -- {
         --     "<leader><space>",
@@ -34,7 +31,7 @@ return {
         },
         { "<leader>ot", "<cmd>Telescope resume<cr>", noremap = true, silent = true, desc = "Telescope Resume" },
         {
-            "<leader>,",
+            "s",
             function()
                 -- require("telescope.builtin").buffers(require("telescope.themes").get_ivy({
                 require("telescope.builtin").buffers(require("telescope.themes").get_dropdown({
@@ -141,7 +138,7 @@ return {
         },
         {
             "<leader>zw",
-            "<cmd>lua require('plugins.telescope.workdirs-picker').set_workdir()<CR>",
+            "<cmd>lua require('plugins.config.telescope.workdirs-picker').set_workdir()<CR>",
             noremap = true,
             silent = true,
             desc = "Change workdir",
@@ -168,17 +165,6 @@ return {
             end,
             desc = "Telescope folder_browser",
         },
-    },
-    dependencies = {
-        "nvim-lua/popup.nvim",
-        "nvim-lua/plenary.nvim",
-        { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-        {
-            "benfowler/telescope-luasnip.nvim",
-            module = "telescope._extensions.luasnip", -- if you wish to lazy-load
-        },
-        { "nvim-telescope/telescope-ui-select.nvim" },
-        "debugloop/telescope-undo.nvim",
     },
     opts = function()
         local actions = require("telescope.actions")
@@ -276,7 +262,7 @@ return {
                         ["<esc>"] = actions.close,
                         ["<C-c>"] = actions.close,
                         ["<C-g>"] = actions.close,
-                        ["<leader>,"] = actions.close,
+                        ["s"] = actions.close,
                         ["<CR>"] = actions.select_default,
                         ["f"] = actions.select_default,
                         ["l"] = actions.select_default,

@@ -108,6 +108,13 @@ M.nyoom_icons = {
     Variable = "  ",
 }
 
+M.diagnostic_icons = {
+    Error = " ",
+    Warn = " ",
+    Info = " ",
+    Hint = " ",
+}
+
 --: Statuscolumn. Source: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/util/ui.lua
 ---@alias Sign {name:string, text:string, texthl:string, priority:number}
 -- Returns a list of regular and extmark signs sorted by priority (low to high)

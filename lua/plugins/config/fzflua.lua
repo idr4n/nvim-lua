@@ -36,7 +36,7 @@ end
 -- @args - table that takes into consideration two possible fields:
 -- new_tab: bool - if changing working directory in a new tab
 -- nvim_tmux: bool - if changing working directory in a new tab
-function M.workdirs(args)
+local function workdirs(args)
     args = args or {}
 
     -- workdirs.lua returns a table of workdirs
@@ -131,5 +131,77 @@ function M.workdirs(args)
 
     fzf_lua.fzf_exec(fzf_fn, opts)
 end
+
+M.opts = {
+    winopts = {
+        height = 0.45,
+        width = 1,
+        row = 1,
+        border = { "─", "─", "─", " ", "", "", "", " " },
+        preview = {
+            vertical = "up:40%",
+            horizontal = "right:54%",
+            flip_columns = 120,
+            delay = 60,
+            scrollbar = false,
+            hidden = "hidden",
+        },
+    },
+    -- winopts_fn = function()
+    --     -- smaller width if neovim win has over 80 columns
+    --     local max_width = 140 / vim.o.columns
+    --     local max_height = 30 / vim.o.lines
+    --     -- return { width = vim.o.columns > 140 and max_width or 1 }
+    --     return {
+    --         width = math.min(max_width, 1),
+    --         height = math.min(max_height, 1),
+    --     }
+    -- end,
+    fzf_opts = {
+        -- ["--layout"] = "default",
+        ["--layout"] = "reverse",
+    },
+    fzf_colors = {
+        ["fg"] = { "fg", "CursorLine" },
+        ["bg"] = { "bg", "Normal" },
+        ["hl"] = { "fg", "Comment" },
+        -- ["fg+"] = { "fg", "ModeMsg" },
+        ["fg+"] = { "fg", "Normal" },
+        ["bg+"] = { "bg", "CursorLine" },
+        ["hl+"] = { "fg", "Statement" },
+        ["info"] = { "fg", "PreProc" },
+        ["border"] = { "fg", "FZFLuaBorder" },
+        ["prompt"] = { "fg", "Conditional" },
+        ["pointer"] = { "fg", "Exception" },
+        ["marker"] = { "fg", "Keyword" },
+        ["spinner"] = { "fg", "Label" },
+        ["header"] = { "fg", "Comment" },
+        ["gutter"] = { "bg", "Normal" },
+    },
+    files = {
+        cmd = "rg --files --hidden --follow --no-ignore -g '!{node_modules,.git,**/_build,deps,.elixir_ls,**/target,**/assets/node_modules,**/assets/vendor,**/.next,**/.vercel,**/build,**/out}'",
+        prompt = "  ",
+    },
+    grep = {
+        rg_opts = "--hidden --column --follow --line-number --no-heading "
+            .. "--color=always --smart-case -g '!{node_modules,.git,**/_build,deps,.elixir_ls,**/target,**/assets/node_modules,**/assets/vendor,**/.next,**/.vercel,**/build,**/out}'",
+        prompt = "  ",
+    },
+    blines = { prompt = "  " },
+    keymap = {
+        builtin = {
+            ["<C-L>"] = "toggle-preview",
+            ["<S-down>"] = "preview-page-down",
+            ["<S-up>"] = "preview-page-up",
+        },
+        fzf = {
+            ["ctrl-l"] = "toggle-preview",
+            ["ctrl-q"] = "select-all+accept", -- send all to quick list
+        },
+    },
+    -- needed for kitty for better icon rendering
+    file_icon_padding = " ",
+    nbsp = "\xc2\xa0",
+}
 
 return M

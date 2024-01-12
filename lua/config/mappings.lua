@@ -300,10 +300,9 @@ keymap("", "m", "d")
 keymap("", "<leader>m", '"+d', { desc = "Cut to clipboard" })
 keymap("n", "x", '"_x')
 keymap("n", "X", '"_X')
-keymap("n", "c", '"_c')
+keyset({ "n", "v", "o" }, "c", '"_c')
 keymap("n", "C", '"_C')
 keymap("v", "x", '"_x')
-keymap("v", "c", '"_c')
 --: }}}
 
 --: Other mappings {{{
