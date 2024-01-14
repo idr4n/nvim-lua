@@ -1,32 +1,32 @@
 return {
-    -- spec = {
-    --     { import = "plugins" },
-    -- },
-    defaults = { lazy = true },
-    install = { colorscheme = { "tokyonight" } },
-    --
-    change_detection = {
-        enabled = true,
-        notify = false,
+  -- spec = {
+  --     { import = "plugins" },
+  -- },
+  defaults = { lazy = true },
+  install = { colorscheme = { "tokyonight" } },
+  --
+  change_detection = {
+    enabled = true,
+    notify = false,
+  },
+  dev = { path = "~/other_repos", patterns = { "idr4n" } },
+  checker = { enabled = true },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        -- "matchit",
+        -- "matchparen",
+        "netrwPlugin",
+        "rplugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
     },
-    dev = { path = "~/other_repos", patterns = { "idr4n" } },
-    checker = { enabled = true },
-    performance = {
-        rtp = {
-            disabled_plugins = {
-                "gzip",
-                -- "matchit",
-                -- "matchparen",
-                "netrwPlugin",
-                "rplugin",
-                "tarPlugin",
-                "tohtml",
-                "tutor",
-                "zipPlugin",
-            },
-        },
-    },
-    ui = {
-        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-    },
+  },
+  ui = {
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+  },
 }

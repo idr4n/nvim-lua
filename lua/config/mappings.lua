@@ -1,16 +1,16 @@
 --: helpers {{{
 --: https://github.com/nvim-telescope/telescope.nvim/issues/1923 {{{
 function vim.getVisualSelection()
-    vim.cmd('noau normal! "vy"')
-    local text = tostring(vim.fn.getreg("v"))
-    vim.fn.setreg("v", {})
+  vim.cmd('noau normal! "vy"')
+  local text = tostring(vim.fn.getreg("v"))
+  vim.fn.setreg("v", {})
 
-    text = string.gsub(text, "\n", "")
-    if #text > 0 then
-        return text
-    else
-        return ""
-    end
+  text = string.gsub(text, "\n", "")
+  if #text > 0 then
+    return text
+  else
+    return ""
+  end
 end
 --: }}}
 
@@ -20,15 +20,15 @@ local opts = { noremap = true, silent = true }
 
 --: Shorten key mappings function names {{{
 local keymap = function(mode, keys, cmd, options)
-    options = options or {}
-    options = vim.tbl_deep_extend("force", opts, options)
-    vim.api.nvim_set_keymap(mode, keys, cmd, options)
+  options = options or {}
+  options = vim.tbl_deep_extend("force", opts, options)
+  vim.api.nvim_set_keymap(mode, keys, cmd, options)
 end
 
 local keyset = function(modes, keys, cmd, options)
-    options = options or {}
-    options = vim.tbl_deep_extend("force", opts, options)
-    vim.keymap.set(modes, keys, cmd, options)
+  options = options or {}
+  options = vim.tbl_deep_extend("force", opts, options)
+  vim.keymap.set(modes, keys, cmd, options)
 end
 --: }}}
 
@@ -160,7 +160,7 @@ keymap("n", "<leader>tw", "<cmd>set wrap!<cr>", { desc = "Line wrap" })
 
 --: toggle line numbers {{{
 keyset("n", "<leader>tn", function()
-    vim.cmd([[
+  vim.cmd([[
         set invnumber
         set invrelativenumber
     ]])
@@ -197,10 +197,10 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>")
 
 --: Clear search highlight {{{
 keymap(
-    "n",
-    "<leader>tr",
-    "<cmd>nohlsearch|diffupdate|normal! <C-L><CR>",
-    { desc = "Redraw / clear hlsearch / diff update" }
+  "n",
+  "<leader>tr",
+  "<cmd>nohlsearch|diffupdate|normal! <C-L><CR>",
+  { desc = "Redraw / clear hlsearch / diff update" }
 )
 keymap("n", "<esc>", "<esc><cmd>noh<cr><cmd>redrawstatus<cr>", { desc = "No highlight escape" })
 --: }}}
@@ -219,7 +219,7 @@ keymap("v", ">", ">gv")
 --: Comment {{{
 -- toggle comment in normal mode
 keyset("n", "<C-c>", function()
-    return vim.v.count == 0 and "<Plug>(comment_toggle_linewise_current)" or "<Plug>(comment_toggle_linewise_count)"
+  return vim.v.count == 0 and "<Plug>(comment_toggle_linewise_current)" or "<Plug>(comment_toggle_linewise_count)"
 end, { expr = true, desc = "Comment line" })
 keyset("n", "<C-b>", "<Plug>(comment_toggle_blockwise_current)")
 
@@ -250,11 +250,11 @@ keymap("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move line up" })
 --: diagnostics {{{
 -- souce: https://github.com/LazyVim/LazyVim
 local diagnostic_goto = function(next, severity)
-    local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-    severity = severity and vim.diagnostic.severity[severity] or nil
-    return function()
-        go({ severity = severity })
-    end
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go({ severity = severity })
+  end
 end
 keyset("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 keyset("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
@@ -300,9 +300,11 @@ keymap("", "m", "d")
 keymap("", "<leader>m", '"+d', { desc = "Cut to clipboard" })
 keymap("n", "x", '"_x')
 keymap("n", "X", '"_X')
-keyset({ "n", "v", "o" }, "c", '"_c')
+keymap("", "c", '"_c')
+keymap("n", "cc", '"_cc')
 keymap("n", "C", '"_C')
 keymap("v", "x", '"_x')
+keymap("v", "c", '"_c')
 --: }}}
 
 --: Other mappings {{{
@@ -318,49 +320,49 @@ keymap("i", "<Space>", "<Space><c-g>u")
 
 --: toggle Colemak DH(m) layout keybindings {{{
 vim.api.nvim_create_user_command("ColemakToggle", function()
-    if not colemak then
-        keymap("i", "ne", "<ESC>")
-        keymap("", "n", "j")
-        keymap("", "e", "k")
-        keymap("n", "N", "J")
-        -- keyset({ "n", "o" }, "i", "l")
-        keymap("n", "I", "L")
-        keymap("", "j", "e")
-        keymap("n", "J", "E")
-        keymap("n", "k", "n")
-        keymap("n", "K", "N")
-        -- keyset({ "n", "o" }, "l", "i")
-        keymap("n", "L", "I")
-        keymap("", "m", "h")
-        keymap("", "h", "d")
-        keymap("", "t", "l")
-        keymap("", "gm", "^", { desc = "Go to start of line" })
-        keyset({ "n", "o" }, "gi", "$", { desc = "Go to end of line" })
-        keymap("v", "gi", "$h", { desc = "Go to end of line" })
-        keyset("n", "gl", "`^i", { desc = "Move to the last insertion" })
-        _G.colemak = true
-    else
-        keymap("i", "jk", "<ESC>")
-        keymap("", "n", "n")
-        keymap("", "e", "e")
-        keymap("n", "N", "N")
-        -- keyset({ "n", "o" }, "i", "i")
-        keymap("n", "I", "I")
-        keymap("n", "j", "j")
-        keymap("n", "J", "J")
-        keymap("n", "k", "k")
-        keymap("n", "K", "K")
-        -- keyset({ "n", "o" }, "l", "l")
-        keymap("n", "L", "L")
-        keymap("", "m", "d")
-        keymap("", "h", "h")
-        keymap("", "t", "t")
-        keymap("v", "gl", "$h", { desc = "Go to end of line" })
-        keyset({ "n", "o" }, "gl", "$", { desc = "Go to end of line" })
-        keymap("n", "gi", "`^i", { desc = "Move to the last insertion" })
-        _G.colemak = false
-    end
-    vim.cmd("redrawstatus!")
+  if not colemak then
+    keymap("i", "ne", "<ESC>")
+    keymap("", "n", "j")
+    keymap("", "e", "k")
+    keymap("n", "N", "J")
+    -- keyset({ "n", "o" }, "i", "l")
+    keymap("n", "I", "L")
+    keymap("", "j", "e")
+    keymap("n", "J", "E")
+    keymap("n", "k", "n")
+    keymap("n", "K", "N")
+    -- keyset({ "n", "o" }, "l", "i")
+    keymap("n", "L", "I")
+    keymap("", "m", "h")
+    keymap("", "h", "d")
+    keymap("", "t", "l")
+    keymap("", "gm", "^", { desc = "Go to start of line" })
+    keyset({ "n", "o" }, "gi", "$", { desc = "Go to end of line" })
+    keymap("v", "gi", "$h", { desc = "Go to end of line" })
+    keyset("n", "gl", "`^i", { desc = "Move to the last insertion" })
+    _G.colemak = true
+  else
+    keymap("i", "jk", "<ESC>")
+    keymap("", "n", "n")
+    keymap("", "e", "e")
+    keymap("n", "N", "N")
+    -- keyset({ "n", "o" }, "i", "i")
+    keymap("n", "I", "I")
+    keymap("n", "j", "j")
+    keymap("n", "J", "J")
+    keymap("n", "k", "k")
+    keymap("n", "K", "K")
+    -- keyset({ "n", "o" }, "l", "l")
+    keymap("n", "L", "L")
+    keymap("", "m", "d")
+    keymap("", "h", "h")
+    keymap("", "t", "t")
+    keymap("v", "gl", "$h", { desc = "Go to end of line" })
+    keyset({ "n", "o" }, "gl", "$", { desc = "Go to end of line" })
+    keymap("n", "gi", "`^i", { desc = "Move to the last insertion" })
+    _G.colemak = false
+  end
+  vim.cmd("redrawstatus!")
 end, {})
 keymap("n", "<leader>tC", ":ColemakToggle<cr>", { desc = "Colemak Layout" })
 

@@ -33,6 +33,7 @@ opt.scrolloff = 8 -- Lines of context
 opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
 -- opt.showbreak = "↪ "
 opt.showmode = false -- Don't show mode
+opt.showtabline = 2 -- always show the tabline
 opt.sidescrolloff = 8 -- the same as scrolloff but horizontally
 opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
 opt.smartcase = true -- smart case
@@ -51,7 +52,7 @@ opt.shortmess:append({ W = true, I = true, c = true, C = true })
 opt.nrformats:append("alpha") -- increments letters sequences as well with <c-a>
 
 -- statuscolumn
-opt.statuscolumn = [[%!v:lua.require'util'.statuscolumn()]]
+opt.statuscolumn = [[%!v:lua.require'utils'.statuscolumn()]]
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.cmd([[set iskeyword+=-]])
@@ -72,12 +73,12 @@ vim.cmd([[
 ]])
 
 if vim.fn.exists(vim.g.neovide) then
-    vim.opt.guifont = { "FiraCode Nerd Font", ":h16" }
-    vim.g.neovide_transparency = 0.0
-    vim.g.transparency = 0.97
-    vim.g.transparency = 1
-    vim.g.neovide_background_color = "#000000" .. vim.fn.printf("%x", vim.fn.float2nr(255 * vim.g.transparency))
-    vim.g.neovide_input_macos_alt_is_meta = true
+  vim.opt.guifont = { "FiraCode Nerd Font", ":h16" }
+  vim.g.neovide_transparency = 0.0
+  vim.g.transparency = 0.97
+  vim.g.transparency = 1
+  vim.g.neovide_background_color = "#000000" .. vim.fn.printf("%x", vim.fn.float2nr(255 * vim.g.transparency))
+  vim.g.neovide_input_macos_alt_is_meta = true
 end
 
 -- Explorer (netrw)

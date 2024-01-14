@@ -3,18 +3,18 @@ local appearance = vim.fn.system("defaults read -g AppleInterfaceStyle")
 -- local isDark = appearance:match("^Dark") ~= nil
 local isDark = true
 if vim.fn.has("linux") == 1 then
-    isDark = true
+  isDark = true
 end
 
 local colors = {
-    green = "#4fd6be",
-    orange = "#ff966c",
-    yellow = "#E2B86B",
-    red = isDark and "#DE6E7C" or "#D73A4A",
-    blue = isDark and "#65bcff" or "#0A407F",
-    -- insert = isDark and "#AE7CFF" or "#8754FF",
-    insert = isDark and "#C882E7" or "#8754FF",
-    select = isDark and "#FCA7EA" or "#2188FF",
+  green = "#4fd6be",
+  orange = "#ff966c",
+  yellow = "#E2B86B",
+  red = isDark and "#DE6E7C" or "#D73A4A",
+  blue = isDark and "#65bcff" or "#0A407F",
+  -- insert = isDark and "#AE7CFF" or "#8754FF",
+  insert = isDark and "#C882E7" or "#8754FF",
+  select = isDark and "#FCA7EA" or "#2188FF",
 }
 
 -- local statusline_hl = vim.api.nvim_get_hl(0, { name = "StatusLine" })
@@ -55,46 +55,46 @@ vim.api.nvim_set_hl(0, "SLDiagnosticHint", { fg = hint_hl.fg, bg = statusline_hl
 vim.api.nvim_set_hl(0, "SLDiagnosticError", { fg = error_hl.fg, bg = statusline_hl.bg, bold = true })
 
 function Status_line()
-    local statusline = ""
-    local filetype = vim.bo.filetype
+  local statusline = ""
+  local filetype = vim.bo.filetype
 
-    if filetype == "neo-tree" then
-        local home_dir = os.getenv("HOME")
-        local dir = vim.fn.getcwd()
-        dir = dir:gsub("^" .. home_dir, "~")
-        return c.decorator(dir)
-    end
+  if filetype == "neo-tree" then
+    local home_dir = os.getenv("HOME")
+    local dir = vim.fn.getcwd()
+    dir = dir:gsub("^" .. home_dir, "~")
+    return c.decorator(dir)
+  end
 
-    statusline = c.mode()
-    statusline = statusline .. c.get_fileinfo()
-    statusline = statusline .. "  " .. c.git_status()
-    statusline = statusline .. "%="
-    statusline = statusline .. c.get_search_count()
-    statusline = statusline .. c.maximized_status()
-    statusline = statusline .. "%="
-    statusline = statusline .. c.status_command()
-    statusline = statusline .. " " .. c.colemak()
-    statusline = statusline .. c.lsp_running()
-    statusline = statusline .. c.get_words()
-    statusline = statusline .. c.charcode()
-    statusline = statusline .. c.get_filetype()
-    statusline = statusline .. " " .. c.get_position()
-    statusline = statusline .. " " .. c.scrollbar()
-    -- statusline = statusline .. " " .. c.total_lines()
-    statusline = statusline .. " " .. c.get_lsp_diagnostic()
-    statusline = statusline .. " " .. c.mode()
+  statusline = c.mode()
+  statusline = statusline .. c.get_fileinfo()
+  statusline = statusline .. "  " .. c.git_status()
+  statusline = statusline .. "%="
+  statusline = statusline .. c.get_search_count()
+  statusline = statusline .. c.maximized_status()
+  statusline = statusline .. "%="
+  statusline = statusline .. c.status_command()
+  statusline = statusline .. " " .. c.colemak()
+  statusline = statusline .. c.lsp_running()
+  statusline = statusline .. c.get_words()
+  statusline = statusline .. c.charcode()
+  statusline = statusline .. c.get_filetype()
+  statusline = statusline .. " " .. c.get_position()
+  statusline = statusline .. " " .. c.scrollbar()
+  -- statusline = statusline .. " " .. c.total_lines()
+  statusline = statusline .. " " .. c.get_lsp_diagnostic()
+  statusline = statusline .. " " .. c.mode()
 
-    return statusline
+  return statusline
 end
 
 vim.o.statusline = "%!v:lua.Status_line()"
 
 vim.api.nvim_create_augroup("statusline", { clear = true })
 vim.api.nvim_create_autocmd("DiagnosticChanged", {
-    pattern = { "*" },
-    callback = function()
-        vim.o.statusline = "%!v:lua.Status_line()"
-        -- vim.cmd("redrawstatus")
-    end,
-    group = "statusline",
+  pattern = { "*" },
+  callback = function()
+    vim.o.statusline = "%!v:lua.Status_line()"
+    -- vim.cmd("redrawstatus")
+  end,
+  group = "statusline",
 })

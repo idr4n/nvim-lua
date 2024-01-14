@@ -35,18 +35,17 @@ return {
         },
         cmdline = {
             opts = {
-                -- -- remover border
-                border = { style = "none", padding = { 0, 1 } },
-                -- border = { padding = { 0, 2 } },
+                -- border = { style = "none", padding = { 0, 1 } },
+                border = { style = "none", padding = { 0, 0 } },
             },
         },
         -- -- if want to position cmdline and search popup in the top instead
         views = {
             cmdline_popup = {
-                -- position = { row = "0%", col = "50%" },
-                position = { row = "99%", col = "50%" },
-                size = { width = "100%" },
-                -- size = { width = "98%" },
+                -- position = { row = "99%", col = "50%" },
+                -- size = { width = "100%" },
+                position = { row = "100%", col = "0%" },
+                size = { width = "40%" },
             },
         },
         popupmenu = { backend = "cmp" },
