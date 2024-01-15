@@ -45,7 +45,7 @@ opt.tabstop = 2 -- insert 4 spaces for a tab
 opt.termguicolors = true -- set term gui colors (most terminals support this)
 opt.undofile = true -- enable persistent undo
 opt.updatetime = 300 -- control CursorHold event waiting time (4000ms default)
-opt.wrap = true -- display lines as one long line
+opt.wrap = false -- display lines as one long line
 opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 
 opt.shortmess:append({ W = true, I = true, c = true, C = true })

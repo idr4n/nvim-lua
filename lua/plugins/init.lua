@@ -113,6 +113,14 @@ local plugins = {
   },
   --: }}}
 
+  --: darkplus {{{
+  {
+    "lunarvim/darkplus.nvim",
+    lazy = true,
+  },
+
+  --: }}}
+
   --: dashboard-nvim {{{
   {
     "nvimdev/dashboard-nvim",
@@ -280,8 +288,7 @@ local plugins = {
     "rebelot/heirline.nvim",
     -- enabled = false,
     -- event = "BufEnter",
-    event = "BufReadPost",
-    -- event = "VeryLazy",
+    event = "VeryLazy",
     opts = require("plugins.config.heirline").opts,
   },
   --: }}}
