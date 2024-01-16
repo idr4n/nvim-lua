@@ -27,13 +27,8 @@ local function get_cwd()
   return realpath(vim.loop.cwd()) or ""
 end
 
----@param opts? {relative: "cwd"|"root", modified_hl: string?}
-function M.pretty_dirpath(opts)
-  opts = vim.tbl_extend("force", {
-    relative = "cwd",
-    modified_hl = "Constant",
-  }, opts or {})
-
+---@return fun():string
+function M.pretty_dirpath()
   return function()
     local path = vim.fn.expand("%:p") --[[@as string]]
 
@@ -42,7 +37,7 @@ function M.pretty_dirpath(opts)
     end
     local cwd = get_cwd()
 
-    if opts.relative == "cwd" and path:find(cwd, 1, true) == 1 then
+    if path:find(cwd, 1, true) == 1 then
       path = path:sub(#cwd + 2)
     end
 

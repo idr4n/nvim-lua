@@ -126,13 +126,22 @@ function M.SimpleStatusline(opts)
       -- self.show_more_info = vim.g.show_more_info
     end,
     hl = { fg = "status_fg", bg = "normal_bg" },
+    component.Section({
+      hl = { fg = "stealth", force = true },
+      children = {
+        component.FileNameBlock(),
+      },
+      condition = function(self)
+        return self.show_more_info
+      end,
+    }),
     component.Align,
     component.SearchCount(),
     component.Align,
     component.Section({
       hl = { fg = "stealth" },
       children = {
-        component.GitBranch({ margin = { right = 0 } }),
+        component.GitBranch(),
         component.CharCode(),
         component.Location({ margin = { left = 0 } }),
       },
