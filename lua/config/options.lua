@@ -24,6 +24,7 @@ opt.incsearch = true
 opt.ignorecase = true -- ignore case in search patterns
 opt.laststatus = 3 -- global statusline
 opt.linebreak = true -- Break lines in spaces not in the middle of a word
+opt.list = true -- Show some invisible characters (tabs...
 opt.mouse = "a" -- allow the mouse to be used in neovim
 opt.number = true -- set numbered lines
 opt.pumheight = 10 -- pop up menu height
@@ -60,8 +61,20 @@ vim.cmd([[set iskeyword+=-]])
 -- fill and list chars
 -- vim.o.fillchars = [[msgsep: ,eob: ,horiz: ,vert: ,diff:╱,fold: ,foldopen:,foldsep: ,foldclose:,]]
 -- vim.o.fillchars = [[msgsep: ,eob: ,diff:╱,fold: ,foldopen:,foldclose:,]]
-vim.o.fillchars = [[msgsep: ,eob: ,vert: ,diff:╱,fold: ,foldopen:,foldsep: ,foldclose:,]]
+-- vim.o.fillchars = [[msgsep: ,eob: ,vert: ,diff:╱,fold: ,foldopen:,foldsep: ,foldclose:,]]
 vim.o.listchars = [[tab:──,trail:·,nbsp:␣,precedes:«,extends:»,]]
+opt.fillchars = {
+  foldopen = "",
+  foldclose = "",
+  fold = " ",
+  foldsep = " ",
+  diff = "╱",
+  eob = " ",
+}
+
+if vim.fn.has("nvim-0.10") == 1 then
+  opt.smoothscroll = true
+end
 
 -- Highlight on Yank
 vim.cmd([[
