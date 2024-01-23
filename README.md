@@ -2,15 +2,14 @@
 
 This is my Neovim configuation written in Lua.
 
-![neovim-29-01-23](https://user-images.githubusercontent.com/20104703/215353617-bdfe080a-c970-441d-b43f-c92a19bf1a41.png)
-![Nvim 2023-04-14 at 23 06 40@2x](https://user-images.githubusercontent.com/20104703/232145344-94c51832-1561-444d-9c52-f593816eb987.png)
-![Nvim 2023-04-14 at 23 14 22@2x](https://user-images.githubusercontent.com/20104703/232146316-04a7f321-6bd8-4d56-92da-7df87b16f7e0.png)
+![CleanShot 2024-01-23 at 08 25 03@2x](https://github.com/idr4n/nvim-lua/assets/20104703/1338bf63-4a91-40a7-bf1d-2e9b7eb91660)
+![CleanShot 2024-01-23 at 08 13 14@2x](https://github.com/idr4n/nvim-lua/assets/20104703/29fe2eec-1129-48c1-9ef8-61345ba2079a)
 
 ## Basic setup
 
 - My setup is based, to great extend, on [LazyVim](https://github.com/LazyVim/LazyVim). I have borrowed many things from this config and if I was to start from scratch, I would probably just use LazyVim with some customization.
-- **Preferred themes**: [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim), [catppuccin/nvim](https://github.com/catppuccin/nvim), [projekt0n/github-nvim-theme](https://github.com/projekt0n/github-nvim-theme), and [loctvl842/monokai-pro.nvim](https://github.com/loctvl842/monokai-pro.nvim).
-- **I am using my own statusline**, as an alternative to Lualine, as I found it easier to customize it for my own needs. Lualine, however, is as excellent alternative.
+- **Preferred theme**: [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim), "moon" variant.
+- ~~I am using my own statusline~~ **I am using heirline** for both status and tabline. I found it easier to customize it for my own needs.
 - **Terminals**: WezTerm (alternatively Alacritty and Kitty). To check my terminals configuration, take a look at my [dotfiles](https://github.com/idr4n/.dotfiles) and my [WezTerm configuration](https://github.com/idr4n/wezterm).
 - **Font**: I switch back and forth between [FiraCode](https://github.com/tonsky/FiraCode) and [MonoLisa](https://www.monolisa.dev/).
 - I'm using **[lazy.nvim](https://github.com/folke/lazy.nvim) as my package manager**, which allows me to start Neovim in around 30ms⚡️.
