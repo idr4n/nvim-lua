@@ -193,6 +193,15 @@ vim.api.nvim_create_autocmd("User", {
   end),
 })
 
+-- Wrap text for some markdown files and others
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("md-tex-aucmd", { clear = true }),
+  pattern = { "markdown", "tex" },
+  callback = function()
+    vim.cmd("setlocal wrap")
+  end,
+})
+
 -- Other Commands
 command("YankCwd", function()
   local cwd = vim.fn.getcwd()
