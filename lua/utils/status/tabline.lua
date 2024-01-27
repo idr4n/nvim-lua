@@ -148,7 +148,7 @@ local TablineCloseButton = {
     condition = function(self)
       return not vim.api.nvim_get_option_value("modified", { buf = self.bufnr })
     end,
-    provider = "  ",
+    provider = " 󰅖 ",
     hl = function(self)
       return not self.is_active and { fg = "comment" } or { fg = "#B55A67" }
     end,
