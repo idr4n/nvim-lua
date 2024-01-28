@@ -691,6 +691,21 @@ local plugins = {
   },
   --: }}}
 
+  --: NvTerm {{{
+  {
+    "NvChad/nvterm",
+    event = "BufReadPost",
+    keys = function()
+      return require("plugins.config.nvterm").keys(require("nvterm.terminal"))
+    end,
+    opts = require("plugins.config.nvterm").opts,
+    config = function(_, opts)
+      require("nvterm").setup(opts)
+      require("plugins.config.nvterm").setup()
+    end,
+  },
+  --: }}}
+
   --: nvim-treesitter {{{
   {
     "nvim-treesitter/nvim-treesitter",
@@ -1017,6 +1032,7 @@ local plugins = {
   --: toggleterm {{{
   {
     "akinsho/toggleterm.nvim",
+    enabled = false,
     cmd = { "ToggleTerm" },
     keys = {
       { "<leader>gl", ":LazyGit<cr>", noremap = true, silent = true, desc = "LazyGit" },
@@ -1147,8 +1163,8 @@ local plugins = {
         -- stylua: ignore
         keys = {
             { "<Leader>tm", "<Cmd>lua require('windex').toggle_nvim_maximize()<CR>", desc = "Toggle Maximize Window" },
-            { "<C-Bslash>", "<Cmd>lua require('windex').toggle_terminal()<CR>", mode = { "n", "t" }, desc = "Toggle terminal" },
-            { "<C-n>", "<C-Bslash><C-n>", mode = "t", desc = "Enter normal mode" },
+            -- { "<C-Bslash>", "<Cmd>lua require('windex').toggle_terminal()<CR>", mode = { "n", "t" }, desc = "Toggle terminal" },
+            -- { "<C-n>", "<C-Bslash><C-n>", mode = "t", desc = "Enter normal mode" },
         },
     config = true,
   },
