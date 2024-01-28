@@ -1,3 +1,5 @@
+local diagnostic_icons = require("utils").diagnostic_icons
+
 return {
   keys = {
     {
@@ -6,6 +8,12 @@ return {
       noremap = true,
       silent = true,
       desc = "Toggle Neo-Tree",
+    },
+    {
+      "<C-n>",
+      ":Neotree reveal show left toggle<CR>",
+      silent = true,
+      desc = "Toggle Neo-Tree (No focus)",
     },
     {
       "<leader>ng",
@@ -57,6 +65,14 @@ return {
           unstaged = "",
           staged = "",
           conflict = "",
+        },
+      },
+      diagnostics = {
+        symbols = {
+          hint = diagnostic_icons.Hint,
+          info = diagnostic_icons.Info,
+          warn = diagnostic_icons.Warn,
+          error = diagnostic_icons.Error,
         },
       },
     },
