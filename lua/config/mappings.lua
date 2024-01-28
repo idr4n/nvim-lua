@@ -288,23 +288,28 @@ keyset("v", "<leader>X", [[y:%s/<C-r>0/<C-r>0/gI<Left><Left><Left>]], { desc = "
 --: }}}
 
 --: Replace the easy-clip plugin {{{
-keyset({ "n", "v", "o" }, "<leader>p", '"+p', { desc = "Paste from clipboard" })
-keyset({ "n", "v", "o" }, "<leader>P", '"+P', { desc = "Paste from clipboard" })
-keyset({ "n", "v", "o" }, "<leader>y", '"+y', { desc = "Yank to clipboard" })
-keymap("n", "<leader>Y", '"+Y', { noremap = false, desc = "Yank to clipboard line-end" })
+-- keyset({ "n", "v", "o" }, "<leader>p", '"+p', { desc = "Paste from clipboard" })
+-- keyset({ "n", "v", "o" }, "<leader>P", '"+P', { desc = "Paste from clipboard" })
+-- keyset({ "n", "v", "o" }, "<leader>y", '"+y', { desc = "Yank to clipboard" })
+-- keymap("n", "<leader>Y", '"+Y', { noremap = false, desc = "Yank to clipboard line-end" })
+keymap("x", "p", '"_dP')
 keymap("n", "d", '"_d')
 keymap("n", "D", '"_D')
 keymap("v", "d", '"_d')
 keyset("n", "gm", "m", { desc = "Add mark" })
 keymap("", "m", "d")
+keymap("", "M", "D")
 keymap("", "<leader>m", '"+d', { desc = "Cut to clipboard" })
 keymap("n", "x", '"_x')
 keymap("n", "X", '"_X')
-keymap("", "c", '"_c')
+keyset({ "n", "x", "o" }, "c", '"_c')
 keymap("n", "cc", '"_cc')
+keymap("n", "cl", '"_cl')
+keymap("n", "ce", '"_ce')
+keymap("n", "ci", '"_ci')
 keymap("n", "C", '"_C')
 keymap("v", "x", '"_x')
-keymap("v", "c", '"_c')
+-- keymap("v", "c", '"_c')
 --: }}}
 
 --: Other mappings {{{
