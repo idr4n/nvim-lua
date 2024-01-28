@@ -17,7 +17,8 @@ return {
     insert_mappings = false,
     persist_size = true,
     -- direction = "float",
-    direction = "horizontal",
+    -- direction = "horizontal",
+    direction = "vertical",
     close_on_exit = true,
     shell = vim.o.shell,
     float_opts = {
@@ -53,8 +54,8 @@ return {
       vim.keymap.set("t", "<C-left>", [[<Cmd>wincmd h<CR>]], op)
       vim.keymap.set("t", "<C-down>", [[<Cmd>wincmd j<CR>]], op)
       vim.keymap.set("t", "<C-up>", [[<Cmd>wincmd k<CR>]], op)
-      vim.keymap.set("t", "<M-`>", [[<Cmd>wincmd k<CR>]], op)
-      vim.keymap.set("n", "<M-`>", "<Cmd>wincmd j<CR>")
+      vim.keymap.set("t", "<M-`>", [[<Cmd>wincmd w<CR>]], op)
+      vim.keymap.set("n", "<M-`>", "<Cmd>wincmd w<CR>")
       vim.keymap.set("t", "<C-right>", [[<Cmd>wincmd l<CR>]], op)
       vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], op)
     end

@@ -211,7 +211,7 @@ return {
             --     return math.min(max_lines, 35)
             -- end,
             prompt_position = "top",
-            preview_width = 0.54,
+            -- preview_width = 0.54,
           },
         },
 
