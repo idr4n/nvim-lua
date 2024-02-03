@@ -1,3 +1,5 @@
+local cursorMoveAround = require("utils").CursorMoveAround
+
 --: helpers {{{
 --: https://github.com/nvim-telescope/telescope.nvim/issues/1923 {{{
 function vim.getVisualSelection()
@@ -60,8 +62,8 @@ keymap("i", "<A-f>", "<ESC>lwi")
 --: move around cursor center and top {{{
 keyset("n", "<C-z>", "zz", { desc = "Center around cursor" })
 keyset("i", "<C-z>", "<C-O>zz", { desc = "Center around cursor" })
-keymap("i", "<C-t>", "<C-O>zt")
-keymap("n", "<C-t>", "zt", { desc = "Top current line" })
+-- keymap("i", "<C-t>", "<C-O>zt")
+-- keymap("n", "<C-t>", "zt", { desc = "Top current line" })
 --: }}}
 
 --: Move up and down with wrapped lines {{{
@@ -139,6 +141,7 @@ keymap("n", "g#", "g#N", { desc = "BckSearch not exact" })
 --: select line without end of line {{{
 keymap("n", ",a", "^v$h", { desc = "Select line-no-end" })
 keymap("n", "g;", "^v$h", { desc = "Select line-no-end" })
+keymap("n", "yg", "^v$hy", { desc = "Yank line-no-end" })
 --: }}}
 
 --: paste register for printing (JavaScript) {{{
@@ -185,7 +188,8 @@ keyset("n", "N", "Nzzzv")
 keymap("n", "<C-h>", "<C-w>h")
 keymap("n", "<C-j>", "<C-w>j")
 keymap("n", "<C-k>", "<C-w>k")
-keymap("n", "<C-l>", "<C-w>l")
+-- keymap("n", "<C-l>", "<C-w>l")
+keymap("n", "<C-t>", "<C-w>w")
 --: }}}
 
 --: Resize windows with arrows {{{
@@ -321,6 +325,12 @@ keymap("i", ",", ",<c-g>u")
 keymap("i", ".", ".<c-g>u")
 keymap("i", ";", ";<c-g>u")
 keymap("i", "<Space>", "<Space><c-g>u")
+--: }}}
+
+--: Move cursor around {{{
+vim.keymap.set({ "n", "i", "v" }, "<C-L>", function()
+  cursorMoveAround()
+end, { desc = "Move Around Cursor" })
 --: }}}
 
 --: toggle Colemak DH(m) layout keybindings {{{

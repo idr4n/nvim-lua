@@ -338,4 +338,21 @@ M.lazy_load = function(plugin)
   })
 end
 
+M.CursorMoveAround = function()
+  local win_height = vim.api.nvim_win_get_height(0)
+  local cursor_winline = vim.fn.winline()
+  local middle_line = math.floor(win_height / 2)
+
+  -- if cursor_winline < middle_line then
+  --   vim.cmd("normal! zz")
+  -- else
+  --   vim.cmd("normal! zt")
+  -- end
+  if cursor_winline <= middle_line + 1 and cursor_winline >= middle_line - 1 then
+    vim.cmd("normal! zt")
+  else
+    vim.cmd("normal! zz")
+  end
+end
+
 return M
