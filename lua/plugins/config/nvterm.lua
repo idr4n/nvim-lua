@@ -54,10 +54,14 @@ M.opts = {
 
 M.setup = function()
   local ft_cmds = {
-    python = "python3 " .. vim.fn.expand("%"),
+    python = "python3",
   }
   vim.keymap.set("n", "<leader>ct", function()
-    require("nvterm.terminal").send(ft_cmds[vim.bo.filetype], "vertical")
+    if ft_cmds[vim.bo.filetype] then
+      local file = vim.fn.expand("%")
+      local cmd = string.format("%s %s", ft_cmds[vim.bo.filetype], file)
+      require("nvterm.terminal").send(cmd, "vertical")
+    end
   end, { noremap = true, silent = true, desc = "Run file in term" })
 
   local op = { noremap = true, silent = true }

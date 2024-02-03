@@ -308,7 +308,8 @@ local plugins = {
       for i = 1, 41 do
         local hl_group = string.format("@ibl.scope.underline.%s", i)
         -- vim.api.nvim_set_hl(0, hl_group, { link = "LspReferenceText" })
-        vim.api.nvim_set_hl(0, hl_group, { bg = "#363C58" })
+        -- vim.api.nvim_set_hl(0, hl_group, { bg = "#363C58" })
+        vim.api.nvim_set_hl(0, hl_group, { bg = "#353B45" })
       end
     end,
   },
