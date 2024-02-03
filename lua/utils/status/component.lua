@@ -274,7 +274,6 @@ M.FileIcon = {
   init = function(self)
     local filename = self.filename
     local extension = vim.fn.fnamemodify(filename, ":e")
-    self.devicons.set_default_icon("󰈚", "#6d8086", 66)
     self.icon, self.icon_color = self.devicons.get_icon_color(filename, extension, { default = true })
     if self.buftype == "terminal" then
       self.icon = ""

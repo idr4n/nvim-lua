@@ -121,6 +121,19 @@ M.diagnostic_icons = {
   Hint = " ",
 }
 
+M.devicons_override = {
+  default_icon = {
+    icon = "󰈚",
+    name = "Default",
+    color = "#E06C75",
+  },
+  toml = {
+    icon = "",
+    name = "toml",
+    color = "#61AFEF",
+  },
+}
+
 -- function used to retrieve buffers (source: heirline's cookbook.md)
 function M.get_bufs()
   return vim.tbl_filter(function(bufnr)

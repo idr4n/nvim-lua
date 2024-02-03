@@ -1205,7 +1205,12 @@ local plugins = {
   --: Misc
   "nvim-lua/popup.nvim",
   "nvim-lua/plenary.nvim",
-  "nvim-tree/nvim-web-devicons",
+  {
+    "nvim-tree/nvim-web-devicons",
+    opts = function()
+      return { override = require("utils").devicons_override }
+    end,
+  },
   -- { "tpope/vim-vinegar", event = "VeryLazy" },
   { "moll/vim-bbye", event = "BufReadPost" },
   -- { "aymericbeaumet/vim-symlink", event = "VeryLazy" },
