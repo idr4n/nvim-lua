@@ -146,7 +146,7 @@ M.monokaipro = {
 
 M.onedark = {
   opts = {
-    style = "darker",
+    -- style = "darker",
     highlights = {
       IblScope = { fg = "#626873" },
       MiniIndentscopeSymbol = { fg = "#525A66" },
@@ -155,10 +155,11 @@ M.onedark = {
       NeoTreeEndOfBuffer = { bg = "#1B1F27" },
       -- NeoTreeGitModified = { fg = "$blue" },
       NeoTreeGitModified = { fg = "#485A86" },
-      NeoTreeWinSeparator = { fg = "#1E222A", bg = "none" },
+      NeoTreeWinSeparator = { fg = "#1B1F27", bg = "#1B1F27" },
       Normal = { bg = "#1E222A" },
       NormalNC = { bg = "#1E222A" },
       EndOfBuffer = { bg = "#1E222A" },
+      FloatBorder = { bg = "NONE" },
       CursorLine = { bg = "#282C34" },
       StatusLine = { bg = "#252931" },
       LineNr = { fg = "#41454D" },
