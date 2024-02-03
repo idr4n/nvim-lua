@@ -64,7 +64,7 @@ local TablineFileNameBlock = {
     self.filetype = vim.api.nvim_get_option_value("filetype", { buf = self.bufnr })
     self.filename_modified = filename_modified(self)
     self.diag_chars = 0
-    self.padding = ut.calculate_padding(self.filename_modified, 14 - self.diag_chars)
+    self.padding = ut.calculate_padding(self.filename_modified, 18 - self.diag_chars)
 
     self.errors = #vim.diagnostic.get(self.bufnr, { severity = vim.diagnostic.severity.ERROR })
     self.warnings = #vim.diagnostic.get(self.bufnr, { severity = vim.diagnostic.severity.WARN })
@@ -93,7 +93,8 @@ local TablineFileNameBlock = {
       return { bg = "normal_bg", fg = self.filename_color }
       -- return { bg = "active_tab_bg", fg = self.filename_color }
     else
-      return { fg = "comment", bg = "dark_black" }
+      -- return { fg = "comment", bg = "dark_black" }
+      return { fg = "comment", bg = "status_bg" }
     end
   end,
 
@@ -119,10 +120,17 @@ local TablineFileNameBlock = {
       return self.padding
     end,
   },
+  {
+    condition = function(self)
+      return #self.filename_modified >= 18
+    end,
+    provider = " ",
+  },
   TablineBufnr({ no_number = true }),
   {
     hl = function(self)
-      return not self.is_active and { fg = "comment", force = true }
+      -- return not self.is_active and { fg = "comment", force = true }
+      return not self.is_active and { fg = "#838994", force = true }
     end,
     component.FileIcon,
   },
@@ -130,7 +138,9 @@ local TablineFileNameBlock = {
   TablineFileFlags,
   {
     provider = function(self)
-      return self.padding
+      -- return self.padding
+      local padding = self.padding and #self.padding - 1 or 0
+      return string.rep(" ", padding)
     end,
   },
 }
@@ -167,14 +177,25 @@ local TablineCloseButton = {
   },
 }
 
-local TablineBufferBlock = utils.surround({ "", "" }, function(self)
-  if self.is_active then
-    return "normal_bg"
-    -- return "active_tab_bg"
-  else
-    return "dark_black"
-  end
-end, { TablineFileNameBlock, TablineCloseButton })
+-- local TablineBufferBlock = utils.surround({ "", "" }, function(self)
+--   if self.is_active then
+--     return "normal_bg"
+--     -- return "active_tab_bg"
+--   else
+--     return "dark_black"
+--   end
+-- end, { TablineFileNameBlock, TablineCloseButton })
+
+local TablineBufferBlock = {
+  { TablineFileNameBlock, TablineCloseButton },
+  hl = function(self)
+    if self.is_active then
+      return { bg = "normal_bg" }
+    else
+      return { bg = "status_bg" }
+    end
+  end,
+}
 
 M.BufferLine = utils.make_buflist(
   TablineBufferBlock,
