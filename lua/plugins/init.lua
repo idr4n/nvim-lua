@@ -1192,19 +1192,6 @@ local plugins = {
   },
   --: }}}
 
-  --: windex (max. window) {{{
-  {
-    "declancm/windex.nvim",
-        -- stylua: ignore
-        keys = {
-            { "<Leader>tm", "<Cmd>lua require('windex').toggle_nvim_maximize()<CR>", desc = "Toggle Maximize Window" },
-            -- { "<C-Bslash>", "<Cmd>lua require('windex').toggle_terminal()<CR>", mode = { "n", "t" }, desc = "Toggle terminal" },
-            -- { "<C-n>", "<C-Bslash><C-n>", mode = "t", desc = "Enter normal mode" },
-        },
-    config = true,
-  },
-  --: }}}
-
   --: yanky {{{
   {
     "gbprod/yanky.nvim",
