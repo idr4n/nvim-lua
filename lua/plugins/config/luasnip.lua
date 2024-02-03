@@ -59,6 +59,11 @@ return {
 
     -- mappable snippets
     local snippets = {
+      spr = p({
+        trig = "spr",
+        name = "print(|)",
+        dscr = "surrounds with print function",
+      }, "print($TM_SELECTED_TEXT$1)"),
       sc = p({
         trig = "sc",
         name = "surronds with {|}",
@@ -143,5 +148,9 @@ return {
     -- surrounds with foldable comment
     map_snippet(";cm", mappable.scm)
     vim.api.nvim_set_keymap("v", ";cm", "<c-s>;cm", { noremap = false, silent = false })
+
+    -- python surround with print()
+    map_snippet(";cp", mappable.spr)
+    vim.api.nvim_set_keymap("v", ";cp", "<c-s>;pr", { noremap = false, silent = false })
   end,
 }
