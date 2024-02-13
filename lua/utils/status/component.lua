@@ -468,8 +468,7 @@ function M.GitDiffSimple(opts)
     },
     {
       provider = function(self)
-        -- return self.changes and " " .. self.changes .. string.format("(%s)", self.nhunks)
-        return self.changes and string.format("(%s)", self.nhunks)
+        return self.nhunks and string.format("(%s)", self.nhunks)
       end,
     },
     { provider = " " },

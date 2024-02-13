@@ -1,6 +1,7 @@
 local M = {}
 
 local utils = require("heirline.utils")
+local ut = require("utils")
 
 --- Statusline colors
 M.colors = {
@@ -12,15 +13,19 @@ M.colors = {
   -- yellow = "#BC9A5C",
   red = "#DE6E7C",
   -- red = "#B55A67",
-  blue = "#82AAFF",
+  blue = utils.get_highlight("Function").fg or "#82AAFF",
   -- blue = "#687CAD",
   purple = utils.get_highlight("Statement").fg,
   cyan = utils.get_highlight("Special").fg,
   dark_red = utils.get_highlight("DiffDelete").bg,
   gray = utils.get_highlight("NonText").fg,
-  stealth = "#4E546B",
+
+  -- stealth = "#4E546B",
+  stealth = ut.darken(string.format("#%06x", utils.get_highlight("Normal").bg), 0.8),
+
   -- insert = "#C3E88D",
-  insert = "#C882E7",
+  -- insert = "#C882E7",
+  insert = utils.get_highlight("Statement").fg or "#C882E7",
   -- insert = "#718107",
   select = "#FCA7EA",
   -- select = "#966B8D",
@@ -32,6 +37,11 @@ M.colors = {
   normal_bg = utils.get_highlight("Normal").bg,
   status_bg = utils.get_highlight("StatusLine").bg,
   status_fg = utils.get_highlight("StatusLine").fg,
+
+  fg_darken = ut.darken(string.format("#%06x", utils.get_highlight("Normal").bg), 0.55),
+  bg_lighten = ut.lighten(string.format("#%06x", utils.get_highlight("Normal").bg), 0.96),
+  bg_lighten_less = ut.lighten(string.format("#%06x", utils.get_highlight("Normal").bg), 0.98),
+
   bright_bg = utils.get_highlight("Folded").bg,
   string = utils.get_highlight("String").fg,
   constant = utils.get_highlight("Constant").fg or utils.get_highlight("StatusLine").fg,

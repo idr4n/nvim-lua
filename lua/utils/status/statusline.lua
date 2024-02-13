@@ -125,7 +125,8 @@ function M.SimpleStatusline(opts)
       self.show_more_info = _G.show_more_info
       -- self.show_more_info = vim.g.show_more_info
     end,
-    hl = { fg = "status_fg", bg = "normal_bg" },
+    -- hl = { fg = "status_fg", bg = "normal_bg" },
+    hl = { fg = "fg_darken", bg = "normal_bg" },
     component.Section({
       hl = { fg = "stealth", force = true },
       children = {
@@ -162,7 +163,8 @@ function M.SimpleStatusline(opts)
         return " " .. string.upper(vim.bo.filetype)
       end,
       hl = function()
-        return conditions.lsp_attached() and { bg = "#272E33" } or { bg = "#272E33", fg = "stealth" }
+        -- return conditions.lsp_attached() and { bg = "#272E33" } or { bg = "#272E33", fg = "stealth" }
+        return conditions.lsp_attached() and { bg = "bg_lighten" } or { bg = "bg_lighten", fg = "stealth" }
       end,
       -- stylua: ignore
       -- component.LSPActive({ icon = "", clients_total = false, hl = { fg = "stealth" }, margin = { left = 0, right = 0 }, }),
@@ -170,12 +172,14 @@ function M.SimpleStatusline(opts)
     },
     component.GitDiffSimple({
       margin = { left = 0, right = 0 },
-      hl = { bg = "#232A2E", fg = "comment", force = false },
+      -- hl = { bg = "#232A2E", fg = "comment", force = false },
+      hl = { bg = "bg_lighten_less", fg = "comment", force = false },
     }),
     component.Section({
       padding = { left = 1 },
       children = { component.Diagnostics({ margin = { left = 0, right = 0 } }) },
-      hl = { bg = "#232A2E", fg = "comment", force = true },
+      -- hl = { bg = "#232A2E", fg = "comment", force = true },
+      hl = { bg = "bg_lighten_less", fg = "comment", force = true },
       condition = conditions.has_diagnostics,
     }),
     component.Updates(),

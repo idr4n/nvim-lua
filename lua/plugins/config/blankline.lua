@@ -76,4 +76,16 @@ return {
       },
     },
   },
+  config = function(_, opts)
+    local ut = require("utils")
+    local hl_bg = ut.lighten(string.format("#%06x", vim.api.nvim_get_hl(0, { name = "Normal" }).bg), 0.9)
+
+    require("ibl").setup(opts)
+    for i = 1, 41 do
+      local hl_group = string.format("@ibl.scope.underline.%s", i)
+      -- vim.api.nvim_set_hl(0, hl_group, { link = "LspReferenceText" })
+      -- vim.api.nvim_set_hl(0, hl_group, { bg = "#363C58" })
+      vim.api.nvim_set_hl(0, hl_group, { bg = hl_bg })
+    end
+  end,
 }
