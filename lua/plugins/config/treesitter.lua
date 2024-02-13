@@ -31,7 +31,7 @@ M.treesitter = {
       "java",
       "javascript",
       "json",
-      "latex",
+      -- "latex",
       "lua",
       "luap",
       "markdown",

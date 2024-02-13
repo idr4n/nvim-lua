@@ -6,7 +6,7 @@ require("config.options")
 -- make sure to set `mapleader` before lazy so your mappings are correct
 vim.keymap.set("", "<Space>", "<Nop>")
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.maplocalleader = "," -- "\" is the default
 
 vim.api.nvim_create_autocmd("User", {
   group = vim.api.nvim_create_augroup("LazyVim", { clear = true }),
@@ -39,13 +39,16 @@ vim.opt.rtp:prepend(lazypath)
 require("plugins")
 
 --: load colorscheme
-require("tokyonight").load()
+-- require("tokyonight").load()
 -- vim.cmd("colorscheme kanagawa")
--- require("onedark").load()
--- vim.cmd("colorscheme rose-pine")
+require("onedark").load()
 -- vim.cmd("colorscheme monokai-pro")
 -- vim.cmd("colorscheme catppuccin-frappe")
 -- vim.cmd("colorscheme catppuccin-macchiato")
 -- vim.cmd("colorscheme catppuccin-mocha")
+-- require("plugins.config.colorschemes").rosepine.setup()
+-- require("plugins.config.colorschemes").rosepine.setup("dark")
+-- require("plugins.config.colorschemes").wind.setup()
+-- require("plugins.config.colorschemes").github.setup()
 -- require("plugins.config.colorschemes").darkplus.setup()
 -- require("plugins.config.colorschemes").NvimDefault.setup()

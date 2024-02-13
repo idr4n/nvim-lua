@@ -236,14 +236,22 @@ M.rosepine = {
         TelescopePromptNormal = { bg = "none" },
         -- TelescopeSelection = { bg = "highlight_low" },
         -- TelescopeSelectionCaret = { bg = "highlight_low" },
-        NeoTreeNormal = { bg = "nc" },
-        NeoTreeNormalNC = { bg = "nc" },
-        NeoTreeEndOfBuffer = { bg = "nc" },
-        NeoTreeCursorLine = { bg = "p.highlight_low" },
-        IblIndent = { fg = "#323048" },
-        IblScope = { fg = "#525069" },
+        StatusLine = vim.o.background == "dark" and { bg = "surface" } or { bg = "highlight_low" },
+        CursorLine = { bg = "highlight_low" },
+        NeoTreeNormal = { bg = "highlight_low" },
+        NeoTreeNormalNC = { bg = "highlight_low" },
+        NeoTreeEndOfBuffer = { bg = "highlight_low" },
+        NeoTreeCursorLine = { bg = "highlight_med" },
+        NeoTreeWinSeparator = { fg = "highlight_low", bg = "highlight_low" },
+        -- NeoTreeCursorLine = { bg = "p.highlight_low" },
+        IblIndent = { fg = "highlight_med" },
+        IblScope = { fg = "iris" },
       },
     }
+  end,
+  setup = function(background)
+    vim.o.background = background or "light"
+    vim.cmd("colorscheme rose-pine")
   end,
 }
 
@@ -268,6 +276,56 @@ M.tokyonight = {
         -- hl.TelescopeBorder = { fg = c.purple, bg = c.none }
       end,
     }
+  end,
+}
+
+M.wind = {
+  setup = function()
+    vim.cmd("colorscheme wind")
+    if vim.g.colors_name == "wind" then
+      local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
+      vim.api.nvim_set_hl(0, "CursorLine", { bg = "#002E40" })
+      vim.api.nvim_set_hl(0, "StatusLine", { bg = "#00354A" })
+      vim.api.nvim_set_hl(0, "LineNr", { fg = "#536B76" })
+    end
+  end,
+}
+
+M.github = {
+  config = function()
+    require("github-theme").setup({
+      options = {
+        darken = {
+          floats = false,
+          sidebars = {
+            enabled = true,
+            list = { "qf", "netrw", "neotree" }, -- default is {}
+          },
+        },
+      },
+    })
+  end,
+  setup = function()
+    vim.cmd("colorscheme github_light")
+    if vim.g.colors_name == "github_light" then
+      -- local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
+      -- vim.api.nvim_set_hl(0, "Normal", vim.tbl_extend("force", normal_hl, { bg = "#FAFAFA" }))
+      vim.api.nvim_set_hl(0, "Comment", { link = "Comment", fg = "#6A737D" })
+      vim.api.nvim_set_hl(0, "Delimiter", { link = "Delimiter", fg = "#24292F" }) -- for punctuation ',' '.', etc
+      vim.api.nvim_set_hl(0, "LineNr", { fg = "#BFC0C1" })
+      vim.api.nvim_set_hl(0, "CursorLine", { bg = "#F6F8FA" })
+      vim.api.nvim_set_hl(0, "StatusLine", { bg = "#F1F3F5" })
+      vim.api.nvim_set_hl(0, "NeoTreeWinSeparator", { fg = "#F6F8FA", bg = "#F6F8FA" })
+
+      -- -- if changing background to something else such as #FAFAFA
+      -- vim.api.nvim_set_hl(0, "CursorLine", { bg = "#EFF0F2" })
+      -- vim.api.nvim_set_hl(0, "StatusLine", { bg = "#E7EAF0" })
+      -- vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "#F3F4F6" })
+      -- vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "#F3F4F6" })
+      -- vim.api.nvim_set_hl(0, "NeoTreeCursorLine", { bg = "#E2E5EA" })
+      -- vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { bg = "#F3F4F6" })
+      -- vim.api.nvim_set_hl(0, "NeoTreeWinSeparator", { fg = "#F3F4F6", bg = "#F3F4F6" })
+    end
   end,
 }
 

@@ -137,10 +137,7 @@ local plugins = {
     "sindrets/diffview.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = true,
-    keys = {
-      { "<leader>vo", ":DiffviewOpen<cr>", noremap = true, silent = true },
-      { "<leader>vh", ":DiffviewFileHistory %<cr>", noremap = true, silent = true },
-    },
+    keys = require("plugins.config.others").diffview.keys,
   },
   --: }}},
 
@@ -241,6 +238,14 @@ local plugins = {
   },
   --: }}},
 
+  --: GitHub Theme {{{
+  {
+    "projekt0n/github-nvim-theme",
+    lazy = true,
+    config = require("plugins.config.colorschemes").github.config,
+  },
+  --: }}}
+
   --: gitsigns {{{
   {
     "lewis6991/gitsigns.nvim",
@@ -303,15 +308,7 @@ local plugins = {
       require("utils").lazy_load("indent-blankline.nvim")
     end,
     opts = require("plugins.config.blankline").opts,
-    config = function(_, opts)
-      require("ibl").setup(opts)
-      for i = 1, 41 do
-        local hl_group = string.format("@ibl.scope.underline.%s", i)
-        -- vim.api.nvim_set_hl(0, hl_group, { link = "LspReferenceText" })
-        -- vim.api.nvim_set_hl(0, hl_group, { bg = "#363C58" })
-        vim.api.nvim_set_hl(0, hl_group, { bg = "#353B45" })
-      end
-    end,
+    config = require("plugins.config.blankline").config,
   },
   --: }}},
 
@@ -327,9 +324,7 @@ local plugins = {
   {
     "ptzz/lf.vim",
     dependencies = "voldikss/vim-floaterm",
-    keys = {
-      { ",l", ":Lf<cr>", noremap = true, silent = true, desc = "Open LF" },
-    },
+    keys = require("plugins.config.others").lf.keys,
     config = require("plugins.config.others").lf.config,
   },
   --: }}},
@@ -470,22 +465,20 @@ local plugins = {
   },
   --: }}}
 
+  --: Nabla - preview equations {{{
+  {
+    "jbyuki/nabla.nvim",
+    -- enabled = false,
+    keys = require("plugins.config.others").nabla.keys,
+  },
+  --: }}}
+
   --: neogit (magit for neovim) {{{
   {
     "TimUntersberger/neogit",
     dependencies = "nvim-lua/plenary.nvim",
-    keys = {
-      { "<leader>gn", ":Neogit<cr>", noremap = true, silent = true, desc = "Neogit" },
-    },
-    opts = {
-      disable_signs = false,
-      signs = {
-        -- { CLOSED, OPENED }
-        section = { "", "" },
-        item = { "", "" },
-      },
-      integrations = { diffview = true },
-    },
+    keys = require("plugins.config.others").neogit.keys,
+    opts = require("plugins.config.others").neogit.opts,
   },
   --: }}}
 
@@ -899,6 +892,14 @@ local plugins = {
   },
   --: }}}
 
+  --: Spectre {{{
+  {
+    "nvim-pack/nvim-spectre",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    keys = require("plugins.config.others").spectre.keys,
+  },
+  --: }}}
+
   --: statuscol {{{
   {
     "luukvbaal/statuscol.nvim",
@@ -1124,30 +1125,8 @@ local plugins = {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
-        -- stylua: ignore
-        keys = {
-            { "<leader>gp", function() require('vgit').buffer_hunk_preview() end, desc = "Hunk preview (vgit)" }
-        },
-    opts = {
-      settings = {
-        live_blame = { enabled = false },
-        live_gutter = { enabled = false },
-        authorship_code_lens = { enabled = false },
-        scene = {
-          diff_preference = "split",
-          keymaps = {
-            quit = "q",
-          },
-        },
-        signs = {
-          definitions = {
-            GitSignsAdd = { text = "▎" },
-            GitSignsDelete = { text = "󰍵" },
-            GitSignsChange = { text = "▎" },
-          },
-        },
-      },
-    },
+    keys = require("plugins.config.vgit").keys,
+    opts = require("plugins.config.vgit").opts,
   },
   --: }}}
 
@@ -1183,11 +1162,27 @@ local plugins = {
   },
   --: }}}
 
+  --: Vimlatex {{{
+  {
+    "lervag/vimtex",
+    -- enabled = false,
+    ft = { "tex" },
+    config = require("plugins.config.others").vimtex.config,
+  },
+  --: }}}
+
+  --: Wind colorscheme {{{
+  {
+    "windwp/wind-colors",
+    lazy = true,
+  },
+  --: }}}
+
   --: which-key {{{
   {
     "folke/which-key.nvim",
     -- event = "VeryLazy",
-    keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },
+    keys = require("plugins.config.whichkey").keys,
     config = require("plugins.config.whichkey").config,
   },
   --: }}}

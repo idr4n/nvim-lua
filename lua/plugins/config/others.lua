@@ -75,7 +75,17 @@ M.closebuffers = {
   },
 }
 
+M.diffview = {
+  keys = {
+    { "<leader>vo", ":DiffviewOpen<cr>", desc = "Diffview Project Open" },
+    { "<leader>vh", ":DiffviewFileHistory %<cr>", desc = "Diffview File History" },
+  },
+}
+
 M.lf = {
+  keys = {
+    { ",L", ":Lf<cr>", noremap = true, silent = true, desc = "Open LF" },
+  },
   config = function()
     local function calcFloatSize()
       return {
@@ -99,6 +109,46 @@ M.lf = {
     vim.g.floaterm_width = calcFloatSize().width
     vim.g.floaterm_height = calcFloatSize().height
   end,
+}
+
+M.nabla = {
+  keys = {
+    { "<leader>tE", ":lua require('nabla').toggle_virt()<cr>", desc = "toggle equations" },
+    { "<leader>te", ":lua require('nabla').popup()<cr>", desc = "hover equation" },
+  },
+}
+
+M.vimtex = {
+  config = function()
+    vim.g.vimtex_view_method = "skim"
+    vim.g.vimtex_compiler_silent = 1
+    -- vim.g.vimtex_syntax_enabled = 0
+  end,
+}
+
+M.neogit = {
+  keys = {
+    { "<leader>gn", ":Neogit<cr>", noremap = true, silent = true, desc = "Neogit" },
+  },
+  opts = {
+    disable_signs = false,
+    signs = {
+      -- { CLOSED, OPENED }
+      section = { "", "" },
+      item = { "", "" },
+    },
+    integrations = { diffview = true },
+  },
+}
+
+M.spectre = {
+    -- stylua: ignore
+    keys = {
+      { "<leader>ts", '<cmd>lua require("spectre").toggle()<CR>', desc = "Toggle Spectre" },
+      { "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', desc = "Spectre current word" },
+      { "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', mode = "v", desc = "Spectre current word" },
+      { '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', desc = "Spectre on current file" }
+    },
 }
 
 M.yanky = {
