@@ -4,7 +4,7 @@ return {
   keys = {
     {
       "<leader>e",
-      ":Neotree reveal show left toggle<CR>",
+      ":Neotree reveal left toggle<CR>",
       noremap = true,
       silent = true,
       desc = "Toggle Neo-Tree",

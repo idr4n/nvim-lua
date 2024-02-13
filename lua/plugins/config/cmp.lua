@@ -3,6 +3,7 @@ return {
     local cmp = require("cmp")
     local luasnip = require("luasnip")
     local nvchad_icons = require("utils").nvchad_icons
+    local cursorMoveAround = require("utils").CursorMoveAround
 
     -- require("luasnip/loaders/from_vscode").lazy_load()
 
@@ -59,7 +60,14 @@ return {
         }),
         -- Accept currently selected item. If none selected, `select` first item.
         -- Set `select` to `false` to only confirm explicitly selected items.
-        ["<C-l>"] = cmp.mapping.confirm({ select = true }),
+        -- ["<C-l>"] = cmp.mapping.confirm({ select = true }),
+        ["<C-l>"] = cmp.mapping(function()
+          if cmp.visible() then
+            cmp.confirm({ select = true })
+          else
+            cursorMoveAround()
+          end
+        end, { "i", "s" }),
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()

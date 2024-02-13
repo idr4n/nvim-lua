@@ -1,4 +1,5 @@
 return {
+  keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g", ",", ";" },
   config = function(_, opts)
     vim.o.timeout = true
     vim.o.timeoutlen = 300
@@ -19,7 +20,7 @@ return {
         q = { name = "Quit" },
         s = { name = "Search" },
         t = { name = "toggle" },
-        v = { name = "diffview" },
+        v = { name = "vgit/diffview" },
         x = { name = "Trouble" },
         z = { name = "misc" },
         ["<tab>"] = { name = "Tabs" },

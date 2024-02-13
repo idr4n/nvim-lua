@@ -189,7 +189,16 @@ keymap("n", "<C-h>", "<C-w>h")
 keymap("n", "<C-j>", "<C-w>j")
 keymap("n", "<C-k>", "<C-w>k")
 -- keymap("n", "<C-l>", "<C-w>l")
-keymap("n", "<C-t>", "<C-w>w")
+-- keymap("n", "<C-t>", "<C-w>w")
+keyset("n", "<C-t>", function()
+  if vim.b.is_zoomed then
+    vim.b.is_zoomed = false
+    vim.api.nvim_call_function("execute", { vim.w.original_window_layout })
+    vim.cmd("wincmd w")
+  else
+    vim.cmd("wincmd w")
+  end
+end)
 --: }}}
 
 --: Resize windows with arrows {{{
@@ -318,6 +327,7 @@ keymap("v", "x", '"_x')
 
 --: Other mappings {{{
 keyset("n", "<leader>ol", "<cmd>:Lazy<cr>", { desc = "Lazy Dashboard" })
+keyset("n", "<leader>op", "<cmd>e#<cr>", { desc = "Reopen buffer" })
 --: }}}
 
 --: Add undo break-points {{{
@@ -328,7 +338,8 @@ keymap("i", "<Space>", "<Space><c-g>u")
 --: }}}
 
 --: Move cursor around {{{
-vim.keymap.set({ "n", "i", "v" }, "<C-L>", function()
+vim.keymap.set({ "n", "v" }, "<C-l>", function()
+  -- insert mode is defined in the nvim-cmp config
   cursorMoveAround()
 end, { desc = "Move Around Cursor" })
 --: }}}
@@ -381,4 +392,25 @@ vim.api.nvim_create_user_command("ColemakToggle", function()
 end, {})
 keymap("n", "<leader>tC", ":ColemakToggle<cr>", { desc = "Colemak Layout" })
 
+--: }}}
+
+--: Maximize window {{{
+vim.b.is_zoomed = false
+vim.w.original_window_layout = {}
+
+local function toggle_maximize_buffer()
+  if not vim.b.is_zoomed then
+    -- Save the current window layout
+    vim.w.original_window_layout = vim.api.nvim_call_function("winrestcmd", {})
+    -- Maximize the current window
+    vim.cmd("wincmd _")
+    vim.cmd("wincmd |")
+    vim.b.is_zoomed = true
+  else
+    -- Restore the previous window layout
+    vim.api.nvim_call_function("execute", { vim.w.original_window_layout })
+    vim.b.is_zoomed = false
+  end
+end
+keyset({ "n", "t" }, "<A-,>", toggle_maximize_buffer, { desc = "Maximize buffer" })
 --: }}}
