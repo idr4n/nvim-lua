@@ -114,6 +114,7 @@ keymap("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 --: }}}
 
 --: Using Bbye plugin to close the current buffer {{{
+keymap("n", "<leader>x", ":Bdelete<CR>", { desc = "Close (delete) Buffer" })
 keymap("n", "<leader>bd", ":Bdelete<CR>", { desc = "Close (delete) Buffer" })
 -- wipeout current buffer
 keymap("n", "<leader>bw", ":Bwipeout<CR>", { desc = "Wipeout Buffer" })
@@ -122,6 +123,7 @@ keymap("n", "<leader>bw", ":Bwipeout<CR>", { desc = "Wipeout Buffer" })
 
 --: tabs {{{
 keymap("n", "<leader><tab>d", ":tabclose<cr>", { desc = "Close tab" })
+keymap("n", "<leader><tab>q", ":tabclose<cr>", { desc = "Close tab" })
 keymap("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
 keymap("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
 keymap("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })

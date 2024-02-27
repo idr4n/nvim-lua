@@ -1069,7 +1069,7 @@ local plugins = {
     cmd = { "TodoTrouble", "TodoTelescope" },
     event = { "BufReadPost", "BufNewFile" },
     keys = {
-      { "<leader>xt", "<cmd>TodoTrouble<cr>", noremap = true, silent = true, desc = "TodoTrouble" },
+      { "<leader>zt", "<cmd>TodoTrouble<cr>", noremap = true, silent = true, desc = "TodoTrouble" },
     },
     opts = {
       highlight = {
@@ -1109,30 +1109,19 @@ local plugins = {
   {
     "folke/trouble.nvim",
     keys = {
-      { "<leader>xx", "<cmd>TroubleToggle<cr>", silent = true, noremap = true, desc = "Toggle" },
+      { "<leader>zx", "<cmd>TroubleToggle<cr>", silent = true, noremap = true, desc = "Toggle" },
       {
-        "<leader>xw",
+        "<leader>zw",
         "<cmd>TroubleToggle workspace_diagnostics<cr>",
-        silent = true,
-        noremap = true,
         desc = "workspace_diagnostics",
       },
       {
-        "<leader>ld",
-        "<cmd>TroubleToggle workspace_diagnostics<cr>",
-        silent = true,
-        noremap = true,
-        desc = "workspace_diagnostics",
-      },
-      {
-        "<leader>xd",
+        "<leader>zd",
         "<cmd>TroubleToggle document_diagnostics<cr>",
-        silent = true,
-        noremap = true,
         desc = "document_diagnostics",
       },
-      { "<leader>xl", "<cmd>TroubleToggle loclist<cr>", silent = true, noremap = true, desc = "loclist" },
-      { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", silent = true, noremap = true, desc = "quickfix" },
+      { "<leader>zl", "<cmd>TroubleToggle loclist<cr>", silent = true, noremap = true, desc = "loclist" },
+      { "<leader>zq", "<cmd>TroubleToggle quickfix<cr>", silent = true, noremap = true, desc = "quickfix" },
       { "gr", "<cmd>TroubleToggle lsp_references<cr>", silent = true, noremap = true, desc = "LSP references" },
       -- { "gd", "<cmd>TroubleToggle lsp_definitions<cr>", silent = true, noremap = true },
     },

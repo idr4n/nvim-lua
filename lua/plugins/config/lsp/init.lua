@@ -26,7 +26,7 @@ local function lsp_keymaps(bufnr)
     end
 
     buf_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
-    -- buf_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
+    buf_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
     buf_keymap("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>")
     buf_keymap("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Code actions" })
     buf_keymap("v", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Code actions" })
