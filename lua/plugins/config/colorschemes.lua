@@ -21,6 +21,7 @@ M.NvimDefault = {
     local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
     -- local diff_changed = vim.api.nvim_get_hl(0, { name = "DiffChange" })
     -- vim.api.nvim_set_hl(0, "NeoTreeNormal", vim.tbl_extend("force", normal_hl, { bg = "#181B20" }))
+    vim.api.nvim_set_hl(0, "NotifyBackground", { bg = "#000000" })
     vim.api.nvim_set_hl(0, "DiffAdded", { fg = "#627259" })
     vim.api.nvim_set_hl(0, "DiffChange", { fg = "#3B4261" })
     -- vim.api.nvim_set_hl(0, "DiffAdded", { fg = "#005523" })

@@ -309,35 +309,6 @@ function M.fg(name)
   return fg and { fg = string.format("#%06x", fg) } or nil
 end
 
--- source: NvChad config
-M.lazy_load = function(plugin)
-  vim.api.nvim_create_autocmd({ "BufRead", "BufWinEnter", "BufNewFile" }, {
-    group = vim.api.nvim_create_augroup("BeLazyOnFileOpen" .. plugin, {}),
-    callback = function()
-      local file = vim.fn.expand("%")
-      local condition = file ~= "NvimTree_1" and file ~= "[lazy]" and file ~= ""
-
-      if condition then
-        vim.api.nvim_del_augroup_by_name("BeLazyOnFileOpen" .. plugin)
-
-        -- dont defer for treesitter as it will show slow highlighting
-        -- This deferring only happens only when we do "nvim filename"
-        if plugin ~= "nvim-treesitter" then
-          vim.schedule(function()
-            require("lazy").load({ plugins = plugin })
-
-            if plugin == "nvim-lspconfig" then
-              vim.cmd("silent! do FileType")
-            end
-          end, 0)
-        else
-          require("lazy").load({ plugins = plugin })
-        end
-      end
-    end,
-  })
-end
-
 M.CursorMoveAround = function()
   local win_height = vim.api.nvim_win_get_height(0)
   local cursor_winline = vim.fn.winline()
@@ -348,10 +319,33 @@ M.CursorMoveAround = function()
   -- else
   --   vim.cmd("normal! zt")
   -- end
+  local current_mode = vim.api.nvim_get_mode().mode
   if cursor_winline <= middle_line + 1 and cursor_winline >= middle_line - 1 then
-    vim.cmd("normal! zt")
+    if current_mode == "i" then
+      local current_cursor_pos = vim.api.nvim_win_get_cursor(0)
+      local current_row = current_cursor_pos[1]
+      local current_col = current_cursor_pos[2]
+
+      -- Center the screen without leaving insert mode
+      vim.cmd("keepjumps normal! zt")
+      -- Adjust the cursor position back to the original position
+      vim.api.nvim_win_set_cursor(0, { current_row, current_col })
+    else
+      vim.cmd("normal! zt")
+    end
   else
-    vim.cmd("normal! zz")
+    if current_mode == "i" then
+      local current_cursor_pos = vim.api.nvim_win_get_cursor(0)
+      local current_row = current_cursor_pos[1]
+      local current_col = current_cursor_pos[2]
+
+      -- Center the screen without leaving insert mode
+      vim.cmd("keepjumps normal! zz")
+      -- Adjust the cursor position back to the original position
+      vim.api.nvim_win_set_cursor(0, { current_row, current_col })
+    else
+      vim.cmd("normal! zz")
+    end
   end
 end
 

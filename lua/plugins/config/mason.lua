@@ -3,7 +3,6 @@ return {
     ensure_installed = {
       "astro-language-server",
       "bash-language-server",
-      "black",
       "clangd",
       "css-lsp",
       "cssmodules-language-server",
@@ -18,8 +17,9 @@ return {
       "prettier",
       "pyright",
       "revive",
-      "ruff",
+      "ruff-lsp",
       "rust-analyzer",
+      "shfmt",
       "sqlfluff",
       "sqlls",
       "stylelint-lsp",

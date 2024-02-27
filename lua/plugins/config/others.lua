@@ -111,13 +111,6 @@ M.lf = {
   end,
 }
 
-M.nabla = {
-  keys = {
-    { "<leader>tE", ":lua require('nabla').toggle_virt()<cr>", desc = "toggle equations" },
-    { "<leader>te", ":lua require('nabla').popup()<cr>", desc = "hover equation" },
-  },
-}
-
 M.vimtex = {
   config = function()
     vim.g.vimtex_view_method = "skim"

@@ -20,12 +20,6 @@ return {
           extra_filetype = { "svelte" },
         }),
 
-        -- Python
-        -- diagnostics.flake8,
-        formatting.black.with({ extra_args = { "--fast", "--preview" } }),
-        formatting.ruff,
-        diagnostics.ruff,
-
         -- LUA
         formatting.stylua.with({ "--config-path", vim.fn.expand("~/.config/stylua.toml") }),
         -- diagnostics.vale,
@@ -44,9 +38,8 @@ return {
         }),
 
         -- Bash
-        formatting.beautysh.with({
-          extra_args = { "--indent-size", "2" },
-        }),
+        -- formatting.shfmt.with({ extra_filetype = { "bash", "zsh" } }),
+        formatting.shfmt,
       },
     }
   end,

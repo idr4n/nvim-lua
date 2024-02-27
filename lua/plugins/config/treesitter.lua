@@ -40,6 +40,7 @@ M.treesitter = {
       "rust",
       "tsx",
       "typescript",
+      "typst",
       "scss",
       "svelte",
       "swift",

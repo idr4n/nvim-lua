@@ -86,10 +86,7 @@ local plugins = {
   {
     "NvChad/nvim-colorizer.lua",
     -- enabled = false,
-    -- event = "BufReadPre",
-    init = function()
-      require("utils").lazy_load("nvim-colorizer.lua")
-    end,
+    event = "BufReadPost",
     keys = {
       { ",c", "<cmd>ColorizerToggle<cr>", noremap = true, silent = true },
     },
@@ -176,41 +173,12 @@ local plugins = {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     -- keys = require("plugins.config.fzflua").keys,
     keys = {
-      -- {
-      --     "<leader>r",
-      --     "<cmd>lua require('fzf-lua').live_grep()<CR>",
-      --     noremap = true,
-      --     silent = true,
-      --     desc = "Live Grep",
-      -- },
       {
         "<leader>or",
         "<cmd>lua require('fzf-lua').resume()<CR>",
-        noremap = true,
-        silent = true,
         desc = "Fzf-Lua Resume",
       },
-      -- { "<C-P>", "<cmd>lua require('fzf-lua').files()<CR>", noremap = true, silent = true },
-      { "<leader><Space>", "<cmd>lua require('fzf-lua').files()<CR>", noremap = true, silent = true },
-      -- { "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", noremap = true, silent = true },
-      -- { "<C-T>", "<cmd>lua require('fzf-lua').oldfiles()<CR>", noremap = true, silent = true },
-      -- { "<C-B>", "<cmd>lua require('fzf-lua').buffers()<CR>", noremap = true, silent = true },
-      -- {
-      --     "<leader>gs",
-      --     "<cmd>lua require('fzf-lua').git_status({ winopts = { preview = { hidden = 'nohidden' } } })<CR>",
-      --     noremap = true,
-      --     silent = true,
-      --     desc = "Git Status",
-      -- },
-      {
-        "<leader>/",
-        function()
-          workdirs({ nvim_tmux = true })
-        end,
-        noremap = true,
-        silent = true,
-        desc = "Open dir in new TMUX",
-      },
+      { "<leader><Space>", "<cmd>lua require('fzf-lua').files()<CR>" },
     },
     opts = function()
       vim.api.nvim_set_hl(0, "FZFLuaBorder", { fg = "#9D7CD8" })
@@ -224,14 +192,7 @@ local plugins = {
     "junegunn/fzf.vim",
     cmd = { "Files", "Rg", "Lines", "BLines", "History" },
     keys = {
-      -- { "<C-P>", ":Files<cr>", noremap = true, silent = true },
-      -- { "<leader>ff", ":Files<cr>", noremap = true, silent = true },
-      -- { "<C-T>", ":History<cr>", noremap = true, silent = true },
-      -- { "<C-B>", ":Buffers<cr>", noremap = true, silent = true },
-      { "<leader>r", ":Rg<cr>", noremap = true, silent = true, desc = "Fzf Live Grep" },
-      -- { "<leader>gs", ":GitFiles?<cr>", noremap = true, silent = true },
-      -- { "<leader>cc", "<cmd>lcd ~/.config/nvim | Files<cr>", noremap = true, silent = true },
-      -- { "<leader>b", "<cmd>BLines<cr>", noremap = true, silent = true },
+      { "<leader>r", ":Rg<cr>", desc = "Fzf Live Grep" },
     },
     dependencies = "junegunn/fzf",
     config = require("plugins.config.fzfvim").config,
@@ -293,7 +254,8 @@ local plugins = {
     "rebelot/heirline.nvim",
     -- enabled = false,
     -- event = "BufEnter",
-    event = "VeryLazy",
+    -- event = "VeryLazy",
+    event = { "BufReadPre", "BufNewFile" },
     opts = require("plugins.config.heirline").opts,
   },
   --: }}}
@@ -303,10 +265,10 @@ local plugins = {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     -- enabled = false,
-    -- event = { "BufReadPre", "BufNewFile" },
-    init = function()
-      require("utils").lazy_load("indent-blankline.nvim")
-    end,
+    event = { "BufReadPre", "BufNewFile" },
+    -- init = function()
+    --   require("utils").lazy_load("indent-blankline.nvim")
+    -- end,
     opts = require("plugins.config.blankline").opts,
     config = require("plugins.config.blankline").config,
   },
@@ -406,7 +368,8 @@ local plugins = {
   --: mini.ai {{{
   {
     "echasnovski/mini.ai",
-    event = "VeryLazy",
+    -- event = "VeryLazy",
+    event = { "BufReadPost", "BufNewFile" },
   },
   --: }}}
 
@@ -482,14 +445,6 @@ local plugins = {
   },
   --: }}}
 
-  --: Nabla - preview equations {{{
-  {
-    "jbyuki/nabla.nvim",
-    -- enabled = false,
-    keys = require("plugins.config.others").nabla.keys,
-  },
-  --: }}}
-
   --: neogit (magit for neovim) {{{
   {
     "TimUntersberger/neogit",
@@ -551,10 +506,10 @@ local plugins = {
         "<leader>tz",
         function()
           vim.cmd([[
-                        NoNeckPain
-                        set invnumber
-                        set invrelativenumber
-                    ]])
+            NoNeckPain
+            set invnumber
+            set invrelativenumber
+          ]])
         end,
         desc = "Zen-mode (No-neck-pain)",
       },
@@ -709,6 +664,7 @@ local plugins = {
   --: nvim-jdtls {{{
   {
     "mfussenegger/nvim-jdtls",
+    enabled = false,
     ft = "java",
   },
   --: }}}
@@ -716,10 +672,7 @@ local plugins = {
   --: nvim-lspconfig {{{
   {
     "neovim/nvim-lspconfig",
-    -- event = { "BufReadPre", "BufNewFile" },
-    init = function()
-      require("utils").lazy_load("nvim-lspconfig")
-    end,
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -753,10 +706,7 @@ local plugins = {
     "nvim-treesitter/nvim-treesitter",
     version = false,
     build = ":TSUpdate",
-    init = function()
-      require("utils").lazy_load("nvim-treesitter")
-    end,
-    -- event = { "BufReadPost", "BufNewFile", "VeryLazy" },
+    event = { "BufReadPost", "BufNewFile" },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall", "TSUninstall" },
     opts = require("plugins.config.treesitter").treesitter.opts,
     config = function(_, opts)
@@ -771,7 +721,6 @@ local plugins = {
   {
     "nvim-treesitter/nvim-treesitter-context",
     event = { "BufReadPost", "BufNewFile" },
-    enabled = true,
     opts = { mode = "cursor", max_lines = 3 },
     keys = {
       {
@@ -1007,6 +956,7 @@ local plugins = {
   --: tabout {{{
   {
     "abecodes/tabout.nvim",
+    enabled = false, -- not needed if using ultimate-autopair
     event = "InsertEnter",
     dependencies = { "nvim-treesitter" },
     opts = {
@@ -1094,11 +1044,11 @@ local plugins = {
   --: toggleterm {{{
   {
     "akinsho/toggleterm.nvim",
-    enabled = false,
+    -- enabled = false,
     cmd = { "ToggleTerm" },
     keys = {
       { "<leader>gl", ":LazyGit<cr>", noremap = true, silent = true, desc = "LazyGit" },
-      { "<M-\\>", ":ToggleTerm<cr>", noremap = true, silent = true },
+      -- { "<M-\\>", ":ToggleTerm<cr>", noremap = true, silent = true },
     },
     opts = require("plugins.config.toggleterm").opts,
     config = require("plugins.config.toggleterm").config,
@@ -1235,18 +1185,15 @@ local plugins = {
   --: }}}
 
   --: Misc
-  "nvim-lua/popup.nvim",
-  "nvim-lua/plenary.nvim",
+  -- "nvim-lua/popup.nvim",
+  -- "nvim-lua/plenary.nvim",
   {
     "nvim-tree/nvim-web-devicons",
     opts = function()
       return { override = require("utils").devicons_override }
     end,
   },
-  -- { "tpope/vim-vinegar", event = "VeryLazy" },
   { "moll/vim-bbye", event = "BufReadPost" },
-  -- { "aymericbeaumet/vim-symlink", event = "VeryLazy" },
-  { "dag/vim-fish", ft = "fish" },
   "simrat39/rust-tools.nvim",
   "nanotee/sqls.nvim",
   { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
