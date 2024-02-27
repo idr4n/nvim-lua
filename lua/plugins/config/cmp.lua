@@ -143,25 +143,32 @@ return {
     local cmp = require("cmp")
     cmp.setup(opts)
 
-    local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-    local handlers = require("nvim-autopairs.completion.handlers")
+    -- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+    -- local handlers = require("nvim-autopairs.completion.handlers")
+    --
+    -- cmp.event:on(
+    --   "confirm_done",
+    --   cmp_autopairs.on_confirm_done({
+    --     filetypes = {
+    --       -- "*" is a alias to all filetypes
+    --       ["*"] = {
+    --         ["("] = {
+    --           kind = {
+    --             cmp.lsp.CompletionItemKind.Function,
+    --             cmp.lsp.CompletionItemKind.Method,
+    --           },
+    --           handler = handlers["*"],
+    --         },
+    --       },
+    --     },
+    --   })
+    -- )
 
-    cmp.event:on(
-      "confirm_done",
-      cmp_autopairs.on_confirm_done({
-        filetypes = {
-          -- "*" is a alias to all filetypes
-          ["*"] = {
-            ["("] = {
-              kind = {
-                cmp.lsp.CompletionItemKind.Function,
-                cmp.lsp.CompletionItemKind.Method,
-              },
-              handler = handlers["*"],
-            },
-          },
-        },
-      })
-    )
+    local Kind = cmp.lsp.CompletionItemKind
+    cmp.event:on("confirm_done", function(evt)
+      if vim.tbl_contains({ Kind.Function, Kind.Method }, evt.entry:get_completion_item().kind) then
+        vim.api.nvim_feedkeys("()" .. vim.api.nvim_replace_termcodes("<Left>", true, true, true), "n", false)
+      end
+    end)
   end,
 }
