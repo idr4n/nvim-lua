@@ -62,7 +62,7 @@ keymap("n", "<leader>ti", ":StatusMoreInfo<cr>", { desc = "Status more info" })
 -- Autospelling and zen mode for tex and md files
 vim.api.nvim_create_augroup("tex-md_group", { clear = true })
 vim.api.nvim_create_autocmd("BufRead", {
-  pattern = { "*.tex", "*.md" },
+  pattern = { "*.tex", "*.md", "*.typ" },
   callback = function()
     vim.cmd("setlocal spell spelllang=en_us")
     -- vim.cmd("ZenMode")
@@ -99,6 +99,13 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = { "*.tmpl", "*.gohtml" },
   command = "set filetype=html",
   group = "golang",
+})
+
+-- Typst
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*.typ" },
+  command = "set filetype=typst",
+  group = vim.api.nvim_create_augroup("typst", { clear = true }),
 })
 
 -- SQL
@@ -196,7 +203,7 @@ vim.api.nvim_create_autocmd("User", {
 -- Wrap text for some markdown files and others
 vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("md-tex-aucmd", { clear = true }),
-  pattern = { "markdown", "tex" },
+  pattern = { "markdown", "tex", "typst" },
   callback = function()
     vim.cmd("setlocal wrap")
   end,
