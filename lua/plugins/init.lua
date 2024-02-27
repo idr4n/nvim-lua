@@ -457,6 +457,23 @@ local plugins = {
   },
   --: }}}
 
+  --: Molten... {{{
+  {
+    "benlubas/molten-nvim",
+    -- dependencies = { "3rd/image.nvim" },
+    build = ":UpdateRemotePlugins",
+    keys = { { "<localleader>mi", ":MoltenInit<cr>", desc = "Molten - init kernel" } },
+    config = require("plugins.config.molten").molten.config,
+  },
+  -- {
+  --   "3rd/image.nvim",
+  --   -- enabled = false,
+  --   -- ft = { "quarto" },
+  --   -- init = require("plugins.config.molten").image_nvim.init,
+  --   opts = require("plugins.config.molten").image_nvim.opts,
+  -- },
+  --: }}}
+
   --: monokai-pro {{{
   {
     "loctvl842/monokai-pro.nvim",
@@ -894,13 +911,9 @@ local plugins = {
         config = true,
       },
     },
-    opts = {
-      lspFeatures = {
-        languages = { "r", "python", "julia", "bash", "lua", "html" },
-      },
-    },
+    opts = require("plugins.config.quarto").opts,
     config = function(_, opts)
-      require("quarto").setup(opts)
+      require("plugins.config.quarto").config(opts)
     end,
   },
   --: }}}
