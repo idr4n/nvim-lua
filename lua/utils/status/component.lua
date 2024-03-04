@@ -433,6 +433,7 @@ function M.GitDiffSimple(opts)
       added_icon = "+",
       modified_icon = "~",
       removed_icon = "-",
+      hunks_icon = "*",
     },
 
     hl = opts.hl or {},
@@ -468,8 +469,9 @@ function M.GitDiffSimple(opts)
     },
     {
       provider = function(self)
-        return self.nhunks and string.format("(%s)", self.nhunks)
+        return self.nhunks and string.format("%s%s", self.hunks_icon, self.nhunks)
       end,
+      hl = { fg = "git_change" },
     },
     { provider = " " },
   }

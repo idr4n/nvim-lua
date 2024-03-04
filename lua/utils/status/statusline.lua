@@ -131,6 +131,7 @@ function M.SimpleStatusline(opts)
       hl = { fg = "stealth", force = true },
       children = {
         component.FileNameBlock(),
+        component.GitBranch(),
       },
       condition = function(self)
         return self.show_more_info
@@ -142,7 +143,6 @@ function M.SimpleStatusline(opts)
     component.Section({
       hl = { fg = "stealth" },
       children = {
-        component.GitBranch(),
         component.CharCode(),
         component.Location({ margin = { left = 0 } }),
       },
