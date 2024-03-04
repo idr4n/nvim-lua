@@ -2,6 +2,7 @@
 -- this is needed to make sure options will be correctly applied
 -- after installing missing plugins
 require("config.options")
+local Util = require("utils")
 
 -- make sure to set `mapleader` before lazy so your mappings are correct
 vim.keymap.set("", "<Space>", "<Nop>")
@@ -36,6 +37,11 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
+
+-- Load LazyFile event
+Util.lazy_file()
+
+-- Load plugins
 require("plugins")
 
 --: load colorscheme

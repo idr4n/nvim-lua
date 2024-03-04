@@ -86,7 +86,8 @@ local plugins = {
   {
     "NvChad/nvim-colorizer.lua",
     -- enabled = false,
-    event = "BufReadPost",
+    -- event = "BufReadPost",
+    event = "VeryLazy",
     keys = {
       { ",c", "<cmd>ColorizerToggle<cr>", noremap = true, silent = true },
     },
@@ -97,7 +98,8 @@ local plugins = {
   --: comment.nvim {{{
   {
     "numToStr/Comment.nvim",
-    event = { "BufReadPost", "BufNewFile" },
+    -- event = { "BufReadPost", "BufNewFile" },
+    event = "VeryLazy",
     dependencies = {
       "JoosepAlviste/nvim-ts-context-commentstring",
     },
@@ -141,7 +143,8 @@ local plugins = {
   --: emmet {{{
   {
     "mattn/emmet-vim",
-    event = "InsertEnter",
+    -- event = "InsertEnter",
+    ft = { "htlml", "css", "scss", "javascript", "javascriptreact", "typescripts", "typescriptreact" },
     init = function()
       vim.g.user_emmet_leader_key = "<C-W>"
     end,
@@ -211,7 +214,7 @@ local plugins = {
   --: gitsigns {{{
   {
     "lewis6991/gitsigns.nvim",
-    event = "BufReadPre",
+    event = "LazyFile",
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = require("plugins.config.gitsigns").opts,
   },
@@ -255,8 +258,7 @@ local plugins = {
     "rebelot/heirline.nvim",
     -- enabled = false,
     -- event = "BufEnter",
-    -- event = "VeryLazy",
-    event = { "BufReadPre", "BufNewFile" },
+    event = "VeryLazy",
     opts = require("plugins.config.heirline").opts,
   },
   --: }}}
@@ -266,10 +268,7 @@ local plugins = {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     -- enabled = false,
-    event = { "BufReadPre", "BufNewFile" },
-    -- init = function()
-    --   require("utils").lazy_load("indent-blankline.nvim")
-    -- end,
+    event = "LazyFile",
     opts = require("plugins.config.blankline").opts,
     config = require("plugins.config.blankline").config,
   },
@@ -369,8 +368,7 @@ local plugins = {
   --: mini.ai {{{
   {
     "echasnovski/mini.ai",
-    -- event = "VeryLazy",
-    event = { "BufReadPost", "BufNewFile" },
+    event = "VeryLazy",
   },
   --: }}}
 
@@ -496,7 +494,7 @@ local plugins = {
   {
     -- "jose-elias-alvarez/null-ls.nvim",
     "nvimtools/none-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    event = "LazyFile",
     dependencies = { "mason.nvim" },
     opts = require("plugins.config.nonels").opts,
   },
@@ -557,7 +555,8 @@ local plugins = {
   --: ultimate-autopair {{{
   {
     "altermo/ultimate-autopair.nvim",
-    event = { "InsertEnter", "CmdlineEnter" },
+    -- event = { "InsertEnter", "CmdlineEnter" },
+    event = "VeryLazy",
     branch = "v0.6", --recommended as each new version will have breaking changes
     opts = {
       --Config goes here
@@ -570,7 +569,7 @@ local plugins = {
   {
     "windwp/nvim-autopairs",
     enabled = false,
-    event = { "BufReadPost", "BufNewFile" },
+    event = "VeryLazy",
     config = function()
       local npairs = require("nvim-autopairs")
       npairs.setup()
@@ -607,7 +606,6 @@ local plugins = {
   --: nvim-cmp {{{
   {
     "hrsh7th/nvim-cmp",
-    -- event = "InsertEnter",
     event = { "InsertEnter", "BufReadPost" },
     -- event = { "InsertEnter", "CmdLineEnter" },
     dependencies = {
@@ -677,7 +675,7 @@ local plugins = {
   --: nvim-lspconfig {{{
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
+    event = "LazyFile",
     dependencies = {
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -694,7 +692,6 @@ local plugins = {
   --: NvTerm {{{
   {
     "NvChad/nvterm",
-    event = "BufReadPost",
     keys = function()
       return require("plugins.config.nvterm").keys(require("nvterm.terminal"))
     end,
@@ -711,7 +708,7 @@ local plugins = {
     "nvim-treesitter/nvim-treesitter",
     version = false,
     build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
+    event = { "LazyFile", "VeryLazy" },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall", "TSUninstall" },
     opts = require("plugins.config.treesitter").treesitter.opts,
     config = function(_, opts)
@@ -725,7 +722,7 @@ local plugins = {
   --: nvim-treesitter-context: show context of the current function {{{
   {
     "nvim-treesitter/nvim-treesitter-context",
-    event = { "BufReadPost", "BufNewFile" },
+    event = "LazyFile",
     opts = { mode = "cursor", max_lines = 3 },
     keys = {
       {
@@ -753,7 +750,7 @@ local plugins = {
   --: nvim-ts-autotag: automatically add closing tags for HTML and JSX {{{
   {
     "windwp/nvim-ts-autotag",
-    event = { "BufReadPost", "BufNewFile" },
+    event = "LazyFile",
     opts = {},
   },
   --: }}}
@@ -762,14 +759,13 @@ local plugins = {
   {
     "kevinhwang91/nvim-ufo",
     dependencies = { "kevinhwang91/promise-async" },
-    event = { "BufReadPost", "BufNewFile" },
-        -- stylua: ignore
-        keys = {
-            { "zR", function() require("ufo").openAllFolds() end, },
-            { "zM", function() require("ufo").closeAllFolds() end, },
-            { "z1", function() require("ufo").closeFoldsWith(1) end, },
-            { "z2", function() require("ufo").closeFoldsWith(2) end, },
-        },
+    -- stylua: ignore
+    keys = {
+        { "zR", function() require("ufo").openAllFolds() end, },
+        { "zM", function() require("ufo").closeAllFolds() end, },
+        { "z1", function() require("ufo").closeFoldsWith(1) end, },
+        { "z2", function() require("ufo").closeFoldsWith(2) end, },
+    },
     config = function()
       -- vim.o.foldcolumn = "1"
       vim.o.foldlevel = 99
@@ -992,7 +988,6 @@ local plugins = {
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
-    event = "BufReadPost",
     dependencies = {
       "nvim-lua/popup.nvim",
       "nvim-lua/plenary.nvim",
@@ -1022,7 +1017,7 @@ local plugins = {
   {
     "folke/todo-comments.nvim",
     cmd = { "TodoTrouble", "TodoTelescope" },
-    event = { "BufReadPost", "BufNewFile" },
+    event = "LazyFile",
     keys = {
       { "<leader>zt", "<cmd>TodoTrouble<cr>", noremap = true, silent = true, desc = "TodoTrouble" },
     },
@@ -1103,7 +1098,8 @@ local plugins = {
   --: vim-dirvish {{{
   {
     "justinmk/vim-dirvish",
-    event = "VimEnter",
+    -- event = "VimEnter",
+    keys = { "-" },
     enabled = false,
     config = function()
       vim.g.dirvish_git_show_ignored = 1
@@ -1161,7 +1157,6 @@ local plugins = {
   {
     "gbprod/yanky.nvim",
     -- enabled = false,
-    event = "BufReadPost",
     cmd = { "YankyRingHistory", "YankyClearHistory" },
     keys = {
       -- { ",r", "<cmd>YankyRingHistory<cr>", noremap = true, silent = true },
