@@ -2,17 +2,15 @@ local diagnostic_icons = require("utils").diagnostic_icons
 
 return {
   keys = {
+    { "-", ":Neotree reveal current<CR>", desc = "Neotree current" },
     {
       "<leader>e",
       ":Neotree reveal left toggle<CR>",
-      noremap = true,
-      silent = true,
       desc = "Toggle Neo-Tree",
     },
     {
       "<C-n>",
       ":Neotree reveal show left toggle<CR>",
-      silent = true,
       desc = "Toggle Neo-Tree (No focus)",
     },
     {
@@ -27,15 +25,11 @@ return {
     {
       "<leader>nb",
       ":Neotree toggle show buffers right<CR>",
-      noremap = true,
-      silent = true,
       desc = "Neo-tree Buffers",
     },
     {
       "<leader>ns",
       ":Neotree toggle document_symbols right<CR>",
-      noremap = true,
-      silent = true,
       desc = "Doc Symbols",
     },
   },

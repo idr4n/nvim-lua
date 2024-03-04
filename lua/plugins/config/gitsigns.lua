@@ -40,7 +40,7 @@ return {
         changedelete = {
           hl = "GitSignsChangeDelete",
           -- text = "▍",
-          text = "▎",
+          text = "│",
           -- text = "‾",
           -- text = "▋",
           numhl = "GitSignsChangeNr",
