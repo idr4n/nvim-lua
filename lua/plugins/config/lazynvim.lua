@@ -9,7 +9,7 @@ return {
     enabled = true,
     notify = false,
   },
-  dev = { path = "~/other_repos", patterns = { "idr4n" } },
+  -- dev = { path = "~/other_repos", patterns = { "idr4n" } },
   checker = { enabled = true },
   performance = {
     rtp = {
@@ -18,7 +18,6 @@ return {
         -- "matchit",
         -- "matchparen",
         "netrwPlugin",
-        "rplugin",
         "tarPlugin",
         "tohtml",
         "tutor",

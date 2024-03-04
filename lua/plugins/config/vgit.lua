@@ -44,9 +44,11 @@ M.opts = {
     },
     signs = {
       definitions = {
-        GitSignsAdd = { text = "▎" },
+        -- GitSignsAdd = { text = "▎" },
+        GitSignsAdd = { text = "│" },
         GitSignsDelete = { text = "󰍵" },
-        GitSignsChange = { text = "▎" },
+        -- GitSignsChange = { text = "▎" },
+        GitSignsChange = { text = "│" },
       },
     },
   },

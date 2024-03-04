@@ -190,6 +190,7 @@ local plugins = {
   --: fzf.vim {{{
   {
     "junegunn/fzf.vim",
+    enabled = false,
     cmd = { "Files", "Rg", "Lines", "BLines", "History" },
     keys = {
       { "<leader>r", ":Rg<cr>", desc = "Fzf Live Grep" },
@@ -399,6 +400,10 @@ local plugins = {
         add = "S", -- Add surrounding
         delete = "ds", -- Delete surrounding
         replace = "cs", -- Replace surrounding
+        find = "fsr", -- Find surrounding (to the right)
+        find_left = "fsl", -- Find surrounding (to the left)
+        highlight = "", -- Highlight surrounding
+        update_n_lines = "", -- Update `n_lines`
       },
     },
   },
@@ -1146,7 +1151,7 @@ local plugins = {
   --: which-key {{{
   {
     "folke/which-key.nvim",
-    -- event = "VeryLazy",
+    event = "VeryLazy",
     keys = require("plugins.config.whichkey").keys,
     config = require("plugins.config.whichkey").config,
   },

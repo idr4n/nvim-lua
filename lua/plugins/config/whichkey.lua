@@ -1,5 +1,5 @@
 return {
-  keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g", ",", ";" },
+  -- keys = { "<leader>", "<c-r>", "<c-w>", "z", '"', "'", "`", "c", "v", "g", ",", ";" },
   config = function(_, opts)
     vim.o.timeout = true
     vim.o.timeoutlen = 300

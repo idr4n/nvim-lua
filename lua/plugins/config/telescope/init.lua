@@ -19,7 +19,16 @@ return {
       silent = true,
       desc = "Telescope-find_files",
     },
-    -- { "<leader>r", "<cmd>Telescope live_grep<cr>", noremap = true, silent = true },
+    { "<leader>r", "<cmd>Telescope live_grep<cr>", desc = "" },
+    {
+      "<leader>r",
+      function()
+        local text = vim.getVisualSelection()
+        require("telescope.builtin").live_grep({ default_text = text })
+      end,
+      mode = "v",
+      desc = "Live grep",
+    },
     {
       "<leader>sb",
       function()
@@ -51,8 +60,6 @@ return {
         -- require("telescope.builtin").oldfiles(require("telescope.themes").get_ivy({ previewer = false }))
         require("telescope.builtin").oldfiles()
       end,
-      noremap = true,
-      silent = true,
       desc = "Recent files",
     },
     {

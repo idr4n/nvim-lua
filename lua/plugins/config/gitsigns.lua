@@ -12,14 +12,14 @@ return {
       -- _extmark_signs = false,
       numhl = false,
       signs = {
-        add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-        -- add = { hl = "GitSignsAdd", text = "│", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+        -- add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+        add = { hl = "GitSignsAdd", text = "│", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
         -- add = { hl = "GitSignsAdd", text = "▍", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
         change = {
           hl = "GitSignsChange",
           -- text = "▍",
-          text = "▎",
-          -- text = "│",
+          -- text = "▎",
+          text = "│",
           numhl = "GitSignsChangeNr",
           linehl = "GitSignsChangeLn",
         },

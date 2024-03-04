@@ -26,14 +26,6 @@ M.keys = function(terminal)
       mode = { "n", "t" },
       desc = "Toggle Float term",
     },
-    {
-      "<leader>gl",
-      function()
-        local term = terminal.new("float")
-        vim.api.nvim_chan_send(term.job_id, "lazygit\n")
-      end,
-      desc = "LazyGit",
-    },
   }
 end
 
