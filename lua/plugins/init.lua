@@ -291,6 +291,25 @@ local plugins = {
   },
   --: }}},
 
+  --: lir {{{
+  {
+    "tamago324/lir.nvim",
+    keys = {
+      -- { "-", ":lua require('lir.float').toggle()<cr>" },
+      { "-", "<Cmd>execute 'e ' .. expand('%:p:h')<CR>" },
+    },
+    init = function()
+      if vim.fn.argc(-1) == 1 then
+        local stat = vim.loop.fs_stat(vim.fn.argv(0))
+        if stat and stat.type == "directory" then
+          require("lir.float")
+        end
+      end
+    end,
+    opts = require("plugins.config.lir").opts,
+  },
+  --: }}}
+
   --: luasnip {{{
   {
     "L3MON4D3/LuaSnip",
@@ -462,14 +481,14 @@ local plugins = {
     "nvim-neo-tree/neo-tree.nvim",
     cmd = "Neotree",
     branch = "v3.x",
-    init = function()
-      if vim.fn.argc(-1) == 1 then
-        local stat = vim.loop.fs_stat(vim.fn.argv(0))
-        if stat and stat.type == "directory" then
-          require("neo-tree")
-        end
-      end
-    end,
+    -- init = function()
+    --   if vim.fn.argc(-1) == 1 then
+    --     local stat = vim.loop.fs_stat(vim.fn.argv(0))
+    --     if stat and stat.type == "directory" then
+    --       require("neo-tree")
+    --     end
+    --   end
+    -- end,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
@@ -555,6 +574,7 @@ local plugins = {
   --: ultimate-autopair {{{
   {
     "altermo/ultimate-autopair.nvim",
+    enabled = false,
     -- event = { "InsertEnter", "CmdlineEnter" },
     event = "VeryLazy",
     branch = "v0.6", --recommended as each new version will have breaking changes
@@ -568,7 +588,7 @@ local plugins = {
   --: nvim-autopairs {{{
   {
     "windwp/nvim-autopairs",
-    enabled = false,
+    -- enabled = false,
     event = "VeryLazy",
     config = function()
       local npairs = require("nvim-autopairs")
@@ -789,6 +809,27 @@ local plugins = {
   },
   --: }}}
 
+  --: obsidian.nvim {{{
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*", -- recommended, use latest release instead of latest commit
+    ft = "markdown",
+    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+    -- stylua: ignore
+    -- event = {
+    --   "BufReadPre " .. vim.fn.expand("~") .. "/Sync/Notes-Database/**.md",
+    --   "BufNewFile " .. vim.fn.expand("~") .. "/Sync/Notes-Database/**.md",
+    --   "BufReadPre " .. vim.fn.expand("~") .. "/Sync/Notes-tdo/**.md",
+    --   "BufNewFile " .. vim.fn.expand("~") .. "/Sync/Notes-tdo/**.md",
+    -- },
+    dependencies = {
+      -- Required.
+      "nvim-lua/plenary.nvim",
+    },
+    opts = require("plugins.config.obsidian").opts,
+  },
+  --: }}}
+
   --: oil - file manager {{{
   {
     "stevearc/oil.nvim",
@@ -957,7 +998,7 @@ local plugins = {
   --: tabout {{{
   {
     "abecodes/tabout.nvim",
-    enabled = false, -- not needed if using ultimate-autopair
+    -- enabled = false, -- not needed if using ultimate-autopair
     event = "InsertEnter",
     dependencies = { "nvim-treesitter" },
     opts = {
@@ -1100,7 +1141,16 @@ local plugins = {
     "justinmk/vim-dirvish",
     -- event = "VimEnter",
     keys = { "-" },
+    cmd = "Dirvish",
     enabled = false,
+    init = function()
+      if vim.fn.argc(-1) == 1 then
+        local stat = vim.loop.fs_stat(vim.fn.argv(0))
+        if stat and stat.type == "directory" then
+          vim.cmd("Dirvish")
+        end
+      end
+    end,
     config = function()
       vim.g.dirvish_git_show_ignored = 1
 
