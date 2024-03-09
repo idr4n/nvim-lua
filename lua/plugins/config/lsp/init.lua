@@ -45,7 +45,7 @@ M.on_attach = function(client, bufnr)
       client.server_capabilities.documentFormattingProvider = false
     end
   end
-  local clientsNoHover = { "tailwindcss", "cssmodules_ls" }
+  local clientsNoHover = { "tailwindcss", "cssmodules_ls", "ruff_lsp" }
   for _, v in ipairs(clientsNoHover) do
     if client.name == v then
       client.server_capabilities.hoverProvider = false

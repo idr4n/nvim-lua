@@ -3,7 +3,7 @@ return {
   --     { import = "plugins" },
   -- },
   defaults = { lazy = true },
-  install = { colorscheme = { "tokyonight" } },
+  install = { colorscheme = { "onedark", "tokyonight" } },
   --
   change_detection = {
     enabled = true,

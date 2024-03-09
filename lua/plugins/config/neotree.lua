@@ -2,10 +2,10 @@ local diagnostic_icons = require("utils").diagnostic_icons
 
 return {
   keys = {
-    { "-", ":Neotree reveal current<CR>", desc = "Neotree current" },
+    -- { "-", ":Neotree reveal current<CR>", desc = "Neotree current" },
     {
       "<leader>e",
-      ":Neotree reveal left toggle<CR>",
+      ":Neotree reveal left<CR>",
       desc = "Toggle Neo-Tree",
     },
     {
@@ -39,6 +39,7 @@ return {
     enable_diagnostics = true,
     default_component_configs = {
       indent = {
+        with_markers = false,
         padding = 1,
         with_expanders = true,
       },
@@ -71,7 +72,7 @@ return {
       },
     },
     window = {
-      width = 35,
+      width = 30,
       mappings = {
         ["o"] = "open",
         ["h"] = function(state)
@@ -108,21 +109,6 @@ return {
       follow_current_file = { enabled = true },
       hijack_netrw_behavior = "open_current",
       use_libuv_file_watcher = true,
-    },
-    event_handlers = {
-      {
-        event = "neo_tree_buffer_enter",
-        handler = function(_)
-          vim.opt_local.signcolumn = "auto"
-        end,
-      },
-      {
-        event = "neo_tree_buffer_enter",
-        handler = function(_)
-          vim.opt.statuscolumn = ""
-        end,
-        id = "statuscol",
-      },
     },
     sources = {
       "filesystem",
