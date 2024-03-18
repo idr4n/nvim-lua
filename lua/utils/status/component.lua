@@ -539,7 +539,7 @@ function M.Location(opts)
     -- %L = number of lines in the buffer
     -- %c = column number
     -- %P = percentage through file of displayed window
-    provider = "%3l:%-2c",
+    provider = "%3l:%-2c " .. "%-3L ",
   }
   return build(Ruler, opts)
 end

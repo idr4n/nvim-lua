@@ -192,13 +192,24 @@ keymap("n", "<C-j>", "<C-w>j")
 keymap("n", "<C-k>", "<C-w>k")
 -- keymap("n", "<C-l>", "<C-w>l")
 -- keymap("n", "<C-t>", "<C-w>w")
-keyset("n", "<C-t>", function()
+
+-- smart window cycle with c-t {{{
+local function is_tree_window()
+  local buftype = vim.bo.buftype
+  local filetype = vim.bo.filetype
+  return buftype == "nofile" and (filetype == "neo-tree" or filetype == "NvimTree")
+end
+
+keyset({ "n", "t" }, "<C-t>", function()
   if vim.b.is_zoomed then
     vim.b.is_zoomed = false
     vim.api.nvim_call_function("execute", { vim.w.original_window_layout })
     vim.cmd("wincmd w")
   else
     vim.cmd("wincmd w")
+    if is_tree_window() then
+      vim.cmd("wincmd w")
+    end
   end
 end)
 --: }}}
@@ -314,7 +325,7 @@ keymap("v", "d", '"_d')
 keyset("n", "gm", "m", { desc = "Add mark" })
 keymap("", "m", "d")
 keymap("", "M", "D")
-keymap("", "<leader>m", '"+d', { desc = "Cut to clipboard" })
+-- keymap("", "<leader>m", '"+d', { desc = "Cut to clipboard" })
 keymap("n", "x", '"_x')
 keymap("n", "X", '"_X')
 keyset({ "n", "x", "o" }, "c", '"_c')

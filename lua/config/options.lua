@@ -72,6 +72,8 @@ opt.fillchars = {
   eob = " ",
 }
 
+vim.o.cursorlineopt = "number"
+
 if vim.fn.has("nvim-0.10") == 1 then
   opt.smoothscroll = true
 end

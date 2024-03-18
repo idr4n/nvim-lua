@@ -62,7 +62,7 @@ keymap("n", "<leader>ti", ":StatusMoreInfo<cr>", { desc = "Status more info" })
 -- Autospelling and zen mode for tex and md files
 vim.api.nvim_create_augroup("tex-md_group", { clear = true })
 vim.api.nvim_create_autocmd("BufRead", {
-  pattern = { "*.tex", "*.md", "*.typ" },
+  pattern = { "*.tex", "*.md", "*.typ", "*.qmd" },
   callback = function()
     vim.cmd("setlocal spell spelllang=en_us")
     -- vim.cmd("ZenMode")

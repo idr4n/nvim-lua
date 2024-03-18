@@ -42,7 +42,31 @@ vim.opt.rtp:prepend(lazypath)
 Util.lazy_file()
 
 -- Load plugins
-require("plugins")
+require("lazy").setup("plugins", {
+  defaults = { lazy = true },
+  install = { colorscheme = { "onedark", "tokyonight" } },
+  --
+  change_detection = { notify = false },
+  -- dev = { path = "~/other_repos", patterns = { "idr4n" } },
+  checker = { enabled = false },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        -- "matchit",
+        -- "matchparen",
+        "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
+  },
+  ui = {
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+  },
+})
 
 --: load colorscheme
 -- require("tokyonight").load()
@@ -52,9 +76,9 @@ require("onedark").load()
 -- vim.cmd("colorscheme catppuccin-frappe")
 -- vim.cmd("colorscheme catppuccin-macchiato")
 -- vim.cmd("colorscheme catppuccin-mocha")
--- require("plugins.config.colorschemes").rosepine.setup()
--- require("plugins.config.colorschemes").rosepine.setup("dark")
--- require("plugins.config.colorschemes").wind.setup()
--- require("plugins.config.colorschemes").github.setup()
--- require("plugins.config.colorschemes").darkplus.setup()
--- require("plugins.config.colorschemes").NvimDefault.setup()
+-- require("config.colorschemes").rosepine.setup()
+-- require("config.colorschemes").rosepine.setup("dark")
+-- require("config.colorschemes").wind.setup()
+-- require("config.colorschemes").github.setup()
+-- require("config.colorschemes").darkplus.setup()
+-- require("config.colorschemes").NvimDefault.setup()

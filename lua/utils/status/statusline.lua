@@ -172,8 +172,8 @@ function M.SimpleStatusline(opts)
     },
     component.GitDiffSimple({
       margin = { left = 0, right = 0 },
-      -- hl = { bg = "#232A2E", fg = "comment", force = false },
-      hl = { bg = "bg_lighten_less", fg = "comment", force = true },
+      hl = { bg = "#232A2E", fg = "comment", force = false },
+      -- hl = { bg = "bg_lighten_less", fg = "comment", force = true },
     }),
     component.Section({
       padding = { left = 1 },
