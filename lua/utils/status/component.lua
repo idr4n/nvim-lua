@@ -471,7 +471,7 @@ function M.GitDiffSimple(opts)
       provider = function(self)
         return self.nhunks and string.format("%s%s", self.hunks_icon, self.nhunks)
       end,
-      hl = { fg = "git_change" },
+      hl = { fg = "purple" },
     },
     { provider = " " },
   }
@@ -562,7 +562,8 @@ end
 function M.SearchCount(opts)
   local SearchCount = {
     condition = function()
-      return vim.v.hlsearch ~= 0 and vim.o.cmdheight == 0
+      -- return vim.v.hlsearch ~= 0 and vim.o.cmdheight == 0
+      return vim.v.hlsearch ~= 0
     end,
     provider = provider.search_count,
   }
@@ -595,6 +596,23 @@ function M.Special(opts)
   return build(Special, opts)
 end
 
+---@param opts? Opts
+---@return Component
+function M.GetWords(opts)
+  local Updates = {
+    provider = function()
+      if vim.fn.wordcount().visual_words == nil then
+        return " " .. tostring(vim.fn.wordcount().words)
+      end
+      return " " .. tostring(vim.fn.wordcount().visual_words)
+    end,
+    condition = function()
+      return vim.bo.filetype == "md" or vim.bo.filetype == "text" or vim.bo.filetype == "markdown"
+    end,
+  }
+  return build(Updates, opts)
+end
+
 --- Noice status command
 ---@param opts? Opts
 ---@return Component
@@ -604,7 +622,10 @@ function M.StatusCmd(opts)
       return require("noice").api.status.command.get()
     end,
     condition = function()
-      return package.loaded["noice"] and require("noice").api.status.command.has()
+      return vim.fn.wordcount().visual_words ~= nil
+        and vim.o.cmdheight == 0
+        and package.loaded["noice"]
+        and require("noice").api.status.command.has()
     end,
     hl = { fg = "purple" },
   }
