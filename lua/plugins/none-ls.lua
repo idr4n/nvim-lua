@@ -20,7 +20,7 @@ return {
         -- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
         formatting.prettier.with({
           extra_args = { "--single-quote", "--jsx-single-quote" },
-          disabled_filetypes = { "markdown", "html", "vue" },
+          disabled_filetypes = { "markdown", "html", "vue", "json" },
           extra_filetype = { "svelte" },
         }),
 

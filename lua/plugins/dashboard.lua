@@ -1,5 +1,6 @@
 return {
   "nvimdev/dashboard-nvim",
+  enabled = false,
   event = "VimEnter",
   keys = {
     { "<leader>od", "<cmd>Dashboard<cr>", desc = "Open Dashboard" },
@@ -69,6 +70,30 @@ return {
     --     pattern = "DashboardLoaded",
     --     command = "set laststatus=0",
     -- })
+
+    local dash_group = vim.api.nvim_create_augroup("idr4n/dashboard", { clear = true })
+    vim.api.nvim_create_autocmd("User", {
+      group = dash_group,
+      desc = "Minimal UI in Dashboard",
+      pattern = "DashboardLoaded",
+      once = true,
+      callback = function(args)
+        vim.o.laststatus = 0
+        vim.o.showtabline = 0
+        vim.o.cmdheight = 0
+
+        vim.api.nvim_create_autocmd("BufUnload", {
+          group = dash_group,
+          buffer = args.buf,
+          once = true,
+          callback = function()
+            vim.o.laststatus = 3
+            vim.o.showtabline = 2
+            vim.o.cmdheight = 1
+          end,
+        })
+      end,
+    })
 
     return opts
   end,

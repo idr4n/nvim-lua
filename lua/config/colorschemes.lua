@@ -49,10 +49,16 @@ M.wind = {
   setup = function()
     vim.cmd("colorscheme wind")
     if vim.g.colors_name == "wind" then
-      local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
+      -- local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
+      local float_hl = vim.api.nvim_get_hl(0, { name = "NormalFloat" })
       vim.api.nvim_set_hl(0, "CursorLine", { bg = "#002E40" })
       vim.api.nvim_set_hl(0, "StatusLine", { bg = "#00354A" })
       vim.api.nvim_set_hl(0, "LineNr", { fg = "#536B76" })
+      vim.api.nvim_set_hl(0, "WhichKeyFloat", { fg = float_hl.fg, bg = float_hl.bg })
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
+      vim.api.nvim_set_hl(0, "FloatBorder", { bg = "NONE" })
+      vim.api.nvim_set_hl(0, "TreesitterContextBottom", { underline = true, sp = "#12ADE0" })
+      vim.api.nvim_set_hl(0, "NeoTreeCursorLine", { bg = "#00445E" })
     end
   end,
 }
@@ -69,6 +75,8 @@ M.github = {
       vim.api.nvim_set_hl(0, "CursorLine", { bg = "#F6F8FA" })
       vim.api.nvim_set_hl(0, "StatusLine", { bg = "#F1F3F5" })
       vim.api.nvim_set_hl(0, "NeoTreeWinSeparator", { fg = "#F6F8FA", bg = "#F6F8FA" })
+      vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "#FFFFFF" })
+      vim.api.nvim_set_hl(0, "TreesitterContextBottom", { underline = true, sp = "#24292F" })
 
       -- -- if changing background to something else such as #FAFAFA
       -- vim.api.nvim_set_hl(0, "CursorLine", { bg = "#EFF0F2" })

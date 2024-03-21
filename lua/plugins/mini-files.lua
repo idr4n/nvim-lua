@@ -1,7 +1,7 @@
 return {
   "echasnovski/mini.files",
   keys = {
-    { "-", ":lua require('mini.files').open()<cr>", desc = "Mini Files" },
+    { "-", ":lua require('mini.files').open()<cr>", silent = true, desc = "Mini Files" },
     {
       "<C-Q>",
       function()
@@ -12,6 +12,7 @@ return {
           require("mini.files").open(bufname, false)
         end
       end,
+      silent = true,
       desc = "Mini Files",
     },
     -- { "<leader>m", ":lua require('mini.files').open()<cr>", desc = "Mini Files" },
@@ -24,12 +25,26 @@ return {
       end
     end
   end,
-  opts = {
-    mappings = {
-      show_help = "?",
-      go_in_plus = "<cr>",
-      go_out_plus = "<tab>",
-    },
-    windows = { width_nofocus = 25 },
-  },
+  opts = function()
+    local copy_path = function()
+      local cur_entry_path = require("mini.files").get_fs_entry().path
+      vim.fn.setreg("+", cur_entry_path)
+      print("Path copied to clipboard!")
+    end
+    vim.api.nvim_create_autocmd("User", {
+      group = vim.api.nvim_create_augroup("idr4n/mini-files", { clear = true }),
+      pattern = "MiniFilesBufferCreate",
+      callback = function(args)
+        vim.keymap.set("n", "Y", copy_path, { buffer = args.data.buf_id })
+      end,
+    })
+    return {
+      mappings = {
+        show_help = "?",
+        go_in_plus = "l",
+        go_out_plus = "<tab>",
+      },
+      windows = { width_nofocus = 25 },
+    }
+  end,
 }

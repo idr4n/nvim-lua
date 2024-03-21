@@ -1,9 +1,10 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    version = false,
+    -- version = false,
     build = ":TSUpdate",
-    event = { "LazyFile", "VeryLazy" },
+    -- event = { "LazyFile", "VeryLazy" },
+    event = { "LazyFile" },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall", "TSUninstall" },
     opts = {
       autotag = {
@@ -53,7 +54,7 @@ return {
         "vue",
         "zig",
       },
-      autopairs = { enable = true },
+      -- autopairs = { enable = true },
       highlight = { enable = true, additional_vim_regex_highlighting = false },
       indent = { enable = true },
       -- context_commentstring = { enable = true, enable_autocmd = false },
@@ -70,7 +71,10 @@ return {
     "nvim-treesitter/nvim-treesitter-context",
     -- enabled = false,
     event = "LazyFile",
-    opts = { mode = "cursor", max_lines = 3 },
+    opts = {
+      max_lines = 3,
+      multiline_threshold = 1,
+    },
     keys = {
       {
         "<leader>tt",

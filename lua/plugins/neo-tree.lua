@@ -21,11 +21,13 @@ return {
     {
       "<leader>e",
       ":Neotree reveal left<CR>",
+      silent = true,
       desc = "Toggle Neo-Tree",
     },
     {
       "<C-n>",
       ":Neotree reveal show left toggle<CR>",
+      silent = true,
       desc = "Toggle Neo-Tree (No focus)",
     },
     {
@@ -33,6 +35,7 @@ return {
       function()
         require("neo-tree.command").execute({ source = "git_status", toggle = true })
       end,
+      silent = true,
       desc = "Neo-tree Git",
     },
     { "<leader>nt", ":Neotree reveal left toggle<CR>", noremap = true, silent = true, desc = "Toggle Neo-Tree" },
@@ -40,11 +43,13 @@ return {
     {
       "<leader>nb",
       ":Neotree toggle show buffers right<CR>",
+      silent = true,
       desc = "Neo-tree Buffers",
     },
     {
       "<leader>ns",
       ":Neotree toggle document_symbols right<CR>",
+      silent = true,
       desc = "Doc Symbols",
     },
   },
@@ -54,7 +59,8 @@ return {
     return {
       close_if_last_window = true,
       popup_border_style = "rounded",
-      enable_diagnostics = true,
+      enable_diagnostics = false,
+      enable_git_status = false,
       default_component_configs = {
         indent = {
           with_markers = false,

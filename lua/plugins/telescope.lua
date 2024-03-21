@@ -77,33 +77,33 @@ return {
       --   end,
       --   desc = "Recent files",
       -- },
-      {
-        "<leader>gs",
-        "<cmd>lua require('telescope.builtin').git_status({ initial_mode = 'normal' })<cr>",
-        noremap = true,
-        silent = true,
-      },
-      -- { "<leader>sh", "<cmd>Telescope help_tags<cr>", noremap = true, silent = true, desc = "Help pages" },
       -- {
-      --   "<leader>sh",
-      --   function()
-      --     local text = vim.getVisualSelection()
-      --     require("telescope.builtin").help_tags({ default_text = text })
-      --   end,
-      --   mode = "v",
+      --   "<leader>gs",
+      --   "<cmd>lua require('telescope.builtin').git_status({ initial_mode = 'normal' })<cr>",
       --   noremap = true,
       --   silent = true,
-      --   desc = "Help pages with selection",
       -- },
+      { "<leader>sh", "<cmd>Telescope help_tags<cr>", noremap = true, silent = true, desc = "Help pages" },
       {
-        "gd",
+        "<leader>sh",
         function()
-          require("telescope.builtin").lsp_definitions(require("telescope.themes").get_ivy({ initial_mode = "normal" }))
+          local text = vim.getVisualSelection()
+          require("telescope.builtin").help_tags({ default_text = text })
         end,
+        mode = "v",
         noremap = true,
         silent = true,
-        desc = "Go to LSP definition",
+        desc = "Help pages with selection",
       },
+      -- {
+      --   "gd",
+      --   function()
+      --     require("telescope.builtin").lsp_definitions(require("telescope.themes").get_ivy({ initial_mode = "normal" }))
+      --   end,
+      --   noremap = true,
+      --   silent = true,
+      --   desc = "Go to LSP definition",
+      -- },
       {
         "<leader>ld",
         function()
@@ -114,20 +114,20 @@ return {
         desc = "Go to definition",
       },
       -- {  "gr", "<cmd>Telescope lsp_references<cr>",  noremap = true, silent = true  },
-      {
-        "<leader>ls",
-        "<cmd>Telescope lsp_document_symbols theme=ivy<cr>",
-        noremap = true,
-        silent = true,
-        desc = "LSP document symbols",
-      },
-      {
-        "<leader>lS",
-        "<cmd>Telescope lsp_dynamic_workspace_symbols theme=ivy<cr>",
-        noremap = true,
-        silent = true,
-        desc = "LSP workspace symbols",
-      },
+      -- {
+      --   "<leader>ls",
+      --   "<cmd>Telescope lsp_document_symbols theme=ivy<cr>",
+      --   noremap = true,
+      --   silent = true,
+      --   desc = "LSP document symbols",
+      -- },
+      -- {
+      --   "<leader>lS",
+      --   "<cmd>Telescope lsp_dynamic_workspace_symbols theme=ivy<cr>",
+      --   noremap = true,
+      --   silent = true,
+      --   desc = "LSP workspace symbols",
+      -- },
       { "<leader>os", "<cmd>Telescope luasnip theme=ivy<cr>", noremap = true, silent = true, desc = "LuaSnips" },
       {
         "<leader>sc",
@@ -145,16 +145,16 @@ return {
         silent = true,
         desc = "Jumplist",
       },
-      {
-        "<leader>sk",
-        function()
-          -- require("telescope.builtin").keymaps(require("telescope.themes").get_ivy())
-          require("telescope.builtin").keymaps()
-        end,
-        noremap = true,
-        silent = true,
-        desc = "Key maps",
-      },
+      -- {
+      --   "<leader>sk",
+      --   function()
+      --     -- require("telescope.builtin").keymaps(require("telescope.themes").get_ivy())
+      --     require("telescope.builtin").keymaps()
+      --   end,
+      --   noremap = true,
+      --   silent = true,
+      --   desc = "Key maps",
+      -- },
       {
         "<leader>zw",
         "<cmd>lua require('conf.telescope.workdirs-picker').set_workdir()<CR>",
@@ -163,27 +163,6 @@ return {
         desc = "Change workdir",
       },
       { ",u", "<cmd>Telescope undo<cr>", noremap = true, silent = true },
-      -- {
-      --     "-",
-      --     function()
-      --         require("telescope").extensions.file_browser.file_browser({
-      --             initial_mode = "normal",
-      --             path = "%:p:h",
-      --             select_buffer = true,
-      --         })
-      --     end,
-      --     desc = "Telescope file_browser",
-      -- },
-      {
-        "<leader>ob",
-        function()
-          require("telescope").extensions.file_browser.file_browser({
-            initial_mode = "normal",
-            files = false,
-          })
-        end,
-        desc = "Telescope folder_browser",
-      },
     },
     opts = function()
       local actions = require("telescope.actions")
@@ -365,20 +344,6 @@ return {
               },
             },
           },
-          file_browser = {
-            theme = "ivy",
-            hide_parent_dir = true,
-            mappings = {
-              ["i"] = {
-                -- your custom insert mode mappings
-              },
-              ["n"] = {
-                ["-"] = require("telescope").extensions.file_browser.actions.goto_parent_dir,
-                ["h"] = require("telescope").extensions.file_browser.actions.goto_parent_dir,
-                ["."] = require("telescope").extensions.file_browser.actions.toggle_hidden,
-              },
-            },
-          },
         },
       }
     end,
@@ -389,12 +354,6 @@ return {
       telescope.load_extension("luasnip")
       telescope.load_extension("ui-select")
       telescope.load_extension("undo")
-      require("telescope").load_extension("file_browser")
     end,
-  },
-
-  {
-    "nvim-telescope/telescope-file-browser.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
   },
 }

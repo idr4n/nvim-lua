@@ -3,3 +3,4 @@ lazy-lock.json
 workdirs.lua
 workdirs.txt
 plugin/packer_compiled.lua
+lua/plugins/inbox.lua

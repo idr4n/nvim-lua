@@ -44,7 +44,7 @@ Util.lazy_file()
 -- Load plugins
 require("lazy").setup("plugins", {
   defaults = { lazy = true },
-  install = { colorscheme = { "onedark", "tokyonight" } },
+  install = { colorscheme = { "tokyonight" } },
   --
   change_detection = { notify = false },
   -- dev = { path = "~/other_repos", patterns = { "idr4n" } },

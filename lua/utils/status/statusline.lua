@@ -128,7 +128,7 @@ function M.SimpleStatusline(opts)
     -- hl = { fg = "status_fg", bg = "normal_bg" },
     hl = { fg = "fg_darken", bg = "normal_bg" },
     component.Section({
-      hl = { fg = "stealth", force = true },
+      hl = { fg = "stealth", bg = "status_bg", force = true },
       children = {
         component.FileNameBlock(),
         component.GitBranch(),
@@ -137,12 +137,26 @@ function M.SimpleStatusline(opts)
         return self.show_more_info
       end,
     }),
-    component.Align,
-    component.SearchCount(),
-    component.Align,
+    -- component.Align,
     component.Section({
-      hl = { fg = "stealth" },
+      hl = function(self)
+        return self.show_more_info and { fg = "stealth", bg = "status_bg" } or {}
+      end,
+      children = { component.Align },
+    }),
+    component.SearchCount(),
+    -- component.Align,
+    component.Section({
+      hl = function(self)
+        return self.show_more_info and { fg = "stealth", bg = "status_bg" } or {}
+      end,
+      children = { component.Align },
+    }),
+    component.Section({
+      -- hl = { fg = "stealth" },
+      hl = { fg = "stealth", bg = "status_bg" },
       children = {
+        component.GetWords(),
         component.CharCode(),
         component.Location({ margin = { left = 0 } }),
       },
@@ -150,7 +164,8 @@ function M.SimpleStatusline(opts)
         return self.show_more_info
       end,
     }),
-    component.StatusMode({ sep = { left = " " } }),
+    -- component.StatusCmd(),
+    -- component.StatusMode({ sep = { left = " " } }),
     component.SectionModeBg({
       margin = { left = 0, right = 0 },
       color = { bold = true },
@@ -172,8 +187,8 @@ function M.SimpleStatusline(opts)
     },
     component.GitDiffSimple({
       margin = { left = 0, right = 0 },
-      hl = { bg = "#232A2E", fg = "comment", force = false },
-      -- hl = { bg = "bg_lighten_less", fg = "comment", force = true },
+      -- hl = { bg = "#232A2E", fg = "comment", force = false },
+      hl = { bg = "bg_lighten_less", fg = "comment", force = false },
     }),
     component.Section({
       padding = { left = 1 },

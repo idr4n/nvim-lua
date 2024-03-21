@@ -3,7 +3,7 @@ return {
   dependencies = "nvim-lua/plenary.nvim",
   keys = {
     { "<leader>cc", ":RunCode<CR>", noremap = true, silent = false, desc = "Code run" },
-    { "<leader>cf", ":RunFile float<CR>", noremap = true, silent = false, desc = "File run" },
+    { "<leader>cC", ":RunFile float<CR>", noremap = true, silent = false, desc = "File run" },
   },
   config = function()
     require("code_runner").setup({

@@ -1,7 +1,7 @@
 return {
   "akinsho/bufferline.nvim",
-  enabled = false,
-  event = "VeryLazy",
+  -- enabled = false,
+  event = "BufReadPost",
   keys = {
     { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
     { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
@@ -12,27 +12,35 @@ return {
   },
   opts = function()
     local bufferline = require("bufferline")
-    local hl_separator_bg = { bg = { attribute = "bg", highlight = "StatusLine" } }
-    local hl_separator_fg = { fg = { attribute = "bg", highlight = "StatusLine" } }
-    -- local hl_separator_fg = { fg = "#1E2030" }
-    -- local hl_separator_bg = { bg = "#1E2030" }
     return {
       highlights = {
-        separator = hl_separator_fg,
-        tab_separator = hl_separator_fg,
-        tab_separator_selected = hl_separator_fg,
-        separator_selected = hl_separator_fg,
-        separator_visible = hl_separator_fg,
-        fill = hl_separator_bg,
+        fill = { bg = { attribute = "bg", highlight = "StatusLine" } },
+        background = { bg = { attribute = "bg", highlight = "StatusLine" } },
+        close_button = { bg = { attribute = "bg", highlight = "StatusLine" } },
+        offset_separator = { bg = { attribute = "bg", highlight = "StatusLine" } },
+        trunc_marker = { bg = { attribute = "bg", highlight = "StatusLine" } },
+        duplicate = { bg = { attribute = "bg", highlight = "StatusLine" } },
+        close_button_selected = { fg = "#B55A67" },
+        separator = { bg = { attribute = "bg", highlight = "StatusLine" } },
+        modified = { fg = "#B55A67", bg = { attribute = "bg", highlight = "StatusLine" } },
+        hint = { bg = { attribute = "bg", highlight = "StatusLine" } },
+        hint_diagnostic = { bg = { attribute = "bg", highlight = "StatusLine" } },
+        info = { bg = { attribute = "bg", highlight = "StatusLine" } },
+        info_diagnostic = { bg = { attribute = "bg", highlight = "StatusLine" } },
+        warning = { bg = { attribute = "bg", highlight = "StatusLine" } },
+        warning_diagnostic = { bg = { attribute = "bg", highlight = "StatusLine" } },
+        error = { bg = { attribute = "bg", highlight = "StatusLine" } },
+        error_diagnostic = { bg = { attribute = "bg", highlight = "StatusLine" } },
       },
       options = {
         buffer_close_icon = "",
         diagnostics = "nvim_lsp",
-        always_show_bufferline = false,
+        always_show_bufferline = true,
+        indicator = {
+          -- icon = "▎", -- this should be omitted if indicator style is not 'icon'
+          style = "none", -- "icon" | "underline" | "none",
+        },
         diagnostics_indicator = function(_, _, diag)
-          -- local ret = diag.error and (" " .. diag.error)
-          --     or (diag.warning and (" " .. diag.warning))
-          --     or diag.hint and (" " .. diag.hint)
           local icons = require("utils").diagnostic_icons
           local ret = (diag.error and icons.Error .. diag.error .. " " or "")
             .. (diag.warning and icons.Warn .. diag.warning .. " " or "")
@@ -52,19 +60,19 @@ return {
           bufferline.style_preset.no_italic,
           bufferline.style_preset.no_bold,
         },
-        separator_style = "slant", -- slope is also nice
+        -- separator_style = "slope", -- slant or slope is also nice
       },
     }
   end,
-  config = function(_, opts)
-    require("bufferline").setup(opts)
-    -- Fix bufferline when restoring a session
-    vim.api.nvim_create_autocmd("BufAdd", {
-      callback = function()
-        vim.schedule(function()
-          pcall(nvim_bufferline)
-        end)
-      end,
-    })
-  end,
+  -- config = function(_, opts)
+  --   require("bufferline").setup(opts)
+  --   -- Fix bufferline when restoring a session
+  --   vim.api.nvim_create_autocmd("BufAdd", {
+  --     callback = function()
+  --       vim.schedule(function()
+  --         pcall(nvim_bufferline)
+  --       end)
+  --     end,
+  --   })
+  -- end,
 }

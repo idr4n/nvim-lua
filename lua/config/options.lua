@@ -11,7 +11,7 @@ opt.breakindent = true -- Every wrapped line will continue visually indented
 opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
 opt.cmdheight = 1
 opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
-opt.conceallevel = 1 -- hide some markup such as `` and * in markdown files
+opt.conceallevel = 2 -- hide some markup such as `` and * in markdown files
 -- opt.concealcursor = "nc" -- conceal in normal/command mode (not in insert/visual)
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.cursorline = true -- highlight the current line
@@ -27,7 +27,7 @@ opt.linebreak = true -- Break lines in spaces not in the middle of a word
 opt.list = true -- Show some invisible characters (tabs...
 opt.mouse = "a" -- allow the mouse to be used in neovim
 opt.number = true -- set numbered lines
-opt.pumheight = 10 -- pop up menu height
+opt.pumheight = 15 -- pop up menu height
 opt.relativenumber = true -- set relative numbered lines
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 opt.scrolloff = 8 -- Lines of context
@@ -49,7 +49,7 @@ opt.updatetime = 300 -- control CursorHold event waiting time (4000ms default)
 opt.wrap = false -- display lines as one long line
 opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 
-opt.shortmess:append({ W = true, I = true, c = true, C = true })
+opt.shortmess:append({ I = true, c = true, C = true, S = true, W = true, s = true })
 opt.nrformats:append("alpha") -- increments letters sequences as well with <c-a>
 
 -- statuscolumn
@@ -102,3 +102,12 @@ vim.g.netrw_banner = 1
 vim.g.netrw_winsize = 25
 vim.g.netrw_fastbrowse = 0
 vim.g.netrw_bufsettings = "noma nomod nu nowrap ro nobl"
+
+-- Use ripgrep for grepping.
+vim.o.grepprg = "rg --vimgrep"
+vim.o.grepformat = "%f:%l:%c:%m"
+
+-- Disable health checks for these providers.
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_node_provider = 0

@@ -1,9 +1,14 @@
 return {
   "voldikss/vim-floaterm",
   keys = {
-    { ",l", ":FloatermNew --title=LF --titleposition=center lf<cr>", desc = "Open LF" },
-    { ",j", ":FloatermNew --title=Joshuto --titleposition=center joshuto<cr>", desc = "Open Joshuto" },
-    { "<leader>j", ":FloatermNew --title=Joshuto --titleposition=center joshuto<cr>", desc = "Open Joshuto" },
+    { ",l", ":FloatermNew --title=LF --titleposition=center lf<cr>", silent = true, desc = "Open LF" },
+    { ",j", ":FloatermNew --title=Joshuto --titleposition=center joshuto<cr>", silent = true, desc = "Open Joshuto" },
+    {
+      "<leader>j",
+      ":FloatermNew --title=Joshuto --titleposition=center joshuto<cr>",
+      silent = true,
+      desc = "Open Joshuto",
+    },
   },
   config = function()
     local function calcFloatSize()

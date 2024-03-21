@@ -54,6 +54,21 @@ return {
     })
 
     return {
+      enabled = function()
+        -- Disable cmp in big files
+        local size_limit = 2 * 1024 * 1024 -- 2 MiB
+        local bufnr = vim.api.nvim_get_current_buf()
+        local ok, stats = pcall(function()
+          return vim.loop.fs_stat(vim.api.nvim_buf_get_name(bufnr))
+        end)
+        if not (ok and stats) then
+          return
+        end
+        if stats.size > size_limit then
+          return false
+        end
+        return true
+      end,
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)

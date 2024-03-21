@@ -325,8 +325,8 @@ end
 function M.lang_version()
   local filetype = vim.bo.filetype
   local lang_v = _G.lang_versions[filetype]
-  local version = lang_v and lang_v or ""
-  return " (" .. filetype .. " " .. version .. ") "
+  local version = lang_v and " " .. lang_v or ""
+  return " (" .. filetype .. version .. ") "
 end
 
 function M.filetype()

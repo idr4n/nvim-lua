@@ -6,14 +6,16 @@ return {
     "williamboman/mason-lspconfig.nvim",
   },
   config = function()
-    local on_attach = require("config.lsp").on_attach
+    local lsp_conf = require("config.lsp")
+    local methods = vim.lsp.protocol.Methods
+    local icons = require("utils").diagnostic_icons
 
     local opts = {
       signs = {
-        { name = "DiagnosticSignError", text = "" },
-        { name = "DiagnosticSignWarn", text = "" },
-        { name = "DiagnosticSignHint", text = "" },
-        { name = "DiagnosticSignInfo", text = "" },
+        { name = "DiagnosticSignError", text = icons.Error },
+        { name = "DiagnosticSignWarn", text = icons.Warn },
+        { name = "DiagnosticSignHint", text = icons.Hint },
+        { name = "DiagnosticSignInfo", text = icons.Info },
       },
 
       diagnostics = {
@@ -83,7 +85,7 @@ return {
             },
             server = {
               on_attach = function(client, bufnr)
-                on_attach(client, bufnr)
+                lsp_conf.on_attach(client, bufnr)
                 local rt = require("rust-tools")
                 vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
               end,
@@ -116,14 +118,21 @@ return {
     end
     vim.diagnostic.config(opts.diagnostics)
 
-    -- Comment out if using noice.nvim
-    -- -- hover, signatureHelp, and Lsp floating window border
-    -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    --     border = "rounded",
-    -- })
-    -- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    --     border = "rounded",
-    -- })
+    -- If not using noice.nvim, configure hover and signatureHelp
+    if not package.loaded["noice"] then
+      if vim.fn.has("nvim-0.10.0") == 1 then
+        vim.lsp.handlers[methods.textDocument_hover] = lsp_conf.enhanced_float_handler(vim.lsp.handlers.hover, true)
+        vim.lsp.handlers[methods.textDocument_signatureHelp] =
+          lsp_conf.enhanced_float_handler(vim.lsp.handlers.signature_help, false)
+      else
+        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+          border = "rounded",
+        })
+        vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+          border = "rounded",
+        })
+      end
+    end
 
     require("lspconfig.ui.windows").default_options.border = "rounded"
 
@@ -143,7 +152,7 @@ return {
 
     local function setup(server)
       local server_opts = vim.tbl_deep_extend("force", {
-        on_attach = on_attach,
+        on_attach = lsp_conf.on_attach,
         capabilities = vim.deepcopy(capabilities),
       }, servers[server] or {})
 
@@ -195,7 +204,7 @@ return {
     ]])
 
     require("lspconfig").sourcekit.setup({
-      on_attach = on_attach,
+      on_attach = lsp_conf.on_attach,
       capabilities = capabilities,
       filetypes = { "swift" },
     })

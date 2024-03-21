@@ -1,6 +1,6 @@
 return {
   "folke/noice.nvim",
-  -- enabled = false,
+  enabled = false,
   event = "VeryLazy",
   -- stylua: ignore
   keys = {

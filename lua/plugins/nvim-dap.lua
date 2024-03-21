@@ -4,9 +4,27 @@ return {
     dependencies = {
       {
         "rcarriga/nvim-dap-ui",
-        config = function()
-          require("dapui").setup()
-        end,
+        dependencies = { "nvim-neotest/nvim-nio" },
+        -- config = function()
+        --   require("dapui").setup()
+        -- end,
+      },
+      -- Virtual text.
+      {
+        "theHamsta/nvim-dap-virtual-text",
+        opts = { virt_text_pos = "eol" },
+      },
+      -- JS/TS debugging.
+      {
+        "mxsdev/nvim-dap-vscode-js",
+        opts = {
+          debugger_path = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug",
+          adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" },
+        },
+      },
+      {
+        "microsoft/vscode-js-debug",
+        build = "npm i && npm run compile vsDebugServerBundle && rm -rf out && mv -f dist out",
       },
       { "jbyuki/one-small-step-for-vimkind" },
     },

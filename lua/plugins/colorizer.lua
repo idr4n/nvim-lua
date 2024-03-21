@@ -1,6 +1,6 @@
 return {
   "NvChad/nvim-colorizer.lua",
-  -- enabled = false,
+  enabled = false,
   -- event = "BufReadPost",
   event = "VeryLazy",
   keys = {

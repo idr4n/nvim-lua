@@ -7,39 +7,47 @@ return {
     {
       "<leader>or",
       "<cmd>lua require('fzf-lua').resume()<CR>",
+      silent = true,
       desc = "Fzf-Lua Resume",
     },
     -- { "<leader><Space>", "<cmd>lua require('fzf-lua').files()<CR>" },
     { "<C-P>", "<cmd>FzfLua files<cr>", desc = "Find files" },
-    { "<leader>r", "<cmd>FzfLua live_grep_glob<cr>", desc = "Live Grep" },
+    -- { "<leader>r", "<cmd>FzfLua live_grep_glob<cr>", desc = "Live Grep" },
+    { "<leader>r", "<cmd>FzfLua grep_project<cr>", desc = "Grep Project" },
     {
       "<leader>fw",
-      ":lua require('fzf-lua').live_grep_glob({query = vim.fn.expand('<cword>')})<CR>",
+      -- ":lua require('fzf-lua').live_grep_glob({query = vim.fn.expand('<cword>')})<CR>",
+      ":lua require('fzf-lua').grep_cword()<CR>",
+      silent = true,
       desc = "Grep current word",
     },
     {
       "<leader>r",
       function()
-        local text = vim.getVisualSelection()
-        require("fzf-lua").live_grep_glob({ query = text })
+        -- local text = vim.getVisualSelection()
+        -- require("fzf-lua").live_grep_glob({ query = text })
+        require("fzf-lua").grep_visual()
       end,
       mode = "v",
+      silent = true,
       desc = "Live Grep",
     },
-    { "<leader>sh", "<cmd>FzfLua help_tags<cr>", desc = "Help tags" },
+    -- { "<leader>sh", "<cmd>FzfLua help_tags<cr>", desc = "Help tags" },
+    -- {
+    --   "<leader>sh",
+    --   function()
+    --     local text = vim.getVisualSelection()
+    --     require("fzf-lua").help_tags({ query = text })
+    --   end,
+    --   mode = "v",
+    --   silent = true,
+    --   desc = "Help tags",
+    -- },
     {
       "<leader>fh",
       ":lua require('fzf-lua').help_tags({query = vim.fn.expand('<cword>')})<CR>",
+      silent = true,
       desc = "Help current word",
-    },
-    {
-      "<leader>fc",
-      function()
-        local text = vim.getVisualSelection()
-        require("fzf-lua").help_tags({ query = text })
-      end,
-      mode = "v",
-      desc = "Help tags",
     },
     {
       "<leader>fr",
@@ -48,7 +56,44 @@ return {
         vim.cmd("rshada!")
         require("fzf-lua").oldfiles()
       end,
+      silent = true,
       desc = "Recently opened files",
+    },
+    { "<leader>sk", "<cmd>FzfLua keymaps<cr>", desc = "Key maps" },
+    {
+      "gd",
+      function()
+        require("fzf-lua").lsp_definitions({ jump_to_single_result = true })
+      end,
+      silent = true,
+      desc = "Go to LSP definition",
+    },
+    {
+      "gD",
+      "<cmd>FzfLua lsp_definitions<cr>",
+      silent = true,
+      desc = "Peek definition",
+    },
+    {
+      "<leader>ls",
+      "<cmd>FzfLua lsp_document_symbols<cr>",
+      silent = true,
+      desc = "LSP document symbols",
+    },
+    {
+      "<leader>lS",
+      function()
+        -- Disable the grep switch header.
+        require("fzf-lua").lsp_live_workspace_symbols({ no_header_i = true })
+      end,
+      silent = true,
+      desc = "LSP workspace symbols",
+    },
+    {
+      "<leader>gs",
+      "<cmd>FzfLua git_status<cr>",
+      silent = true,
+      desc = "Git Status",
     },
   },
   opts = function()
@@ -92,7 +137,6 @@ return {
         ["fg"] = { "fg", "CursorLine" },
         ["bg"] = { "bg", "Normal" },
         ["hl"] = { "fg", "Comment" },
-        -- ["fg+"] = { "fg", "ModeMsg" },
         ["fg+"] = { "fg", "Normal" },
         ["bg+"] = { "bg", "CursorLine" },
         ["hl+"] = { "fg", "Statement" },
@@ -111,11 +155,11 @@ return {
         winopts = {
           preview = { hidden = "hidden" },
         },
+        _fzf_nth_devicons = false,
       },
       grep = {
         rg_opts = "--hidden --column --follow --line-number --no-heading "
           .. "--color=always --smart-case -g '!{node_modules,.git,**/_build,deps,.elixir_ls,**/target,**/assets/node_modules,**/assets/vendor,**/.next,**/.vercel,**/build,**/out}'",
-        prompt = "  ",
       },
       oldfiles = {
         include_current_session = true,
@@ -135,9 +179,6 @@ return {
           ["ctrl-q"] = "select-all+accept", -- send all to quick list
         },
       },
-      -- needed for kitty for better icon rendering
-      file_icon_padding = " ",
-      nbsp = "\xc2\xa0",
     }
   end,
 }
