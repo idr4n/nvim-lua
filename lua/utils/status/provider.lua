@@ -16,42 +16,6 @@ function M.mode_long(self)
   return " " .. self.mode_names[self.mode] .. " "
 end
 
-local function get_cwd()
-  local function realpath(path)
-    if path == "" or path == nil then
-      return nil
-    end
-    return vim.loop.fs_realpath(path) or path
-  end
-
-  return realpath(vim.loop.cwd()) or ""
-end
-
----@return fun():string
-function M.pretty_dirpath()
-  return function()
-    local path = vim.fn.expand("%:p") --[[@as string]]
-
-    if path == "" then
-      return ""
-    end
-    local cwd = get_cwd()
-
-    if path:find(cwd, 1, true) == 1 then
-      path = path:sub(#cwd + 2)
-    end
-
-    local sep = package.config:sub(1, 1)
-    local parts = vim.split(path, "[\\/]")
-    table.remove(parts)
-    if #parts > 3 then
-      parts = { parts[1], "…", parts[#parts - 1], parts[#parts] }
-    end
-
-    return #parts > 0 and (table.concat(parts, sep) .. "/") or ""
-  end
-end
-
 function M.scrollbar(self)
   local curr_line = vim.api.nvim_win_get_cursor(0)[1]
   local lines = vim.api.nvim_buf_line_count(0)

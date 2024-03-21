@@ -305,7 +305,7 @@ function M.FileNameBlock(opts)
     end,
   }
   local FileDir = {
-    provider = provider.pretty_dirpath(),
+    provider = require("utils").pretty_dirpath(),
   }
   local FileName = {
     provider = function(self)

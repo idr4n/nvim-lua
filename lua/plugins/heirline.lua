@@ -1,6 +1,6 @@
 return {
   "rebelot/heirline.nvim",
-  -- enabled = false,
+  enabled = false,
   -- event = "BufEnter",
   event = "VeryLazy",
   opts = function()
