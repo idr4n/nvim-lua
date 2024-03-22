@@ -198,7 +198,8 @@ function M.search_count()
   end
 
   -- local hl_match = _G.show_more_info and "%#SLNormal#" or "%#SLStealth#"
-  local hl_match = "%#SLStealth#"
+  -- local hl_match = "%#SLStealth#"
+  local hl_match = "%#SLBgLightenLess#"
 
   if count.incomplete == 1 then
     return "%#SLMatches# ?/? " .. hl_match
@@ -233,9 +234,9 @@ end
 function M.get_words()
   if vim.bo.filetype == "md" or vim.bo.filetype == "text" or vim.bo.filetype == "markdown" then
     if vim.fn.wordcount().visual_words == nil then
-      return " " .. "%#SLBufNr#" .. " " .. tostring(vim.fn.wordcount().words) .. "%#SLNormal#" .. " "
+      return " " .. " " .. tostring(vim.fn.wordcount().words) .. " "
     end
-    return " " .. "%#SLBufNr#" .. " " .. tostring(vim.fn.wordcount().visual_words) .. "%#SLNormal#" .. " "
+    return " " .. " " .. tostring(vim.fn.wordcount().visual_words) .. " "
   else
     return ""
   end
@@ -288,9 +289,9 @@ function M.git_status(opts)
     local removed = ""
 
     if opts.mono then
-      added = gitsigns.added > 0 and " " .. diff_icons.added .. gitsigns.added or ""
-      changed = gitsigns.changed > 0 and " " .. diff_icons.modified .. gitsigns.changed or ""
-      removed = gitsigns.removed > 0 and " " .. diff_icons.removed .. gitsigns.removed or ""
+      added = (gitsigns.added or 0) > 0 and " " .. diff_icons.added .. gitsigns.added or ""
+      changed = (gitsigns.changed or 0) > 0 and " " .. diff_icons.modified .. gitsigns.changed or ""
+      removed = (gitsigns.removed or 0) > 0 and " " .. diff_icons.removed .. gitsigns.removed or ""
 
       return total_changes > 0
           and M.get_or_create_hl("SLStealth", "SLBgLightenLess") .. added .. changed .. removed .. " "
@@ -325,8 +326,13 @@ end
 function M.lang_version()
   local filetype = vim.bo.filetype
   local lang_v = _G.lang_versions[filetype]
-  local version = lang_v and " " .. lang_v or ""
-  return " (" .. filetype .. version .. ") "
+  return lang_v and " (" .. filetype .. " " .. lang_v .. ") " or ""
+end
+
+function M.cwd()
+  local hl = "%#SLBgLighten#"
+  local name = hl .. "  " .. vim.loop.cwd():match("([^/\\]+)[/\\]*$") .. " "
+  return (vim.o.columns > 85 and name) or ""
 end
 
 function M.filetype()

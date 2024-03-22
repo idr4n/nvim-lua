@@ -21,11 +21,12 @@ local comment_hl = vim.api.nvim_get_hl(0, { name = "Comment" })
 local string_hl = vim.api.nvim_get_hl(0, { name = "String" })
 
 local stealth = normal_hl.bg and ut.darken(string.format("#%06x", normal_hl.bg), 0.7) or colors.stealth
-local bg_lighten = normal_hl.bg and ut.lighten(string.format("#%06x", normal_hl.bg), 0.96) or colors.bg_lighten
+local fg_lighten = normal_hl.bg and ut.darken(string.format("#%06x", normal_hl.bg), 0.6) or colors.stealth
+local bg_lighten = normal_hl.bg and ut.lighten(string.format("#%06x", normal_hl.bg), 0.95) or colors.bg_lighten
 local bg_lighten_less = normal_hl.bg and ut.lighten(string.format("#%06x", normal_hl.bg), 0.98) or colors.bg_lighten
 
 vim.api.nvim_set_hl(0, "SLStealth", { fg = stealth, bg = normal_hl.bg })
-vim.api.nvim_set_hl(0, "SLBgLighten", { fg = comment_hl.fg, bg = bg_lighten })
+vim.api.nvim_set_hl(0, "SLBgLighten", { fg = fg_lighten, bg = bg_lighten })
 vim.api.nvim_set_hl(0, "SLBgLightenLess", { fg = comment_hl.fg, bg = bg_lighten_less })
 vim.api.nvim_set_hl(0, "StatusReplace", { bg = colors.red, fg = statusline_hl.bg, bold = true })
 vim.api.nvim_set_hl(0, "StatusInsert", { bg = colors.insert, fg = statusline_hl.bg, bold = true })
@@ -54,10 +55,13 @@ function Status_line()
   end
 
   local components = {
-    "%#SLStealth#",
+    c.cwd(),
+    -- "%#SLStealth#",
+    "%#SLBgLightenLess#",
     _G.show_more_info and c.fileinfo() or "",
     _G.show_more_info and c.git_branch() or "",
     "%=",
+    _G.show_more_info and c.get_words() or "",
     c.search_count(),
     "%=",
     _G.show_more_info and c.lang_version() or "",
