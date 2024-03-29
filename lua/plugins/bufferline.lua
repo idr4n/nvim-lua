@@ -1,7 +1,7 @@
 return {
   "akinsho/bufferline.nvim",
   -- enabled = false,
-  event = "BufReadPost",
+  event = { "BufReadPost", "BufNewFile" },
   keys = {
     { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
     { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
@@ -33,6 +33,7 @@ return {
         error_diagnostic = { bg = { attribute = "bg", highlight = "StatusLine" } },
       },
       options = {
+        -- show_buffer_close_icons = false,
         buffer_close_icon = "",
         diagnostics = "nvim_lsp",
         always_show_bufferline = true,

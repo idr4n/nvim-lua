@@ -1,5 +1,5 @@
 return {
   "windwp/nvim-ts-autotag",
-  event = "LazyFile",
+  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   opts = {},
 }

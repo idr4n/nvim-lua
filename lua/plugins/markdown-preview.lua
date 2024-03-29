@@ -5,7 +5,7 @@ return {
   build = function()
     vim.fn["mkdp#util#install"]()
   end,
-  config = function()
-    vim.g.mkdp_browser = "Vivaldi"
-  end,
+  -- config = function()
+  --   vim.g.mkdp_browser = "Vivaldi"
+  -- end,
 }

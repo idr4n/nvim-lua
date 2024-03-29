@@ -2,7 +2,7 @@ return {
   "lukas-reineke/indent-blankline.nvim",
   main = "ibl",
   -- enabled = false,
-  event = "LazyFile",
+  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   opts = {
     indent = {
       char = "│",

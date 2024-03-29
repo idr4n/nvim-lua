@@ -25,13 +25,13 @@ return {
     dashboard.section.buttons.val = {
       dashboard.button("e", "󰈔  New file", ":ene <BAR> startinsert <CR>"),
       -- dashboard.button("f", "󰱼  Find file", ":Files<cr>"),
-      dashboard.button("f", "󰱼  Find file", ":lua require('fzf-lua').files()<cr>"),
-      -- dashboard.button(
-      --     "f",
-      --     "󰈞  Find file",
-      --     -- ":lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>"
-      --     ":lua require('telescope.builtin').find_files()<cr>"
-      -- ),
+      -- dashboard.button("f", "󰱼  Find file", ":lua require('fzf-lua').files()<cr>"),
+      dashboard.button(
+        "f",
+        "󰈞  Find file",
+        -- ":lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>"
+        ":lua require('telescope.builtin').find_files()<cr>"
+      ),
       dashboard.button("t", "󰄉  File History", ":Telescope oldfiles<cr>"),
       dashboard.button("r", "󰺮  Find text", ":FzfLua live_grep_glob<cr>"),
       -- dashboard.button("r", "󰺮  Find text", "<cmd>Telescope live_grep<cr>"),

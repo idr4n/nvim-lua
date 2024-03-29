@@ -1,6 +1,6 @@
 return {
   "lewis6991/gitsigns.nvim",
-  event = "LazyFile",
+  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   dependencies = { "nvim-lua/plenary.nvim" },
   opts = function()
     -- redefine gitsigns colors

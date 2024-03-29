@@ -1,5 +1,6 @@
 return {
   "ekickx/clipboard-image.nvim",
+  enabled = false,
   ft = "markdown",
   opts = {
     -- Default configuration for all filetype

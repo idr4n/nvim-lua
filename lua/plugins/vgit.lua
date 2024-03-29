@@ -24,18 +24,8 @@ return {
   },
   opts = {
     keymaps = {
-      ["n <C-k>"] = function()
-        require("vgit").hunk_up()
-      end,
-      ["n <C-j>"] = function()
-        require("vgit").hunk_down()
-      end,
-      ["n [c"] = function()
-        require("vgit").hunk_up()
-      end,
-      ["n ]c"] = function()
-        require("vgit").hunk_down()
-      end,
+      ["n [c"] = "hunk_up",
+      ["n ]c"] = "hunk_down",
     },
     settings = {
       live_blame = { enabled = false },

@@ -1,7 +1,7 @@
 return {
   -- "jose-elias-alvarez/null-ls.nvim",
   "nvimtools/none-ls.nvim",
-  event = "LazyFile",
+  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   dependencies = { "mason.nvim" },
   opts = function()
     local null_ls = require("null-ls")

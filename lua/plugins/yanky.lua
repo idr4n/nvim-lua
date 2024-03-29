@@ -3,10 +3,8 @@ return {
   -- enabled = false,
   cmd = { "YankyRingHistory", "YankyClearHistory" },
   keys = {
-    -- { ",r", "<cmd>YankyRingHistory<cr>", noremap = true, silent = true },
-    -- { ",r", "<cmd>Telescope yank_history<cr>", noremap = true, silent = true },
     {
-      ",y",
+      "<leader>oy",
       "<cmd>lua require('telescope').extensions.yank_history.yank_history({ initial_mode = 'normal' })<cr>",
       noremap = true,
       silent = true,

@@ -10,8 +10,8 @@ return {
       silent = true,
       desc = "Fzf-Lua Resume",
     },
-    -- { "<leader><Space>", "<cmd>lua require('fzf-lua').files()<CR>" },
-    { "<C-P>", "<cmd>FzfLua files<cr>", desc = "Find files" },
+    { "<leader><Space>", "<cmd>lua require('fzf-lua').files()<CR>" },
+    -- { "<C-P>", "<cmd>FzfLua files<cr>", desc = "Find files" },
     -- { "<leader>r", "<cmd>FzfLua live_grep_glob<cr>", desc = "Live Grep" },
     { "<leader>r", "<cmd>FzfLua grep_project<cr>", desc = "Grep Project" },
     {
@@ -32,6 +32,7 @@ return {
       silent = true,
       desc = "Live Grep",
     },
+    { "<leader>sb", "<cmd>FzfLua grep_curbuf<cr>", desc = "Grep buffer" },
     -- { "<leader>sh", "<cmd>FzfLua help_tags<cr>", desc = "Help tags" },
     -- {
     --   "<leader>sh",
@@ -59,7 +60,7 @@ return {
       silent = true,
       desc = "Recently opened files",
     },
-    { "<leader>sk", "<cmd>FzfLua keymaps<cr>", desc = "Key maps" },
+    -- { "<leader>sk", "<cmd>FzfLua keymaps<cr>", desc = "Key maps" },
     {
       "gd",
       function()
@@ -176,7 +177,8 @@ return {
         },
         fzf = {
           ["ctrl-l"] = "toggle-preview",
-          ["ctrl-q"] = "select-all+accept", -- send all to quick list
+          -- ["ctrl-q"] = "select-all+accept", -- send all to quick list
+          ["ctrl-f"] = "select-all+accept", -- send all to quick list
         },
       },
     }

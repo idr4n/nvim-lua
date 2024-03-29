@@ -25,8 +25,8 @@ return {
       --     desc = "Telescope-find_files",
       -- },
       {
-        -- "<C-P>",
-        "<leader><Space>",
+        "<C-P>",
+        -- "<leader><Space>",
         function()
           require("telescope.builtin").find_files()
         end,
@@ -44,15 +44,15 @@ return {
       --   mode = "v",
       --   desc = "Live grep",
       -- },
-      {
-        "<leader>sb",
-        function()
-          require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_ivy())
-        end,
-        noremap = true,
-        silent = true,
-        desc = "Fuzzy find in current buffer",
-      },
+      -- {
+      --   "<leader>sb",
+      --   function()
+      --     require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_ivy())
+      --   end,
+      --   noremap = true,
+      --   silent = true,
+      --   desc = "Fuzzy find in current buffer",
+      -- },
       { "<leader>ot", "<cmd>Telescope resume<cr>", noremap = true, silent = true, desc = "Telescope Resume" },
       {
         "s",
@@ -145,23 +145,23 @@ return {
         silent = true,
         desc = "Jumplist",
       },
-      -- {
-      --   "<leader>sk",
-      --   function()
-      --     -- require("telescope.builtin").keymaps(require("telescope.themes").get_ivy())
-      --     require("telescope.builtin").keymaps()
-      --   end,
-      --   noremap = true,
-      --   silent = true,
-      --   desc = "Key maps",
-      -- },
       {
-        "<leader>zw",
-        "<cmd>lua require('conf.telescope.workdirs-picker').set_workdir()<CR>",
+        "<leader>sk",
+        function()
+          -- require("telescope.builtin").keymaps(require("telescope.themes").get_ivy())
+          require("telescope.builtin").keymaps()
+        end,
         noremap = true,
         silent = true,
-        desc = "Change workdir",
+        desc = "Key maps",
       },
+      -- {
+      --   "<leader>zw",
+      --   "<cmd>lua require('conf.telescope.workdirs-picker').set_workdir()<CR>",
+      --   noremap = true,
+      --   silent = true,
+      --   desc = "Change workdir",
+      -- },
       { ",u", "<cmd>Telescope undo<cr>", noremap = true, silent = true },
     },
     opts = function()
@@ -187,7 +187,9 @@ return {
           layout_strategy = "flex",
 
           layout_config = {
-            preview_cutoff = 1, -- Preview should always show (unless previewer = false)
+            preview_cutoff = 120,
+            width = 0.87,
+            height = 0.80,
             flex = {
               flip_columns = 120,
             },
@@ -208,12 +210,11 @@ return {
               -- width = function(_, max_columns, _)
               --     return math.min(max_columns, 140)
               -- end,
-              height = 0.78,
               -- height = function(_, _, max_lines)
               --     return math.min(max_lines, 35)
               -- end,
               prompt_position = "top",
-              -- preview_width = 0.54,
+              preview_width = 0.50,
             },
           },
 
@@ -322,13 +323,14 @@ return {
         },
         extensions = {
           ["ui-select"] = {
-            -- require("telescope.themes").get_dropdown({
-            -- 	layout_config = {
-            -- 		height = function(_, _, max_lines)
-            -- 			return math.min(max_lines, 10)
-            -- 		end,
-            -- 	},
-            require("telescope.themes").get_cursor(),
+            require("telescope.themes").get_dropdown({
+              layout_config = {
+                height = function(_, _, max_lines)
+                  return math.min(max_lines, 12)
+                end,
+              },
+            }),
+            -- require("telescope.themes").get_cursor(),
           },
           undo = {
             mappings = {

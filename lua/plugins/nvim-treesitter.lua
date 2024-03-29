@@ -3,8 +3,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     -- version = false,
     build = ":TSUpdate",
-    -- event = { "LazyFile", "VeryLazy" },
-    event = { "LazyFile" },
+    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall", "TSUninstall" },
     opts = {
       autotag = {
@@ -70,7 +69,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-context",
     -- enabled = false,
-    event = "LazyFile",
+    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     opts = {
       max_lines = 3,
       multiline_threshold = 1,
@@ -82,6 +81,18 @@ return {
           require("treesitter-context").toggle()
         end,
         desc = "Toggle Treesitter Context",
+      },
+      {
+        "[[",
+        function()
+          -- Jump to previous change when in diffview.
+          vim.schedule(function()
+            require("treesitter-context").go_to_context()
+          end)
+          return "<Ignore>"
+        end,
+        desc = "Jump to upper context",
+        expr = true,
       },
     },
   },

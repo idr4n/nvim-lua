@@ -1,20 +1,18 @@
 return {
   "voldikss/vim-floaterm",
+  -- stylua: ignore
   keys = {
     { ",l", ":FloatermNew --title=LF --titleposition=center lf<cr>", silent = true, desc = "Open LF" },
     { ",j", ":FloatermNew --title=Joshuto --titleposition=center joshuto<cr>", silent = true, desc = "Open Joshuto" },
-    {
-      "<leader>j",
-      ":FloatermNew --title=Joshuto --titleposition=center joshuto<cr>",
-      silent = true,
-      desc = "Open Joshuto",
-    },
+    { ",y", ":FloatermNew --title=Yazi --titleposition=center yazi --cwd-file ~/.cache/yazi/last_dir %<cr>", silent = true, desc = "Open Yazi" },
+    { "<leader>ff", ":FloatermNew --title=Yazi --titleposition=center yazi --cwd-file ~/.cache/yazi/last_dir %<cr>", silent = true, desc = "Open Yazi" },
+    { "<leader>j", ":FloatermNew --title=Joshuto --titleposition=center joshuto<cr>", silent = true, desc = "Open Joshuto", },
   },
   config = function()
     local function calcFloatSize()
       return {
-        width = math.min(math.ceil(vim.fn.winwidth(0) * 0.93), 200),
-        height = math.min(math.ceil(vim.fn.winheight(0) * 0.85), 40),
+        width = math.min(math.ceil(vim.fn.winwidth(0) * 0.97), 180),
+        height = math.min(math.ceil(vim.fn.winheight(0) * 0.8), 45),
       }
     end
 
