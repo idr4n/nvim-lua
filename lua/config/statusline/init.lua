@@ -17,7 +17,7 @@ local colors = {
 
 local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
 local statusline_hl = vim.api.nvim_get_hl(0, { name = "StatusLine" })
-local comment_hl = vim.api.nvim_get_hl(0, { name = "Comment" })
+-- local comment_hl = vim.api.nvim_get_hl(0, { name = "Comment" })
 local string_hl = vim.api.nvim_get_hl(0, { name = "String" })
 
 local stealth = normal_hl.bg and ut.darken(string.format("#%06x", normal_hl.bg), 0.7) or colors.stealth
@@ -25,9 +25,10 @@ local fg_lighten = normal_hl.bg and ut.darken(string.format("#%06x", normal_hl.b
 local bg_lighten = normal_hl.bg and ut.lighten(string.format("#%06x", normal_hl.bg), 0.95) or colors.bg_lighten
 local bg_lighten_less = normal_hl.bg and ut.lighten(string.format("#%06x", normal_hl.bg), 0.98) or colors.bg_lighten
 
-vim.api.nvim_set_hl(0, "SLStealth", { fg = stealth, bg = normal_hl.bg })
+-- vim.api.nvim_set_hl(0, "SLStealth", { fg = stealth, bg = normal_hl.bg })
 vim.api.nvim_set_hl(0, "SLBgLighten", { fg = fg_lighten, bg = bg_lighten })
-vim.api.nvim_set_hl(0, "SLBgLightenLess", { fg = comment_hl.fg, bg = bg_lighten_less })
+-- vim.api.nvim_set_hl(0, "SLBgLightenLess", { fg = comment_hl.fg, bg = bg_lighten_less })
+vim.api.nvim_set_hl(0, "SLBgLightenLess", { fg = stealth, bg = bg_lighten_less })
 vim.api.nvim_set_hl(0, "StatusReplace", { bg = colors.red, fg = statusline_hl.bg, bold = true })
 vim.api.nvim_set_hl(0, "StatusInsert", { bg = colors.insert, fg = statusline_hl.bg, bold = true })
 vim.api.nvim_set_hl(0, "StatusVisual", { bg = colors.select, fg = statusline_hl.bg, bold = true })
@@ -37,13 +38,18 @@ vim.api.nvim_set_hl(0, "StatusCommand", { bg = colors.yellow, fg = statusline_hl
 vim.api.nvim_set_hl(0, "StatusDir", { fg = string_hl.fg, bg = statusline_hl.bg, bold = true })
 vim.api.nvim_set_hl(0, "SLFileName", { fg = statusline_hl.fg, bg = statusline_hl.bg, bold = true })
 vim.api.nvim_set_hl(0, "SLNotModifiable", { fg = colors.yellow, bg = statusline_hl.bg })
-vim.api.nvim_set_hl(0, "SLNormal", { fg = stealth, bg = statusline_hl.bg })
+vim.api.nvim_set_hl(0, "SLNormal", { fg = fg_lighten, bg = statusline_hl.bg })
 vim.api.nvim_set_hl(0, "SLBufNr", { fg = "#4E546B", bg = statusline_hl.bg })
 vim.api.nvim_set_hl(0, "SLModified", { fg = "#FF7EB6", bg = statusline_hl.bg })
 vim.api.nvim_set_hl(0, "SLMatches", { fg = "#2C2A2E", bg = "#3DDBD9" })
 vim.api.nvim_set_hl(0, "SLGitHunks", { fg = colors.insert, bg = bg_lighten_less })
 
-function Status_line()
+---@return string
+---@param opts? {status:number, mono:boolean}
+function Status_line(opts)
+  opts = vim.tbl_extend("force", { status = 1, mono = true }, opts)
+  local num = vim.tbl_contains({ 1, 2 }, opts.status) and opts.status or 1
+  local mono = opts.mono
   local statusline = ""
   local filetype = vim.bo.filetype
 
@@ -51,7 +57,7 @@ function Status_line()
     local home_dir = os.getenv("HOME")
     local dir = vim.fn.getcwd()
     dir = dir:gsub("^" .. home_dir, "~")
-    return c.decorator(dir)
+    return c.decorator({ name = dir, align = num == 1 and "right" or "left" })
   end
 
   local components = {
@@ -69,23 +75,45 @@ function Status_line()
     _G.show_more_info and c.get_position() or "",
     c.mode(),
     c.filetype(),
-    _G.show_more_info and c.git_status() or "",
-    not _G.show_more_info and c.git_hunks() or "",
-    c.lsp_diagnostic(),
+    _G.show_more_info and c.git_status({ mono = mono }) or "",
+    not _G.show_more_info and c.git_hunks({ mono = mono }) or "",
+    c.lsp_diagnostic({ mono = mono }),
   }
 
-  statusline = table.concat(components)
+  local components2 = {
+    c.mode(),
+    c.filetype(),
+    "%#SLBgLightenLess#",
+    _G.show_more_info and c.fileinfo() or "",
+    _G.show_more_info and c.git_branch() or "",
+    -- _G.show_more_info and c.git_status({ mono = mono }) or "",
+    -- not _G.show_more_info and c.git_hunks({ mono = mono }) or "",
+    c.git_status({ mono = mono }),
+    c.lsp_diagnostic({ mono = mono }),
+    "%=%#SLBgLightenLess#",
+    _G.show_more_info and c.get_words() or "",
+    c.search_count(),
+    "%=",
+    _G.show_more_info and c.lang_version() or "",
+    _G.show_more_info and " Ux%04B" or "",
+    _G.show_more_info and c.get_position() or "",
+    c.cwd(),
+  }
+
+  statusline = num == 1 and table.concat(components) or table.concat(components2)
 
   return statusline
 end
 
-vim.o.statusline = "%!v:lua.Status_line()"
+-- vim.o.statusline = "%!v:lua.Status_line(2)"
+vim.o.statusline = '%!luaeval("Status_line({ status = 2, mono = false })")'
 
 vim.api.nvim_create_augroup("statusline", { clear = true })
 vim.api.nvim_create_autocmd("DiagnosticChanged", {
   pattern = { "*" },
   callback = function()
-    vim.o.statusline = "%!v:lua.Status_line()"
+    -- vim.o.statusline = "%!v:lua.Status_line()"
+    vim.cmd("redrawstatus!")
   end,
   group = "statusline",
 })

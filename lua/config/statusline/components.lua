@@ -55,9 +55,12 @@ local mode_color = {
 }
 
 ---@return string
----@param name string
-function M.decorator(name)
-  return "%=%#StatusNormal# " .. name .. " %#SLNormal#"
+---@param opts? {name:string, align:string}
+function M.decorator(opts)
+  opts = vim.tbl_extend("force", { name = " ", align = "left" }, opts)
+  local align = vim.tbl_contains({ "left", "right" }, opts.align) and opts.align or "left"
+  local name = opts.name
+  return (align == "right" and "%=" or "") .. "%#StatusNormal# " .. name .. " %#SLNormal#"
 end
 
 function M.mode()
@@ -100,6 +103,8 @@ function M.get_or_create_hl(hl_fg, hl_bg)
   return "%#" .. hl_name .. "#"
 end
 
+---@return string
+---@param opts? {mono:boolean}
 local function file_icon(opts)
   opts = opts or { mono = true }
   local icon, icon_highlight_group = devicons.get_icon(vim.fn.expand("%:t"))
@@ -112,10 +117,10 @@ local function file_icon(opts)
     icon_highlight_group = "DevIconDefault"
   end
 
-  local hl_icon = "%#SLStealth#"
+  local hl_icon = "%#SLBgLightenLess#"
 
   if not opts.mono then
-    hl_icon = M.get_or_create_hl(icon_highlight_group)
+    hl_icon = M.get_or_create_hl(icon_highlight_group, "SLBgLightenLess")
   end
 
   if not vim.bo.modifiable then
@@ -258,17 +263,23 @@ function M.status_command()
   return command_str .. mode_str
 end
 
-function M.git_hunks()
+---@return string
+---@param opts? {mono:boolean}
+function M.git_hunks(opts)
+  opts = opts or { mono = true }
   local hunks = require("gitsigns").get_hunks()
   local nhunks = hunks and #hunks or 0
   local status = ""
   local hunk_icon = " "
   if nhunks > 0 then
-    status = M.get_or_create_hl("SLStealth", "SLBgLightenLess") .. " " .. hunk_icon .. nhunks
+    status = opts.mono and "%#SLBgLightenLess#" .. " " .. hunk_icon .. nhunks
+      or "%#SLGitHunks#" .. " " .. hunk_icon .. nhunks
   end
   return nhunks > 0 and status .. " " or ""
 end
 
+---@return string
+---@param opts? {mono:boolean}
 function M.git_status(opts)
   opts = opts or { mono = true }
   local gitsigns = vim.b.gitsigns_status_dict
@@ -293,19 +304,17 @@ function M.git_status(opts)
       changed = (gitsigns.changed or 0) > 0 and " " .. diff_icons.modified .. gitsigns.changed or ""
       removed = (gitsigns.removed or 0) > 0 and " " .. diff_icons.removed .. gitsigns.removed or ""
 
-      return total_changes > 0
-          and M.get_or_create_hl("SLStealth", "SLBgLightenLess") .. added .. changed .. removed .. " "
-        or ""
+      return total_changes > 0 and "%#SLBgLightenLess#" .. added .. changed .. removed .. " " or ""
     else
-      if gitsigns.added > 0 then
+      if gitsigns.added and gitsigns.added > 0 then
         added = M.get_or_create_hl("GitSignsAdd", "SLBgLightenLess") .. " " .. diff_icons.added .. gitsigns.added
       end
       -- stylua: ignore
-      if gitsigns.changed > 0 then
+      if gitsigns.changed and gitsigns.changed > 0 then
         changed = M.get_or_create_hl("GitSignsChange", "SLBgLightenLess") .. " " .. diff_icons.modified .. gitsigns.changed
       end
       -- stylua: ignore
-      if gitsigns.removed > 0 then
+      if gitsigns.removed and gitsigns.removed > 0 then
         removed = M.get_or_create_hl("GitSignsDelete", "SLBgLightenLess") .. " " .. diff_icons.removed .. gitsigns.removed
       end
     end
@@ -340,6 +349,8 @@ function M.filetype()
   return "%#SLBgLighten# " .. filetype:upper() .. " "
 end
 
+---@return string
+---@param opts? {mono:boolean}
 function M.lsp_diagnostic(opts)
   opts = opts or { mono = true }
   local icons = require("utils").diagnostic_icons
@@ -361,18 +372,12 @@ function M.lsp_diagnostic(opts)
   local hints = ""
 
   if opts.mono then
-    errors = result.errors > 0
-        and M.get_or_create_hl("SLStealth", "SLBgLightenLess") .. " " .. icons.Error .. result.errors
-      or ""
-    warnings = result.warnings > 0
-        and M.get_or_create_hl("SLStealth", "SLBgLightenLess") .. " " .. icons.Warn .. result.warnings
-      or ""
-    info = result.info > 0 and M.get_or_create_hl("SLStealth", "SLBgLightenLess") .. " " .. icons.Info .. result.info
-      or ""
-    hints = result.hints > 0 and M.get_or_create_hl("SLStealth", "SLBgLightenLess") .. " " .. icons.Hint .. result.hints
-      or ""
+    errors = result.errors > 0 and " " .. icons.Error .. result.errors or ""
+    warnings = result.warnings > 0 and " " .. icons.Warn .. result.warnings or ""
+    info = result.info > 0 and " " .. icons.Info .. result.info or ""
+    hints = result.hints > 0 and " " .. icons.Hint .. result.hints or ""
 
-    return vim.bo.modifiable and total > 0 and errors .. warnings .. info .. hints .. " " or ""
+    return vim.bo.modifiable and total > 0 and "%#SLBgLightenLess#" .. errors .. warnings .. info .. hints .. " " or ""
   else
     if result.errors > 0 then
       errors = M.get_or_create_hl("DiagnosticError", "SLBgLightenLess") .. " " .. icons.Error .. result.errors
