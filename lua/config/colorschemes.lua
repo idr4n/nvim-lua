@@ -77,6 +77,16 @@ M.github = {
       vim.api.nvim_set_hl(0, "NeoTreeWinSeparator", { fg = "#F6F8FA", bg = "#F6F8FA" })
       vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "#FFFFFF" })
       vim.api.nvim_set_hl(0, "TreesitterContextBottom", { underline = true, sp = "#24292F" })
+      vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "#F3F5F7" })
+      vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = "#F3F5F7", bg = "#F3F5F7" })
+      vim.api.nvim_set_hl(0, "TelescopeSelection", { bg = "#EDEFF1" })
+      vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { fg = "#F3F5F7", bg = "#F3F5F7" })
+      vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { fg = "#F3F5F7", bg = "#18654B" })
+      vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { fg = "#F3F5F7", bg = "#F3F5F7" })
+      vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = "#EDEFF1" })
+      vim.api.nvim_set_hl(0, "TelescopePromptTitle", { fg = "#F3F5F7", bg = "#DE2C2E" })
+      vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = "#DE2C2E", bg = "#EDEFF1" })
+      vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = "#EDEFF1", bg = "#EDEFF1" })
 
       -- -- if changing background to something else such as #FAFAFA
       -- vim.api.nvim_set_hl(0, "CursorLine", { bg = "#EFF0F2" })

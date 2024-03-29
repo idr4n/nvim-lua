@@ -34,8 +34,22 @@ return {
       LineNr = { fg = "#41454D" },
       TreesitterContext = { bg = "NONE" },
       TreesitterContextBottom = { fmt = "underline", sp = "$purple" },
+      TelescopeNormal = { bg = "#1B1F27" },
+      TelescopeBorder = { fg = "#1B1F27", bg = "#1B1F27" },
+      TelescopeSelection = { bg = "#252931" },
+      TelescopeResultsBorder = { fg = "#1B1F27", bg = "#1B1F27" },
+      TelescopePreviewTitle = { fg = "#1B1F27", bg = "$green" },
+      TelescopePreviewBorder = { fg = "#1B1F27", bg = "#1B1F27" },
+      TelescopePromptNormal = { bg = "$bg0" },
+      TelescopePromptTitle = { fg = "#1B1F27", bg = "$red" },
+      TelescopePromptPrefix = { fg = "$red", bg = "$bg0" },
+      TelescopePromptBorder = { fg = "$bg0", bg = "$bg0" },
     },
   },
+  -- config = function(_, opts)
+  --   vim.o.background = "dark"
+  --   require("onedark").setup(opts)
+  -- end,
 }
 
 -- local dark = {
