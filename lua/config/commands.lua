@@ -25,6 +25,9 @@ command("OpenDeckset", "execute 'silent !open -a Deckset \"%\"'", {})
 -- Convert markdown file to pdf using pandoc
 command("MdToPdf", 'execute \'silent !pandoc "%" -o "%:r.pdf"\'', {})
 
+-- Convert markdown file to docx using pandoc
+command("MdToDocx", 'execute \'silent !pandoc "%" -o "%:r.docx"\'', {})
+
 -- Convert markdown file to Beamer presentation using pandoc
 command("MdToBeamer", 'execute \'silent !pandoc "%" -t beamer -o "%:r.pdf"\'', {})
 

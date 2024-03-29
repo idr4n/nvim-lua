@@ -38,9 +38,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Load LazyFile event
-Util.lazy_file()
-
 -- Load plugins
 require("lazy").setup("plugins", {
   defaults = { lazy = true },
@@ -71,11 +68,11 @@ require("lazy").setup("plugins", {
 --: load colorscheme
 -- require("tokyonight").load()
 -- vim.cmd("colorscheme kanagawa")
-require("onedark").load()
+-- require("onedark").load()
 -- vim.cmd("colorscheme monokai-pro")
 -- vim.cmd("colorscheme catppuccin-frappe")
 -- vim.cmd("colorscheme catppuccin-macchiato")
--- vim.cmd("colorscheme catppuccin-mocha")
+vim.cmd("colorscheme catppuccin-mocha")
 -- require("config.colorschemes").rosepine.setup()
 -- require("config.colorschemes").rosepine.setup("dark")
 -- require("config.colorschemes").wind.setup()

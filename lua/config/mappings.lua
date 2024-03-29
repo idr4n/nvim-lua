@@ -85,7 +85,8 @@ keymap("n", "[<space>", "<cmd>call append(line('.')-1, repeat([''], v:count1))<c
 --: }}}
 
 --: Quicksave command {{{
-keyset({ "n", "i", "x", "s" }, "<C-S>", "<cmd>w<CR><esc>", { desc = "Save file" })
+-- keyset({ "n", "i", "x", "s" }, "<C-S>", "<cmd>w<CR><esc>", { desc = "Save file" })
+keyset({ "n", "i" }, "<C-S>", "<cmd>w<CR><esc>", { desc = "Save file" })
 keyset("n", "<leader>fs", "<cmd>w<CR>", { desc = "Save file" })
 keymap("n", "<Leader>S", "<cmd>w!<CR>", { desc = "Save file override" })
 keymap("n", "<Leader>w", "<cmd>noa w<CR>", { desc = "Save file no formatting" })
@@ -116,6 +117,7 @@ keymap("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 --: Using Bbye plugin to close the current buffer {{{
 keymap("n", "<leader>x", ":Bdelete<CR>", { desc = "Close (delete) Buffer" })
 keymap("n", "<leader>bd", ":Bdelete<CR>", { desc = "Close (delete) Buffer" })
+keymap("n", "<leader>bD", ":Bdelete!<CR>", { desc = "Force Close Buffer!" })
 -- wipeout current buffer
 keymap("n", "<leader>bw", ":Bwipeout<CR>", { desc = "Wipeout Buffer" })
 -- keymap("n", "<leader>bd", ":bd<CR>")
@@ -228,7 +230,7 @@ keymap(
   "<cmd>nohlsearch|diffupdate|normal! <C-L><CR>",
   { desc = "Redraw / clear hlsearch / diff update" }
 )
-keymap("n", "<esc>", "<esc><cmd>noh<cr><cmd>redrawstatus<cr>", { desc = "No highlight escape" })
+keymap("n", "<esc>", "<esc><cmd>noh<cr><cmd>redrawstatus<cr><cmd>echon ''<cr>", { desc = "No highlight escape" })
 --: }}}
 
 --: home row goto end and start of line (same as in Helix editor) {{{
@@ -426,4 +428,30 @@ local function toggle_maximize_buffer()
   end
 end
 keyset({ "n", "t" }, "<A-,>", toggle_maximize_buffer, { desc = "Maximize buffer" })
+--: }}}
+
+--: Diff selection agains keyboard {{{
+-- layout: selection<->clipboard
+local function compare_to_clipboard()
+  local ftype = vim.api.nvim_eval("&filetype")
+  vim.cmd(string.format(
+    [[
+    execute "normal! \"xy"
+    vsplit
+    enew
+    normal! P
+    setlocal buftype=nowrite
+    set filetype=%s
+    diffthis
+    execute "normal! \<C-w>\<C-w>"
+    enew
+    set filetype=%s
+    normal! "xP
+    diffthis
+  ]],
+    ftype,
+    ftype
+  ))
+end
+keyset("x", "<Space>D", compare_to_clipboard, { desc = "Compare to clipboard" })
 --: }}}
