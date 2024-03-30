@@ -22,6 +22,7 @@ vim.api.nvim_create_autocmd("User", {
 
 --: load commands and autocmds
 require("config.commands")
+require("config.autocmds")
 
 --: load lazy.nvim and plugins
 -- Automatically install lazy.nvim
