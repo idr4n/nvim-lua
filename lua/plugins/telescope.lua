@@ -155,13 +155,6 @@ return {
         silent = true,
         desc = "Key maps",
       },
-      -- {
-      --   "<leader>zw",
-      --   "<cmd>lua require('conf.telescope.workdirs-picker').set_workdir()<CR>",
-      --   noremap = true,
-      --   silent = true,
-      --   desc = "Change workdir",
-      -- },
       { ",u", "<cmd>Telescope undo<cr>", noremap = true, silent = true },
     },
     opts = function()
