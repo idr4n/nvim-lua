@@ -267,12 +267,12 @@ keymap("v", "gy", ":t'><cr>gvgcgv<esc>", { noremap = false, desc = "Duplicate an
 --: }}}
 
 --: Move text up and down {{{
-keymap("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move line down" })
-keymap("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move line up" })
-keymap("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move line down" })
-keymap("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move line up" })
-keymap("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move line down" })
-keymap("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move line up" })
+-- keymap("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move line down" })
+-- keymap("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move line up" })
+-- keymap("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move line down" })
+-- keymap("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move line up" })
+-- keymap("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move line down" })
+-- keymap("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move line up" })
 --: }}}
 
 --: diagnostics {{{
