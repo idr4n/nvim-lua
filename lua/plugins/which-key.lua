@@ -20,7 +20,7 @@ return {
         o = { name = "open" },
         n = { name = "Neotree/Noice" },
         q = { name = "Quit" },
-        s = { name = "Search" },
+        s = { name = "Search/Spectre" },
         t = { name = "toggle" },
         v = { name = "vgit/diffview" },
         z = { name = "Trouble/Misc" },
@@ -30,9 +30,10 @@ return {
     }
     local keymaps_v = {
       ["<leader>"] = {
+        d = { name = "debug" },
         h = { name = "Gitsings" },
         l = { name = "LSP" },
-        o = { name = "open" },
+        s = { name = "Search/Spectre" },
       },
     }
     wk.register(keymaps_n)

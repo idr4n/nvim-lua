@@ -32,7 +32,16 @@ return {
       silent = true,
       desc = "Live Grep",
     },
-    { "<leader>sb", "<cmd>FzfLua grep_curbuf<cr>", desc = "Grep buffer" },
+    -- { "<leader>sb", "<cmd>FzfLua grep_curbuf<cr>", desc = "Grep buffer" },
+    {
+      "<leader>sb",
+      function()
+        local text = vim.getVisualSelection()
+        require("fzf-lua").grep_curbuf({ query = text })
+      end,
+      mode = { "n", "v" },
+      desc = "Grep buffer",
+    },
     -- { "<leader>sh", "<cmd>FzfLua help_tags<cr>", desc = "Help tags" },
     -- {
     --   "<leader>sh",
@@ -79,7 +88,7 @@ return {
       "<leader>ls",
       "<cmd>FzfLua lsp_document_symbols<cr>",
       silent = true,
-      desc = "LSP document symbols",
+      desc = "LSP document symbols (FzfLua)",
     },
     {
       "<leader>lS",
@@ -88,7 +97,7 @@ return {
         require("fzf-lua").lsp_live_workspace_symbols({ no_header_i = true })
       end,
       silent = true,
-      desc = "LSP workspace symbols",
+      desc = "LSP workspace symbols (FzfLua)",
     },
     {
       "<leader>gs",

@@ -42,7 +42,7 @@ opt.smartindent = true -- make indenting smarter again
 opt.splitbelow = true -- force all horizontal splits to go below current window
 opt.splitright = true -- force all vertical splits to go to the right of current window
 opt.swapfile = false -- creates a swapfile
-opt.tabstop = 2 -- insert 4 spaces for a tab
+opt.tabstop = 2 -- insert # spaces for a tab
 opt.termguicolors = true -- set term gui colors (most terminals support this)
 opt.undofile = true -- enable persistent undo
 opt.updatetime = 300 -- control CursorHold event waiting time (4000ms default)
@@ -112,3 +112,6 @@ vim.o.grepformat = "%f:%l:%c:%m"
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_node_provider = 0
+
+-- Enforce custom markdown indentation
+vim.g.markdown_recommended_style = 0

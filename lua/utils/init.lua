@@ -132,6 +132,11 @@ M.devicons_override = {
     name = "toml",
     color = "#61AFEF",
   },
+  tsx = {
+    icon = "",
+    name = "Tsx",
+    color = "#20c2e3",
+  },
 }
 
 -- function used to retrieve buffers (source: heirline's cookbook.md)

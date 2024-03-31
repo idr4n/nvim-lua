@@ -51,7 +51,7 @@ return {
     -- :Lazygit
     vim.api.nvim_create_user_command("LazyGit", function()
       if os.getenv("TERM_PROGRAM") == "tmux" then
-        vim.cmd("execute 'silent !tmux split-window -v -p 80 lazygit'")
+        vim.cmd("execute 'silent !tmux split-window -v -l 80\\% lazygit'")
       else
         lazygit:toggle()
       end
