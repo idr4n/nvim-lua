@@ -97,3 +97,28 @@ command("NewTerminalWindow", function()
   ))
 end, {})
 keymap("n", "<leader>\\", "<cmd>NewTerminalWindow<cr>", { desc = "Open LF Ext-Window" })
+
+command("OpenGithubRepo", function()
+  local mode = vim.api.nvim_get_mode().mode
+  local text = ""
+
+  if mode == "v" then
+    text = vim.getVisualSelection()
+    vim.fn.setreg('"', text) -- yank the selected text
+  else
+    local node = vim.treesitter.get_node() --[[@as TSNode]]
+    -- Get the text of the node
+    text = vim.treesitter.get_node_text(node, 0)
+  end
+
+  if text:match("^[%w%-%.%_%+]+/[%w%-%.%_%+]+$") == nil then
+    local msg = string.format("OpenGithubRepo: '%s' Invalid format. Expected 'foo/bar' format.", text)
+    vim.notify(msg, vim.log.levels.ERROR)
+    return
+  end
+
+  local url = string.format("https://www.github.com/%s", text)
+  print("Opening", url)
+  vim.ui.open(url)
+end, {})
+vim.keymap.set({ "n", "v" }, "<leader>og", "<cmd>OpenGithubRepo<cr>", { desc = "Open Github Repo" })
