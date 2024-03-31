@@ -3,13 +3,32 @@ local c = require("config.statusline.components")
 
 local isDark = vim.o.background == "dark"
 
+--- Gets the color for either insert or normal mode.
+---@param mode "insert"|nil
+---@return string
+local function get_theme_color(mode)
+  if package.loaded["tokyonight"] then
+    local colors = require("tokyonight.colors").setup()
+    return mode == "insert" and colors.magenta or colors.blue
+  elseif package.loaded["catppuccin"] then
+    local cp = require("catppuccin.palettes").get_palette("mocha")
+    return mode == "insert" and cp.mauve or cp.blue
+  end
+
+  if mode == "insert" then
+    return isDark and "#B08CEA" or "#9A5BFF"
+  end
+
+  return isDark and "#6E89C3" or "#1E1E1E"
+end
+
 local colors = {
   green = "#4FD6BE",
   orange = "#FF966C",
   yellow = "#E2B86B",
   red = isDark and "#DE6E7C" or "#D73A4A",
-  blue = isDark and "#6E89C3" or "#1E1E1E",
-  insert = isDark and "#B08CEA" or "#9A5BFF",
+  blue = get_theme_color(),
+  insert = get_theme_color("insert"),
   select = isDark and "#FCA7EA" or "#2188FF",
   stealth = isDark and "#4E546B" or "#A7ACBF",
   bg_lighten = isDark and "#333333" or "#D1D1D1",

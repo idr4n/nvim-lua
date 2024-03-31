@@ -60,7 +60,7 @@ function M.decorator(opts)
   opts = vim.tbl_extend("force", { name = " ", align = "left" }, opts)
   local align = vim.tbl_contains({ "left", "right" }, opts.align) and opts.align or "left"
   local name = opts.name
-  return (align == "right" and "%=" or "") .. "%#StatusNormal# " .. name .. " %#SLNormal#"
+  return (align == "right" and "%=" or "") .. "%#StatusNormal# " .. name .. " %#SLBgLightenLess#"
 end
 
 function M.mode()
