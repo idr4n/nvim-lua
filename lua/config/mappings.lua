@@ -315,6 +315,17 @@ keyset("v", "<leader>X", [[y:%s/<C-r>0/<C-r>0/gI<Left><Left><Left>]], { desc = "
 -- keymap("n", "<leader>oe", ":Explor<cr>", { desc = "Netrw" })
 --: }}}
 
+--: Quickfix and location list {{{
+-- ...and navigating through the items.
+-- keyset("n", "<leader>zq", "<cmd>copen<cr>", { desc = "Toggle quickfix list" })
+-- keyset("n", "<leader>zl", "<cmd>lopen<cr>", { desc = "Toggle location list" })
+-- keyset("n", "[q", "<cmd>cprev<cr>zvzz", { desc = "Previous quickfix item" })
+-- keyset("n", "[q", "<cmd>cprev<cr>zvzz", { desc = "Previous quickfix item" })
+-- keyset("n", "]q", "<cmd>cnext<cr>zvzz", { desc = "Next quickfix item" })
+-- keyset("n", "[l", "<cmd>lprev<cr>zvzz", { desc = "Previous loclist item" })
+-- keyset("n", "]l", "<cmd>lnext<cr>zvzz", { desc = "Next loclist item" })
+--: }}}
+
 --: Replace the easy-clip plugin {{{
 -- keyset({ "n", "v", "o" }, "<leader>p", '"+p', { desc = "Paste from clipboard" })
 -- keyset({ "n", "v", "o" }, "<leader>P", '"+P', { desc = "Paste from clipboard" })
