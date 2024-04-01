@@ -7,10 +7,10 @@ local isDark = vim.o.background == "dark"
 ---@param mode "insert"|nil
 ---@return string
 local function get_theme_color(mode)
-  if package.loaded["tokyonight"] then
+  if vim.g.colors_name == "tokyonight" then
     local colors = require("tokyonight.colors").setup()
     return mode == "insert" and colors.magenta or colors.blue
-  elseif package.loaded["catppuccin"] then
+  elseif vim.g.colors_name == "catppuccin-mocha" then
     local cp = require("catppuccin.palettes").get_palette("mocha")
     return mode == "insert" and cp.mauve or cp.blue
   end
