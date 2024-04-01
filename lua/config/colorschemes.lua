@@ -74,7 +74,7 @@ M.github = {
       vim.api.nvim_set_hl(0, "LineNr", { fg = "#BFC0C1" })
       vim.api.nvim_set_hl(0, "CursorLine", { bg = "#F6F8FA" })
       vim.api.nvim_set_hl(0, "StatusLine", { bg = "#F1F3F5" })
-      vim.api.nvim_set_hl(0, "NeoTreeWinSeparator", { fg = "#F6F8FA", bg = "#F6F8FA" })
+      vim.api.nvim_set_hl(0, "NeoTreeWinSeparator", { fg = "#FFFFFF" })
       vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "#FFFFFF" })
       vim.api.nvim_set_hl(0, "TreesitterContextBottom", { underline = true, sp = "#24292F" })
       vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "#F3F5F7" })
