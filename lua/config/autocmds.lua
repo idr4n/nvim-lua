@@ -30,7 +30,6 @@ aucmd("BufRead", {
 --   group = augroup("indent_4"),
 -- })
 
-
 -- SQL
 aucmd("FileType", {
   pattern = { "sql" },
@@ -173,4 +172,3 @@ aucmd("BufWinEnter", {
     end
   end,
 })
-

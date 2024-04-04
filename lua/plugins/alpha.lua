@@ -30,7 +30,8 @@ return {
         "f",
         "󰈞  Find file",
         -- ":lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>"
-        ":lua require('telescope.builtin').find_files()<cr>"
+        -- ":lua require('telescope.builtin').find_files()<cr>"
+        ":CommandTRipgrep<cr>"
       ),
       dashboard.button("t", "󰄉  File History", ":Telescope oldfiles<cr>"),
       dashboard.button("r", "󰺮  Find text", ":FzfLua live_grep_glob<cr>"),

@@ -9,6 +9,8 @@ return {
       { "<leader>qd", function() require("session_manager").delete_current_dir_session() end, desc = "Delete Current Dir Session" },
     },
   config = function()
-    require("session_manager").setup({})
+    require("session_manager").setup({
+      autosave_ignore_dirs = { "~/Downloads", "~/Desktop" },
+    })
   end,
 }

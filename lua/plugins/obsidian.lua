@@ -58,12 +58,21 @@ return {
         opts = { noremap = false, expr = true, buffer = true, desc = "Obsidian Follow Link" },
       },
       -- Toggle check-boxes.
-      ["<leader>oc"] = {
+      ["<leader>tt"] = {
         action = function()
           return require("obsidian").util.toggle_checkbox()
         end,
-        opts = { buffer = true, desc = "Toggle check-boxes" },
+        opts = { buffer = true, desc = "Toggle check-box (Obsidian)" },
       },
     },
+    -- Optional, customize how note file names are generated given the ID, target directory, and title.
+    ---@alias obsidian.Path string
+    ---@param spec { id: string, dir: obsidian.Path, title: string|? }
+    ---@return string|obsidian.Path The full path to the new note.
+    note_path_func = function(spec)
+      -- This is equivalent to the default behavior.
+      local path = spec.dir / spec.title
+      return path:with_suffix(".md")
+    end,
   },
 }

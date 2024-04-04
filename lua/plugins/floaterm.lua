@@ -5,8 +5,7 @@ return {
     { ",l", ":FloatermNew --title=LF --titleposition=center lf<cr>", silent = true, desc = "Open LF" },
     { ",j", ":FloatermNew --title=Joshuto --titleposition=center joshuto<cr>", silent = true, desc = "Open Joshuto" },
     { ",y", ":FloatermNew --title=Yazi --titleposition=center yazi --cwd-file ~/.cache/yazi/last_dir '%'<cr>", silent = true, desc = "Open Yazi" },
-    { "<leader>ff", ":FloatermNew --title=Yazi --titleposition=center yazi --cwd-file ~/.cache/yazi/last_dir '%'<cr>", silent = true, desc = "Open Yazi" },
-    { "<leader>j", ":FloatermNew --title=Joshuto --titleposition=center joshuto<cr>", silent = true, desc = "Open Joshuto", },
+    { "<leader>y", ":FloatermNew --title=Yazi --titleposition=center yazi --cwd-file ~/.cache/yazi/last_dir '%'<cr>", silent = true, desc = "Open Yazi" },
   },
   config = function()
     local function calcFloatSize()

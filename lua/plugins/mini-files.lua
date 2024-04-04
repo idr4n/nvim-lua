@@ -21,7 +21,9 @@ return {
         local path = vim.fn.fnamemodify(bufname, ":p")
         if path and vim.uv.fs_stat(path) then
           local MiniFiles = require("mini.files")
-          if not MiniFiles.close() then MiniFiles.open(bufname, false) end
+          if not MiniFiles.close() then
+            MiniFiles.open(bufname, false)
+          end
         end
       end,
       silent = true,
@@ -63,7 +65,7 @@ return {
     })
     return {
       mappings = {
-        close = ",",
+        close = "q",
         show_help = "?",
         go_in_plus = "l",
         go_out_plus = "<tab>",

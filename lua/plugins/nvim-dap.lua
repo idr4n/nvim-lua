@@ -5,9 +5,9 @@ return {
       {
         "rcarriga/nvim-dap-ui",
         dependencies = { "nvim-neotest/nvim-nio" },
-        -- config = function()
-        --   require("dapui").setup()
-        -- end,
+        config = function()
+          require("dapui").setup()
+        end,
       },
       -- Virtual text.
       {

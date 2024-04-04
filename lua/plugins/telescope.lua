@@ -25,7 +25,8 @@ return {
       --     desc = "Telescope-find_files",
       -- },
       {
-        "<C-P>",
+        "<leader>ff",
+        -- "<C-P>",
         -- "<leader><Space>",
         function()
           require("telescope.builtin").find_files()
