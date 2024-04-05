@@ -2,7 +2,7 @@
 
 This is my Neovim configuation written in Lua.
 
-![CleanShot 2024-01-23 at 08 25 03@2x](https://github.com/idr4n/nvim-lua/assets/20104703/1338bf63-4a91-40a7-bf1d-2e9b7eb91660)
+![CleanShot 2024-04-05 at 15 29 43@2x](https://github.com/idr4n/nvim-lua/assets/20104703/d2c62063-96ba-4bdd-8843-d4d18ab6b8ae)
 ![CleanShot 2024-01-23 at 08 13 14@2x](https://github.com/idr4n/nvim-lua/assets/20104703/29fe2eec-1129-48c1-9ef8-61345ba2079a)
 
 ## Basic setup
