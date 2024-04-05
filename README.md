@@ -17,35 +17,33 @@ This is my Neovim configuation written in Lua.
 
 <details>
 <summary>
-This is the list of plugins I currently have installed (although some of them are disabled):
+This is the list of plugins I currently have installed (although many of them are disabled):
 </summary>
 
 <br>
 
-**Total: 107 plugins**
+**Total: 117 plugins**
 
-**Loaded (15)**
+**Loaded (11)**
 
+- alpha-nvim
 - Comment.nvim
-- dashboard-nvim
-- heirline.nvim
+- github-nvim-theme
 - lazy.nvim
 - mini.ai
-- noice.nvim
-- nui.nvim
+- mini.move
 - nvim-autopairs
-- nvim-colorizer.lua
-- nvim-notify
 - nvim-treesitter
 - nvim-ts-context-commentstring
 - nvim-web-devicons
-- onedark.nvim
 - which-key.nvim
 
-**Not Loaded (76)**
+**Not Loaded (86)**
 
+- bigfile.nvim
+- bufferline.nvim
 - catppuccin
-- clipboard-image.nvim
+- ccc.nvim
 - close-buffers.nvim
 - cmp-buffer
 - cmp-cmdline
@@ -55,12 +53,13 @@ This is the list of plugins I currently have installed (although some of them ar
 - cmp-tailwind-colors
 - cmp_luasnip
 - code_runner.nvim
+- command-t
 - darkplus.nvim
 - diffview.nvim
+- dressing.nvim
 - emmet-vim
 - friendly-snippets
 - fzf-lua
-- github-nvim-theme
 - gitsigns.nvim
 - glance.nvim
 - harpoon
@@ -79,12 +78,16 @@ This is the list of plugins I currently have installed (although some of them ar
 - neovim-session-manager
 - no-neck-pain.nvim
 - none-ls.nvim
+- nui.nvim
 - nvim-cmp
 - nvim-dap
 - nvim-dap-go
 - nvim-dap-python
 - nvim-dap-ui
+- nvim-dap-virtual-text
+- nvim-dap-vscode-js
 - nvim-lspconfig
+- nvim-nio
 - nvim-spectre
 - nvim-treesitter-context
 - nvim-treesitter-textobjects
@@ -92,6 +95,7 @@ This is the list of plugins I currently have installed (although some of them ar
 - nvim-ufo
 - obsidian.nvim
 - one-small-step-for-vimkind
+- onedark.nvim
 - otter.nvim
 - playground
 - plenary.nvim
@@ -102,7 +106,7 @@ This is the list of plugins I currently have installed (although some of them ar
 - rust-tools.nvim
 - sqls.nvim
 - tabout.nvim
-- telescope-file-browser.nvim
+- tdo.nvim
 - telescope-fzf-native.nvim
 - telescope-luasnip.nvim
 - telescope-ui-select.nvim
@@ -111,34 +115,40 @@ This is the list of plugins I currently have installed (although some of them ar
 - todo-comments.nvim
 - toggleterm.nvim
 - tokyonight.nvim
+- treesj
 - trouble.nvim
 - vgit.nvim
 - vim-bbye
 - vim-floaterm
 - vim-fugitive
 - vimtex
+- vscode-js-debug
 - wind-colors
 - yanky.nvim
 - zen-mode.nvim
 
-**Disabled (16)**
+**Disabled (20)**
 
-- alpha-nvim
-- barbecue
-- bufferline.nvim
-- flash.nvim
-- fzf.vim
-- image.nvim
-- lir.nvim
-- mini.indentscope
-- modes.nvim
-- nvim-jdtls
-- oil.nvim
-- persistence.nvim
-- statuscol.nvim
-- tabby.nvim
-- ultimate-autopair.nvim
-- vim-dirvish
+- barbecue 
+- clipboard-image.nvim 
+- dashboard-nvim 
+- flash.nvim 
+- fzf.vim 
+- heirline.nvim 
+- image.nvim 
+- lir.nvim 
+- mini.indentscope 
+- modes.nvim 
+- noice.nvim 
+- nvim-colorizer.lua 
+- nvim-jdtls 
+- nvim-notify 
+- oil.nvim 
+- persistence.nvim 
+- statuscol.nvim 
+- tabby.nvim 
+- ultimate-autopair.nvim 
+- vim-dirvish 
 
 
 </details>
