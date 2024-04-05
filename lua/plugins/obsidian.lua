@@ -48,6 +48,7 @@ return {
       },
     },
     new_notes_location = "notes_subdir",
+    wiki_link_func = "use_alias_only",
     disable_frontmatter = true,
     mappings = {
       -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
@@ -65,6 +66,7 @@ return {
         opts = { buffer = true, desc = "Toggle check-box (Obsidian)" },
       },
     },
+
     -- Optional, customize how note file names are generated given the ID, target directory, and title.
     ---@alias obsidian.Path string
     ---@param spec { id: string, dir: obsidian.Path, title: string|? }
@@ -74,5 +76,14 @@ return {
       local path = spec.dir / spec.title
       return path:with_suffix(".md")
     end,
+
+    -- Templates
+    templates = {
+      subdir = "templates",
+      date_format = "%Y-%m-%d-%a",
+      time_format = "%I:%M%p",
+      -- A map for custom variables, the key should be the variable and the value a function
+      substitutions = {},
+    },
   },
 }

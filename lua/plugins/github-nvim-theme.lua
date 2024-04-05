@@ -20,6 +20,7 @@ return {
           LineNr = { fg = "#BFC0C1" },
           CursorLine = { bg = "#F6F8FA" },
           NeoTreeWinSeparator = { fg = "#FFFFFF" },
+          NeoTreeCursorLine = { bg = "#EDEFF1" },
           TreesitterContext = { bg = "#FFFFFF" },
           TreesitterContextBottom = { underline = true, sp = "#24292F" },
           TelescopeNormal = { bg = "#F3F5F7" },
