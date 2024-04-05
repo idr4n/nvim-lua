@@ -38,8 +38,6 @@ return {
       silent = true,
       desc = "Neo-tree Git",
     },
-    { "<leader>nt", ":Neotree reveal left toggle<CR>", noremap = true, silent = true, desc = "Toggle Neo-Tree" },
-    { "<leader>nf", ":Neotree float reveal toggle<CR>", noremap = true, silent = true, desc = "Neo-tree Float" },
     {
       "<leader>nb",
       ":Neotree toggle show buffers right<CR>",
