@@ -25,7 +25,7 @@ return {
         }),
 
         -- LUA
-        formatting.stylua.with({ "--config-path", vim.fn.expand("~/.config/stylua.toml") }),
+        formatting.stylua,
         -- diagnostics.vale,
 
         -- GOLANG

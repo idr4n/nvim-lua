@@ -16,6 +16,7 @@ return {
         f = { name = "file" },
         g = { name = "Git/Glance" },
         h = { name = "Gitsings/Harpoon" },
+        j = { name = "ChatGPT" },
         l = { name = "LSP" },
         o = { name = "open" },
         n = { name = "Neotree/Tdo" },
@@ -31,9 +32,12 @@ return {
     }
     local keymaps_v = {
       ["<leader>"] = {
+        c = { name = "coding" },
         d = { name = "debug" },
         h = { name = "Gitsings" },
+        j = { name = "ChatGPT" },
         l = { name = "LSP" },
+        o = { name = "open" },
         s = { name = "Search/Spectre" },
       },
     }

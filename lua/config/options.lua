@@ -63,7 +63,7 @@ vim.cmd([[set iskeyword+=-]])
 -- vim.o.fillchars = [[msgsep: ,eob: ,diff:╱,fold: ,foldopen:,foldclose:,]]
 -- vim.o.fillchars = [[msgsep: ,eob: ,vert: ,diff:╱,fold: ,foldopen:,foldsep: ,foldclose:,]]
 -- vim.o.listchars = [[tab:──,trail:·,nbsp:␣,precedes:«,extends:»,]]
-vim.opt.listchars = { trail = "·", tab = "> ", nbsp = "␣" }
+opt.listchars = { trail = "·", tab = "> ", nbsp = "␣" }
 opt.fillchars = {
   foldopen = "",
   foldclose = "",

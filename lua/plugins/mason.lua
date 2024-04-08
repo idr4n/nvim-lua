@@ -7,6 +7,7 @@ return {
       "astro-language-server",
       "bash-language-server",
       "clangd",
+      "codelldb",
       "css-lsp",
       "cssmodules-language-server",
       -- "emmet-ls",
