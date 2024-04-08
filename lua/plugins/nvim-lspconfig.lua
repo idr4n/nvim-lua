@@ -61,6 +61,20 @@ return {
         jdtls = function()
           return true
         end,
+
+        tailwindcss = function(_, opts)
+          local tw = require("lspconfig.server_configurations.tailwindcss")
+          opts.filetypes = opts.filetypes or {}
+
+          -- Add default filetypes
+          vim.list_extend(opts.filetypes, tw.default_config.filetypes)
+
+          -- Remove excluded filetypes
+          --- @param ft string
+          opts.filetypes = vim.tbl_filter(function(ft)
+            return not vim.tbl_contains({ "markdown" }, ft)
+          end, opts.filetypes)
+        end,
       },
     }
     for _, sign in ipairs(opts.signs) do
