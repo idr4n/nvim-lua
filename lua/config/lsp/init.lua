@@ -120,7 +120,7 @@ local function lsp_keymaps(client, bufnr)
     { "<leader>cR", vim.lsp.buf.rename, desc = "LSP Rename" },
     { "<leader>cf", vim.lsp.buf.format, desc = "Format" },
     { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
-    { "i", "<c-k>", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
+    { "<c-k>", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
     { "<leader>ca", vim.lsp.buf.code_action, mode = { "n", "v" }, desc = "Code Action", has = "codeAction" },
     { "<leader>cl", vim.lsp.codelens.run, mode = { "n", "v" }, desc = "Run Codelens", has = "codeLens" },
     { "<leader>cL", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", has = "codeLens" },
@@ -166,10 +166,10 @@ M.on_attach = function(client, bufnr)
     end
 
     -- codelens
-    if client.supports_method("textDocument/codeLens") then
+    if vim.lsp.codelens and client.supports_method("textDocument/codeLens") then
       vim.lsp.codelens.refresh()
-      --- autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
       vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+        group = vim.api.nvim_create_augroup("idr4n/LSPCodeLens", { clear = true }),
         buffer = bufnr,
         callback = vim.lsp.codelens.refresh,
       })
