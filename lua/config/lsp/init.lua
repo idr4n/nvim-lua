@@ -143,15 +143,38 @@ M.on_attach = function(client, bufnr)
       client.server_capabilities.documentFormattingProvider = false
     end
   end
+
   local clientsNoHover = { "tailwindcss", "cssmodules_ls", "ruff_lsp" }
   for _, v in ipairs(clientsNoHover) do
     if client.name == v then
       client.server_capabilities.hoverProvider = false
     end
   end
+
   -- client.server_capabilities.semanticTokensProvider = nil
-  lsp_keymaps(bufnr)
+
+  lsp_keymaps(client, bufnr)
   lsp_highlight_document(client)
+
+  if vim.fn.has("nvim-0.10.0") == 1 then
+    -- inlay_hints
+    local ih = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
+    if type(ih) == "function" then
+      ih(bufnr, true)
+    elseif type(ih) == "table" and ih.enable then
+      ih.enable(bufnr, true)
+    end
+
+    -- codelens
+    if client.supports_method("textDocument/codeLens") then
+      vim.lsp.codelens.refresh()
+      --- autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
+      vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+        buffer = bufnr,
+        callback = vim.lsp.codelens.refresh,
+      })
+    end
+  end
 end
 
 return M
