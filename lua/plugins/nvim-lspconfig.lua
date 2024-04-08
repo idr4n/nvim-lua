@@ -52,58 +52,8 @@ return {
         -- Specify * to use this function as a fallback for any server
         -- ["*"] = function(server, opts) end,
 
-        -- rust_analyzer
+        -- rust_analyzer (it is being setup by rustaceanvim plugin)
         rust_analyzer = function()
-          local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/")
-          local codelldb_adapter = {
-            type = "server",
-            port = "${port}",
-            executable = {
-              command = mason_path .. "bin/codelldb",
-              args = { "--port", "${port}" },
-            },
-          }
-
-          require("rust-tools").setup({
-            tools = {
-              inlay_hints = {
-                show_parameter_hints = true,
-                parameter_hints_prefix = "<- ",
-                other_hints_prefix = "=> ",
-              },
-              on_initialized = function()
-                vim.api.nvim_create_autocmd({ "BufWritePost", "BufRead", "CursorHold", "InsertLeave" }, {
-                  pattern = { "*.rs" },
-                  callback = function()
-                    local _, _ = pcall(vim.lsp.codelens.refresh)
-                  end,
-                })
-              end,
-            },
-            dap = {
-              adapter = codelldb_adapter,
-            },
-            server = {
-              on_attach = function(client, bufnr)
-                lsp_conf.on_attach(client, bufnr)
-                local rt = require("rust-tools")
-                vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
-              end,
-
-              capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
-              settings = {
-                ["rust-analyzer"] = {
-                  lens = {
-                    enable = true,
-                  },
-                  checkOnSave = {
-                    enable = true,
-                    command = "clippy",
-                  },
-                },
-              },
-            },
-          })
           return true
         end,
 
