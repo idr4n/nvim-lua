@@ -102,27 +102,37 @@ function M.enhanced_float_handler(handler, focusable)
   end
 end
 
+---@param method string
+local function has(client, method)
+  method = method:find("/") and method or "textDocument/" .. method
+  if client.supports_method(method) then
+    return true
+  end
+  return false
+end
 
--- stylua: ignore
-local function lsp_keymaps(bufnr)
-    local opts = { noremap = true, silent = true }
-    local buf_keymap = function(mode, keys, cmd, options)
-        options = options or {}
-        options = vim.tbl_deep_extend("force", opts, options)
-        vim.api.nvim_buf_set_keymap(bufnr, mode, keys, cmd, options)
+local function lsp_keymaps(client, bufnr)
+  local opts = { noremap = true, silent = true, buffer = bufnr }
+
+  local keys = {
+    { "K", vim.lsp.buf.hover, desc = "Hover" },
+    { "<F2>", vim.lsp.buf.rename, desc = "LSP Rename" },
+    { "<leader>cR", vim.lsp.buf.rename, desc = "LSP Rename" },
+    { "<leader>cf", vim.lsp.buf.format, desc = "Format" },
+    { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
+    { "i", "<c-k>", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
+    { "<leader>ca", vim.lsp.buf.code_action, mode = { "n", "v" }, desc = "Code Action", has = "codeAction" },
+    { "<leader>cl", vim.lsp.codelens.run, mode = { "n", "v" }, desc = "Run Codelens", has = "codeLens" },
+    { "<leader>cL", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", has = "codeLens" },
+  }
+
+  for _, key in pairs(keys) do
+    opts.desc = key.desc
+    local mode = key.mode or "n"
+    if not key.has or has(client, key.has) then
+      vim.keymap.set(mode, key[1], key[2], opts)
     end
-
-    -- buf_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
-    buf_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
-    buf_keymap("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>")
-    buf_keymap("n", "<leader>cR", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = "LSP Rename" })
-    buf_keymap("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Code actions" })
-    buf_keymap("v", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Code actions" })
-    buf_keymap("n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>')
-    buf_keymap("n", "<leader>lf", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "Diagnostics float" })
-    buf_keymap("n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>')
-    vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format({ async = true })' ]])
-    buf_keymap( "n", "<leader>cf", ":Format<cr>", { desc = "Format" })
+  end
 end
 
 M.on_attach = function(client, bufnr)
