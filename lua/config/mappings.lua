@@ -59,13 +59,6 @@ keymap("i", "<C-f>", "<Right>")
 keymap("i", "<A-f>", "<ESC>lwi")
 --: }}}
 
---: move around cursor center and top {{{
-keyset("n", "<C-z>", "zz", { desc = "Center around cursor" })
-keyset("i", "<C-z>", "<C-O>zz", { desc = "Center around cursor" })
--- keymap("i", "<C-t>", "<C-O>zt")
--- keymap("n", "<C-t>", "zt", { desc = "Top current line" })
---: }}}
-
 --: Move up and down with wrapped lines {{{
 keymap("n", "j", "gj")
 keymap("n", "k", "gk")
@@ -192,8 +185,7 @@ keyset("n", "N", "Nzzzv")
 keymap("n", "<C-h>", "<C-w>h")
 keymap("n", "<C-j>", "<C-w>j")
 keymap("n", "<C-k>", "<C-w>k")
--- keymap("n", "<C-l>", "<C-w>l")
--- keymap("n", "<C-t>", "<C-w>w")
+keymap("n", "<C-z>", "<C-w>l")
 
 -- smart window cycle with c-t {{{
 local function is_tree_window()

@@ -1,7 +1,6 @@
 local M = {}
 
 local function lsp_highlight_document(client)
-  -- Set autocommands conditional on server_capabilities
   if client.server_capabilities.documentHighlightProvider then
     local document_highlight = vim.api.nvim_create_augroup("idr4n/LSPDocumentHighlight", { clear = true })
     vim.api.nvim_create_autocmd("CursorHold", {
@@ -19,7 +18,6 @@ end
 
 --- LSP handler that adds extra inline highlights, keymaps, and window options.
 --- source: https://github.com/MariaSolOs/dotfiles
-
 local md_namespace = vim.api.nvim_create_namespace("idr4n/lsp_float")
 
 --- Adds extra inline highlights to the given buffer.
