@@ -29,6 +29,7 @@ return {
         "cpp",
         "css",
         "elixir",
+        "gleam",
         "go",
         "heex",
         "html",
