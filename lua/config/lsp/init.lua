@@ -1,21 +1,5 @@
 local M = {}
 
-local function lsp_highlight_document(client)
-  if client.server_capabilities.documentHighlightProvider then
-    local document_highlight = vim.api.nvim_create_augroup("idr4n/LSPDocumentHighlight", { clear = true })
-    vim.api.nvim_create_autocmd("CursorHold", {
-      group = document_highlight,
-      buffer = 0,
-      callback = vim.lsp.buf.document_highlight,
-    })
-    vim.api.nvim_create_autocmd("CursorMoved", {
-      group = document_highlight,
-      buffer = 0,
-      callback = vim.lsp.buf.clear_references,
-    })
-  end
-end
-
 --- LSP handler that adds extra inline highlights, keymaps, and window options.
 --- source: https://github.com/MariaSolOs/dotfiles
 local md_namespace = vim.api.nvim_create_namespace("idr4n/lsp_float")
@@ -153,7 +137,6 @@ M.on_attach = function(client, bufnr)
   -- client.server_capabilities.semanticTokensProvider = nil
 
   lsp_keymaps(client, bufnr)
-  lsp_highlight_document(client)
 
   if vim.fn.has("nvim-0.10.0") == 1 then
     -- inlay_hints
