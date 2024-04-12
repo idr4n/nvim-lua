@@ -164,7 +164,7 @@ keyset("n", "<leader>tn", function()
         set invnumber
         set invrelativenumber
     ]])
-end, { desc = "Line numbers" })
+end, { desc = "Toggle Line numbers" })
 --: }}}
 
 --: center when scrolling page down and up {{{
