@@ -150,10 +150,6 @@ keymap("n", ",D", 'Oconsole.log("<esc>pa")<esc>', { desc = "Paste for printing -
 keymap("n", ",s", 'a"<esc>pa:", <esc>p', { desc = "Paste for info printing" })
 --: }}}
 
---: keep cursor at same position when joining lines {{{
-keymap("n", "J", "mzJ`z")
---: }}}
-
 --: toggle wrapping lines {{{
 keymap("n", "<leader>tw", "<cmd>set wrap!<cr>", { desc = "Line wrap" })
 --: }}}
@@ -161,8 +157,9 @@ keymap("n", "<leader>tw", "<cmd>set wrap!<cr>", { desc = "Line wrap" })
 --: toggle line numbers {{{
 keyset("n", "<leader>tn", function()
   vim.cmd([[
-        set invnumber
-        set invrelativenumber
+    set invnumber
+    set invrelativenumber
+    set invcursorline
     ]])
 end, { desc = "Toggle Line numbers" })
 --: }}}
