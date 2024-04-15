@@ -172,3 +172,20 @@ aucmd("BufWinEnter", {
     end
   end,
 })
+
+-- After loading seoul256 colorschemes
+aucmd("ColorScheme", {
+  group = augroup("ColorSchemes"),
+  pattern = { "seoul256" },
+  callback = function()
+    local bg_c = vim.g.seoul256_background == 235 and "#333233" or "#4B4B4B"
+    local bg_nt = vim.g.seoul256_background == 235 and "#252525" or "#3F3F3F"
+    local bg_ws = vim.g.seoul256_background == 235 and "#3F3F3F" or "#565656"
+    vim.api.nvim_set_hl(0, "IblScope", { fg = "#999872", bg = bg_c })
+    vim.api.nvim_set_hl(0, "WinSeparator", { fg = bg_ws, bg = bg_ws })
+    vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = bg_nt })
+    vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = bg_nt })
+    vim.api.nvim_set_hl(0, "NeoTreeCursorLine", { bg = bg_c })
+    vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { fg = bg_nt })
+  end,
+})

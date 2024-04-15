@@ -32,6 +32,7 @@ return {
         ["@namespace"] = { fg = cp.blue, style = {} },
         TSNamespace = { fg = cp.blue, style = {} },
         -- StatusLine = { bg = cp.mantle },
+        -- StatusLine = { fg = cp.overlay1, bg = "NONE", style = { "underline" } },
         NeoTreeNormal = { bg = cp.mantle },
         NeoTreeNormalNC = { bg = cp.mantle },
         NotifyBackground = { bg = "#000000" },

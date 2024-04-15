@@ -4,6 +4,7 @@ return {
   config = function()
     require("github-theme").setup({
       options = {
+        hide_end_of_buffer = false,
         darken = {
           floats = false,
           sidebars = {
@@ -15,10 +16,12 @@ return {
       groups = {
         github_light = {
           StatusLine = { bg = "#F1F3F5" },
+          -- StatusLine = { bg = "NONE", style = "underline" },
           Comment = { fg = "#6A737D" },
           Delimiter = { fg = "#24292F" }, -- for punctuation ',' '.', etc
           LineNr = { fg = "#BFC0C1" },
           CursorLine = { bg = "#F6F8FA" },
+          EndOfBuffer = { fg = "#EDEFF1" },
           NeoTreeWinSeparator = { fg = "#FFFFFF" },
           NeoTreeCursorLine = { bg = "#EDEFF1" },
           TreesitterContext = { bg = "#FFFFFF" },
