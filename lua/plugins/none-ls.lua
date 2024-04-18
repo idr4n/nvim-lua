@@ -1,5 +1,6 @@
 return {
   -- "jose-elias-alvarez/null-ls.nvim",
+  enabled = false,
   "nvimtools/none-ls.nvim",
   event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   dependencies = { "mason.nvim" },
