@@ -20,7 +20,7 @@ return {
 
       diagnostics = {
         virtual_text = { spacing = 4, prefix = "●" },
-        update_in_insert = true,
+        update_in_insert = false,
         underline = true,
         severity_sort = true,
         float = {
