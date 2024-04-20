@@ -101,7 +101,7 @@ local function lsp_keymaps(client, bufnr)
     { "K", vim.lsp.buf.hover, desc = "Hover" },
     { "<F2>", vim.lsp.buf.rename, desc = "LSP Rename" },
     { "<leader>cR", vim.lsp.buf.rename, desc = "LSP Rename" },
-    { "<leader>cf", vim.lsp.buf.format, desc = "Format" },
+    -- { "<leader>cf", vim.lsp.buf.format, desc = "Format" },
     { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
     { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
     { "<leader>ca", vim.lsp.buf.code_action, mode = { "n", "v" }, desc = "Code Action", has = "codeAction" },
