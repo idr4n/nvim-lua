@@ -10,6 +10,7 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-nvim-lua",
     { "js-everts/cmp-tailwind-colors", config = true },
+    { "Saecki/crates.nvim", event = { "BufRead Cargo.toml" } },
   },
   opts = function()
     local cmp = require("cmp")
@@ -128,7 +129,9 @@ return {
           -- END extra config for cmp-tailwind-colors
 
           vim_item.menu = vim_item.kind
-          vim_item.kind = string.format(" %s ", nvchad_icons[vim_item.kind])
+          if nvchad_icons[vim_item.kind] then
+            vim_item.kind = string.format(" %s ", nvchad_icons[vim_item.kind])
+          end
           return vim_item
         end,
       },
@@ -139,7 +142,7 @@ return {
         { name = "buffer" },
         { name = "path" },
         { name = "otter" },
-        -- { name = "copilot" },
+        { name = "crates" },
       },
       confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,
