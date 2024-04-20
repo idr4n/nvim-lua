@@ -1,7 +1,6 @@
 -- Statusline components
 
 local utils = require("utils")
-local devicons = require("nvim-web-devicons")
 
 local M = {}
 
@@ -111,6 +110,7 @@ end
 ---@param opts? {mono:boolean}
 local function file_icon(opts)
   opts = opts or { mono = true }
+  local devicons = require("nvim-web-devicons")
   local icon, icon_highlight_group = devicons.get_icon(vim.fn.expand("%:t"))
   if icon == nil then
     icon, icon_highlight_group = devicons.get_icon_by_filetype(vim.bo.filetype)
@@ -160,13 +160,16 @@ function M.get_fileinfo()
   return filename
 end
 
-function M.fileinfo()
-  local icon = "󰈚 "
+---@return string
+---@param opts? {add_icon:boolean}
+function M.fileinfo(opts)
+  opts = opts or { add_icon = true }
+  local icon = opts.add_icon and "󰈚 " or ""
   local dir = utils.pretty_dirpath()()
   local path = vim.fn.expand("%:t")
   local name = (path == "" and "Empty ") or path:match("([^/\\]+)[/\\]*$")
 
-  if name ~= "Empty " then
+  if name ~= "Empty " and opts.add_icon then
     local devicons_present, icons = pcall(require, "nvim-web-devicons")
 
     if devicons_present then
@@ -177,7 +180,7 @@ function M.fileinfo()
     name = name .. " "
   end
 
-  return " " .. icon .. " " .. dir .. name
+  return (opts.add_icon and " " .. icon .. " " or "") .. dir .. name
 end
 
 function M.progress()
@@ -329,6 +332,21 @@ function M.git_status(opts)
   return git_status
 end
 
+---@return string
+function M.git_boring()
+  local gitsigns = vim.b.gitsigns_status_dict
+
+  -- local icon = "󰓎"
+  local icon = "*"
+  local total_changes = 0
+
+  if gitsigns then
+    total_changes = (gitsigns.added or 0) + (gitsigns.changed or 0) + (gitsigns.removed or 0)
+  end
+
+  return total_changes > 0 and (vim.bo.modified and " " or "") .. "%#SLBgNoneHl#" .. icon .. "%#SLBgNone#" or ""
+end
+
 function M.git_branch()
   local branch = vim.b.gitsigns_status_dict or { head = "" }
   local git_icon = " "
@@ -354,8 +372,28 @@ function M.filetype()
 end
 
 ---@return string
+function M.diagnostics_boring()
+  local function get_severity(s)
+    return #vim.diagnostic.get(0, { severity = s })
+  end
+
+  local result = {
+    errors = get_severity(vim.diagnostic.severity.ERROR),
+    warnings = get_severity(vim.diagnostic.severity.WARN),
+    info = get_severity(vim.diagnostic.severity.INFO),
+    hints = get_severity(vim.diagnostic.severity.HINT),
+  }
+
+  -- local icon = "󱈸"
+  local icon = "!"
+  local total = result.errors + result.warnings + result.hints + result.info
+
+  return total > 0 and "%#SLBgNoneHl#" .. icon .. "%#SLBgNone#" or ""
+end
+
+---@return string
 ---@param opts? {mono:boolean}
-function M.lsp_diagnostic(opts)
+function M.lsp_diagnostics(opts)
   opts = opts or { mono = true }
   local icons = require("utils").diagnostic_icons
   local function get_severity(s)
@@ -412,6 +450,16 @@ function M.scrollbar()
   if sbar[i] then
     return "%#StatusCommand#" .. string.rep(sbar[i], 2) .. "%#SLNormal# "
   end
+end
+
+-- codeium status in the statusline
+function M.codeium_status()
+  if vim.g.codeium_enabled then
+    local status = vim.api.nvim_call_function("codeium#GetStatusString", {})
+    return "%#SLBgNoneHl# [ " .. status .. "]" .. "%#SLBgNone# "
+  end
+
+  return ""
 end
 
 return M
