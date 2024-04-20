@@ -2,7 +2,7 @@
 -- this is needed to make sure options will be correctly applied
 -- after installing missing plugins
 require("config.options")
-local Util = require("utils")
+-- local Util = require("utils")
 
 -- make sure to set `mapleader` before lazy so your mappings are correct
 vim.keymap.set("", "<Space>", "<Nop>")
@@ -45,7 +45,7 @@ require("lazy").setup("plugins", {
   install = { colorscheme = { "tokyonight" } },
   --
   change_detection = { notify = false },
-  -- dev = { path = "~/other_repos", patterns = { "idr4n" } },
+  dev = { path = "~/other_repos", patterns = { "idr4n" } },
   checker = { enabled = false },
   performance = {
     rtp = {
