@@ -82,19 +82,23 @@ aucmd("FileType", {
 
 -- format on save for specific files
 aucmd("BufWritePre", {
-  pattern = { "*.go", "*.lua" },
+  pattern = { "*.go", "*.lua", "*.rs" },
   callback = function()
-    vim.lsp.buf.format()
+    -- vim.lsp.buf.format()
+    require("conform").format({ lsp_fallback = true })
   end,
   group = augroup("LspFormatting"),
 })
 
--- -- Alpha
--- aucmd("FileType", {
---     pattern = { "alpha" },
---     command = "nnoremap <silent> <buffer> - :bwipe <Bar> Dirvish<CR>",
---     group = augroup("alpha"),
--- })
+-- Alpha
+aucmd("FileType", {
+  group = augroup("Alpha"),
+  pattern = { "alpha" },
+  -- command = "nnoremap <silent> <buffer> - :bwipe <Bar> Dirvish<CR>",
+  callback = function()
+    vim.opt_local.fillchars = { eob = " " }
+  end,
+})
 
 -- go to last loc when opening a buffer
 aucmd("BufReadPost", {
@@ -173,19 +177,28 @@ aucmd("BufWinEnter", {
   end,
 })
 
--- After loading seoul256 colorschemes
+-- After loading seoul256 colorscheme
 aucmd("ColorScheme", {
-  group = augroup("ColorSchemes"),
+  group = augroup("Seoul256"),
   pattern = { "seoul256" },
   callback = function()
-    local bg_c = vim.g.seoul256_background == 235 and "#333233" or "#4B4B4B"
-    local bg_nt = vim.g.seoul256_background == 235 and "#252525" or "#3F3F3F"
-    local bg_ws = vim.g.seoul256_background == 235 and "#3F3F3F" or "#565656"
-    vim.api.nvim_set_hl(0, "IblScope", { fg = "#999872", bg = bg_c })
-    vim.api.nvim_set_hl(0, "WinSeparator", { fg = bg_ws, bg = bg_ws })
-    vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = bg_nt })
-    vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = bg_nt })
-    vim.api.nvim_set_hl(0, "NeoTreeCursorLine", { bg = bg_c })
-    vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { fg = bg_nt })
+    vim.api.nvim_set_hl(0, "IblScope", { fg = "#999872", bg = "#4B4B4B" })
+    vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { fg = "#4B4B4B" })
+  end,
+})
+
+-- After loading zenbones, wind, etc. colorschemes
+aucmd("ColorScheme", {
+  group = augroup("Zenbones"),
+  pattern = { "zenbones", "wind" },
+  callback = function()
+    local ut = require("utils")
+    local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
+    local line_nr = ut.lighten(string.format("#%06x", normal.bg), 0.8)
+    local winsep = ut.lighten(string.format("#%06x", normal.bg), 0.7)
+
+    vim.api.nvim_set_hl(0, "LineNr", { fg = line_nr })
+    vim.api.nvim_set_hl(0, "WinSeparator", { fg = winsep })
+    vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { fg = normal.bg })
   end,
 })
