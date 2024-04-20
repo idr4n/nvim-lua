@@ -41,3 +41,11 @@ return {
     })
   end,
 }
+-- -- if changing background to something else such as #FAFAFA
+-- vim.api.nvim_set_hl(0, "CursorLine", { bg = "#EFF0F2" })
+-- vim.api.nvim_set_hl(0, "StatusLine", { bg = "#E7EAF0" })
+-- vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "#F3F4F6" })
+-- vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "#F3F4F6" })
+-- vim.api.nvim_set_hl(0, "NeoTreeCursorLine", { bg = "#E2E5EA" })
+-- vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { bg = "#F3F4F6" })
+-- vim.api.nvim_set_hl(0, "NeoTreeWinSeparator", { fg = "#F3F4F6", bg = "#F3F4F6" })

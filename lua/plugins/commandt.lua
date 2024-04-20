@@ -29,6 +29,7 @@ return {
           max_files = 1000000,
         },
       },
+      -- selection_highlight = "CursorLine",
     })
   end,
 }

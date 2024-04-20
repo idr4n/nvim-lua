@@ -80,5 +80,10 @@ require("lazy").setup("plugins", {
 -- require("config.colorschemes").wind.setup()
 -- require("config.colorschemes").darkplus.setup()
 -- require("config.colorschemes").NvimDefault.setup()
+-- vim.cmd("colorscheme duskfox")
+-- vim.cmd("colorscheme monotone")
+-- vim.cmd("colorscheme zenbones")
+-- vim.cmd("colorscheme solarized")
+-- vim.cmd("colorscheme seoul256")
 
-vim.cmd("colorscheme catppuccin-mocha")
+vim.cmd("colorscheme seoul256")

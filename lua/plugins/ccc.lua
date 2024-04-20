@@ -6,6 +6,7 @@ local colored_fts = {
   "lua",
   "scss",
   "toml",
+  "markdown",
 }
 
 return {

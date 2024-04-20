@@ -32,21 +32,15 @@ M.kind_icons = {
 
 -- from https://github.com/NvChad/ui/blob/main/lua/nvchad_ui/icons.lua
 M.nvchad_icons = {
-  -- Class = "󰠱",
-  -- Constant = "󰏿",
-  -- EnumMember = "󰒻",
-  -- Text = "󰉿",
-  -- TypeParameter = "󰊄",
-  -- Variable = "",
-  -- Variable = "󰂡",
   Array = "[]",
   Boolean = "",
   Calendar = "",
   Class = "",
+  Codeium = "",
   Color = "󰏘",
   Constant = "",
   Constructor = "",
-  -- Enum = "󰒻",
+  Copilot = "",
   Enum = "",
   EnumMember = "",
   Event = "",
@@ -70,11 +64,13 @@ M.nvchad_icons = {
   String = "󰉿",
   Struct = "󰙅",
   Table = "",
+  TabNine = "",
   Tag = "",
   Text = "",
   TypeParameter = "",
   Unit = "󰑭",
   Value = "󰎠",
+  Version = "",
   Variable = "",
   Watch = "󰥔",
 }
@@ -115,7 +111,8 @@ M.git_icons = {
 }
 
 M.diagnostic_icons = {
-  Error = " ",
+  -- Error = " ",
+  Error = "E ",
   Warn = " ",
   Info = " ",
   Hint = "󰌵 ",
@@ -136,6 +133,17 @@ M.devicons_override = {
     icon = "",
     name = "Tsx",
     color = "#20c2e3",
+  },
+  gleam = {
+    icon = "",
+    name = "Gleam",
+    color = "#FFAFF3",
+  },
+  py = {
+    icon = "",
+    color = "#519ABA",
+    cterm_color = "214",
+    name = "Py",
   },
 }
 

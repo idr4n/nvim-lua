@@ -26,11 +26,11 @@ return {
     -- api_key_cmd = "op read op://Personal/openAIApiKey/credential --no-newline",
     openai_params = {
       -- model = "gpt-4",
-      -- model = "gpt-4-turbo-preview",
+      model = "gpt-4-turbo-preview",
     },
     openai_edit_params = {
       -- model = "gpt-4",
-      -- model = "gpt-4-turbo-preview",
+      model = "gpt-4-turbo-preview",
     },
     chat = {
       keymaps = {
