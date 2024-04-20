@@ -140,11 +140,11 @@ M.on_attach = function(client, bufnr)
 
   if vim.fn.has("nvim-0.10.0") == 1 then
     -- inlay_hints
-    local ih = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
-    if type(ih) == "function" then
-      ih(bufnr, true)
-    elseif type(ih) == "table" and ih.enable then
-      ih.enable(bufnr, true)
+    if vim.lsp.inlay_hint and client.supports_method("textDocument/inlayHint") then
+      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+      vim.keymap.set("n", "<leader>th", function()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(), { bufnr = bufnr })
+      end, { buffer = bufnr, desc = "Toggle inlay hints" })
     end
 
     -- codelens
