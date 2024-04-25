@@ -4,6 +4,7 @@ return {
   dependencies = {
     "mason.nvim",
     "williamboman/mason-lspconfig.nvim",
+    "j-hui/fidget.nvim",
   },
   config = function()
     local lsp_conf = require("config.lsp")
@@ -157,6 +158,9 @@ return {
     if have_mason then
       mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
     end
+
+    -- Turn on lsp status information
+    require("fidget").setup()
 
     -- Convert JSON filetype to JSON with comments (jsonc)
     vim.cmd([[
