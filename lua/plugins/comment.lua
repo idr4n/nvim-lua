@@ -4,9 +4,11 @@ return {
   dependencies = {
     "JoosepAlviste/nvim-ts-context-commentstring",
   },
-  -- opts = {
-  --     pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
-  -- },
+  opts = {
+    pre_hook = function()
+      return vim.bo.commentstring
+    end,
+  },
   config = function(_, opts)
     require("Comment").setup(opts)
   end,
