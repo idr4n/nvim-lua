@@ -156,7 +156,7 @@ aucmd("User", {
 -- Wrap text for some markdown files and others
 aucmd("FileType", {
   group = augroup("md-tex-aucmd"),
-  pattern = { "markdown", "tex", "typst" },
+  pattern = { "markdown", "tex", "typst", "quarto" },
   callback = function()
     vim.cmd("setlocal wrap")
   end,
@@ -177,13 +177,19 @@ aucmd("BufWinEnter", {
   end,
 })
 
--- After loading seoul256 colorscheme
-aucmd("ColorScheme", {
-  group = augroup("Seoul256"),
-  pattern = { "seoul256" },
+-- Before saving session with Shatur/neovim-session-manager
+aucmd("User", {
+  pattern = "SessionSavePre",
+  group = augroup("Session"),
   callback = function()
-    vim.api.nvim_set_hl(0, "IblScope", { fg = "#999872", bg = "#4B4B4B" })
-    vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { fg = "#4B4B4B" })
+    -- remove buffers whose files are located outside of cwd
+    local cwd = vim.fn.getcwd() .. "/"
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+      local bufpath = vim.api.nvim_buf_get_name(buf) .. "/"
+      if not bufpath:match("^" .. vim.pesc(cwd)) then
+        vim.api.nvim_buf_delete(buf, {})
+      end
+    end
   end,
 })
 

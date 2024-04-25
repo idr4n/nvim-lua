@@ -42,14 +42,14 @@ return {
       desc = "Mini Files",
     },
   },
-  init = function()
-    if vim.fn.argc(-1) == 1 then
-      local stat = vim.loop.fs_stat(vim.fn.argv(0))
-      if stat and stat.type == "directory" then
-        require("mini.files").open()
-      end
-    end
-  end,
+  -- init = function()
+  --   if vim.fn.argc(-1) == 1 then
+  --     local stat = vim.loop.fs_stat(vim.fn.argv(0))
+  --     if stat and stat.type == "directory" then
+  --       require("mini.files").open()
+  --     end
+  --   end
+  -- end,
   opts = function()
     local copy_path = function()
       local cur_entry_path = require("mini.files").get_fs_entry().path

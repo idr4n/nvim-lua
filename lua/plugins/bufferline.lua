@@ -57,6 +57,13 @@ return {
             highlight = "Directory",
             text_align = "center",
           },
+          {
+            filetype = "NvimTree",
+            text = "Nvim-tree",
+            highlight = "FileExplorerHl",
+            text_align = "center",
+            separator = false,
+          },
         },
         style_preset = {
           bufferline.style_preset.no_italic,
