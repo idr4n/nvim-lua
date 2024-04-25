@@ -189,16 +189,32 @@ aucmd("ColorScheme", {
 
 -- After loading zenbones, wind, etc. colorschemes
 aucmd("ColorScheme", {
-  group = augroup("Zenbones"),
-  pattern = { "zenbones", "wind" },
+  group = augroup("ColorsCustomization"),
+  pattern = { "zenbones", "wind", "seoul256" },
   callback = function()
     local ut = require("utils")
     local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
     local line_nr = ut.lighten(string.format("#%06x", normal.bg), 0.8)
     local winsep = ut.lighten(string.format("#%06x", normal.bg), 0.7)
+    local treeindent = ut.lighten(string.format("#%06x", normal.bg), 0.85)
+    local darker_bg = ut.darken(string.format("#%06x", normal.bg), 0.95, "#000000")
+    vim.api.nvim_set_hl(0, "FileExplorerHl", { fg = normal.fg, bg = darker_bg })
 
-    vim.api.nvim_set_hl(0, "LineNr", { fg = line_nr })
+    if vim.g.colors_name == "seoul256" then
+      vim.api.nvim_set_hl(0, "IblScope", { fg = "#999872", bg = normal.bg })
+      vim.api.nvim_set_hl(0, "NvimTreeLineNr", { bg = darker_bg })
+    end
+
+    if vim.g.colors_name ~= "seoul256" then
+      vim.api.nvim_set_hl(0, "LineNr", { fg = line_nr })
+    end
+
     vim.api.nvim_set_hl(0, "WinSeparator", { fg = winsep })
+    vim.api.nvim_set_hl(0, "NvimTreeIndentMarker", { fg = treeindent })
     vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { fg = normal.bg })
+    vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = darker_bg })
+    vim.api.nvim_set_hl(0, "NvimTreeNormalNC", { bg = darker_bg })
+    vim.api.nvim_set_hl(0, "NvimTreeEndOfBuffer", { fg = darker_bg })
+    vim.api.nvim_set_hl(0, "NvimTreeWinSeparator", { fg = normal.bg })
   end,
 })
