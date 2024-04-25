@@ -39,9 +39,15 @@ M.snips.bb = p({
 }, "**$TM_SELECTED_TEXT$1**")
 
 M.snips.m = p({
-  trig = "mm",
+  trig = "m",
+  name = "Math $|$",
+  dscr = "Surrounds with single math symbols",
+}, "\\$$TM_SELECTED_TEXT$1\\$")
+
+M.snips.M = p({
+  trig = "M",
   name = "Math $$|$$",
-  dscr = "Surrounds with math symbols",
+  dscr = "Surrounds with double math symbols",
 }, "\\$\\$$TM_SELECTED_TEXT$1\\$\\$")
 
 M.snips.col = p({
@@ -51,10 +57,29 @@ M.snips.col = p({
 }, "<details>\n<summary>$1</summary>\n$2\n</details>")
 
 M.snips.cq = p({
-  trig = "cq",
-  name = "code block in quarto",
-  dscr = "Code block in Quarto document",
+  trig = "cb",
+  name = "code block",
+  dscr = "Code block",
 }, "```{${1:python}}\n$TM_SELECTED_TEXT$2\n```")
+
+M.snips.pfm = p(
+  {
+    trig = "pfm",
+    name = "Pandoc front matter",
+    dscr = "Pandoc front matter",
+  },
+  [[
+---
+output: 
+    pdf_document:
+      pandoc_args: ["--filter", "pandoc-eqnos"]
+fontsize: 12pt
+geometry: "left=3.5cm,right=3.5cm,top=3cm,bottom=3cm"
+papersize: A4
+urlcolor: blue
+---
+]]
+)
 
 -- autosnippets
 M.autosnips.tt = p({
@@ -76,15 +101,21 @@ M.autosnips.bb = p({
 }, "**$TM_SELECTED_TEXT$1**")
 
 M.autosnips.m = p({
-  trig = ";mm",
+  trig = ";m",
+  name = "Math $|$",
+  dscr = "Surrounds with single math symbols",
+}, "\\$$TM_SELECTED_TEXT$1\\$")
+
+M.autosnips.M = p({
+  trig = ";M",
   name = "Math $$|$$",
-  dscr = "Surrounds with math symbols",
+  dscr = "Surrounds with double math symbols",
 }, "\\$\\$$TM_SELECTED_TEXT$1\\$\\$")
 
 M.autosnips.cq = p({
-  trig = ";cq",
-  name = "code block in quarto",
-  dscr = "Code block in Quarto document",
+  trig = ";cb",
+  name = "code block",
+  dscr = "Code block",
 }, "```{${1:python}}\n$TM_SELECTED_TEXT$2\n```")
 
 return getSnippetsList(M.snips), getSnippetsList(M.autosnips)
