@@ -10,7 +10,7 @@ return {
       silent = true,
       desc = "Fzf-Lua Resume",
     },
-    { "<leader><Space>", "<cmd>lua require('fzf-lua').files()<CR>" },
+    { "<leader>m", "<cmd>lua require('fzf-lua').files()<CR>", desc = "Find files" },
     -- { "<C-P>", "<cmd>FzfLua files<cr>", desc = "Find files" },
     -- { "<leader>r", "<cmd>FzfLua live_grep_glob<cr>", desc = "Live Grep" },
     { "<leader>r", "<cmd>FzfLua grep_project<cr>", desc = "Grep Project" },

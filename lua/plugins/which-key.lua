@@ -19,7 +19,7 @@ return {
         j = { name = "ChatGPT" },
         l = { name = "LSP" },
         o = { name = "open" },
-        n = { name = "Neotree/Tdo" },
+        n = { name = "N-Tree/Tdo" },
         ["nd"] = { name = "Tdo with offset" },
         q = { name = "Quit" },
         s = { name = "Search/Spectre" },

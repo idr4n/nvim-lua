@@ -202,7 +202,7 @@ keyset({ "n", "t" }, "<C-t>", function()
       vim.cmd("wincmd w")
     end
   end
-end)
+end, { desc = "Smart window cycle" })
 --: }}}
 
 --: Resize windows with arrows {{{
