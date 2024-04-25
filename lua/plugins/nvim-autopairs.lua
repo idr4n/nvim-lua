@@ -1,7 +1,8 @@
 return {
   "windwp/nvim-autopairs",
   -- enabled = false,
-  event = "VeryLazy",
+  -- event = "VeryLazy",
+  event = { "BufReadPost", "BufNewFile" },
   config = function()
     local npairs = require("nvim-autopairs")
     npairs.setup()
