@@ -1,5 +1,6 @@
 return {
   "wincent/command-t",
+  enabled = false,
   build = "cd lua/wincent/commandt/lib && make",
   cmd = { "CommandT", "CommandTFind", "CommandTRipgrep" },
   keys = {
