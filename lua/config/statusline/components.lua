@@ -196,7 +196,7 @@ function M.progress()
 end
 
 function M.get_position()
-  return " %3l:%-2c %-2L  "
+  return " %3l:%-2c %-2L "
 end
 
 function M.search_count()
@@ -344,7 +344,7 @@ function M.git_status(opts)
       end
     end
 
-    git_status = total_changes > 0 and added .. changed .. removed .. " " or ""
+    git_status = total_changes > 0 and added .. changed .. removed or ""
   end
 
   return git_status

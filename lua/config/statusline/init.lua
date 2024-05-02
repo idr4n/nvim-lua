@@ -50,8 +50,10 @@ local bg_lighten_less = normal_hl.bg and ut.lighten(string.format("#%06x", norma
 vim.api.nvim_set_hl(0, "SLBgLighten", { fg = fg_lighten, bg = bg_lighten })
 -- vim.api.nvim_set_hl(0, "SLBgLightenLess", { fg = comment_hl.fg, bg = bg_lighten_less })
 vim.api.nvim_set_hl(0, "SLBgLightenLess", { fg = stealth, bg = bg_lighten_less })
-vim.api.nvim_set_hl(0, "SLBgNone", { fg = fg_lighten, bg = "none", underline = true })
-vim.api.nvim_set_hl(0, "SLBgNoneHl", { fg = colors.fg_hl, bg = "none", underline = true, sp = fg_lighten })
+-- vim.api.nvim_set_hl(0, "SLBgNone", { fg = fg_lighten, bg = "none", underline = true })
+-- vim.api.nvim_set_hl(0, "SLBgNoneHl", { fg = colors.fg_hl, bg = "none", underline = true, sp = fg_lighten })
+vim.api.nvim_set_hl(0, "SLBgNone", { fg = fg_lighten, bg = bg_lighten_less })
+vim.api.nvim_set_hl(0, "SLBgNoneHl", { fg = colors.fg_hl, bg = bg_lighten_less })
 vim.api.nvim_set_hl(0, "StatusReplace", { bg = colors.red, fg = statusline_hl.bg, bold = true })
 vim.api.nvim_set_hl(0, "StatusInsert", { bg = colors.insert, fg = statusline_hl.bg, bold = true })
 vim.api.nvim_set_hl(0, "StatusVisual", { bg = colors.select, fg = statusline_hl.bg, bold = true })
@@ -76,7 +78,7 @@ function Status_line(opts)
   local statusline = ""
   local filetype = vim.bo.filetype
 
-  if filetype == "neo-tree" or filetype == "minifiles" then
+  if filetype == "neo-tree" or filetype == "minifiles" or filetype == "NvimTree" then
     local home_dir = os.getenv("HOME")
     local dir = vim.fn.getcwd()
     dir = dir:gsub("^" .. home_dir, "~")
@@ -118,7 +120,7 @@ function Status_line(opts)
     "%=",
     c.get_words(),
     _G.show_more_info and c.lang_version() or "",
-    _G.show_more_info and c.LSP(),
+    _G.show_more_info and c.LSP() or "",
     _G.show_more_info and " Ux%04B" or "",
     _G.show_more_info and c.get_position() or "",
     c.cwd(),
@@ -131,7 +133,8 @@ end
 
 function StatusBoring()
   local components = {
-    "%#SLBgNone#",
+    c.mode(),
+    "%#SLBgNone# ",
     c.fileinfo({ add_icon = false }),
     " %h%m%r",
     c.git_boring(),
