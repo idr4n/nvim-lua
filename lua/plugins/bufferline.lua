@@ -2,6 +2,14 @@ return {
   "akinsho/bufferline.nvim",
   -- enabled = false,
   event = { "BufReadPost", "BufNewFile" },
+  init = function()
+    if vim.fn.argc(-1) == 1 then
+      local stat = vim.loop.fs_stat(vim.fn.argv(0))
+      if stat and stat.type == "directory" then
+        require("bufferline")
+      end
+    end
+  end,
   keys = {
     { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
     { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
@@ -36,7 +44,8 @@ return {
       options = {
         -- show_buffer_close_icons = false,
         buffer_close_icon = "",
-        diagnostics = "nvim_lsp",
+        -- diagnostics = "nvim_lsp",
+        diagnostics = false,
         always_show_bufferline = true,
         indicator = {
           -- icon = "▎", -- this should be omitted if indicator style is not 'icon'

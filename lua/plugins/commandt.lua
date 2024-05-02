@@ -1,10 +1,10 @@
 return {
   "wincent/command-t",
-  enabled = false,
+  -- enabled = false,
   build = "cd lua/wincent/commandt/lib && make",
   cmd = { "CommandT", "CommandTFind", "CommandTRipgrep" },
   keys = {
-    { "<leader>a", ":CommandTRipgrep<cr>", silent = true, desc = "Find files (CmdT)" },
+    -- { "<leader>a", ":CommandTRipgrep<cr>", silent = true, desc = "Find files (CmdT)" },
     { "<C-P>", ":CommandTRipgrep<cr>", silent = true, desc = "Find files (CmdT)" },
   },
   init = function()

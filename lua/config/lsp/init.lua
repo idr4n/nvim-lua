@@ -134,7 +134,7 @@ M.on_attach = function(client, bufnr)
     end
   end
 
-  -- client.server_capabilities.semanticTokensProvider = nil
+  client.server_capabilities.semanticTokensProvider = nil
 
   lsp_keymaps(client, bufnr)
 

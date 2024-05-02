@@ -1,5 +1,6 @@
 return {
   "epwalsh/obsidian.nvim",
+  -- enabled = false,
   version = "*", -- recommended, use latest release instead of latest commit
   ft = "markdown",
     -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
@@ -47,6 +48,7 @@ return {
         },
       },
     },
+    ui = { enable = false },
     new_notes_location = "notes_subdir",
     wiki_link_func = "use_alias_only",
     disable_frontmatter = true,

@@ -74,7 +74,8 @@ output:
     pdf_document:
       pandoc_args: ["--filter", "pandoc-eqnos"]
 fontsize: 12pt
-geometry: "left=3.5cm,right=3.5cm,top=3cm,bottom=3cm"
+# geometry: "left=3.5cm,right=3.5cm,top=3cm,bottom=3cm"
+geometry: margin=3cm
 papersize: A4
 urlcolor: blue
 ---

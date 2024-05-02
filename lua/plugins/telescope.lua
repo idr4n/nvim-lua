@@ -35,32 +35,20 @@ return {
           "<leader>a",
           function()
             require("telescope.builtin").find_files(dropdown_theme())
-            -- require("telescope.builtin").find_files({
-            --   layout_strategy = "vertical",
-            --   previewer = false,
-            --   layout_config = {
-            --     width = function(_, max_columns, _)
-            --       return math.min(math.floor(max_columns * 0.82), 120)
-            --     end,
-            --     height = function(_, _, max_lines)
-            --       return math.min(math.floor(max_lines * 0.8), 20)
-            --     end,
-            --   },
-            -- })
           end,
           noremap = true,
           silent = true,
           desc = "Telescope-find_files",
         },
-        {
-          "<C-P>",
-          function()
-            require("telescope.builtin").find_files(dropdown_theme())
-          end,
-          noremap = true,
-          silent = true,
-          desc = "Telescope-find_files",
-        },
+        -- {
+        --   "<C-P>",
+        --   function()
+        --     require("telescope.builtin").find_files(dropdown_theme())
+        --   end,
+        --   noremap = true,
+        --   silent = true,
+        --   desc = "Telescope-find_files",
+        -- },
         -- { "<leader>r", "<cmd>Telescope live_grep<cr>", desc = "" },
         -- {
         --   "<leader>r",
@@ -195,7 +183,7 @@ return {
           },
 
           prompt_prefix = "   ",
-          selection_caret = "  ",
+          selection_caret = " ",
 
           results_title = false,
 

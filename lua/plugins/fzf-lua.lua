@@ -99,12 +99,12 @@ return {
       silent = true,
       desc = "LSP workspace symbols (FzfLua)",
     },
-    {
-      "<leader>gs",
-      "<cmd>FzfLua git_status<cr>",
-      silent = true,
-      desc = "Git Status",
-    },
+    -- {
+    --   "<leader>gs",
+    --   "<cmd>FzfLua git_status<cr>",
+    --   silent = true,
+    --   desc = "Git Status",
+    -- },
   },
   opts = function()
     vim.api.nvim_set_hl(0, "FZFLuaBorder", { fg = "#9D7CD8" })
