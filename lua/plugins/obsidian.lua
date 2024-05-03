@@ -6,10 +6,10 @@ return {
     -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
     -- stylua: ignore
     -- event = {
-    --   "BufReadPre " .. vim.fn.expand("~") .. "/Sync/Notes-Database/**.md",
-    --   "BufNewFile " .. vim.fn.expand("~") .. "/Sync/Notes-Database/**.md",
-    --   "BufReadPre " .. vim.fn.expand("~") .. "/Sync/Notes-tdo/**.md",
-    --   "BufNewFile " .. vim.fn.expand("~") .. "/Sync/Notes-tdo/**.md",
+    --   "BufReadPre " .. vim.fn.expand("~") .. "/pCloud/Notes-Database/**.md",
+    --   "BufNewFile " .. vim.fn.expand("~") .. "/pCloud/Notes-Database/**.md",
+    --   "BufReadPre " .. vim.fn.expand("~") .. "/pCloud/Notes-tdo/**.md",
+    --   "BufNewFile " .. vim.fn.expand("~") .. "/pCloud/Notes-tdo/**.md",
     -- },
     dependencies = {
       -- Required.
@@ -19,14 +19,14 @@ return {
     workspaces = {
       {
         name = "personal",
-        path = "~/Sync/Notes-Database",
+        path = "~/pCloud/Notes-Database",
         overrides = {
           notes_subdir = "00-Inbox",
         },
       },
       {
         name = "work",
-        path = "~/Sync/Notes-tdo",
+        path = "~/pCloud/Notes-tdo",
         overrides = {
           notes_subdir = "notes",
         },
