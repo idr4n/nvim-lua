@@ -56,10 +56,16 @@ M.snips.col = p({
   dscr = "Adds a collapsible/foldable block",
 }, "<details>\n<summary>$1</summary>\n$2\n</details>")
 
-M.snips.cq = p({
+M.snips.cb = p({
   trig = "cb",
   name = "code block",
   dscr = "Code block",
+}, "```${1:python}\n$TM_SELECTED_TEXT$2\n```")
+
+M.snips.cq = p({
+  trig = "cq",
+  name = "code block - quarto",
+  dscr = "Code block - quarto",
 }, "```{${1:python}}\n$TM_SELECTED_TEXT$2\n```")
 
 M.snips.pfm = p(
@@ -113,10 +119,16 @@ M.autosnips.M = p({
   dscr = "Surrounds with double math symbols",
 }, "\\$\\$$TM_SELECTED_TEXT$1\\$\\$")
 
-M.autosnips.cq = p({
+M.autosnips.cb = p({
   trig = ";cb",
   name = "code block",
   dscr = "Code block",
+}, "```${1:python}\n$TM_SELECTED_TEXT$2\n```")
+
+M.autosnips.cq = p({
+  trig = ";cq",
+  name = "code block - quarto",
+  dscr = "Code block - quarto",
 }, "```{${1:python}}\n$TM_SELECTED_TEXT$2\n```")
 
 return getSnippetsList(M.snips), getSnippetsList(M.autosnips)

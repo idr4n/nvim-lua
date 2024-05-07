@@ -22,7 +22,8 @@ command("OpenMarked2", "execute 'silent !open -a Marked\\ 2 \"%\"'", {})
 command("OpenDeckset", "execute 'silent !open -a Deckset \"%\"'", {})
 
 -- Convert markdown file to pdf using pandoc
-command("MdToPdf", 'execute \'silent !pandoc "%" -o "%:r.pdf"\'', {})
+-- command("MdToPdf", 'execute \'silent !pandoc "%" -o "%:r.pdf"\'', {})
+command("MdToPdf", 'execute \'silent !pandoc "%"  --listings -H ~/dotfiles/listings-setup.tex -o "%:r.pdf"\'', {})
 
 -- Convert markdown file to docx using pandoc
 command("MdToDocx", 'execute \'silent !pandoc "%" -o "%:r.docx"\'', {})

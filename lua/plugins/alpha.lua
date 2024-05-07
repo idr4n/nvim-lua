@@ -51,6 +51,10 @@ return {
       -- dashboard.button("c", "  Config", "<cmd>lcd ~/.config/nvim | echo 'Directory:' getcwd()<cr>"),
       -- dashboard.button("d", "  Dotfiles", "<cmd>lcd ~/dotfiles | echo 'Directory:' getcwd()<cr>"),
       dashboard.button("l", "󰒲  Lazy", ":Lazy<CR>"),
+      dashboard.button("n", "  File Explorer", function()
+        require("bufferline")
+        require("nvim-tree.api").tree.find_file({ open = true, current_window = true })
+      end),
       dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
       { type = "padding", val = 1 },
     }
