@@ -45,6 +45,36 @@ M.snips.M = p({
   dscr = "Surrounds with double math symbols",
 }, "\\$\\$$TM_SELECTED_TEXT$1\\$\\$")
 
+M.snips.ta = p(
+  {
+    trig = "ta",
+    name = "Assignment Template",
+    dscr = "Assignment Template",
+  },
+  [[
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=3.5cm, vmargin={3cm,3cm}]{geometry}
+\usepackage{amsmath}
+\usepackage{multirow}
+
+\title{Chapter ${1:02} - Practice Problems}
+\author{${2:FIN335} - Dr. Ivan Duran }
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+  \item $3
+
+\end{enumerate}
+
+\end{document}
+]]
+)
+
 -- autosnippets
 
 M.autosnips.bb = p({
