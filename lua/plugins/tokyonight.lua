@@ -10,6 +10,7 @@ return {
         -- functions = { italic = true },
         -- sidebars = "transparent",
         keywords = { italic = false },
+        comments = { italic = false },
         floats = "transparent",
       },
       on_highlights = function(hl, c)
@@ -21,6 +22,7 @@ return {
         hl.TreesitterContext = { bg = c.none }
         hl.TreesitterContextBottom = { underline = true, sp = c.magenta }
         -- hl.TelescopeBorder = { fg = c.purple, bg = c.none }
+        hl.TelescopePromptBorder = { fg = c.none }
       end,
     }
   end,
