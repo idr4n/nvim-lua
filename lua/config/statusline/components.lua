@@ -176,11 +176,9 @@ function M.fileinfo(opts)
       local ft_icon = icons.get_icon(name)
       icon = (ft_icon ~= nil and ft_icon) or icon
     end
-
-    name = name .. " "
   end
 
-  return (opts.add_icon and " " .. icon .. " " or "") .. dir .. name
+  return (opts.add_icon and " " .. icon .. " " or " ") .. dir .. name .. " "
 end
 
 function M.progress()

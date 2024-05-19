@@ -78,7 +78,8 @@ function Status_line(opts)
   local statusline = ""
   local filetype = vim.bo.filetype
 
-  if filetype == "neo-tree" or filetype == "minifiles" or filetype == "NvimTree" then
+  local filetypes = { "neo-tree", "minifiles", "NvimTree", "oil" }
+  if vim.tbl_contains(filetypes, filetype) then
     local home_dir = os.getenv("HOME")
     local dir = vim.fn.getcwd()
     dir = dir:gsub("^" .. home_dir, "~")
@@ -109,12 +110,14 @@ function Status_line(opts)
     c.mode(),
     c.filetype(),
     "%#SLBgLightenLess#",
-    _G.show_more_info and c.fileinfo() or "",
+    c.fileinfo(),
     _G.show_more_info and c.git_branch() or "",
     -- _G.show_more_info and c.git_status({ mono = mono }) or "",
     -- not _G.show_more_info and c.git_hunks({ mono = mono }) or "",
-    c.git_status({ mono = mono }),
-    c.lsp_diagnostics({ mono = mono }),
+    -- c.git_status({ mono = mono }),
+    -- c.lsp_diagnostics({ mono = mono }),
+    _G.show_more_info and c.git_status({ mono = mono }) or c.git_boring(),
+    _G.show_more_info and c.lsp_diagnostics({ mono = mono }) or c.diagnostics_boring(),
     "%=%#SLBgLightenLess#",
     c.search_count(),
     "%=",
@@ -134,9 +137,9 @@ end
 function StatusBoring()
   local components = {
     c.mode(),
-    "%#SLBgNone# ",
+    "%#SLBgNone#",
     c.fileinfo({ add_icon = false }),
-    " %h%m%r",
+    "%h%m%r",
     c.git_boring(),
     c.diagnostics_boring(),
     "%=",
@@ -151,8 +154,8 @@ function StatusBoring()
 end
 
 -- vim.o.statusline = "%!v:lua.Status_line(2)"
--- vim.o.statusline = '%!luaeval("Status_line({ status = 2, mono = false })")'
-vim.o.statusline = '%!luaeval("_G.show_more_info and Status_line({ status = 2, mono = false }) or StatusBoring()")'
+vim.o.statusline = '%!luaeval("Status_line({ status = 2, mono = false })")'
+-- vim.o.statusline = '%!luaeval("_G.show_more_info and Status_line({ status = 2, mono = false }) or StatusBoring()")'
 
 vim.api.nvim_create_augroup("statusline", { clear = true })
 vim.api.nvim_create_autocmd("DiagnosticChanged", {
