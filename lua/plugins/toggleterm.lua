@@ -4,6 +4,7 @@ return {
   cmd = { "ToggleTerm" },
   keys = {
     { "<leader>gl", ":LazyGit<cr>", desc = "LazyGit" },
+    { "<leader>gu", ":GitUI<cr>", desc = "GitUI" },
     { "<M-\\>", ":ToggleTerm<cr>", mode = { "n", "t" }, desc = "Toggle Horizontal Term" },
     { "<M-`>", "<cmd>ToggleTerm<cr>", mode = { "n", "t" }, desc = "Toggle Horizontal Term" },
     { "<C-\\>", "<cmd>2ToggleTerm direction=vertical<cr>", mode = { "n", "t" }, desc = "Toggle Vertical Term" },
@@ -43,10 +44,14 @@ return {
   },
   config = function(_, opts)
     require("toggleterm").setup(opts)
-    local float_opts = { height = math.floor(vim.fn.winheight(0) * 0.85) }
+    local float_opts = {
+      width = math.floor(vim.fn.winwidth(0) * 0.9),
+      height = math.floor(vim.fn.winheight(0) * 0.9),
+    }
 
     local Terminal = require("toggleterm.terminal").Terminal
-    local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, float_opts = float_opts })
+    local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float", float_opts = float_opts })
+    local gitui = Terminal:new({ cmd = "gitui", hidden = true, direction = "float", float_opts = float_opts })
 
     -- :Lazygit
     vim.api.nvim_create_user_command("LazyGit", function()
@@ -56,6 +61,15 @@ return {
         lazygit:toggle()
       end
     end, {})
+    -- :GitUI
+    vim.api.nvim_create_user_command("GitUI", function()
+      if os.getenv("TERM_PROGRAM") == "tmux" then
+        vim.cmd("execute 'silent !tmux split-window -v -l 80\\% gitui'")
+      else
+        gitui:toggle()
+      end
+    end, {})
+
     function _G.set_terminal_keymaps()
       local op = { buffer = 0 }
       vim.keymap.set("t", "<esc><esc>", [[<C-\><C-n>]], op)
