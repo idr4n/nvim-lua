@@ -182,8 +182,9 @@ return {
             ".DS_Store",
           },
 
-          prompt_prefix = "   ",
-          selection_caret = " ",
+          prompt_prefix = "  ",
+          -- selection_caret = " ",
+          selection_caret = "• ",
 
           results_title = false,
 

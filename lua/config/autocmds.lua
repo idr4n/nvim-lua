@@ -203,6 +203,7 @@ aucmd("ColorScheme", {
     local line_nr = ut.lighten(string.format("#%06x", normal.bg), 0.8)
     local winsep = ut.lighten(string.format("#%06x", normal.bg), 0.7)
     local treeindent = ut.lighten(string.format("#%06x", normal.bg), 0.85)
+    local lighter_bg = ut.lighten(string.format("#%06x", normal.bg), 0.95)
     local darker_bg = ut.darken(string.format("#%06x", normal.bg), 0.95, "#000000")
     vim.api.nvim_set_hl(0, "FileExplorerHl", { fg = normal.fg, bg = darker_bg })
 
@@ -222,5 +223,8 @@ aucmd("ColorScheme", {
     vim.api.nvim_set_hl(0, "NvimTreeNormalNC", { bg = darker_bg })
     vim.api.nvim_set_hl(0, "NvimTreeEndOfBuffer", { fg = darker_bg })
     vim.api.nvim_set_hl(0, "NvimTreeWinSeparator", { fg = normal.bg })
+    vim.api.nvim_set_hl(0, "TelescopeSelection", { bg = lighter_bg })
+    vim.api.nvim_set_hl(0, "TelescopeSelectionCaret", { fg = "#FF87D7" })
+    vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = "#FF87D7" })
   end,
 })
