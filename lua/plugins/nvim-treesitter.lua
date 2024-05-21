@@ -6,15 +6,6 @@ return {
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall", "TSUninstall" },
     opts = {
-      autotag = {
-        enable = true,
-        filetypes = {
-          "html",
-          "javascript",
-          "typescript",
-          "markdown",
-        },
-      },
       incremental_selection = {
         enable = true,
         keymaps = {

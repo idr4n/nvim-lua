@@ -48,7 +48,7 @@ return {
         },
       },
     },
-    ui = { enable = false },
+    -- ui = { enable = false },
     new_notes_location = "notes_subdir",
     wiki_link_func = "use_alias_only",
     disable_frontmatter = true,
