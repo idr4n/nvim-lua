@@ -455,3 +455,8 @@ local function compare_to_clipboard()
 end
 keyset("x", "<Space>D", compare_to_clipboard, { desc = "Compare to clipboard" })
 --: }}}
+
+--: Delete default mappings {{{
+-- vim.kezmap.del({ "n" }, "crn")
+-- vim.keymap.del({ "n", "v" }, "crr")
+--: }}}

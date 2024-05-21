@@ -2,18 +2,18 @@ return {
   "echasnovski/mini.files",
   keys = {
     -- { "-", ":lua require('mini.files').open()<cr>", silent = true, desc = "Mini Files" },
-    {
-      "-",
-      function()
-        local bufname = vim.api.nvim_buf_get_name(0)
-        local path = vim.fn.fnamemodify(bufname, ":p")
-        if path and vim.uv.fs_stat(path) then
-          require("mini.files").open(bufname, false)
-        end
-      end,
-      silent = true,
-      desc = "Mini Files",
-    },
+    -- {
+    --   "-",
+    --   function()
+    --     local bufname = vim.api.nvim_buf_get_name(0)
+    --     local path = vim.fn.fnamemodify(bufname, ":p")
+    --     if path and vim.uv.fs_stat(path) then
+    --       require("mini.files").open(bufname, false)
+    --     end
+    --   end,
+    --   silent = true,
+    --   desc = "Mini Files",
+    -- },
     {
       "<C-Q>",
       function()
