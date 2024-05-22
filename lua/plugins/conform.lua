@@ -21,6 +21,7 @@ return {
       css = { "prettier" },
       html = { "prettier" },
       sh = { "shfmt" },
+      go = { "goimports", "gofumpt" },
     },
   },
 }
