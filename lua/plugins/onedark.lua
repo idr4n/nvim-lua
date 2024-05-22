@@ -1,3 +1,6 @@
+local bg_ln = "#30333C"
+-- local bg_ln = "$bg1"
+
 return {
   "navarasu/onedark.nvim",
   lazy = true,
@@ -37,15 +40,15 @@ return {
       -- StatusLine = { bg = "#252931" },
       -- LineNr = { fg = "#41454D" },
       -- LineNr = { fg = "#4A4F58" },
-      LineNr = { fg = "#4A4F58", bg = "#2D3039" },
+      LineNr = { fg = "#4A4F58", bg = bg_ln },
       NvimTreeLineNr = { bg = "$bg_d" },
-      GitSignsAdd = { bg = "#2D3039" },
-      GitSignsDelete = { bg = "#2D3039" },
-      GitSignsChange = { bg = "#2D3039" },
-      DiagnostictSignHint = { bg = "#2D3039" },
-      DiagnostictSignError = { bg = "#2D3039" },
-      DiagnostictSignInfo = { bg = "#2D3039" },
-      DiagnostictSignWarn = { bg = "#2D3039" },
+      GitSignsAdd = { bg = bg_ln },
+      GitSignsDelete = { bg = bg_ln },
+      GitSignsChange = { bg = bg_ln },
+      DiagnostictSignHint = { bg = bg_ln },
+      DiagnostictSignError = { bg = bg_ln },
+      DiagnostictSignInfo = { bg = bg_ln },
+      DiagnostictSignWarn = { bg = bg_ln },
       -- TreesitterContext = { bg = "NONE" },
       -- TreesitterContextBottom = { fmt = "underline", sp = "$purple" },
       Visual = { bg = "#224058" },
@@ -80,7 +83,6 @@ return {
 --   black = "#181a1f",
 --   bg0 = "#282c34",
 --   bg1 = "#31353f",
---   bg1 = "#2D3039",
 --   bg2 = "#393f4a",
 --   bg3 = "#3b3f4c",
 --   bg_d = "#21252b",
