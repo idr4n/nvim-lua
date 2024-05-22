@@ -8,7 +8,7 @@ function _G.get_lang_version(language)
   local script_path = "get_lang_version" -- Adjust the path to the Bash script if needed
   local cmd = script_path .. " " .. language
   local result = vim.fn.system(cmd)
-  return result:gsub("%s+", "")
+  return result:gsub("^%s*(.-)%s*$", "%1")
 end
 
 _G.lang_versions = {}
