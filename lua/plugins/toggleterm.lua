@@ -5,6 +5,7 @@ return {
   keys = {
     { "<leader>gl", ":LazyGit<cr>", desc = "LazyGit" },
     { "<leader>gu", ":GitUI<cr>", desc = "GitUI" },
+    { "<leader>gt", ":Tig<cr>", desc = "Tig" },
     { "<M-\\>", ":ToggleTerm<cr>", mode = { "n", "t" }, desc = "Toggle Horizontal Term" },
     { "<M-`>", "<cmd>ToggleTerm<cr>", mode = { "n", "t" }, desc = "Toggle Horizontal Term" },
     { "<C-\\>", "<cmd>2ToggleTerm direction=vertical<cr>", mode = { "n", "t" }, desc = "Toggle Vertical Term" },
@@ -52,6 +53,7 @@ return {
     local Terminal = require("toggleterm.terminal").Terminal
     local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float", float_opts = float_opts })
     local gitui = Terminal:new({ cmd = "gitui", hidden = true, direction = "float", float_opts = float_opts })
+    local tig = Terminal:new({ cmd = "tig", hidden = true, direction = "float", float_opts = float_opts })
 
     -- :Lazygit
     vim.api.nvim_create_user_command("LazyGit", function()
@@ -67,6 +69,14 @@ return {
         vim.cmd("execute 'silent !tmux split-window -v -l 80\\% gitui'")
       else
         gitui:toggle()
+      end
+    end, {})
+    -- :Tig
+    vim.api.nvim_create_user_command("Tig", function()
+      if os.getenv("TERM_PROGRAM") == "tmux" then
+        vim.cmd("execute 'silent !tmux split-window -v -l 80\\% tig'")
+      else
+        tig:toggle()
       end
     end, {})
 
