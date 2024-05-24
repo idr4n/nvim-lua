@@ -11,7 +11,7 @@ return {
     { "<leader>ne", "<cmd>TdoEntry<cr>", desc = "Today's entry (Tdo)" },
     { "<leader>nf", "<cmd>TdoFiles<cr>", desc = "Find note (Tdo)" },
     { "<leader>nr", "<cmd>TdoFind<cr>", desc = "Search notes (Tdo)" },
-    { "<leader>nc", "<cmd>TdoToggle<cr>", desc = "Toggle checkmark (Tdo)" },
+    { "<leader>nC", "<cmd>TdoToggle<cr>", desc = "Toggle checkmark (Tdo)" },
     {
       "<leader>ndt",
       function()

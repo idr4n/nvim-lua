@@ -156,13 +156,3 @@ end
 -- vim.o.statusline = "%!v:lua.Status_line(2)"
 vim.o.statusline = '%!luaeval("Status_line({ status = 2, mono = false })")'
 -- vim.o.statusline = '%!luaeval("_G.show_more_info and Status_line({ status = 2, mono = false }) or StatusBoring()")'
-
-vim.api.nvim_create_augroup("statusline", { clear = true })
-vim.api.nvim_create_autocmd("DiagnosticChanged", {
-  pattern = { "*" },
-  callback = function()
-    -- vim.o.statusline = "%!v:lua.Status_line()"
-    vim.cmd("redrawstatus!")
-  end,
-  group = "statusline",
-})
