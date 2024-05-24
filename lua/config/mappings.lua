@@ -108,11 +108,11 @@ keymap("n", "ga", ":b#<CR>zz", { desc = "Last buffer" })
 --: }}}
 
 --: Using Bbye plugin to close the current buffer {{{
-keymap("n", "<leader>x", ":bdelete<CR>", { desc = "Close (delete) Buffer" })
-keymap("n", "<leader>bd", ":bdelete<CR>", { desc = "Close (delete) Buffer" })
-keymap("n", "<leader>bD", ":bdelete!<CR>", { desc = "Force Close Buffer!" })
+keyset("n", "<leader>x", ":Bdelete<CR>", { desc = "Close (delete) Buffer" })
+keymap("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete Buffer and Window" })
+keymap("n", "<leader>bD", ":Bdelete!<CR>", { desc = "Force Close Buffer!" })
 -- wipeout current buffer
-keymap("n", "<leader>bw", ":bwipeout<CR>", { desc = "Wipeout Buffer" })
+keymap("n", "<leader>bw", ":Bwipeout<CR>", { desc = "Wipeout Buffer" })
 -- keymap("n", "<leader>bd", ":bd<CR>")
 --: }}}
 
