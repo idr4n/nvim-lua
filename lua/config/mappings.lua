@@ -108,7 +108,13 @@ keymap("n", "ga", ":b#<CR>zz", { desc = "Last buffer" })
 --: }}}
 
 --: Using Bbye plugin to close the current buffer {{{
-keyset("n", "<leader>x", ":Bdelete<CR>", { desc = "Close (delete) Buffer" })
+keyset("n", "<leader>x", function()
+  if vim.bo.filetype == "gitcommit" then
+    vim.cmd("bdelete")
+  else
+    vim.cmd("Bdelete")
+  end
+end, { desc = "Close (delete) Buffer" })
 keymap("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete Buffer and Window" })
 keymap("n", "<leader>bD", ":Bdelete!<CR>", { desc = "Force Close Buffer!" })
 -- wipeout current buffer
