@@ -2,6 +2,7 @@ return {
   "projekt0n/github-nvim-theme",
   lazy = true,
   config = function()
+    local bg_ln = "#F6F8FA"
     require("github-theme").setup({
       options = {
         hide_end_of_buffer = false,
@@ -19,13 +20,25 @@ return {
           -- StatusLine = { bg = "NONE", style = "underline" },
           Comment = { fg = "#6A737D" },
           Delimiter = { fg = "#24292F" }, -- for punctuation ',' '.', etc
-          LineNr = { fg = "#BFC0C1" },
+          LineNr = { fg = "#BFC0C1", bg = bg_ln },
+          NvimTreeLineNr = { bg = "#F6F8FA" },
+          GitSignsAdd = { fg = "git.add", bg = bg_ln },
+          GitSignsDelete = { fg = "git.removed", bg = bg_ln },
+          GitSignsChange = { fg = "git.changed", bg = bg_ln },
+          DiagnostictHint = { fg = "palette.fg.muted", bg = bg_ln },
+          DiagnostictError = { fg = "palette.danger.fg", bg = bg_ln },
+          DiagnostictInfo = { fg = "palette.accent.fg", bg = bg_ln },
+          DiagnostictWarn = { fg = "palette.attention.fg", bg = bg_ln },
+          IblIndent = { fg = "palette.neutral.muted", bg = "bg1" },
+          IblScope = { fg = "palette.fg.muted", bg = "bg1" },
           CursorLine = { bg = "#F6F8FA" },
+          CursorLineNr = { bg = "palette.fg.muted" },
           EndOfBuffer = { fg = "#EDEFF1" },
           NeoTreeWinSeparator = { fg = "#FFFFFF" },
           NeoTreeCursorLine = { bg = "#EDEFF1" },
           NvimTreeEndOfBuffer = { fg = "#F6F8FA" },
           NvimTreeCursorLine = { bg = "#EDEFF1" },
+          NvimTreeCursorLineNr = { bg = "#EDEFF1" },
           NvimTreeIndentMarker = { fg = "#EDEFF1" },
           NvimTreeFolderArrowClosed = { fg = "#57606A" },
           NvimTreeFolderArrowOpen = { fg = "#57606A" },
