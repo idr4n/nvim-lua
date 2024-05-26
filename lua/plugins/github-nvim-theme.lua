@@ -32,7 +32,7 @@ return {
           IblIndent = { fg = "palette.neutral.muted", bg = "bg1" },
           IblScope = { fg = "palette.fg.muted", bg = "bg1" },
           CursorLine = { bg = "#F6F8FA" },
-          CursorLineNr = { bg = "palette.fg.muted" },
+          CursorLineNr = { fg = "#9A5BFF", bg = "palette.fg.muted", style = "bold" },
           EndOfBuffer = { fg = "#EDEFF1" },
           NeoTreeWinSeparator = { fg = "#FFFFFF" },
           NeoTreeCursorLine = { bg = "#EDEFF1" },

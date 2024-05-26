@@ -41,6 +41,7 @@ return {
       -- LineNr = { fg = "#41454D" },
       -- LineNr = { fg = "#4A4F58" },
       LineNr = { fg = "#4A4F58", bg = bg_ln },
+      CursorLineNr = { fg = "$red", fmt = "bold" },
       NvimTreeLineNr = { bg = "$bg_d" },
       GitSignsAdd = { bg = bg_ln },
       GitSignsDelete = { bg = bg_ln },
