@@ -45,6 +45,12 @@ M.snips.M = p({
   dscr = "Surrounds with double math symbols",
 }, "\\$\\$$TM_SELECTED_TEXT$1\\$\\$")
 
+M.snips.bu = p({
+  trig = "bu",
+  name = "Blank Underline $$_____$$",
+  dscr = "Adds a blank underline for mcqs questions",
+}, "\\underline{\\phantom{mmmmm}}")
+
 M.snips.ta = p(
   {
     trig = "ta",
@@ -100,5 +106,11 @@ M.autosnips.M = p({
   name = "Math $$|$$",
   dscr = "Surrounds with double math symbols",
 }, "\\$\\$$TM_SELECTED_TEXT$1\\$\\$")
+
+M.autosnips.bu = p({
+  trig = ";bu",
+  name = "Blank Underline $$_____$$",
+  dscr = "Adds a blank underline for mcqs questions",
+}, "\\underline{\\phantom{mmmmm}}")
 
 return getSnippetsList(M.snips), getSnippetsList(M.autosnips)
