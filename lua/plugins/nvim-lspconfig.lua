@@ -12,13 +12,6 @@ return {
     local icons = require("utils").diagnostic_icons
 
     local opts = {
-      signs = {
-        { name = "DiagnosticSignError", text = icons.Error },
-        { name = "DiagnosticSignWarn", text = icons.Warn },
-        { name = "DiagnosticSignHint", text = icons.Hint },
-        { name = "DiagnosticSignInfo", text = icons.Info },
-      },
-
       diagnostics = {
         virtual_text = { spacing = 4, prefix = "●" },
         update_in_insert = false,
@@ -31,6 +24,14 @@ return {
           source = "always",
           header = "",
           prefix = "",
+        },
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = icons.Error,
+            [vim.diagnostic.severity.WARN] = icons.Warn,
+            [vim.diagnostic.severity.HINT] = icons.Hint,
+            [vim.diagnostic.severity.INFO] = icons.Info,
+          },
         },
       },
 
@@ -81,9 +82,6 @@ return {
     }
 
     -- setup signs and diagnostics
-    for _, sign in ipairs(opts.signs) do
-      vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-    end
     vim.diagnostic.config(opts.diagnostics)
 
     -- If not using noice.nvim, configure hover and signatureHelp
