@@ -10,7 +10,7 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-nvim-lua",
     { "js-everts/cmp-tailwind-colors", config = true },
-    { "Saecki/crates.nvim", event = { "BufRead Cargo.toml" } },
+    { "saecki/crates.nvim", event = { "BufRead Cargo.toml" } },
   },
   opts = function()
     local cmp = require("cmp")
