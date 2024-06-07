@@ -126,6 +126,7 @@ function Status_line(opts)
     _G.show_more_info and c.LSP() or "",
     _G.show_more_info and " Ux%04B" or "",
     _G.show_more_info and c.get_position() or "",
+    c.codeium_status(),
     c.cwd(),
   }
 
