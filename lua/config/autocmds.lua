@@ -80,15 +80,15 @@ aucmd("FileType", {
   group = augroup("Netrw"),
 })
 
--- format on save for specific files
-aucmd("BufWritePre", {
-  pattern = { "*.go", "*.lua", "*.rs" },
-  callback = function()
-    -- vim.lsp.buf.format()
-    require("conform").format({ lsp_fallback = true })
-  end,
-  group = augroup("LspFormatting"),
-})
+-- format on save for specific files (set in conform config instead)
+-- aucmd("BufWritePre", {
+--   pattern = { "*.go", "*.lua", "*.rs" },
+--   callback = function()
+--     -- vim.lsp.buf.format()
+--     require("conform").format({ lsp_fallback = true })
+--   end,
+--   group = augroup("LspFormatting"),
+-- })
 
 -- Alpha
 aucmd("FileType", {
