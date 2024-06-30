@@ -5,7 +5,7 @@ return {
   },
   keys = {
     {
-      "<leader>-",
+      "-",
       function()
         require("yazi").yazi()
       end,

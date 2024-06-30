@@ -70,7 +70,8 @@ opt.fillchars = {
   fold = " ",
   foldsep = " ",
   diff = "╱",
-  eob = "~",
+  -- eob = "~",
+  eob = " ",
 }
 
 vim.o.cursorlineopt = "number"

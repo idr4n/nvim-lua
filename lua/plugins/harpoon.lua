@@ -7,8 +7,6 @@ return {
     { "<M-i>", "<cmd>lua require('harpoon.ui').nav_file(2)<cr>" },
     { "<M-o>", "<cmd>lua require('harpoon.ui').nav_file(3)<cr>" },
     { "<M-p>", "<cmd>lua require('harpoon.ui').nav_file(4)<cr>" },
-    { "<M-[>", "<cmd>lua require('harpoon.ui').nav_file(5)<cr>" },
-    { "<M-]>", "<cmd>lua require('harpoon.ui').nav_file(6)<cr>" },
   },
   dependencies = "nvim-lua/plenary.nvim",
 }

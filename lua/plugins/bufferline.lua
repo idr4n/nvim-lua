@@ -1,15 +1,8 @@
 return {
   "akinsho/bufferline.nvim",
   -- enabled = false,
-  event = { "BufReadPost", "BufNewFile" },
-  init = function()
-    if vim.fn.argc(-1) == 1 then
-      local stat = vim.loop.fs_stat(vim.fn.argv(0))
-      if stat and stat.type == "directory" then
-        require("bufferline")
-      end
-    end
-  end,
+  -- event = { "BufReadPost", "BufNewFile" },
+  event = "VimEnter",
   keys = {
     { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
     { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
@@ -68,9 +61,10 @@ return {
           },
           {
             filetype = "NvimTree",
-            text = "Nvim-tree",
-            highlight = "FileExplorerHl",
-            text_align = "center",
+            -- text = "Nvim-tree",
+            -- highlight = "FileExplorerHl",
+            highlight = "NvimTreeNormal",
+            -- text_align = "center",
             separator = false,
           },
         },

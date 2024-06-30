@@ -177,6 +177,9 @@ return {
       { "<leader>ds", "<ESC>:lua require('dap-python').debug_selection()<CR>", mode = "v" },
     },
     config = function()
+      require("dap-python").resolve_python = function()
+        return "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3"
+      end
       require("dap-python").setup("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
     end,
   },

@@ -3,7 +3,7 @@ return {
   -- enabled = false,
   cmd = "Oil",
   keys = {
-    { "-", "<cmd>Oil<cr>", desc = "Oil - Parent Dir" },
+    { "<leader>-", "<cmd>Oil<cr>", desc = "Oil - Parent Dir" },
     { "<leader>oo", "<cmd>Oil<cr>", desc = "Oil - Parent Dir" },
   },
   opts = {
