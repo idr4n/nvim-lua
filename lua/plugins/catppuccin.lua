@@ -5,7 +5,7 @@ return {
   build = ":CatppuccinCompile",
   opts = function()
     -- local flavour = "macchiato"
-    local flavour = "mocha"
+    local flavour = "frappe"
     local cp = require("catppuccin.palettes").get_palette(flavour)
     return {
       -- transparent_background = true,

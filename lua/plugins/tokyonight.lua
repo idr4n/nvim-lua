@@ -18,6 +18,7 @@ return {
         -- hl.IblIndent = { fg = "#303342" }
         hl.IblScope = { fg = "#634E89" }
         hl.NeoTreeCursorLine = { bg = "#2F344C" }
+        hl.NvimTreeCursorLine = { bg = "#2F344C" }
         hl.MiniIndentscopeSymbol = { fg = "#646FA1" }
         hl.TreesitterContext = { bg = c.none }
         hl.TreesitterContextBottom = { underline = true, sp = c.magenta }

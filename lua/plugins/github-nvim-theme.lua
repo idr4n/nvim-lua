@@ -15,6 +15,16 @@ return {
         },
       },
       groups = {
+        github_dark_default = {
+          LineNr = { fg = "#484E55" },
+          IblIndent = { fg = "palette.neutral.subtle" },
+          IblScope = { fg = "palette.fg.subtle" },
+          CursorLine = { bg = "#181D25" },
+          StatusLine = { fg = "palette.fg.default", bg = "#181D25" },
+        },
+        github_dark_colorblind = {
+          LineNr = { fg = "#484E55" },
+        },
         github_light = {
           StatusLine = { bg = "#F1F3F5" },
           -- StatusLine = { bg = "NONE", style = "underline" },
@@ -29,8 +39,8 @@ return {
           DiagnostictError = { fg = "palette.danger.fg", bg = bg_ln },
           DiagnostictInfo = { fg = "palette.accent.fg", bg = bg_ln },
           DiagnostictWarn = { fg = "palette.attention.fg", bg = bg_ln },
-          IblIndent = { fg = "palette.neutral.muted", bg = "bg1" },
-          IblScope = { fg = "palette.fg.muted", bg = "bg1" },
+          IblIndent = { fg = "palette.neutral.muted" },
+          IblScope = { fg = "palette.fg.muted" },
           CursorLine = { bg = "#F6F8FA" },
           CursorLineNr = { fg = "#9A5BFF", bg = "palette.fg.muted", style = "bold" },
           EndOfBuffer = { fg = "#EDEFF1" },
