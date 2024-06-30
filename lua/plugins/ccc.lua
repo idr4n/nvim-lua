@@ -15,6 +15,7 @@ return {
     -- enabled = false,
     ft = colored_fts,
     cmd = { "CccPick", "CccHighlighterToggle" },
+    -- cmd = { "CccPick" },
     keys = {
       { ",c", "<cmd>CccHighlighterToggle<cr>", silent = true, desc = "Toggle colorizer" },
       { ",p", "<cmd>CccPick<cr>", silent = true, desc = "Pick color" },
@@ -28,7 +29,8 @@ return {
 
       return {
         highlighter = {
-          auto_enable = true,
+          -- auto_enable = true,
+          auto_enable = false,
           filetypes = colored_fts,
         },
       }
