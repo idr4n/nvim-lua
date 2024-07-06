@@ -273,8 +273,8 @@ function M.statuscolumn()
 
   local components = { "", "", "" } -- left, middle, right
 
-  local show_open_folds = vim.g.lazyvim_statuscolumn and vim.g.lazyvim_statuscolumn.folds_open
-  local use_githl = vim.g.lazyvim_statuscolumn and vim.g.lazyvim_statuscolumn.folds_githl
+  local show_open_folds = false
+  local use_githl = false
 
   if show_signs then
     local signs = M.get_signs(buf, vim.v.lnum)
@@ -295,16 +295,12 @@ function M.statuscolumn()
     vim.api.nvim_win_call(win, function()
       if vim.fn.foldclosed(vim.v.lnum) >= 0 then
         fold = { text = vim.opt.fillchars:get().foldclose or "", texthl = githl or "Folded" }
-      elseif
-        show_open_folds
-        and not LazyVim.ui.skip_foldexpr[buf]
-        and vim.treesitter.foldexpr(vim.v.lnum):sub(1, 1) == ">"
-      then -- fold start
+      elseif show_open_folds and tostring(vim.treesitter.foldexpr(vim.v.lnum)):sub(1, 1) == ">" then -- fold start
         fold = { text = vim.opt.fillchars:get().foldopen or "", texthl = githl }
       end
     end)
     -- Left: mark or non-git sign
-    components[1] = M.icon(M.get_mark(buf, vim.v.lnum) or left)
+    components[1] = " " .. M.icon(M.get_mark(buf, vim.v.lnum) or left)
     -- Right: fold icon or git sign (only if file)
     components[3] = is_file and M.icon(fold or right) or ""
   end

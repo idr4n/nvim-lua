@@ -7,19 +7,19 @@ local isDark = vim.o.background == "dark"
 ---@param mode "insert"|nil
 ---@return string
 local function get_theme_color(mode)
-  if vim.g.colors_name == "tokyonight" then
+  if vim.g.colors_name == "tokyonight-moon" then
     local colors = require("tokyonight.colors").setup()
-    return mode == "insert" and colors.magenta or colors.blue
+    return mode == "insert" and colors.green1 or "#9580FF"
   elseif vim.g.colors_name == "catppuccin-mocha" then
     local cp = require("catppuccin.palettes").get_palette("mocha")
     return mode == "insert" and cp.mauve or cp.blue
   end
 
   if mode == "insert" then
-    return isDark and "#B08CEA" or "#9A5BFF"
+    return isDark and "#4FD6BE" or "#1E1E1E"
   end
 
-  return isDark and "#6E89C3" or "#1E1E1E"
+  return isDark and "#9580FF" or "#9A5BFF"
 end
 
 local colors = {
@@ -81,7 +81,9 @@ function Status_line(opts)
   local filetypes = { "neo-tree", "minifiles", "NvimTree", "oil" }
   if vim.tbl_contains(filetypes, filetype) then
     local home_dir = os.getenv("HOME")
-    local dir = vim.fn.getcwd()
+    local api = require("nvim-tree.api")
+    local node = api.tree.get_node_under_cursor()
+    local dir = filetype == "NvimTree" and node.absolute_path or vim.fn.getcwd()
     dir = dir:gsub("^" .. home_dir, "~")
     return c.decorator({ name = dir, align = num == 1 and "right" or "left" })
   end
@@ -116,8 +118,10 @@ function Status_line(opts)
     -- not _G.show_more_info and c.git_hunks({ mono = mono }) or "",
     -- c.git_status({ mono = mono }),
     -- c.lsp_diagnostics({ mono = mono }),
-    _G.show_more_info and c.git_status({ mono = mono }) or c.git_boring(),
-    _G.show_more_info and c.lsp_diagnostics({ mono = mono }) or c.diagnostics_boring(),
+    -- _G.show_more_info and c.git_status({ mono = mono }) or c.git_boring(),
+    -- _G.show_more_info and c.lsp_diagnostics({ mono = mono }) or c.diagnostics_boring(),
+    c.git_status({ mono = mono }),
+    c.lsp_diagnostics({ mono = mono }),
     "%=%#SLBgLightenLess#",
     c.search_count(),
     "%=",
@@ -127,6 +131,7 @@ function Status_line(opts)
     _G.show_more_info and " Ux%04B" or "",
     _G.show_more_info and c.get_position() or "",
     c.codeium_status(),
+    c.terminal_status(),
     c.cwd(),
   }
 

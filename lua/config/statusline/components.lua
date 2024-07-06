@@ -478,4 +478,14 @@ function M.codeium_status()
   return ""
 end
 
+function M.terminal_status()
+  local is_terminal_open = false
+  for _, buffer in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.bo[buffer].buftype == "terminal" then
+      is_terminal_open = true
+    end
+  end
+  return is_terminal_open and "%#SLBgNoneHl# []" .. "%#SLBgNone# " or ""
+end
+
 return M
