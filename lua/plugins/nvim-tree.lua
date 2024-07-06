@@ -96,10 +96,37 @@ return {
 
     view = {
       adaptive_size = false,
-      side = "left",
+      -- side = "left",
+      side = "right",
       width = 32,
       preserve_window_proportions = true,
       -- signcolumn = "no",
+      float = {
+        enable = true,
+        quit_on_focus_loss = false,
+        open_win_config = function()
+          local screen_w = vim.opt.columns:get()
+          local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
+          -- local window_w = screen_w * 0.3
+          local window_w = math.min(math.floor(screen_w * 0.3), 40)
+          local window_h = screen_h * 0.925
+          local window_w_int = math.floor(window_w)
+          local window_h_int = math.floor(window_h)
+
+          -- adjust for the offset
+          local col_right_aligned = screen_w - window_w_int - 3
+          local row_offset = 3 - 3
+
+          return {
+            border = "rounded",
+            relative = "editor",
+            row = row_offset,
+            col = col_right_aligned,
+            width = window_w_int,
+            height = window_h_int,
+          }
+        end,
+      },
     },
 
     git = {
@@ -122,6 +149,18 @@ return {
       },
     },
 
+    diagnostics = {
+      enable = true,
+      show_on_dirs = true,
+      show_on_open_dirs = true,
+      icons = {
+        hint = "",
+        info = "",
+        warning = "",
+        error = "",
+      },
+    },
+
     renderer = {
       root_folder_label = false,
       highlight_git = true,
@@ -132,11 +171,13 @@ return {
       },
 
       icons = {
+        -- diagnostics_placement = "after",
         show = {
           file = true,
           folder = true,
           folder_arrow = true,
           git = true,
+          diagnostics = true,
         },
 
         glyphs = {

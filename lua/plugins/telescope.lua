@@ -16,7 +16,7 @@ return {
     keys = function()
       _G.dropdown_theme = function(opts)
         opts = vim.tbl_deep_extend("force", {
-          disable_devicons = true,
+          disable_devicons = false,
           previewer = false,
           layout_config = {
             width = function(_, max_columns, _)
@@ -73,7 +73,7 @@ return {
           "s",
           function()
             -- require("telescope.builtin").buffers(require("telescope.themes").get_ivy({
-            require("telescope.builtin").buffers(dropdown_theme({ initial_mode = "normal" }))
+            require("telescope.builtin").buffers(dropdown_theme({ initial_mode = "normal", sort_lastused = true }))
           end,
           noremap = true,
           silent = true,
