@@ -52,7 +52,7 @@ return {
       -- dashboard.button("d", "  Dotfiles", "<cmd>lcd ~/dotfiles | echo 'Directory:' getcwd()<cr>"),
       dashboard.button("l", "󰒲  Lazy", ":Lazy<CR>"),
       dashboard.button("n", "  File Explorer", function()
-        require("bufferline")
+        -- require("bufferline")
         require("nvim-tree.api").tree.find_file({ open = true, current_window = true })
       end),
       dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
@@ -118,7 +118,7 @@ return {
           once = true,
           callback = function()
             vim.o.laststatus = 3
-            vim.o.showtabline = 2
+            -- vim.o.showtabline = 2
             vim.o.cmdheight = 1
           end,
         })
