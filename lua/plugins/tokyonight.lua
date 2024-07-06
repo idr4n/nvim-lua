@@ -14,16 +14,24 @@ return {
         floats = "transparent",
       },
       on_highlights = function(hl, c)
-        hl.CursorLine = { bg = c.bg_dark }
-        -- hl.IblIndent = { fg = "#303342" }
+        hl.CursorLine = { bg = c.bg_dark } -- needed for bufferline
+        hl.CursorLineNr = { fg = c.magenta }
         hl.IblScope = { fg = "#634E89" }
+        hl.Folded = { fg = c.comment, bg = c.none }
+        hl.FloatBorder = { fg = c.magenta }
         hl.NeoTreeCursorLine = { bg = "#2F344C" }
-        hl.NvimTreeCursorLine = { bg = "#2F344C" }
+        hl.NvimTreeCursorLine = { bg = c.bg_highlight }
+        hl.NvimTreeFolderIcon = { fg = c.magenta }
+        hl.NvimTreeIndentMarker = { fg = c.fg_gutter }
+        hl.NvimTreeNormal = { fg = c.fg_sidebar, bg = c.bg_sidebar }
+        hl.NvimTreeNormalNC = { fg = c.fg_sidebar, bg = c.bg_sidebar }
+        hl.NvimTreeNormalFloat = { fg = c.fg_sidebar, bg = c.bg_sidebar }
         hl.MiniIndentscopeSymbol = { fg = "#646FA1" }
         hl.TreesitterContext = { bg = c.none }
         hl.TreesitterContextBottom = { underline = true, sp = c.magenta }
-        -- hl.TelescopeBorder = { fg = c.purple, bg = c.none }
+        hl.TelescopeBorder = { fg = c.magenta }
         hl.TelescopePromptBorder = { fg = c.none }
+        hl.NonText = { fg = c.bg_highlight }
       end,
     }
   end,

@@ -1,4 +1,4 @@
-local bg_ln = "#30333C"
+-- local bg_ln = "#2F343E"
 -- local bg_ln = "$bg1"
 
 return {
@@ -15,7 +15,8 @@ return {
       IlluminatedWordWrite = { bg = "$bg2" },
       -- LazyNormal = { bg = "#1B1F27" },
       -- LazyNormal = { bg = "#1E222A" },
-      -- FloatBorder = { bg = "NONE" },
+      FloatBorder = { fg = "$blue", bg = "NONE" },
+      Folded = { fg = "$grey", bg = "NONE" },
       -- NormalFloat = { bg = "NONE" },
       -- MiniIndentscopeSymbol = { fg = "#525A66" },
       -- NeoTreeNormal = { bg = "#1B1F27" },
@@ -27,6 +28,8 @@ return {
       -- NvimTreeWinSeparator = { fg = "#1E222A" },
       NvimTreeWinSeparator = { fg = "$bg0" },
       NvimTreeIndentMarker = { fg = "$bg3" },
+      NvimTreeFolderIcon = { fg = "$purple" },
+      NvimTreeNormalFloat = { bg = "$bg_d" },
       -- FileExplorerHl = { bg = "$bg_d" },
       -- Normal = { bg = "#1E222A" },
       -- NormalNC = { bg = "#1E222A" },
@@ -40,16 +43,17 @@ return {
       -- StatusLine = { bg = "#252931" },
       -- LineNr = { fg = "#41454D" },
       -- LineNr = { fg = "#4A4F58" },
-      LineNr = { fg = "#4A4F58", bg = bg_ln },
-      CursorLineNr = { fg = "$red", fmt = "bold" },
+      -- LineNr = { fg = "#4A4F58", bg = bg_ln },
+      -- CursorLineNr = { fg = "$purple", fmt = "bold" },
+      CursorLineNr = { fg = "$purple" },
       NvimTreeLineNr = { bg = "$bg_d" },
-      GitSignsAdd = { bg = bg_ln },
-      GitSignsDelete = { bg = bg_ln },
-      GitSignsChange = { bg = bg_ln },
-      DiagnostictSignHint = { bg = bg_ln },
-      DiagnostictSignError = { bg = bg_ln },
-      DiagnostictSignInfo = { bg = bg_ln },
-      DiagnostictSignWarn = { bg = bg_ln },
+      -- GitSignsAdd = { bg = bg_ln },
+      -- GitSignsDelete = { bg = bg_ln },
+      -- GitSignsChange = { bg = bg_ln },
+      -- DiagnostictSignHint = { bg = bg_ln },
+      -- DiagnostictSignError = { bg = bg_ln },
+      -- DiagnostictSignInfo = { bg = bg_ln },
+      -- DiagnostictSignWarn = { bg = bg_ln },
       -- TreesitterContext = { bg = "NONE" },
       -- TreesitterContextBottom = { fmt = "underline", sp = "$purple" },
       Visual = { bg = "#224058" },
@@ -60,6 +64,8 @@ return {
       TelescopeSelectionCaret = { fg = "#FF87D7" },
       TelescopeMatching = { fg = "#FF87D7" },
       TelescopeSelection = { bg = "$bg1" },
+
+      NonText = { fg = "$bg1" },
 
       -- borderless telescope
       -- TelescopeNormal = { bg = "#1B1F27" },
