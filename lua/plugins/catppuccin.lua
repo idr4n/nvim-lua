@@ -43,6 +43,7 @@ return {
         TreesitterContextLineNumber = { bg = cp.base },
         TreesitterContextBottom = { style = { "underline" }, sp = cp.mauve },
         FloatBorder = { fg = cp.blue, bg = "NONE" },
+        Folded = { fg = cp.surface2, bg = "NONE" },
         NonText = { fg = cp.surface0 },
         -- TelescopeNormal = { bg = cp.mantle },
         -- TelescopeBorder = { fg = cp.mantle, bg = cp.mantle },

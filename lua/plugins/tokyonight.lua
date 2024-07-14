@@ -19,6 +19,7 @@ return {
         hl.IblScope = { fg = "#634E89" }
         hl.Folded = { fg = c.comment, bg = c.none }
         hl.FloatBorder = { fg = c.magenta }
+        hl.Visual = { bg = "#403C7A" }
         hl.NeoTreeCursorLine = { bg = "#2F344C" }
         hl.NvimTreeCursorLine = { bg = c.bg_highlight }
         hl.NvimTreeFolderIcon = { fg = c.magenta }
