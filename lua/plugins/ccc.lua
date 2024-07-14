@@ -17,7 +17,7 @@ return {
     cmd = { "CccPick", "CccHighlighterToggle" },
     -- cmd = { "CccPick" },
     keys = {
-      { ",c", "<cmd>CccHighlighterToggle<cr>", silent = true, desc = "Toggle colorizer" },
+      -- { ",c", "<cmd>CccHighlighterToggle<cr>", silent = true, desc = "Toggle colorizer" },
       { ",p", "<cmd>CccPick<cr>", silent = true, desc = "Pick color" },
     },
     opts = function()
@@ -28,6 +28,7 @@ return {
       ccc.output.hex_short.setup({ uppercase = true })
 
       return {
+        alpha_show = "hide",
         highlighter = {
           -- auto_enable = true,
           auto_enable = false,

@@ -20,6 +20,7 @@ opt.expandtab = true -- convert tabs to spaces
 -- opt.foldmethod = "marker"
 opt.foldmethod = "indent"
 opt.foldlevel = 99
+opt.foldlevelstart = 99
 -- opt.guicursor = "" -- no thin cursor on insert mode
 opt.hlsearch = true -- highlight all matches on previous search pattern
 opt.incsearch = true
@@ -55,7 +56,7 @@ opt.shortmess:append({ I = true, c = true, C = true, S = true, W = true, s = tru
 opt.nrformats:append("alpha") -- increments letters sequences as well with <c-a>
 
 -- statuscolumn
-opt.statuscolumn = [[%!v:lua.require'utils'.statuscolumn()]]
+-- opt.statuscolumn = [[%!v:lua.require'utils'.statuscolumn()]]
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.cmd([[set iskeyword+=-]])

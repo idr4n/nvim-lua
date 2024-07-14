@@ -2,6 +2,13 @@ return {
   "folke/which-key.nvim",
   event = "VeryLazy",
   -- keys = { "<leader>", "<c-r>", "<c-w>", "z", '"', "'", "`", "c", "v", "g", ",", ";" },
+  opts = {
+    notify = false,
+    icons = {
+      rules = false,
+      separator = "",
+    },
+  },
   config = function(_, opts)
     vim.o.timeout = true
     vim.o.timeoutlen = 300

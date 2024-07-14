@@ -1,9 +1,9 @@
 return {
   "folke/todo-comments.nvim",
-  cmd = { "TodoTrouble", "TodoTelescope" },
+  cmd = { "TodoQuickFix", "TodoTelescope" },
   event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   keys = {
-    { "<leader>zt", "<cmd>TodoTrouble<cr>", noremap = true, silent = true, desc = "TodoTrouble" },
+    { "<leader>zt", "<cmd>TodoQuickFix<cr>", noremap = true, silent = true, desc = "TodoTrouble" },
   },
   opts = {
     highlight = {

@@ -47,7 +47,7 @@ return {
           " ",
           -- { filename, gui = modified and "bold,italic" or "bold" },
           filename,
-          modified and { " ●", guifg = "#c3e88d" } or "",
+          modified and { " ", guifg = "#c3e88d" } or "",
           " ",
           -- guibg = "#44406e",
           -- guibg = hl_bg2,

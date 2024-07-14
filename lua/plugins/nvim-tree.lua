@@ -63,6 +63,7 @@ return {
       vim.keymap.del("n", "<C-t>", { buffer = bufnr })
 
       vim.keymap.set("n", "l", api.node.open.edit, opts("Edit Or Open"))
+
       vim.keymap.set("n", "h", function()
         local node = api.tree.get_node_under_cursor()
         if node.nodes ~= nil then
@@ -71,6 +72,11 @@ return {
           api.node.navigate.parent()
         end
       end, opts("Go to parent or close"))
+
+      vim.keymap.set("n", "<CR>", function()
+        api.node.open.edit()
+        api.tree.close_in_this_tab()
+      end, opts("Open and close tree"))
     end,
 
     filters = {
@@ -108,14 +114,14 @@ return {
           local screen_w = vim.opt.columns:get()
           local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
           -- local window_w = screen_w * 0.3
-          local window_w = math.min(math.floor(screen_w * 0.3), 40)
+          local window_w = math.min(math.floor(screen_w * 0.28), 38)
           local window_h = screen_h * 0.925
           local window_w_int = math.floor(window_w)
           local window_h_int = math.floor(window_h)
 
           -- adjust for the offset
           local col_right_aligned = screen_w - window_w_int - 3
-          local row_offset = 3 - 3
+          local row_offset = 1
 
           return {
             border = "rounded",
@@ -140,7 +146,7 @@ return {
 
     actions = {
       open_file = {
-        quit_on_open = true,
+        quit_on_open = false,
         resize_window = true,
       },
       expand_all = {

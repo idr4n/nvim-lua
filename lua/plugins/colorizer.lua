@@ -11,7 +11,7 @@ local colored_fts = {
 
 return {
   "NvChad/nvim-colorizer.lua",
-  enabled = false,
+  -- enabled = false,
   -- event = "BufReadPost",
   -- event = "VeryLazy",
   ft = colored_fts,
