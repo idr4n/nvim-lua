@@ -56,7 +56,7 @@ opt.shortmess:append({ I = true, c = true, C = true, S = true, W = true, s = tru
 opt.nrformats:append("alpha") -- increments letters sequences as well with <c-a>
 
 -- statuscolumn
--- opt.statuscolumn = [[%!v:lua.require'utils'.statuscolumn()]]
+opt.statuscolumn = [[%!v:lua.require'utils'.statuscolumn()]]
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.cmd([[set iskeyword+=-]])
