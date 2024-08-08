@@ -4,7 +4,26 @@ return {
   dependencies = {
     "mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    "j-hui/fidget.nvim",
+    -- "j-hui/fidget.nvim",
+    {
+      "linrongbin16/lsp-progress.nvim",
+      opts = {
+        max_size = 60,
+        -- client_format = function(client_name, spinner, series_messages)
+        client_format = function(_, spinner, series_messages)
+          return #series_messages > 0
+              -- and (spinner .. " [" .. client_name .. "] " .. table.concat(series_messages, ", "))
+              and (spinner .. " (LSP) " .. table.concat(series_messages, ", "))
+            or nil
+        end,
+        format = function(client_messages)
+          if #client_messages > 0 then
+            return table.concat(client_messages, " ")
+          end
+          return ""
+        end,
+      },
+    },
   },
   config = function()
     local lsp_conf = require("config.lsp")
@@ -13,7 +32,7 @@ return {
 
     local opts = {
       diagnostics = {
-        virtual_text = { spacing = 4, prefix = "" },
+        virtual_text = { spacing = 4, prefix = "" },
         update_in_insert = false,
         underline = true,
         severity_sort = true,
@@ -158,7 +177,7 @@ return {
     end
 
     -- Turn on lsp status information
-    require("fidget").setup()
+    -- require("fidget").setup()
 
     -- Convert JSON filetype to JSON with comments (jsonc)
     vim.cmd([[
