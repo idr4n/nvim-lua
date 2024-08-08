@@ -113,15 +113,16 @@ function Status_line(opts)
     c.filetype(),
     "%#SLBgLightenLess#",
     c.fileinfo(),
-    _G.show_more_info and c.git_branch() or "",
+    -- _G.show_more_info and c.git_branch() or "",
     -- _G.show_more_info and c.git_status({ mono = mono }) or "",
     -- not _G.show_more_info and c.git_hunks({ mono = mono }) or "",
     -- c.git_status({ mono = mono }),
     -- c.lsp_diagnostics({ mono = mono }),
     -- _G.show_more_info and c.git_status({ mono = mono }) or c.git_boring(),
     -- _G.show_more_info and c.lsp_diagnostics({ mono = mono }) or c.diagnostics_boring(),
-    c.git_status({ mono = mono }),
+    -- c.git_status({ mono = mono }),
     c.lsp_diagnostics({ mono = mono }),
+    c.lsp_progress(),
     "%=%#SLBgLightenLess#",
     c.search_count(),
     "%=",
@@ -132,6 +133,8 @@ function Status_line(opts)
     _G.show_more_info and c.get_position() or "",
     c.codeium_status(),
     c.terminal_status(),
+    c.git_status({ mono = mono }),
+    c.git_branch(),
     c.cwd(),
   }
 
@@ -160,5 +163,5 @@ function StatusBoring()
 end
 
 -- vim.o.statusline = "%!v:lua.Status_line(2)"
-vim.o.statusline = '%!luaeval("Status_line({ status = 2, mono = false })")'
+vim.o.statusline = '%!luaeval("Status_line({ status = 2, mono = true })")'
 -- vim.o.statusline = '%!luaeval("_G.show_more_info and Status_line({ status = 2, mono = false }) or StatusBoring()")'

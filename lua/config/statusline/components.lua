@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     "*.ts",
     "*.jsx",
     "*.tsx",
-    "*.cpp",
+    -- "*.cpp",
     "*.java",
     "*.vue",
     "*ex",
@@ -486,6 +486,10 @@ function M.terminal_status()
     end
   end
   return is_terminal_open and "%#SLBgNoneHl# []" .. "%#SLBgNone# " or ""
+end
+
+function M.lsp_progress()
+  return "" .. require("lsp-progress").progress()
 end
 
 return M
