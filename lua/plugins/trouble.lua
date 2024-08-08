@@ -4,7 +4,7 @@ return {
   -- stylua: ignore
   keys = {
     --: v3
-    { "gr", "<cmd>Trouble lsp_references toggle<cr>", silent = true, noremap = true, desc = "LSP references (Trouble)" },
+    -- { "gr", "<cmd>Trouble lsp_references toggle<cr>", silent = true, noremap = true, desc = "LSP references (Trouble)" },
     { "<leader>zr", "<cmd>Trouble lsp_references toggle<cr>", silent = true, noremap = true, desc = "LSP references (Trouble)" },
     { "<leader>zx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
     { "<leader>zX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
