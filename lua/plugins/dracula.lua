@@ -58,6 +58,10 @@ local colors = {
   visual = "#463F5D",
   white = "#ABB2BF",
   yellow = "#F1FA8C",
+  diffadd_bg = "#273849",
+  diffadd_fg = "#B8DB87",
+  diffdelete_bg = "#3A273A",
+  diffdelete_fg = "#E26A75",
 }
 
 return {
@@ -96,6 +100,10 @@ return {
         -- CmpItemAbbr = { fg = colors.white, bg = colors.bg_light },
         -- CmpItemKind = { fg = colors.white, bg = colors.bg_light },
         NormalFloat = { fg = colors.fg, bg = colors.bg_light },
+        NeogitDiffAdd = { fg = colors.diffadd_fg, bg = colors.diffadd_bg },
+        NeogitDiffAddHighlight = { fg = colors.diffadd_fg, bg = colors.diffadd_bg },
+        NeogitDiffDelete = { fg = colors.diffdelete_fg, bg = colors.diffdelete_bg },
+        NeogitDiffDeleteHighlight = { fg = colors.diffdelete_fg, bg = colors.diffdelete_bg },
         -- TelescopeNormal = { fg = colors.fg, bg = colors.bg_light },
         -- TelescopePromptBorder = { fg = colors.cyan },
         -- TelescopeResultsBorder = { fg = colors.cyan },
