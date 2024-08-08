@@ -437,7 +437,7 @@ end
 keyset({ "n", "t" }, "<A-,>", toggle_maximize_buffer, { desc = "Maximize buffer" })
 --: }}}
 
---: Diff selection agains keyboard {{{
+--: Diff selection agains clipboard {{{
 -- layout: selection<->clipboard
 local function compare_to_clipboard()
   local ftype = vim.api.nvim_eval("&filetype")
@@ -466,4 +466,7 @@ keyset("x", "<Space>D", compare_to_clipboard, { desc = "Compare to clipboard" })
 --: Delete default mappings {{{
 -- vim.kezmap.del({ "n" }, "crn")
 -- vim.keymap.del({ "n", "v" }, "crr")
+vim.keymap.del({ "n" }, "grr")
+vim.keymap.del({ "n" }, "grn")
+vim.keymap.del({ "n", "x" }, "gra")
 --: }}}

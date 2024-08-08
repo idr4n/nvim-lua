@@ -3,10 +3,17 @@ return {
   event = "VeryLazy",
   -- keys = { "<leader>", "<c-r>", "<c-w>", "z", '"', "'", "`", "c", "v", "g", ",", ";" },
   opts = {
+    -- preset = "modern",
+    -- preset = "helix",
     notify = false,
     icons = {
       rules = false,
       separator = "",
+    },
+    win = {
+      -- no_overlap = false,
+      -- width = { max = 0.28 },
+      height = { min = 4, max = 20 },
     },
   },
   config = function(_, opts)
