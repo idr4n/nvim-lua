@@ -23,12 +23,43 @@ command("OpenDeckset", "execute 'silent !open -a Deckset \"%\"'", {})
 
 -- Convert markdown file to pdf using pandoc
 -- command("MdToPdf", 'execute \'silent !pandoc "%" -o "%:r.pdf"\'', {})
-command("MdToPdf", 'execute \'silent !pandoc "%"  --listings -H ~/dotfiles/listings-setup.tex -o "%:r.pdf"\'', {})
+command("MdToPdf", 'execute \'silent !pandoc "%" --listings -H ~/dotfiles/listings-setup.tex -o "%:r.pdf"\'', {})
 command(
   "MdToPdfNumbered",
-  'execute \'silent !pandoc "%"  --listings -H ~/dotfiles/listings-setup.tex -o "%:r.pdf" --number-sections\'',
+  'execute \'silent !pandoc "%" --listings -H ~/dotfiles/listings-setup.tex -o "%:r.pdf" --number-sections\'',
   {}
 )
+command("MdToPdfWatch", function()
+  if _G.fswatch_job_id then
+    print("Fswatch job already running.")
+    return
+  end
+  vim.cmd('execute \'silent !pandoc "%" --listings -H ~/dotfiles/listings-setup.tex -o "%:r.pdf"\'')
+  local cmd = string.format(
+    'fswatch -o "%s" | xargs -n1 -I{} pandoc "%s" --listings -H ~/dotfiles/listings-setup.tex -o "%s.pdf"',
+    vim.fn.expand("%:p"),
+    vim.fn.expand("%:p"),
+    vim.fn.expand("%:r")
+  )
+  _G.fswatch_job_id = vim.fn.jobstart(cmd)
+  if _G.fswatch_job_id ~= 0 then
+    print("Started watching file changes.")
+    vim.cmd("execute 'silent !zathura \"%:r.pdf\" & ~/scripts/focus_app zathura'")
+  else
+    print("Failed to start watching file changes.")
+  end
+end, {})
+
+-- Stop watching markdown file changes
+command("StopMdToPdfWatch", function()
+  if _G.fswatch_job_id then
+    vim.fn.jobstop(_G.fswatch_job_id)
+    print("Stopped watching file changes.")
+    _G.fswatch_job_id = nil
+  else
+    print("No fswatch process found.")
+  end
+end, {})
 
 -- Convert markdown file to docx using pandoc
 command("MdToDocx", 'execute \'silent !pandoc "%" -o "%:r.docx"\'', {})
