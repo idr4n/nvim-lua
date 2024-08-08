@@ -111,8 +111,7 @@ M.git_icons = {
 }
 
 M.diagnostic_icons = {
-  -- Error = " ",
-  Error = "E ",
+  Error = " ",
   Warn = " ",
   Info = " ",
   Hint = "󰌵 ",

@@ -7,7 +7,7 @@ return {
     { "<leader>gu", ":GitUI<cr>", desc = "GitUI" },
     { "<leader>gt", ":Tig<cr>", desc = "Tig" },
     { "<M-\\>", ":ToggleTerm<cr>", mode = { "n", "t" }, desc = "Toggle Horizontal Term" },
-    { "<M-`>", "<cmd>ToggleTerm<cr>", mode = { "n", "t" }, desc = "Toggle Horizontal Term" },
+    { "<M-`>", '<cmd>ToggleTerm dir="%:p:h"<cr>', mode = { "n", "t" }, desc = "Toggle Horizontal Term" },
     { "<C-\\>", "<cmd>2ToggleTerm direction=vertical<cr>", mode = { "n", "t" }, desc = "Toggle Vertical Term" },
   },
   opts = {

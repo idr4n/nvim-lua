@@ -106,7 +106,7 @@ return {
       side = "right",
       width = 32,
       preserve_window_proportions = true,
-      -- signcolumn = "no",
+      signcolumn = "no",
       float = {
         enable = true,
         quit_on_focus_loss = false,
@@ -114,7 +114,7 @@ return {
           local screen_w = vim.opt.columns:get()
           local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
           -- local window_w = screen_w * 0.3
-          local window_w = math.min(math.floor(screen_w * 0.28), 38)
+          local window_w = math.min(math.floor(screen_w * 0.28), 35)
           local window_h = screen_h * 0.925
           local window_w_int = math.floor(window_w)
           local window_h_int = math.floor(window_h)
