@@ -131,14 +131,16 @@ return {
         -- {  "gr", "<cmd>Telescope lsp_references<cr>",  noremap = true, silent = true  },
         -- {
         --   "<leader>ls",
-        --   "<cmd>Telescope lsp_document_symbols theme=ivy<cr>",
+        --   -- "<cmd>Telescope lsp_document_symbols theme=ivy<cr>",
+        --   "<cmd>Telescope lsp_document_symbols<cr>",
         --   noremap = true,
         --   silent = true,
         --   desc = "LSP document symbols",
         -- },
         -- {
         --   "<leader>lS",
-        --   "<cmd>Telescope lsp_dynamic_workspace_symbols theme=ivy<cr>",
+        --   -- "<cmd>Telescope lsp_dynamic_workspace_symbols theme=ivy<cr>",
+        --   "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
         --   noremap = true,
         --   silent = true,
         --   desc = "LSP workspace symbols",
