@@ -148,14 +148,14 @@ M.on_attach = function(client, bufnr)
     end
 
     -- codelens
-    if vim.lsp.codelens and client.supports_method("textDocument/codeLens") and vim.bo.filetype == "rust" then
-      vim.lsp.codelens.refresh()
-      vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-        group = vim.api.nvim_create_augroup("idr4n/LSPCodeLens", { clear = true }),
-        buffer = bufnr,
-        callback = vim.lsp.codelens.refresh,
-      })
-    end
+    -- if vim.lsp.codelens and client.supports_method("textDocument/codeLens") and vim.bo.filetype == "rust" then
+    --   vim.lsp.codelens.refresh()
+    --   vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+    --     group = vim.api.nvim_create_augroup("idr4n/LSPCodeLens", { clear = true }),
+    --     buffer = bufnr,
+    --     callback = vim.lsp.codelens.refresh,
+    --   })
+    -- end
   end
 end
 
