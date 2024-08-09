@@ -10,6 +10,9 @@ local function get_theme_color(mode)
   if vim.g.colors_name == "tokyonight-moon" then
     local colors = require("tokyonight.colors").setup()
     return mode == "insert" and colors.green1 or "#9580FF"
+  elseif vim.g.colors_name == "dracula" then
+    local c_dracula = require("dracula").colors()
+    return mode == "insert" and c_dracula.green or c_dracula.purple
   elseif vim.g.colors_name == "catppuccin-mocha" then
     local cp = require("catppuccin.palettes").get_palette("mocha")
     return mode == "insert" and cp.mauve or cp.blue
