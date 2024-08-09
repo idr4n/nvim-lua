@@ -89,10 +89,10 @@ return {
         -- },
         {
           "<leader>gs",
-          -- "<cmd>lua require('telescope.builtin').git_status({ initial_mode = 'normal' })<cr>",
-          function()
-            require("telescope.builtin").git_status(dropdown_theme({ initial_mode = "normal", previewer = true }))
-          end,
+          "<cmd>lua require('telescope.builtin').git_status({ initial_mode = 'normal' })<cr>",
+          -- function()
+          --   require("telescope.builtin").git_status(dropdown_theme({ initial_mode = "normal", previewer = true }))
+          -- end,
           noremap = true,
           silent = true,
         },
