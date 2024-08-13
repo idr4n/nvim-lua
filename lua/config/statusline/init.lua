@@ -34,7 +34,8 @@ local colors = {
   insert = get_theme_color("insert"),
   select = isDark and "#FCA7EA" or "#2188FF",
   stealth = isDark and "#4E546B" or "#A7ACBF",
-  bg_lighten = isDark and "#333333" or "#D1D1D1",
+  bg_lighten = isDark and "#303342" or "#D1D1D1",
+  bg_lighten_less = isDark and "#2C2E3C" or "#D1D1D1",
   fg_hl = isDark and "#FFAFF3" or "#9A5BFF",
   bg_hl = isDark and "#151515" or "#E1E1E1",
 }
@@ -47,7 +48,8 @@ local string_hl = vim.api.nvim_get_hl(0, { name = "String" })
 local stealth = normal_hl.bg and ut.darken(string.format("#%06x", normal_hl.bg), 0.7) or colors.stealth
 local fg_lighten = normal_hl.bg and ut.darken(string.format("#%06x", normal_hl.bg), 0.6) or colors.stealth
 local bg_lighten = normal_hl.bg and ut.lighten(string.format("#%06x", normal_hl.bg), 0.95) or colors.bg_lighten
-local bg_lighten_less = normal_hl.bg and ut.lighten(string.format("#%06x", normal_hl.bg), 0.98) or colors.bg_lighten
+local bg_lighten_less = normal_hl.bg and ut.lighten(string.format("#%06x", normal_hl.bg), 0.98)
+  or colors.bg_lighten_less
 
 -- vim.api.nvim_set_hl(0, "SLStealth", { fg = stealth, bg = normal_hl.bg })
 vim.api.nvim_set_hl(0, "SLBgLighten", { fg = fg_lighten, bg = bg_lighten })
@@ -125,10 +127,10 @@ function Status_line(opts)
     -- _G.show_more_info and c.lsp_diagnostics({ mono = mono }) or c.diagnostics_boring(),
     -- c.git_status({ mono = mono }),
     c.lsp_diagnostics({ mono = mono }),
-    c.lsp_progress(),
     "%=%#SLBgLightenLess#",
     c.search_count(),
     "%=",
+    c.lsp_progress(),
     c.get_words(),
     _G.show_more_info and c.lang_version() or "",
     _G.show_more_info and c.LSP() or "",

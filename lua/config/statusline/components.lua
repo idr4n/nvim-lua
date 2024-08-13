@@ -489,7 +489,7 @@ function M.terminal_status()
 end
 
 function M.lsp_progress()
-  return "" .. require("lsp-progress").progress()
+  return "" .. require("lsp-progress").progress() .. " "
 end
 
 return M
