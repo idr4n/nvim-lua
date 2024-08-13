@@ -82,7 +82,10 @@ return {
   },
   config = function(_, opts)
     local ut = require("utils")
-    local hl_bg = ut.lighten(string.format("#%06x", vim.api.nvim_get_hl(0, { name = "Normal" }).bg), 0.94)
+    local bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg
+        and string.format("#%06x", vim.api.nvim_get_hl(0, { name = "Normal" }).bg)
+      or "#282A36"
+    local hl_bg = ut.lighten(bg, 0.94)
 
     local hooks = require("ibl.hooks")
     hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)

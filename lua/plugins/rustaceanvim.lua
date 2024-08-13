@@ -3,6 +3,11 @@ return {
   version = "^4", -- Recommended
   ft = { "rust" },
   opts = {
+    tools = {
+      float_win_config = {
+        border = "rounded",
+      },
+    },
     server = {
       on_attach = function(client, bufnr)
         require("config.lsp").on_attach(client, bufnr)

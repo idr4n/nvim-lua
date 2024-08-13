@@ -35,7 +35,7 @@ return {
         desc = "Fzf-Lua Resume",
       },
       { "<leader>m", "<cmd>lua require('fzf-lua').files()<CR>", desc = "Find files" },
-      { "<C-P>", "<cmd>FzfLua files<cr>", desc = "Find files" },
+      -- { "<C-P>", "<cmd>FzfLua files<cr>", desc = "Find files" },
       -- { "<leader>r", "<cmd>FzfLua live_grep_glob<cr>", desc = "Live Grep" },
       { "<leader>r", "<cmd>FzfLua grep_project<cr>", desc = "Grep Project" },
       {
@@ -116,6 +116,14 @@ return {
       },
       {
         "<leader>ls",
+        function()
+          require("fzf-lua").lsp_document_symbols(fzflua_theme())
+        end,
+        silent = true,
+        desc = "LSP document symbols (FzfLua)",
+      },
+      {
+        "gs",
         function()
           require("fzf-lua").lsp_document_symbols(fzflua_theme())
         end,
