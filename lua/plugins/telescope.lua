@@ -31,17 +31,8 @@ return {
       end
 
       return {
-        {
-          "<leader>a",
-          function()
-            require("telescope.builtin").find_files(dropdown_theme())
-          end,
-          noremap = true,
-          silent = true,
-          desc = "Telescope-find_files",
-        },
         -- {
-        --   "<C-P>",
+        --   "<leader>a",
         --   function()
         --     require("telescope.builtin").find_files(dropdown_theme())
         --   end,
@@ -49,6 +40,15 @@ return {
         --   silent = true,
         --   desc = "Telescope-find_files",
         -- },
+        {
+          "<C-P>",
+          function()
+            require("telescope.builtin").find_files(dropdown_theme())
+          end,
+          noremap = true,
+          silent = true,
+          desc = "Telescope-find_files",
+        },
         -- { "<leader>r", "<cmd>Telescope live_grep<cr>", desc = "" },
         -- {
         --   "<leader>r",
