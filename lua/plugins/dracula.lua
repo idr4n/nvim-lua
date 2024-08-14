@@ -78,24 +78,24 @@ return {
       -- use transparent background
       transparent_bg = false, -- default false
       -- set italic comment
-      italic_comment = true, -- default false
+      italic_comment = false, -- default false
       -- overrides the default highlights see `:h synIDattr`
       overrides = {
         -- https://github.com/Mofiqul/dracula.nvim/blob/main/lua/dracula/groups.lua
-        Comment = { fg = colors.comment, italic = true },
-        Constant = { fg = colors.yellow, italic = true },
-        Keyword = { fg = colors.cyan, italic = true },
-        DiagnosticUnderlineError = { fg = colors.red, italic = true, underline = true },
+        Comment = { fg = colors.comment, italic = false },
+        Constant = { fg = colors.yellow, italic = false },
+        Keyword = { fg = colors.cyan, italic = false },
+        DiagnosticUnderlineError = { fg = colors.red, italic = false, underline = false },
         Special = { fg = colors.pink },
         ["@keyword"] = { fg = colors.pink, italic = true },
         ["@keyword.function"] = { fg = colors.pink },
-        ["@keyword.conditional"] = { fg = colors.pink, italic = true },
+        ["@keyword.conditional"] = { fg = colors.pink, italic = false },
         ["@variable.member"] = { fg = colors.purple },
-        ["@variable.parameter"] = { fg = colors.orange, italic = true },
-        ["@constant"] = { fg = colors.purple, italic = true },
-        ["@type"] = { fg = colors.bright_cyan, italic = true },
-        ["@number"] = { fg = colors.purple, italic = true },
-        ["@lsp.type.parameter"] = { fg = colors.orange, italic = true },
+        ["@variable.parameter"] = { fg = colors.orange, italic = false },
+        ["@constant"] = { fg = colors.purple, italic = false },
+        ["@type"] = { fg = colors.bright_cyan, italic = false },
+        ["@number"] = { fg = colors.purple, italic = false },
+        ["@lsp.type.parameter"] = { fg = colors.orange, italic = false },
         NvimTreeNormal = { fg = colors.fg, bg = colors.bg_light },
         -- CmpItemAbbr = { fg = colors.white, bg = colors.bg_light },
         -- CmpItemKind = { fg = colors.white, bg = colors.bg_light },
@@ -104,6 +104,9 @@ return {
         NeogitDiffAddHighlight = { fg = colors.diffadd_fg, bg = colors.diffadd_bg },
         NeogitDiffDelete = { fg = colors.diffdelete_fg, bg = colors.diffdelete_bg },
         NeogitDiffDeleteHighlight = { fg = colors.diffdelete_fg, bg = colors.diffdelete_bg },
+        GitSignsAddPreview = { fg = colors.diffadd_fg, bg = colors.diffadd_bg },
+        GitSignsStagedAddLn = { fg = colors.diffadd_fg, bg = colors.diffadd_bg },
+        GitSignsUntrackedLn = { fg = colors.diffadd_fg, bg = colors.diffadd_bg },
         -- TelescopeNormal = { fg = colors.fg, bg = colors.bg_light },
         -- TelescopePromptBorder = { fg = colors.cyan },
         -- TelescopeResultsBorder = { fg = colors.cyan },

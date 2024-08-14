@@ -7,6 +7,7 @@ return {
   opts = {
     -- style = "darker",
     highlights = {
+      LspInlayHint = { fg = "#7F8A9E", bg = "#2C313A" },
       -- IblScope = { fg = "#626873" },
       illuminatedWord = { bg = "$bg2" },
       illuminatedCurWord = { bg = "$bg2" },
