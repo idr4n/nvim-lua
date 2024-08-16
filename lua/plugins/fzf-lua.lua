@@ -207,7 +207,7 @@ return {
         ["gutter"] = { "bg", "Normal" },
       },
       files = {
-        cmd = "rg --files --hidden --follow --no-ignore -g '!{node_modules,.git,**/_build,deps,.elixir_ls,**/target,**/assets/node_modules,**/assets/vendor,**/.next,**/.vercel,**/build,**/out}'",
+        cmd = "rg --files --hidden --follow --no-ignore -g '!{node_modules,.zig-cache,.git,**/_build,deps,.elixir_ls,**/target,**/assets/node_modules,**/assets/vendor,**/.next,**/.vercel,**/build,**/out}'",
         prompt = "  ",
         winopts = {
           preview = { hidden = "hidden" },
@@ -217,7 +217,7 @@ return {
       },
       grep = {
         rg_opts = "--hidden --column --follow --line-number --no-heading "
-          .. "--color=always --smart-case -g '!{node_modules,.git,**/_build,deps,.elixir_ls,**/target,**/assets/node_modules,**/assets/vendor,**/.next,**/.vercel,**/build,**/out}'",
+          .. "--color=always --smart-case -g '!{node_modules,.zig-cache,.git,**/_build,deps,.elixir_ls,**/target,**/assets/node_modules,**/assets/vendor,**/.next,**/.vercel,**/build,**/out}'",
       },
       oldfiles = {
         include_current_session = true,
