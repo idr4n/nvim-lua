@@ -42,7 +42,7 @@ vim.opt.rtp:prepend(lazypath)
 -- Load plugins
 require("lazy").setup("plugins", {
   defaults = { lazy = true },
-  install = { colorscheme = { "tokyonight" } },
+  install = { colorscheme = { "dracula", "tokyonight" } },
   --
   change_detection = { notify = false },
   dev = { path = "~/other_repos", patterns = { "idr4n" } },
