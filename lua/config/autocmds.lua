@@ -16,19 +16,15 @@ aucmd("BufRead", {
 })
 
 -- Indent four spaces
--- aucmd("FileType", {
---   pattern = {
---     "sql",
---     "go",
---     "markdown",
---     "javascript",
---     "javascriptreact",
---     "typescript",
---     "typescriptreact",
---   },
---   command = "setlocal shiftwidth=4 tabstop=4",
---   group = augroup("indent_4"),
--- })
+aucmd("FileType", {
+  pattern = {
+    -- "sql",
+    "markdown",
+    "quarto",
+  },
+  command = "setlocal shiftwidth=4 tabstop=4",
+  group = augroup("indent_4"),
+})
 
 -- SQL
 aucmd("FileType", {

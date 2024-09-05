@@ -31,18 +31,20 @@ return {
       end
 
       return {
-        -- {
-        --   "<leader>a",
-        --   function()
-        --     require("telescope.builtin").find_files(dropdown_theme())
-        --   end,
-        --   noremap = true,
-        --   silent = true,
-        --   desc = "Telescope-find_files",
-        -- },
+        {
+          -- "<leader>a",
+          "<C-M>",
+          function()
+            require("telescope.builtin").find_files(dropdown_theme())
+          end,
+          noremap = true,
+          silent = true,
+          desc = "Telescope-find_files",
+        },
         {
           "<C-P>",
           function()
+            -- require("telescope.builtin").find_files()
             require("telescope.builtin").find_files(dropdown_theme())
           end,
           noremap = true,
@@ -129,14 +131,14 @@ return {
           desc = "Go to definition",
         },
         -- {  "gr", "<cmd>Telescope lsp_references<cr>",  noremap = true, silent = true  },
-        -- {
-        --   "<leader>ls",
-        --   -- "<cmd>Telescope lsp_document_symbols theme=ivy<cr>",
-        --   "<cmd>Telescope lsp_document_symbols<cr>",
-        --   noremap = true,
-        --   silent = true,
-        --   desc = "LSP document symbols",
-        -- },
+        {
+          "gs",
+          -- "<cmd>Telescope lsp_document_symbols theme=ivy<cr>",
+          "<cmd>Telescope lsp_document_symbols<cr>",
+          noremap = true,
+          silent = true,
+          desc = "LSP document symbols",
+        },
         -- {
         --   "<leader>lS",
         --   -- "<cmd>Telescope lsp_dynamic_workspace_symbols theme=ivy<cr>",

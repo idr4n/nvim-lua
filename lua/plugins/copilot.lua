@@ -1,6 +1,9 @@
 return {
   "zbirenbaum/copilot.lua",
   cmd = "Copilot",
+  dependencies = {
+    "AndreM222/copilot-lualine",
+  },
   keys = {
     {
       "<leader>cP",

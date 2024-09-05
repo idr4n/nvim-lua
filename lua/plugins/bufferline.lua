@@ -1,6 +1,6 @@
 return {
   "akinsho/bufferline.nvim",
-  enabled = false,
+  -- enabled = false,
   -- event = { "BufReadPost", "BufNewFile" },
   event = "VimEnter",
   keys = {
@@ -37,6 +37,7 @@ return {
       options = {
         -- show_buffer_close_icons = false,
         buffer_close_icon = "",
+        modified_icon = "",
         -- diagnostics = "nvim_lsp",
         diagnostics = false,
         always_show_bufferline = true,

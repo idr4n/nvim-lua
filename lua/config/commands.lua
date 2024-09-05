@@ -34,9 +34,9 @@ command("MdToPdfWatch", function()
     print("Fswatch job already running.")
     return
   end
-  vim.cmd('execute \'silent !pandoc "%" --listings -H ~/dotfiles/listings-setup.tex -o "%:r.pdf"\'')
+  vim.cmd('execute \'silent !pandoc "%" --listings -H ~/dotfiles/listings-setup.tex -L ~/pagebreak.lua --include-in-header ~/header.tex -o "%:r.pdf"\'')
   local cmd = string.format(
-    'fswatch -o "%s" | xargs -n1 -I{} pandoc "%s" --listings -H ~/dotfiles/listings-setup.tex -o "%s.pdf"',
+    'fswatch -o "%s" | xargs -n1 -I{} pandoc "%s" --listings -H ~/dotfiles/listings-setup.tex -L ~/pagebreak.lua --include-in-header ~/header.tex -o "%s.pdf"',
     vim.fn.expand("%:p"),
     vim.fn.expand("%:p"),
     vim.fn.expand("%:r")

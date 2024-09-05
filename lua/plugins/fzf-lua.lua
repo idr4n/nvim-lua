@@ -123,14 +123,6 @@ return {
         desc = "LSP document symbols (FzfLua)",
       },
       {
-        "gs",
-        function()
-          require("fzf-lua").lsp_document_symbols(fzflua_theme())
-        end,
-        silent = true,
-        desc = "LSP document symbols (FzfLua)",
-      },
-      {
         "<leader>lS",
         function()
           require("fzf-lua").lsp_live_workspace_symbols(fzflua_theme())

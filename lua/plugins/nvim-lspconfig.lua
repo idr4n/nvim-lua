@@ -8,7 +8,7 @@ return {
     {
       "linrongbin16/lsp-progress.nvim",
       opts = {
-        max_size = 60,
+        max_size = 50,
         -- client_format = function(client_name, spinner, series_messages)
         client_format = function(_, spinner, series_messages)
           return #series_messages > 0

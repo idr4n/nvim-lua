@@ -104,8 +104,8 @@ keymap("n", "<S-l>", ":bnext<CR>")
 keymap("n", "<S-h>", ":bprevious<CR>")
 -- keymap("n", "ga", ":b#<CR>zz", { desc = "Last buffer" })
 keymap("n", "ga", "<cmd>e#<cr>zz", { desc = "Reopen buffer" })
--- keymap("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
--- keymap("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+keymap("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+keymap("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 --: }}}
 
 --: Using Bbye plugin to close the current buffer {{{
@@ -230,7 +230,8 @@ keymap("n", "<esc>", "<esc><cmd>noh<cr><cmd>redrawstatus<cr><cmd>echon ''<cr>", 
 --: }}}
 
 --: home row goto end and start of line (same as in Helix editor) {{{
-keyset({ "n", "v", "o" }, "gh", "^", { desc = "Go to start of line" })
+-- keyset({ "n", "v", "o" }, "gh", "^", { desc = "Go to start of line" })
+keyset({ "n", "v", "o" }, "gh", "0", { desc = "Go to start of line" })
 keyset({ "n", "o" }, "gl", "$", { desc = "Go to end of line" })
 keyset("v", "gl", "$h", { desc = "Go to end of line" })
 --: }}}

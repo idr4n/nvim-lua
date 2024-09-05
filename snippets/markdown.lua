@@ -50,6 +50,24 @@ M.snips.M = p({
   dscr = "Surrounds with double math symbols",
 }, "\\$\\$$TM_SELECTED_TEXT$1\\$\\$")
 
+M.snips.v = p({
+  trig = "v",
+  name = "Vertical space",
+  dscr = "Vertical space in Latex notation",
+}, "\\vspace{${1:1}cm}")
+
+M.snips.p = p({
+  trig = "p",
+  name = "Phantom",
+  dscr = "Phantom in Latex notation",
+}, "\\phantom{.}")
+
+M.snips.e = p({
+  trig = "e",
+  name = "Environment",
+  dscr = "Environment in Latex notation",
+}, "\\begin{${1:mdframed}}\n$TM_SELECTED_TEXT$2\n\\end{$1}")
+
 M.snips.col = p({
   trig = "col",
   name = "collapsible block",
@@ -118,6 +136,24 @@ M.autosnips.M = p({
   name = "Math $$|$$",
   dscr = "Surrounds with double math symbols",
 }, "\\$\\$$TM_SELECTED_TEXT$1\\$\\$")
+
+M.autosnips.v = p({
+  trig = ";v",
+  name = "Vertical space",
+  dscr = "Vertical space in Latex notation",
+}, "\\vspace{${1:1}cm}")
+
+M.autosnips.p = p({
+  trig = ";p",
+  name = "Phantom",
+  dscr = "Phantom in Latex notation",
+}, "\\phantom{.}")
+
+M.autosnips.e = p({
+  trig = ";e",
+  name = "Environment",
+  dscr = "Environment in Latex notation",
+}, "\\begin{${1:mdframed}}\n$TM_SELECTED_TEXT$2\n\\end{$1}")
 
 M.autosnips.cb = p({
   trig = ";cb",
