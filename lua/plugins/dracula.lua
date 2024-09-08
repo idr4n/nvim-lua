@@ -127,6 +127,7 @@ return {
         -- LineNr = { fg = "#696B71" },
         LineNr = { fg = "#5F6166" },
         CursorLineNr = { fg = "#C9A8F9" },
+        NoiceCmdlinePopUp = { bg = "#2C2E3A" },
       },
     })
   end,
