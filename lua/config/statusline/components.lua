@@ -259,16 +259,7 @@ function M.LSP()
   return ""
 end
 
-function M.get_words()
-  if vim.bo.filetype == "md" or vim.bo.filetype == "text" or vim.bo.filetype == "markdown" then
-    if vim.fn.wordcount().visual_words == nil then
-      return " " .. " " .. tostring(vim.fn.wordcount().words) .. " "
-    end
-    return " " .. " " .. tostring(vim.fn.wordcount().visual_words) .. " "
-  else
-    return ""
-  end
-end
+M.get_words = utils.get_words
 
 function M.charcode()
   return _G.charcode and " %#SLBufNr#Ux%04B%#SLNormal# " or ""
