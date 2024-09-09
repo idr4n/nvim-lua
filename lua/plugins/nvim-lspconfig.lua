@@ -29,29 +29,16 @@ return {
     local lsp_conf = require("config.lsp")
     local methods = vim.lsp.protocol.Methods
     local icons = require("utils").diagnostic_icons
+    local x = vim.diagnostic.severity
 
     local opts = {
       diagnostics = {
-        virtual_text = { spacing = 4, prefix = "" },
-        update_in_insert = false,
-        underline = true,
-        severity_sort = true,
-        float = {
-          focusable = false,
-          style = "minimal",
-          border = "rounded",
-          source = "always",
-          header = "",
-          prefix = "",
-        },
+        virtual_text = { prefix = "" },
         signs = {
-          text = {
-            [vim.diagnostic.severity.ERROR] = icons.Error,
-            [vim.diagnostic.severity.WARN] = icons.Warn,
-            [vim.diagnostic.severity.HINT] = icons.Hint,
-            [vim.diagnostic.severity.INFO] = icons.Info,
-          },
+          text = { [x.ERROR] = icons.Error, [x.WARN] = icons.Warn, [x.INFO] = icons.Info, [x.HINT] = icons.Hint },
         },
+        underline = true,
+        float = { border = "rounded" },
       },
 
       servers = {
