@@ -11,8 +11,7 @@ end
 
 local c_dracula = {
   gray = "#2C2E3A",
-  lightgray = "#333540",
-  lightgray2 = "#3D4053",
+  lightgray = "#373946",
   orange = "#ffb86c",
   purple = "#bd93f9",
   pink = "#FF86D3",
