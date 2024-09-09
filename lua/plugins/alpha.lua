@@ -104,7 +104,7 @@ return {
       callback = function(args)
         vim.o.laststatus = 0
         vim.o.showtabline = 0
-        vim.o.cmdheight = 0
+        -- vim.o.cmdheight = 0 -- uncomment if not useing noice
 
         vim.api.nvim_create_autocmd("BufUnload", {
           group = alpha_group,
@@ -112,8 +112,8 @@ return {
           once = true,
           callback = function()
             vim.o.laststatus = 3
-            -- vim.o.showtabline = 2
-            vim.o.cmdheight = 1
+            vim.o.showtabline = 2
+            -- vim.o.cmdheight = 1 -- uncomment if not useing noice
           end,
         })
       end,

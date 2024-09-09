@@ -1,12 +1,12 @@
 return {
   "folke/noice.nvim",
-  enabled = false,
+  -- enabled = false,
   event = "VeryLazy",
   -- stylua: ignore
   keys = {
     { "<leader>nl", function() require("noice").cmd("last") end, desc = "Noice Last Message" },
     { "<leader>nh", function() require("noice").cmd("history") end, desc = "Noice History" },
-    { "<leader>na", function() require("noice").cmd("all") end, desc = "Noice All" },
+    { "<leader>nA", function() require("noice").cmd("all") end, desc = "Noice All" },
     { "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline" },
     { "<leader>nd", function() require("noice").cmd("dismiss") end, desc = "Dismiss All" },
     { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll forward", mode = {"i", "n", "s"} },
@@ -14,17 +14,15 @@ return {
   },
   opts = {
     routes = {
-      {
-        filter = {
-          event = "msg_show",
-          any = {
-            { find = "%d+L, %d+B" },
-            { find = "; after #%d+" },
-            { find = "; before #%d+" },
-          },
-        },
-        view = "mini",
-      },
+      { filter = { event = "msg_show", find = "written" } },
+      { filter = { event = "msg_show", find = "yanked" } },
+      { filter = { event = "msg_show", find = "%d+L, %d+B" } },
+      { filter = { event = "msg_show", find = "; after #%d+" } },
+      { filter = { event = "msg_show", find = "; before #%d+" } },
+      { filter = { event = "msg_show", find = "%d fewer lines" } },
+      { filter = { event = "msg_show", find = "%d more lines" } },
+      { filter = { event = "msg_show", find = "<ed" } },
+      { filter = { event = "msg_show", find = ">ed" } },
     },
     lsp = {
       override = {
@@ -34,7 +32,7 @@ return {
       },
       hover = { enabled = true },
       signature = { enabled = true },
-      progress = { enabled = true },
+      progress = { enabled = false },
     },
     cmdline = {
       opts = {
@@ -48,7 +46,7 @@ return {
         -- position = { row = "99%", col = "50%" },
         -- size = { width = "100%" },
         position = { row = "100%", col = "0%" },
-        size = { width = "40%" },
+        size = { width = "50%" },
       },
     },
     popupmenu = { backend = "cmp" },
