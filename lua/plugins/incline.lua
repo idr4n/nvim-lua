@@ -5,14 +5,14 @@ return {
     { "<leader>I", '<Cmd>lua require"incline".toggle()<Cr>', desc = "Incline: Toggle" },
   },
   config = function()
-    local helpers = require("incline.helpers")
+    -- local helpers = require("incline.helpers")
     local devicons = require("nvim-web-devicons")
     require("incline").setup({
       hide = {
         cursorline = "focused_win",
         -- cursorline = false,
-        focused_win = false,
-        only_win = false,
+        focused_win = true,
+        only_win = true,
       },
       debounce_threshold = { rising = 20, falling = 150 },
       window = {
