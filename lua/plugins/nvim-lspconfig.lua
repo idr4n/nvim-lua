@@ -67,7 +67,7 @@ return {
 
       setup = {
         -- example to setup with typescript.nvim
-        -- ts_ls = function(_, opts)
+        -- tsserver = function(_, opts)
         --   require("typescript").setup({ server = opts })
         --   return true
         -- end,

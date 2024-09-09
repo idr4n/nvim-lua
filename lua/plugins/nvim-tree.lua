@@ -33,8 +33,7 @@ return {
     {
       "<leader><Space>",
       function()
-        require("nvim-tree.api").tree.close()
-        require("nvim-tree.api").tree.find_file({ open = true, current_window = true })
+        require("nvim-tree.api").tree.toggle({ current_window = true })
       end,
       silent = true,
       desc = "NvimTree Open",
@@ -77,6 +76,10 @@ return {
         api.node.open.edit()
         api.tree.close_in_this_tab()
       end, opts("Open and close tree"))
+
+      vim.keymap.set("n", "q", function()
+        vim.cmd("Bdelete")
+      end, opts("Close tree"))
     end,
 
     filters = {
@@ -87,13 +90,7 @@ return {
     disable_netrw = true,
     hijack_netrw = true,
     hijack_cursor = true,
-    hijack_unnamed_buffer_when_opening = false,
     sync_root_with_cwd = true,
-
-    hijack_directories = {
-      enable = true,
-      auto_open = true,
-    },
 
     update_focused_file = {
       enable = true,
@@ -145,10 +142,10 @@ return {
     },
 
     actions = {
-      open_file = {
-        quit_on_open = false,
-        resize_window = true,
-      },
+      -- open_file = {
+      --   quit_on_open = false,
+      --   resize_window = true,
+      -- },
       expand_all = {
         max_folder_discovery = 300,
         exclude = { ".git" },

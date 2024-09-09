@@ -36,7 +36,7 @@ return {
 
   {
     "yetone/avante.nvim",
-    enabled = false,
+    -- enabled = false,
     build = ":AvanteBuild source=false",
     cmd = { "AvanteAsk", "AvanteToggle" },
     dependencies = {

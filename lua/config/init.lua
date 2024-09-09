@@ -86,4 +86,4 @@ require("lazy").setup("plugins", {
 -- vim.cmd("colorscheme solarized")
 -- vim.cmd("colorscheme seoul256")
 
-vim.cmd("colorscheme dracula")
+vim.cmd("colorscheme nord")

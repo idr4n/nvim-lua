@@ -328,7 +328,7 @@ function M.statuscolumn()
   return table.concat(components, "")
 end
 
-function M.fg(name)
+function M.get_fg(name)
   ---@type {foreground?:number}?
   ---@diagnostic disable-next-line: deprecated
   local hl = vim.api.nvim_get_hl and vim.api.nvim_get_hl(0, { name = name }) or vim.api.nvim_get_hl_by_name(name, true)
@@ -451,6 +451,19 @@ function M.pretty_dirpath()
     end
 
     return #parts > 0 and (table.concat(parts, sep) .. "/") or ""
+  end
+end
+
+---Get number of words in the current markdown or text buffer
+---@return string
+function M.get_words()
+  if vim.bo.filetype == "md" or vim.bo.filetype == "text" or vim.bo.filetype == "markdown" then
+    if vim.fn.wordcount().visual_words == nil then
+      return " " .. " " .. tostring(vim.fn.wordcount().words) .. " "
+    end
+    return " " .. " " .. tostring(vim.fn.wordcount().visual_words) .. " "
+  else
+    return ""
   end
 end
 
