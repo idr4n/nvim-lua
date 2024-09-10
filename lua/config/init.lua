@@ -46,7 +46,10 @@ require("lazy").setup("plugins", {
   --
   change_detection = { notify = false },
   dev = { path = "~/other_repos", patterns = { "idr4n" } },
-  checker = { enabled = false },
+  checker = {
+    enabled = true, -- check for plugin updates periodically
+    notify = false, -- notify on update
+  },
   performance = {
     rtp = {
       disabled_plugins = {
