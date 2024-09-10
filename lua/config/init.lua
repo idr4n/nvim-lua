@@ -61,9 +61,10 @@ require("lazy").setup("plugins", {
       },
     },
   },
-  -- ui = {
-  --   border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-  -- },
+  ui = {
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    backdrop = 100,
+  },
 })
 
 --: load colorscheme
