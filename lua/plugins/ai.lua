@@ -3,10 +3,10 @@ return {
     "olimorris/codecompanion.nvim",
     cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions" },
     keys = {
-      { "<leader>jt", "<cmd>CodeCompanionToggle<cr>", mode = { "n", "v" }, desc = "CodeCompanion Toggle" },
-      { "<leader>jc", "<cmd>CodeCompanionChat<cr>", mode = { "n", "v" }, desc = "CodeCompanion Chat" },
+      { "<leader>jc", "<cmd>CodeCompanionToggle<cr>", mode = { "n", "v" }, desc = "CodeCompanion Toggle" },
+      { "<leader>jC", "<cmd>CodeCompanionChat<cr>", mode = { "n", "v" }, desc = "CodeCompanion Chat" },
       { "<leader>jA", "<cmd>CodeCompanionActions<cr>", mode = { "n", "v" }, desc = "CodeCompanion Actions" },
-      { "<leader>ja", "<cmd>CodeCompanionAdd<cr>", mode = { "v" }, desc = "CodeCompanion Add Selection" },
+      { "<leader>js", "<cmd>CodeCompanionAdd<cr>", mode = { "v" }, desc = "CodeCompanion Add Selection" },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -45,32 +45,31 @@ return {
       "MunifTanjim/nui.nvim",
       --- The below dependencies are optional,
       "nvim-tree/nvim-web-devicons",
-      "zbirenbaum/copilot.lua", -- for providers='copilot'
     },
     keys = function()
       local wk = require("which-key")
       wk.add({
-        { "<leader>a", group = "Avante AI" },
+        { "<leader>ja", group = "Avante AI" },
       })
       return {
-        { "<leader>aa", ":AvanteAsk<cr>", mode = { "n" }, desc = "avante: ask" },
-        { "<leader>at", ":AvanteToggle<cr>", mode = { "n" }, desc = "avante: toggle" },
+        { "<leader>jt", ":AvanteToggle<cr>", mode = { "n" }, desc = "Avante Toggle" },
       }
     end,
     opts = {
       windows = {
         width = 45,
       },
-      -- mappings = {
-      --   ask = "<leader>aa",
-      --   edit = "<leader>ae",
-      --   refresh = "<leader>ar",
-      --   toggle = {
-      --     default = "<leader>at",
-      --     debug = "<leader>ad",
-      --     hint = "<leader>ah",
-      --   },
-      -- },
+      mappings = {
+        ask = "<leader>jaa",
+        edit = "<leader>jae",
+        refresh = "<leader>jar",
+        toggle = {
+          default = "<leader>jat",
+          debug = "<leader>jad",
+          hint = "<leader>jah",
+          suggestion = "<leader>jas",
+        },
+      },
     },
   },
 }
