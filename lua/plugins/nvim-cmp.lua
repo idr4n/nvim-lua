@@ -15,7 +15,7 @@ return {
   opts = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
-    local nvchad_icons = require("utils").nvchad_icons
+    local nvchad_icons = require("utils").lazyvim_icons
     local cursorMoveAround = require("utils").CursorMoveAround
 
     -- require("luasnip/loaders/from_vscode").lazy_load()
