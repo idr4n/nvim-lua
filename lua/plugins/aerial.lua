@@ -33,12 +33,10 @@ return {
       "Method",
       "Module",
       "Namespace",
-      "Object",
       "Package",
       "Property",
       "Struct",
       "Trait",
-      "Variable",
     },
       -- stylua: ignore
       guides = {
