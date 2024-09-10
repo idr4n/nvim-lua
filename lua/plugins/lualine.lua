@@ -129,20 +129,38 @@ return {
         theme = vim.g.colors_name == "nord" and nord_custom or dracula_custom,
         globalstatus = vim.o.laststatus == 3,
         disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter", "telescope" } },
-        -- component_separators = { left = "", right = "" },
-        component_separators = { left = "", right = "" },
+        -- component_separators = { left = "", right = "" },
+        component_separators = vim.env.TERM == "alacritty" and { left = "", right = "" }
+          or { left = "", right = "" },
         -- section_separators = { left = "", right = "" },
+        -- section_separators = vim.env.TERM == "alacritty" and { left = "", right = "" }
+        --   or { left = "", right = "" },
         section_separators = vim.env.TERM == "alacritty" and { left = "", right = "" }
-          or { left = "", right = "" },
+          or { left = "", right = "" },
       },
       sections = {
-        -- stylua: ignore
-        lualine_a = { { "mode", fmt = function(str) return str:sub(1, 1) end, } },
+        lualine_a = {
+          {
+            "mode",
+            fmt = function(str)
+              local m = vim.api.nvim_get_mode().mode
+              if m == "\22" then
+                return "C-V"
+              end
+              return str:sub(1, 1)
+            end,
+          },
+        },
         -- stylua: ignore
         lualine_b = { { function() return vim.bo.filetype:upper() end, } },
         lualine_c = {
-          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-          { fileinfo, padding = { left = 0, right = 1 } },
+          {
+            "branch",
+            icon = "",
+            cond = function()
+              return _G.show_more_info
+            end,
+          },
           {
             "diagnostics",
             symbols = {
@@ -152,6 +170,8 @@ return {
               hint = utils.diagnostic_icons.Hint,
             },
           },
+          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+          { fileinfo, padding = { left = 0, right = 1 } },
         },
         lualine_x = {
           function()
@@ -161,13 +181,13 @@ return {
           {
             function() return require("noice").api.status.command.get() end,
             cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-            color = function() return utils.get_fg('Statement') end
+            color = function() return utils.get_fg("Statement") end
           },
           -- stylua: ignore
           {
             function() return require("noice").api.status.mode.get() end,
             cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-            color = function() return utils.get_fg('Constant') end
+            color = function() return utils.get_fg("Constant") end
           },
           "searchcount",
           {
@@ -194,19 +214,16 @@ return {
             cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
           },
           { utils.get_words, padding = { right = 0 } },
+          -- stylua: ignore
           {
-            "progress",
-            separator = " ",
-            padding = { left = 1, right = 0 },
-            cond = function()
-              return _G.show_more_info
-            end,
+            function () return "Ux%04B" end,
+            cond = function() return _G.show_more_info end,
           },
           {
-            "location",
-            padding = { left = 0, right = 1 },
-            cond = function()
-              return _G.show_more_info
+            require("lazy.status").updates,
+            cond = require("lazy.status").has_updates,
+            color = function()
+              return utils.get_fg("Special")
             end,
           },
           {
@@ -229,7 +246,14 @@ return {
           },
         },
         lualine_y = {
-          { "branch", icon = "" },
+          -- stylua: ignore
+          {
+            function() return vim.api.nvim_buf_line_count(0) .. "" end,
+            separator = " ",
+            padding = { left = 1, right = 0 },
+          },
+          -- { "progress", separator = " ", padding = { left = 1, right = 0 } },
+          { "location", padding = { left = 0, right = 1 }, separator = " " },
         },
         lualine_z = {
           {
