@@ -10,7 +10,7 @@ return {
   },
   opts = {
     attach_mode = "global",
-    backends = { "lsp", "markdown", "asciidoc", "man" },
+    backends = { "lsp", "treesitter", "markdown", "man" },
     show_guides = true,
     layout = {
       resize_to_content = false,
