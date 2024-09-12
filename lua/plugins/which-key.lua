@@ -33,7 +33,7 @@ return {
         j = { name = "AI" },
         l = { name = "LSP" },
         o = { name = "open" },
-        n = { name = "N-Tree/Tdo" },
+        n = { name = "N-Tree/Noice/Tdo" },
         ["nd"] = { name = "Tdo with offset" },
         q = { name = "Quit" },
         s = { name = "Search/Replace" },
