@@ -164,8 +164,9 @@ return {
               hint = utils.diagnostic_icons.Hint,
             },
           },
-          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-          { fileinfo, padding = { left = 0, right = 1 } },
+          -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+          -- { fileinfo, padding = { left = 0, right = 1 } },
+          fileinfo,
         },
         lualine_x = {
           function()
@@ -265,10 +266,12 @@ return {
               return _G.show_more_info
             end,
           },
+          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           {
             function()
               return vim.bo.filetype:upper()
             end,
+            padding = { left = 0, right = 1 },
           },
           -- stylua: ignore
           -- {
