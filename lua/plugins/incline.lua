@@ -1,5 +1,6 @@
 return {
   "b0o/incline.nvim",
+  enabled = false,
   event = "BufReadPre",
   keys = {
     { "<leader>I", '<Cmd>lua require"incline".toggle()<Cr>', desc = "Incline: Toggle" },
