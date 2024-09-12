@@ -151,16 +151,10 @@ return {
             end,
           },
         },
-        -- stylua: ignore
-        lualine_b = { { function() return vim.bo.filetype:upper() end, } },
+        lualine_b = {
+          { "branch", icon = "" },
+        },
         lualine_c = {
-          {
-            "branch",
-            icon = "",
-            cond = function()
-              return _G.show_more_info
-            end,
-          },
           {
             "diagnostics",
             symbols = {
@@ -214,6 +208,23 @@ return {
             cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
           },
           { utils.get_words, padding = { right = 0 } },
+          {
+            function()
+              if rawget(vim, "lsp") then
+                local stbufnr = 0
+                for _, client in ipairs(vim.lsp.get_clients()) do
+                  stbufnr = vim.api.nvim_win_get_buf(vim.g.statusline_winid or 0)
+                  if client.attached_buffers[stbufnr] and client.name ~= "null-ls" then
+                    return (vim.o.columns > 100 and "󰄭  " .. client.name) or "󰄭  LSP"
+                  end
+                end
+              end
+              return ""
+            end,
+            cond = function()
+              return _G.show_more_info
+            end,
+          },
           -- stylua: ignore
           {
             function () return "Ux%04B" end,
@@ -246,23 +257,43 @@ return {
           },
         },
         lualine_y = {
-          -- stylua: ignore
           {
-            function() return vim.api.nvim_buf_line_count(0) .. "" end,
-            separator = " ",
+            "location",
             padding = { left = 1, right = 0 },
+            separator = " ",
+            cond = function()
+              return _G.show_more_info
+            end,
           },
-          -- { "progress", separator = " ", padding = { left = 1, right = 0 } },
-          { "location", padding = { left = 0, right = 1 }, separator = " " },
-        },
-        lualine_z = {
           {
             function()
-              local name = " " .. vim.loop.cwd():match("([^/\\]+)[/\\]*$")
-              return name
+              return vim.bo.filetype:upper()
             end,
-            -- stylua: ignore
-            cond = function() return vim.o.columns > 85 end,
+          },
+          -- stylua: ignore
+          -- {
+          --   function() return vim.api.nvim_buf_line_count(0) .. "" end,
+          --   separator = " ",
+          --   padding = { left = 1, right = 0 },
+          -- },
+        },
+        lualine_z = {
+          -- {
+          --   function()
+          --     local name = " " .. vim.loop.cwd():match("([^/\\]+)[/\\]*$")
+          --     return name
+          --   end,
+          --   -- stylua: ignore
+          --   cond = function() return vim.o.columns > 85 end,
+          -- },
+          {
+            "progress",
+            separator = " ",
+            padding = { left = 1, right = 0 },
+            fmt = function(str)
+              local lines = vim.api.nvim_buf_line_count(0)
+              return str .. "/" .. lines
+            end,
           },
         },
       },
