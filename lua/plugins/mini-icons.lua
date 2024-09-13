@@ -8,9 +8,9 @@ return {
       file = {
         [".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
         ["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
-        README = { glyph = "󱗖", hl = "MiniIconsYellow" },
-        ["README.md"] = { glyph = "󱗖", hl = "MiniIconsYellow" },
-        ["README.txt"] = { glyph = "󱗖", hl = "MiniIconsYellow" },
+        README = { glyph = "", hl = "MiniIconsYellow" },
+        ["README.md"] = { glyph = "", hl = "MiniIconsYellow" },
+        ["README.txt"] = { glyph = "", hl = "MiniIconsYellow" },
       },
       filetype = {
         dotenv = { glyph = "", hl = "MiniIconsYellow" },
