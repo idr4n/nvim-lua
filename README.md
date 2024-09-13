@@ -1,15 +1,15 @@
 # Neovim Configuration
 
-This is my Neovim configuation written in Lua.
+This is my Neovim configuation written in Lua (awip).
 
 ![CleanShot 2024-04-05 at 15 29 43@2x](https://github.com/idr4n/nvim-lua/assets/20104703/d2c62063-96ba-4bdd-8843-d4d18ab6b8ae)
 ![CleanShot 2024-04-05 at 16 00 57@2x](https://github.com/idr4n/nvim-lua/assets/20104703/3732ccdd-bf76-4b04-a371-f3db25b2c526)
 
 ## Basic setup
 
-- **Preferred themes**: [dracula.nvim](https://github.com/Mofiqul/dracula.nvim), and [nord.nvim](https://github.com/gbprod/nord.nvim).
-- **Terminals**: WezTerm (alternatively Alacritty and Kitty). To check my terminals configuration, take a look at my [dotfiles](https://github.com/idr4n/.dotfiles) and my [WezTerm configuration](https://github.com/idr4n/wezterm).
-- **Font**: I switch back and forth between [FiraCode](https://github.com/tonsky/FiraCode) and [MonoLisa](https://www.monolisa.dev/).
+- **Preferred themes (awip)**: [dracula.nvim](https://github.com/Mofiqul/dracula.nvim), and [nord.nvim](https://github.com/gbprod/nord.nvim).
+- **Terminals**: Ghostty (alternatively Alacritty, WezTerm or Kitty). To check my terminals configuration, take a look at my [dotfiles](https://github.com/idr4n/.dotfiles) and my [WezTerm configuration](https://github.com/idr4n/wezterm).
+- **Font**: I have been switching back and forth between [FiraCode](https://github.com/tonsky/FiraCode) and [MonoLisa](https://www.monolisa.dev/); however, I have recently settled on a customized version of Iosevka based on Zed Mono.
 - I'm using **[lazy.nvim](https://github.com/folke/lazy.nvim) as my package manager**, which allows me to start Neovim in around 30ms⚡️.
 
 ## Credits
