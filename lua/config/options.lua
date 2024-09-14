@@ -33,6 +33,7 @@ opt.mouse = "a" -- allow the mouse to be used in neovim
 opt.number = true -- set numbered lines
 opt.pumheight = 15 -- pop up menu height
 opt.relativenumber = true -- set relative numbered lines
+opt.ruler = false
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 opt.scrolloff = 8 -- Lines of context
 opt.shiftwidth = 2 -- the number of spaces inserted for each indentation

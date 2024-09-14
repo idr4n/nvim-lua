@@ -16,7 +16,7 @@ return {
     -- },
     {
       -- "<C-Q>",
-      "<leader>,",
+      "s",
       function()
         local bufname = vim.api.nvim_buf_get_name(0)
         local path = vim.fn.fnamemodify(bufname, ":p")

@@ -1,5 +1,6 @@
 return {
   "dnlhc/glance.nvim",
+  -- "idr4n/glance.nvim",
   keys = {
     { "<leader>gg", "<CMD>Glance definitions<CR>", desc = "Glance definitions" },
     { "gr", "<CMD>Glance references<CR>", desc = "LSP references (Glance)" },

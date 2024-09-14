@@ -145,7 +145,6 @@ keymap("n", "g#", "g#N", { desc = "BckSearch not exact" })
 --: select line without end of line {{{
 keymap("n", ",a", "^v$h", { desc = "Select line-no-end" })
 keymap("n", "g;", "^v$h", { desc = "Select line-no-end" })
-keymap("n", "yg", "^v$hy", { desc = "Yank line-no-end" })
 --: }}}
 
 --: paste register for printing (JavaScript) {{{
@@ -230,10 +229,10 @@ keymap("n", "<esc>", "<esc><cmd>noh<cr><cmd>redrawstatus<cr><cmd>echon ''<cr>", 
 --: }}}
 
 --: home row goto end and start of line (same as in Helix editor) {{{
--- keyset({ "n", "v", "o" }, "gh", "^", { desc = "Go to start of line" })
-keyset({ "n", "v", "o" }, "gh", "0", { desc = "Go to start of line" })
+keyset({ "n", "v", "o" }, "gk", "0", { desc = "Go to start of line" })
+keyset({ "n", "v", "o" }, "gh", "^", { desc = "Go to start of line" })
 keyset({ "n", "o" }, "gl", "$", { desc = "Go to end of line" })
-keyset("v", "gl", "$h", { desc = "Go to end of line" })
+keyset("v", "gl", "$h", { desc = "Select to end of line" })
 --: }}}
 
 --: Stay in indent mode {{{

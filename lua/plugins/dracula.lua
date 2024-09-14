@@ -29,8 +29,7 @@ local colors = {
   yellow = "#F1FA8C",
 }
 
--- local colors_default = {
-local colors = {
+local c = {
   bg = "#282A36",
   black = "#191A21",
   bg_light = "#2E2B3B",
@@ -65,6 +64,7 @@ local colors = {
   diffadd_fg = "#B8DB87",
   diffdelete_bg = "#3A273A",
   diffdelete_fg = "#E26A75",
+  illuminated_bg = "#544B6F",
 }
 
 return {
@@ -75,7 +75,7 @@ return {
 
     dracula.setup({
       -- customize dracula color palette
-      colors = colors,
+      colors = c,
       -- show the '~' characters after the end of buffers
       show_end_of_buffer = false, -- default false
       -- use transparent background
@@ -85,49 +85,54 @@ return {
       -- overrides the default highlights see `:h synIDattr`
       overrides = {
         -- https://github.com/Mofiqul/dracula.nvim/blob/main/lua/dracula/groups.lua
-        Comment = { fg = colors.comment, italic = false },
+        Comment = { fg = c.comment, italic = false },
         CursorLine = { bg = "#2E303E" },
         BufferLineFill = { bg = "#2E303E" },
-        BufferLineModifiedSelected = { fg = colors.green },
+        BufferLineModifiedSelected = { fg = c.green },
         BufferLineSeparator = { fg = "#2E303E", bg = "#2E303E" },
         BufferLineSeparatorSelected = { fg = "#2E303E", bg = "#2E303E" },
         BufferLineSeparatorVisible = { fg = "#2E303E", bg = "#2E303E" },
         RenderMarkdownCode = { bg = "#2D303E" },
-        Constant = { fg = colors.yellow, italic = false },
-        Keyword = { fg = colors.cyan, italic = false },
-        DiagnosticUnderlineError = { fg = colors.red, italic = false, underline = false },
-        Special = { fg = colors.pink },
-        ["@keyword"] = { fg = colors.pink, italic = true },
-        ["@keyword.function"] = { fg = colors.pink },
-        ["@keyword.conditional"] = { fg = colors.pink, italic = false },
-        ["@variable.member"] = { fg = colors.purple },
-        ["@variable.parameter"] = { fg = colors.orange, italic = false },
-        ["@constant"] = { fg = colors.purple, italic = false },
-        ["@type"] = { fg = colors.bright_cyan, italic = false },
-        ["@number"] = { fg = colors.purple, italic = false },
-        ["@lsp.type.parameter"] = { fg = colors.orange, italic = false },
-        NvimTreeNormal = { fg = colors.fg, bg = colors.bg_light },
+        Constant = { fg = c.yellow, italic = false },
+        Keyword = { fg = c.cyan, italic = false },
+        DiagnosticUnderlineError = { fg = c.red, italic = false, underline = false },
+        Special = { fg = c.pink },
+        ["@keyword"] = { fg = c.pink, italic = true },
+        ["@keyword.function"] = { fg = c.pink },
+        ["@keyword.conditional"] = { fg = c.pink, italic = false },
+        ["@variable.member"] = { fg = c.purple },
+        ["@variable.parameter"] = { fg = c.orange, italic = false },
+        ["@constant"] = { fg = c.purple, italic = false },
+        ["@type"] = { fg = c.bright_cyan, italic = false },
+        ["@number"] = { fg = c.purple, italic = false },
+        ["@lsp.type.parameter"] = { fg = c.orange, italic = false },
+        NvimTreeNormal = { fg = c.fg, bg = c.bg_light },
         -- CmpItemAbbr = { fg = colors.white, bg = colors.bg_light },
         -- CmpItemKind = { fg = colors.white, bg = colors.bg_light },
-        NormalFloat = { fg = colors.fg, bg = colors.bg_light },
-        NeogitDiffAdd = { fg = colors.diffadd_fg, bg = colors.diffadd_bg },
-        NeogitDiffAddHighlight = { fg = colors.diffadd_fg, bg = colors.diffadd_bg },
-        NeogitDiffDelete = { fg = colors.diffdelete_fg, bg = colors.diffdelete_bg },
-        NeogitDiffDeleteHighlight = { fg = colors.diffdelete_fg, bg = colors.diffdelete_bg },
-        GitSignsAddPreview = { fg = colors.diffadd_fg, bg = colors.diffadd_bg },
-        GitSignsStagedAddLn = { fg = colors.diffadd_fg, bg = colors.diffadd_bg },
-        GitSignsUntrackedLn = { fg = colors.diffadd_fg, bg = colors.diffadd_bg },
+        NormalFloat = { fg = c.fg, bg = c.bg_light },
+        NeogitDiffAdd = { fg = c.diffadd_fg, bg = c.diffadd_bg },
+        NeogitDiffAddHighlight = { fg = c.diffadd_fg, bg = c.diffadd_bg },
+        NeogitDiffDelete = { fg = c.diffdelete_fg, bg = c.diffdelete_bg },
+        NeogitDiffDeleteHighlight = { fg = c.diffdelete_fg, bg = c.diffdelete_bg },
+        GitSignsAddPreview = { fg = c.diffadd_fg, bg = c.diffadd_bg },
+        GitSignsStagedAddLn = { fg = c.diffadd_fg, bg = c.diffadd_bg },
+        GitSignsUntrackedLn = { fg = c.diffadd_fg, bg = c.diffadd_bg },
         -- TelescopeNormal = { fg = colors.fg, bg = colors.bg_light },
         -- TelescopePromptBorder = { fg = colors.cyan },
         -- TelescopeResultsBorder = { fg = colors.cyan },
         -- TelescopePreviewBorder = { fg = colors.cyan },
-        FloatBorder = { fg = colors.cyan },
-        VertSplit = { fg = colors.cyan },
-        WinSeparator = { fg = colors.cyan },
+        FloatBorder = { fg = c.cyan },
+        VertSplit = { fg = c.cyan },
+        WinSeparator = { fg = c.cyan },
         -- LineNr = { fg = "#696B71" },
         LineNr = { fg = "#5F6166" },
         CursorLineNr = { fg = "#C9A8F9" },
         NoiceCmdlinePopUp = { bg = "#2C2E3A" },
+        illuminatedWord = { bg = c.illuminated_bg },
+        illuminatedCurWord = { bg = c.illuminated_bg },
+        IlluminatedWordText = { bg = c.illuminated_bg },
+        IlluminatedWordRead = { bg = c.illuminated_bg },
+        IlluminatedWordWrite = { bg = c.illuminated_bg },
       },
     })
   end,

@@ -77,9 +77,9 @@ return {
         api.tree.close_in_this_tab()
       end, opts("Open and close tree"))
 
-      vim.keymap.set("n", "q", function()
-        vim.cmd("Bdelete")
-      end, opts("Close tree"))
+      -- vim.keymap.set("n", "q", function()
+      --   vim.cmd("Bdelete")
+      -- end, opts("Close tree"))
     end,
 
     filters = {

@@ -32,8 +32,7 @@ return {
 
       return {
         {
-          -- "<leader>a",
-          "<C-M>",
+          "<leader>a",
           function()
             require("telescope.builtin").find_files(dropdown_theme())
           end,
@@ -72,7 +71,7 @@ return {
         -- },
         { "<leader>ot", "<cmd>Telescope resume<cr>", noremap = true, silent = true, desc = "Telescope Resume" },
         {
-          "s",
+          "<leader>,",
           function()
             -- require("telescope.builtin").buffers(require("telescope.themes").get_ivy({
             require("telescope.builtin").buffers(dropdown_theme({ initial_mode = "normal", sort_lastused = true }))
@@ -275,7 +274,7 @@ return {
               ["<esc>"] = actions.close,
               ["<C-c>"] = actions.close,
               ["<C-g>"] = actions.close,
-              ["s"] = actions.close,
+              ["<leader>,"] = actions.close,
               ["<CR>"] = actions.select_default,
               ["f"] = actions.select_default,
               ["l"] = actions.select_default,
