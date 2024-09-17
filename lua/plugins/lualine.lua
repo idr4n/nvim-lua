@@ -49,9 +49,9 @@ local dracula_custom = {
 }
 
 local c_nord = {
-  nord1 = "#3B4252",
+  nord1 = "#434C5E",
   -- nord3 = "#4C566A",
-  nord3 = "#323946",
+  nord3 = "#363E4C",
   nord4 = "#96A6C4",
   nord5 = "#B1BDD2",
   nord6 = "#ECEFF4",
@@ -309,7 +309,7 @@ return {
           {
             "progress",
             separator = " ",
-            padding = { left = 1, right = 0 },
+            -- padding = { left = 1, right = 0 },
             fmt = function(str)
               local lines = vim.api.nvim_buf_line_count(0)
               return str .. "/" .. lines

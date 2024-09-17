@@ -34,7 +34,8 @@ return {
         {
           "<leader>a",
           function()
-            require("telescope.builtin").find_files(dropdown_theme())
+            require("telescope.builtin").find_files()
+            -- require("telescope.builtin").find_files(dropdown_theme())
           end,
           noremap = true,
           silent = true,
