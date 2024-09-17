@@ -22,11 +22,10 @@ command("OpenMarked2", "execute 'silent !open -a Marked\\ 2 \"%\"'", {})
 command("OpenDeckset", "execute 'silent !open -a Deckset \"%\"'", {})
 
 -- Convert markdown file to pdf using pandoc
--- command("MdToPdf", 'execute \'silent !pandoc "%" -o "%:r.pdf"\'', {})
-command("MdToPdf", 'execute \'silent !pandoc "%" --listings -H ~/dotfiles/listings-setup.tex -o "%:r.pdf"\'', {})
+command("MdToPdf", 'execute \'silent !pandoc "%" --listings -H ~/.config/pandoc/listings-setup.tex -o "%:r.pdf"\'', {})
 command(
   "MdToPdfNumbered",
-  'execute \'silent !pandoc "%" --listings -H ~/dotfiles/listings-setup.tex -o "%:r.pdf" --number-sections\'',
+  'execute \'silent !pandoc "%" --listings -H ~/.config/pandoc/listings-setup.tex -o "%:r.pdf" --number-sections\'',
   {}
 )
 command("MdToPdfWatch", function()
@@ -35,10 +34,10 @@ command("MdToPdfWatch", function()
     return
   end
   vim.cmd(
-    'execute \'silent !pandoc "%" --listings -H ~/dotfiles/listings-setup.tex -L ~/pagebreak.lua --include-in-header ~/header.tex -o "%:r.pdf"\''
+    'execute \'silent !pandoc "%" --listings -H ~/.config/pandoc/listings-setup.tex -L ~/.config/pandoc/pagebreak.lua --include-in-header ~/.config/pandoc/header.tex -o "%:r.pdf"\''
   )
   local cmd = string.format(
-    'fswatch -o "%s" | xargs -n1 -I{} pandoc "%s" --listings -H ~/dotfiles/listings-setup.tex -L ~/pagebreak.lua --include-in-header ~/header.tex -o "%s.pdf"',
+    'fswatch -o "%s" | xargs -n1 -I{} pandoc "%s" --listings -H ~/.config/pandoc/listings-setup.tex -L ~/.config/pandoc/pagebreak.lua --include-in-header ~/.config/pandoc/header.tex -o "%s.pdf"',
     vim.fn.expand("%:p"),
     vim.fn.expand("%:p"),
     vim.fn.expand("%:r")
