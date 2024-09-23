@@ -21,7 +21,7 @@ return {
         hl.RenderMarkdownH4Bg = { bg = "", fg = c.aurora.orange }
         hl.RenderMarkdownH5Bg = { bg = "", fg = c.aurora.orange }
         hl.RenderMarkdownH6Bg = { bg = "", fg = c.aurora.orange }
-        hl.NoiceCmdlinePopUp = { bg = "#323946" }
+        hl.NoiceCmdlinePopUp = { bg = "#363E4C" }
       end,
     }
   end,
