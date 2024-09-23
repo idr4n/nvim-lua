@@ -62,6 +62,14 @@ command("StopMdToPdfWatch", function()
   end
 end, {})
 
+vim.keymap.set("n", "<leader>mt", function()
+  if _G.fswatch_job_id then
+    vim.cmd("StopMdToPdfWatch")
+  else
+    vim.cmd("MdToPdfWatch")
+  end
+end, { desc = "MarkdowntoPDFWatch Toggle" })
+
 -- Convert markdown file to docx using pandoc
 command("MdToDocx", 'execute \'silent !pandoc "%" -o "%:r.docx"\'', {})
 
