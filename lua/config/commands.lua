@@ -62,7 +62,7 @@ command("StopMdToPdfWatch", function()
   end
 end, {})
 
-vim.keymap.set("n", "<leader>mt", function()
+vim.keymap.set("n", "<leader>mw", function()
   if _G.fswatch_job_id then
     vim.cmd("StopMdToPdfWatch")
   else

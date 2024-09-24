@@ -4,6 +4,6 @@ return {
   opts = {
     char = { "│" },
     virtcolumn = "80",
-    exclude = { filetypes = { "markdown" } },
+    exclude = { filetypes = { "markdown", "oil" } },
   },
 }
