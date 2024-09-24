@@ -317,7 +317,18 @@ return {
           },
         },
       },
-      extensions = { "neo-tree", "lazy", "nvim-tree" },
+      extensions = {
+        "neo-tree",
+        "lazy",
+        "nvim-tree",
+        "fugitive",
+        "quickfix",
+        "fzf",
+        "mason",
+        "nvim-dap-ui",
+        "oil",
+        "trouble",
+      },
     }
 
     return opts
