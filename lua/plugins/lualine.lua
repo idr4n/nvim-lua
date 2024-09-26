@@ -328,6 +328,7 @@ return {
         "nvim-dap-ui",
         "oil",
         "trouble",
+        "toggleterm",
       },
     }
 
