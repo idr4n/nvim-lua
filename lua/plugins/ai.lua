@@ -3,10 +3,10 @@ return {
     "olimorris/codecompanion.nvim",
     cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions" },
     keys = {
-      { "<leader>jc", "<cmd>CodeCompanionToggle<cr>", mode = { "n", "v" }, desc = "CodeCompanion Toggle" },
-      { "<leader>jC", "<cmd>CodeCompanionChat<cr>", mode = { "n", "v" }, desc = "CodeCompanion Chat" },
+      { "<leader>jc", "<cmd>CodeCompanionChat Toggle<cr>", mode = { "n", "v" }, desc = "CodeCompanion Toggle" },
+      { "<leader>jl", "<cmd>CodeCompanion<cr>", mode = { "n", "v" }, desc = "CodeCompanion Inline Assistant" },
       { "<leader>jA", "<cmd>CodeCompanionActions<cr>", mode = { "n", "v" }, desc = "CodeCompanion Actions" },
-      { "<leader>js", "<cmd>CodeCompanionAdd<cr>", mode = { "v" }, desc = "CodeCompanion Add Selection" },
+      { "<leader>js", "<cmd>CodeCompanionChat Add<cr>", mode = { "v" }, desc = "CodeCompanion Add Selection" },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
