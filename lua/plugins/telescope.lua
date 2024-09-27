@@ -32,7 +32,7 @@ return {
 
       return {
         {
-          "<leader>a",
+          "<C-Space>",
           function()
             require("telescope.builtin").find_files()
             -- require("telescope.builtin").find_files(dropdown_theme())

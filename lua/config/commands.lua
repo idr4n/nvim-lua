@@ -168,3 +168,34 @@ command("OpenGithubRepo", function()
   vim.ui.open(url)
 end, {})
 vim.keymap.set({ "n", "v" }, "<leader>og", "<cmd>OpenGithubRepo<cr>", { desc = "Open Github Repo" })
+
+command("LuaInspect", function()
+  local sel = vim.fn.mode() == "v" and vim.getVisualSelection() or nil
+  if sel then
+    local chunk, load_error = load("return " .. sel)
+    if chunk then
+      local success, result = pcall(chunk)
+      if success then
+        vim.notify(vim.inspect(result), vim.log.levels.INFO)
+      else
+        vim.notify("Error evaluating expression: " .. result, vim.log.levels.ERROR)
+      end
+    else
+      vim.notify("Error loading expression: " .. load_error, vim.log.levels.ERROR)
+    end
+  else
+    vim.api.nvim_feedkeys(":lua print(vim.inspect())", "n", true)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Left><Left>", true, false, true), "n", true)
+  end
+end, {})
+vim.keymap.set({ "n", "v" }, "<leader>pi", "<cmd>LuaInspect<cr>", { desc = "Lua Inspect" })
+
+command("LuaPrint", function()
+  if vim.fn.mode() == "v" then
+    vim.cmd("LuaInspect")
+  else
+    vim.api.nvim_feedkeys(":lua print()", "n", true)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Left>", true, false, true), "n", true)
+  end
+end, {})
+vim.keymap.set({ "n", "v" }, "<leader>pp", "<cmd>LuaPrint<cr>", { desc = "Lua Print" })

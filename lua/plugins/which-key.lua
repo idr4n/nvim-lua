@@ -36,6 +36,7 @@ return {
         o = { name = "open" },
         n = { name = "N-Tree/Noice/Tdo" },
         ["nd"] = { name = "Tdo with offset" },
+        p = { name = "Misc" },
         q = { name = "Quit" },
         s = { name = "Search/Replace" },
         t = { name = "toggle" },

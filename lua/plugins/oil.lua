@@ -34,6 +34,7 @@ return {
       ["<C-h>"] = false,
       ["q"] = "actions.close",
       -- ["<leader>-"] = "actions.close",
+      [";"] = "actions.select",
       ["s"] = "actions.close",
       ["y"] = "actions.yank_entry",
       ["gd"] = {
