@@ -80,6 +80,11 @@ local nord_custom = {
   },
 }
 
+local theme = {
+  ["nord"] = nord_custom,
+  ["dracula"] = dracula_custom,
+}
+
 return {
   "nvim-lualine/lualine.nvim",
   -- enabled = false,
@@ -126,7 +131,7 @@ return {
       options = {
         -- theme = "auto",
         -- theme = theme,
-        theme = vim.g.colors_name == "nord" and nord_custom or dracula_custom,
+        theme = theme[vim.g.colors_name] or "auto",
         globalstatus = vim.o.laststatus == 3,
         disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter", "telescope" } },
         -- component_separators = { left = "", right = "" },
