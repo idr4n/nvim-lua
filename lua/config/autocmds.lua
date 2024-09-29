@@ -212,6 +212,10 @@ aucmd("ColorScheme", {
       vim.api.nvim_set_hl(0, "LineNr", { fg = line_nr })
     end
 
+    if vim.g.colors_name == "zenbones" then
+      vim.api.nvim_set_hl(0, "NoiceCmdlinePopUp", { bg = "#2E2927" })
+    end
+
     vim.api.nvim_set_hl(0, "WinSeparator", { fg = winsep })
     vim.api.nvim_set_hl(0, "NvimTreeIndentMarker", { fg = treeindent })
     vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { fg = normal.bg })

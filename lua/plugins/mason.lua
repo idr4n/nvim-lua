@@ -33,6 +33,7 @@ return {
       "tailwindcss-language-server",
       "vim-language-server",
       "vtsls",
+      -- "typescript-language-server",
       "vue-language-server",
       "zls",
     },

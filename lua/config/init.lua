@@ -70,24 +70,5 @@ require("lazy").setup("plugins", {
   },
 })
 
---: load colorscheme
--- require("tokyonight").load()
--- vim.cmd("colorscheme kanagawa")
--- require("onedark").load()
--- vim.cmd("colorscheme monokai-pro")
--- vim.cmd("colorscheme catppuccin-frappe")
--- vim.cmd("colorscheme catppuccin-macchiato")
--- vim.cmd("colorscheme catppuccin-mocha")
--- vim.cmd("colorscheme github_light")
--- require("config.colorschemes").rosepine.setup()
--- require("config.colorschemes").rosepine.setup("dark")
--- require("config.colorschemes").wind.setup()
--- require("config.colorschemes").darkplus.setup()
--- require("config.colorschemes").NvimDefault.setup()
--- vim.cmd("colorscheme duskfox")
--- vim.cmd("colorscheme monotone")
--- vim.cmd("colorscheme zenbones")
--- vim.cmd("colorscheme solarized")
--- vim.cmd("colorscheme seoul256")
-
-vim.cmd("colorscheme nord")
+-- Load colorscheme
+vim.cmd("colorscheme dracula")

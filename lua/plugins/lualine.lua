@@ -117,7 +117,7 @@ return {
 
     vim.api.nvim_create_autocmd("ColorScheme", {
       group = "lualine_augroup",
-      pattern = { "dracula", "nord" },
+      pattern = { "dracula", "nord", "*" },
       callback = function()
         if vim.g.colors_name == "nord" then
           require("lualine").setup({ options = { theme = "nord" } })
