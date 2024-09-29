@@ -81,6 +81,18 @@ M.snips.ta = p(
 ]]
 )
 
+M.snips.e = p({
+  trig = "e",
+  name = "Environment",
+  dscr = "Latex Environment",
+}, "\\begin{$1}\n$TM_SELECTED_TEXT$2\n\\end{$1}")
+
+M.snips.c = p({
+  trig = "c",
+  name = "Multicol Environment",
+  dscr = "Multicol Environment",
+}, "\\vspace*{-\\baselineskip}\n\\begin{multicols}{2}\n$TM_SELECTED_TEXT$2\n\\end{multicols}")
+
 -- autosnippets
 
 M.autosnips.bb = p({
@@ -112,5 +124,17 @@ M.autosnips.bu = p({
   name = "Blank Underline $$_____$$",
   dscr = "Adds a blank underline for mcqs questions",
 }, "\\underline{\\phantom{mmmmm}}")
+
+M.autosnips.e = p({
+  trig = ";e",
+  name = "Environment",
+  dscr = "Latex Environment",
+}, "\\begin{$1}\n$TM_SELECTED_TEXT$2\n\\end{$1}")
+
+M.snips.c = p({
+  trig = ";c",
+  name = "Multicol Environment",
+  dscr = "Multicol Environment",
+}, "\\vspace*{-\\baselineskip}\n\\begin{multicols}{2}\n$TM_SELECTED_TEXT$2\n\\end{multicols}")
 
 return getSnippetsList(M.snips), getSnippetsList(M.autosnips)
