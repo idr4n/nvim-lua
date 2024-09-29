@@ -131,7 +131,7 @@ M.autosnips.e = p({
   dscr = "Latex Environment",
 }, "\\begin{$1}\n$TM_SELECTED_TEXT$2\n\\end{$1}")
 
-M.snips.c = p({
+M.autosnips.c = p({
   trig = ";c",
   name = "Multicol Environment",
   dscr = "Multicol Environment",
