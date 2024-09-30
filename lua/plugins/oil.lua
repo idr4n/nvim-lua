@@ -36,7 +36,7 @@ return {
       -- ["<leader>-"] = "actions.close",
       [";"] = "actions.select",
       ["s"] = "actions.close",
-      ["y"] = "actions.yank_entry",
+      ["Y"] = "actions.yank_entry",
       ["gd"] = {
         desc = "Toggle file detail view",
         callback = function()
