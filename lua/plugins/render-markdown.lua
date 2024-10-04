@@ -7,5 +7,6 @@ return {
       icons = { "•", "◦", "▪", "▫" },
       -- right_pad = 1,
     },
+    latex = { enabled = false },
   },
 }

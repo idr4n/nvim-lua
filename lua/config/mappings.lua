@@ -230,7 +230,7 @@ keymap("n", "<esc>", "<esc><cmd>noh<cr><cmd>redrawstatus<cr><cmd>echon ''<cr>", 
 
 --: home row goto end and start of line (same as in Helix editor) {{{
 keyset({ "n", "v", "o" }, "gk", "0", { desc = "Go to start of line" })
-keyset({ "n", "v", "o" }, "gh", "^", { desc = "Go to start of line" })
+keyset({ "n", "v", "o" }, "gh", "^", { desc = "Go to beginning of line" })
 keyset({ "n", "o" }, "gl", "$", { desc = "Go to end of line" })
 keyset("v", "gl", "$h", { desc = "Select to end of line" })
 --: }}}
