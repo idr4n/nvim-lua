@@ -174,9 +174,11 @@ return {
           fileinfo,
         },
         lualine_x = {
-          function()
-            return require("lsp-progress").progress()
-          end,
+          -- stylua: ignore
+          {
+            function() return require("lsp-progress").progress() end,
+            color = function() return utils.get_fg("DiffAdded") end
+          },
           -- stylua: ignore
           {
             function() return require("noice").api.status.command.get() end,
