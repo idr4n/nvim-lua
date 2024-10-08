@@ -177,7 +177,7 @@ return {
           -- stylua: ignore
           {
             function() return require("lsp-progress").progress() end,
-            color = function() return utils.get_fg("DiffAdded") end
+            color = function() return utils.get_fg("DiffAdded") and utils.get_fg("DiffAdded") or utils.get_fg("DiffAdd") end
           },
           -- stylua: ignore
           {
