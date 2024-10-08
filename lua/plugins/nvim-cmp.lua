@@ -25,19 +25,6 @@ return {
       return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
     end
 
-    local function border(hl_name)
-      return {
-        { "╭", hl_name },
-        { "─", hl_name },
-        { "╮", hl_name },
-        { "│", hl_name },
-        { "╯", hl_name },
-        { "─", hl_name },
-        { "╰", hl_name },
-        { "│", hl_name },
-      }
-    end
-
     cmp.setup.cmdline("/", {
       mapping = cmp.mapping.preset.cmdline(),
       sources = {
@@ -150,7 +137,6 @@ return {
       },
       window = {
         completion = {
-          -- border = border("CmpBorder"),
           border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
           winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
           side_padding = 0,
@@ -159,7 +145,6 @@ return {
         },
         documentation = {
           border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-          -- border = border("CmpDocBorder"),
           winhighlight = "Normal:CmpPmenu",
         },
       },
