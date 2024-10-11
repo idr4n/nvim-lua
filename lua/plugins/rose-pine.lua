@@ -85,7 +85,7 @@ return {
         NvimTreeNormalFloat = { bg = "surface" },
         IblIndent = { fg = "highlight_med" },
         IblScope = { fg = "muted" },
-        Visual = { bg = "#3B3770" },
+        Visual = { bg = "foam", blend = 30 },
         NonText = { fg = "overlay" },
         LineNr = { fg = "highlight_high" },
         CurSearch = { fg = "base", bg = "leaf", inherit = false },
