@@ -5,14 +5,18 @@ return {
   build = ":CatppuccinCompile",
   opts = function()
     -- local flavour = "macchiato"
-    local flavour = "frappe"
-    local cp = require("catppuccin.palettes").get_palette(flavour)
+    -- local flavour = "mocha"
+    -- local flavour = "frappe"
+    -- local cp = require("catppuccin.palettes").get_palette(flavour)
+    local cp = require("catppuccin.palettes").get_palette()
     return {
       -- transparent_background = true,
+      -- flavour = flavour,
       styles = {
-        functions = { "italic" },
+        -- functions = { "italic" },
         keywords = { "italic" },
         conditionals = {},
+        comments = {},
       },
       integrations = {
         native_lsp = {
@@ -45,6 +49,8 @@ return {
         FloatBorder = { fg = cp.blue, bg = "NONE" },
         Folded = { fg = cp.surface2, bg = "NONE" },
         NonText = { fg = cp.surface0 },
+        Visual = { bg = "#403C7A" },
+        NoiceCmdlinePopUp = { bg = cp.mantle },
         -- TelescopeNormal = { bg = cp.mantle },
         -- TelescopeBorder = { fg = cp.mantle, bg = cp.mantle },
         -- TelescopeSelection = { bg = cp.surface0 },

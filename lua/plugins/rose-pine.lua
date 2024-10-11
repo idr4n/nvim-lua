@@ -5,7 +5,7 @@ return {
   opts = function()
     return {
       --- @usage 'main' | 'moon'
-      dark_variant = "moon",
+      -- dark_variant = "moon",
       bold_vert_split = false,
       dim_nc_background = false,
       disable_background = false,
@@ -78,8 +78,16 @@ return {
         NeoTreeCursorLine = { bg = "highlight_med" },
         NeoTreeWinSeparator = { fg = "highlight_low", bg = "highlight_low" },
         -- NeoTreeCursorLine = { bg = "p.highlight_low" },
+        NvimTreeNormal = { bg = "surface" },
+        NvimTreeNormalNC = { bg = "surface" },
+        NvimTreeNormalFloat = { bg = "surface" },
         IblIndent = { fg = "highlight_med" },
-        IblScope = { fg = "iris" },
+        IblScope = { fg = "muted" },
+        Visual = { bg = "#3B3770" },
+        NonText = { fg = "overlay" },
+        LineNr = { fg = "highlight_high" },
+        CurSearch = { fg = "base", bg = "leaf", inherit = false },
+        Search = { fg = "text", bg = "leaf", blend = 20, inherit = false },
       },
     }
   end,

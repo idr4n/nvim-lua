@@ -1,4 +1,5 @@
 local utils = require("utils")
+local theme = require("config.lualine.themes").theme
 
 local function fileinfo()
   local dir = utils.pretty_dirpath()()
@@ -8,82 +9,6 @@ local function fileinfo()
 
   return dir .. name
 end
-
-local c_dracula = {
-  gray = "#2C2E3A",
-  lightgray = "#373946",
-  orange = "#ffb86c",
-  purple = "#bd93f9",
-  pink = "#FF86D3",
-  red = "#ff5555",
-  yellow = "#f1fa8c",
-  green = "#50fa7b",
-  white = "#92939B",
-  black = "#282a36",
-  stealth = "#787982",
-}
-
-local dracula_custom = {
-  normal = {
-    a = { bg = c_dracula.purple, fg = c_dracula.black, gui = "bold" },
-    b = { bg = c_dracula.lightgray, fg = c_dracula.white },
-    c = { bg = c_dracula.gray, fg = c_dracula.stealth },
-  },
-  insert = {
-    a = { bg = c_dracula.green, fg = c_dracula.black, gui = "bold" },
-  },
-  visual = {
-    a = { bg = c_dracula.pink, fg = c_dracula.black, gui = "bold" },
-  },
-  replace = {
-    a = { bg = c_dracula.red, fg = c_dracula.black, gui = "bold" },
-  },
-  command = {
-    a = { bg = c_dracula.orange, fg = c_dracula.black, gui = "bold" },
-  },
-  inactive = {
-    a = { bg = c_dracula.gray, fg = c_dracula.white, gui = "bold" },
-    b = { bg = c_dracula.lightgray, fg = c_dracula.white },
-    c = { bg = c_dracula.gray, fg = c_dracula.stealth },
-  },
-}
-
-local c_nord = {
-  nord1 = "#434C5E",
-  -- nord3 = "#4C566A",
-  nord3 = "#363E4C",
-  nord4 = "#96A6C4",
-  nord5 = "#B1BDD2",
-  nord6 = "#ECEFF4",
-  nord7 = "#8FBCBB",
-  nord8 = "#88C0D0",
-  nord9 = "#81A1C1",
-  nord11 = "#BF616A",
-  nord13 = "#EBCB8B",
-  nord15 = "#B48EAD",
-}
-
-local nord_custom = {
-  normal = {
-    a = { fg = c_nord.nord1, bg = c_nord.nord8, gui = "bold" },
-    b = { fg = c_nord.nord5, bg = c_nord.nord1 },
-    c = { fg = c_nord.nord4, bg = c_nord.nord3 },
-  },
-  insert = { a = { fg = c_nord.nord1, bg = c_nord.nord6, gui = "bold" } },
-  visual = { a = { fg = c_nord.nord1, bg = c_nord.nord15, gui = "bold" } },
-  command = { a = { fg = c_nord.nord1, bg = c_nord.nord13, gui = "bold" } },
-  replace = { a = { fg = c_nord.nord5, bg = c_nord.nord11, gui = "bold" } },
-  inactive = {
-    a = { fg = c_nord.nord1, bg = c_nord.nord8, gui = "bold" },
-    b = { fg = c_nord.nord5, bg = c_nord.nord1 },
-    c = { fg = c_nord.nord4, bg = c_nord.nord3 },
-  },
-}
-
-local theme = {
-  ["nord"] = nord_custom,
-  ["dracula"] = dracula_custom,
-}
 
 return {
   "nvim-lualine/lualine.nvim",
@@ -130,7 +55,6 @@ return {
     local opts = {
       options = {
         -- theme = "auto",
-        -- theme = theme,
         theme = theme[vim.g.colors_name] or "auto",
         globalstatus = vim.o.laststatus == 3,
         disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter", "telescope" } },
@@ -177,7 +101,7 @@ return {
           -- stylua: ignore
           {
             function() return require("lsp-progress").progress() end,
-            color = function() return utils.get_fg("DiffAdded") and utils.get_fg("DiffAdded") or utils.get_fg("DiffAdd") end
+            color = function() return utils.get_fg("Added") and utils.get_fg("Added") or utils.get_fg("DiffAdded") and utils.get_fg("DiffAdded") or utils.get_fg("DiffAdd") end
           },
           -- stylua: ignore
           {
