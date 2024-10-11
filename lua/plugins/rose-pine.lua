@@ -45,6 +45,8 @@ return {
 
       -- Change specific vim highlight groups
       highlight_groups = {
+        Comment = { fg = "muted", italic = false },
+        ["@comment"] = { fg = "muted", italic = false },
         -- CursorLine = { bg = "surface" },
         IndentBlanklineChar = { fg = "overlay" },
         -- IndentBlanklineChar = { fg = "highlight_med" },
@@ -87,7 +89,7 @@ return {
         NonText = { fg = "overlay" },
         LineNr = { fg = "highlight_high" },
         CurSearch = { fg = "base", bg = "leaf", inherit = false },
-        Search = { fg = "text", bg = "leaf", blend = 20, inherit = false },
+        Search = { fg = "text", bg = "leaf", blend = 30, inherit = false },
       },
     }
   end,
