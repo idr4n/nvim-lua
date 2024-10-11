@@ -37,9 +37,9 @@ return {
         tailwind = "lsp",
         -- Available modes: foreground, background
         -- Available modes for `mode`: foreground, background,  virtualtext
-        mode = "background", -- Set the display mode.
-        -- mode = "virtualtext", -- Set the display mode.
-        virtualtext = "■",
+        -- mode = "background", -- Set the display mode.
+        mode = "virtualtext", -- Set the display mode.
+        virtualtext = "󱓻",
       },
     },
   },
@@ -51,6 +51,9 @@ return {
     keys = {
       { ",c", "<cmd>HighlightColors Toggle<cr>", silent = true, desc = "Toggle colorizer" },
     },
-    opts = {},
+    opts = {
+      render = "virtual",
+      virtual_symbol = "󱓻",
+    },
   },
 }
