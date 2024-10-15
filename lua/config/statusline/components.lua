@@ -59,7 +59,7 @@ function M.decorator(opts)
   opts = vim.tbl_extend("force", { name = " ", align = "left" }, opts)
   local align = vim.tbl_contains({ "left", "right" }, opts.align) and opts.align or "left"
   local name = opts.name
-  return (align == "right" and "%=" or "") .. "%#StatusNormal# " .. name .. " %#SLBgLightenLess#"
+  return (align == "right" and "%=" or "") .. "%#SLDecorator# " .. name .. " %#SLNormal#"
 end
 
 function M.mode()
@@ -76,7 +76,7 @@ end
 ---@type table<string, boolean>
 local statusline_hls = {}
 
----@param hl_bg string
+---@param hl_bg? string
 ---@param hl_fg string
 ---@return string
 function M.get_or_create_hl(hl_fg, hl_bg)
@@ -95,7 +95,11 @@ function M.get_or_create_hl(hl_fg, hl_bg)
       fg_hl = vim.api.nvim_get_hl(0, { name = "Statusline" })
     end
 
-    vim.api.nvim_set_hl(0, hl_name, { bg = ("#%06x"):format(bg_hl.bg), fg = ("#%06x"):format(fg_hl.fg) })
+    vim.api.nvim_set_hl(
+      0,
+      hl_name,
+      { bg = bg_hl.bg and ("#%06x"):format(bg_hl.bg) or "none", fg = ("#%06x"):format(fg_hl.fg) }
+    )
     statusline_hls[hl_name] = true
   end
 
@@ -178,7 +182,7 @@ function M.fileinfo(opts)
     end
   end
 
-  return (opts.add_icon and " " .. icon .. " " or " ") .. dir .. name .. " "
+  return (opts.add_icon and " " .. icon .. " " or " ") .. dir .. name .. " %m%r%h%w "
 end
 
 function M.progress()
@@ -340,6 +344,39 @@ function M.git_status(opts)
 end
 
 ---@return string
+function M.git_status_simple()
+  local gitsigns = vim.b.gitsigns_status_dict
+
+  -- local diff_icon = "◦"
+  local diff_icon = "•"
+  local total_changes = 0
+  local git_status = ""
+
+  if gitsigns then
+    total_changes = (gitsigns.added or 0) + (gitsigns.changed or 0) + (gitsigns.removed or 0)
+    local added = ""
+    local changed = ""
+    local removed = ""
+
+    if gitsigns.added and gitsigns.added > 0 then
+      added = "%#GitSignsAdd#" .. diff_icon
+    end
+    -- stylua: ignore
+    if gitsigns.changed and gitsigns.changed > 0 then
+      changed = "%#GitSignsChange#" .. diff_icon
+    end
+    -- stylua: ignore
+    if gitsigns.removed and gitsigns.removed > 0 then
+      removed = "%#GitSignsDelete#" .. diff_icon
+    end
+
+    git_status = total_changes > 0 and added .. changed .. removed .. " " or ""
+  end
+
+  return git_status
+end
+
+---@return string
 function M.git_boring()
   local gitsigns = vim.b.gitsigns_status_dict
 
@@ -449,6 +486,49 @@ function M.lsp_diagnostics(opts)
   return ""
 end
 
+---@return string
+function M.lsp_diagnostics_simple()
+  local icons = require("utils").diagnostic_icons
+  local function get_severity(s)
+    return #vim.diagnostic.get(0, { severity = s })
+  end
+
+  local result = {
+    errors = get_severity(vim.diagnostic.severity.ERROR),
+    warnings = get_severity(vim.diagnostic.severity.WARN),
+    info = get_severity(vim.diagnostic.severity.INFO),
+    hints = get_severity(vim.diagnostic.severity.HINT),
+  }
+
+  local total = result.errors + result.warnings + result.hints + result.info
+  local errors = ""
+  local warnings = ""
+  local info = ""
+  local hints = ""
+
+  -- local icon = "•"
+  local icon = "◦"
+
+  if result.errors > 0 then
+    errors = M.get_or_create_hl("DiagnosticError") .. icon
+  end
+  if result.warnings > 0 then
+    warnings = M.get_or_create_hl("DiagnosticWarn") .. icon
+  end
+  if result.info > 0 then
+    info = M.get_or_create_hl("DiagnosticInfo") .. icon
+  end
+  if result.hints > 0 then
+    hints = M.get_or_create_hl("DiagnosticHint") .. icon
+  end
+
+  if vim.bo.modifiable and total > 0 then
+    return warnings .. errors .. info .. hints .. " "
+  end
+
+  return ""
+end
+
 function M.scrollbar()
   local sbar = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" }
   local curr_line = vim.api.nvim_win_get_cursor(0)[1]
@@ -476,7 +556,8 @@ function M.terminal_status()
       is_terminal_open = true
     end
   end
-  return is_terminal_open and "%#SLBgNoneHl# []" .. "%#SLBgNone# " or ""
+  -- return is_terminal_open and "%#SLBgNoneHl# []" .. "%#SLBgNone# " or ""
+  return is_terminal_open and M.get_or_create_hl("SLBgNoneHl") .. " []" .. "%#SLNormal# " or ""
 end
 
 function M.lsp_progress()

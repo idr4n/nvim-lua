@@ -58,7 +58,7 @@ vim.api.nvim_set_hl(0, "SLBgLightenLess", { fg = stealth, bg = bg_lighten_less }
 -- vim.api.nvim_set_hl(0, "SLBgNone", { fg = fg_lighten, bg = "none", underline = true })
 -- vim.api.nvim_set_hl(0, "SLBgNoneHl", { fg = colors.fg_hl, bg = "none", underline = true, sp = fg_lighten })
 vim.api.nvim_set_hl(0, "SLBgNone", { fg = fg_lighten, bg = bg_lighten_less })
-vim.api.nvim_set_hl(0, "SLBgNoneHl", { fg = colors.fg_hl, bg = bg_lighten_less })
+vim.api.nvim_set_hl(0, "SLBgNoneHl", { fg = colors.fg_hl, bg = "none" })
 vim.api.nvim_set_hl(0, "StatusReplace", { bg = colors.red, fg = statusline_hl.bg, bold = true })
 vim.api.nvim_set_hl(0, "StatusInsert", { bg = colors.insert, fg = statusline_hl.bg, bold = true })
 vim.api.nvim_set_hl(0, "StatusVisual", { bg = colors.select, fg = statusline_hl.bg, bold = true })
@@ -73,6 +73,7 @@ vim.api.nvim_set_hl(0, "SLBufNr", { fg = "#4E546B", bg = statusline_hl.bg })
 vim.api.nvim_set_hl(0, "SLModified", { fg = "#FF7EB6", bg = statusline_hl.bg })
 vim.api.nvim_set_hl(0, "SLMatches", { fg = colors.bg_hl, bg = colors.fg_hl })
 vim.api.nvim_set_hl(0, "SLGitHunks", { fg = colors.insert, bg = bg_lighten_less })
+vim.api.nvim_set_hl(0, "SLDecorator", { fg = "#414868", bg = "#7AA2F7", bold = true })
 
 ---@return string
 ---@param opts? {status:number, mono:boolean}
@@ -83,49 +84,22 @@ function Status_line(opts)
   local statusline = ""
   local filetype = vim.bo.filetype
 
-  local filetypes = { "neo-tree", "minifiles", "NvimTree", "oil" }
+  local filetypes = { "neo-tree", "minifiles", "NvimTree", "oil", "TelescopePrompt" }
   if vim.tbl_contains(filetypes, filetype) then
     local home_dir = os.getenv("HOME")
     local api = require("nvim-tree.api")
     local node = api.tree.get_node_under_cursor()
     local dir = filetype == "NvimTree" and node.absolute_path or vim.fn.getcwd()
     dir = dir:gsub("^" .. home_dir, "~")
-    return c.decorator({ name = dir, align = num == 1 and "right" or "left" })
+    -- return c.decorator({ name = dir, align = num == 1 and "right" or "left" })
+    return c.decorator({ name = dir, align = "left" })
   end
-
-  local components = {
-    c.cwd(),
-    -- "%#SLStealth#",
-    "%#SLBgLightenLess#",
-    _G.show_more_info and c.fileinfo() or "",
-    _G.show_more_info and c.git_branch() or "",
-    "%=",
-    _G.show_more_info and c.get_words() or "",
-    c.search_count(),
-    "%=",
-    _G.show_more_info and c.lang_version() or "",
-    _G.show_more_info and " Ux%04B" or "",
-    _G.show_more_info and c.get_position() or "",
-    c.mode(),
-    c.filetype(),
-    _G.show_more_info and c.git_status({ mono = mono }) or "",
-    not _G.show_more_info and c.git_hunks({ mono = mono }) or "",
-    c.lsp_diagnostics({ mono = mono }),
-  }
 
   local components2 = {
     c.mode(),
     c.filetype(),
     "%#SLBgLightenLess#",
     c.fileinfo(),
-    -- _G.show_more_info and c.git_branch() or "",
-    -- _G.show_more_info and c.git_status({ mono = mono }) or "",
-    -- not _G.show_more_info and c.git_hunks({ mono = mono }) or "",
-    -- c.git_status({ mono = mono }),
-    -- c.lsp_diagnostics({ mono = mono }),
-    -- _G.show_more_info and c.git_status({ mono = mono }) or c.git_boring(),
-    -- _G.show_more_info and c.lsp_diagnostics({ mono = mono }) or c.diagnostics_boring(),
-    -- c.git_status({ mono = mono }),
     c.lsp_diagnostics({ mono = mono }),
     "%=%#SLBgLightenLess#",
     c.search_count(),
@@ -143,7 +117,22 @@ function Status_line(opts)
     c.cwd(),
   }
 
-  statusline = num == 1 and table.concat(components) or table.concat(components2)
+  local simple = {
+    c.fileinfo({ add_icon = false }),
+    "%=",
+    c.lsp_progress(),
+    c.get_words(),
+    _G.show_more_info and c.lang_version() or "",
+    _G.show_more_info and c.LSP() or "",
+    _G.show_more_info and " Ux%04B" or "",
+    _G.show_more_info and c.get_position() or "",
+    c.terminal_status(),
+    _G.show_more_info and c.git_branch() or "",
+    c.lsp_diagnostics_simple(),
+    c.git_status_simple(),
+  }
+
+  statusline = num == 1 and table.concat(simple) or table.concat(components2)
 
   return statusline
 end
@@ -168,5 +157,5 @@ function StatusBoring()
 end
 
 -- vim.o.statusline = "%!v:lua.Status_line(2)"
-vim.o.statusline = '%!luaeval("Status_line({ status = 2, mono = true })")'
+vim.o.statusline = '%!luaeval("Status_line({ status = 1, mono = false })")'
 -- vim.o.statusline = '%!luaeval("_G.show_more_info and Status_line({ status = 2, mono = false }) or StatusBoring()")'

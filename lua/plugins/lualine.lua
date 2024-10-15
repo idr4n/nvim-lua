@@ -12,7 +12,7 @@ end
 
 return {
   "nvim-lualine/lualine.nvim",
-  -- enabled = false,
+  enabled = false,
   event = "VeryLazy",
   init = function()
     vim.g.lualine_laststatus = vim.o.laststatus

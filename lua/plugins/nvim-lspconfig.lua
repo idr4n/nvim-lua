@@ -8,7 +8,7 @@ return {
     {
       "linrongbin16/lsp-progress.nvim",
       opts = {
-        max_size = 50,
+        max_size = 70,
         spinner = { "", "󰪞", "󰪟", "󰪠", "󰪢", "󰪣", "󰪤", "󰪥" },
         -- client_format = function(client_name, spinner, series_messages)
         client_format = function(_, spinner, series_messages)
@@ -32,6 +32,13 @@ return {
     local icons = require("utils").diagnostic_icons
     local x = vim.diagnostic.severity
 
+    local lspconfig = require("lspconfig")
+
+    local function is_deno_project(filename)
+      local denoRootDir = lspconfig.util.root_pattern("deno.json", "deno.jsonc")(filename)
+      return denoRootDir ~= nil
+    end
+
     local opts = {
       diagnostics = {
         virtual_text = { prefix = "" },
@@ -51,6 +58,10 @@ return {
         solargraph = require("config.lsp.server_settings.solargraph"),
         tailwindcss = require("config.lsp.server_settings.tailwindcss"),
         gleam = { mason = false },
+        vtsls = {
+          single_file_support = not is_deno_project(vim.fn.expand("%:p")),
+        },
+        denols = { root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc") },
       },
 
       setup = {
