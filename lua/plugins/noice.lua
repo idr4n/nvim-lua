@@ -46,7 +46,7 @@ return {
         -- position = { row = "99%", col = "50%" },
         -- size = { width = "100%" },
         position = { row = "100%", col = "0%" },
-        size = { width = "50%" },
+        size = { width = "80%" },
       },
     },
     popupmenu = { backend = "cmp" },

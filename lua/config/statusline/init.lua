@@ -120,6 +120,7 @@ function Status_line(opts)
   local simple = {
     c.fileinfo({ add_icon = false }),
     "%=",
+    c.search_count(),
     c.lsp_progress(),
     c.get_words(),
     _G.show_more_info and c.lang_version() or "",
