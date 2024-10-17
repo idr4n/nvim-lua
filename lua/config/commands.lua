@@ -199,3 +199,46 @@ command("LuaPrint", function()
   end
 end, {})
 vim.keymap.set({ "n", "v" }, "<leader>pp", "<cmd>LuaPrint<cr>", { desc = "Lua Print" })
+
+command("TypstWatch", function()
+  local input_file = vim.fn.expand("%:p")
+  local output_file = vim.fn.expand("%:r") .. ".pdf"
+  -- local cmd = string.format("typst watch %s --open sioyek", input_file)
+  local cmd = string.format("typst watch %s", input_file)
+
+  if _G.typst_job_id then
+    vim.fn.jobstart({ "sioyek", output_file })
+    print("Typst watch job already running.")
+    return
+  end
+
+  _G.typst_job_id = vim.fn.jobstart(cmd)
+
+  if _G.typst_job_id ~= 0 then
+    print("Started watching Typst file changes.")
+
+    vim.fn.jobstart({ "sioyek", output_file }, { detach = true })
+    -- vim.fn.jobstart({ "sioyek", output_file })
+    -- vim.cmd(string.format("execute 'silent !zathura \"%s\" & ~/scripts/focus_app zathura'", output_file))
+  else
+    print("Failed to start watching Typst file changes.")
+  end
+end, {})
+
+command("TypstWatchStop", function()
+  if _G.typst_job_id then
+    vim.fn.jobstop(_G.typst_job_id)
+    print("Stopped watching file changes.")
+    _G.typst_job_id = nil
+  else
+    print("No typst watch process found.")
+  end
+end, {})
+
+vim.keymap.set("n", "<leader>mt", function()
+  if _G.typst_job_id then
+    vim.cmd("TypstWatchStop")
+  else
+    vim.cmd("TypstWatch")
+  end
+end, { desc = "TypstWatch Toggle" })

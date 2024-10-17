@@ -32,7 +32,7 @@ return {
         h = { name = "Gitsings/Harpoon" },
         j = { name = "AI" },
         l = { name = "LSP" },
-        m = { name = "Markdown" },
+        m = { name = "Markdown/Typst" },
         o = { name = "open" },
         n = { name = "N-Tree/Noice/Tdo" },
         ["nd"] = { name = "Tdo with offset" },
