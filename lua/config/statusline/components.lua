@@ -281,6 +281,12 @@ function M.status_command()
   return command_str .. mode_str
 end
 
+function M.status_noice()
+  local mode = require("noice").api.status.mode.get()
+  local mode_str = mode and M.get_or_create_hl("SLBgNoneHl") .. "[" .. mode .. "]%#SLNormal# " or ""
+  return mode_str
+end
+
 ---@return string
 ---@param opts? {mono:boolean}
 function M.git_hunks(opts)
@@ -561,7 +567,7 @@ function M.terminal_status()
 end
 
 function M.lsp_progress()
-  return "" .. require("lsp-progress").progress() .. " "
+  return require("lsp-progress").progress() .. " "
 end
 
 return M

@@ -129,6 +129,7 @@ function Status_line(opts)
     _G.show_more_info and c.get_position() or "",
     c.terminal_status(),
     _G.show_more_info and c.git_branch() or "",
+    c.status_noice(),
     c.lsp_diagnostics_simple(),
     c.git_status_simple(),
   }
