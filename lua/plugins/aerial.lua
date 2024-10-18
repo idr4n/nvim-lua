@@ -7,6 +7,7 @@ return {
   },
   keys = {
     { "<leader>ta", "<cmd>AerialToggle!<cr>", desc = "Aerial Toggle" },
+    { "<leader>tn", "<cmd>AerialNavToggle<cr>", desc = "Aerial Nav Toggle" },
   },
   opts = {
     attach_mode = "global",
@@ -22,6 +23,7 @@ return {
         statuscolumn = " ",
       },
     },
+    autojump = false,
     icons = require("utils").lazyvim_icons,
     filter_kind = {
       "Class",
@@ -38,12 +40,14 @@ return {
       "Struct",
       "Trait",
     },
-      -- stylua: ignore
-      guides = {
-        mid_item   = "├╴",
-        last_item  = "└╴",
-        nested_top = "│ ",
-        whitespace = "  ",
-      },
+    guides = {
+      mid_item = "├╴",
+      last_item = "└╴",
+      nested_top = "│ ",
+      whitespace = "  ",
+    },
+    nav = {
+      preview = true,
+    },
   },
 }

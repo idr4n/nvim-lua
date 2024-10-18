@@ -130,6 +130,7 @@ function Status_line(opts)
     c.terminal_status(),
     _G.show_more_info and c.git_branch() or "",
     c.status_noice(),
+    _G.show_more_info and vim.bo.filetype:upper() .. " " or "",
     c.lsp_diagnostics_simple(),
     c.git_status_simple(),
   }

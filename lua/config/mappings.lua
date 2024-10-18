@@ -161,13 +161,13 @@ keymap("n", "<leader>tw", "<cmd>set wrap!<cr>", { desc = "Line wrap" })
 --: }}}
 
 --: toggle line numbers {{{
-keyset("n", "<leader>tn", function()
+keyset("n", "<leader>tl", function()
   vim.cmd([[
     set invnumber
     set invrelativenumber
     set invcursorline
     ]])
-end, { desc = "Toggle Line numbers" })
+end, { desc = "Toggle Line Numbers" })
 --: }}}
 
 --: center when scrolling page down and up {{{
