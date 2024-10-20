@@ -88,7 +88,7 @@ M.autosnips.M = p({
   dscr = "Surrounds with block math symbols",
 }, "\\$ $TM_SELECTED_TEXT$1 \\$")
 
-M.autosnips.gt = p(
+M.autosnips.lt = p(
   {
     trig = ";gt",
     name = "Typst 'general' template",
