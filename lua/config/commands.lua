@@ -204,10 +204,11 @@ command("TypstWatch", function()
   local input_file = vim.fn.expand("%:p")
   local output_file = vim.fn.expand("%:r") .. ".pdf"
   -- local cmd = string.format("typst watch %s --open sioyek", input_file)
-  local cmd = string.format("typst watch %s", input_file)
+  local cmd = string.format('typst watch "%s"', input_file)
 
   if _G.typst_job_id then
-    vim.fn.jobstart({ "sioyek", output_file })
+    vim.fn.jobstart({ "sioyek", string.format('"%s"', output_file) })
+    -- vim.fn.jobstart({ "sioyek", string.format('"%s"', output_file) }, { detach = true })
     print("Typst watch job already running.")
     return
   end
@@ -217,8 +218,7 @@ command("TypstWatch", function()
   if _G.typst_job_id ~= 0 then
     print("Started watching Typst file changes.")
 
-    vim.fn.jobstart({ "sioyek", output_file }, { detach = true })
-    -- vim.fn.jobstart({ "sioyek", output_file })
+    vim.fn.jobstart({ "sioyek", output_file })
     -- vim.cmd(string.format("execute 'silent !zathura \"%s\" & ~/scripts/focus_app zathura'", output_file))
   else
     print("Failed to start watching Typst file changes.")
