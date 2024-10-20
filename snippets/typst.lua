@@ -43,9 +43,9 @@ M.snips.cb = p({
   dscr = "Code block",
 }, "```${1:python}\n$TM_SELECTED_TEXT$2\n```")
 
-M.snips.gt = p(
+M.snips.lt = p(
   {
-    trig = "gt",
+    trig = "lt",
     name = "Typst 'general' template",
     dscr = "Typst 'general' template",
   },
@@ -90,7 +90,7 @@ M.autosnips.M = p({
 
 M.autosnips.lt = p(
   {
-    trig = ";gt",
+    trig = ";lt",
     name = "Typst 'general' template",
     dscr = "Typst 'general' template",
   },
