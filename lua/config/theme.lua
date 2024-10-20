@@ -27,7 +27,7 @@ if vim.g.colors_name == "noirbuddy" then
   local groups = colorbuddy.groups
   local styles = colorbuddy.styles
 
-  Group.new("StatusLine", colors.noir_4, colors.none, styles.bold)
+  Group.new("StatusLine", colors.noir_4, colors.none, nil)
   Group.new("StatusLineNC", colors.noir_7, colors.none)
 
   -- force transparent bg
@@ -62,7 +62,7 @@ if vim.g.colors_name == "noirbuddy" then
   Group.new("IblIndent", colors.noir_9, colors.none)
   Group.new("NormalFloat", colors.noir_1, colors.none, nil)
   Group.new("NonText", colors.noir_9, nil, nil)
-  Group.new("LineNr", colors.noir_7, colors.none, nil)
+  -- Group.new("LineNr", colors.noir_7, colors.none, nil)
   Group.new("WinSeparator", colors.noir_8, colors.none, nil)
   Group.new("NotifyBackground", colors.noir_4, colors.background, nil)
   Group.new("illuminatedWord", nil, colors.noir_9, nil)
