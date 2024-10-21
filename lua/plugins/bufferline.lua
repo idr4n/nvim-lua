@@ -35,9 +35,10 @@ return {
         error_diagnostic = { bg = { attribute = "bg", highlight = fill_hl } },
       },
       options = {
-        -- show_buffer_close_icons = false,
+        show_buffer_close_icons = false,
+        show_close_icon = false,
         buffer_close_icon = "",
-        modified_icon = "",
+        modified_icon = "•",
         -- diagnostics = "nvim_lsp",
         diagnostics = false,
         always_show_bufferline = true,
