@@ -1,6 +1,6 @@
 require("noirbuddy").setup({
   colors = {
-    background = "#000000",
+    -- background = "#000000",
     primary = "#99AABB",
     diagnostic_error = "#bf616a",
     diagnostic_warning = "#b48ead",
@@ -63,6 +63,7 @@ if vim.g.colors_name == "noirbuddy" then
   Group.new("NormalFloat", colors.noir_1, colors.none, nil)
   Group.new("NonText", colors.noir_9, nil, nil)
   -- Group.new("LineNr", colors.noir_7, colors.none, nil)
+  Group.new("CursorLineNr", colors.noir_6, colors.none, nil)
   Group.new("WinSeparator", colors.noir_8, colors.none, nil)
   Group.new("NotifyBackground", colors.noir_4, colors.background, nil)
   Group.new("illuminatedWord", nil, colors.noir_9, nil)
@@ -71,6 +72,7 @@ if vim.g.colors_name == "noirbuddy" then
   Group.new("IlluminatedWordRead", nil, colors.noir_9, nil)
   Group.new("IlluminatedWordWrite", nil, colors.noir_9, nil)
   Group.new("LspInlayHint", colors.noir_6, colors.noir_9, nil)
+  Group.new("RenderMarkdownCode", nil, colors.noir_9, nil)
 
   -- swap undercurls and underlines
   for _, v in ipairs({ "Error", "Info", "Hint", "Warn" }) do
