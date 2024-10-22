@@ -2,9 +2,9 @@
 
 This is my Neovim configuation written in Lua (wip).
 
-![](assets/2024-10-22-23-21-49.png)
+![](assets/screenshot1.png)
 
-![](assets/2024-10-22-23-22-27.png)
+![](assets/screenshot2.png)
 
 ## Basic setup
 
