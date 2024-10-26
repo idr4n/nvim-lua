@@ -1,15 +1,15 @@
 return {
   "rcarriga/nvim-notify",
   -- enabled = false,
-  keys = {
-    {
-      "<leader>nn",
-      function()
-        require("notify").dismiss({ silent = true, pending = true })
-      end,
-      desc = "Dismiss all Notifications",
-    },
-  },
+  -- keys = {
+  --   {
+  --     "<leader>nn",
+  --     function()
+  --       require("notify").dismiss({ silent = true, pending = true })
+  --     end,
+  --     desc = "Dismiss all Notifications",
+  --   },
+  -- },
   opts = {
     timeout = 3000,
     -- background_colour = "#000000",

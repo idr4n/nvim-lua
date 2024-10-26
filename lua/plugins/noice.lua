@@ -5,7 +5,8 @@ return {
   -- stylua: ignore
   keys = {
     { "<leader>nl", function() require("noice").cmd("last") end, desc = "Noice Last Message" },
-    { "<leader>nh", function() require("noice").cmd("history") end, desc = "Noice History" },
+    -- { "<leader>nh", function() require("noice").cmd("history") end, desc = "Noice History" },
+    { "<leader>nh", "<cmd>Noice pick<cr>", desc = "Noice History" },
     { "<leader>nA", function() require("noice").cmd("all") end, desc = "Noice All" },
     { "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline" },
     { "<leader>nD", function() require("noice").cmd("dismiss") end, desc = "Noice Dismiss All" },
@@ -35,18 +36,20 @@ return {
       progress = { enabled = false },
     },
     cmdline = {
-      opts = {
-        -- border = { style = "none", padding = { 0, 1 } },
-        border = { style = "none", padding = { 0, 0 } },
+      format = {
+        -- input = { view = "cmdline_popup", icon = "󰥻 " },
+        input = { view = "cmdline_input", icon = "󰥻 " },
       },
     },
-    -- -- if want to position cmdline and search popup in the top instead
     views = {
+      cmdline_input = {
+        position = { row = "25%", col = "50%" },
+        size = { width = "65%" },
+      },
       cmdline_popup = {
-        -- position = { row = "99%", col = "50%" },
-        -- size = { width = "100%" },
         position = { row = "100%", col = "0%" },
         size = { width = "80%" },
+        border = { style = "none", padding = { 0, 0 } },
       },
     },
     popupmenu = { backend = "cmp" },
