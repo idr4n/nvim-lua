@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd("User", {
     -- load mappings
     require("config.mappings")
     -- load statusline
-    require("config.statusline")
+    -- require("config.statusline")
   end,
 })
 
@@ -42,7 +42,7 @@ vim.opt.rtp:prepend(lazypath)
 -- Load plugins
 require("lazy").setup("plugins", {
   defaults = { lazy = true },
-  install = { colorscheme = { "noirbuddy", "dracula", "tokyonight" } },
+  install = { colorscheme = { "dracula", "tokyonight" } },
   --
   change_detection = { notify = false },
   dev = { path = "~/other_repos", patterns = { "idr4n" } },
@@ -71,5 +71,5 @@ require("lazy").setup("plugins", {
 })
 
 -- Load colorscheme
-require("config.theme")
--- vim.cmd("colorscheme dracula")
+-- require("config.theme")
+vim.cmd("colorscheme dracula")

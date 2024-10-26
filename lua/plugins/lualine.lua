@@ -12,7 +12,7 @@ end
 
 return {
   "nvim-lualine/lualine.nvim",
-  enabled = false,
+  -- enabled = false,
   event = "VeryLazy",
   init = function()
     vim.g.lualine_laststatus = vim.o.laststatus
@@ -47,7 +47,7 @@ return {
         if vim.g.colors_name == "nord" then
           require("lualine").setup({ options = { theme = "nord" } })
         else
-          require("lualine").setup({ options = { theme = dracula_custom } })
+          require("lualine").setup({ options = { theme = theme[vim.g.colors_name] } })
         end
       end,
     })

@@ -133,6 +133,8 @@ return {
         IlluminatedWordText = { bg = c.illuminated_bg },
         IlluminatedWordRead = { bg = c.illuminated_bg },
         IlluminatedWordWrite = { bg = c.illuminated_bg },
+        StatusLine = { bg = c.bg },
+        StatusLineNC = { bg = c.bg },
       },
     })
   end,
