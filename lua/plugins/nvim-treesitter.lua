@@ -60,7 +60,7 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter-context",
-    -- enabled = false,
+    enabled = false,
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     opts = {
       max_lines = 3,

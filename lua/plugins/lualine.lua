@@ -7,12 +7,12 @@ local function fileinfo()
   -- local name = (path == "" and "Empty ") or path:match("([^/\\]+)[/\\]*$")
   local name = path:match("([^/\\]+)[/\\]*$")
 
-  return dir .. name
+  return dir .. name .. " %m%r%h%w "
 end
 
 return {
   "nvim-lualine/lualine.nvim",
-  -- enabled = false,
+  enabled = false,
   event = "VeryLazy",
   init = function()
     vim.g.lualine_laststatus = vim.o.laststatus

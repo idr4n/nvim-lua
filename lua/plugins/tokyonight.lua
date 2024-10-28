@@ -3,8 +3,8 @@ return {
   lazy = true,
   opts = function()
     return {
-      style = "moon",
-      -- style = "night",
+      -- style = "moon",
+      style = "night",
       -- transparent = true,
       styles = {
         -- functions = { italic = true },
@@ -33,6 +33,10 @@ return {
         hl.TelescopeBorder = { fg = c.magenta }
         hl.TelescopePromptBorder = { fg = c.none }
         hl.NonText = { fg = c.bg_highlight }
+        hl.BufferLineIndicatorSelected = { fg = c.bg, bg = c.bg }
+        hl.MiniTablineCurrent = { bg = c.bg }
+        hl.MiniTablineVisible = { fg = c.dark5, bg = c.bg_highlight }
+        hl.MiniTablineModifiedCurrent = { fg = c.yellow, bg = c.bg }
       end,
     }
   end,

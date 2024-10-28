@@ -1,6 +1,6 @@
 return {
   "akinsho/bufferline.nvim",
-  -- enabled = false,
+  enabled = false,
   -- event = { "BufReadPost", "BufNewFile" },
   event = "VimEnter",
   keys = {

@@ -118,6 +118,7 @@ function Status_line(opts)
   }
 
   local simple = {
+    -- "%#SLNormal#",
     c.fileinfo({ add_icon = false }),
     "%=",
     c.search_count(),
@@ -125,12 +126,13 @@ function Status_line(opts)
     c.get_words(),
     _G.show_more_info and c.lang_version() or "",
     _G.show_more_info and c.LSP() or "",
-    _G.show_more_info and " Ux%04B" or "",
-    _G.show_more_info and c.get_position() or "",
+    _G.show_more_info and " Ux%04B " or "",
+    -- _G.show_more_info and c.get_position() or "",
     c.terminal_status(),
     _G.show_more_info and c.git_branch() or "",
     c.status_noice(),
     _G.show_more_info and vim.bo.filetype:upper() .. " " or "",
+    c.get_position(),
     c.lsp_diagnostics_simple(),
     c.git_status_simple(),
   }
