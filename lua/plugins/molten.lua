@@ -26,8 +26,8 @@ return {
 
   {
     "3rd/image.nvim",
-    enabled = false,
-    ft = { "quarto" },
+    -- enabled = false,
+    ft = { "quarto", "markdown" },
     init = function()
       package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
       package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
@@ -48,7 +48,7 @@ return {
       max_height_window_percentage = math.huge,
       max_width_window_percentage = math.huge,
       kitty_method = "normal",
-      window_overlap_clear_enabled = true,
+      window_overlap_clear_enabled = false,
       editor_only_render_when_focused = true, -- auto show/hide images when the editor gains/looses focus
       tmux_show_only_in_active_window = true, -- auto show/hide images in the correct Tmux window (needs visual-activity off)
       window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
