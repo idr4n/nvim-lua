@@ -17,25 +17,29 @@ return {
       signs = {
         -- add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
         -- add = { hl = "GitSignsAdd", text = "│", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-        add = { text = "▍" },
+        -- add = { text = "▍" },
+        add = { text = "▎" },
         change = {
           -- text = "▋",
-          text = "▍",
+          -- text = "▍",
+          text = "▎",
+          -- text = "┃", -- gitsigns default
         },
         delete = {
           -- text = "▁",
           text = "󰍵",
         },
-        topdelete = {
-          -- text = "󰐊",
-          text = "~",
-        },
+        -- topdelete = {
+        --   -- text = "󰐊",
+        --   text = "~",
+        -- },
         changedelete = {
-          -- text = "▍",
+          text = "▍",
           -- text = "▎",
           -- text = "│",
           -- text = "‾",
-          text = "▋",
+          -- text = "┃",
+          -- text = "▋",
         },
       },
       on_attach = function(bufnr)
