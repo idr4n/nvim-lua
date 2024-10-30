@@ -26,12 +26,15 @@ return {
 
   {
     "3rd/image.nvim",
-    -- enabled = false,
-    ft = { "quarto", "markdown" },
-    init = function()
-      package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
-      package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
-    end,
+    enabled = false,
+    ft = { "quarto", "markdown", "typst" },
+    dependencies = {
+      { "leafo/magick" },
+    },
+    -- init = function()
+    --   package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
+    --   package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
+    -- end,
     opts = {
       backend = "kitty",
       integrations = {
@@ -42,13 +45,19 @@ return {
           only_render_image_at_cursor = true,
           filetypes = { "markdown", "quarto" }, -- markdown extensions (ie. quarto) can go here
         },
+        typst = {
+          enabled = true,
+          clear_in_insert_mode = true,
+          download_remote_images = true,
+          only_render_image_at_cursor = true,
+        },
       },
       max_width = 100,
       max_height = 20,
       max_height_window_percentage = math.huge,
       max_width_window_percentage = math.huge,
       kitty_method = "normal",
-      window_overlap_clear_enabled = false,
+      window_overlap_clear_enabled = true,
       editor_only_render_when_focused = true, -- auto show/hide images when the editor gains/looses focus
       tmux_show_only_in_active_window = true, -- auto show/hide images in the correct Tmux window (needs visual-activity off)
       window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
