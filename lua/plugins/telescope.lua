@@ -131,7 +131,16 @@ return {
           silent = true,
           desc = "Go to definition",
         },
-        -- {  "gr", "<cmd>Telescope lsp_references<cr>",  noremap = true, silent = true  },
+        -- { "gr", "<cmd>Telescope lsp_references<cr>", noremap = true, silent = true },
+        {
+          "gr",
+          function()
+            require("telescope.builtin").lsp_references(dropdown_theme({ initial_mode = "normal", previewer = true }))
+          end,
+          noremap = true,
+          silent = true,
+          desc = "Telescope - LSP References",
+        },
         {
           "gs",
           -- "<cmd>Telescope lsp_document_symbols theme=ivy<cr>",

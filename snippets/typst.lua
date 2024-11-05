@@ -43,6 +43,12 @@ M.snips.cb = p({
   dscr = "Code block",
 }, "```${1:python}\n$TM_SELECTED_TEXT$2\n```")
 
+M.snips.pb = p({
+  trig = "pb",
+  name = "Page break",
+  dscr = "Adds a page break",
+}, "#pagebreak()")
+
 M.snips.lt = p(
   {
     trig = "lt",
@@ -60,6 +66,7 @@ M.snips.lt = p(
   suffix: "Prince Sultan University"
 )
 #set math.equation(numbering: "(1)")
+#set heading(numbering: none)
 ]]
 )
 

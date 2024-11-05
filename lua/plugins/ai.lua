@@ -15,8 +15,10 @@ return {
     },
     opts = {
       strategies = {
-        chat = { adapter = "anthropic" },
-        inline = { adapter = "anthropic" },
+        -- chat = { adapter = "anthropic" },
+        -- inline = { adapter = "anthropic" },
+        chat = { adapter = "openai" },
+        inline = { adapter = "openai" },
       },
     },
   },
@@ -37,7 +39,8 @@ return {
   {
     "yetone/avante.nvim",
     -- enabled = false,
-    build = ":AvanteBuild source=false",
+    version = false,
+    build = "make",
     cmd = { "AvanteAsk", "AvanteToggle" },
     dependencies = {
       "stevearc/dressing.nvim",
