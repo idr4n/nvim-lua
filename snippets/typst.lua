@@ -95,6 +95,12 @@ M.autosnips.M = p({
   dscr = "Surrounds with block math symbols",
 }, "\\$ $TM_SELECTED_TEXT$1 \\$")
 
+M.autosnips.pb = p({
+  trig = ";pb",
+  name = "Page break",
+  dscr = "Adds a page break",
+}, "#pagebreak()")
+
 M.autosnips.lt = p(
   {
     trig = ";lt",

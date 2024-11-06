@@ -17,8 +17,17 @@ return {
       strategies = {
         -- chat = { adapter = "anthropic" },
         -- inline = { adapter = "anthropic" },
-        chat = { adapter = "openai" },
-        inline = { adapter = "openai" },
+        -- chat = { adapter = "openai" },
+        -- inline = { adapter = "openai" },
+        chat = { adapter = "copilot" },
+        inline = { adapter = "copilot" },
+      },
+      adapters = {
+        copilot = function()
+          return require("codecompanion.adapters").extend("copilot", {
+            schema = { model = { default = "claude-3.5-sonnet" } },
+          })
+        end,
       },
     },
   },
