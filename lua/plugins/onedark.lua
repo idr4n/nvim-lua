@@ -8,7 +8,7 @@ return {
     -- style = "darker",
     highlights = {
       LspInlayHint = { fg = "#7F8A9E", bg = "#2C313A" },
-      -- IblScope = { fg = "#626873" },
+      IblScope = { fg = "#634E89" },
       illuminatedWord = { bg = "$bg2", fmt = "none" },
       illuminatedCurWord = { bg = "$bg2", fmt = "none" },
       IlluminatedWordText = { bg = "$bg2", fmt = "none" },
@@ -84,6 +84,7 @@ return {
       MiniTablineVisible = { fg = "$purple", bg = "$bg3" },
       MiniTablineHidden = { fg = "$light_grey", bg = "$bg1" },
       MiniTablineModifiedCurrent = { fg = "$yellow", bg = "$bg0", fmt = "none" },
+      RenderMarkdownCode = { bg = "$bg_d" },
     },
   },
   -- config = function(_, opts)

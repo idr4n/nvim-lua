@@ -35,7 +35,7 @@ return {
         hl.NonText = { fg = c.bg_highlight }
         hl.BufferLineIndicatorSelected = { fg = c.bg, bg = c.bg }
         hl.MiniTablineCurrent = { bg = c.bg }
-        hl.MiniTablineVisible = { fg = c.dark5, bg = c.bg_highlight }
+        hl.MiniTablineVisible = { fg = c.magenta, bg = c.bg_highlight }
         hl.MiniTablineModifiedCurrent = { fg = c.yellow, bg = c.bg }
         hl.StatusLine = { fg = c.fg_dark, bg = c.bg }
         -- hl.NoiceCmdlinePopUp = { bg = c.bg_dark }
