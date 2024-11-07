@@ -62,6 +62,7 @@ return {
           single_file_support = not is_deno_project(vim.fn.expand("%:p")),
         },
         denols = { root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc") },
+        ruff = { init_options = { settings = { lint = { enable = false } } } },
       },
 
       setup = {

@@ -22,7 +22,7 @@ return {
       "lua-language-server",
       "prettier",
       "pyright",
-      "ruff-lsp",
+      "ruff",
       "rust-analyzer",
       "shfmt",
       "sqlfluff",
