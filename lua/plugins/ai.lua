@@ -68,6 +68,8 @@ return {
       }
     end,
     opts = {
+      provider = "copilot",
+      auto_suggestions_provider = "copilot",
       windows = {
         width = 45,
       },
