@@ -51,6 +51,18 @@ M.snips.bu = p({
   dscr = "Adds a blank underline for mcqs questions",
 }, "\\underline{\\phantom{mmmmm}}")
 
+M.snips.p = p({
+  trig = "p",
+  name = "Phantom",
+  dscr = "Phantom in Latex notation",
+}, "\\phantom{.}")
+
+M.snips.v = p({
+  trig = "v",
+  name = "Vertical space",
+  dscr = "Vertical space in Latex notation",
+}, "\\vspace{${1:1}cm}")
+
 M.snips.ta = p(
   {
     trig = "ta",
@@ -87,11 +99,153 @@ M.snips.e = p({
   dscr = "Latex Environment",
 }, "\\begin{$1}\n$TM_SELECTED_TEXT$2\n\\end{$1}")
 
+M.snips.emc = p({
+  trig = "emc",
+  name = "Environment Multicolumn",
+  dscr = "Environment Multicolumn Question",
+}, "\\vspace*{-\\baselineskip}\n\\begin{multicols}{2}\n$TM_SELECTED_TEXT$2\n\\end{multicols}")
+
 M.snips.c = p({
   trig = "c",
   name = "Multicol Environment",
   dscr = "Multicol Environment",
-}, "\\vspace*{-\\baselineskip}\n\\begin{multicols}{2}\n$TM_SELECTED_TEXT$2\n\\end{multicols}")
+}, "\\vspace*{-\\baselineskip}\n\\vspace*{1.2ex}\n\\begin{multicols}{2}\n$TM_SELECTED_TEXT$2\n\\end{multicols}")
+
+M.autosnips.p = p({
+  trig = ";p",
+  name = "Phantom",
+  dscr = "Phantom in Latex notation",
+}, "\\phantom{.}")
+
+M.autosnips.v = p({
+  trig = ";v",
+  name = "Vertical space",
+  dscr = "Vertical space in Latex notation",
+}, "\\vspace{${1:1}cm}")
+
+M.snips.et10 = p(
+  {
+    trig = "et10",
+    name = "Exam table 10",
+    dscr = "Exam table with 10 MCQs",
+  },
+  [[
+\begin{center}
+  {\fontsize{10}{20}\selectfont
+    \begin{tabular}{|c|c|c|c|c|}
+      \hline
+      \rowcolor{gray!15}
+      \textbf{1}   & \textbf{2}   & \textbf{3}   & \textbf{4}   & \textbf{5}   \\\\\hline
+      \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} \\\\\hline
+      \rowcolor{gray!15}
+      \textbf{6}   & \textbf{7}   & \textbf{8}   & \textbf{9}  & \textbf{10}   \\\\\hline
+      \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} \\\\\hline
+    \end{tabular}
+  }
+\end{center}
+]]
+)
+
+M.snips.ex = p(
+  {
+    trig = "ex",
+    name = "Exams Template",
+    dscr = "Major Exam Template",
+  },
+  [[
+\documentclass[10pt,a4paper]{mydoc_eng}
+\usepackage[margin=2cm, vmargin={2cm,1cm},includefoot]{geometry}
+\renewcommand{\baselinestretch}{1.1}
+\setlength{\parindent}{0pt}
+\setlength{\headheight}{14.5pt}
+\usepackage{paralist}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{booktabs}
+%%%Headers and Footers%%%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\chead{}
+\rhead{MAJOR EXAM ${1:I} - ${2:ECON102}}
+\cfoot{\thepage}
+\rfoot{Prince Sultan University}
+\lfoot{${3:Oct. 05, 2024}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+%%%%%%%%%%%%%%%%%
+
+\newcommand{\blank}{\line(1,0){60}\;}
+
+% Define a new column type that centers the content within a specified width
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\begin{document}
+\title{MAJOR EXAM $1: $2 (${5:FALL 2024})}
+\author{}
+\maketitle
+
+\textbf{I. (6\%) Multiple Choice Questions.} Write your answers to the MCQs in the table below:
+
+\phantom{.}
+
+\begin{center}
+  {\fontsize{10}{20}\selectfont
+    \begin{tabular}{|c|c|c|c|c|c|}
+      \hline
+      \rowcolor{gray!15}
+      \textbf{1}   & \textbf{2}   & \textbf{3}   & \textbf{4}   & \textbf{5}   & \textbf{6}   \\\\\hline
+      \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} \\\\\hline
+      \rowcolor{gray!15}
+      \textbf{7}   & \textbf{8}   & \textbf{9}   & \textbf{10}  & \textbf{11}  & \textbf{12}  \\\\\hline
+      \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} \\\\\hline
+    \end{tabular}
+  }
+\end{center}
+
+\phantom{.}
+
+\begin{enumerate}[1.]
+
+  \item Main statement
+  \alfa
+  \item item
+  \item item
+  \item item
+  \item item
+  \myend
+
+  \item Multicolumn question
+  \alfa
+  \vspace*{-\baselineskip}
+  \vspace*{1.2ex}
+  \begin{multicols}{2}
+  \item item.     \item item.
+  \item item.     \item item.
+  \end{multicols}
+  \myend
+
+\end{enumerate}
+
+\textbf{II. (14\%) Numerical and Analytical Questions.}
+
+\begin{enumerate}[1.]
+  \item (5 marks)
+
+  \newpage
+
+  \item (5 marks)
+
+  \newpage
+
+  \item (4 marks)
+
+\end{enumerate}
+\end{document}
+]]
+)
 
 -- autosnippets
 
