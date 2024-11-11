@@ -25,7 +25,7 @@ return {
       -- NeoTreeEndOfBuffer = { bg = "#1B1F27" },
       -- NeoTreeGitModified = { fg = "$blue" },
       -- NeoTreeGitModified = { fg = "#485A86" },
-      -- NeoTreeWinSeparator = { fg = "#1B1F27", bg = "#1B1F27" },
+      NeoTreeWinSeparator = { fg = "$bg0", bg = "$bg0" },
       -- NvimTreeWinSeparator = { fg = "#1E222A" },
       NvimTreeWinSeparator = { fg = "$bg0" },
       NvimTreeIndentMarker = { fg = "$bg3" },
