@@ -99,12 +99,6 @@ M.snips.e = p({
   dscr = "Latex Environment",
 }, "\\begin{$1}\n$TM_SELECTED_TEXT$2\n\\end{$1}")
 
-M.snips.emc = p({
-  trig = "emc",
-  name = "Environment Multicolumn",
-  dscr = "Environment Multicolumn Question",
-}, "\\vspace*{-\\baselineskip}\n\\begin{multicols}{2}\n$TM_SELECTED_TEXT$2\n\\end{multicols}")
-
 M.snips.c = p({
   trig = "c",
   name = "Multicol Environment",
@@ -291,6 +285,6 @@ M.autosnips.c = p({
   trig = ";c",
   name = "Multicol Environment",
   dscr = "Multicol Environment",
-}, "\\vspace*{-\\baselineskip}\n\\begin{multicols}{2}\n$TM_SELECTED_TEXT$2\n\\end{multicols}")
+}, "\\vspace*{-\\baselineskip}\n\\vspace*{1.2ex}\n\\begin{multicols}{2}\n$TM_SELECTED_TEXT$2\n\\end{multicols}")
 
 return getSnippetsList(M.snips), getSnippetsList(M.autosnips)
