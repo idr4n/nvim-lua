@@ -164,6 +164,8 @@ M.snips.ex = p(
 \usepackage{graphicx}
 \usepackage{multicol}
 \usepackage{array}
+% For long underlines use ulem's \uline instead
+\usepackage{ulem}
 \usepackage{booktabs}
 %%%Headers and Footers%%%
 \usepackage{fancyhdr}
