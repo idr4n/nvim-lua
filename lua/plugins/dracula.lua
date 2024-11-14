@@ -107,6 +107,8 @@ return {
         ["@number"] = { fg = c.purple, italic = false },
         ["@lsp.type.parameter"] = { fg = c.orange, italic = false },
         NvimTreeNormal = { fg = c.fg, bg = c.bg_light },
+        NvimTreeWinSeparator = { fg = c.bg },
+        NvimTreeCursorLine = { bg = c.visual },
         -- CmpItemAbbr = { fg = colors.white, bg = colors.bg_light },
         -- CmpItemKind = { fg = colors.white, bg = colors.bg_light },
         NormalFloat = { fg = c.fg, bg = c.bg_light },

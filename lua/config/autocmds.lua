@@ -189,6 +189,15 @@ aucmd("User", {
   end,
 })
 
+-- Reset cursor shape on exit (needed in Fish within Tmux somehow)
+aucmd("VimLeave", {
+  group = augroup("CursorShape"),
+  pattern = "*",
+  callback = function()
+    vim.cmd("set guicursor=a:ver100")
+  end,
+})
+
 -- After loading zenbones, wind, etc. colorschemes
 aucmd("ColorScheme", {
   group = augroup("ColorsCustomization"),

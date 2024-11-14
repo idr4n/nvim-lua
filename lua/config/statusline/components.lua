@@ -494,7 +494,6 @@ end
 
 ---@return string
 function M.lsp_diagnostics_simple()
-  local icons = require("utils").diagnostic_icons
   local function get_severity(s)
     return #vim.diagnostic.get(0, { severity = s })
   end
@@ -541,7 +540,7 @@ function M.scrollbar()
   local lines = vim.api.nvim_buf_line_count(0)
   local i = math.floor((curr_line - 1) / lines * #sbar) + 1
   if sbar[i] then
-    return "%#StatusCommand#" .. string.rep(sbar[i], 2) .. "%#SLNormal# "
+    return "%#StatusCommand#" .. string.rep(sbar[i], 2) .. "%#SLNormalNoFg# "
   end
 end
 
@@ -549,7 +548,13 @@ end
 function M.codeium_status()
   if vim.g.codeium_enabled then
     local status = vim.api.nvim_call_function("codeium#GetStatusString", {})
-    return "%#SLBgNoneHl# [ " .. status .. "]" .. "%#SLBgNone# "
+    -- return "%#SLBgNoneHl# [ " .. status .. "]" .. "%#SLBgNone# "
+    local status_map = {
+      [" ON"] = "",
+      [" * "] = " ",
+    }
+    status = status_map[status] or status
+    return M.get_or_create_hl("SLBgNoneHl") .. "  " .. status .. "%#SLNormalNoFg# "
   end
 
   return ""
@@ -568,6 +573,24 @@ end
 
 function M.lsp_progress()
   return require("lsp-progress").progress() .. " "
+end
+
+function M.get_copilot_status()
+  local copilot_loaded = package.loaded["copilot"] ~= nil
+  local s = copilot_loaded and require("copilot-lualine") or nil
+  local status = ""
+  if copilot_loaded then
+    if s and s.is_enabled() then
+      status = "   "
+    end
+    if s and s.is_loading() then
+      status = "  "
+    end
+    if s and s.is_error() then
+      status = "  "
+    end
+  end
+  return status
 end
 
 return M

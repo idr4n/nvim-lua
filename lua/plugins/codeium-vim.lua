@@ -1,26 +1,21 @@
 return {
   "Exafunction/codeium.vim",
   -- enabled = false,
-  cmd = { "CodeiumEnable", "CodeiumDisable", "CodeiumToggle" },
+  cmd = { "CodeiumEnable", "CodeiumDisable" },
   -- stylua: ignore
   keys = {
     {
       "<leader>cx",
       function()
-        vim.cmd("CodeiumEnable")
+        if vim.g.codeium_enabled then
+          vim.cmd("CodeiumDisable")
+        else
+          vim.cmd("CodeiumEnable")
+        end
         vim.cmd("redrawstatus!")
       end,
       silent = true,
-      desc = "Codeium Enable",
-    },
-    {
-      "<leader>cX",
-      function()
-        vim.cmd("CodeiumDisable")
-        vim.cmd("redrawstatus!")
-      end,
-      silent = true,
-      desc = "Codeium Disable",
+      desc = "Codeium Toggle",
     },
     { "<C-c>", function() return vim.fn["codeium#Accept"]() end, mode = "i", expr = true, silent = true, desc = "Codeium Accept" },
     { "<C-n>", function() return vim.fn["codeium#CycleCompletions"](1) end, mode = "i", expr = true, silent = true, desc = "Codeium Next" },

@@ -133,7 +133,8 @@ return {
         },
         -- { "gr", "<cmd>Telescope lsp_references<cr>", noremap = true, silent = true },
         {
-          "gr",
+          -- "gr",
+          "<leader>gr",
           function()
             require("telescope.builtin").lsp_references(dropdown_theme({ initial_mode = "normal", previewer = true }))
           end,

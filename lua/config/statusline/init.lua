@@ -69,6 +69,7 @@ vim.api.nvim_set_hl(0, "StatusDir", { fg = string_hl.fg, bg = statusline_hl.bg, 
 vim.api.nvim_set_hl(0, "SLFileName", { fg = statusline_hl.fg, bg = statusline_hl.bg, bold = true })
 vim.api.nvim_set_hl(0, "SLNotModifiable", { fg = colors.yellow, bg = statusline_hl.bg })
 vim.api.nvim_set_hl(0, "SLNormal", { fg = fg_lighten, bg = statusline_hl.bg })
+vim.api.nvim_set_hl(0, "SLNormalNoFg", { bg = statusline_hl.bg })
 vim.api.nvim_set_hl(0, "SLBufNr", { fg = "#4E546B", bg = statusline_hl.bg })
 vim.api.nvim_set_hl(0, "SLModified", { fg = "#FF7EB6", bg = statusline_hl.bg })
 vim.api.nvim_set_hl(0, "SLMatches", { fg = colors.bg_hl, bg = colors.fg_hl })
@@ -132,6 +133,8 @@ function Status_line(opts)
     _G.show_more_info and c.git_branch() or "",
     c.status_noice(),
     _G.show_more_info and vim.bo.filetype:upper() .. " " or "",
+    c.codeium_status(),
+    c.get_copilot_status(),
     c.get_position(),
     c.lsp_diagnostics_simple(),
     c.git_status_simple(),
