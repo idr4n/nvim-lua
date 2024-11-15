@@ -5,6 +5,10 @@ return {
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall", "TSUninstall" },
+    dependencies = {
+      -- Additional Nushell parser
+      { "nushell/tree-sitter-nu", build = ":TSUpdate nu" },
+    },
     opts = {
       incremental_selection = {
         enable = true,
@@ -31,6 +35,7 @@ return {
         "lua",
         "luap",
         "markdown",
+        "nu",
         "python",
         "regex",
         "rust",
