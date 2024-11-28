@@ -38,7 +38,7 @@ return {
         hl.MiniTablineCurrent = { bg = c.bg }
         hl.MiniTablineVisible = { fg = c.magenta, bg = c.bg_highlight }
         hl.MiniTablineModifiedCurrent = { fg = c.yellow, bg = c.bg }
-        hl.StatusLine = { fg = c.fg_dark, bg = c.bg }
+        hl.StatusLine = { fg = c.fg_dark, bg = c.none }
         -- hl.NoiceCmdlinePopUp = { bg = c.bg_dark }
       end,
     }

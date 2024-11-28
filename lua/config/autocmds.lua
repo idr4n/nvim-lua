@@ -201,7 +201,7 @@ aucmd("VimLeave", {
 -- After loading zenbones, wind, etc. colorschemes
 aucmd("ColorScheme", {
   group = augroup("ColorsCustomization"),
-  pattern = { "zenbones", "wind", "seoul256" },
+  pattern = { "zenbones", "wind", "seoul256", "gruvbox-material" },
   callback = function()
     local ut = require("utils")
     local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
@@ -223,6 +223,37 @@ aucmd("ColorScheme", {
 
     if vim.g.colors_name == "zenbones" then
       vim.api.nvim_set_hl(0, "NoiceCmdlinePopUp", { bg = "#2E2927" })
+    end
+
+    if vim.g.colors_name == "gruvbox-material" then
+      local config = vim.fn["gruvbox_material#get_configuration"]()
+      local palette =
+        vim.fn["gruvbox_material#get_palette"](config.background, config.foreground, config.colors_override)
+      local set_hl = vim.fn["gruvbox_material#highlight"]
+
+      set_hl("FloatBorder", { "#e26a75", "NONE" }, palette.bg0)
+      set_hl("FloatTitle", palette.none, palette.bg0)
+      set_hl("NormalFloat", palette.none, { darker_bg, "NONE" })
+      set_hl("NonText", palette.bg3, palette.none)
+      set_hl("IblIndent", palette.bg3, palette.none)
+      -- set_hl("StatusLine", palette.none, palette.bg_dim)
+      set_hl("MiniFilesTitleFocused", palette.none, palette.bg0)
+      set_hl("WhichKeyNormal", palette.none, palette.bg3)
+      set_hl("NoiceCmdlinePopUp", palette.none, palette.bg1)
+      set_hl("GitSignsAdd", palette.green, palette.none)
+      set_hl("GitSignsChange", palette.blue, palette.none)
+      set_hl("GitSignsDelete", palette.red, palette.none)
+      set_hl("TreesitterContext", palette.none, palette.bg0)
+      -- vim.api.nvim_set_hl(0, "TreesitterContextBottom", { underline = true, sp = palette.red[1] })
+      -- set_hl("TreesitterContextBottom", palette.none, palette.none, "underline", palette.red)
+      set_hl("TreesitterContextBottom", palette.none, palette.none, "underline", { "#e26a75" })
+      set_hl("MiniTablineCurrent", palette.none, palette.bg0)
+      set_hl("MiniTablineHidden", palette.grey0, palette.bg1)
+      set_hl("MiniTablineVisible", palette.purple, palette.bg1)
+      set_hl("MiniTablineModifiedCurrent", palette.yellow, palette.bg_visual_red)
+      set_hl("MiniTablineModifiedHidden", palette.grey0, palette.bg_visual_red)
+      set_hl("MiniTablineModifiedVisible", palette.purple, palette.bg_visual_red)
+      set_hl("RenderMarkdownCode", palette.none, palette.bg_dim)
     end
 
     vim.api.nvim_set_hl(0, "WinSeparator", { fg = winsep })

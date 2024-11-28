@@ -81,12 +81,29 @@ local statusline_hls = {}
 ---@return string
 function M.get_or_create_hl(hl_fg, hl_bg)
   hl_bg = hl_bg or "Normal"
-  local hl_name = "SL" .. hl_fg .. hl_bg
+  local sanitized_hl_fg = hl_fg:gsub("#", "")
+  local sanitized_hl_bg = hl_bg:gsub("#", "")
+  local hl_name = "SL" .. sanitized_hl_fg .. sanitized_hl_bg
 
   if not statusline_hls[hl_name] then
     -- If not in the cache, create the highlight group
-    local bg_hl = vim.api.nvim_get_hl(0, { name = hl_bg })
-    local fg_hl = vim.api.nvim_get_hl(0, { name = hl_fg })
+    local bg_hl
+    if hl_bg:match("^#") then
+      -- If hl_bg starts with #, it's a hex color
+      bg_hl = { bg = hl_bg }
+    else
+      -- Otherwise treat it as highlight group name
+      bg_hl = vim.api.nvim_get_hl(0, { name = hl_bg })
+    end
+
+    local fg_hl
+    if hl_fg:match("^#") then
+      -- If hl_fg starts with #, it's a hex color
+      fg_hl = { fg = hl_fg }
+    else
+      -- Otherwise treat it as highlight group name
+      fg_hl = vim.api.nvim_get_hl(0, { name = hl_fg })
+    end
 
     if not bg_hl.bg then
       bg_hl = vim.api.nvim_get_hl(0, { name = "Statusline" })
@@ -95,11 +112,10 @@ function M.get_or_create_hl(hl_fg, hl_bg)
       fg_hl = vim.api.nvim_get_hl(0, { name = "Statusline" })
     end
 
-    vim.api.nvim_set_hl(
-      0,
-      hl_name,
-      { bg = bg_hl.bg and ("#%06x"):format(bg_hl.bg) or "none", fg = ("#%06x"):format(fg_hl.fg) }
-    )
+    vim.api.nvim_set_hl(0, hl_name, {
+      bg = bg_hl.bg and (type(bg_hl.bg) == "string" and bg_hl.bg or ("#%06x"):format(bg_hl.bg)) or "none",
+      fg = fg_hl.fg and (type(fg_hl.fg) == "string" and fg_hl.fg or ("#%06x"):format(fg_hl.fg)) or "none",
+    })
     statusline_hls[hl_name] = true
   end
 
@@ -211,9 +227,7 @@ function M.search_count()
     return ""
   end
 
-  -- local hl_match = _G.show_more_info and "%#SLNormal#" or "%#SLStealth#"
-  -- local hl_match = "%#SLStealth#"
-  local hl_match = "%#SLBgLightenLess#"
+  local hl_match = "%#SLNormal# "
 
   if count.incomplete == 1 then
     return "%#SLMatches# ?/? " .. hl_match
@@ -283,7 +297,9 @@ end
 
 function M.status_noice()
   local mode = require("noice").api.status.mode.get()
-  local mode_str = mode and M.get_or_create_hl("SLBgNoneHl") .. "[" .. mode .. "]%#SLNormal# " or ""
+  local sep_left = M.get_or_create_hl("#ff6666", "StatusLine") .. ""
+  local sep_right = M.get_or_create_hl("#ff6666", "StatusLine") .. "%#SLNormal# "
+  local mode_str = mode and sep_left .. M.get_or_create_hl("#212121", "#ff6666") .. mode .. sep_right or ""
   return mode_str
 end
 
@@ -365,15 +381,15 @@ function M.git_status_simple()
     local removed = ""
 
     if gitsigns.added and gitsigns.added > 0 then
-      added = "%#GitSignsAdd#" .. diff_icon
+      added = M.get_or_create_hl("GitSignsAdd", "StatusLine") .. diff_icon
     end
     -- stylua: ignore
     if gitsigns.changed and gitsigns.changed > 0 then
-      changed = "%#GitSignsChange#" .. diff_icon
+      changed = M.get_or_create_hl("GitSignsChange", "StatusLine").. diff_icon
     end
     -- stylua: ignore
     if gitsigns.removed and gitsigns.removed > 0 then
-      removed = "%#GitSignsDelete#" .. diff_icon
+      removed = M.get_or_create_hl("GitSignsDelete", "StatusLine") .. diff_icon
     end
 
     git_status = total_changes > 0 and added .. changed .. removed .. " " or ""
@@ -515,16 +531,16 @@ function M.lsp_diagnostics_simple()
   local icon = "◦"
 
   if result.errors > 0 then
-    errors = M.get_or_create_hl("DiagnosticError") .. icon
+    errors = M.get_or_create_hl("DiagnosticError", "StatusLine") .. icon
   end
   if result.warnings > 0 then
-    warnings = M.get_or_create_hl("DiagnosticWarn") .. icon
+    warnings = M.get_or_create_hl("DiagnosticWarn", "StatusLine") .. icon
   end
   if result.info > 0 then
-    info = M.get_or_create_hl("DiagnosticInfo") .. icon
+    info = M.get_or_create_hl("DiagnosticInfo", "StatusLine") .. icon
   end
   if result.hints > 0 then
-    hints = M.get_or_create_hl("DiagnosticHint") .. icon
+    hints = M.get_or_create_hl("DiagnosticHint", "StatusLine") .. icon
   end
 
   if vim.bo.modifiable and total > 0 then
@@ -554,7 +570,7 @@ function M.codeium_status()
       [" * "] = " ",
     }
     status = status_map[status] or status
-    return M.get_or_create_hl("SLBgNoneHl") .. "  " .. status .. "%#SLNormalNoFg# "
+    return M.get_or_create_hl("SLBgNoneHl", "StatusLine") .. "  " .. status .. "%#SLNormalNoFg# "
   end
 
   return ""
@@ -567,8 +583,7 @@ function M.terminal_status()
       is_terminal_open = true
     end
   end
-  -- return is_terminal_open and "%#SLBgNoneHl# []" .. "%#SLBgNone# " or ""
-  return is_terminal_open and M.get_or_create_hl("SLBgNoneHl") .. " []" .. "%#SLNormal# " or ""
+  return is_terminal_open and M.get_or_create_hl("SLBgNoneHl", "SLNormal") .. "  " .. "%#SLNormal# " or ""
 end
 
 function M.lsp_progress()

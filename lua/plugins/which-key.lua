@@ -4,11 +4,17 @@ return {
   -- keys = { "<leader>", "<c-r>", "<c-w>", "z", '"', "'", "`", "c", "v", "g", ",", ";" },
   opts = {
     -- preset = "modern",
-    -- preset = "helix",
+    preset = "helix",
     notify = false,
+    -- icons = {
+    --   rules = false,
+    --   separator = "",
+    -- },
     icons = {
       rules = false,
-      separator = "",
+      breadcrumb = " ", -- symbol used in the command line area that shows your active key combo
+      separator = "󱦰  ", -- symbol used between a key and it's label
+      group = "󰹍 ", -- symbol prepended to a group
     },
     win = {
       -- no_overlap = false,
