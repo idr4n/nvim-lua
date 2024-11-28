@@ -47,7 +47,7 @@ M.snips.pb = p({
   trig = "pb",
   name = "Page break",
   dscr = "Adds a page break",
-}, "#pagebreak()")
+}, "\n\n#pagebreak()\n\n")
 
 M.snips.lt = p(
   {
@@ -64,9 +64,33 @@ M.snips.lt = p(
   ),
   prefix: "${4:Course}",
   suffix: "Prince Sultan University"
+  // heading_font: "New Computer Modern",
+  // text_font: "New Computer Modern",
 )
+#set text(font: "New Computer Modern",size: 11pt)
+#set enum(full: true, numbering: (..n) => {
+  let format = if n.pos().len() > 1 {"(a)"} else {"1."}
+  numbering(format, n.pos().last())
+})
 #set math.equation(numbering: "(1)")
 #set heading(numbering: none)
+#import "@preview/xarrow:0.3.0": xarrow
+
+#let highlight(content) = align(
+  // center, 
+  block(
+    width: 100%,
+    // fill: luma(95%),
+    inset: (x: 5pt, y: 15pt),
+    radius: 2pt,
+    stroke: (thickness: 0.5pt),
+    content
+  )
+)
+
+#pagebreak()
+
+= Introduction
 ]]
 )
 
@@ -99,7 +123,7 @@ M.autosnips.pb = p({
   trig = ";pb",
   name = "Page break",
   dscr = "Adds a page break",
-}, "#pagebreak()")
+}, "\n\n#pagebreak()\n\n")
 
 M.autosnips.lt = p(
   {
@@ -116,8 +140,33 @@ M.autosnips.lt = p(
   ),
   prefix: "${4:Course}",
   suffix: "Prince Sultan University"
+  // heading_font: "New Computer Modern",
+  // text_font: "New Computer Modern",
 )
+#set text(font: "New Computer Modern",size: 11pt)
+#set enum(full: true, numbering: (..n) => {
+  let format = if n.pos().len() > 1 {"(a)"} else {"1."}
+  numbering(format, n.pos().last())
+})
 #set math.equation(numbering: "(1)")
+#set heading(numbering: none)
+#import "@preview/xarrow:0.3.0": xarrow
+
+#let highlight(content) = align(
+  // center, 
+  block(
+    width: 100%,
+    // fill: luma(95%),
+    inset: (x: 5pt, y: 15pt),
+    radius: 2pt,
+    stroke: (thickness: 0.5pt),
+    content
+  )
+)
+
+#pagebreak()
+
+= Introduction
 ]]
 )
 
