@@ -3,6 +3,7 @@ return {
     "olimorris/codecompanion.nvim",
     cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions" },
     keys = {
+      { "go", "<cmd>CodeCompanionChat Toggle<cr>", mode = { "n", "v" }, desc = "CodeCompanion Toggle" },
       { "<leader>jc", "<cmd>CodeCompanionChat Toggle<cr>", mode = { "n", "v" }, desc = "CodeCompanion Toggle" },
       { "<leader>jl", "<cmd>CodeCompanion<cr>", mode = { "n", "v" }, desc = "CodeCompanion Inline Assistant" },
       { "<leader>jA", "<cmd>CodeCompanionActions<cr>", mode = { "n", "v" }, desc = "CodeCompanion Actions" },
@@ -82,6 +83,29 @@ return {
           debug = "<leader>jad",
           hint = "<leader>jah",
           suggestion = "<leader>jas",
+        },
+      },
+    },
+  },
+
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    branch = "canary",
+    dependencies = {
+      { "nvim-lua/plenary.nvim" },
+    },
+    build = "make tiktoken",
+    cmd = { "CopilotChat", "CopilotChatToggle" },
+    keys = {
+      { "<leader>jh", ":CopilotChat ", mode = { "n", "v" }, desc = "CopilotChat Input" },
+      { "<leader>jo", ":CopilotChat<cr>", mode = { "n", "v" }, desc = "CopilotChat" },
+    },
+    opts = {
+      highlight_headers = false, -- disable if using markdown renderers (like render-markdown.nvim)
+      mappings = {
+        reset = {
+          normal = "",
+          insert = "",
         },
       },
     },

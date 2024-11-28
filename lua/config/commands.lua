@@ -112,7 +112,7 @@ command("YankCwd", function()
   vim.cmd(string.format("call setreg('*', '%s')", cwd))
   print("Cwd copied to clipboard!")
 end, {})
-keymap("n", "<leader>cp", "<cmd>YankCwd<cr>", { desc = "Yank current dir" })
+keymap("n", "<leader>cP", "<cmd>YankCwd<cr>", { desc = "Yank current dir" })
 
 -- open same file in nvim in a new tmux pane
 vim.api.nvim_create_user_command("NewTmuxNvim", function()

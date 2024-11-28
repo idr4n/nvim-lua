@@ -440,7 +440,8 @@ end
 ---Get number of words in the current markdown or text buffer
 ---@return string
 function M.get_words()
-  if vim.bo.filetype == "md" or vim.bo.filetype == "text" or vim.bo.filetype == "markdown" then
+  local ft = vim.bo.filetype
+  if ft == "md" or ft == "text" or ft == "markdown" then
     if vim.fn.wordcount().visual_words == nil then
       return " " .. " " .. tostring(vim.fn.wordcount().words) .. " "
     end
