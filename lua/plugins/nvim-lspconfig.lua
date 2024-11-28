@@ -8,7 +8,7 @@ return {
     {
       "linrongbin16/lsp-progress.nvim",
       opts = {
-        max_size = 70,
+        max_size = 50,
         spinner = { "", "󰪞", "󰪟", "󰪠", "󰪢", "󰪣", "󰪤", "󰪥" },
         -- client_format = function(client_name, spinner, series_messages)
         client_format = function(_, spinner, series_messages)
@@ -175,9 +175,6 @@ return {
     if have_mason then
       mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
     end
-
-    -- Turn on lsp status information
-    -- require("fidget").setup()
 
     -- Convert JSON filetype to JSON with comments (jsonc)
     vim.cmd([[

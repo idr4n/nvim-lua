@@ -91,24 +91,6 @@ return {
         },
         lualine_b = {
           { "branch", icon = "" },
-          -- {
-          --   "diff",
-          --   symbols = {
-          --     added = utils.git_icons.added,
-          --     modified = utils.git_icons.modified,
-          --     removed = utils.git_icons.removed,
-          --   },
-          --   source = function()
-          --     local gitsigns = vim.b.gitsigns_status_dict
-          --     if gitsigns then
-          --       return {
-          --         added = gitsigns.added,
-          --         modified = gitsigns.changed,
-          --         removed = gitsigns.removed,
-          --       }
-          --     end
-          --   end,
-          -- },
           {
             "diff",
             fmt = function(str)
@@ -147,13 +129,13 @@ return {
         lualine_c = {
           -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           -- { fileinfo, padding = { left = 0, right = 1 } },
+          {
+            fileinfo,
+            padding = { left = 1, right = 0 },
+          },
           function()
             return "%="
           end,
-          {
-            fileinfo,
-            padding = { left = 0, right = 0 },
-          },
           {
             utils.get_words,
             padding = { left = 0, right = 0 },
@@ -171,10 +153,10 @@ return {
         },
         lualine_x = {
           -- stylua: ignore
-          -- {
-          --   function() return require("lsp-progress").progress() end,
-          --   color = function() return utils.get_fg("Added") and utils.get_fg("Added") or utils.get_fg("DiffAdded") and utils.get_fg("DiffAdded") or utils.get_fg("DiffAdd") end
-          -- },
+          {
+            function() return require("lsp-progress").progress() end,
+            color = function() return utils.get_fg("Added") and utils.get_fg("Added") or utils.get_fg("DiffAdded") and utils.get_fg("DiffAdded") or utils.get_fg("DiffAdd") end
+          },
           -- stylua: ignore
           -- {
           --   function() return require("noice").api.status.command.get() end,
@@ -211,11 +193,9 @@ return {
               status = {
                 icons = {
                   enabled = " ",
-                  sleep = " ", -- auto-trigger disabled
-                  -- disabled = " ",
+                  sleep = " ",
                   disabled = "",
                   warning = " ",
-                  -- unknown = " "
                   unknown = "",
                 },
               },
@@ -257,15 +237,6 @@ return {
               return utils.get_fg("Special")
             end,
           },
-          -- {
-          --   "diagnostics",
-          --   symbols = {
-          --     error = utils.diagnostic_icons.Error,
-          --     warn = utils.diagnostic_icons.Warn,
-          --     info = utils.diagnostic_icons.Info,
-          --     hint = utils.diagnostic_icons.Hint,
-          --   },
-          -- },
         },
         lualine_y = {
           {
@@ -283,22 +254,8 @@ return {
             end,
             padding = { left = 0, right = 1 },
           },
-          -- stylua: ignore
-          -- {
-          --   function() return vim.api.nvim_buf_line_count(0) .. "" end,
-          --   separator = " ",
-          --   padding = { left = 1, right = 0 },
-          -- },
         },
         lualine_z = {
-          -- {
-          --   function()
-          --     local name = " " .. vim.loop.cwd():match("([^/\\]+)[/\\]*$")
-          --     return name
-          --   end,
-          --   -- stylua: ignore
-          --   cond = function() return vim.o.columns > 85 end,
-          -- },
           {
             "progress",
             separator = " ",
