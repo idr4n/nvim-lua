@@ -169,6 +169,41 @@ command("OpenGithubRepo", function()
 end, {})
 vim.keymap.set({ "n", "v" }, "<leader>og", "<cmd>OpenGithubRepo<cr>", { desc = "Open Github Repo" })
 
+-- Command to preview files using macOS Quick Look
+command("QuickLookPreview", function()
+  local mode = vim.api.nvim_get_mode().mode
+  local filepath = ""
+
+  if mode == "v" then
+    filepath = vim.getVisualSelection()
+  else
+    filepath = vim.fn.expand("<cfile>")
+  end
+
+  -- Get current buffer's directory
+  local buf_dir = vim.fn.expand("%:p:h")
+
+  -- Resolve relative path against current buffer's directory
+  filepath = vim.fn.resolve(buf_dir .. "/" .. filepath)
+
+  -- Check if file exists
+  if vim.fn.filereadable(filepath) == 0 then
+    local msg = string.format("QuickLookPreview: File '%s' does not exist", filepath)
+    vim.notify(msg, vim.log.levels.ERROR)
+    return
+  end
+
+  -- Preview file with Quick Look
+  vim.system({ "qlmanage", "-p", filepath }, {
+    stdout = false,
+    stderr = false,
+  })
+  vim.defer_fn(function()
+    vim.system({ "osascript", "-e", 'tell application "qlmanage" to activate' })
+  end, 200)
+end, {})
+vim.keymap.set({ "n", "v" }, "<leader>pv", "<cmd>QuickLookPreview<cr>", { desc = "Quick Look File Preview" })
+
 command("LuaInspect", function()
   local sel = vim.fn.mode() == "v" and vim.getVisualSelection() or nil
   if sel then
