@@ -45,7 +45,8 @@ return {
       dashboard.button("n", "  File Explorer", function()
         -- require("bufferline")
         -- require("nvim-tree.api").tree.find_file({ open = true, current_window = true })
-        vim.cmd("Oil --float")
+        -- vim.cmd("Oil --float")
+        require("mini.files").open()
       end),
       dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
       { type = "padding", val = 1 },

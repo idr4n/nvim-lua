@@ -2,14 +2,14 @@ return {
   "stevearc/oil.nvim",
   -- enabled = false,
   cmd = "Oil",
-  init = function()
-    if vim.fn.argc(-1) == 1 then
-      local stat = vim.loop.fs_stat(vim.fn.argv(0))
-      if stat and stat.type == "directory" then
-        require("oil")
-      end
-    end
-  end,
+  -- init = function()
+  --   if vim.fn.argc(-1) == 1 then
+  --     local stat = vim.loop.fs_stat(vim.fn.argv(0))
+  --     if stat and stat.type == "directory" then
+  --       require("oil")
+  --     end
+  --   end
+  -- end,
   keys = {
     -- { "<leader>-", "<cmd>Oil --float<cr>", desc = "Oil Float - Parent Dir" },
     { "-", "<cmd>Oil --float<cr>", desc = "Oil Float - Parent Dir" },

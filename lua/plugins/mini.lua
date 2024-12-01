@@ -53,25 +53,39 @@ return {
         desc = "Mini Files",
       },
     },
-    -- init = function()
-    --   if vim.fn.argc(-1) == 1 then
-    --     local stat = vim.loop.fs_stat(vim.fn.argv(0))
-    --     if stat and stat.type == "directory" then
-    --       require("mini.files").open()
-    --     end
-    --   end
-    -- end,
+    init = function()
+      if vim.fn.argc(-1) == 1 then
+        local stat = vim.loop.fs_stat(vim.fn.argv(0))
+        if stat and stat.type == "directory" then
+          require("mini.files").open()
+        end
+      end
+    end,
     opts = function()
+      local MiniFiles = require("mini.files")
       local copy_path = function()
-        local cur_entry_path = require("mini.files").get_fs_entry().path
+        local cur_entry_path = MiniFiles.get_fs_entry().path
         vim.fn.setreg("+", cur_entry_path)
         print("Path copied to clipboard!")
+      end
+      local preview_file = function()
+        local cur_entry_path = MiniFiles.get_fs_entry().path
+        vim.system({ "qlmanage", "-p", cur_entry_path }, {
+          stdout = false,
+          stderr = false,
+        })
+        vim.defer_fn(function()
+          vim.system({ "osascript", "-e", 'tell application "qlmanage" to activate' })
+        end, 200)
       end
       vim.api.nvim_create_autocmd("User", {
         group = vim.api.nvim_create_augroup("idr4n/mini-files", { clear = true }),
         pattern = "MiniFilesBufferCreate",
         callback = function(args)
           vim.keymap.set("n", "Y", copy_path, { buffer = args.data.buf_id })
+          if vim.fn.has("mac") == 1 then
+            vim.keymap.set("n", "F", preview_file, { buffer = args.data.buf_id })
+          end
         end,
       })
       return {
@@ -81,7 +95,7 @@ return {
           go_in_plus = "l",
           go_out_plus = "<tab>",
         },
-        windows = { width_nofocus = 25, preview = false },
+        windows = { width_nofocus = 25, preview = true, width_preview = 50 },
       }
     end,
   },
