@@ -45,14 +45,14 @@ return {
       cmdline_input = {
         position = { row = "25%", col = "50%" },
         -- size = { width = "65%" },
-        size = { width = "45%" },
+        size = { width = "60%" },
       },
       cmdline_popup = {
         -- position = { row = "100%", col = "0%" },
         -- size = { width = "80%" },
         -- border = { style = "none", padding = { 0, 0 } },
         position = { row = "25%", col = "50%" },
-        size = { width = "45%" },
+        size = { width = "60%" },
       },
     },
     popupmenu = { backend = "cmp" },

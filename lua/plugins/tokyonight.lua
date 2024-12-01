@@ -17,6 +17,7 @@ return {
         hl.CursorLine = { bg = c.bg_dark } -- needed for bufferline
         hl.CursorLineNr = { fg = c.magenta }
         hl.IblScope = { fg = "#634E89" }
+        hl.DiagnosticUnnecessary = { fg = c.none }
         hl.Folded = { fg = c.comment, bg = c.none }
         hl.FloatBorder = { fg = c.magenta }
         hl.Visual = { bg = "#403C7A" }
