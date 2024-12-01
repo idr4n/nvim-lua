@@ -56,7 +56,7 @@ return {
         if vim.g.colors_name == "nord" then
           require("lualine").setup({ options = { theme = "nord" } })
         else
-          require("lualine").setup({ options = { theme = theme[vim.g.colors_name] } })
+          require("lualine").setup({ options = { theme = theme[vim.g.colors_name] or "auto" } })
         end
       end,
     })

@@ -125,10 +125,65 @@ local rose_pine_custom = {
   },
 }
 
+local c_github_light = {
+  -- blue = "#0A69DA",
+  blue = "#0859B8",
+  blue_light = "#CFE1F8",
+  blue_fg = "#6BA5E9",
+  blue_fg1 = "#3A87E1",
+  green = "#106329",
+  green_light = "#CFE0D4",
+  green_fg = "#70A17F",
+  green_fg1 = "#418254",
+  purple = "#A475F9",
+  purple_light = "#EDE3FE",
+  purple_fg = "#C8ACFB",
+  purple_fg1 = "#B691FA",
+  yellow = "#9B6700",
+  yellow_light = "#DBD5CC",
+  yellow_fg = "#948166",
+  yellow_fg1 = "#715733",
+  red = "#CF212E",
+  red_light = "#F5D3D6",
+  red_fg = "#E27A82",
+  red_fg1 = "#D94E58",
+  white = "#F4F4F4",
+  bg = "#EFEFEF",
+}
+
+local github_light_custom = {
+  normal = {
+    a = { bg = c_github_light.blue, fg = c_github_light.white },
+    b = { bg = c_github_light.blue_light, fg = c_github_light.blue_fg1 },
+    c = { bg = c_github_light.bg, fg = c_github_light.blue_fg },
+  },
+  insert = {
+    a = { bg = c_github_light.purple, fg = c_github_light.white },
+    b = { bg = c_github_light.purple_light, fg = c_github_light.purple_fg1 },
+    c = { bg = c_github_light.bg, fg = c_github_light.purple_fg },
+  },
+  visual = {
+    a = { bg = c_github_light.yellow, fg = c_github_light.white },
+    b = { bg = c_github_light.yellow_light, fg = c_github_light.yellow_fg1 },
+    c = { bg = c_github_light.bg, fg = c_github_light.yellow_fg },
+  },
+  replace = {
+    a = { bg = c_github_light.red, fg = c_github_light.white },
+    b = { bg = c_github_light.red_light, fg = c_github_light.red_fg1 },
+    c = { bg = c_github_light.bg, fg = c_github_light.red_fg },
+  },
+  command = {
+    a = { bg = c_github_light.green, fg = c_github_light.white },
+    b = { bg = c_github_light.green_light, fg = c_github_light.green_fg1 },
+    c = { bg = c_github_light.bg, fg = c_github_light.green_fg },
+  },
+}
+
 M.theme = {
   ["nord"] = nord_custom,
   ["dracula"] = dracula_custom,
   ["rose-pine"] = rose_pine_custom,
+  ["github_light"] = github_light_custom,
   -- ["rose-pine"] = "rose-pine-alt",
 }
 
