@@ -62,9 +62,6 @@ opt.writebackup = false -- if a file is being edited by another program (or was 
 opt.shortmess:append({ W = true, I = true, c = true, C = true }) -- comment if not using noice
 opt.nrformats:append("alpha") -- increments letters sequences as well with <c-a>
 
--- statuscolumn
-opt.statuscolumn = [[%!v:lua.require'utils'.statuscolumn()]]
-
 vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.cmd([[set iskeyword+=-]])
 
