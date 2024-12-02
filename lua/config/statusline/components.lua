@@ -1,6 +1,7 @@
 -- Statusline components
 
 local utils = require("utils")
+local get_opt = vim.api.nvim_get_option_value
 
 local M = {}
 
@@ -53,13 +54,82 @@ local mode_color = {
   ["nt"] = { "T", "%#StatusCommand#" },
 }
 
+---Get a hl group's hex
+---@param hl_group string
+---@return table
+local get_hl_hex = function(hl_group)
+  assert(hl_group, "Error: must have hl group name")
+
+  local hl = vim.api.nvim_get_hl(0, { name = hl_group })
+
+  return {
+    fg = hl.fg and ("#%06x"):format(hl.fg) or "none",
+    bg = hl.bg and ("#%06x"):format(hl.bg) or "none",
+  }
+end
+
+local group_number = function(num, sep)
+  if num < 999 then
+    return tostring(num)
+  else
+    num = tostring(num)
+    return num:reverse():gsub("(%d%d%d)", "%1" .. sep):reverse():gsub("^,", "")
+  end
+end
+
+local nonprog_modes = {
+  ["markdown"] = true,
+  ["org"] = true,
+  ["text"] = true,
+}
+
+local isDark = vim.o.background == "dark"
+
+--- Gets the color for either insert or normal mode.
+---@param mode "insert"|nil
+---@return string
+local function get_theme_color(mode)
+  if vim.g.colors_name == "tokyonight-moon" then
+    local colors = require("tokyonight.colors").setup()
+    return mode == "insert" and colors.green1 or "#9580FF"
+  elseif vim.g.colors_name == "dracula" then
+    local c_dracula = require("dracula").colors()
+    return mode == "insert" and c_dracula.green or c_dracula.purple
+  elseif vim.g.colors_name == "catppuccin-mocha" then
+    local cp = require("catppuccin.palettes").get_palette("mocha")
+    return mode == "insert" and cp.mauve or cp.blue
+  end
+
+  if mode == "insert" then
+    return isDark and "#4FD6BE" or "#1E1E1E"
+  end
+
+  return isDark and "#9580FF" or "#9A5BFF"
+end
+
+local hl_str = function(hl, str)
+  return "%#" .. hl .. "#" .. str .. "%*"
+end
+
+M.colors = {
+  yellow = "#E2B86B",
+  red = isDark and "#DE6E7C" or "#D73A4A",
+  blue = get_theme_color(),
+  insert = get_theme_color("insert"),
+  select = isDark and "#FCA7EA" or "#2188FF",
+  stealth = isDark and "#4E546B" or "#A7ACBF",
+  fg_hl = isDark and "#FFAFF3" or "#9A5BFF",
+  bg_hl = utils.lighten(get_hl_hex("Normal").bg, 0.93),
+}
+
+---Get a status decorator for some filetypes such as Nvimtree
 ---@return string
 ---@param opts? {name:string, align:string}
 function M.decorator(opts)
   opts = vim.tbl_extend("force", { name = " ", align = "left" }, opts)
   local align = vim.tbl_contains({ "left", "right" }, opts.align) and opts.align or "left"
-  local name = opts.name
-  return (align == "right" and "%=" or "") .. "%#SLDecorator# " .. name .. " %#SLNormal#"
+  local name = " " .. opts.name .. " "
+  return (align == "right" and "%=" or "") .. hl_str("SLDecorator", name)
 end
 
 function M.mode()
@@ -71,8 +141,8 @@ function M.mode()
   end
 end
 
--- source: modified from https://github.com/MariaSolOs/dotfiles/blob/fedora/.config/nvim/lua/statusline.lua
---- Keeps track of the highlight groups already created.
+---source: modified from https://github.com/MariaSolOs/dotfiles
+---Keeps track of the highlight groups already created.
 ---@type table<string, boolean>
 local statusline_hls = {}
 
@@ -122,10 +192,6 @@ function M.get_or_create_hl(hl_fg, hl_bg)
   return "%#" .. hl_name .. "#"
 end
 
-function M.clear_hl_cache()
-  statusline_hls = {}
-end
-
 ---@return string
 ---@param opts? {mono:boolean}
 local function file_icon(opts)
@@ -137,84 +203,95 @@ local function file_icon(opts)
   end
 
   if icon == nil and icon_highlight_group == nil then
-    icon = ""
+    icon = "󰈚"
     icon_highlight_group = "DevIconDefault"
-  end
-
-  local hl_icon = "%#SLBgLightenLess#"
-
-  if not opts.mono then
-    hl_icon = M.get_or_create_hl(icon_highlight_group, "SLBgLightenLess")
   end
 
   if not vim.bo.modifiable then
     icon = ""
     icon_highlight_group = "SLNotModifiable"
-    return "  %#SLNotModifiable#" .. icon
   end
 
-  return hl_icon .. " " .. icon
-end
-
-function M.get_fileinfo()
-  local filename = ""
-
-  if vim.fn.expand("%") == "" then
-    return " nvim "
-  end
-
-  local icon = file_icon({ mono = false }) .. " "
-  filename = icon
-    .. "%#StatusDir#"
-    .. (vim.fn.expand("%:p:h:t"))
-    .. "/"
-    .. "%#SLFileName#"
-    .. vim.fn.expand("%:t")
-    .. "%#SLNormal# "
-
-  if vim.bo.modified then
-    filename = (vim.fn.expand("%:p:h:t")) .. "/" .. vim.fn.expand("%:t")
-    return icon .. "%#SLModified#" .. filename .. "  " .. "%#SLNormal# "
-  end
-
-  return filename
+  return hl_str(icon_highlight_group, icon)
 end
 
 ---@return string
 ---@param opts? {add_icon:boolean}
 function M.fileinfo(opts)
   opts = opts or { add_icon = true }
-  local icon = opts.add_icon and "󰈚 " or ""
+  local icon = file_icon({ mono = false })
   local dir = utils.pretty_dirpath()()
   local path = vim.fn.expand("%:t")
   local name = (path == "" and "Empty ") or path:match("([^/\\]+)[/\\]*$")
 
-  if name ~= "Empty " and opts.add_icon then
-    local devicons_present, icons = pcall(require, "nvim-web-devicons")
+  local modified = vim.bo.modified and hl_str("DiagnosticError", " •") or ""
 
-    if devicons_present then
-      local ft_icon = icons.get_icon(name)
-      icon = (ft_icon ~= nil and ft_icon) or icon
+  return (opts.add_icon and " " .. icon .. " " or " ") .. dir .. name .. modified .. " %r%h%w "
+end
+
+local function get_vlinecount_str()
+  local raw_count = vim.fn.line(".") - vim.fn.line("v")
+  raw_count = raw_count < 0 and raw_count - 1 or raw_count + 1
+
+  return group_number(math.abs(raw_count), ",")
+end
+
+---Source: modified from https://github.com/mcauley-penney/nvim
+---Get wordcount for current buffer or visual selection
+--- @return string word count
+function M.get_fileinfo_widget()
+  local ft = get_opt("filetype", {})
+  local lines = group_number(vim.api.nvim_buf_line_count(0), ",")
+
+  local wc_table = vim.fn.wordcount()
+
+  -- For source code: return icon and line count
+  if not nonprog_modes[ft] then
+    if not wc_table.visual_words or not wc_table.visual_chars then
+      return table.concat({ hl_str("DiagnosticInfo", "≡"), " ", lines, " lines" })
+    else
+      return table.concat({
+        hl_str("DiagnosticInfo", "‹›"),
+        " ",
+        get_vlinecount_str(),
+        " lines  ",
+        group_number(wc_table.visual_chars, ","),
+        " chars",
+      })
     end
   end
 
-  return (opts.add_icon and " " .. icon .. " " or " ") .. dir .. name .. " %m%r%h%w "
-end
-
-function M.progress()
-  local cur = vim.fn.line(".")
-  local total = vim.fn.line("$")
-  if cur == 1 then
-    return "Top"
-  elseif cur == total then
-    return "Bot"
+  if not wc_table.visual_words or not wc_table.visual_chars then
+    -- Normal mode word count and file info
+    return table.concat({
+      hl_str("DiagnosticInfo", "≡"),
+      " ",
+      lines,
+      " lines  ",
+      group_number(wc_table.words, ","),
+      " words ",
+    })
   else
-    return string.format("%2d", math.floor(cur / total * 100)) .. "%%"
+    -- Visual selection mode: line count, word count, and char count
+    return table.concat({
+      hl_str("DiagnosticInfo", "‹›"),
+      " ",
+      get_vlinecount_str(),
+      " lines  ",
+      group_number(wc_table.visual_words, ","),
+      " words  ",
+      group_number(wc_table.visual_chars, ","),
+      " chars",
+    })
   end
 end
 
+function M.separator()
+  return hl_str("DiagnosticError", " ‹ ")
+end
+
 function M.get_position()
-  return " %3l:%-2c %-2L "
+  return " %3l:%-2c "
 end
 
 function M.search_count()
@@ -227,36 +304,18 @@ function M.search_count()
     return ""
   end
 
-  local hl_match = "%#SLNormal# "
-
   if count.incomplete == 1 then
-    return "%#SLMatches# ?/? " .. hl_match
+    return hl_str("SLMatches", " ?/? ")
   end
 
   local too_many = (">%d"):format(count.maxcount)
   local total = (((count.total > count.maxcount) and too_many) or count.total)
 
-  return ("  %#SLMatches#" .. (" %s/%s "):format(count.current, total) .. hl_match)
-end
-
-function M.get_bufnr()
-  return "%#SLBufNr#" .. vim.api.nvim_get_current_buf() .. "%#SLNormal#"
+  return "  " .. hl_str("SLMatches", (" %s/%s "):format(count.current, total))
 end
 
 function M.maximized_status()
-  return vim.t.maximized and "  %#SLModified# %#SLNormal#" or ""
-end
-
-function M.lsp_running()
-  if not vim.bo.modifiable then
-    return ""
-  end
-
-  if #vim.lsp.get_clients() > 0 then
-    return " " .. "%#SLBufNr#󱓞 " .. "%#SLNormal#" .. " "
-  else
-    return ""
-  end
+  return vim.b.is_zoomed and hl_str("SLModified", "   ") or ""
 end
 
 local function stbufnr()
@@ -279,97 +338,22 @@ end
 
 M.get_words = utils.get_words
 
-function M.charcode()
-  return _G.charcode and " %#SLBufNr#Ux%04B%#SLNormal# " or ""
-end
-
-function M.colemak()
-  return _G.colemak and " %#SLBufNr#󰯳 󰌌 %#SLNormal#  " or ""
-end
-
-function M.status_command()
-  local command = require("noice").api.status.command.get()
-  local mode = require("noice").api.status.mode.get()
-  local command_str = command and " %#SLBufNr#" .. string.format("%-3s", command) .. "%#SLNormal#" or ""
-  local mode_str = mode and "  %#SLBufNr#" .. mode .. "%#SLNormal#" or ""
-  return command_str .. mode_str
-end
-
-function M.status_noice()
-  local mode = require("noice").api.status.mode.get()
+function M.show_macro_recording()
   local sep_left = M.get_or_create_hl("#ff6666", "StatusLine") .. ""
-  local sep_right = M.get_or_create_hl("#ff6666", "StatusLine") .. "%#SLNormal# "
-  local mode_str = mode and sep_left .. M.get_or_create_hl("#212121", "#ff6666") .. mode .. sep_right or ""
-  return mode_str
-end
+  local sep_right = M.get_or_create_hl("#ff6666", "StatusLine") .. "%* "
 
----@return string
----@param opts? {mono:boolean}
-function M.git_hunks(opts)
-  opts = opts or { mono = true }
-  local hunks = require("gitsigns").get_hunks()
-  local nhunks = hunks and #hunks or 0
-  local status = ""
-  local hunk_icon = " "
-  if nhunks > 0 then
-    status = opts.mono and "%#SLBgLightenLess#" .. " " .. hunk_icon .. nhunks
-      or "%#SLGitHunks#" .. " " .. hunk_icon .. nhunks
+  local recording_register = vim.fn.reg_recording()
+  if recording_register == "" then
+    return ""
+  else
+    return sep_left .. M.get_or_create_hl("#212121", "#ff6666") .. "󰑋 " .. recording_register .. sep_right
   end
-  return nhunks > 0 and status .. " " or ""
-end
-
----@return string
----@param opts? {mono:boolean}
-function M.git_status(opts)
-  opts = opts or { mono = true }
-  local gitsigns = vim.b.gitsigns_status_dict
-
-  local diff_icons = {
-    added = " ",
-    modified = " ",
-    removed = " ",
-  }
-
-  local total_changes = 0
-  local git_status = ""
-
-  if gitsigns then
-    total_changes = (gitsigns.added or 0) + (gitsigns.changed or 0) + (gitsigns.removed or 0)
-    local added = ""
-    local changed = ""
-    local removed = ""
-
-    if opts.mono then
-      added = (gitsigns.added or 0) > 0 and " " .. diff_icons.added .. gitsigns.added or ""
-      changed = (gitsigns.changed or 0) > 0 and " " .. diff_icons.modified .. gitsigns.changed or ""
-      removed = (gitsigns.removed or 0) > 0 and " " .. diff_icons.removed .. gitsigns.removed or ""
-
-      return total_changes > 0 and "%#SLBgLightenLess#" .. added .. changed .. removed .. " " or ""
-    else
-      if gitsigns.added and gitsigns.added > 0 then
-        added = M.get_or_create_hl("GitSignsAdd", "SLBgLightenLess") .. " " .. diff_icons.added .. gitsigns.added
-      end
-      -- stylua: ignore
-      if gitsigns.changed and gitsigns.changed > 0 then
-        changed = M.get_or_create_hl("GitSignsChange", "SLBgLightenLess") .. " " .. diff_icons.modified .. gitsigns.changed
-      end
-      -- stylua: ignore
-      if gitsigns.removed and gitsigns.removed > 0 then
-        removed = M.get_or_create_hl("GitSignsDelete", "SLBgLightenLess") .. " " .. diff_icons.removed .. gitsigns.removed
-      end
-    end
-
-    git_status = total_changes > 0 and added .. changed .. removed or ""
-  end
-
-  return git_status
 end
 
 ---@return string
 function M.git_status_simple()
   local gitsigns = vim.b.gitsigns_status_dict
 
-  -- local diff_icon = "◦"
   local diff_icon = "•"
   local total_changes = 0
   local git_status = ""
@@ -398,21 +382,6 @@ function M.git_status_simple()
   return git_status
 end
 
----@return string
-function M.git_boring()
-  local gitsigns = vim.b.gitsigns_status_dict
-
-  -- local icon = "󰓎"
-  local icon = "*"
-  local total_changes = 0
-
-  if gitsigns then
-    total_changes = (gitsigns.added or 0) + (gitsigns.changed or 0) + (gitsigns.removed or 0)
-  end
-
-  return total_changes > 0 and (vim.bo.modified and " " or "") .. "%#SLBgNoneHl#" .. icon .. "%#SLBgNone#" or ""
-end
-
 function M.git_branch()
   local branch = vim.b.gitsigns_status_dict or { head = "" }
   local git_icon = " "
@@ -424,88 +393,6 @@ function M.lang_version()
   local filetype = vim.bo.filetype
   local lang_v = _G.lang_versions[filetype]
   return lang_v and " (" .. filetype .. " " .. lang_v .. ") " or ""
-end
-
-function M.cwd()
-  local hl = "%#SLBgLighten#"
-  local name = hl .. "  " .. vim.loop.cwd():match("([^/\\]+)[/\\]*$") .. " "
-  return (vim.o.columns > 85 and name) or ""
-end
-
-function M.filetype()
-  local filetype = vim.bo.filetype
-  return "%#SLBgLighten# " .. filetype:upper() .. " "
-end
-
----@return string
-function M.diagnostics_boring()
-  local function get_severity(s)
-    return #vim.diagnostic.get(0, { severity = s })
-  end
-
-  local result = {
-    errors = get_severity(vim.diagnostic.severity.ERROR),
-    warnings = get_severity(vim.diagnostic.severity.WARN),
-    info = get_severity(vim.diagnostic.severity.INFO),
-    hints = get_severity(vim.diagnostic.severity.HINT),
-  }
-
-  -- local icon = "󱈸"
-  local icon = "!"
-  local total = result.errors + result.warnings + result.hints + result.info
-
-  return total > 0 and "%#SLBgNoneHl#" .. icon .. "%#SLBgNone#" or ""
-end
-
----@return string
----@param opts? {mono:boolean}
-function M.lsp_diagnostics(opts)
-  opts = opts or { mono = true }
-  local icons = require("utils").diagnostic_icons
-  local function get_severity(s)
-    return #vim.diagnostic.get(0, { severity = s })
-  end
-
-  local result = {
-    errors = get_severity(vim.diagnostic.severity.ERROR),
-    warnings = get_severity(vim.diagnostic.severity.WARN),
-    info = get_severity(vim.diagnostic.severity.INFO),
-    hints = get_severity(vim.diagnostic.severity.HINT),
-  }
-
-  local total = result.errors + result.warnings + result.hints + result.info
-  local errors = ""
-  local warnings = ""
-  local info = ""
-  local hints = ""
-
-  if opts.mono then
-    errors = result.errors > 0 and " " .. icons.Error .. result.errors or ""
-    warnings = result.warnings > 0 and " " .. icons.Warn .. result.warnings or ""
-    info = result.info > 0 and " " .. icons.Info .. result.info or ""
-    hints = result.hints > 0 and " " .. icons.Hint .. result.hints or ""
-
-    return vim.bo.modifiable and total > 0 and "%#SLBgLightenLess#" .. errors .. warnings .. info .. hints .. " " or ""
-  else
-    if result.errors > 0 then
-      errors = M.get_or_create_hl("DiagnosticError", "SLBgLightenLess") .. " " .. icons.Error .. result.errors
-    end
-    if result.warnings > 0 then
-      warnings = M.get_or_create_hl("DiagnosticWarn", "SLBgLightenLess") .. " " .. icons.Warn .. result.warnings
-    end
-    if result.info > 0 then
-      info = M.get_or_create_hl("DiagnosticInfo", "SLBgLightenLess") .. " " .. icons.Info .. result.info
-    end
-    if result.hints > 0 then
-      hints = M.get_or_create_hl("DiagnosticHint", "SLBgLightenLess") .. " " .. icons.Hint .. result.hints
-    end
-
-    if vim.bo.modifiable and total > 0 then
-      return warnings .. errors .. info .. hints .. " "
-    end
-  end
-
-  return ""
 end
 
 ---@return string
@@ -527,7 +414,6 @@ function M.lsp_diagnostics_simple()
   local info = ""
   local hints = ""
 
-  -- local icon = "•"
   local icon = "◦"
 
   if result.errors > 0 then
@@ -551,31 +437,33 @@ function M.lsp_diagnostics_simple()
 end
 
 function M.scrollbar()
-  local sbar = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" }
-  local curr_line = vim.api.nvim_win_get_cursor(0)[1]
+  local sbar_chars = { "▔", "🮂", "🬂", "🮃", "▀", "▄", "▃", "🬭", "▂", "▁" }
+
+  local cur_line = vim.api.nvim_win_get_cursor(0)[1]
   local lines = vim.api.nvim_buf_line_count(0)
-  local i = math.floor((curr_line - 1) / lines * #sbar) + 1
-  if sbar[i] then
-    return "%#StatusCommand#" .. string.rep(sbar[i], 2) .. "%#SLNormalNoFg# "
-  end
+
+  local i = math.floor((cur_line - 1) / lines * #sbar_chars) + 1
+  local sbar = string.rep(sbar_chars[i], 2)
+
+  return " " .. M.get_or_create_hl(get_hl_hex("Substitute").bg, M.colors.bg_hl) .. sbar .. "%* "
 end
 
--- codeium status in the statusline
+---codeium status in the statusline
 function M.codeium_status()
   if vim.g.codeium_enabled then
     local status = vim.api.nvim_call_function("codeium#GetStatusString", {})
-    -- return "%#SLBgNoneHl# [ " .. status .. "]" .. "%#SLBgNone# "
     local status_map = {
       [" ON"] = "",
       [" * "] = " ",
     }
     status = status_map[status] or status
-    return M.get_or_create_hl("SLBgNoneHl", "StatusLine") .. "  " .. status .. "%#SLNormalNoFg# "
+    return M.get_or_create_hl("SLBgNoneHl", "StatusLine") .. "  " .. status .. "%* "
   end
 
   return ""
 end
 
+---Indicates whether a terminal is open or not
 function M.terminal_status()
   local is_terminal_open = false
   for _, buffer in ipairs(vim.api.nvim_list_bufs()) do
@@ -583,7 +471,7 @@ function M.terminal_status()
       is_terminal_open = true
     end
   end
-  return is_terminal_open and M.get_or_create_hl("SLBgNoneHl", "SLNormal") .. "  " .. "%#SLNormal# " or ""
+  return is_terminal_open and M.get_or_create_hl("SLBgNoneHl", "StatusLine") .. "  " .. "%* " or ""
 end
 
 function M.lsp_progress()
