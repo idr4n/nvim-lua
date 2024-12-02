@@ -186,7 +186,7 @@ return {
           desc = "Key maps",
         },
         { ",u", "<cmd>Telescope undo<cr>", noremap = true, silent = true },
-        { "<leader>oh", "<cmd>Telescope highlights<cr>", desc = "Telescope Highlights" },
+        { "<leader>sl", "<cmd>Telescope highlights<cr>", desc = "Telescope Highlights" },
       }
     end,
     opts = function()

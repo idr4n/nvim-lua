@@ -23,6 +23,12 @@ opt.foldmethod = "indent"
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 -- opt.guicursor = "" -- no thin cursor on insert mode
+opt.guicursor = {
+  "n-sm:block",
+  "v:hor50",
+  "c-ci-cr-i-ve:ver10",
+  "o-r:hor50",
+}
 opt.hlsearch = true -- highlight all matches on previous search pattern
 opt.incsearch = true
 opt.ignorecase = true -- ignore case in search patterns
