@@ -31,6 +31,7 @@ return {
       "stylua",
       "svelte-language-server",
       "tailwindcss-language-server",
+      "tinymist",
       "vim-language-server",
       "vtsls",
       -- "typescript-language-server",

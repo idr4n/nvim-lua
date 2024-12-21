@@ -4,7 +4,7 @@ return {
   -- keys = { "<leader>", "<c-r>", "<c-w>", "z", '"', "'", "`", "c", "v", "g", ",", ";" },
   opts = {
     -- preset = "modern",
-    preset = "helix",
+    -- preset = "helix",
     notify = false,
     -- icons = {
     --   rules = false,

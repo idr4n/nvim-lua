@@ -277,3 +277,26 @@ vim.keymap.set("n", "<leader>mt", function()
     vim.cmd("TypstWatch")
   end
 end, { desc = "TypstWatch Toggle" })
+
+-- Function to shuffle lines
+local function shuffle_lines()
+  -- Get the start and end line numbers of the visual selection
+  local start_line = vim.fn.line("'<")
+  local end_line = vim.fn.line("'>")
+
+  -- Extract the lines within the selection
+  local lines = vim.fn.getline(start_line, end_line)
+
+  -- Shuffle the lines
+  math.randomseed(os.time())
+  for i = #lines, 2, -1 do
+    local j = math.random(i)
+    lines[i], lines[j] = lines[j], lines[i]
+  end
+
+  -- Replace the original lines with the shuffled lines
+  vim.fn.setline(start_line, lines)
+end
+
+-- Create a command to call the shuffle_lines function
+command("ShuffleLines", shuffle_lines, { range = true })

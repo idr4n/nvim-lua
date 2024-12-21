@@ -14,6 +14,6 @@ return {
       },
     })
 
-    vim.keymap.set("n", "<leader>vw", require("visual-whitespace").toggle, {})
+    vim.keymap.set("n", "<leader>tv", require("visual-whitespace").toggle, { desc = "Visual-Whitespace" })
   end,
 }

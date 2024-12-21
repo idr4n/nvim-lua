@@ -95,7 +95,7 @@ return {
           go_in_plus = "l",
           go_out_plus = "<tab>",
         },
-        windows = { width_nofocus = 25, preview = true, width_preview = 50 },
+        windows = { width_nofocus = 25, preview = false, width_preview = 50 },
       }
     end,
   },

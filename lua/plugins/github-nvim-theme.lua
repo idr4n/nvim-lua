@@ -2,9 +2,12 @@ return {
   "projekt0n/github-nvim-theme",
   lazy = true,
   config = function()
-    local bg = "#F4F4F4"
-    local bg_accent1 = "#EBEBEB"
-    local bg_accent2 = "#E9E9E9"
+    -- local bg = "#F4F4F4"
+    local bg = "#EFEDEC"
+    -- local bg_accent1 = "#EBEBEB"
+    -- local bg_accent2 = "#E9E9E9"
+    local bg_accent1 = "#E5E5E5"
+    local bg_accent2 = "#DFDFDF"
     local accent_purple1 = "#6639BA"
     local accent_purple2 = "#E8E0F4"
     local fg_light = "#7A838E"
@@ -41,7 +44,9 @@ return {
           -- FloatBorder = { fg = "#1F2328" },
           FloatBorder = { fg = accent_purple1 },
           NormalFloat = { bg = "None" },
-          IblScope = { fg = "palette.fg.muted" },
+          IblIndent = { fg = bg_accent1 },
+          -- IblScope = { fg = "palette.fg.muted" },
+          IblScope = { fg = accent_purple1 },
           DiagnosticUnnecessary = { fg = "None" },
           -- CursorLine = { bg = "#F6F8FA" },
           CursorLineNr = { fg = accent_purple1, style = "bold" },

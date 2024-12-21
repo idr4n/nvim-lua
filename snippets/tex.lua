@@ -99,6 +99,20 @@ M.snips.e = p({
   dscr = "Latex Environment",
 }, "\\begin{$1}\n$TM_SELECTED_TEXT$2\n\\end{$1}")
 
+M.snips.q = p(
+  {
+    trig = "q",
+    name = "MCQ",
+    dscr = "MCQ",
+  },
+  [[
+\item $1
+\alfa
+$2
+\myend
+]]
+)
+
 M.snips.c = p({
   trig = "c",
   name = "Multicol Environment",
@@ -117,9 +131,9 @@ M.autosnips.v = p({
   dscr = "Vertical space in Latex notation",
 }, "\\vspace{${1:1}cm}")
 
-M.snips.et10 = p(
+M.snips.t10 = p(
   {
-    trig = "et10",
+    trig = "t10",
     name = "Exam table 10",
     dscr = "Exam table with 10 MCQs",
   },
@@ -135,6 +149,29 @@ M.snips.et10 = p(
       \textbf{6}   & \textbf{7}   & \textbf{8}   & \textbf{9}  & \textbf{10}   \\\\\hline
       \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} \\\\\hline
     \end{tabular}
+  }
+\end{center}
+]]
+)
+
+M.snips.t20 = p(
+  {
+    trig = "t20",
+    name = "Exam table 20",
+    dscr = "Exam table with 20 MCQs",
+  },
+  [[
+\begin{center}
+  {\fontsize{10}{20}\selectfont
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+    \rowcolor{gray!15}
+    \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4}  & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} \\\hline
+    \hspace{1cm} & \hspace{1cm} & \hspace{1cm} &  \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} \\\hline
+    \rowcolor{gray!15}
+    \textbf{11}  & \textbf{12}  & \textbf{13}  & \textbf{14}   & \textbf{15}  & \textbf{16}  & \textbf{17}  & \textbf{18}  & \textbf{19}  & \textbf{20}  \\\hline
+    \hspace{1cm} & \hspace{1cm} & \hspace{1cm} &  \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} \\\hline
+  \end{tabular}
   }
 \end{center}
 ]]
@@ -158,6 +195,7 @@ M.snips.ex = p(
 \usepackage{graphicx}
 \usepackage{multicol}
 \usepackage{array}
+\usepackage{booktabs}
 % For long underlines use ulem's \uline instead
 \usepackage{ulem}
 \usepackage{booktabs}
@@ -165,10 +203,10 @@ M.snips.ex = p(
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \chead{}
-\rhead{MAJOR EXAM ${1:I} - ${2:ECON102}}
+\rhead{${1:MAJOR} EXAM ${2:I }- ${3:ECON102}}
 \cfoot{\thepage}
 \rfoot{Prince Sultan University}
-\lfoot{${3:Oct. 05, 2024}}
+\lfoot{${4:Oct. 05, 2024}}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 %%%%%%%%%%%%%%%%%
@@ -179,11 +217,11 @@ M.snips.ex = p(
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
 
 \begin{document}
-\title{MAJOR EXAM $1: $2 (${5:FALL 2024})}
+\title{$1 EXAM $2- $3 (${5:FALL 2024})}
 \author{}
 \maketitle
 
-\textbf{I. (6\%) Multiple Choice Questions.} Write your answers to the MCQs in the table below:
+\textbf{I. (${6:6}\%) Multiple Choice Questions.} Write your answers to the MCQs in the table below:
 
 \phantom{.}
 
@@ -225,9 +263,22 @@ M.snips.ex = p(
 
 \end{enumerate}
 
-\textbf{II. (14\%) Numerical and Analytical Questions.}
+\rule{\textwidth}{0.4pt}
 
-\begin{enumerate}[1.]
+\textbf{II. (${7:9}\%) Numerical and Analytical Questions.}
+
+\center\textbf{INSTRUCTIONS}
+
+\begin{itemize}
+  \item In all your calculations, use at least \textbf{4 decimals} for intermediate results, and \textbf{2 decimals} for final answers.
+  \item Only use the space provided to answer your questions. \textbf{No additional paper will be provided}, so think and plan your answer before attempting to writing it down.
+  \item Using pencil is allowed to write your answers.
+  \item \textbf{Be clear and organized!}
+\end{itemize}
+
+\rule{\textwidth}{0.4pt}
+
+\begin{enumerate}[Q1.]
   \item (5 marks)
 
   \newpage
