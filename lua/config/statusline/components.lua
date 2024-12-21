@@ -2,6 +2,7 @@
 
 local utils = require("utils")
 local get_opt = vim.api.nvim_get_option_value
+local hl_str = utils.hl_str
 
 local M = {}
 
@@ -105,10 +106,6 @@ local function get_theme_color(mode)
   end
 
   return isDark and "#9580FF" or "#9A5BFF"
-end
-
-local hl_str = function(hl, str)
-  return "%#" .. hl .. "#" .. str .. "%*"
 end
 
 M.colors = {
@@ -288,6 +285,11 @@ end
 
 function M.separator()
   return hl_str("DiagnosticError", " ‹ ")
+end
+
+function M.padding(nr)
+  nr = nr or 1
+  return string.rep(" ", nr)
 end
 
 function M.get_position()

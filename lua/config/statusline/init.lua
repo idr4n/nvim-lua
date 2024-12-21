@@ -23,19 +23,20 @@ vim.api.nvim_set_hl(0, "SLDecorator", { fg = "#414868", bg = "#7AA2F7", bold = t
 function Status_line()
   local filetype = vim.bo.filetype
 
-  local filetypes = { "neo-tree", "minifiles", "NvimTree", "oil", "TelescopePrompt" }
+  local filetypes = { "neo-tree", "minifiles", "NvimTree", "oil", "TelescopePrompt", "fzf" }
   if vim.tbl_contains(filetypes, filetype) then
     local home_dir = os.getenv("HOME")
     local api = require("nvim-tree.api")
     local node = api.tree.get_node_under_cursor()
     local dir = filetype == "NvimTree" and node.absolute_path or vim.fn.getcwd()
     dir = dir:gsub("^" .. home_dir, "~")
-    return c.decorator({ name = dir, align = "left" })
+    local ft = filetype:sub(1, 1):upper() .. filetype:sub(2)
+    return c.decorator({ name = ft .. ": " .. dir, align = "left" })
   end
 
   local components = {
     -- "%#SLNormal#",
-    "  ",
+    c.padding(3),
     c.fileinfo({ add_icon = true }),
     "%=",
     c.maximized_status(),
@@ -52,15 +53,15 @@ function Status_line()
     _G.show_more_info and c.separator() or "",
     c.codeium_status(),
     c.get_copilot_status(),
-    " ",
+    c.padding(),
     c.get_fileinfo_widget(),
     " ",
     c.get_position(),
     c.scrollbar(),
-    " ",
+    c.padding(),
     c.lsp_diagnostics_simple(),
     c.git_status_simple(),
-    "  ",
+    c.padding(3),
   }
 
   return table.concat(components)
