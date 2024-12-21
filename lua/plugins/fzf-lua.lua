@@ -34,8 +34,8 @@ return {
         silent = true,
         desc = "Fzf-Lua Resume",
       },
-      { "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", desc = "Find files - FzfLua" },
-      -- { "<C-P>", "<cmd>FzfLua files<cr>", desc = "Find files" },
+      -- { "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", desc = "Find files - FzfLua" },
+      { "<C-Space>", "<cmd>lua require('fzf-lua').files()<CR>", desc = "Find files - FzfLua" },
       -- { "<leader>r", "<cmd>FzfLua live_grep_glob<cr>", desc = "Live Grep" },
       { "<leader>r", "<cmd>FzfLua grep_project<cr>", desc = "Grep Project" },
       {
