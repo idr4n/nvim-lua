@@ -360,7 +360,7 @@ keymap("i", "<Space>", "<Space><c-g>u")
 --: }}}
 
 --: Move cursor around {{{
-vim.keymap.set({ "n", "v" }, "<C-l>", function()
+vim.keymap.set({ "n", "i", "v" }, "<C-l>", function()
   -- insert mode is defined in the nvim-cmp config
   cursorMoveAround()
 end, { desc = "Move Around Cursor" })

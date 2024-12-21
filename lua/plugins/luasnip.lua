@@ -1,3 +1,5 @@
+local cursorMoveAround = require("utils").CursorMoveAround
+
 return {
   "L3MON4D3/LuaSnip",
   version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
@@ -35,6 +37,8 @@ return {
       function()
         if require("luasnip").choice_active() then
           require("luasnip").change_choice(1)
+        else
+          cursorMoveAround()
         end
       end,
       mode = "i",
