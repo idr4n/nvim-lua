@@ -1,6 +1,6 @@
 return {
   "folke/snacks.nvim",
-  -- cond = false,
+  enabled = false,
   priority = 1000,
   event = { "BufReadPost", "BufNewFile" },
   -- stylua: ignore
@@ -10,7 +10,8 @@ return {
   },
   opts = function()
     -- use statuscolumn with padding
-    vim.opt.statuscolumn = [[%!v:lua.require'utils'.statuscolumn_with_padding()]]
+    -- Uncomment if not using luukvbaal/statuscol.nvim
+    -- vim.opt.statuscolumn = [[%!v:lua.require'utils'.statuscolumn_with_padding()]]
     return {
       scratch = {
         ft = "markdown",
