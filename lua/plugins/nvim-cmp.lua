@@ -1,6 +1,6 @@
 return {
   "hrsh7th/nvim-cmp",
-  enabled = false,
+  -- enabled = false,
   event = { "InsertEnter", "BufReadPost" },
   -- event = { "InsertEnter", "CmdLineEnter" },
   dependencies = {
