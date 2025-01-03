@@ -68,6 +68,12 @@ M.snips.e = p({
   dscr = "Environment in Latex notation",
 }, "\\begin{${1:mdframed}}\n$TM_SELECTED_TEXT$2\n\\end{$1}")
 
+M.snips.bc = p({
+  trig = "bc",
+  name = "Color Box",
+  dscr = "Color Box Environment in Latex notation",
+}, "\\begin{${1:tcolorbox}}\n$TM_SELECTED_TEXT$2\n\\end{$1}")
+
 M.snips.col = p({
   trig = "col",
   name = "collapsible block",
@@ -154,6 +160,12 @@ M.autosnips.e = p({
   name = "Environment",
   dscr = "Environment in Latex notation",
 }, "\\begin{${1:mdframed}}\n$TM_SELECTED_TEXT$2\n\\end{$1}")
+
+M.autosnips.bc = p({
+  trig = ";bc",
+  name = "Color Box",
+  dscr = "Color Box Environment in Latex notation",
+}, "\\begin{${1:tcolorbox}}\n$TM_SELECTED_TEXT$2\n\\end{$1}")
 
 M.autosnips.cb = p({
   trig = ";cb",
