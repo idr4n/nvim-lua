@@ -78,13 +78,26 @@ return {
           vim.system({ "osascript", "-e", 'tell application "qlmanage" to activate' })
         end, 200)
       end
+      local make_executable = function()
+        local cur_entry_path = MiniFiles.get_fs_entry().path
+        if cur_entry_path and vim.uv.fs_stat(cur_entry_path) then
+          local confirm = vim.fn.confirm("Do you want to make this file executable?", "&Yes\n&No", 2)
+          if confirm == 1 then
+            vim.fn.system({ "chmod", "+x", cur_entry_path })
+            print("Changed file mode to executable: " .. cur_entry_path)
+          else
+            print("Operation cancelled")
+          end
+        end
+      end
       vim.api.nvim_create_autocmd("User", {
         group = vim.api.nvim_create_augroup("idr4n/mini-files", { clear = true }),
         pattern = "MiniFilesBufferCreate",
         callback = function(args)
-          vim.keymap.set("n", "Y", copy_path, { buffer = args.data.buf_id })
+          vim.keymap.set("n", "Y", copy_path, { buffer = args.data.buf_id, desc = "Copy Path" })
+          vim.keymap.set("n", "X", make_executable, { buffer = args.data.buf_id, desc = "Make file executable" })
           if vim.fn.has("mac") == 1 then
-            vim.keymap.set("n", "F", preview_file, { buffer = args.data.buf_id })
+            vim.keymap.set("n", "F", preview_file, { buffer = args.data.buf_id, desc = "Preview File in MacOS" })
           end
         end,
       })
@@ -92,10 +105,12 @@ return {
         mappings = {
           close = "q",
           show_help = "?",
-          go_in_plus = "l",
+          go_in = "<c-l>",
+          go_out = "<c-h>",
+          go_in_plus = "<c-l>",
           go_out_plus = "<tab>",
         },
-        windows = { width_nofocus = 25, preview = false, width_preview = 50 },
+        windows = { width_nofocus = 25, preview = true, width_preview = 50 },
       }
     end,
   },

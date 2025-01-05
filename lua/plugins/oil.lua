@@ -31,10 +31,11 @@ return {
     },
     keymaps = {
       ["<C-s>"] = false,
-      ["<C-h>"] = false,
+      -- ["<C-h>"] = false,
       ["q"] = "actions.close",
       -- ["<leader>-"] = "actions.close",
-      [";"] = "actions.select",
+      ["<C-h>"] = "actions.parent",
+      ["<C-l>"] = "actions.select",
       ["s"] = "actions.close",
       ["Y"] = "actions.yank_entry",
       ["gd"] = {
