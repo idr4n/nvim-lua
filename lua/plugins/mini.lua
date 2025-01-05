@@ -233,4 +233,40 @@ return {
     version = false,
     opts = {},
   },
+
+  {
+    "echasnovski/mini.pick",
+    version = false,
+    cmd = { "Pick" },
+    -- init = function()
+    --   vim.ui.select = require("mini.pick").ui_select
+    -- end,
+    keys = function()
+      local MiniPick = require("mini.pick").builtin
+      return {
+        { "<C-Space>", "<cmd>Pick files<cr>", noremap = true, silent = true, desc = "MiniPick Files" },
+        { "<leader>sh", "<cmd>Pick help<cr>", noremap = true, silent = true, desc = "Help pages" },
+        { "<leader>r", "<cmd>Pick grep_live<cr>", noremap = true, silent = true, desc = "Grep Project" },
+        { "<leader>oe", "<cmd>Pick resume<cr>", noremap = true, silent = true, desc = "MiniPick Resume" },
+        {
+          "<leader>r",
+          function()
+            local text = vim.getVisualSelection()
+            MiniPick.grep({ pattern = text })
+          end,
+          mode = "v",
+          noremap = true,
+          silent = true,
+          desc = "Grep Project",
+        },
+      }
+    end,
+    opts = {
+      -- Keys for performing actions. See `:h MiniPick-actions`.
+      mappings = {
+        move_down = "<C-j>",
+        move_up = "<C-k>",
+      },
+    },
+  },
 }

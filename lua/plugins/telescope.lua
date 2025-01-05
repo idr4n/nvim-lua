@@ -33,7 +33,8 @@ return {
       return {
         {
           -- "<C-Space>",
-          "<leader>ff",
+          "<C-P>",
+          -- "<leader>ff",
           function()
             -- require("telescope.builtin").find_files()
             require("telescope.builtin").find_files(dropdown_theme())
@@ -42,16 +43,16 @@ return {
           silent = true,
           desc = "Telescope-find_files",
         },
-        {
-          "<C-P>",
-          function()
-            require("telescope.builtin").find_files()
-            -- require("telescope.builtin").find_files(dropdown_theme())
-          end,
-          noremap = true,
-          silent = true,
-          desc = "Telescope-find_files",
-        },
+        -- {
+        --   "<C-P>",
+        --   function()
+        --     require("telescope.builtin").find_files()
+        --     -- require("telescope.builtin").find_files(dropdown_theme())
+        --   end,
+        --   noremap = true,
+        --   silent = true,
+        --   desc = "Telescope-find_files",
+        -- },
         -- { "<leader>r", "<cmd>Telescope live_grep<cr>", desc = "" },
         -- {
         --   "<leader>r",
@@ -100,7 +101,7 @@ return {
           noremap = true,
           silent = true,
         },
-        { "<leader>sh", "<cmd>Telescope help_tags<cr>", noremap = true, silent = true, desc = "Help pages" },
+        -- { "<leader>sh", "<cmd>Telescope help_tags<cr>", noremap = true, silent = true, desc = "Help pages" },
         {
           "<leader>sh",
           function()

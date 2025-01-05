@@ -34,10 +34,10 @@ return {
         silent = true,
         desc = "Fzf-Lua Resume",
       },
-      -- { "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", desc = "Find files - FzfLua" },
-      { "<C-Space>", "<cmd>lua require('fzf-lua').files()<CR>", desc = "Find files - FzfLua" },
+      { "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", desc = "Find files - FzfLua" },
+      -- { "<C-Space>", "<cmd>lua require('fzf-lua').files()<CR>", desc = "Find files - FzfLua" },
       -- { "<leader>r", "<cmd>FzfLua live_grep_glob<cr>", desc = "Live Grep" },
-      { "<leader>r", "<cmd>FzfLua grep_project<cr>", desc = "Grep Project" },
+      -- { "<leader>r", "<cmd>FzfLua grep_project<cr>", desc = "Grep Project" },
       {
         "<leader>fw",
         -- ":lua require('fzf-lua').live_grep_glob({query = vim.fn.expand('<cword>')})<CR>",
@@ -45,17 +45,17 @@ return {
         silent = true,
         desc = "Grep current word",
       },
-      {
-        "<leader>r",
-        function()
-          -- local text = vim.getVisualSelection()
-          -- require("fzf-lua").live_grep_glob({ query = text })
-          require("fzf-lua").grep_visual()
-        end,
-        mode = "v",
-        silent = true,
-        desc = "Live Grep",
-      },
+      -- {
+      --   "<leader>r",
+      --   function()
+      --     -- local text = vim.getVisualSelection()
+      --     -- require("fzf-lua").live_grep_glob({ query = text })
+      --     require("fzf-lua").grep_visual()
+      --   end,
+      --   mode = "v",
+      --   silent = true,
+      --   desc = "Live Grep",
+      -- },
       -- { "<leader>sb", "<cmd>FzfLua grep_curbuf<cr>", desc = "Grep buffer" },
       {
         "<leader>sb",
@@ -228,7 +228,7 @@ return {
         },
         fzf = {
           ["ctrl-l"] = "toggle-preview",
-          -- ["ctrl-q"] = "select-all+accept", -- send all to quick list
+          ["ctrl-q"] = "select-all+accept", -- send all to quick list
           ["ctrl-f"] = "select-all+accept", -- send all to quick list
         },
       },
