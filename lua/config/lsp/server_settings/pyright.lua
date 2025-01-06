@@ -4,6 +4,7 @@ return {
     python = {
       analysis = {
         typeCheckingMode = "on",
+        diagnosticMode = "workspace",
         extraPaths = { "/Applications/Sublime Text.app/Contents/MacOS/Lib/python38" },
       },
     },
