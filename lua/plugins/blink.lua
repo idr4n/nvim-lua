@@ -1,6 +1,6 @@
 return {
   "saghen/blink.cmp",
-  enabled = false,
+  cond = false,
   event = { "InsertEnter", "BufReadPost" },
   dependencies = { "L3MON4D3/LuaSnip", version = "v2.*" },
   version = "*",
@@ -22,11 +22,8 @@ return {
       end,
     },
     sources = {
-      default = { "lsp", "path", "luasnip", "snippets", "buffer", "codecompanion" },
+      default = { "lsp", "path", "luasnip", "buffer", "codecompanion" },
       providers = {
-        lsp = { score_offset = 10 },
-        luasnip = { score_offset = 8 },
-        snippets = { score_offset = 8 },
         codecompanion = {
           name = "CodeCompanion",
           module = "codecompanion.providers.completion.blink",
