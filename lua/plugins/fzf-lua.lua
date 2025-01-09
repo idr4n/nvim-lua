@@ -13,16 +13,10 @@ return {
             horizontal = "right:50%",
             scrollbar = false,
           },
+          width = math.min(126 / vim.o.columns, 0.82),
+          height = math.min(36 / vim.o.lines, 0.8),
         },
         previewers = { builtin = { toggle_behavior = "default" } },
-        winopts_fn = function()
-          local max_width = 150 / vim.o.columns
-          local max_height = 40 / vim.o.lines
-          return {
-            width = math.min(max_width, 0.9),
-            height = math.min(max_height, 0.9),
-          }
-        end,
       }, opts or {})
       return require("telescope.themes").get_dropdown(opts)
     end
@@ -40,22 +34,13 @@ return {
       -- { "<leader>r", "<cmd>FzfLua grep_project<cr>", desc = "Grep Project" },
       {
         "<leader>fw",
-        -- ":lua require('fzf-lua').live_grep_glob({query = vim.fn.expand('<cword>')})<CR>",
-        ":lua require('fzf-lua').grep_cword()<CR>",
+        function()
+          require("fzf-lua").grep_visual()
+        end,
+        mode = "v",
         silent = true,
-        desc = "Grep current word",
+        desc = "Live Grep",
       },
-      -- {
-      --   "<leader>r",
-      --   function()
-      --     -- local text = vim.getVisualSelection()
-      --     -- require("fzf-lua").live_grep_glob({ query = text })
-      --     require("fzf-lua").grep_visual()
-      --   end,
-      --   mode = "v",
-      --   silent = true,
-      --   desc = "Live Grep",
-      -- },
       -- { "<leader>sb", "<cmd>FzfLua grep_curbuf<cr>", desc = "Grep buffer" },
       {
         "<leader>sb",
@@ -147,40 +132,20 @@ return {
     vim.api.nvim_set_hl(0, "FZFLuaBorder", { fg = "#9D7CD8" })
     return {
       winopts = {
-        -- height = 0.45,
-        -- width = 1,
         backdrop = 100,
         row = 0,
-        -- border = { "─", "─", "─", " ", "", "", "", " " },
-        -- height = 0.7,
-        -- width = 0.55,
         preview = {
-          -- vertical = "up:40%",
-          -- horizontal = "right:54%",
-          -- flip_columns = 120,
-          -- delay = 60,
-          -- hidden = "hidden",
           vertical = "up:41%",
           layout = "vertical",
           scrollbar = false,
         },
+        width = math.min(126 / vim.o.columns, 0.82),
+        height = math.min(36 / vim.o.lines, 0.8),
       },
-      winopts_fn = function()
-        -- smaller width if neovim win has over 80 columns
-        local max_width = 120 / vim.o.columns
-        local max_height = 36 / vim.o.lines
-        -- return { width = vim.o.columns > 140 and max_width or 1 }
-        return {
-          width = math.min(max_width, 0.82),
-          height = math.min(max_height, 0.8),
-        }
-      end,
       previewers = { builtin = { toggle_behavior = "extend" } },
       fzf_opts = {
-        -- ["--layout"] = "default",
         ["--layout"] = "reverse",
         ["--info"] = "inline-right",
-        -- ["--layout"] = "reverse-list",
       },
       fzf_colors = {
         ["fg"] = { "fg", "CursorLine" },
