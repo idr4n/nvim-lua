@@ -107,14 +107,14 @@ return {
     -- If not using noice.nvim, configure hover and signatureHelp
     if not package.loaded["noice"] then
       if vim.fn.has("nvim-0.10.0") == 1 then
-        vim.lsp.handlers[methods.textDocument_hover] = lsp_conf.enhanced_float_handler(vim.lsp.buf.handlers.hover, true)
+        vim.lsp.handlers[methods.textDocument_hover] = lsp_conf.enhanced_float_handler(vim.lsp.buf.hover, true)
         vim.lsp.handlers[methods.textDocument_signatureHelp] =
-          lsp_conf.enhanced_float_handler(vim.lsp.buf.handlers.signature_help, false)
+          lsp_conf.enhanced_float_handler(vim.lsp.buf.signature_help, false)
       else
-        vim.lsp.handlers["textDocument/hover"] = vim.lsp.buf.with(vim.lsp.buf.handlers.hover, {
+        vim.lsp.handlers["textDocument/hover"] = vim.lsp.buf.with(vim.lsp.buf.hover, {
           border = "rounded",
         })
-        vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.buf.with(vim.lsp.buf.handlers.signature_help, {
+        vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.buf.with(vim.lsp.buf.signature_help, {
           border = "rounded",
         })
       end
