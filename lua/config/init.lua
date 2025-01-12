@@ -71,5 +71,4 @@ require("lazy").setup("plugins", {
 })
 
 -- Load colorscheme
--- require("config.theme")
-vim.cmd("colorscheme tokyonight")
+vim.cmd("colorscheme github-monochrome-dark")
