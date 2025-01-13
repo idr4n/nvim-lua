@@ -24,7 +24,8 @@ return {
     },
     on_open = function(win)
       local buffline = package.loaded["bufferline"]
-      if buffline then
+      local minitabline = package.loaded["mini.tabline"]
+      if buffline or minitabline then
         local view = require("zen-mode.view")
         local layout = view.layout(view.opts)
         vim.api.nvim_win_set_config(win, {
