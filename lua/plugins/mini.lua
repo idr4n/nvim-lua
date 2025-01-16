@@ -237,6 +237,7 @@ return {
   {
     "echasnovski/mini.pick",
     version = false,
+    enabled = false,
     cmd = { "Pick" },
     -- init = function()
     --   vim.ui.select = require("mini.pick").ui_select
