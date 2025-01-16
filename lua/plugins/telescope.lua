@@ -1,7 +1,7 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
-    enabled = false,
+    -- enabled = false,
     cmd = "Telescope",
     dependencies = {
       "nvim-lua/popup.nvim",
@@ -32,50 +32,20 @@ return {
       end
 
       return {
-        {
-          -- "<C-Space>",
-          "<C-P>",
-          -- "<leader>ff",
-          function()
-            -- require("telescope.builtin").find_files()
-            require("telescope.builtin").find_files(dropdown_theme())
-          end,
-          noremap = true,
-          silent = true,
-          desc = "Telescope-find_files",
-        },
         -- {
+        --   -- "<C-Space>",
         --   "<C-P>",
+        --   -- "<leader>ff",
         --   function()
-        --     require("telescope.builtin").find_files()
-        --     -- require("telescope.builtin").find_files(dropdown_theme())
+        --     -- require("telescope.builtin").find_files()
+        --     require("telescope.builtin").find_files(dropdown_theme())
         --   end,
         --   noremap = true,
         --   silent = true,
         --   desc = "Telescope-find_files",
         -- },
-        -- { "<leader>r", "<cmd>Telescope live_grep<cr>", desc = "" },
-        -- {
-        --   "<leader>r",
-        --   function()
-        --     local text = vim.getVisualSelection()
-        --     require("telescope.builtin").live_grep({ default_text = text })
-        --   end,
-        --   mode = "v",
-        --   desc = "Live grep",
-        -- },
-        -- {
-        --   "<leader>sb",
-        --   function()
-        --     require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_ivy())
-        --   end,
-        --   noremap = true,
-        --   silent = true,
-        --   desc = "Fuzzy find in current buffer",
-        -- },
         { "<leader>ot", "<cmd>Telescope resume<cr>", noremap = true, silent = true, desc = "Telescope Resume" },
         {
-          -- "<leader>,",
           "s",
           function()
             -- require("telescope.builtin").buffers(require("telescope.themes").get_ivy({
@@ -84,23 +54,6 @@ return {
           noremap = true,
           silent = true,
           desc = "Switch buffers",
-        },
-        -- {
-        --   "<leader>fh",
-        --   function()
-        --     -- require("telescope.builtin").oldfiles(require("telescope.themes").get_ivy({ previewer = false }))
-        --     require("telescope.builtin").oldfiles()
-        --   end,
-        --   desc = "Recent files",
-        -- },
-        {
-          "<leader>gs",
-          "<cmd>lua require('telescope.builtin').git_status({ initial_mode = 'normal' })<cr>",
-          -- function()
-          --   require("telescope.builtin").git_status(dropdown_theme({ initial_mode = "normal", previewer = true }))
-          -- end,
-          noremap = true,
-          silent = true,
         },
         -- { "<leader>sh", "<cmd>Telescope help_tags<cr>", noremap = true, silent = true, desc = "Help pages" },
         {
@@ -114,82 +67,7 @@ return {
           silent = true,
           desc = "Help pages with selection",
         },
-        -- {
-        --   "gd",
-        --   function()
-        --     require("telescope.builtin").lsp_definitions(require("telescope.themes").get_ivy({ initial_mode = "normal" }))
-        --   end,
-        --   noremap = true,
-        --   silent = true,
-        --   desc = "Go to LSP definition",
-        -- },
-        {
-          "<leader>ld",
-          function()
-            require("telescope.builtin").lsp_definitions(
-              require("telescope.themes").get_ivy({ initial_mode = "normal" })
-            )
-          end,
-          noremap = true,
-          silent = true,
-          desc = "Go to definition",
-        },
-        -- { "gr", "<cmd>Telescope lsp_references<cr>", noremap = true, silent = true },
-        {
-          -- "gr",
-          "<leader>gr",
-          function()
-            require("telescope.builtin").lsp_references(dropdown_theme({ initial_mode = "normal", previewer = true }))
-          end,
-          noremap = true,
-          silent = true,
-          desc = "Telescope - LSP References",
-        },
-        {
-          "gs",
-          -- "<cmd>Telescope lsp_document_symbols theme=ivy<cr>",
-          "<cmd>Telescope lsp_document_symbols<cr>",
-          noremap = true,
-          silent = true,
-          desc = "LSP document symbols",
-        },
-        -- {
-        --   "<leader>lS",
-        --   -- "<cmd>Telescope lsp_dynamic_workspace_symbols theme=ivy<cr>",
-        --   "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-        --   noremap = true,
-        --   silent = true,
-        --   desc = "LSP workspace symbols",
-        -- },
         { "<leader>os", "<cmd>Telescope luasnip theme=ivy<cr>", noremap = true, silent = true, desc = "LuaSnips" },
-        {
-          "<leader>sc",
-          function()
-            require("telescope.builtin").commands(require("telescope.themes").get_ivy())
-          end,
-          noremap = true,
-          silent = true,
-          desc = "Commands",
-        },
-        {
-          "<leader>sj",
-          "<cmd>lua require('telescope.builtin').jumplist({ initial_mode = 'normal' })<cr>",
-          noremap = true,
-          silent = true,
-          desc = "Jumplist",
-        },
-        {
-          "<leader>sk",
-          function()
-            -- require("telescope.builtin").keymaps(require("telescope.themes").get_ivy())
-            require("telescope.builtin").keymaps()
-          end,
-          noremap = true,
-          silent = true,
-          desc = "Key maps",
-        },
-        { ",u", "<cmd>Telescope undo<cr>", noremap = true, silent = true },
-        { "<leader>sl", "<cmd>Telescope highlights<cr>", desc = "Telescope Highlights" },
       }
     end,
     opts = function()

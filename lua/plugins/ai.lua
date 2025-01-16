@@ -66,7 +66,7 @@ return {
         { "<leader>ja", group = "Avante AI" },
       })
       return {
-        { "<leader>jt", ":AvanteToggle<cr>", mode = { "n" }, desc = "Avante Toggle" },
+        { "<leader>jt", ":AvanteToggle<cr>", desc = "Avante Toggle" },
       }
     end,
     opts = {

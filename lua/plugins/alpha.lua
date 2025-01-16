@@ -25,27 +25,10 @@ return {
 
     dashboard.section.buttons.val = {
       dashboard.button("e", "󰈔  New file", ":ene <BAR> startinsert <CR>"),
-      -- dashboard.button("f", "󰱼  Find file", ":Files<cr>"),
       dashboard.button("a", "󰱼  Find file", ":lua require('snacks').picker.files()<cr>"),
-      -- dashboard.button("f", "󰈞  Find file", ":lua require('telescope.builtin').find_files(_G.dropdown_theme())<cr>"),
-      -- dashboard.button("t", "󰄉  File History", ":Telescope oldfiles<cr>"),
-      -- dashboard.button("r", "󰺮  Find text", ":FzfLua live_grep_glob<cr>"),
-      -- dashboard.button("r", "󰺮  Find text", "<cmd>Telescope live_grep<cr>"),
       dashboard.button("s", "  Restore session", ':lua require("session_manager").load_current_dir_session() <CR>'),
-      -- dashboard.button(
-      --   "S",
-      --   "  Open directory",
-      --   "<cmd>lua require('plugins.telescope.workdirs-picker').set_workdir()<CR>"
-      -- ),
-      -- dashboard.button("c", "  Configuration", "<cmd>lcd ~/.config/nvim | Files<cr>"),
-      -- dashboard.button("c", "  Configuration", "<cmd>lcd ~/.config/nvim | Telescope find_files<cr>"),
-      -- dashboard.button("c", "  Config", "<cmd>lcd ~/.config/nvim | echo 'Directory:' getcwd()<cr>"),
-      -- dashboard.button("d", "  Dotfiles", "<cmd>lcd ~/dotfiles | echo 'Directory:' getcwd()<cr>"),
       dashboard.button("l", "󰒲  Lazy", ":Lazy<CR>"),
       dashboard.button("n", "  File Explorer", function()
-        -- require("bufferline")
-        -- require("nvim-tree.api").tree.find_file({ open = true, current_window = true })
-        -- vim.cmd("Oil --float")
         require("mini.files").open()
       end),
       dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
@@ -56,10 +39,6 @@ return {
     dashboard.section.buttons.opts.hl = "AlphaButtons"
     dashboard.section.footer.opts.hl = pick_color()
     dashboard.opts.layout[1].val = 8
-
-    -- for _, el in pairs(dashboard.section.buttons.val) do
-    --   el.opts.width = 51 -- or some other value
-    -- end
 
     if vim.o.filetype == "lazy" then
       vim.cmd.close()

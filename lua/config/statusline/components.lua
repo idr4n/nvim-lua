@@ -189,6 +189,10 @@ function M.get_or_create_hl(hl_fg, hl_bg)
   return "%#" .. hl_name .. "#"
 end
 
+function M.clear_hl_cache()
+  statusline_hls = {}
+end
+
 ---@return string
 ---@param opts? {mono:boolean}
 local function file_icon(opts)

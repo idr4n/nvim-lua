@@ -2,6 +2,7 @@ return {
   "folke/snacks.nvim",
   opts = {
     picker = {
+      -- layout = { layout = { backdrop = false } },
       formatters = {
         file = {
           filename_first = true, -- display filename before the file path
@@ -13,6 +14,8 @@ return {
             ["<c-l>"] = { "toggle_preview", mode = { "i", "n" } },
             ["<Esc>"] = { "close", mode = { "n", "i" } },
             ["<c-c>"] = { "close", mode = { "n", "i" } },
+            ["l"] = { "confirm", mode = { "n" } },
+            ["s"] = { "close", mode = { "n" } },
           },
         },
       },

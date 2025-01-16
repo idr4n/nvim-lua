@@ -24,9 +24,9 @@ return {
       { filter = { event = "msg_show", find = "%d more lines" } },
       { filter = { event = "msg_show", find = "<ed" } },
       { filter = { event = "msg_show", find = ">ed" } },
-      -- { filter = { event = "notify", find = "position_encoding param is required" } },
-      -- { filter = { event = "notify", find = "warning: multiple different client" } },
-      { filter = { warning = true } },
+      { filter = { event = "notify", find = "position_encoding param is required" } },
+      { filter = { event = "notify", find = "warning: multiple different client" } },
+      -- { filter = { warning = true } },
       opts = { skip = true },
     },
     lsp = {
