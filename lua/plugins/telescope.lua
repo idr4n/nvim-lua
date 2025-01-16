@@ -1,6 +1,7 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
+    enabled = false,
     cmd = "Telescope",
     dependencies = {
       "nvim-lua/popup.nvim",

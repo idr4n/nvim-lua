@@ -26,7 +26,7 @@ return {
     dashboard.section.buttons.val = {
       dashboard.button("e", "󰈔  New file", ":ene <BAR> startinsert <CR>"),
       -- dashboard.button("f", "󰱼  Find file", ":Files<cr>"),
-      dashboard.button("a", "󰱼  Find file", ":lua require('fzf-lua').files()<cr>"),
+      dashboard.button("a", "󰱼  Find file", ":lua require('snacks').picker.files()<cr>"),
       -- dashboard.button("f", "󰈞  Find file", ":lua require('telescope.builtin').find_files(_G.dropdown_theme())<cr>"),
       -- dashboard.button("t", "󰄉  File History", ":Telescope oldfiles<cr>"),
       -- dashboard.button("r", "󰺮  Find text", ":FzfLua live_grep_glob<cr>"),

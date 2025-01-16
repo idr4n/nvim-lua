@@ -1,6 +1,6 @@
 return {
   "ibhagwan/fzf-lua",
-  -- enabled = false,
+  enabled = false,
   cmd = "FzfLua",
   dependencies = { "nvim-tree/nvim-web-devicons" },
   keys = function()
@@ -31,7 +31,7 @@ return {
       { "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", desc = "Find files - FzfLua" },
       -- { "<C-Space>", "<cmd>lua require('fzf-lua').files()<CR>", desc = "Find files - FzfLua" },
       -- { "<leader>r", "<cmd>FzfLua live_grep_glob<cr>", desc = "Live Grep" },
-      -- { "<leader>r", "<cmd>FzfLua grep_project<cr>", desc = "Grep Project" },
+      { "<leader>fw", "<cmd>FzfLua grep_project<cr>", desc = "Grep Project" },
       {
         "<leader>fw",
         function()
