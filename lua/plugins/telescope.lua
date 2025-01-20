@@ -68,6 +68,13 @@ return {
           desc = "Help pages with selection",
         },
         { "<leader>os", "<cmd>Telescope luasnip theme=ivy<cr>", noremap = true, silent = true, desc = "LuaSnips" },
+        {
+          "<leader>lS",
+          "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+          noremap = true,
+          silent = true,
+          desc = "LSP workspace symbols",
+        },
       }
     end,
     opts = function()

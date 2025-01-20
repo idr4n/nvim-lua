@@ -1,7 +1,7 @@
 return {
   {
     "idr4n/github-monochrome.nvim",
-    -- dev = false,
+    dev = false,
     lazy = true,
     priority = 1000,
     opts = {

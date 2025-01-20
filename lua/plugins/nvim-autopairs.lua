@@ -3,7 +3,10 @@ return {
   -- enabled = false,
   -- event = "VeryLazy",
   event = { "BufReadPost", "BufNewFile" },
-  config = function()
+  opts = {
+    disable_filetype = { "TelescopePrompt", "snacks_picker_input" },
+  },
+  config = function(_, opts)
     local npairs = require("nvim-autopairs")
     npairs.setup()
 
@@ -32,5 +35,7 @@ return {
           :use_key(bracket[2]),
       })
     end
+
+    require("nvim-autopairs").setup(opts)
   end,
 }

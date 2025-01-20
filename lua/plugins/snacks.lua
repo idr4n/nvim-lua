@@ -1,28 +1,56 @@
 return {
   "folke/snacks.nvim",
-  opts = {
-    picker = {
-      -- layout = { layout = { backdrop = false } },
-      formatters = {
-        file = {
-          filename_first = true, -- display filename before the file path
+  opts = function()
+    -- local exclude_pattern = {
+    --   "node_modules",
+    --   ".DS_Store",
+    --   ".next",
+    --   ".zig-cache/",
+    --   "**/_build/",
+    --   "deps/",
+    --   ".elixir_ls/",
+    --   "**/target/",
+    --   "**/assets/node_modules/",
+    --   "**/assets/vendor/",
+    --   "**/.next/",
+    --   "**/.vercel/",
+    --   "**/build/",
+    --   "**/out/",
+    -- }
+    return {
+      picker = {
+        sources = {
+          files = {
+            hidden = false,
+            ignored = false,
+            -- exclude = exclude_pattern,
+          },
         },
-      },
-      win = {
-        input = {
-          keys = {
-            ["<c-l>"] = { "toggle_preview", mode = { "i", "n" } },
-            ["<Esc>"] = { "close", mode = { "n", "i" } },
-            ["<c-c>"] = { "close", mode = { "n", "i" } },
-            ["l"] = { "confirm", mode = { "n" } },
-            ["s"] = { "close", mode = { "n" } },
+        layout = { layout = { backdrop = false } },
+        formatters = {
+          file = {
+            filename_first = false,
+          },
+        },
+        win = {
+          input = {
+            keys = {
+              ["<c-l>"] = { "toggle_preview", mode = { "i", "n" } },
+              ["<Esc>"] = { "close", mode = { "n", "i" } },
+              ["l"] = { "confirm", mode = { "n" } },
+              ["s"] = { "close", mode = { "n" } },
+              ["<c-\\>"] = { "toggle_ignored", mode = { "i", "n" } },
+              ["<c-h>"] = { "toggle_hidden", mode = { "i", "n" } },
+            },
           },
         },
       },
-    },
-  },
+    }
+  end,
   keys = function()
     local snacks = require("snacks")
+    -- local default_opts = { layout = { preset = "dropdown" } }
+
     -- stylua: ignore
     return {
       { "<C-Space>", function() snacks.picker.files() end, desc = "Find Files" },
