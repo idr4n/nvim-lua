@@ -49,7 +49,7 @@ return {
   end,
   keys = function()
     local snacks = require("snacks")
-    -- local default_opts = { layout = { preset = "dropdown" } }
+    -- local default_opts = { layout = { preset = "select", layout = { width = 0.6, min_width = 80, height = 0.5, min_height = 15 } } }
 
     -- stylua: ignore
     return {

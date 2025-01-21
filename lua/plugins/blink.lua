@@ -22,15 +22,8 @@ return {
     },
 
     completion = {
-      accept = {
-        -- experimental auto-brackets support
-        auto_brackets = {
-          enabled = true,
-        },
-      },
-      list = {
-        selection = { auto_insert = true },
-      },
+      accept = { auto_brackets = { enabled = true } },
+      list = { selection = { preselect = false, auto_insert = true } },
       menu = {
         border = "rounded",
         draw = {
