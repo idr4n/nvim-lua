@@ -24,7 +24,7 @@ return {
       bt_ignore = { "terminal" },
       segments = {
         { text = { " " } },
-        { sign = { namespace = { "diagnostic/signs" }, name = { "Dap*" } }, click = "v:lua.ScSa" },
+        { sign = { namespace = { "diagnostic" }, name = { "Dap*" } }, click = "v:lua.ScSa" },
         {
           -- text = { "", builtin.lnumfunc, "" },
           condition = { true, builtin.not_empty },
