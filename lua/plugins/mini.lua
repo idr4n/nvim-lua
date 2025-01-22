@@ -233,4 +233,15 @@ return {
     version = false,
     opts = {},
   },
+
+  {
+    "echasnovski/mini.pairs",
+    event = { "BufReadPost", "BufNewFile" },
+    version = false,
+    opts = {
+      mappings = {
+        [" "] = { action = "open", pair = "  ", neigh_pattern = "[%(%[{%S][%)%]}%$]" },
+      },
+    },
+  },
 }
