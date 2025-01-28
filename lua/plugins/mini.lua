@@ -240,7 +240,7 @@ return {
     version = false,
     opts = {
       mappings = {
-        [" "] = { action = "open", pair = "  ", neigh_pattern = "[%(%[{%S][%)%]}%$]" },
+        [" "] = { action = "open", pair = "  ", neigh_pattern = "[%(%[{%$][%)%]}%$]" },
       },
     },
   },
