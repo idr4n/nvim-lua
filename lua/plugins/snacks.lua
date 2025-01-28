@@ -59,6 +59,7 @@ return {
       { "<leader>r", function() snacks.picker.grep() end, desc = "Grep" },
       { "<leader>:", function() snacks.picker.command_history() end, desc = "Command History" },
       { "<leader>'", function() snacks.picker.resume() end, desc = "Resume" },
+      { "<leader>u", function() snacks.picker.undo() end, desc = "Undo Tree" },
       { "<C-P>", function() snacks.picker() end, desc = "Show all pickers" },
       -- find
       { "<leader>fb", function() snacks.picker.buffers() end, desc = "Buffers" },
@@ -89,7 +90,6 @@ return {
       { "<leader>sm", function() snacks.picker.marks() end, desc = "Marks" },
       { "<leader>sR", function() snacks.picker.resume() end, desc = "Resume" },
       { "<leader>sq", function() snacks.picker.qflist() end, desc = "Quickfix List" },
-      { "<leader>uC", function() snacks.picker.colorschemes() end, desc = "Colorschemes" },
       { "<leader>qp", function() snacks.picker.projects() end, desc = "Projects" },
       -- LSP
       { "gd", function() snacks.picker.lsp_definitions() end, desc = "Goto Definition" },

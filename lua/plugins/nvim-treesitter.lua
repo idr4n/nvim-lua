@@ -80,7 +80,7 @@ return {
         desc = "Toggle Treesitter Context",
       },
       {
-        "[[",
+        "<leader>lc",
         function()
           -- Jump to previous change when in diffview.
           vim.schedule(function()
