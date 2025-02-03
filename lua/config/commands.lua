@@ -68,7 +68,7 @@ vim.keymap.set("n", "<leader>mw", function()
   else
     vim.cmd("MdToPdfWatch")
   end
-end, { desc = "MarkdowntoPDFWatch Toggle" })
+end, { desc = "Custom Command: Convert MD to PDF - Toggle Watch" })
 
 -- Convert markdown file to docx using pandoc
 command("MdToDocx", 'execute \'silent !pandoc "%" -o "%:r.docx"\'', {})
@@ -78,25 +78,14 @@ command("MdToBeamer", 'execute \'silent !pandoc "%" -t beamer -o "%:r.pdf"\'', {
 
 -- Reveal file in finder without changing the working dir in vim
 command("RevealInFinder", "execute 'silent !open -R \"%\"'", {})
-keymap("n", "<leader>;", ":RevealInFinder<cr>", { desc = "Reveal in finder" })
+keymap("n", "<leader>;", ":RevealInFinder<cr>", { desc = "Custom command: Reveal in Finder" })
 
 -- Code Run Script
 command("CodeRun", function()
   -- vim.cmd("execute '!~/scripts/code_run \"%\"'")
   require("noice").redirect("execute '!~/scripts/code_run \"%\"'")
 end, {})
-keymap("n", "<leader>cr", ":CodeRun<cr>", { desc = "Run code - own script" })
-
--- yank line after dash (-), i.e., bullet point in markdown without the bullet and the X
-command("YankBullet", "execute '.g/- \\(X\\s\\)\\?\\zs.*$/normal \"+ygn'", {})
-keymap("n", ",b", ":YankBullet<cr>", { desc = "Yank line no bullet" })
-
--- toggle charcode in statusline
-command("CharcodeToggle", function()
-  _G.charcode = not _G.charcode
-  vim.cmd("redrawstatus!")
-end, {})
-keymap("n", "<leader>tc", ":CharcodeToggle<cr>", { desc = "Charcode" })
+keymap("n", "<leader>cr", ":CodeRun<cr>", { desc = "Custom command: Run code - own script" })
 
 -- toggle more in the SimpleStatusline
 vim.api.nvim_create_user_command("StatusMoreInfo", function()
@@ -104,7 +93,7 @@ vim.api.nvim_create_user_command("StatusMoreInfo", function()
   -- vim.g.show_more_info = not vim.g.show_more_info
   vim.cmd("redrawstatus!")
 end, {})
-keymap("n", "<leader>ti", ":StatusMoreInfo<cr>", { desc = "Status more info" })
+keymap("n", "<leader>ti", ":StatusMoreInfo<cr>", { desc = "Custom command: Status more info" })
 
 -- Other Commands
 command("YankCwd", function()
@@ -112,7 +101,7 @@ command("YankCwd", function()
   vim.cmd(string.format("call setreg('*', '%s')", cwd))
   print("Cwd copied to clipboard!")
 end, {})
-keymap("n", "<leader>cP", "<cmd>YankCwd<cr>", { desc = "Yank current dir" })
+keymap("n", "<leader>cP", "<cmd>YankCwd<cr>", { desc = "Custom command: Yank current dir" })
 
 -- open same file in nvim in a new tmux pane
 vim.api.nvim_create_user_command("NewTmuxNvim", function()
@@ -123,26 +112,19 @@ vim.api.nvim_create_user_command("NewTmuxNvim", function()
     print("Nothing to open...")
   end
 end, {})
-keymap("n", "<leader>on", "<cmd>NewTmuxNvim<cr>", { desc = "Same file in TMUX window" })
+keymap("n", "<leader>on", "<cmd>NewTmuxNvim<cr>", { desc = "Custom command: Same file in TMUX window" })
 
 -- new (tmux or terminal) window at current working directory
 command("NewTerminalWindow", function()
-  -- local cwd = vim.fn.getcwd()
-  -- local cmd = {
-  -- 	alacritty = "open -na alacritty --args --working-directory %s'",
-  -- 	wezterm = "wezterm start --always-new-process --cwd %s'",
-  -- 	["xterm-kitty"] = "open -na kitty --args -d %s'",
-  -- }
-  -- vim.cmd(string.format("execute 'silent !" .. cmd[vim.env.TERM], cwd))
-  -- vim.cmd(string.format("execute 'silent !open -na alacritty --args --working-directory %s'", cwd))
-  vim.cmd(string.format(
-    -- "execute 'silent !open -na wezterm --args --config initial_rows=40 --config initial_cols=160 start lf %s'",
-    -- cwd
-    "execute 'silent !open -na wezterm --args --config initial_rows=40 --config initial_cols=160 start lf \"%s\"'",
-    vim.fn.expand("%:p")
-  ))
+  local cwd = vim.fn.getcwd()
+  vim.cmd(
+    string.format(
+      "execute 'silent !open -na alacritty --args -o window.dimensions.columns=102 -o window.dimensions.lines=48 -o window.position.y=0 -o window.position.x=1600 --working-directory \"%s\"'",
+      cwd
+    )
+  )
 end, {})
-keymap("n", "<leader>\\", "<cmd>NewTerminalWindow<cr>", { desc = "Open LF Ext-Window" })
+keymap("n", "<leader>\\", "<cmd>NewTerminalWindow<cr>", { desc = "Custom command: Open Terminal in cwd" })
 
 command("OpenGithubRepo", function()
   local mode = vim.api.nvim_get_mode().mode
@@ -167,7 +149,7 @@ command("OpenGithubRepo", function()
   print("Opening", url)
   vim.ui.open(url)
 end, {})
-vim.keymap.set({ "n", "v" }, "<leader>og", "<cmd>OpenGithubRepo<cr>", { desc = "Open Github Repo" })
+vim.keymap.set({ "n", "v" }, "<leader>og", "<cmd>OpenGithubRepo<cr>", { desc = "Custom command: Open Github Repo" })
 
 -- Command to preview files using macOS Quick Look
 command("QuickLookPreview", function()
@@ -202,7 +184,12 @@ command("QuickLookPreview", function()
     vim.system({ "osascript", "-e", 'tell application "qlmanage" to activate' })
   end, 200)
 end, {})
-vim.keymap.set({ "n", "v" }, "<leader>pv", "<cmd>QuickLookPreview<cr>", { desc = "Quick Look File Preview" })
+vim.keymap.set(
+  { "n", "v" },
+  "<leader>pv",
+  "<cmd>QuickLookPreview<cr>",
+  { desc = "Custom command: Quick Look File Preview" }
+)
 
 command("LuaInspect", function()
   local sel = vim.fn.mode() == "v" and vim.getVisualSelection() or nil
@@ -223,7 +210,7 @@ command("LuaInspect", function()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Left><Left>", true, false, true), "n", true)
   end
 end, {})
-vim.keymap.set({ "n", "v" }, "<leader>pi", "<cmd>LuaInspect<cr>", { desc = "Lua Inspect" })
+vim.keymap.set({ "n", "v" }, "<leader>pi", "<cmd>LuaInspect<cr>", { desc = "Custom command: Lua Inspect" })
 
 command("LuaPrint", function()
   if vim.fn.mode() == "v" then
@@ -233,7 +220,7 @@ command("LuaPrint", function()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Left>", true, false, true), "n", true)
   end
 end, {})
-vim.keymap.set({ "n", "v" }, "<leader>pp", "<cmd>LuaPrint<cr>", { desc = "Lua Print" })
+vim.keymap.set({ "n", "v" }, "<leader>pp", "<cmd>LuaPrint<cr>", { desc = "Custom command: Lua Print" })
 
 command("TypstWatch", function()
   local input_file = vim.fn.expand("%:p")
@@ -276,7 +263,7 @@ vim.keymap.set("n", "<leader>mt", function()
   else
     vim.cmd("TypstWatch")
   end
-end, { desc = "TypstWatch Toggle" })
+end, { desc = "Custom command: TypstWatch Toggle" })
 
 -- Function to shuffle lines
 local function shuffle_lines()
@@ -298,5 +285,29 @@ local function shuffle_lines()
   vim.fn.setline(start_line, lines)
 end
 
--- Create a command to call the shuffle_lines function
 command("ShuffleLines", shuffle_lines, { range = true })
+
+-- Command to copy bullet list without bullets
+command("CopyNoBullets", function(cmd_opts)
+  local lines = vim.fn.getline(cmd_opts.line1, cmd_opts.line2)
+  -- if type(lines) ~= "table" then
+  if type(lines) == "string" then
+    lines = { lines }
+  end
+  local text = table.concat(lines, "\n")
+
+  if #text > 0 then
+    -- Remove "- " from each line while preserving indentation
+    local cleaned_text = text:gsub("(%s*)%- ?", "%1")
+    vim.fn.setreg("+", cleaned_text)
+    print("Bullet list copied without bullets!")
+  end
+end, { range = true })
+
+keymap("v", "<leader>cb", ":CopyNoBullets<CR>", { desc = "Custom Command: Copy without bullets" })
+
+command("ConvertHEXtoUpper", function()
+  vim.cmd('s/"#.\\+"/\\=toupper(submatch(0))')
+end, { range = true })
+
+keymap("v", "<leader>ch", ":ConvertHEXtoUpper<cr>", { desc = "Custom Command: Covert HEX color to Uppercase" })
