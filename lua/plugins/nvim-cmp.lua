@@ -183,66 +183,26 @@ return {
     local cmp = require("cmp")
     cmp.setup(opts)
 
-    -- Allowed filetypes (e.g., python, lua)
-    local allowed_filetypes = { python = true, lua = true }
+    local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+    local handlers = require("nvim-autopairs.completion.handlers")
 
-    -- Global handler (attached once)
-    cmp.event:on("confirm_done", function(event)
-      local entry = event.entry
-      local item = entry:get_completion_item()
-
-      -- Check if the current buffer's filetype is allowed
-      local filetype = vim.bo.filetype
-      if not allowed_filetypes[filetype] then
-        return
-      end
-
-      -- Check if the completion is a function/method
-      if item.kind == cmp.lsp.CompletionItemKind.Function or item.kind == cmp.lsp.CompletionItemKind.Method then
-        -- Get cursor position and completion text
-        local cursor = vim.api.nvim_win_get_cursor(0)
-        local row, col = cursor[1], cursor[2]
-        local completion_text = item.insertText or item.label
-
-        -- Get the character after the cursor
-        local line = vim.api.nvim_buf_get_lines(0, row - 1, row, true)[1]
-        local next_char = line:sub(col + 1, col + 1)
-
-        -- Add parentheses only if not already present
-        if not completion_text:match("%b()") and next_char ~= "(" then
-          vim.api.nvim_buf_set_text(0, row - 1, col, row - 1, col, { "()" })
-          vim.api.nvim_win_set_cursor(0, { row, col + 1 })
-        end
-      end
-    end)
-
-    -- Excluding specific fyletypes instead of the approach above (less optimal I guess):
-
-    -- cmp.event:on("confirm_done", function(event)
-    --   local entry = event.entry
-    --   local item = entry:get_completion_item()
-    --   local filetype = vim.bo.filetype
-    --   local ignore_filetypes = { "zig", "go" }
-    --
-    --   -- Check if the completion item is a function or method
-    --   if item.kind == cmp.lsp.CompletionItemKind.Function or item.kind == cmp.lsp.CompletionItemKind.Method then
-    --     if vim.tbl_contains(ignore_filetypes, filetype) then
-    --       return
-    --     end
-    --
-    --     -- Get the current cursor position
-    --     local cursor = vim.api.nvim_win_get_cursor(0)
-    --     local row, col = cursor[1], cursor[2]
-    --
-    --     -- Get the completion text (use `insertText` if available, otherwise fall back to `label`)
-    --     local completion_text = item.insertText or item.label
-    --     -- print("Completion text:", completion_text)
-    --
-    --     if not completion_text:match("%b()") then
-    --       vim.api.nvim_buf_set_text(0, row - 1, col, row - 1, col, { "()" })
-    --       vim.api.nvim_win_set_cursor(0, { row, col + 1 })
-    --     end
-    --   end
-    -- end)
+    -- if using nvim-autopairs
+    cmp.event:on(
+      "confirm_done",
+      cmp_autopairs.on_confirm_done({
+        filetypes = {
+          -- "*" is a alias to all filetypes
+          ["*"] = {
+            ["("] = {
+              kind = {
+                cmp.lsp.CompletionItemKind.Function,
+                cmp.lsp.CompletionItemKind.Method,
+              },
+              handler = handlers["*"],
+            },
+          },
+        },
+      })
+    )
   end,
 }
