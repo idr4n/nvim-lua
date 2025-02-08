@@ -1,29 +1,29 @@
 return {
   "folke/snacks.nvim",
   opts = function()
-    -- local exclude_pattern = {
-    --   "node_modules",
-    --   ".DS_Store",
-    --   ".next",
-    --   ".zig-cache/",
-    --   "**/_build/",
-    --   "deps/",
-    --   ".elixir_ls/",
-    --   "**/target/",
-    --   "**/assets/node_modules/",
-    --   "**/assets/vendor/",
-    --   "**/.next/",
-    --   "**/.vercel/",
-    --   "**/build/",
-    --   "**/out/",
-    -- }
+    local exclude_pattern = {
+      "node_modules",
+      ".DS_Store",
+      ".next",
+      ".zig-cache/",
+      "**/_build/",
+      "deps/",
+      ".elixir_ls/",
+      "**/target/",
+      "**/assets/node_modules/",
+      "**/assets/vendor/",
+      "**/.next/",
+      "**/.vercel/",
+      "**/build/",
+      "**/out/",
+    }
     return {
       picker = {
         sources = {
           files = {
-            hidden = false,
-            ignored = false,
-            -- exclude = exclude_pattern,
+            hidden = true,
+            ignored = true,
+            exclude = exclude_pattern,
           },
         },
         layout = { layout = { backdrop = false } },
@@ -49,18 +49,48 @@ return {
   end,
   keys = function()
     local snacks = require("snacks")
-    -- local default_opts = { layout = { preset = "select", layout = { width = 0.6, min_width = 80, height = 0.5, min_height = 15 } } }
+    local default_opts =
+      { layout = { preset = "select", layout = { width = 0.6, min_width = 100, height = 0.4, min_height = 18 } } }
+    local explorer_opts = {
+      layout = { layout = { width = 32, min_width = 32 } },
+      win = {
+        list = {
+          keys = { ["<C-n>"] = { "close", mode = { "i", "n" } } },
+        },
+      },
+    }
+
+    local lsp_symbols_opts = {
+      layout = {
+        preset = "vscode",
+        preview = "main",
+        layout = {
+          backdrop = false,
+          row = 1,
+          width = 0.4,
+          min_width = 80,
+          height = 0.4,
+          border = "none",
+          box = "vertical",
+          { win = "input", height = 1, border = "rounded", title = "{title} {live} {flags}", title_pos = "center" },
+          { win = "list", border = "rounded" },
+          { win = "preview", title = "{preview}", border = "rounded" },
+        },
+      },
+      filter = { default = true },
+    }
+
 
     -- stylua: ignore
     return {
-      { "<C-Space>", function() snacks.picker.files() end, desc = "Find Files" },
+      { "<C-Space>", function() snacks.picker.files(default_opts) end, desc = "Find Files" },
       { "<leader>,", function() snacks.picker.buffers() end, desc = "Buffers" },
-      { "<leader>/", function() snacks.picker.grep() end, desc = "Grep" },
       { "<leader>r", function() snacks.picker.grep() end, desc = "Grep" },
       { "<leader>:", function() snacks.picker.command_history() end, desc = "Command History" },
       { "<leader>'", function() snacks.picker.resume() end, desc = "Resume" },
       { "<leader>u", function() snacks.picker.undo() end, desc = "Undo Tree" },
       { "<C-P>", function() snacks.picker() end, desc = "Show all pickers" },
+      { "<leader>/", function() snacks.picker.explorer(explorer_opts) end, desc = "Explorer" },
       -- find
       { "<leader>fb", function() snacks.picker.buffers() end, desc = "Buffers" },
       { "<leader>fc", function() snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
@@ -96,8 +126,8 @@ return {
       { "gr", function() snacks.picker.lsp_references() end, nowait = true, desc = "References" },
       { "gI", function() snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
       { "gy", function() snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-      { "gs", function() snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
-      { "<leader>ss", function() snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+      { "gs", function() snacks.picker.lsp_symbols(lsp_symbols_opts) end, desc = "LSP Symbols - Snacks Picker" },
+      {"<leader>ls", function() snacks.picker.lsp_workspace_symbols(lsp_symbols_opts) end, desc = "LSP Workspace Symbols - Snacks Picker"},
     }
   end,
 }
