@@ -13,7 +13,7 @@ return {
     return {
       signcolumn = true,
       -- _extmark_signs = false,
-      numhl = false,
+      numhl = true,
       signs = {
         -- add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
         -- add = { hl = "GitSignsAdd", text = "│", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },

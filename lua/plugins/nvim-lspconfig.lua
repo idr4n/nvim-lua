@@ -45,6 +45,12 @@ return {
         virtual_text = { prefix = "" },
         signs = {
           text = { [x.ERROR] = icons.Error, [x.WARN] = icons.Warn, [x.INFO] = icons.Info, [x.HINT] = icons.Hint },
+          numhl = {
+            [x.WARN] = "WarningMsg",
+            [x.ERROR] = "ErrorMsg",
+            [x.INFO] = "DiagnosticInfo",
+            [x.HINT] = "DiagnosticHint",
+          },
         },
         underline = true,
         float = { border = "rounded" },
