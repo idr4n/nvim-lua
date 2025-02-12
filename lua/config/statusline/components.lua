@@ -189,8 +189,14 @@ function M.get_or_create_hl(hl_fg, hl_bg)
   return "%#" .. hl_name .. "#"
 end
 
-function M.clear_hl_cache()
+function M.reload_colors()
+  -- clear cache
   statusline_hls = {}
+
+  -- reload other colors
+  M.colors.bg_hl = utils.lighten(get_hl_hex("Normal").bg, 0.93)
+  M.colors.blue = get_theme_color()
+  M.colors.insert = get_theme_color("insert")
 end
 
 ---@return string
