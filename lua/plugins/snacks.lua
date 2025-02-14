@@ -60,6 +60,12 @@ return {
       },
     }
 
+    -- stylua: ignore
+    local buffers_opts = {
+      on_show = function() vim.cmd.stopinsert() end,
+      layout = { preset = "select", layout = { width = 0.6, min_width = 100, height = 0.4, min_height = 18 } },
+    }
+
     local lsp_symbols_opts = {
       layout = {
         preset = "vscode",
@@ -84,7 +90,7 @@ return {
     -- stylua: ignore
     return {
       { "<C-Space>", function() snacks.picker.files(default_opts) end, desc = "Find Files" },
-      { "<leader>,", function() snacks.picker.buffers() end, desc = "Buffers" },
+      { "s", function() snacks.picker.buffers(buffers_opts) end, desc = "Buffers" },
       { "<leader>r", function() snacks.picker.grep() end, desc = "Grep" },
       { "<leader>:", function() snacks.picker.command_history() end, desc = "Command History" },
       { "<leader>'", function() snacks.picker.resume() end, desc = "Resume" },

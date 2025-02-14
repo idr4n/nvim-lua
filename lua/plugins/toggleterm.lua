@@ -22,7 +22,7 @@ return {
     open_mapping = [[<M-\>]],
     hide_numbers = true,
     shade_filetypes = {},
-    shade_terminals = true,
+    shade_terminals = false,
     shading_factor = -10,
     start_in_insert = true,
     insert_mappings = false,

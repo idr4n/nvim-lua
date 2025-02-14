@@ -46,7 +46,7 @@ return {
         -- },
         { "<leader>ot", "<cmd>Telescope resume<cr>", noremap = true, silent = true, desc = "Telescope Resume" },
         {
-          "s",
+          "<leader>,",
           function()
             -- require("telescope.builtin").buffers(require("telescope.themes").get_ivy({
             require("telescope.builtin").buffers(dropdown_theme({ initial_mode = "normal", sort_lastused = true }))

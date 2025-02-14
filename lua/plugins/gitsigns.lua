@@ -13,16 +13,16 @@ return {
     return {
       signcolumn = true,
       -- _extmark_signs = false,
-      numhl = true,
+      numhl = false,
       signs = {
         -- add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
         -- add = { hl = "GitSignsAdd", text = "│", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-        -- add = { text = "▍" },
-        add = { text = "▎" },
+        add = { text = "▍" },
+        -- add = { text = "▎" },
         change = {
           -- text = "▋",
-          -- text = "▍",
-          text = "▎",
+          text = "▍",
+          -- text = "▎",
           -- text = "┃", -- gitsigns default
         },
         delete = {
@@ -34,7 +34,8 @@ return {
         --   text = "~",
         -- },
         changedelete = {
-          text = "▍",
+          text = "▌",
+          -- text = "▍",
           -- text = "▎",
           -- text = "│",
           -- text = "‾",

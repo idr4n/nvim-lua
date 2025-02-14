@@ -12,5 +12,10 @@ return {
       item = { "", "" },
     },
     integrations = { diffview = true },
+    highlight = {
+      italic = false,
+      bold = false,
+      underline = true,
+    },
   },
 }

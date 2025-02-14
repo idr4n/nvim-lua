@@ -28,6 +28,7 @@ return {
     icons = require("utils").lazyvim_icons,
     filter_kind = {
       "Class",
+      "Constant",
       "Constructor",
       "Enum",
       "Field",
