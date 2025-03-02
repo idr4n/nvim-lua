@@ -15,12 +15,26 @@ return {
       "nvim-telescope/telescope.nvim",
     },
     opts = {
+      display = {
+        chat = {
+          window = {
+            layout = "buffer",
+            width = 0.4,
+            position = "left",
+          },
+        },
+      },
       strategies = {
-        -- chat = { adapter = "anthropic" },
-        -- inline = { adapter = "anthropic" },
-        -- chat = { adapter = "openai" },
-        -- inline = { adapter = "openai" },
-        chat = { adapter = "copilot" },
+        chat = {
+          -- adapter = "anthropic",
+          -- adapter = "openai",
+          adapter = "copilot",
+          keymaps = {
+            change_adapter = {
+              modes = { n = "gA" },
+            },
+          },
+        },
         inline = { adapter = "copilot" },
       },
       adapters = {
@@ -92,7 +106,7 @@ return {
 
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "canary",
+    branch = "main",
     dependencies = {
       { "nvim-lua/plenary.nvim" },
     },
