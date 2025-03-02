@@ -1,5 +1,6 @@
 return {
   "folke/trouble.nvim",
+  enabled = false,
   -- branch = "dev",
   -- stylua: ignore
   keys = {
