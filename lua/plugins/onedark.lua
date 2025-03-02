@@ -104,6 +104,7 @@ return {
       MiniFilesNormal = { bg = "NONE" },
       MiniFilesBorder = { fg = "$blue", bg = "NONE" },
       Substitute = { bg = "$red" },
+      NotifyBackground = { bg = "$bg0" },
     },
   },
   -- config = function(_, opts)

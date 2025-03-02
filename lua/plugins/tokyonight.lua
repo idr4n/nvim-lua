@@ -9,8 +9,8 @@ return {
       styles = {
         -- functions = { italic = true },
         -- sidebars = "transparent",
-        -- keywords = { italic = false },
-        -- comments = { italic = false },
+        keywords = { italic = false },
+        comments = { italic = false },
         floats = "transparent",
       },
       on_highlights = function(hl, c)

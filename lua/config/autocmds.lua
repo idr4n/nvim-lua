@@ -1,3 +1,5 @@
+local get_hl_hex = require("utils").get_hl_hex
+
 -- Autocommands
 local aucmd = vim.api.nvim_create_autocmd
 
@@ -201,7 +203,7 @@ aucmd("VimLeave", {
 -- After loading zenbones, wind, etc. colorschemes
 aucmd("ColorScheme", {
   group = augroup("ColorsCustomization"),
-  pattern = { "zenbones", "wind", "seoul256", "gruvbox-material" },
+  pattern = { "zenbones", "wind", "seoul256", "gruvbox-material", "gruvbox" },
   callback = function()
     local ut = require("utils")
     local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
@@ -211,6 +213,7 @@ aucmd("ColorScheme", {
     local lighter_bg = ut.lighten(string.format("#%06x", normal.bg), 0.95)
     local darker_bg = ut.darken(string.format("#%06x", normal.bg), 0.95, "#000000")
     vim.api.nvim_set_hl(0, "FileExplorerHl", { fg = normal.fg, bg = darker_bg })
+    vim.api.nvim_set_hl(0, "NotifyBackground", { bg = normal.bg })
 
     if vim.g.colors_name == "seoul256" then
       vim.api.nvim_set_hl(0, "IblScope", { fg = "#999872", bg = normal.bg })
@@ -223,6 +226,65 @@ aucmd("ColorScheme", {
 
     if vim.g.colors_name == "zenbones" then
       vim.api.nvim_set_hl(0, "NoiceCmdlinePopUp", { bg = "#2E2927" })
+    end
+
+    if vim.g.colors_name == "gruvbox" then
+      local gruvbox_bg0 = get_hl_hex("GruvboxBg0").fg
+      local gruvbox_red = get_hl_hex("GruvboxRed").fg
+      local gruvbox_aqua = get_hl_hex("GruvboxAqua").fg
+      local gruvbox_yellow = get_hl_hex("GruvboxYellow").fg
+      local gruvbox_blue = get_hl_hex("GruvboxBlue").fg
+      local gruvbox_purple = get_hl_hex("GruvboxPurple").fg
+      local illuminate = { bg = get_hl_hex("GruvboxBg1").fg }
+
+      vim.api.nvim_set_hl(0, "CursorLineNr", { fg = gruvbox_purple, bg = gruvbox_bg0 })
+      vim.api.nvim_set_hl(0, "StatusLine", { fg = get_hl_hex("GruvboxFg2").fg, bg = gruvbox_bg0 })
+      vim.api.nvim_set_hl(0, "Substitute", { bg = get_hl_hex("GruvboxRed").fg })
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+      vim.api.nvim_set_hl(0, "NonText", { link = "GruvboxBg1" })
+      vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#e26a75" })
+      vim.api.nvim_set_hl(0, "CurSearch", { fg = gruvbox_bg0, bg = gruvbox_red })
+      vim.api.nvim_set_hl(0, "@variable", { link = "GruvboxFg1" })
+      vim.api.nvim_set_hl(0, "@variable.member", { link = "GruvboxFg1" })
+      vim.api.nvim_set_hl(0, "@variable.parameter", { link = "GruvboxBlue" })
+      vim.api.nvim_set_hl(0, "@constant.builtin", { link = "GruvboxPurple" })
+      vim.api.nvim_set_hl(0, "@function", { link = "GruvboxAqua" })
+      vim.api.nvim_set_hl(0, "@function.call", { link = "GruvboxAqua" })
+      vim.api.nvim_set_hl(0, "@function.method.call", { link = "GruvboxAqua" })
+      vim.api.nvim_set_hl(0, "@punctuation.bracket", { link = "GruvboxPurple" })
+      vim.api.nvim_set_hl(0, "@constructor", { link = "GruvboxYellow" })
+      vim.api.nvim_set_hl(0, "@operator", { link = "GruvboxAqua" })
+      vim.api.nvim_set_hl(0, "Delimiter", { link = "GruvboxFg4" })
+      vim.api.nvim_set_hl(0, "SnacksPickerBorder", { link = "GruvboxGray" })
+      vim.api.nvim_set_hl(0, "SnacksPickerMatch", { link = "GruvboxPurple" })
+      vim.api.nvim_set_hl(0, "SnacksPickerDir", { link = "GruvboxGray" })
+      vim.api.nvim_set_hl(0, "SnacksPickerListCursorLine", { bg = "#282828" })
+      vim.api.nvim_set_hl(0, "MiniTablineFill", { bg = "#282828" })
+      vim.api.nvim_set_hl(0, "MiniTablineHidden", { bg = "#282828" })
+      vim.api.nvim_set_hl(0, "MiniTablineCurrent", { fg = get_hl_hex("GruvboxFg1").fg, bg = gruvbox_bg0 })
+      vim.api.nvim_set_hl(0, "MiniTablineModifiedCurrent", { fg = gruvbox_red, bg = gruvbox_bg0 })
+      vim.api.nvim_set_hl(0, "MiniTablineModifiedHidden", { fg = gruvbox_red, bg = "#282828" })
+      vim.api.nvim_set_hl(0, "MiniTablineModifiedVisible", { fg = gruvbox_red, bg = "#282828" })
+      vim.api.nvim_set_hl(0, "MiniTablineVisible", { fg = gruvbox_purple, bg = "#282828" })
+      vim.api.nvim_set_hl(0, "IlluminatedWordRead", illuminate)
+      vim.api.nvim_set_hl(0, "IlluminatedWordText", illuminate)
+      vim.api.nvim_set_hl(0, "IlluminatedWordWrite", illuminate)
+      vim.api.nvim_set_hl(0, "illuminatedCurWord", illuminate)
+      vim.api.nvim_set_hl(0, "illuminatedWord", illuminate)
+      vim.api.nvim_set_hl(0, "NvimInternalError", { link = "GruvboxRed" })
+      vim.api.nvim_set_hl(0, "ErrorMsg", { link = "GruvboxRed" })
+      vim.api.nvim_set_hl(0, "DiagnosticError", { fg = gruvbox_red })
+      vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = gruvbox_yellow })
+      vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = gruvbox_blue })
+      vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = gruvbox_aqua })
+      vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", { link = "GruvboxPurple" })
+      vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { undercurl = true, sp = gruvbox_red })
+      vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { undercurl = true, sp = get_hl_hex("GruvboxYellow").fg })
+      vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { undercurl = true, sp = get_hl_hex("GruvboxBlue").fg })
+      vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { undercurl = true, sp = gruvbox_aqua })
+      vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = get_hl_hex("GruvboxGreen").fg })
+      vim.api.nvim_set_hl(0, "GitSignsChange", { fg = gruvbox_aqua })
+      vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = gruvbox_red })
     end
 
     if vim.g.colors_name == "gruvbox-material" then
