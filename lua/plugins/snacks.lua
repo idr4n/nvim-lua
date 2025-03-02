@@ -9,6 +9,8 @@ return {
       "**/_build/",
       "deps/",
       ".elixir_ls/",
+      "**/__pycache__/",
+      ".ruff_cache",
       "**/target/",
       "**/assets/node_modules/",
       "**/assets/vendor/",
@@ -18,6 +20,7 @@ return {
       "**/out/",
     }
     return {
+      image = {},
       picker = {
         sources = {
           files = {
@@ -50,7 +53,7 @@ return {
   keys = function()
     local snacks = require("snacks")
     local default_opts =
-      { layout = { preset = "select", layout = { width = 0.6, min_width = 100, height = 0.4, min_height = 18 } } }
+      { layout = { preset = "select", layout = { width = 0.6, min_width = 100, height = 0.3, min_height = 17 } } }
     local explorer_opts = {
       layout = { layout = { width = 32, min_width = 32 } },
       win = {
@@ -62,8 +65,9 @@ return {
 
     -- stylua: ignore
     local buffers_opts = {
+      sort_lastused = false,
       on_show = function() vim.cmd.stopinsert() end,
-      layout = { preset = "select", layout = { width = 0.6, min_width = 100, height = 0.4, min_height = 18 } },
+      layout = { preset = "select", layout = { width = 0.6, min_width = 90, height = 0.3, min_height = 15 } },
     }
 
     local lsp_symbols_opts = {
@@ -100,18 +104,18 @@ return {
       -- find
       { "<leader>fb", function() snacks.picker.buffers() end, desc = "Buffers" },
       { "<leader>fc", function() snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-      { "<leader>ff", function() snacks.picker.files() end, desc = "Find Files" },
+      -- { "<leader>ff", function() snacks.picker.files() end, desc = "Find Files" },
       { "<leader>fg", function() snacks.picker.git_files() end, desc = "Find Git Files" },
       { "<leader>fr", function() snacks.picker.recent() end, desc = "Recent" },
       -- git
       { "<leader>gc", function() snacks.picker.git_log() end, desc = "Git Log" },
-      { "<leader>gs", function() snacks.picker.git_status() end, desc = "Git Status" },
+      { "<leader>gs", function() snacks.picker.git_status({ on_show = function() vim.cmd.stopinsert() end }) end, desc = "Git Status" },
       -- Grep
-      { "<leader>sb", function() snacks.picker.lines() end, desc = "Buffer Lines" },
+      -- { "<leader>sb", function() snacks.picker.lines() end, desc = "Buffer Lines" },
       { "<leader>sB", function() snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
       { "<leader>sg", function() snacks.picker.grep() end, desc = "Grep" },
       { "<leader>r", function() snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "x" } },
-      { "<leader>fw", function() snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
+      -- { "<leader>fw", function() snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
       -- search
       { '<leader>s"', function() snacks.picker.registers() end, desc = "Registers" },
       { "<leader>sa", function() snacks.picker.autocmds() end, desc = "Autocmds" },
@@ -132,8 +136,8 @@ return {
       { "gr", function() snacks.picker.lsp_references() end, nowait = true, desc = "References" },
       { "gI", function() snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
       { "gy", function() snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-      { "gs", function() snacks.picker.lsp_symbols(lsp_symbols_opts) end, desc = "LSP Symbols - Snacks Picker" },
-      {"<leader>ls", function() snacks.picker.lsp_workspace_symbols(lsp_symbols_opts) end, desc = "LSP Workspace Symbols - Snacks Picker"},
+      -- { "gs", function() snacks.picker.lsp_symbols(lsp_symbols_opts) end, desc = "LSP Symbols - Snacks Picker" },
+      -- {"<leader>ls", function() snacks.picker.lsp_workspace_symbols(lsp_symbols_opts) end, desc = "LSP Workspace Symbols - Snacks Picker"},
     }
   end,
 }
