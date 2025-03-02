@@ -3,6 +3,7 @@
 local utils = require("utils")
 local get_opt = vim.api.nvim_get_option_value
 local hl_str = utils.hl_str
+local get_hl_hex = utils.get_hl_hex
 
 local M = {}
 
@@ -54,20 +55,6 @@ local mode_color = {
   ["t"] = { "T", "%#StatusCommand#" },
   ["nt"] = { "T", "%#StatusCommand#" },
 }
-
----Get a hl group's hex
----@param hl_group string
----@return table
-local get_hl_hex = function(hl_group)
-  assert(hl_group, "Error: must have hl group name")
-
-  local hl = vim.api.nvim_get_hl(0, { name = hl_group })
-
-  return {
-    fg = hl.fg and ("#%06x"):format(hl.fg) or "none",
-    bg = hl.bg and ("#%06x"):format(hl.bg) or "none",
-  }
-end
 
 local group_number = function(num, sep)
   if num < 999 then

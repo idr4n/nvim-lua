@@ -324,4 +324,18 @@ function M.hl_str(hl, str)
   return "%#" .. hl .. "#" .. str .. "%*"
 end
 
+---Get a hl group's hex
+---@param hl_group string
+---@return table
+function M.get_hl_hex(hl_group)
+  assert(hl_group, "Error: must have hl group name")
+
+  local hl = vim.api.nvim_get_hl(0, { name = hl_group })
+
+  return {
+    fg = hl.fg and ("#%06x"):format(hl.fg) or "none",
+    bg = hl.bg and ("#%06x"):format(hl.bg) or "none",
+  }
+end
+
 return M
