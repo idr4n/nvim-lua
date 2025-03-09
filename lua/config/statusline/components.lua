@@ -103,7 +103,7 @@ M.colors = {
   select = isDark and "#FCA7EA" or "#2188FF",
   stealth = isDark and "#4E546B" or "#A7ACBF",
   fg_hl = isDark and "#FFAFF3" or "#9A5BFF",
-  bg_hl = utils.lighten(get_hl_hex("Normal").bg, 0.93),
+  bg_hl = get_hl_hex("Normal").bg and utils.lighten(get_hl_hex("Normal").bg, 0.93) or "none",
 }
 
 ---Get a status decorator for some filetypes such as Nvimtree
@@ -181,7 +181,7 @@ function M.reload_colors()
   statusline_hls = {}
 
   -- reload other colors
-  M.colors.bg_hl = utils.lighten(get_hl_hex("Normal").bg, 0.93)
+  M.colors.bg_hl = get_hl_hex("Normal").bg and utils.lighten(get_hl_hex("Normal").bg, 0.93) or "none"
   M.colors.blue = get_theme_color()
   M.colors.insert = get_theme_color("insert")
 end
