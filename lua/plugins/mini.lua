@@ -214,7 +214,7 @@ return {
   {
     "echasnovski/mini.tabline",
     version = false,
-    -- enabled = false,
+    cond = false,
     event = { "BufReadPost", "BufNewFile" },
     opts = {
       -- show_icons = false,
