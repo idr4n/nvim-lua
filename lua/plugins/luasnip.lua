@@ -144,6 +144,7 @@ return {
     ls.filetype_extend("javascriptreact", { "javascript", "javascriptreact" })
     ls.filetype_extend("typescriptreact", { "javascript", "javascriptreact" })
     ls.filetype_extend("quarto", { "markdown" })
+    ls.filetype_extend("codecompanion", { "markdown" })
 
     ls.config.set_config({
       store_selection_keys = "<c-s>",

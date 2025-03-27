@@ -38,6 +38,12 @@ M.snips.bb = p({
   dscr = "Surrounds with bold text",
 }, "**$TM_SELECTED_TEXT$1**")
 
+M.snips.it = p({
+  trig = "it",
+  name = "Italize Text _|_",
+  dscr = "Surrounds with italized text",
+}, "_$TM_SELECTED_TEXT$1_")
+
 M.snips.m = p({
   trig = "m",
   name = "Math $|$",
@@ -130,6 +136,12 @@ M.autosnips.bb = p({
   name = "Autosnippet - Bold Text **|**",
   dscr = "Surrounds with bold text",
 }, "**$TM_SELECTED_TEXT$1**")
+
+M.autosnips.it = p({
+  trig = ";it",
+  name = "Italize Text _|_",
+  dscr = "Surrounds with italized text",
+}, "_$TM_SELECTED_TEXT$1_")
 
 M.autosnips.m = p({
   trig = ";m",
