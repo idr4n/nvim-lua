@@ -13,6 +13,11 @@ vim.api.nvim_set_hl(0, "StatusInsert", { bg = colors.insert, fg = statusline_hl.
 vim.api.nvim_set_hl(0, "StatusVisual", { bg = colors.select, fg = statusline_hl.bg, bold = true })
 vim.api.nvim_set_hl(0, "StatusNormal", { bg = colors.blue, fg = statusline_hl.bg, bold = true })
 vim.api.nvim_set_hl(0, "StatusCommand", { bg = colors.yellow, fg = statusline_hl.bg, bold = true })
+vim.api.nvim_set_hl(0, "StatusReplaceInv", { fg = colors.red, bg = statusline_hl.bg, bold = true })
+vim.api.nvim_set_hl(0, "StatusInsertInv", { fg = colors.insert, bg = statusline_hl.bg, bold = true })
+vim.api.nvim_set_hl(0, "StatusVisualInv", { fg = colors.select, bg = statusline_hl.bg, bold = true })
+vim.api.nvim_set_hl(0, "StatusNormalInv", { fg = colors.blue, bg = statusline_hl.bg, bold = true })
+vim.api.nvim_set_hl(0, "StatusCommand", { fg = colors.yellow, bg = statusline_hl.bg, bold = true })
 vim.api.nvim_set_hl(0, "SLNotModifiable", { fg = colors.yellow, bg = statusline_hl.bg })
 vim.api.nvim_set_hl(0, "SLNormal", { fg = fg_lighten, bg = statusline_hl.bg })
 vim.api.nvim_set_hl(0, "SLModified", { fg = "#FF7EB6", bg = statusline_hl.bg })
@@ -36,8 +41,9 @@ function Status_line()
 
   local components = {
     -- "%#SLNormal#",
-    c.padding(3),
-    c.fileinfo({ add_icon = true }),
+    -- c.padding(1),
+    c.mode(),
+    c.fileinfo({ add_icon = false }),
     "%=",
     c.maximized_status(),
     c.search_count(),
@@ -49,19 +55,22 @@ function Status_line()
     _G.show_more_info and " Ux%04B " or "",
     c.terminal_status(),
     _G.show_more_info and c.git_branch() or "",
-    _G.show_more_info and vim.bo.filetype:upper() .. " " or "",
     _G.show_more_info and c.separator() or "",
     c.codeium_status(),
     c.get_copilot_status(),
     c.padding(),
     c.get_fileinfo_widget(),
-    " ",
+    c.padding(),
     c.get_position(),
+    c.padding(),
+    c.file_icon() .. " ",
+    vim.bo.filetype:upper(),
+    c.padding(),
     c.scrollbar(),
     c.padding(),
     c.lsp_diagnostics_simple(),
     c.git_status_simple(),
-    c.padding(3),
+    -- c.padding(3),
   }
 
   return table.concat(components)

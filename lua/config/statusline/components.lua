@@ -8,7 +8,7 @@ local get_hl_hex = utils.get_hl_hex
 local M = {}
 
 function _G.get_lang_version(language)
-  local script_path = "get_lang_version" -- Adjust the path to the Bash script if needed
+  local script_path = "get_lang_version"
   local cmd = script_path .. " " .. language
   local result = vim.fn.system(cmd)
   return result:gsub("^%s*(.-)%s*$", "%1")
@@ -42,18 +42,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("idr4n/lang_version", { clear = true }),
 })
 
+local kirby_default = "(>*-*)>"
 local mode_color = {
-  ["n"] = { "N", "%#StatusNormal#" },
-  ["i"] = { "I", "%#StatusInsert#" },
-  ["ic"] = { "I", "%#StatusInsert#" },
-  ["v"] = { "V", "%#StatusVisual#" },
-  ["V"] = { "V-L", "%#StatusVisual#" },
-  ["\22"] = { "^V", "%#StatusVisual#" },
-  ["\22s"] = { "^V", "%#StatusVisual#" },
-  ["R"] = { "R", "%#StatusReplace#" },
-  ["c"] = { "C", "%#StatusCommand#" },
-  ["t"] = { "T", "%#StatusCommand#" },
-  ["nt"] = { "T", "%#StatusCommand#" },
+  ["n"] = { "<(•ᴗ•)>", "%#StatusNormalInv#" },
+  ["i"] = { "<(•o•)>", "%#StatusInsertInv#" },
+  ["ic"] = { "<(•o•)>", "%#StatusInsertInv#" },
+  ["v"] = { "(v•-•)v", "%#StatusVisualInv#" },
+  ["V"] = { "(>•-•)>", "%#StatusVisualInv#" },
+  ["\22"] = { "(v•-•)>", "%#StatusVisualInv#" },
+  ["\22s"] = { "(v•-•)>", "%#StatusVisualInv#" },
+  ["R"] = { kirby_default, "%#StatusReplaceInv#" },
+  ["c"] = { kirby_default, "%#StatusCommandInv#" },
+  ["t"] = { "<(•ᴗ•)>", "%#StatusCommandInv#" },
+  ["nt"] = { "<(•ᴗ•)>", "%#StatusCommandInv#" },
 }
 
 local group_number = function(num, sep)
@@ -86,6 +87,10 @@ local function get_theme_color(mode)
   elseif vim.g.colors_name == "catppuccin-mocha" then
     local cp = require("catppuccin.palettes").get_palette("mocha")
     return mode == "insert" and cp.mauve or cp.blue
+  elseif string.match(vim.g.colors_name, "^github%-monochrome%-(.+)$") then
+    local style = string.match(vim.g.colors_name, "^github%-monochrome%-(.+)$")
+    local colors = require("github-monochrome.colors").setup({ style = style })
+    return mode == "insert" and colors.magenta or colors.blue
   end
 
   if mode == "insert" then
@@ -188,7 +193,7 @@ end
 
 ---@return string
 ---@param opts? {mono:boolean}
-local function file_icon(opts)
+function M.file_icon(opts)
   opts = opts or { mono = true }
   local devicons = require("nvim-web-devicons")
   local icon, icon_highlight_group = devicons.get_icon(vim.fn.expand("%:t"))
@@ -213,7 +218,7 @@ end
 ---@param opts? {add_icon:boolean}
 function M.fileinfo(opts)
   opts = opts or { add_icon = true }
-  local icon = file_icon({ mono = false })
+  local icon = M.file_icon({ mono = false })
   local dir = utils.pretty_dirpath()()
   local path = vim.fn.expand("%:t")
   local name = (path == "" and "Empty ") or path:match("([^/\\]+)[/\\]*$")
@@ -353,7 +358,7 @@ end
 function M.git_status_simple()
   local gitsigns = vim.b.gitsigns_status_dict
 
-  local diff_icon = "•"
+  local diff_icon = "▪"
   local total_changes = 0
   local git_status = ""
 
@@ -436,7 +441,12 @@ function M.lsp_diagnostics_simple()
 end
 
 function M.scrollbar()
-  local sbar_chars = { "▔", "🮂", "🬂", "🮃", "▀", "▄", "▃", "🬭", "▂", "▁" }
+  local sbar_chars = {}
+  if vim.env.TERM == "alacritty" then
+    sbar_chars = { "▔", "🬂", "▀", "▄", "🬭", "▁" }
+  else
+    sbar_chars = { "▔", "🮂", "🬂", "🮃", "▀", "▄", "▃", "🬭", "▂", "▁" }
+  end
 
   local cur_line = vim.api.nvim_win_get_cursor(0)[1]
   local lines = vim.api.nvim_buf_line_count(0)
