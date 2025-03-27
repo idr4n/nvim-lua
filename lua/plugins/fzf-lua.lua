@@ -30,15 +30,16 @@ return {
       { "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", desc = "Find files - FzfLua" },
       -- { "<C-Space>", "<cmd>lua require('fzf-lua').files()<CR>", desc = "Find files - FzfLua" },
       -- { "<leader>r", "<cmd>FzfLua live_grep_glob<cr>", desc = "Live Grep" },
-      { "<leader>fw", "<cmd>FzfLua grep_project<cr>", desc = "Grep Project" },
+      { "<leader>r", "<cmd>FzfLua grep_project<cr>", desc = "Grep Project" },
+      { "<leader>fw", "<cmd>FzfLua grep_cword<cr>", desc = "Grep Project" },
       {
-        "<leader>fw",
+        "<leader>r",
         function()
           require("fzf-lua").grep_visual()
         end,
         mode = "v",
         silent = true,
-        desc = "Live Grep",
+        desc = "Grep",
       },
       -- { "<leader>sb", "<cmd>FzfLua grep_curbuf<cr>", desc = "Grep buffer" },
       {

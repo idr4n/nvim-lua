@@ -7,38 +7,8 @@ return {
   {
     "echasnovski/mini.files",
     keys = {
-      -- { "-", ":lua require('mini.files').open()<cr>", silent = true, desc = "Mini Files" },
-      -- {
-      --   "-",
-      --   function()
-      --     local bufname = vim.api.nvim_buf_get_name(0)
-      --     local path = vim.fn.fnamemodify(bufname, ":p")
-      --     if path and vim.uv.fs_stat(path) then
-      --       require("mini.files").open(bufname, false)
-      --     end
-      --   end,
-      --   silent = true,
-      --   desc = "Mini Files",
-      -- },
       {
         "<C-Q>",
-        -- "s",
-        -- "<leader>-",
-        function()
-          local bufname = vim.api.nvim_buf_get_name(0)
-          local path = vim.fn.fnamemodify(bufname, ":p")
-          if path and vim.uv.fs_stat(path) then
-            local MiniFiles = require("mini.files")
-            if not MiniFiles.close() then
-              MiniFiles.open(bufname, false)
-            end
-          end
-        end,
-        silent = true,
-        desc = "Mini Files",
-      },
-      {
-        ",,",
         function()
           local bufname = vim.api.nvim_buf_get_name(0)
           local path = vim.fn.fnamemodify(bufname, ":p")
@@ -105,9 +75,10 @@ return {
         mappings = {
           close = "q",
           show_help = "?",
-          go_in = "<c-l>",
-          go_out = "<c-h>",
-          go_in_plus = "<c-l>",
+          -- go_in = "<c-l>",
+          -- go_out = "<c-h>",
+          -- go_in_plus = "<c-l>",
+          go_in_plus = "l",
           go_out_plus = "<tab>",
         },
         windows = { width_nofocus = 25, preview = true, width_preview = 50 },

@@ -113,7 +113,7 @@ keyset("n", "<leader>x", function()
   if vim.bo.filetype == "gitcommit" then
     vim.cmd("bdelete")
   else
-    vim.cmd("Bdelete")
+    require("snacks").bufdelete()
   end
 end, { desc = "Close (delete) Buffer" })
 keymap("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete Buffer and Window" })
@@ -469,5 +469,6 @@ keyset("x", "<Space>D", compare_to_clipboard, { desc = "Compare to clipboard" })
 -- vim.keymap.del({ "n", "v" }, "crr")
 vim.keymap.del({ "n" }, "grr")
 vim.keymap.del({ "n" }, "grn")
+vim.keymap.del({ "n" }, "gri")
 vim.keymap.del({ "n", "x" }, "gra")
 --: }}}

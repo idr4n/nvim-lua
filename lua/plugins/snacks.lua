@@ -94,8 +94,8 @@ return {
     -- stylua: ignore
     return {
       { "<C-Space>", function() snacks.picker.files(default_opts) end, desc = "Find Files" },
-      { "s", function() snacks.picker.buffers(buffers_opts) end, desc = "Buffers" },
-      { "<leader>r", function() snacks.picker.grep() end, desc = "Grep" },
+      { "<leader>so", function() snacks.picker.buffers(buffers_opts) end, desc = "Buffers" },
+      -- { "<leader>r", function() snacks.picker.grep() end, desc = "Grep" },
       { "<leader>:", function() snacks.picker.command_history() end, desc = "Command History" },
       { "<leader>'", function() snacks.picker.resume() end, desc = "Resume" },
       { "<leader>u", function() snacks.picker.undo() end, desc = "Undo Tree" },
@@ -114,7 +114,7 @@ return {
       -- { "<leader>sb", function() snacks.picker.lines() end, desc = "Buffer Lines" },
       { "<leader>sB", function() snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
       { "<leader>sg", function() snacks.picker.grep() end, desc = "Grep" },
-      { "<leader>r", function() snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "x" } },
+      -- { "<leader>r", function() snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "x" } },
       -- { "<leader>fw", function() snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
       -- search
       { '<leader>s"', function() snacks.picker.registers() end, desc = "Registers" },
@@ -133,7 +133,8 @@ return {
       { "<leader>qp", function() snacks.picker.projects() end, desc = "Projects" },
       -- LSP
       { "gd", function() snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
-      { "gr", function() snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+      -- { "gr", function() snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+      { "<leader>gr", function() snacks.picker.lsp_references() end, nowait = true, desc = "References" },
       { "gI", function() snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
       { "gy", function() snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
       -- { "gs", function() snacks.picker.lsp_symbols(lsp_symbols_opts) end, desc = "LSP Symbols - Snacks Picker" },

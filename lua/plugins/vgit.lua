@@ -15,11 +15,18 @@ return {
       desc = "Hunk preview (vgit)",
     },
     {
-      "<leader>vd",
+      "<leader>vb",
       function()
         require("vgit").buffer_diff_preview()
       end,
       desc = "Buffer diff preview (vgit)",
+    },
+    {
+      "<leader>vh",
+      function()
+        require("vgit").buffer_history_preview()
+      end,
+      desc = "Buffer history preview (vgit)",
     },
   },
   opts = {

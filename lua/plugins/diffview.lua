@@ -4,6 +4,6 @@ return {
   config = true,
   keys = {
     { "<leader>vo", ":DiffviewOpen<cr>", desc = "Diffview Project Open" },
-    { "<leader>vh", ":DiffviewFileHistory %<cr>", desc = "Diffview File History" },
+    { "<leader>vH", ":DiffviewFileHistory %<cr>", desc = "Diffview File History" },
   },
 }

@@ -21,10 +21,10 @@ return {
           previewer = false,
           layout_config = {
             width = function(_, max_columns, _)
-              return math.min(math.floor(max_columns * 0.82), 120)
+              return math.min(math.floor(max_columns * 0.8), 92)
             end,
             height = function(_, _, max_lines)
-              return math.min(math.floor(max_lines * 0.8), 20)
+              return math.min(math.floor(max_lines * 0.8), 17)
             end,
           },
         }, opts or {})
@@ -46,10 +46,12 @@ return {
         -- },
         { "<leader>ot", "<cmd>Telescope resume<cr>", noremap = true, silent = true, desc = "Telescope Resume" },
         {
-          "<leader>,",
+          "s",
           function()
             -- require("telescope.builtin").buffers(require("telescope.themes").get_ivy({
-            require("telescope.builtin").buffers(dropdown_theme({ initial_mode = "normal", sort_lastused = true }))
+            require("telescope.builtin").buffers(
+              dropdown_theme({ initial_mode = "normal", sort_lastused = false, select_current = true })
+            )
           end,
           noremap = true,
           silent = true,

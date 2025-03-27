@@ -1,5 +1,6 @@
 return {
   "kazhala/close-buffers.nvim",
+  -- enabled = false,
   keys = {
     {
       "<leader>bk",

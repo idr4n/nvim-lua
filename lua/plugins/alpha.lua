@@ -25,7 +25,11 @@ return {
 
     dashboard.section.buttons.val = {
       dashboard.button("e", "󰈔  New file", ":ene <BAR> startinsert <CR>"),
-      dashboard.button("a", "󰱼  Find file", ":lua require('snacks').picker.files()<cr>"),
+      dashboard.button("a", "󰱼  Find file", function()
+        require("snacks").picker.files({
+          layout = { preset = "select", layout = { width = 0.6, min_width = 100, height = 0.4, min_height = 17 } },
+        })
+      end),
       dashboard.button("s", "  Restore session", ':lua require("session_manager").load_current_dir_session() <CR>'),
       dashboard.button("l", "󰒲  Lazy", ":Lazy<CR>"),
       dashboard.button("n", "  File Explorer", function()
