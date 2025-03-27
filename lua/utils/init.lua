@@ -333,8 +333,8 @@ function M.get_hl_hex(hl_group)
   local hl = vim.api.nvim_get_hl(0, { name = hl_group })
 
   return {
-    fg = hl.fg and ("#%06x"):format(hl.fg) or "none",
-    bg = hl.bg and ("#%06x"):format(hl.bg) or "none",
+    fg = hl.fg and ("#%06x"):format(hl.fg) or nil,
+    bg = hl.bg and ("#%06x"):format(hl.bg) or nil,
   }
 end
 

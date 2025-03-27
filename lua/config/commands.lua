@@ -307,7 +307,7 @@ end, { range = true })
 keymap("v", "<leader>cb", ":CopyNoBullets<CR>", { desc = "Custom Command: Copy without bullets" })
 
 command("ConvertHEXtoUpper", function()
-  vim.cmd("'<,'>s/\"#.\\+\"/\\=toupper(submatch(0))")
+  vim.cmd("'<,'>s/#[0-9A-Fa-f]\\{3,8}\\(\"\\)\\?/\\=toupper(submatch(0))")
 end, { range = true })
 
 keymap("v", "<leader>ch", ":ConvertHEXtoUpper<cr>", { desc = "Custom Command: Covert HEX color to Uppercase" })

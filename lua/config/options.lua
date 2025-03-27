@@ -26,7 +26,7 @@ opt.foldlevelstart = 99
 opt.guicursor = {
   "n-sm:block",
   "v:hor50",
-  "c-ci-cr-i-ve:ver10",
+  -- "c-ci-cr-i-ve:ver10",
   "o-r:hor50",
 }
 opt.hlsearch = true -- highlight all matches on previous search pattern
@@ -58,7 +58,8 @@ opt.termguicolors = true -- set term gui colors (most terminals support this)
 opt.title = true
 -- opt.titlestring = '%t%( %m%)%( %a%)%( │ (%{expand("%:~:.:h")})%)'
 -- opt.titlestring = '%{getcwd()->fnamemodify(":~")} │ %t%( %m%)%( %a%) %((%{expand("%:~:.:h")}) %)'
-opt.titlestring = '%t%( %m%)%( %a%) %((%{expand("%:~:.:h")}) %) - NVIM'
+-- opt.titlestring = 'ⁿ%t%( %m%)%( %a%) %((%{expand("%:~:.:h")}) %)'
+opt.titlestring = 'ⁿ%((%{expand("%:~:.:h")}) %) %t%( %m%)%( %a%)'
 opt.undofile = true -- enable persistent undo
 opt.updatetime = 300 -- control CursorHold event waiting time (4000ms default)
 opt.wrap = false -- display lines as one long line
@@ -103,12 +104,13 @@ vim.cmd([[
 ]])
 
 if vim.fn.exists(vim.g.neovide) then
-  vim.opt.guifont = { "FiraCode Nerd Font", ":h16" }
-  vim.g.neovide_transparency = 0.0
-  vim.g.transparency = 0.97
+  vim.opt.guifont = { "Zed Plex Mono", ":h17" }
+  vim.opt.linespace = 10
   vim.g.transparency = 1
-  vim.g.neovide_background_color = "#000000" .. vim.fn.printf("%x", vim.fn.float2nr(255 * vim.g.transparency))
-  vim.g.neovide_input_macos_alt_is_meta = true
+  -- vim.g.neovide_background_color = "#000000" .. vim.fn.printf("%x", vim.fn.float2nr(255 * vim.g.transparency))
+  vim.g.neovide_input_macos_option_key_is_meta = true
+  vim.g.neovide_floating_blur_amount_x = 0
+  vim.g.neovide_floating_blur_amount_y = 0
 end
 
 -- Explorer (netrw)
