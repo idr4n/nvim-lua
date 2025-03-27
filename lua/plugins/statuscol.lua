@@ -20,7 +20,7 @@ return {
     local builtin = require("statuscol.builtin")
     return {
       -- relculright = true,
-      ft_ignore = { "toggleterm", "neogitstatus", "NvimTree", "oil", "snacks_picker_preview" },
+      ft_ignore = { "toggleterm", "neogitstatus", "NvimTree", "neo-tree", "oil", "snacks_picker_preview" },
       bt_ignore = { "terminal" },
       segments = {
         { text = { " " } },

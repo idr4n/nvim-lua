@@ -72,3 +72,4 @@ require("lazy").setup("plugins", {
 
 -- Load colorscheme
 vim.cmd("colorscheme github-monochrome-dark")
+vim.cmd("colorscheme github-monochrome-zenbones")

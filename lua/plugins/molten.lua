@@ -26,7 +26,7 @@ return {
 
   {
     "3rd/image.nvim",
-    -- enabled = false,
+    enabled = false,
     ft = { "quarto", "markdown", "typst" },
     dependencies = {
       { "leafo/magick" },
