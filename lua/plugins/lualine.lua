@@ -110,12 +110,14 @@ return {
                 }
               end
             end,
-            symbols = { added = "•", modified = "•", removed = "•" },
+            -- symbols = { added = "•", modified = "•", removed = "•" },
+            symbols = { added = "▪", modified = "▪", removed = "▪" },
             padding = { left = 0, right = 1 },
           },
           {
             "diagnostics",
             symbols = { error = "◦", warn = "◦", info = "◦", hint = "◦" },
+            -- symbols = { error = "◌", warn = "◌", info = "◌", hint = "◌" },
             padding = { left = 0, right = 1 },
             fmt = function(str)
               local count = str:match("%d+")

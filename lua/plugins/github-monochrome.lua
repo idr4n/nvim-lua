@@ -2,29 +2,31 @@ return {
   {
     "idr4n/github-monochrome.nvim",
     dev = false,
-    -- cond = false,
     lazy = true,
     priority = 1000,
     opts = {
-      style = "light",
       -- style = "dark",
+      -- alternate_style = "rosepine",
+      -- transparent = true,
       styles = {
         comments = { italic = false },
-        keywords = { bold = false },
-        functions = { bold = false },
+        -- keywords = { bold = false },
+        -- functions = { bold = false },
         -- statements = { bold = false }, -- e.g., try/except statements, but also if, for, etc.
-        sidebars = "dark",
-        -- floats = "dark",
+        -- sidebars = "transparent", -- "dark", "transparent" or "normal"
+        -- sidebars = "dark", -- "dark", "transparent" or "normal"
+        -- floats = "transparent", -- "dark", "transparent" or "normal"
       },
       on_highlights = function(hl, c, s)
-        hl.FloatBorder = { fg = c.magenta }
-        hl.TreesitterContext = { bg = c.bg }
-        hl.TreesitterContextBottom = { bg = c.none, underline = true, sp = c.magenta }
+        -- hl.FloatBorder = { fg = c.magenta }
+        -- hl.TreesitterContext = { bg = c.none }
+        -- hl.TreesitterContextBottom = { bg = c.none, underline = true, sp = c.magenta }
         hl.gitcommitSummary = { italic = false }
         hl.gitcommitFirstLine = { italic = false }
-        hl.Type = { bold = false }
-        hl["@type.builtin"] = { bold = false }
-        hl["@keyword.function"] = { bold = true }
+        hl.Identifier = { fg = c.magenta, bold = true }
+        -- hl.Type = { bold = false }
+        -- hl["@type.builtin"] = { bold = false }
+        -- hl["@keyword.function"] = { bold = true }
 
         if s == "solarized" then
           hl.IblScope = { fg = "#62868C" }
@@ -41,7 +43,7 @@ return {
       -- end,
 
       plugins = {
-        ["neo-tree"] = false,
+        -- ["neo-tree"] = true,
       },
     },
   },

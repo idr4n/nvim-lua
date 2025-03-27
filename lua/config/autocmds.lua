@@ -255,6 +255,10 @@ aucmd("ColorScheme", {
       vim.api.nvim_set_hl(0, "@constructor", { link = "GruvboxYellow" })
       vim.api.nvim_set_hl(0, "@operator", { link = "GruvboxAqua" })
       vim.api.nvim_set_hl(0, "Delimiter", { link = "GruvboxFg4" })
+      vim.api.nvim_set_hl(0, "TreesitterContextBottom", { sp = gruvbox_purple, underline = true })
+      vim.api.nvim_set_hl(0, "TelescopeBorder", { link = "GruvboxGray" })
+      vim.api.nvim_set_hl(0, "VBufferListBorder", { link = "GruvboxGray" })
+      -- vim.api.nvim_set_hl(0, "VBufferListBackground", { bg = "#000000" })
       vim.api.nvim_set_hl(0, "SnacksPickerBorder", { link = "GruvboxGray" })
       vim.api.nvim_set_hl(0, "SnacksPickerMatch", { link = "GruvboxPurple" })
       vim.api.nvim_set_hl(0, "SnacksPickerDir", { link = "GruvboxGray" })
@@ -285,6 +289,7 @@ aucmd("ColorScheme", {
       vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = get_hl_hex("GruvboxGreen").fg })
       vim.api.nvim_set_hl(0, "GitSignsChange", { fg = gruvbox_aqua })
       vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = gruvbox_red })
+      vim.api.nvim_set_hl(0, "WhichKeyNormal", { bg = "#282828" })
     end
 
     if vim.g.colors_name == "gruvbox-material" then
