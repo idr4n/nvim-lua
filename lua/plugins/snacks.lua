@@ -20,7 +20,14 @@ return {
       "**/out/",
     }
     return {
-      image = {},
+      image = {
+        enabled = false,
+        doc = { inline = false },
+        math = {
+          enabled = false,
+          latex = { font_size = "large" },
+        },
+      },
       picker = {
         sources = {
           files = {
@@ -100,7 +107,7 @@ return {
       { "<leader>'", function() snacks.picker.resume() end, desc = "Resume" },
       { "<leader>u", function() snacks.picker.undo() end, desc = "Undo Tree" },
       { "<C-P>", function() snacks.picker() end, desc = "Show all pickers" },
-      { "<leader>/", function() snacks.picker.explorer(explorer_opts) end, desc = "Explorer" },
+      -- { "<leader>/", function() snacks.picker.explorer(explorer_opts) end, desc = "Explorer" },
       -- find
       { "<leader>fb", function() snacks.picker.buffers() end, desc = "Buffers" },
       { "<leader>fc", function() snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
@@ -128,7 +135,7 @@ return {
       { "<leader>sk", function() snacks.picker.keymaps() end, desc = "Keymaps" },
       { "<leader>sM", function() snacks.picker.man() end, desc = "Man Pages" },
       { "<leader>sm", function() snacks.picker.marks() end, desc = "Marks" },
-      { "<leader>sR", function() snacks.picker.resume() end, desc = "Resume" },
+      { "<leader>sR", function() snacks.picker.resume() end, desc = "Resume Snacks Picker" },
       { "<leader>sq", function() snacks.picker.qflist() end, desc = "Quickfix List" },
       { "<leader>qp", function() snacks.picker.projects() end, desc = "Projects" },
       -- LSP

@@ -26,6 +26,7 @@ return {
       { filter = { event = "msg_show", find = ">ed" } },
       { filter = { event = "notify", find = "position_encoding param is required" } },
       { filter = { event = "notify", find = "warning: multiple different client" } },
+      { filter = { event = "msg_show", find = "is deprecated" } },
       -- { filter = { warning = true } },
       opts = { skip = true },
     },

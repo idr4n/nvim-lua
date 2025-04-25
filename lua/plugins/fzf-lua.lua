@@ -107,16 +107,17 @@ return {
         silent = true,
         desc = "LSP document symbols (FzfLua)",
       },
-      {
-        "<leader>lS",
-        function()
-          require("fzf-lua").lsp_live_workspace_symbols(fzflua_theme())
-          -- Disable the grep switch header.
-          -- require("fzf-lua").lsp_live_workspace_symbols(fzflua_theme({ no_header_i = true }))
-        end,
-        silent = true,
-        desc = "LSP workspace symbols (FzfLua)",
-      },
+      -- { "<leader>zx", "<cmd>FzfLua diagnostics_workspace<cr>", desc = "FzfLua - Diagnostics Project" },
+      -- {
+      --   "<leader>lS",
+      --   function()
+      --     require("fzf-lua").lsp_live_workspace_symbols(fzflua_theme())
+      --     -- Disable the grep switch header.
+      --     -- require("fzf-lua").lsp_live_workspace_symbols(fzflua_theme({ no_header_i = true }))
+      --   end,
+      --   silent = true,
+      --   desc = "LSP workspace symbols (FzfLua)",
+      -- },
       -- {
       --   "<leader>gs",
       --   -- "<cmd>FzfLua git_status<cr>",

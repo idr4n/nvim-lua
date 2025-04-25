@@ -4,7 +4,8 @@ return {
   cmd = { "NvimTreeToggle", "NvimTreeFocus" },
   keys = {
     {
-      "<C-n>",
+      -- "<C-n>",
+      "<leader><Space>",
       "<cmd>lua require('nvim-tree.api').tree.toggle({ focus = false })<CR>",
       silent = true,
       desc = "Nvimtree Toggle",
@@ -30,14 +31,14 @@ return {
       silent = true,
       desc = "NvimTree Collapse",
     },
-    {
-      "<leader><Space>",
-      function()
-        require("nvim-tree.api").tree.toggle({ current_window = true })
-      end,
-      silent = true,
-      desc = "NvimTree Open",
-    },
+    -- {
+    --   "<leader><Space>",
+    --   function()
+    --     require("nvim-tree.api").tree.toggle({ current_window = true })
+    --   end,
+    --   silent = true,
+    --   desc = "NvimTree Open",
+    -- },
   },
   -- init = function()
   --   if vim.fn.argc(-1) == 1 then

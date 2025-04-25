@@ -41,7 +41,7 @@ return {
         copilot = function()
           return require("codecompanion.adapters").extend("copilot", {
             -- schema = { model = { default = "o3-mini-2025-01-31" } },
-            schema = { model = { default = "claude-3.5-sonnet" } },
+            schema = { model = { default = "claude-3.7-sonnet" } },
             -- schema = { model = { default = "gpt-4o-2024-08-06" } },
           })
         end,
@@ -51,6 +51,7 @@ return {
 
   {
     "Aaronik/GPTModels.nvim",
+    enabled = false,
     cmd = { "GPTModelsCode" },
     keys = {
       { "<leader>jg", ":GPTModelsCode<cr>", mode = { "n", "v" }, desc = "GPTModelsCode" },

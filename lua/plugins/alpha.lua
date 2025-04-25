@@ -98,6 +98,19 @@ return {
             -- vim.o.cmdheight = 1 -- uncomment if not useing noice
           end,
         })
+        vim.api.nvim_create_autocmd("BufUnload", {
+          group = alpha_group,
+          buffer = args.buf,
+          once = true,
+          callback = vim.schedule_wrap(function()
+            local width = vim.o.columns
+            local min_width_threshhold = 140
+
+            if width >= min_width_threshhold then
+              vim.cmd("Neotree show")
+            end
+          end),
+        })
       end,
     })
   end,
