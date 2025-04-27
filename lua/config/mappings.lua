@@ -295,7 +295,8 @@ keymap("v", "p", '"_dP')
 --: }}}
 
 --: search for highlighted text {{{
-keymap("v", "*", "y/\\V<C-R>=escape(@\",'/')<CR><CR>N")
+keymap("v", "*", "y/\\V<C-R>=escape(@\",'/')<CR><CR>N", { desc = "Search selection" })
+keymap("v", "g*", "y/\\V\\C<C-R>=escape(@\",'/')<CR><CR>N", { desc = "Search selection (case sensitive)" })
 --: }}}
 
 --: substitute word previously searched {{{
@@ -351,6 +352,11 @@ keymap("v", "x", '"_x')
 --: Other mappings {{{
 keyset("n", "<leader>ol", "<cmd>:Lazy<cr>", { desc = "Lazy Dashboard" })
 keyset("n", "<leader>op", "<cmd>e#<cr>", { desc = "Reopen buffer" })
+--: }}}
+
+--: Transpose {{{
+keymap("n", ",t", '"zx"zph', { desc = "Transpose/Swap characters" })
+keymap("n", ",w", '"zdiwxea<space><esc>"zpbb', { desc = "Transpose/Swap words" })
 --: }}}
 
 --: Add undo break-points {{{

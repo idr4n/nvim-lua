@@ -4,7 +4,7 @@ return {
   event = { "BufReadPost", "BufNewFile" },
   keys = {
     {
-      "<C-B>",
+      ",n",
       ":Neotree reveal left<CR>",
       silent = true,
       desc = "Toggle Neo-Tree",

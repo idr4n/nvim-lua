@@ -27,6 +27,16 @@ return {
       },
     },
   },
+  keys = {
+    {
+      "<leader>cD",
+      function()
+        local new_config = not vim.diagnostic.config().virtual_lines
+        vim.diagnostic.config({ virtual_lines = new_config })
+      end,
+      desc = "Toggle diagnostic virtual_lines",
+    },
+  },
   config = function()
     local lsp_conf = require("config.lsp")
     local methods = vim.lsp.protocol.Methods
