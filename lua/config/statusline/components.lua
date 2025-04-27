@@ -81,6 +81,9 @@ local function get_theme_color(mode)
   if vim.g.colors_name == "tokyonight-moon" then
     local colors = require("tokyonight.colors").setup()
     return mode == "insert" and colors.green1 or "#9580FF"
+  elseif vim.g.colors_name == "cyberdream" then
+    local c_cyberdream = require("cyberdream.colors").default
+    return mode == "insert" and c_cyberdream.green or c_cyberdream.magenta
   elseif vim.g.colors_name == "dracula" then
     local c_dracula = require("dracula").colors()
     return mode == "insert" and c_dracula.green or c_dracula.purple
@@ -455,6 +458,18 @@ function M.scrollbar()
   local sbar = string.rep(sbar_chars[i], 2)
 
   return " " .. M.get_or_create_hl(get_hl_hex("Substitute").bg, M.colors.bg_hl) .. sbar .. "%* "
+end
+
+function M.scrollbar2()
+  local sbar_chars = { "󰋙", "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈" }
+
+  local cur_line = vim.api.nvim_win_get_cursor(0)[1]
+  local lines = vim.api.nvim_buf_line_count(0)
+
+  local i = math.floor((cur_line - 1) / lines * #sbar_chars) + 1
+  local sbar = sbar_chars[i]
+
+  return hl_str("DiagnosticInfo", " " .. sbar .. "  ")
 end
 
 ---codeium status in the statusline

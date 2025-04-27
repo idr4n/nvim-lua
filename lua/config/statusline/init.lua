@@ -28,7 +28,7 @@ vim.api.nvim_set_hl(0, "SLDecorator", { fg = "#414868", bg = "#7AA2F7", bold = t
 function Status_line()
   local filetype = vim.bo.filetype
 
-  local filetypes = { "neo-tree", "minifiles", "NvimTree", "oil", "TelescopePrompt", "fzf" }
+  local filetypes = { "neo-tree", "minifiles", "NvimTree", "oil", "TelescopePrompt", "fzf", "snacks_picker_input" }
   if vim.tbl_contains(filetypes, filetype) then
     local home_dir = os.getenv("HOME")
     local api = require("nvim-tree.api")
@@ -41,8 +41,8 @@ function Status_line()
 
   local components = {
     -- "%#SLNormal#",
-    -- c.padding(1),
-    c.mode(),
+    c.padding(),
+    -- c.mode(),
     c.fileinfo({ add_icon = false }),
     "%=",
     c.maximized_status(),
@@ -62,11 +62,11 @@ function Status_line()
     c.get_fileinfo_widget(),
     c.padding(),
     c.get_position(),
-    c.padding(),
+    c.padding(2),
     c.file_icon() .. " ",
     vim.bo.filetype:upper(),
-    c.padding(),
-    c.scrollbar(),
+    c.padding(2),
+    c.scrollbar2(),
     c.padding(),
     c.lsp_diagnostics_simple(),
     c.git_status_simple(),
