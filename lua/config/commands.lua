@@ -311,3 +311,15 @@ command("ConvertHEXtoUpper", function()
 end, { range = true })
 
 keymap("v", "<leader>ch", ":ConvertHEXtoUpper<cr>", { desc = "Custom Command: Covert HEX color to Uppercase" })
+
+command("ToggleSpellCheck", function()
+  if vim.wo.spell then
+    vim.wo.spell = false
+    vim.notify("Spell checking disabled", vim.log.levels.INFO)
+  else
+    vim.wo.spell = true
+    vim.cmd("setlocal spelllang=en_us")
+    vim.notify("Spell checking enabled", vim.log.levels.INFO)
+  end
+end, {})
+keymap("n", "<leader>tS", ":ToggleSpellCheck<cr>", { desc = "Toggle spell checking" })

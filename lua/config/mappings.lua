@@ -444,6 +444,22 @@ end
 keyset({ "n", "t" }, "<A-,>", toggle_maximize_buffer, { desc = "Maximize buffer" })
 --: }}}
 
+--: Fold {{{
+keyset("n", "z0", ":set foldlevel=0<cr>", { desc = "Fold level 0" })
+keyset("n", "z1", ":set foldlevel=1<cr>", { desc = "Fold level 1" })
+keyset("n", "z2", ":set foldlevel=2<cr>", { desc = "Fold level 2" })
+keyset("n", "z9", ":set foldlevel=99<cr>", { desc = "Fold level 99" })
+keyset("n", "<leader>fi", ":set foldmethod=indent<cr>", { desc = "Set fold indent" })
+keyset("n", "<leader>fm", ":set foldmethod=marker<cr>", { desc = "Set fold marker" })
+keyset(
+  "n",
+  "<leader>fx",
+  ":set foldmethod=expr<cr>:set foldexpr=nvim_treesitter#foldexpr()<cr>",
+  { desc = "Set fold treesitter" }
+)
+keyset("n", "zm", ":set foldmethod=marker<cr>:set foldlevel=1<cr>", { desc = "Set fold marker" })
+--: }}}
+
 --: Diff selection agains clipboard {{{
 -- layout: selection<->clipboard
 local function compare_to_clipboard()
