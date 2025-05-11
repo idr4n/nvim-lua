@@ -3,7 +3,7 @@ return {
   event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   dependencies = {
     "mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     -- "saghen/blink.cmp",
     -- "j-hui/fidget.nvim",
     {
@@ -53,6 +53,7 @@ return {
     local opts = {
       diagnostics = {
         virtual_text = { prefix = "" },
+        virtual_lines = false,
         signs = {
           text = { [x.ERROR] = icons.Error, [x.WARN] = icons.Warn, [x.INFO] = icons.Info, [x.HINT] = icons.Hint },
           numhl = {
@@ -72,9 +73,8 @@ return {
         pyright = require("config.lsp.server_settings.pyright"),
         sqlls = require("config.lsp.server_settings.sqls"),
         cssls = require("config.lsp.server_settings.cssls"),
-        solargraph = require("config.lsp.server_settings.solargraph"),
+        -- solargraph = require("config.lsp.server_settings.solargraph"),
         tailwindcss = require("config.lsp.server_settings.tailwindcss"),
-        gleam = { mason = false },
         vtsls = {
           single_file_support = not is_deno_project(vim.fn.expand("%:p")),
         },
@@ -83,14 +83,6 @@ return {
       },
 
       setup = {
-        -- example to setup with typescript.nvim
-        -- tsserver = function(_, opts)
-        --   require("typescript").setup({ server = opts })
-        --   return true
-        -- end,
-        -- Specify * to use this function as a fallback for any server
-        -- ["*"] = function(server, opts) end,
-
         -- rust_analyzer (it is being setup by rustaceanvim plugin)
         rust_analyzer = function()
           return true
@@ -163,35 +155,17 @@ return {
         if opts.setup[server](server, server_opts) then
           return
         end
-      elseif opts.setup["*"] then
-        if opts.setup["*"](server, server_opts) then
-          return
-        end
       end
       require("lspconfig")[server].setup(server_opts)
     end
 
-    local have_mason, mlsp = pcall(require, "mason-lspconfig")
-    local all_mslp_servers = {}
-    if have_mason then
-      all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
-    end
+    -- Using mason-lspconfig only to get installed_servers names
+    local installed_servers = require("mason-lspconfig").get_installed_servers()
 
-    local ensure_installed = {} ---@type string[]
-    for server, server_opts in pairs(servers) do
-      if server_opts then
-        server_opts = server_opts == true and {} or server_opts
-        -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
-        if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
-          setup(server)
-        else
-          ensure_installed[#ensure_installed + 1] = server
-        end
-      end
-    end
-
-    if have_mason then
-      mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
+    -- for _, server in ipairs(vim.tbl_keys(servers)) do
+    for _, server in ipairs(installed_servers) do
+      -- manual server setup (not using mason-lspconfig)
+      setup(server)
     end
 
     -- Convert JSON filetype to JSON with comments (jsonc)
