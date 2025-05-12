@@ -88,7 +88,7 @@ end
 ---@param method string
 local function has(client, method)
   method = method:find("/") and method or "textDocument/" .. method
-  if client.supports_method(method) then
+  if client:supports_method(method) then
     return true
   end
   return false
@@ -140,7 +140,7 @@ M.on_attach = function(client, bufnr)
 
   if vim.fn.has("nvim-0.10.0") == 1 then
     -- inlay_hints
-    if vim.lsp.inlay_hint and client.supports_method("textDocument/inlayHint") then
+    if vim.lsp.inlay_hint and client:supports_method("textDocument/inlayHint") then
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
       vim.keymap.set("n", "<leader>th", function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
@@ -148,7 +148,7 @@ M.on_attach = function(client, bufnr)
     end
 
     -- codelens
-    -- if vim.lsp.codelens and client.supports_method("textDocument/codeLens") and vim.bo.filetype == "rust" then
+    -- if vim.lsp.codelens and client:supports_method("textDocument/codeLens") and vim.bo.filetype == "rust" then
     --   vim.lsp.codelens.refresh()
     --   vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
     --     group = vim.api.nvim_create_augroup("idr4n/LSPCodeLens", { clear = true }),
