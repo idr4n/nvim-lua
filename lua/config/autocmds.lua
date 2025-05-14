@@ -200,6 +200,14 @@ aucmd("VimLeave", {
   end,
 })
 
+-- Convert JSON filetype to JSON with comments (jsonc)
+vim.cmd([[
+  augroup jsonFtdetect
+  autocmd!
+  autocmd BufNewFile,BufRead tsconfig.json setlocal filetype=jsonc
+  augroup END
+]])
+
 -- After loading zenbones, wind, etc. colorschemes
 aucmd("ColorScheme", {
   group = augroup("ColorsCustomization"),

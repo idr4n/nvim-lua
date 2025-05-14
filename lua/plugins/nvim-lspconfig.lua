@@ -3,7 +3,6 @@ return {
   event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   dependencies = {
     "mason.nvim",
-    "mason-org/mason-lspconfig.nvim",
     -- "saghen/blink.cmp",
     -- "j-hui/fidget.nvim",
     {
@@ -15,7 +14,8 @@ return {
         client_format = function(_, spinner, series_messages)
           return #series_messages > 0
               -- and (spinner .. " [" .. client_name .. "] " .. table.concat(series_messages, ", "))
-              and (spinner .. " (LSP) " .. table.concat(series_messages, ", "))
+              -- and (spinner .. " (LSP) " .. table.concat(series_messages, ", "))
+              and (spinner .. " LSP")
             or nil
         end,
         format = function(client_messages)
@@ -39,11 +39,10 @@ return {
   },
   config = function()
     local lsp_conf = require("config.lsp")
+    local lspconfig = require("lspconfig")
     local methods = vim.lsp.protocol.Methods
     local icons = require("utils").diagnostic_icons
     local x = vim.diagnostic.severity
-
-    local lspconfig = require("lspconfig")
 
     local function is_deno_project(filename)
       local denoRootDir = lspconfig.util.root_pattern("deno.json", "deno.jsonc")(filename)
@@ -67,7 +66,7 @@ return {
         float = { border = "rounded" },
       },
 
-      servers = {
+      custom_server_settings = {
         jsonls = require("config.lsp.server_settings.jsonls"),
         lua_ls = require("config.lsp.server_settings.lua_ls"),
         pyright = require("config.lsp.server_settings.pyright"),
@@ -82,7 +81,7 @@ return {
         ruff = { init_options = { settings = { lint = { enable = false } } } },
       },
 
-      setup = {
+      custom_server_setup = {
         -- rust_analyzer (it is being setup by rustaceanvim plugin)
         rust_analyzer = function()
           return true
@@ -93,6 +92,7 @@ return {
           return true
         end,
 
+        -- tailwindcss
         tailwindcss = function(_, opts)
           local tw = require("lspconfig.configs.tailwindcss")
           opts.filetypes = opts.filetypes or {}
@@ -109,6 +109,7 @@ return {
       },
     }
 
+    --: Diagnostics, Hover, SignatureHelp, UI {{{
     -- setup signs and diagnostics
     vim.diagnostic.config(opts.diagnostics)
 
@@ -128,9 +129,11 @@ return {
       end
     end
 
+    -- UI border
     require("lspconfig.ui.windows").default_options.border = "rounded"
+    --: }}}
 
-    local servers = opts.servers
+    --: Capabilities {{{
     local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
     -- local capabilities = require("blink.cmp").get_lsp_capabilities()
 
@@ -144,42 +147,41 @@ return {
         dynamicRegistration = true,
       },
     }
+    --: }}}
 
+    --: LSP's setup {{{
     local function setup(server)
       local server_opts = vim.tbl_deep_extend("force", {
         on_attach = lsp_conf.on_attach,
         capabilities = vim.deepcopy(capabilities),
-      }, servers[server] or {})
+      }, opts.custom_server_settings[server] or {})
 
-      if opts.setup[server] then
-        if opts.setup[server](server, server_opts) then
+      if opts.custom_server_setup[server] then
+        if opts.custom_server_setup[server](server, server_opts) then
           return
         end
       end
       require("lspconfig")[server].setup(server_opts)
     end
 
-    -- Using mason-lspconfig only to get installed_servers names
-    local installed_servers = require("mason-lspconfig").get_installed_servers()
+    local servers_lists = require("config.lsp.server_names")
+    local installed_servers = require("mason-registry").get_installed_package_names()
+    local servers_mapping = servers_lists.names_mapping
 
-    -- for _, server in ipairs(vim.tbl_keys(servers)) do
-    for _, server in ipairs(installed_servers) do
-      -- manual server setup (not using mason-lspconfig)
-      setup(server)
+    for _, server in ipairs(servers_lists.ensure_installed) do
+      if vim.tbl_contains(installed_servers, server) and servers_mapping[server] then
+        setup(servers_mapping[server])
+      end
     end
+    --: }}}
 
-    -- Convert JSON filetype to JSON with comments (jsonc)
-    vim.cmd([[
-      augroup jsonFtdetect
-      autocmd!
-      autocmd BufNewFile,BufRead tsconfig.json setlocal filetype=jsonc
-      augroup END
-    ]])
-
+    --: Servers not in Mason {{{
+    -- Swift (sourcekit)
     require("lspconfig").sourcekit.setup({
       on_attach = lsp_conf.on_attach,
       capabilities = capabilities,
       filetypes = { "swift" },
     })
+    --: }}}
   end,
 }
