@@ -8,14 +8,20 @@ return {
       -- transparent = true,
       styles = {
         -- functions = { italic = true },
-        -- sidebars = "transparent",
+        sidebars = "transparent",
         keywords = { italic = false },
         comments = { italic = false },
         floats = "transparent",
       },
+      on_colors = function(colors)
+        colors.bg = "#000000"
+        -- colors.bg_highlight = "#232838"
+      end,
       on_highlights = function(hl, c)
         hl.CursorLine = { bg = c.bg_dark } -- needed for bufferline
         hl.CursorLineNr = { fg = c.magenta }
+        hl.IblIndent = { fg = "#1F2432" }
+        hl.SnacksPickerDir = { fg = c.dark3 }
         hl.IblScope = { fg = "#634E89" }
         hl.DiagnosticUnnecessary = { fg = c.none }
         hl.Folded = { fg = c.comment, bg = c.none }
@@ -34,13 +40,16 @@ return {
         hl.TreesitterContextBottom = { underline = true, sp = c.magenta }
         hl.TelescopeBorder = { fg = c.magenta }
         hl.TelescopePromptBorder = { fg = c.none }
-        hl.NonText = { fg = c.bg_highlight }
+        hl.NonText = { fg = c.bg_dark }
         hl.BufferLineIndicatorSelected = { fg = c.bg, bg = c.bg }
         hl.MiniTablineCurrent = { bg = c.bg }
         hl.MiniTablineVisible = { fg = c.magenta, bg = c.bg_highlight }
         hl.MiniTablineModifiedCurrent = { fg = c.yellow, bg = c.bg }
         hl.StatusLine = { fg = c.fg_dark, bg = c.none }
         -- hl.NoiceCmdlinePopUp = { bg = c.bg_dark }
+        hl.IlluminatedWordText = { bg = c.bg_highlight }
+        hl.IlluminatedWordRead = { bg = c.bg_highlight }
+        hl.IlluminatedWordWrite = { bg = c.bg_highlight }
       end,
     }
   end,
