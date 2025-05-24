@@ -223,12 +223,19 @@ function M.fileinfo(opts)
   opts = opts or { add_icon = true }
   local icon = M.file_icon({ mono = false })
   local dir = utils.pretty_dirpath()()
+  local pretty_dir = "╼ " .. dir
   local path = vim.fn.expand("%:t")
   local name = (path == "" and "Empty ") or path:match("([^/\\]+)[/\\]*$")
 
   local modified = vim.bo.modified and hl_str("DiagnosticError", " •") or ""
 
   return (opts.add_icon and " " .. icon .. " " or " ") .. dir .. name .. modified .. " %r%h%w "
+  return " "
+    .. (dir ~= "" and pretty_dir .. "  " or "")
+    .. (opts.add_icon and icon .. " " or "")
+    .. name
+    .. modified
+    .. " %r%h%w "
 end
 
 local function get_vlinecount_str()
@@ -499,7 +506,7 @@ function M.terminal_status()
 end
 
 function M.lsp_progress()
-  return require("lsp-progress").progress() .. " "
+  return " " .. require("lsp-progress").progress() .. " "
 end
 
 function M.get_copilot_status()
