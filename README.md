@@ -2,9 +2,7 @@
 
 This is my Neovim configuation written in Lua (wip).
 
-![](assets/github-monochrome-dark.png)
-
-![](assets/github-monochrome-light.png)
+![](assets/nvim-screenshot.png)
 
 ## Basic setup
 
