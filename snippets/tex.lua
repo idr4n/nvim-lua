@@ -166,11 +166,11 @@ M.snips.t20 = p(
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
     \hline
     \rowcolor{gray!15}
-    \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4}  & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} \\\hline
-    \hspace{1cm} & \hspace{1cm} & \hspace{1cm} &  \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} \\\hline
+    \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4}  & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} \\\\\hline
+    \hspace{1cm} & \hspace{1cm} & \hspace{1cm} &  \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} \\\\\hline
     \rowcolor{gray!15}
-    \textbf{11}  & \textbf{12}  & \textbf{13}  & \textbf{14}   & \textbf{15}  & \textbf{16}  & \textbf{17}  & \textbf{18}  & \textbf{19}  & \textbf{20}  \\\hline
-    \hspace{1cm} & \hspace{1cm} & \hspace{1cm} &  \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} \\\hline
+    \textbf{11}  & \textbf{12}  & \textbf{13}  & \textbf{14}   & \textbf{15}  & \textbf{16}  & \textbf{17}  & \textbf{18}  & \textbf{19}  & \textbf{20}  \\\\\hline
+    \hspace{1cm} & \hspace{1cm} & \hspace{1cm} &  \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} \\\\\hline
   \end{tabular}
   }
 \end{center}
@@ -195,7 +195,6 @@ M.snips.ex = p(
 \usepackage{graphicx}
 \usepackage{multicol}
 \usepackage{array}
-\usepackage{booktabs}
 % For long underlines use ulem's \uline instead
 \usepackage{ulem}
 \usepackage{booktabs}
@@ -221,7 +220,7 @@ M.snips.ex = p(
 \author{}
 \maketitle
 
-\textbf{I. (${6:6}\%) Multiple Choice Questions.} Write your answers to the MCQs in the table below:
+\textbf{I. (${6:6} marks) Multiple Choice Questions.} Write your answers to the MCQs in the table below:
 
 \phantom{.}
 
@@ -265,7 +264,7 @@ M.snips.ex = p(
 
 \rule{\textwidth}{0.4pt}
 
-\textbf{II. (${7:9}\%) Numerical and Analytical Questions.}
+\textbf{II. (${7:9} marks) Numerical and Analytical Questions.}
 
 \center\textbf{INSTRUCTIONS}
 

@@ -1,6 +1,15 @@
 return {
-  "epwalsh/obsidian.nvim",
-  -- enabled = false,
+  -- "epwalsh/obsidian.nvim",
+  "obsidian-nvim/obsidian.nvim",
+  cond = function()
+    local cwd = vim.fn.getcwd()
+    local enabled_dirs = {
+      vim.fn.expand("~/pCloud/Notes-tdo"),
+      vim.fn.expand("~/pCloud/Notes-Database"),
+    }
+    return vim.tbl_contains(enabled_dirs, cwd)
+  end,
+
   version = "*", -- recommended, use latest release instead of latest commit
   ft = "markdown",
     -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:

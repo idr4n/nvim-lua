@@ -1,7 +1,7 @@
 local cursorMoveAround = require("utils").CursorMoveAround
 
 --: helpers {{{
---: https://github.com/nvim-telescope/telescope.nvim/issues/1923 {{{
+-- https://github.com/nvim-telescope/telescope.nvim/issues/1923
 function vim.getVisualSelection()
   vim.cmd('noau normal! "vy"')
   local text = tostring(vim.fn.getreg("v"))
@@ -457,7 +457,7 @@ keyset(
   ":set foldmethod=expr<cr>:set foldexpr=nvim_treesitter#foldexpr()<cr>",
   { desc = "Set fold treesitter" }
 )
-keyset("n", "zm", ":set foldmethod=marker<cr>:set foldlevel=1<cr>", { desc = "Set fold marker" })
+keyset("n", "zm", ":set foldmethod=marker<cr>:set foldlevel=0<cr>", { desc = "Set fold marker" })
 --: }}}
 
 --: Diff selection agains clipboard {{{

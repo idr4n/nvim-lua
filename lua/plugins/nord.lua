@@ -1,5 +1,6 @@
 return {
   "gbprod/nord.nvim",
+  enabled = false,
   lazy = true,
   opts = function()
     return {
@@ -23,13 +24,14 @@ return {
         hl.StatusLine = { bg = c.polar_night.origin }
         hl.Substitute = { bg = c.aurora.red }
         hl.BufferLineFill = { bg = c.polar_night.origin }
-        hl.BufferLineIndicatorSelected = { fg = c.aurora.yellow, bg = c.polar_night.origin }
+        -- hl.BufferLineIndicatorSelected = { fg = c.aurora.yellow, bg = c.polar_night.origin }
         hl.WarningMsg = { fg = c.aurora.yellow, bg = c.polar_night.origin }
         hl.ErrorMsg = { fg = c.aurora.red, bg = c.polar_night.origin }
         hl.NonText = { fg = c.polar_night.bright }
         hl.IblIndent = { fg = c.polar_night.bright }
         hl.VisualNonText = { fg = c.polar_night.light, bg = c.polar_night.brighter }
         hl.WhichKeyNormal = { bg = "#282D37" }
+        hl.MultiCursorCursor = { fg = c.polar_night.origin, bg = c.frost.artic_water }
       end,
     }
   end,

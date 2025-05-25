@@ -26,6 +26,18 @@ return {
           },
           display = { format = "tree_guides" },
           preserve_hierarchy = true,
+          movement = {
+            next = { "<C-n>", "<DOWN>", "<C-j>" }, -- Support multiple keys
+            previous = { "<C-p>", "<UP>", "<C-k>" }, -- Support multiple keys
+          },
+        },
+      },
+      diagnostics = {
+        options = {
+          window = {
+            min_width = 120,
+            max_width = 140,
+          },
         },
       },
     })
