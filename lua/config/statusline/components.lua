@@ -229,7 +229,7 @@ function M.fileinfo(opts)
 
   local modified = vim.bo.modified and hl_str("DiagnosticError", " •") or ""
 
-  return (opts.add_icon and " " .. icon .. " " or " ") .. dir .. name .. modified .. " %r%h%w "
+  -- .. "╾ ╼"
   return " "
     .. (dir ~= "" and pretty_dir .. "  " or "")
     .. (opts.add_icon and icon .. " " or "")
