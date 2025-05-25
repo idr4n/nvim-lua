@@ -21,11 +21,16 @@ You should be able to clone this repo in `~/.config/nvim`, and start Neovim, for
 - I would recommend commenting out at least `latex` and `swift` in the list of `ensured_installed` in `lua/plugins/nvim-treesitter.lua`, as they require some manual configuration in your system, as far as I know.
 - Take a look at the list of `ensure_installed` servers in `lua/config/lsp/server_names.lua` and comment out or delete the ones you don't need. These servers are installed by `Mason` automatically.
 - There are some commands in `lua/config/commands.lua` that would work only in macOS (e.g., those with `open -a`). This would not give you an error in Linux unless you try to trigger those commands. So either adjust them or delete them.
-- Similarly, a command like `MdToPdfWatch` requires a `pandoc` setting in your system that you can get from my [dotfiles](https://github.com/idr4n/.dotfiles).
+- Similarly, a command like `MdToPdfWatch` requires a `pandoc` setting in your system that you can get from my [dotfiles](https://github.com/idr4n/.dotfiles). Same for `:CodeRun<cr>`, you need to install this [script](https://github.com/idr4n/.dotfiles/blob/master/scripts/code_run) in your path.
 
 ## Useful mappings
 
-- The leader key: `<space>`
+<details>
+<summary>A list of frequently-used mappings:</summary>
+
+<br>
+
+- Leader key: `<space>`
 - Open the file picker: `<C-space>` (Snacks picker)
 - Open another file picker (Fzf-Lua): `<space>ff`
 - Quit: `<space>qq`
@@ -51,15 +56,18 @@ You should be able to clone this repo in `~/.config/nvim`, and start Neovim, for
 - Toggle maximize window (including a Terminal buffer): `<A-,>`
 - Toggle extra information in the statusline: `<space>ti`
 - Toggle line wrap: `<space>tw`
-- Toggle spell check: `<space>tw`
+- Toggle spell check: `<space>tS`
 - Different fold levels: `z1`, `z2`, `z0`. Check more in `lua/config/mappings.lua`
 - Git:
     - Check status: `<space>gs`
     - Open Neogit: `<space>gn`
     - Open Lazygit: `<space>gl`
     - Open Vim-Fugitive: `<space>gi`
-    - Stage hunk or selection in current buffer: `<space>hs`. Check other mappings under `<space>h`.
+    - Stage hunk or selection in current buffer: `<space>hs`, or `<space>hS` to stage all changes in the current buffer. Check other mappings under `<space>h`.
 
+**Note**: although the system clipboard is enabled, motion mappings such as `d`, `c`, `x`, etc., do not copy to the clipboard (ala easy-clip plugin). That is, if you select something and use `d`, that text is deleted and sent to the 'black hole register'. If you want to delete while yanking text to paste it somewhere else, use `m` instead (use `gm` instead for adding a mark). Take a look at the "Replace the easy-clip plugin" section in `lua/config/mappings.lua`.
+
+</details>
 
 ## Nice commands
 
