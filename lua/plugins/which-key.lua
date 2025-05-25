@@ -33,7 +33,7 @@ return {
         b = { name = "buffer" },
         c = { name = "coding" },
         d = { name = "debug" },
-        f = { name = "file" },
+        f = { name = "file/fold" },
         g = { name = "Git/Glance" },
         h = { name = "Gitsings/Harpoon" },
         j = { name = "AI" },

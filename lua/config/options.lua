@@ -26,7 +26,7 @@ opt.foldlevelstart = 99
 opt.guicursor = {
   "n-sm:block",
   "v:hor50",
-  -- "c-ci-cr-i-ve:ver10",
+  "c-ci-cr-i-ve:ver10",
   "o-r:hor50",
 }
 opt.hlsearch = true -- highlight all matches on previous search pattern
@@ -104,9 +104,10 @@ vim.cmd([[
 ]])
 
 if vim.fn.exists(vim.g.neovide) then
-  vim.opt.guifont = { "Zed Plex Mono", ":h17" }
+  -- vim.opt.guifont = { "Berkeley Mono", ":h16.5" }
   vim.opt.linespace = 10
   vim.g.transparency = 1
+  vim.g.neovide_opacity = 1
   -- vim.g.neovide_background_color = "#000000" .. vim.fn.printf("%x", vim.fn.float2nr(255 * vim.g.transparency))
   vim.g.neovide_input_macos_option_key_is_meta = true
   vim.g.neovide_floating_blur_amount_x = 0

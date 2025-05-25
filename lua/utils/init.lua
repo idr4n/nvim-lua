@@ -298,7 +298,7 @@ function M.pretty_dirpath()
       parts = { parts[1], "…", parts[#parts - 1], parts[#parts] }
     end
 
-    return #parts > 0 and (table.concat(parts, sep) .. "/") or ""
+    return #parts > 0 and (table.concat(parts, sep)) or ""
   end
 end
 

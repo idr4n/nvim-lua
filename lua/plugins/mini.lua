@@ -188,7 +188,7 @@ return {
     cond = false,
     event = { "BufReadPost", "BufNewFile" },
     opts = {
-      -- show_icons = false,
+      show_icons = false,
       format = function(buf_id, label)
         local MiniTabline = require("mini.tabline").default_format(buf_id, label)
         -- local suffix = vim.bo[buf_id].modified and "+ " or "  "
