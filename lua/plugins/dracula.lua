@@ -79,6 +79,7 @@ local c = {
 
 return {
   "Mofiqul/dracula.nvim",
+  enabled = false,
   lazy = true,
   config = function()
     local dracula = require("dracula")

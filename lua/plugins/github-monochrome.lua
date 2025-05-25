@@ -24,6 +24,7 @@ return {
         hl.gitcommitSummary = { italic = false }
         hl.gitcommitFirstLine = { italic = false }
         hl.Identifier = { fg = c.magenta, bold = true }
+        hl.BufferLineIndicatorSelected = { fg = c.bg, bg = c.bg }
         -- hl.Type = { bold = false }
         -- hl["@type.builtin"] = { bold = false }
         -- hl["@keyword.function"] = { bold = true }
