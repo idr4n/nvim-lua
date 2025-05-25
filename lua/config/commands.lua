@@ -323,3 +323,72 @@ command("ToggleSpellCheck", function()
   end
 end, {})
 keymap("n", "<leader>tS", ":ToggleSpellCheck<cr>", { desc = "Toggle spell checking" })
+
+-- Command to remove trailing whitespace
+command("TrimTrailingWhitespace", function(cmd_opts)
+  local start_line, end_line
+
+  if cmd_opts.range == 0 then
+    start_line = vim.fn.line(".")
+    end_line = start_line
+  else
+    start_line = cmd_opts.line1
+    end_line = cmd_opts.line2
+  end
+
+  -- Execute the substitution command
+  vim.cmd(string.format("silent %d,%ds/\\s\\+$//e", start_line, end_line))
+  vim.cmd("nohlsearch")
+
+  -- Provide feedback
+  local count = end_line - start_line + 1
+  local message = "Trimmed trailing whitespace from " .. count .. " line" .. (count > 1 and "s" or "")
+  vim.notify(message, vim.log.levels.INFO)
+end, { range = true })
+
+vim.keymap.set({ "n", "v" }, "<leader>cw", ":TrimTrailingWhitespace<cr>", { desc = "Trim trailing whitespace" })
+
+-- Command to shuffle paragraphs within a visual selection
+command("ShuffleParagraphs", function(cmd_opts)
+  local start_line = cmd_opts.line1
+  local end_line = cmd_opts.line2
+
+  -- Get selected lines
+  local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+
+  -- Identify paragraph boundaries within selection
+  local paragraphs = {}
+  local current_paragraph = {}
+
+  for _, line in ipairs(lines) do
+    table.insert(current_paragraph, line)
+    -- Empty line marks paragraph boundary
+    if line:match("^%s*$") then
+      table.insert(paragraphs, current_paragraph)
+      current_paragraph = {}
+    end
+  end
+
+  -- Add the last paragraph if it's not empty
+  if #current_paragraph > 0 then
+    table.insert(paragraphs, current_paragraph)
+  end
+
+  -- Shuffle paragraphs using Fisher-Yates algorithm
+  math.randomseed(os.time())
+  for i = #paragraphs, 2, -1 do
+    local j = math.random(i)
+    paragraphs[i], paragraphs[j] = paragraphs[j], paragraphs[i]
+  end
+
+  -- Flatten paragraphs back into lines
+  local shuffled_lines = {}
+  for _, paragraph in ipairs(paragraphs) do
+    for _, line in ipairs(paragraph) do
+      table.insert(shuffled_lines, line)
+    end
+  end
+
+  -- Replace only the selected portion with shuffled paragraphs
+  vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, shuffled_lines)
+end, { range = true })
