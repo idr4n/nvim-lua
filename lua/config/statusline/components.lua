@@ -11,6 +11,12 @@ function _G.get_lang_version(language)
   local script_path = "get_lang_version"
   local cmd = script_path .. " " .. language
   local result = vim.fn.system(cmd)
+
+  -- Check if command failed (non-zero exit code)
+  if vim.v.shell_error ~= 0 then
+    return "v?"
+  end
+
   return result:gsub("^%s*(.-)%s*$", "%1")
 end
 
