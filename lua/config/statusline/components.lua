@@ -434,7 +434,7 @@ function M.lsp_diagnostics_simple()
   local info = ""
   local hints = ""
 
-  local icon = "◦"
+  local icon = "▫"
 
   if result.errors > 0 then
     errors = M.get_or_create_hl("DiagnosticError", "StatusLine") .. icon
