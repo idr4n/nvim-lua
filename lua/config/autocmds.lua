@@ -9,7 +9,7 @@ end
 
 -- Autospelling and zen mode for tex and md files
 aucmd("BufRead", {
-  pattern = { "*.tex", "*.md", "*.typ", "*.qmd" },
+  pattern = { "*.tex", "*.typ", "*.qmd" },
   callback = function()
     vim.cmd("setlocal spell spelllang=en_us")
     -- vim.cmd("ZenMode")

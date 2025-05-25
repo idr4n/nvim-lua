@@ -318,7 +318,7 @@ command("ToggleSpellCheck", function()
     vim.notify("Spell checking disabled", vim.log.levels.INFO)
   else
     vim.wo.spell = true
-    vim.cmd("setlocal spelllang=en_us")
+    vim.cmd("setlocal spell spelllang=en_us")
     vim.notify("Spell checking enabled", vim.log.levels.INFO)
   end
 end, {})
