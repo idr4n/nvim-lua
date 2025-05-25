@@ -1,10 +1,11 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
   cmd = { "Neotree" },
-  event = { "BufReadPost", "BufNewFile" },
+  -- event = { "BufReadPost", "BufNewFile" },
+  event = "VimEnter",
   keys = {
     {
-      ",n",
+      "<leader>e",
       ":Neotree reveal left<CR>",
       silent = true,
       desc = "Toggle Neo-Tree",
@@ -62,10 +63,11 @@ return {
         scan_mode = "deep", -- Scan into directories to detect empty or grouped empty directories a priori.
       },
       window = {
-        width = 32,
+        width = 28,
         mappings = {
+          ["<space>"] = "none",
           ["<Enter>"] = "toggle_node",
-          -- ["<c-b>"] = "close_window",
+          ["<space>e"] = { "close_window", desc = "Close Neo-Tree" },
           ["o"] = "open",
           ["h"] = function(state)
             local node = state.tree:get_node()

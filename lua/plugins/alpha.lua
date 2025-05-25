@@ -33,7 +33,8 @@ return {
       dashboard.button("s", "  Restore session", ':lua require("session_manager").load_current_dir_session() <CR>'),
       dashboard.button("l", "󰒲  Lazy", ":Lazy<CR>"),
       dashboard.button("n", "  File Explorer", function()
-        require("mini.files").open()
+        -- require("mini.files").open()
+        vim.cmd("Neotree reveal")
       end),
       dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
       { type = "padding", val = 1 },
