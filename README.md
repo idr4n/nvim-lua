@@ -65,13 +65,14 @@ You should be able to clone this repo in `~/.config/nvim`, and start Neovim, for
     - Open Vim-Fugitive: `<space>gi`
     - Stage hunk or selection in current buffer: `<space>hs`, or `<space>hS` to stage all changes in the current buffer. Check other mappings under `<space>h`.
 
-**Note**: although the system clipboard is enabled, motion mappings such as `d`, `c`, `x`, etc., do not copy to the clipboard (ala easy-clip plugin). That is, if you select something and use `d`, that text is deleted and sent to the 'black hole register'. If you want to delete while yanking text to paste it somewhere else, use `m` instead (use `gm` instead for adding a mark). Take a look at the "Replace the easy-clip plugin" section in `lua/config/mappings.lua`.
+**Note**: although the system clipboard is enabled, motion mappings such as `d`, `c`, `x`, etc., do not copy to the clipboard (ala easy-clip plugin). That is, if you select something and use `d`, that text is deleted and sent to the 'black hole register'. If you want to delete some text to paste it somewhere else, use `m` instead (use `gm` for adding a mark). Take a look at the "Replace the easy-clip plugin" section in `lua/config/mappings.lua`.
 
 </details>
 
-## Nice commands
+## Other nice commands
 
 - `:TrimTrailingWhitespace<cr>` in both current line (normal mode) or selection (visual mode)
 - `:ShuffleLines<cr>` with selection
 - `:ShuffleParagraphs<cr>` with selection (the last paragraph should be followed by an empty line)
+- `:CopyNoBullets<cr>` with selection, to copy a markdown list but each line without '-'
 
