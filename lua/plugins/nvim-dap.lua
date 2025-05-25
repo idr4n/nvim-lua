@@ -24,6 +24,7 @@ return {
       },
       {
         "microsoft/vscode-js-debug",
+        enabled = false,
         build = "npm i && npm run compile vsDebugServerBundle && rm -rf out && mv -f dist out",
       },
       { "jbyuki/one-small-step-for-vimkind" },
