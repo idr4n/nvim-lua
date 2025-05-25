@@ -130,7 +130,7 @@ return {
       { "<leader>sC", function() snacks.picker.commands() end, desc = "Commands" },
       { "<leader>sd", function() snacks.picker.diagnostics() end, desc = "Diagnostics" },
       { "<leader>sh", function() snacks.picker.help() end, desc = "Help Pages" },
-      { "<leader>sl", function() snacks.picker.highlights() end, desc = "Highlights" },
+      -- { "<leader>sl", function() snacks.picker.highlights() end, desc = "Highlights" },
       { "<leader>sj", function() snacks.picker.jumps() end, desc = "Jumps" },
       { "<leader>sk", function() snacks.picker.keymaps() end, desc = "Keymaps" },
       { "<leader>sM", function() snacks.picker.man() end, desc = "Man Pages" },

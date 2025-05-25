@@ -45,6 +45,7 @@ return {
         --   desc = "Telescope-find_files",
         -- },
         { "<leader>ot", "<cmd>Telescope resume<cr>", noremap = true, silent = true, desc = "Telescope Resume" },
+        { "<leader>sl", "<cmd>Telescope highlights<cr>", noremap = true, silent = true, desc = "Highlights" },
         {
           "s",
           function()
