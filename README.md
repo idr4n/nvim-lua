@@ -33,6 +33,7 @@ You should be able to clone this repo in `~/.config/nvim`, and start Neovim, for
 - Leader key: `<space>`
 - Open the file picker: `<C-space>` (Snacks picker)
 - Open another file picker (Fzf-Lua): `<space>ff`
+- Close (delete) current buffer: `<space>x`
 - Grep across project (Fzf-Lua): `<space>r` in normal or visual mode
 - Quit: `<space>qq`
 - Force quit: `<space>qQ`
@@ -65,6 +66,12 @@ You should be able to clone this repo in `~/.config/nvim`, and start Neovim, for
     - Open Lazygit: `<space>gl`
     - Open Vim-Fugitive: `<space>gi`
     - Stage hunk or selection in current buffer: `<space>hs`, or `<space>hS` to stage all changes in the current buffer. Check other mappings under `<space>h`.
+- Completions and snippets (LuaSnip):
+    - Select next completion suggestion: `<Tab>`
+    - Select previous completion suggestion: `<S-Tab>`
+    - Confirm completion or snippet suggestion: `<C-L>`
+    - Jump to next snippet placeholder: `<C-J>` in insert and selection mode
+    - Jump to previous snippet placeholder: `<C-K>` in insert and selection mode
 
 **Note**: although the system clipboard is enabled, motion mappings such as `d`, `c`, `x`, etc., do not copy to the clipboard (ala easy-clip plugin). That is, if you select something and use `d`, that text is deleted and sent to the 'black hole register'. If you want to delete some text to paste it somewhere else, use `m` instead (use `gm` for adding a mark). Take a look at the "Replace the easy-clip plugin" section in `lua/config/mappings.lua`.
 
