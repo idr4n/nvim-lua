@@ -9,6 +9,7 @@ return {
     "saadparwaiz1/cmp_luasnip",
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-nvim-lua",
+    { "Gelio/cmp-natdat", config = true },
     {
       "js-everts/cmp-tailwind-colors",
       opts = {
@@ -155,6 +156,7 @@ return {
         { name = "path" },
         { name = "otter" },
         { name = "crates" },
+        { name = "natdat" },
       },
       confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,
