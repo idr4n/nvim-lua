@@ -33,6 +33,7 @@ You should be able to clone this repo in `~/.config/nvim`, and start Neovim, for
 - Leader key: `<space>`
 - Open the file picker: `<C-space>` (Snacks picker)
 - Open another file picker (Fzf-Lua): `<space>ff`
+- Grep across project (Fzf-Lua): `<space>r` in normal or visual mode
 - Quit: `<space>qq`
 - Force quit: `<space>qQ`
 - Save buffer: `<C-S>` in both normal and insert modes
