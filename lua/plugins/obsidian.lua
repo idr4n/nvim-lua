@@ -28,10 +28,7 @@ return {
       },
       {
         name = "work",
-        path = "~/pCloud/Notes-tdo",
-        overrides = {
-          notes_subdir = "notes",
-        },
+        path = "~/pCloud/Notes-zk",
       },
       -- Usage outside of a workspace or vault
       {
