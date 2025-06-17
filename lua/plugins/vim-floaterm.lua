@@ -1,9 +1,20 @@
 return {
   "voldikss/vim-floaterm",
   cmd = "FloatermNew",
+  init = function()
+    if vim.fn.argc(-1) == 1 then
+      local stat = vim.loop.fs_stat(vim.fn.argv(0))
+      if stat and stat.type == "directory" then
+        vim.cmd("FloatermNew --width=0.85 --height=0.9 --title=Broot broot")
+        vim.defer_fn(function()
+          vim.cmd("FloatermToggle")
+        end, 50)
+      end
+    end
+  end,
   keys = {
-    { ",b", "<cmd>Broot<cr>", desc = "Broot (CWD)" },
-    { ",,", "<cmd>BrootCWD<cr>", desc = "Broot" },
+    { ",,", "<cmd>Broot<cr>", desc = "Broot (CWD)" },
+    { ",b", "<cmd>BrootCWD<cr>", desc = "Broot" },
     { ",v", "<cmd>BrootSplit<cr>", desc = "Broot (Split)" },
     { ",r", "<cmd>BrootSearch<cr>", desc = "Broot (Sarch Content)" },
   },
@@ -23,7 +34,12 @@ return {
 
       -- Only add the file path if we're in a valid buffer
       if current_file ~= "" then
-        broot_command = broot_command .. ' -c "' .. current_file2:gsub("/", "\\/") .. (opts.cwd and ':escape"' or '"')
+        if not opts.cwd then
+          broot_command = broot_command .. ' -c ":mode_input"'
+        else
+          -- broot_command = broot_command .. ' -c "' .. current_file2:gsub("/", "\\/") .. ':escape"'
+          broot_command = broot_command .. ' -c "' .. current_file2:gsub("/", "\\/") .. '"'
+        end
       end
 
       return broot_command
