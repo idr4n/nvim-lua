@@ -28,6 +28,8 @@ return {
         -- hl.Type = { bold = false }
         -- hl["@type.builtin"] = { bold = false }
         -- hl["@keyword.function"] = { bold = true }
+        hl.floatermborder = { fg = c.red }
+        hl.insertcursor = { bg = c.red }
 
         if s == "solarized" then
           hl.IblScope = { fg = "#62868C" }

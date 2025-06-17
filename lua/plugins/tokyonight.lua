@@ -50,6 +50,8 @@ return {
         hl.IlluminatedWordText = { bg = c.bg_highlight }
         hl.IlluminatedWordRead = { bg = c.bg_highlight }
         hl.IlluminatedWordWrite = { bg = c.bg_highlight }
+        hl.floatermborder = { fg = c.magenta }
+        hl.insertcursor = { bg = c.yellow }
       end,
     }
   end,
