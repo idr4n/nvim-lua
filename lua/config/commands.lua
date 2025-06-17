@@ -392,3 +392,21 @@ command("ShuffleParagraphs", function(cmd_opts)
   -- Replace only the selected portion with shuffled paragraphs
   vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, shuffled_lines)
 end, { range = true })
+
+-- Command to close all opened terminals
+command("CloseAllTerminals", function()
+  local buffers = vim.api.nvim_list_bufs()
+  local closed_count = 0
+
+  for _, buf in ipairs(buffers) do
+    if vim.api.nvim_buf_is_valid(buf) and vim.api.nvim_buf_is_loaded(buf) then
+      local buftype = vim.bo[buf].buftype
+      if buftype == "terminal" then
+        vim.api.nvim_buf_delete(buf, { force = true })
+        closed_count = closed_count + 1
+      end
+    end
+  end
+
+  vim.notify("Closed " .. closed_count .. " terminal buffers", vim.log.levels.INFO)
+end, {})
