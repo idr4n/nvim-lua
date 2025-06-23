@@ -44,5 +44,8 @@ return {
     require("zk").setup({
       picker = "telescope",
     })
+
+    -- Initialize zk backlinks module
+    require("config.statusline.zk-backlinks").setup(zk_api)
   end,
 }

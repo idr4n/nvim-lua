@@ -533,4 +533,24 @@ function M.get_copilot_status()
   return status
 end
 
+-- Cache the module reference to avoid repeated require calls
+local zk_backlinks
+local function get_zk_backlinks()
+  if not zk_backlinks then
+    local ok, module = pcall(require, "config.statusline.zk-backlinks")
+    zk_backlinks = ok and module or false
+  end
+  return zk_backlinks
+end
+
+function M.BacklinkCount()
+  local backlinks = get_zk_backlinks()
+  if not backlinks then
+    return ""
+  end
+
+  local count = backlinks.get_count()
+  return count ~= "" and (" %s%s%%* "):format(M.get_or_create_hl("SLBgNoneHl", "StatusLine"), count) or ""
+end
+
 return M
