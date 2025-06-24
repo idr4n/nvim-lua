@@ -44,10 +44,10 @@ You should be able to clone this repo in `~/.config/nvim`, and start Neovim, for
     - Nvimtree: `<space><space` to show and `,e` to focus.
     - Neo-tree: `<C-.>` to show and `<space>e` to focus.
 - File managers:
-    - mini.files: `<C-q>`
     - Oil: just `-`
     - Yazi: `<space>-`
-    - Broot: `,,`, `,b`, `,v`, `,r` (each has different functionality)
+    - Broot: `,f`, `,b`, `,v`, `,r` (each has different functionality)
+    - Netrw: `,,`
 - Go back to the last visited buffer: `ga` in normal mode
 - Go to next buffer: `L`
 - Go to previous buffer: `H`
