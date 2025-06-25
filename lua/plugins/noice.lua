@@ -43,21 +43,30 @@ return {
     cmdline = {
       format = {
         -- input = { view = "cmdline_popup", icon = "󰥻 " },
-        input = { view = "cmdline_input", icon = "󰥻 " },
+        -- input = { view = "cmdline_input", icon = "󰥻 " },
+        input = { view = "cmdline" },
+        cmdline = { icon = "  " },
+        search_down = { icon = "   " },
+        search_up = { icon = "   " },
+        filter = { icon = "  $" },
+        lua = { icon = "  " },
+        help = { icon = "  " },
       },
     },
     views = {
+      cmdline = { position = { row = "100%", col = 0 }, size = { height = "auto", width = "70%" } },
       cmdline_input = {
         position = { row = "25%", col = "50%" },
         -- size = { width = "65%" },
-        size = { width = "60%" },
+        size = { width = "50%" },
       },
+
       cmdline_popup = {
-        -- position = { row = "100%", col = "0%" },
-        -- size = { width = "80%" },
-        -- border = { style = "none", padding = { 0, 0 } },
-        position = { row = "25%", col = "50%" },
-        size = { width = "60%" },
+        position = { row = "100%", col = 0 },
+        size = { width = "65%" },
+        border = { style = "none", padding = { 0, 0 } },
+        -- position = { row = "25%", col = "50%" },
+        -- size = { width = "60%" },
       },
     },
     popupmenu = { backend = "cmp" },
