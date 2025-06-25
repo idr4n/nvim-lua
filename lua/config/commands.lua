@@ -410,3 +410,5 @@ command("CloseAllTerminals", function()
 
   vim.notify("Closed " .. closed_count .. " terminal buffers", vim.log.levels.INFO)
 end, {})
+
+vim.keymap.set("n", "<leader>ct", ":CloseAllTerminals<cr>", { desc = "Close all opened terminals" })
