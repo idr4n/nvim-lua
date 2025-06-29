@@ -41,14 +41,6 @@ return {
     --   desc = "NvimTree Open",
     -- },
   },
-  -- init = function()
-  --   if vim.fn.argc(-1) == 1 then
-  --     local stat = vim.loop.fs_stat(vim.fn.argv(0))
-  --     if stat and stat.type == "directory" then
-  --       require("nvim-tree")
-  --     end
-  --   end
-  -- end,
   opts = {
     on_attach = function(bufnr)
       local api = require("nvim-tree.api")
@@ -89,7 +81,7 @@ return {
       git_ignored = false,
     },
 
-    disable_netrw = true,
+    disable_netrw = false,
     hijack_netrw = false,
     hijack_cursor = true,
     sync_root_with_cwd = true,
@@ -114,7 +106,7 @@ return {
           local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
           -- local window_w = screen_w * 0.3
           local window_w = math.min(math.floor(screen_w * 0.28), 30)
-          local window_h = screen_h * 0.92
+          local window_h = screen_h * 0.9
           local window_w_int = math.floor(window_w)
           local window_h_int = math.floor(window_h)
 

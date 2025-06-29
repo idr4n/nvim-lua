@@ -16,7 +16,7 @@ return {
     { "<leader>oo", "<cmd>Oil<cr>", desc = "Oil - Parent Dir" },
   },
   opts = {
-    default_file_explorer = true,
+    default_file_explorer = false,
     view_options = {
       show_hidden = true,
     },
@@ -28,14 +28,14 @@ return {
     win_options = {
       wrap = true,
       winblend = 0,
+      signcolumn = "yes",
     },
     keymaps = {
       ["<C-s>"] = false,
       -- ["<C-h>"] = false,
       ["q"] = "actions.close",
-      -- ["<leader>-"] = "actions.close",
-      ["<C-h>"] = "actions.parent",
-      ["<C-l>"] = "actions.select",
+      ["h"] = "actions.parent",
+      ["l"] = "actions.select",
       ["s"] = "actions.close",
       ["Y"] = "actions.yank_entry",
       ["gd"] = {
