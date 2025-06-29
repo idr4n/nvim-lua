@@ -103,7 +103,7 @@ keymap("n", "gcy", "gcc:t.<cr>gcc", { noremap = false, desc = "Duplicate-comment
 keymap("n", "<S-l>", ":bnext<CR>")
 keymap("n", "<S-h>", ":bprevious<CR>")
 -- keymap("n", "ga", ":b#<CR>zz", { desc = "Last buffer" })
-keymap("n", "ga", "<cmd>e#<cr>zz", { desc = "Reopen buffer" })
+-- keymap("n", "ga", "<cmd>e#<cr>zz", { desc = "Reopen buffer" })
 -- keymap("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 -- keymap("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 --: }}}

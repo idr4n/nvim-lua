@@ -22,7 +22,7 @@ You should be able to clone this repo in `~/.config/nvim`, and start Neovim, for
 - Take a look at the list of `ensure_installed` servers in `lua/config/lsp/server_names.lua` and comment out or delete the ones you don't need. These servers are installed by `Mason` automatically.
 - There are some commands in `lua/config/commands.lua` that would work only in macOS (e.g., those with `open -a`). This would not give you an error in Linux unless you try to trigger those commands. So either adjust them or delete them.
 - Similarly, a command like `MdToPdfWatch` requires a `pandoc` setting in your system that you can get from my [dotfiles](https://github.com/idr4n/.dotfiles). Same for `:CodeRun<cr>`, you need to install this [script](https://github.com/idr4n/.dotfiles/blob/master/scripts/code_run) in your path.
-- Yazi and Broot should be installed in your system to be able to use them as file managers.
+- Yazi should be installed in your system to be able to use it as file managers.
 
 ## Useful mappings
 
@@ -46,8 +46,7 @@ You should be able to clone this repo in `~/.config/nvim`, and start Neovim, for
 - File managers:
     - Oil: just `-`
     - Yazi: `<space>-`
-    - Broot: `,f`, `,b`, `,v`, `,r` (each has different functionality)
-    - Netrw: `,,`
+    - Netrw: `,,` and `,l` (via `netrw-preview.nvim`)
 - Go back to the last visited buffer: `ga` in normal mode
 - Go to next buffer: `L`
 - Go to previous buffer: `H`
