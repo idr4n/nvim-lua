@@ -53,6 +53,7 @@ return {
       diagnostics = {
         virtual_text = { prefix = "" },
         virtual_lines = false,
+        -- virtual_lines = { current_line = true },
         signs = {
           text = { [x.ERROR] = icons.Error, [x.WARN] = icons.Warn, [x.INFO] = icons.Info, [x.HINT] = icons.Hint },
           numhl = {

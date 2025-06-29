@@ -26,7 +26,8 @@ opt.foldlevelstart = 99
 opt.guicursor = {
   "n-sm:block",
   "v:hor50",
-  "c-ci-cr-i-ve:ver10",
+  "i-c-ci-cr-ve:ver10-InsertCursor",
+  -- "i-c-ci-ve:block-InsertCursor",
   "o-r:hor50",
 }
 opt.hlsearch = true -- highlight all matches on previous search pattern
@@ -116,10 +117,13 @@ end
 
 -- Explorer (netrw)
 vim.g.netrw_browse_split = 0
-vim.g.netrw_banner = 1
+vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 vim.g.netrw_fastbrowse = 0
 vim.g.netrw_bufsettings = "noma nomod nu nowrap ro nobl"
+vim.g.netrw_preview = 1
+vim.g.netrw_alto = 0
+-- vim.g.netrw_keepdir = 0
 
 -- Use ripgrep for grepping.
 vim.o.grepprg = "rg --vimgrep"
