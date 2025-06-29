@@ -32,6 +32,9 @@ return {
         hl.VisualNonText = { fg = c.polar_night.light, bg = c.polar_night.brighter }
         hl.WhichKeyNormal = { bg = "#282D37" }
         hl.MultiCursorCursor = { fg = c.polar_night.origin, bg = c.frost.artic_water }
+        hl.InsertCursor = { bg = c.aurora.purple }
+        hl.FloatermBorder = { fg = c.aurora.purple }
+        hl.BufferLineIndicatorSelected = { fg = c.polar_night.origin, bg = c.polar_night.origin }
       end,
     }
   end,

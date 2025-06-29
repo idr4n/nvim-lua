@@ -4,7 +4,6 @@ return {
   cond = function()
     local cwd = vim.fn.getcwd()
     local enabled_dirs = {
-      vim.fn.expand("~/pCloud/Notes-zk"),
       vim.fn.expand("~/pCloud/Notes-Database"),
     }
     return vim.tbl_contains(enabled_dirs, cwd)
