@@ -68,16 +68,6 @@ aucmd({ "FileType" }, {
   end,
 })
 
--- Netrw
-aucmd("FileType", {
-  pattern = { "netrw" },
-  callback = function()
-    vim.api.nvim_buf_set_keymap(0, "n", "h", "-", { silent = true })
-    vim.api.nvim_buf_set_keymap(0, "n", "l", "<CR>", { silent = true })
-  end,
-  group = augroup("Netrw"),
-})
-
 -- format on save for specific files (set in conform config instead)
 -- aucmd("BufWritePre", {
 --   pattern = { "*.go", "*.lua", "*.rs" },
@@ -134,6 +124,16 @@ aucmd("FileType", {
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
 })
+
+--: Netwr mappings {{{
+-- vim.api.nvim_create_autocmd("FileType", {
+--   group = augroup("NetwrMappings"),
+--   pattern = "netrw",
+--   callback = function()
+--     vim.api.nvim_buf_set_keymap(0, "n", "l", "<CR>", { silent = true })
+--   end,
+-- })
+--: }}}
 
 -- Redraw statusline on different events
 aucmd("DiagnosticChanged", {
@@ -329,6 +329,8 @@ aucmd("ColorScheme", {
       set_hl("MiniTablineModifiedHidden", palette.grey0, palette.bg_visual_red)
       set_hl("MiniTablineModifiedVisible", palette.purple, palette.bg_visual_red)
       set_hl("RenderMarkdownCode", palette.none, palette.bg_dim)
+      set_hl("BufferLineIndicatorSelected", palette.bg0, palette.bg0)
+      set_hl("insertcursor", palette.fg0, { "#F34B00", "NONE" })
     end
 
     vim.api.nvim_set_hl(0, "WinSeparator", { fg = winsep })
