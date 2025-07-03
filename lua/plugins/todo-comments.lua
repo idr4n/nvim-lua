@@ -1,5 +1,6 @@
 return {
   "folke/todo-comments.nvim",
+  -- cond = false,
   cmd = { "TodoQuickFix", "TodoTelescope" },
   event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   keys = {
@@ -8,7 +9,10 @@ return {
   opts = {
     highlight = {
       comments_only = false,
+      keyword = "wide_fg",
       after = "",
+      before = "",
+      pattern = { ".*<(KEYWORDS)\\s*:", ".*\\[(KEYWORDS)\\]" },
     },
     search = {
       command = "rg",
@@ -20,6 +24,7 @@ return {
         "--column",
         "--glob=!node_modules",
       },
+      pattern = "\\b(KEYWORDS):|\\[(KEYWORDS)\\]",
     },
   },
 }
