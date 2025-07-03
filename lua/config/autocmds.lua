@@ -135,6 +135,18 @@ aucmd("FileType", {
 -- })
 --: }}}
 
+-- netrw-preview open if directory
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    if vim.fn.argc() == 1 then
+      local stat = vim.loop.fs_stat(vim.fn.argv(0))
+      if stat and stat.type == "directory" then
+        require("netrw-preview").reveal()
+      end
+    end
+  end,
+})
+
 -- Redraw statusline on different events
 aucmd("DiagnosticChanged", {
   group = augroup("Status_Diagnostics"),
