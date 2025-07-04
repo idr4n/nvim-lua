@@ -11,8 +11,8 @@ return {
       desc = "Nvimtree Toggle",
     },
     {
-      -- "<leader>e",
-      ",e",
+      "<leader>e",
+      -- ",e",
       "<cmd>lua require('nvim-tree.api').tree.open()<CR>",
       silent = false,
       desc = "Nvimtree Focus window",

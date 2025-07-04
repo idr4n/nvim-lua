@@ -2,16 +2,16 @@ return {
   "nvim-neo-tree/neo-tree.nvim",
   cmd = { "Neotree" },
   -- event = { "BufReadPost", "BufNewFile" },
-  event = "VimEnter",
+  -- event = "VimEnter",
   keys = {
     {
-      "<leader>e",
+      ",e",
       ":Neotree reveal left<CR>",
       silent = true,
       desc = "Toggle Neo-Tree",
     },
     {
-      "<C-.>",
+      ",.",
       ":Neotree reveal show left toggle<CR>",
       silent = true,
       desc = "Toggle Neo-Tree (No focus)",
