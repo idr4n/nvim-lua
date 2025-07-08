@@ -42,7 +42,6 @@ You should be able to clone this repo in `~/.config/nvim`, and start Neovim, for
 - Save without formatting: `<space>w`
 - File tree view:
     - Nvimtree: `<space><space` to show and `,e` to focus.
-    - Neo-tree: `<C-.>` to show and `<space>e` to focus.
 - File managers:
     - Oil: just `-`
     - Yazi: `<space>-`
