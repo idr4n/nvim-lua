@@ -1,6 +1,6 @@
 return {
   "gbprod/nord.nvim",
-  enabled = false,
+  -- enabled = false,
   lazy = true,
   opts = function()
     return {

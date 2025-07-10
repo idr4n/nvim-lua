@@ -179,7 +179,7 @@ return {
     },
     config = function()
       require("dap-python").resolve_python = function()
-        return "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3"
+        return "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3"
       end
       require("dap-python").setup("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
     end,

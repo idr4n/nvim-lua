@@ -228,7 +228,7 @@ aucmd("ColorScheme", {
     local ut = require("utils")
     local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
     local line_nr = ut.lighten(string.format("#%06x", normal.bg), 0.8)
-    local winsep = ut.lighten(string.format("#%06x", normal.bg), 0.7)
+    -- local winsep = ut.lighten(string.format("#%06x", normal.bg), 0.7)
     local treeindent = ut.lighten(string.format("#%06x", normal.bg), 0.85)
     local lighter_bg = ut.lighten(string.format("#%06x", normal.bg), 0.95)
     local darker_bg = ut.darken(string.format("#%06x", normal.bg), 0.95, "#000000")
@@ -343,9 +343,10 @@ aucmd("ColorScheme", {
       set_hl("RenderMarkdownCode", palette.none, palette.bg_dim)
       set_hl("BufferLineIndicatorSelected", palette.bg0, palette.bg0)
       set_hl("insertcursor", palette.fg0, { "#F34B00", "NONE" })
+      set_hl("WinSeparator", { "#e26a75", "NONE" }, palette.bg0)
     end
 
-    vim.api.nvim_set_hl(0, "WinSeparator", { fg = winsep })
+    -- vim.api.nvim_set_hl(0, "WinSeparator", { fg = winsep })
     vim.api.nvim_set_hl(0, "NvimTreeIndentMarker", { fg = treeindent })
     vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { fg = normal.bg })
     vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = darker_bg })
