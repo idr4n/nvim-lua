@@ -40,7 +40,6 @@ return {
   config = function()
     local lsp_conf = require("config.lsp")
     local lspconfig = require("lspconfig")
-    local methods = vim.lsp.protocol.Methods
     local icons = require("utils").diagnostic_icons
     local x = vim.diagnostic.severity
 
