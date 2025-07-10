@@ -2,7 +2,49 @@ return {
   "nvim-tree/nvim-tree.lua",
   -- enabled = false,
   cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+  dependencies = {
+    {
+      -- "idr4n/nvim-tree-preview.lua",
+      "b0o/nvim-tree-preview.lua",
+      opts = {
+        win_position = {
+          ---@param tree_win number The tree window handle
+          ---@param size {width: number, height: number} Desired window dimensions
+          ---@return number Calculated column position
+          col = function(tree_win, size)
+            local tree_width = vim.fn.winwidth(tree_win)
+            local total_width = vim.o.columns
+
+            -- Get the tree side configuration
+            local view = require("nvim-tree").config.view
+
+            -- Check if nvim-tree is taking a significant portion of the screen
+            local is_full_width = (tree_width / total_width) > 0.4
+
+            if is_full_width then
+              -- Place it on the right side of the tree window with a gap
+              return 30
+            elseif view.float.enable then
+              return -1 * (size.width + 3)
+            else
+              -- Standard positioning based on tree side
+              return view.side == "left" and tree_width + 1 or -size.width - 3
+            end
+          end,
+        },
+      },
+    },
+  },
   keys = {
+    {
+      ",.",
+      function()
+        require("nvim-tree.api").tree.toggle({ current_window = true })
+      end,
+      silent = true,
+      desc = "NvimTree Open",
+    },
+
     {
       -- "<C-n>",
       "<leader><Space>",
@@ -74,6 +116,33 @@ return {
       -- vim.keymap.set("n", "q", function()
       --   vim.cmd("Bdelete")
       -- end, opts("Close tree"))
+
+      local preview = require("nvim-tree-preview")
+
+      vim.keymap.set("n", "P", preview.watch, opts("Preview (Watch)"))
+      vim.keymap.set("n", "<Esc>", preview.unwatch, opts("Close Preview/Unwatch"))
+      vim.keymap.set("n", "<C-f>", function()
+        return preview.scroll(4)
+      end, opts("Scroll Down"))
+      vim.keymap.set("n", "<C-b>", function()
+        return preview.scroll(-4)
+      end, opts("Scroll Up"))
+
+      -- Option A: Smart tab behavior: Only preview files, expand/collapse directories (recommended)
+      vim.keymap.set("n", "<Tab>", function()
+        local ok, node = pcall(api.tree.get_node_under_cursor)
+        if ok and node then
+          if node.type == "directory" then
+            api.node.open.edit()
+          else
+            if not preview.is_open() then
+              preview.watch()
+            else
+              preview.node(node, { toggle_focus = true })
+            end
+          end
+        end
+      end, opts("Preview"))
     end,
 
     filters = {
@@ -95,7 +164,7 @@ return {
       adaptive_size = false,
       side = "left",
       -- side = "right",
-      width = 32,
+      width = 29,
       preserve_window_proportions = true,
       signcolumn = "no",
       float = {
