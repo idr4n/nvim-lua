@@ -10,6 +10,7 @@ return {
     -- local cp = require("catppuccin.palettes").get_palette(flavour)
     local cp = require("catppuccin.palettes").get_palette()
     return {
+      no_italic = true,
       -- transparent_background = true,
       -- flavour = flavour,
       styles = {
@@ -51,6 +52,8 @@ return {
         NonText = { fg = cp.surface0 },
         Visual = { bg = "#403C7A" },
         NoiceCmdlinePopUp = { bg = cp.mantle },
+        BufferLineIndicatorSelected = { fg = cp.base, bg = cp.base },
+        SnacksPickerDir = { fg = cp.overlay1 },
         -- TelescopeNormal = { bg = cp.mantle },
         -- TelescopeBorder = { fg = cp.mantle, bg = cp.mantle },
         -- TelescopeSelection = { bg = cp.surface0 },
