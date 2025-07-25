@@ -439,3 +439,84 @@ command("OpenDashLang", function()
 end, { range = true })
 
 vim.keymap.set({ "n", "v" }, "<leader>sd", ":OpenDashLang<cr>", { desc = "Open Dash Docs" })
+
+--: Scratch to Quickfix {{{
+-- Initially taken and modified from https://github.com/yobibyte/yobitools/blob/main/dotfiles/init.lua
+local function scratch()
+  vim.bo.buftype = "nofile"
+  vim.bo.bufhidden = "wipe"
+  vim.bo.swapfile = false
+end
+
+_G.basic_excludes = { ".git", "*.egg-info", "__pycache__", "wandb", "target" }
+_G.ext_excludes = vim.list_extend(vim.deepcopy(_G.basic_excludes), { ".venv" })
+
+local function pre_search()
+  if vim.bo.filetype == "netrw" then
+    return vim.b.netrw_curdir, _G.basic_excludes, {}
+  else
+    return vim.fn.getcwd(), _G.ext_excludes, {}
+  end
+end
+
+local function scratch_to_quickfix(close_qf)
+  local items, bufnr = {}, vim.api.nvim_get_current_buf()
+  for _, line in ipairs(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)) do
+    if line ~= "" then
+      local filename, lnum, text = line:match("^([^:]+):(%d+):(.*)$")
+      if filename and lnum then
+        table.insert(items, { filename = vim.fn.fnamemodify(filename, ":p"), lnum = tonumber(lnum), text = text }) -- for grep filename:line:text
+      else
+        lnum, text = line:match("^(%d+):(.*)$")
+        if lnum and text then
+          table.insert(items, { filename = vim.fn.bufname(vim.fn.bufnr("#")), lnum = tonumber(lnum), text = text }) -- for current buffer grep
+        else
+          table.insert(items, { filename = vim.fn.fnamemodify(line, ":p") }) -- for find results, only fnames
+        end
+      end
+    end
+  end
+  vim.api.nvim_buf_delete(bufnr, { force = true })
+  vim.fn.setqflist(items, "r")
+  vim.cmd("copen | cc")
+  if close_qf then
+    vim.cmd("cclose")
+  end
+end
+
+vim.keymap.set("n", "<leader>sx", scratch_to_quickfix, { desc = "Scratch to Quickfix" })
+
+local function extcmd(cmd, qf, close_qf, novsplit)
+  local output = vim.fn.systemlist(cmd)
+  if not output or #output == 0 then
+    return
+  end
+  vim.cmd(novsplit and "enew" or "vnew")
+  vim.api.nvim_buf_set_lines(0, 0, -1, false, output)
+  scratch()
+  if qf then
+    scratch_to_quickfix(close_qf)
+  end
+end
+
+vim.keymap.set("n", "<leader>ss", function()
+  vim.ui.input({ prompt = "  > " }, function(pat)
+    if pat then
+      extcmd("grep -iEn '" .. pat .. "' " .. vim.fn.shellescape(vim.api.nvim_buf_get_name(0)), false)
+    end
+  end)
+end, { desc = "Search Buffer - ScratchToQuickfix" })
+
+vim.keymap.set("n", "<leader>sg", function()
+  vim.ui.input({ prompt = "  > " }, function(pat)
+    if pat then
+      local path, excludes, parts = pre_search()
+      for _, pattern in ipairs(excludes) do
+        table.insert(parts, string.format("--exclude-dir='%s'", pattern))
+      end
+      -- extcmd(string.format("grep -IEnr %s '%s' %s", table.concat(parts, " "), pat, path), true)
+      extcmd(string.format("grep -IEnr %s '%s' %s", table.concat(parts, " "), pat, path), false)
+    end
+  end)
+end, { desc = "Search Project - ScratchToQuickfix" })
+--: }}}
