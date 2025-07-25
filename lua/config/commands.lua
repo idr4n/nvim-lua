@@ -412,3 +412,30 @@ command("CloseAllTerminals", function()
 end, {})
 
 vim.keymap.set("n", "<leader>ct", ":CloseAllTerminals<cr>", { desc = "Close all opened terminals" })
+
+command("OpenDashLang", function()
+  local ft_to_key = { python = "py" }
+  local ft = vim.bo.filetype
+  local key = ft_to_key[ft] or ft
+
+  local query
+  if vim.fn.mode():match("[vV]") then
+    local start_pos = vim.fn.getpos("'<")
+    local end_pos = vim.fn.getpos("'>")
+    local lines = vim.fn.getregion(start_pos, end_pos, { type = vim.fn.mode() })
+    query = table.concat(lines, "\n")
+  else
+    -- Normal mode: word under cursor
+    query = vim.fn.expand("<cword>")
+  end
+
+  query = vim.trim(query)
+  if query == "" then
+    vim.notify("Nothing to search for", vim.log.levels.WARN)
+    return
+  end
+
+  vim.fn.system(string.format('open -g "dash-plugin://keys=%s&query=%s"', key, query))
+end, { range = true })
+
+vim.keymap.set({ "n", "v" }, "<leader>sd", ":OpenDashLang<cr>", { desc = "Open Dash Docs" })
