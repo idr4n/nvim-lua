@@ -4,8 +4,8 @@ return {
   cmd = { "NvimTreeToggle", "NvimTreeFocus" },
   dependencies = {
     {
-      -- "idr4n/nvim-tree-preview.lua",
-      "b0o/nvim-tree-preview.lua",
+      "idr4n/nvim-tree-preview.lua",
+      -- "b0o/nvim-tree-preview.lua",
       opts = {
         win_position = {
           ---@param tree_win number The tree window handle
@@ -162,13 +162,13 @@ return {
 
     view = {
       adaptive_size = false,
-      side = "left",
-      -- side = "right",
-      width = 29,
+      -- side = "left",
+      side = "right",
+      width = 27,
       preserve_window_proportions = true,
       signcolumn = "no",
       float = {
-        enable = true,
+        -- enable = true,
         quit_on_focus_loss = false,
         open_win_config = function()
           local screen_w = vim.opt.columns:get()

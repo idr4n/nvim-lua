@@ -14,6 +14,7 @@ local function lsp_keymaps(client, bufnr)
 
   local keys = {
     { "K", vim.lsp.buf.hover, desc = "Hover" },
+    { "gd", vim.lsp.buf.definition, desc = "Go to definition" },
     { "<F2>", vim.lsp.buf.rename, desc = "LSP Rename" },
     { "<leader>cR", vim.lsp.buf.rename, desc = "LSP Rename" },
     -- { "<leader>cf", vim.lsp.buf.format, desc = "Format" },
@@ -61,6 +62,21 @@ M.on_attach = function(client, bufnr)
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
       end, { buffer = bufnr, desc = "Toggle inlay hints" })
     end
+
+    -- Refresh inlay hints when file is changed externally or LSP reattaches
+    vim.api.nvim_create_autocmd({ "FileChangedShellPost", "BufReadPost", "LspAttach" }, {
+      buffer = bufnr,
+      callback = function()
+        -- Check if we still have LSP clients and inlay hints are enabled
+        local clients = vim.lsp.get_clients({ bufnr = bufnr })
+        if #clients > 0 and vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }) then
+          -- Force refresh by toggling
+          vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        end
+      end,
+      desc = "Refresh inlay hints after external changes or LSP reattach",
+    })
 
     -- codelens
     -- if vim.lsp.codelens and client:supports_method("textDocument/codeLens") and vim.bo.filetype == "rust" then

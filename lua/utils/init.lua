@@ -316,10 +316,6 @@ function M.get_words()
   end
 end
 
-function M.statuscolumn_with_padding()
-  return " " .. require("snacks.statuscolumn").get()
-end
-
 function M.hl_str(hl, str)
   return "%#" .. hl .. "#" .. str .. "%*"
 end

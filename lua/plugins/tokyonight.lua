@@ -14,7 +14,7 @@ return {
         floats = "transparent",
       },
       on_colors = function(colors)
-        colors.bg = "#000000"
+        -- colors.bg = "#000000"
         -- colors.bg_highlight = "#232838"
       end,
       on_highlights = function(hl, c)

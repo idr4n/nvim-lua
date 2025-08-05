@@ -2,21 +2,20 @@ return {
   "stevearc/oil.nvim",
   -- enabled = false,
   cmd = "Oil",
-  -- init = function()
-  --   if vim.fn.argc(-1) == 1 then
-  --     local stat = vim.loop.fs_stat(vim.fn.argv(0))
-  --     if stat and stat.type == "directory" then
-  --       require("oil")
-  --     end
-  --   end
-  -- end,
+  init = function()
+    if vim.fn.argc(-1) == 1 then
+      local stat = vim.loop.fs_stat(vim.fn.argv(0))
+      if stat and stat.type == "directory" then
+        require("oil")
+      end
+    end
+  end,
   keys = {
-    -- { "<leader>-", "<cmd>Oil --float<cr>", desc = "Oil Float - Parent Dir" },
-    { "-", "<cmd>Oil --float<cr>", desc = "Oil Float - Parent Dir" },
-    { "<leader>oo", "<cmd>Oil<cr>", desc = "Oil - Parent Dir" },
+    { "-", "<cmd>Oil<cr>", desc = "Oil - Parent Dir" },
+    { "<leader>oo", "<cmd>Oil --float<cr>", desc = "Oil Float - Parent Dir" },
   },
   opts = {
-    default_file_explorer = false,
+    default_file_explorer = true,
     view_options = {
       show_hidden = true,
     },
@@ -38,6 +37,40 @@ return {
       ["l"] = "actions.select",
       ["s"] = "actions.close",
       ["Y"] = "actions.yank_entry",
+      ["<C-p>"] = {
+        callback = function()
+          local oil = require("oil")
+          -- Function to find if preview window is open
+          local function find_preview_window()
+            for _, winid in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+              if vim.api.nvim_win_is_valid(winid) and vim.wo[winid].previewwindow and vim.w[winid]["oil_preview"] then
+                return winid
+              end
+            end
+            return nil
+          end
+
+          local preview_winid = find_preview_window()
+          if preview_winid then
+            -- Close the preview window if it's open
+            vim.api.nvim_win_close(preview_winid, true)
+          else
+            -- Open preview if it's not open
+            oil.open_preview({ vertical = true, split = "botright" }, function(err)
+              if not err then
+                vim.cmd("vertical resize 40")
+              end
+            end)
+          end
+        end,
+        desc = "Toggle Oil preview",
+      },
+      ["gw"] = {
+        desc = "Go to working directory",
+        callback = function()
+          require("oil").open(vim.fn.getcwd())
+        end,
+      },
       ["gd"] = {
         desc = "Toggle file detail view",
         callback = function()

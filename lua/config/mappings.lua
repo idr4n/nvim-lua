@@ -102,25 +102,21 @@ keymap("n", "gcy", "gcc:t.<cr>gcc", { noremap = false, desc = "Duplicate-comment
 --: Switch buffers {{{
 keymap("n", "<S-l>", ":bnext<CR>")
 keymap("n", "<S-h>", ":bprevious<CR>")
--- keymap("n", "ga", ":b#<CR>zz", { desc = "Last buffer" })
+keymap("n", "ga", ":b#<CR>zz", { desc = "Last buffer" })
 -- keymap("n", "ga", "<cmd>e#<cr>zz", { desc = "Reopen buffer" })
 -- keymap("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 -- keymap("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 --: }}}
 
---: Using Bbye plugin to close the current buffer {{{
+--: Close current buffer {{{
 keyset("n", "<leader>x", function()
-  if vim.bo.filetype == "gitcommit" then
-    vim.cmd("bdelete")
-  else
-    require("snacks").bufdelete()
-  end
+  vim.cmd("bdelete")
 end, { desc = "Close (delete) Buffer" })
 keymap("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete Buffer and Window" })
-keymap("n", "<leader>bD", ":Bdelete!<CR>", { desc = "Force Close Buffer!" })
+keymap("n", "<leader>bD", ":bdelete!<CR>", { desc = "Force Close Buffer!" })
 -- wipeout current buffer
-keymap("n", "<leader>bw", ":Bwipeout<CR>", { desc = "Wipeout Buffer" })
--- keymap("n", "<leader>bd", ":bd<CR>")
+keymap("n", "<leader>bw", ":bwipeout<CR>", { desc = "Wipeout Buffer" })
+keyset("n", "<leader>bo", require("utils").close_all_bufs, { desc = "Close all buffers" })
 --: }}}
 
 --: tabs {{{
@@ -132,6 +128,21 @@ keymap("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
 keymap("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 keymap("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 --: }}}
+
+-- Line number toggle with statuscolumn
+keyset("n", "<leader>tl", function()
+  if vim.opt.statuscolumn:get() == "" then
+    vim.opt.statuscolumn = "%s%{v:lnum == line('.') ? v:lnum : ''}%=%{v:lnum != line('.') ? v:relnum : ''}   "
+    vim.opt.number = true
+    vim.opt.relativenumber = true
+    vim.opt.cursorline = true
+  else
+    vim.opt.statuscolumn = ""
+    vim.opt.number = false
+    vim.opt.relativenumber = false
+    vim.opt.cursorline = false
+  end
+end, { desc = "Toggle Line Numbers" })
 
 --: search for word under cursor and stays there {{{
 -- searches exact word (* forward, # backwards)
@@ -158,16 +169,6 @@ keymap("n", ",s", 'a"<esc>pa:", <esc>p', { desc = "Paste for info printing" })
 
 --: toggle wrapping lines {{{
 keymap("n", "<leader>tw", "<cmd>set wrap!<cr>", { desc = "Line wrap" })
---: }}}
-
---: toggle line numbers {{{
-keyset("n", "<leader>tl", function()
-  vim.cmd([[
-    set invnumber
-    set invrelativenumber
-    set invcursorline
-    ]])
-end, { desc = "Toggle Line Numbers" })
 --: }}}
 
 --: center when scrolling page down and up {{{
@@ -314,14 +315,33 @@ keyset("v", "<leader>X", [[y:%s/<C-r>0/<C-r>0/gI<Left><Left><Left>]], { desc = "
 --: }}}
 
 --: Quickfix and location list {{{
--- ...and navigating through the items.
--- keyset("n", "<leader>zq", "<cmd>copen<cr>", { desc = "Toggle quickfix list" })
--- keyset("n", "<leader>zl", "<cmd>lopen<cr>", { desc = "Toggle location list" })
--- keyset("n", "[q", "<cmd>cprev<cr>zvzz", { desc = "Previous quickfix item" })
--- keyset("n", "[q", "<cmd>cprev<cr>zvzz", { desc = "Previous quickfix item" })
--- keyset("n", "]q", "<cmd>cnext<cr>zvzz", { desc = "Next quickfix item" })
--- keyset("n", "[l", "<cmd>lprev<cr>zvzz", { desc = "Previous loclist item" })
--- keyset("n", "]l", "<cmd>lnext<cr>zvzz", { desc = "Next loclist item" })
+keyset("n", "[q", "<cmd>cprev<cr>zvzz", { desc = "Previous quickfix item" })
+keyset("n", "]q", "<cmd>cnext<cr>zvzz", { desc = "Next quickfix item" })
+keyset("n", "[l", "<cmd>lprev<cr>zvzz", { desc = "Previous loclist item" })
+keyset("n", "]l", "<cmd>lnext<cr>zvzz", { desc = "Next loclist item" })
+keyset("n", "<C-q>", function()
+  local qf_exists = false
+  local loc_exists = false
+  for _, win in pairs(vim.fn.getwininfo()) do
+    if win["quickfix"] == 1 then
+      qf_exists = true
+    elseif win["loclist"] == 1 then
+      loc_exists = true
+    end
+  end
+  if qf_exists or loc_exists then
+    vim.cmd("cclose")
+    vim.cmd("lclose")
+  else
+    if vim.fn.getloclist(0, { size = 0 }).size > 0 then
+      vim.cmd("lopen 10")
+    elseif vim.fn.getqflist({ size = 0 }).size > 0 then
+      vim.cmd("copen 10")
+    else
+      vim.cmd("copen 10")
+    end
+  end
+end, { desc = "Toggle quickfix/location list" })
 --: }}}
 
 --: Replace the easy-clip plugin {{{

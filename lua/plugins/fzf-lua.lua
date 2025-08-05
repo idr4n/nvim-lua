@@ -27,8 +27,8 @@ return {
         silent = true,
         desc = "Fzf-Lua Resume",
       },
-      { "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", desc = "Find files - FzfLua" },
-      -- { "<C-Space>", "<cmd>lua require('fzf-lua').files()<CR>", desc = "Find files - FzfLua" },
+      -- { "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", desc = "Find files - FzfLua" },
+      { "<C-Space>", "<cmd>lua require('fzf-lua').files()<CR>", desc = "Find files - FzfLua" },
       -- { "<leader>r", "<cmd>FzfLua live_grep_glob<cr>", desc = "Live Grep" },
       { "<leader>r", "<cmd>FzfLua grep_project<cr>", desc = "Grep Project" },
       { "<leader>fw", "<cmd>FzfLua grep_cword<cr>", desc = "Grep Project" },
@@ -84,21 +84,8 @@ return {
         silent = true,
         desc = "Recently opened files",
       },
-      -- { "<leader>sk", "<cmd>FzfLua keymaps<cr>", desc = "Key maps" },
-      -- {
-      --   "gd",
-      --   function()
-      --     require("fzf-lua").lsp_definitions({ jump_to_single_result = true })
-      --   end,
-      --   silent = true,
-      --   desc = "Go to LSP definition",
-      -- },
-      {
-        "gD",
-        "<cmd>FzfLua lsp_definitions<cr>",
-        silent = true,
-        desc = "Peek definition",
-      },
+      { "<leader>sk", "<cmd>FzfLua keymaps<cr>", desc = "Key maps" },
+      -- { "gd", "<cmd>FzfLua lsp_definitions<cr>", silent = true, desc = "Go to LSP definition" },
       {
         "<leader>ls",
         function()
@@ -118,15 +105,15 @@ return {
       --   silent = true,
       --   desc = "LSP workspace symbols (FzfLua)",
       -- },
-      -- {
-      --   "<leader>gs",
-      --   -- "<cmd>FzfLua git_status<cr>",
-      --   function()
-      --     require("fzf-lua").git_status(fzflua_theme())
-      --   end,
-      --   silent = true,
-      --   desc = "Git Status",
-      -- },
+      {
+        "<leader>gs",
+        -- "<cmd>FzfLua git_status<cr>",
+        function()
+          require("fzf-lua").git_status(fzflua_theme())
+        end,
+        silent = true,
+        desc = "Git Status",
+      },
     }
   end,
   opts = function()

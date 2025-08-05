@@ -7,7 +7,6 @@ return {
   keys = {
     { ",,", "<cmd>NetrwRevealToggle<cr>", desc = "Toggle Netrw - Reveal" },
     { ",l", "<cmd>NetrwRevealLexToggle<cr>", desc = "Toggle Netrw (Lex) - Reveal" },
-    { "ga", "<cmd>NetrwLastBuffer<cr>", desc = "Go to alternate buffer (with netrw reveal)" },
   },
   opts = {
     preview_width = 65,

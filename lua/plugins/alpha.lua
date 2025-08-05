@@ -85,9 +85,11 @@ return {
       pattern = "AlphaReady",
       once = true,
       callback = function(args)
+        local prev_statuscol = vim.opt.statuscolumn
         vim.o.laststatus = 0
         vim.o.showtabline = 0
         -- vim.o.cmdheight = 0 -- uncomment if not useing noice
+        vim.opt.statuscolumn = ""
 
         vim.api.nvim_create_autocmd("BufUnload", {
           group = alpha_group,
@@ -95,8 +97,9 @@ return {
           once = true,
           callback = function()
             vim.o.laststatus = 3
-            vim.o.showtabline = 2
+            -- vim.o.showtabline = 2
             -- vim.o.cmdheight = 1 -- uncomment if not useing noice
+            vim.opt.statuscolumn = prev_statuscol
           end,
         })
         -- -- If we want Alpha to start at launch

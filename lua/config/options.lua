@@ -9,8 +9,8 @@ opt.breakindent = true -- Every wrapped line will continue visually indented
 -- opt.colorcolumn = "80"
 -- opt.clipboard = "" -- don't use system clipboard by default
 opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
--- opt.cmdheight = 1
-opt.cmdheight = 0
+opt.cmdheight = 1
+-- opt.cmdheight = 0
 opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
 opt.conceallevel = 2 -- hide some markup such as `` and * in markdown files
 -- opt.concealcursor = "nc" -- conceal in normal/command mode (not in insert/visual)
@@ -42,13 +42,10 @@ opt.pumheight = 15 -- pop up menu height
 opt.relativenumber = true -- set relative numbered lines
 opt.ruler = false
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
+opt.signcolumn = "yes:2"
 opt.scrolloff = 8 -- Lines of context
 opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
 -- opt.showbreak = "↪ "
-opt.showmode = false -- Don't show mode
-opt.showtabline = 0 -- always (2), never (0), at least two tabs (1), show the tabline
-opt.sidescrolloff = 8 -- the same as scrolloff but horizontally
-opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
 opt.smartcase = true -- smart case
 opt.smartindent = true -- make indenting smarter again
 opt.splitbelow = true -- force all horizontal splits to go below current window
@@ -60,14 +57,18 @@ opt.title = true
 -- opt.titlestring = '%t%( %m%)%( %a%)%( │ (%{expand("%:~:.:h")})%)'
 -- opt.titlestring = '%{getcwd()->fnamemodify(":~")} │ %t%( %m%)%( %a%) %((%{expand("%:~:.:h")}) %)'
 -- opt.titlestring = 'ⁿ%t%( %m%)%( %a%) %((%{expand("%:~:.:h")}) %)'
-opt.titlestring = 'ⁿ%((%{expand("%:~:.:h")}) %) %t%( %m%)%( %a%)'
+-- opt.titlestring = 'ⁿ%((%{expand("%:~:.:h")}) %) %t%( %m%)%( %a%)'
+-- opt.titlestring =
+--   'ⁿ%((%{pathshorten(substitute(getcwd(), "^" . $HOME . "/", "", ""))}) %) %{len(expand("%:t")) > 15 ? strcharpart(expand("%:t"), 0, 12)."..." : expand("%:t")}%( %m%)%( %a%)'
+opt.titlestring =
+  'ⁿ%((%{len(pathshorten(substitute(getcwd(), "^" . $HOME . "/", "", ""))) > 10 ? strcharpart(pathshorten(substitute(getcwd(), "^" . $HOME . "/", "", "")), 0, 7)."..." : pathshorten(substitute(getcwd(), "^" . $HOME . "/", "", ""))}) %) %{len(expand("%:t")) > 15 ? strcharpart(expand("%:t"), 0, 12)."..." : expand("%:t")}%( %m%)%( %a%)'
 opt.undofile = true -- enable persistent undo
 opt.updatetime = 300 -- control CursorHold event waiting time (4000ms default)
 opt.wrap = false -- display lines as one long line
 opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 
--- opt.shortmess:append({ I = true, c = true, C = true, S = true, W = true, s = true }) -- uncomment if not using noice
-opt.shortmess:append({ W = true, I = true, c = true, C = true }) -- comment if not using noice
+opt.shortmess:append({ I = true, c = true, C = true, S = true, W = true, s = true }) -- uncomment if not using noice
+-- opt.shortmess:append({ W = true, I = true, c = true, C = true }) -- comment if not using noice
 opt.nrformats:append("alpha") -- increments letters sequences as well with <c-a>
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")
@@ -90,6 +91,9 @@ opt.fillchars = {
 }
 
 vim.o.cursorlineopt = "number"
+
+-- Statuscolumn
+vim.opt.statuscolumn = "%s%{v:lnum == line('.') ? v:lnum : ''}%=%{v:lnum != line('.') ? v:relnum : ''}   "
 
 if vim.fn.has("nvim-0.10") == 1 then
   opt.smoothscroll = true

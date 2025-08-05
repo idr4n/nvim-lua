@@ -32,18 +32,18 @@ return {
       end
 
       return {
-        -- {
-        --   -- "<C-Space>",
-        --   "<C-P>",
-        --   -- "<leader>ff",
-        --   function()
-        --     -- require("telescope.builtin").find_files()
-        --     require("telescope.builtin").find_files(dropdown_theme())
-        --   end,
-        --   noremap = true,
-        --   silent = true,
-        --   desc = "Telescope-find_files",
-        -- },
+        {
+          -- "<C-Space>",
+          "<C-P>",
+          -- "<leader>ff",
+          function()
+            -- require("telescope.builtin").find_files()
+            require("telescope.builtin").find_files(dropdown_theme())
+          end,
+          noremap = true,
+          silent = true,
+          desc = "Telescope-find_files",
+        },
         { "<leader>ot", "<cmd>Telescope resume<cr>", noremap = true, silent = true, desc = "Telescope Resume" },
         { "<leader>sl", "<cmd>Telescope highlights<cr>", noremap = true, silent = true, desc = "Highlights" },
         {

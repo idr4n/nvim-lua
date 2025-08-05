@@ -21,7 +21,7 @@ return {
         hl.RenderMarkdownH6Bg = { fg = c.aurora.orange }
         hl.RenderMarkdownCode = { bg = c.polar_night.bright }
         hl.NoiceCmdlinePopUp = { bg = "#363E4C" }
-        hl.StatusLine = { bg = c.polar_night.origin }
+        hl.StatusLine = { bg = c.polar_night.bright }
         hl.Substitute = { bg = c.aurora.red }
         hl.BufferLineFill = { bg = c.polar_night.origin }
         -- hl.BufferLineIndicatorSelected = { fg = c.aurora.yellow, bg = c.polar_night.origin }
@@ -35,6 +35,9 @@ return {
         hl.InsertCursor = { bg = c.aurora.purple }
         hl.FloatermBorder = { fg = c.aurora.purple }
         hl.BufferLineIndicatorSelected = { fg = c.polar_night.origin, bg = c.polar_night.origin }
+        hl.MiniDiffSignAdd = { fg = c.aurora.green }
+        hl.MiniDiffSignChange = { fg = c.aurora.yellow }
+        hl.MiniDiffSignDelete = { fg = c.aurora.red }
       end,
     }
   end,

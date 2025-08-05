@@ -372,34 +372,33 @@ end
 
 ---@return string
 function M.git_status_simple()
-  local gitsigns = vim.b.gitsigns_status_dict
+  local gitsigns = vim.b.minidiff_summary
+
+  if not gitsigns then
+    return ""
+  end
 
   local diff_icon = "▪"
   local total_changes = 0
-  local git_status = ""
 
-  if gitsigns then
-    total_changes = (gitsigns.added or 0) + (gitsigns.changed or 0) + (gitsigns.removed or 0)
-    local added = ""
-    local changed = ""
-    local removed = ""
+  total_changes = (gitsigns.add or 0) + (gitsigns.change or 0) + (gitsigns.delete or 0)
+  local added = ""
+  local changed = ""
+  local removed = ""
 
-    if gitsigns.added and gitsigns.added > 0 then
-      added = M.get_or_create_hl("GitSignsAdd", "StatusLine") .. diff_icon
-    end
-    -- stylua: ignore
-    if gitsigns.changed and gitsigns.changed > 0 then
-      changed = M.get_or_create_hl("GitSignsChange", "StatusLine").. diff_icon
-    end
-    -- stylua: ignore
-    if gitsigns.removed and gitsigns.removed > 0 then
-      removed = M.get_or_create_hl("GitSignsDelete", "StatusLine") .. diff_icon
-    end
-
-    git_status = total_changes > 0 and added .. changed .. removed .. " " or ""
+  if gitsigns.add and gitsigns.add > 0 then
+    added = M.get_or_create_hl("MiniDiffSignAdd", "StatusLine") .. diff_icon
   end
 
-  return git_status
+  if gitsigns.change and gitsigns.change > 0 then
+    changed = M.get_or_create_hl("MiniDiffSignChange", "StatusLine") .. diff_icon
+  end
+
+  if gitsigns.delete and gitsigns.delete > 0 then
+    removed = M.get_or_create_hl("MiniDiffSignDelete", "StatusLine") .. diff_icon
+  end
+
+  return total_changes > 0 and added .. changed .. removed .. " " or ""
 end
 
 function M.git_branch()

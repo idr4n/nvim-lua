@@ -50,6 +50,7 @@ return {
 
     local opts = {
       diagnostics = {
+        update_in_insert = false,
         virtual_text = { prefix = "" },
         virtual_lines = false,
         -- virtual_lines = { current_line = true },
@@ -136,13 +137,58 @@ return {
       end
     end
 
+    -- vim.lsp.buf.hover = function(opts)
+    --   opts = opts or {}
+    --   opts.border = "rounded"
+    --   opts.focusable = true
+    --   opts.max_width = 70
+    --   opts.max_height = 20
+    --
+    --   local function handler(err, result, ctx, config)
+    --     if not (result and result.contents) then
+    --       return
+    --     end
+    --     local contents = vim.lsp.util.convert_input_to_markdown_lines(result.contents)
+    --
+    --     -- Remove the first and last line to eliminate the language label
+    --     if #contents > 1 then
+    --       table.remove(contents, 1) -- Removes the first entry (e.g., "```typescript")
+    --       table.remove(contents) -- Removes the last entry (e.g., "```")
+    --     end
+    --
+    --     -- Add side padding by prepending spaces to each line
+    --     local side_padding = "  " -- Adjust the number of spaces as needed (e.g., "   " for more)
+    --     for i, line in ipairs(contents) do
+    --       contents[i] = side_padding .. line .. side_padding
+    --     end
+    --
+    --     local bufnr, winnr = vim.lsp.util.open_floating_preview(contents, "markdown", opts)
+    --
+    --     -- Hide filetype and adjust options for cleaner look
+    --     vim.bo[bufnr].filetype = vim.bo[0].filetype
+    --     vim.wo[winnr].number = false
+    --     vim.wo[winnr].wrap = true
+    --
+    --     -- Set background via highlights (adjust to match your theme)
+    --     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#1E2021" }) -- Darker background
+    --   end
+    --
+    --   -- Get the current client for encoding (assumes one active client; adjust if multiple)
+    --   local client = vim.lsp.get_clients()[1] -- Use the first active client
+    --   local position_encoding = client and client.offset_encoding or "utf-16" -- Default to utf-16 if no client
+    --
+    --   -- Call with correct arguments: window and position_encoding
+    --   local params = vim.lsp.util.make_position_params(vim.api.nvim_get_current_win(), position_encoding)
+    --   vim.lsp.buf_request(0, "textDocument/hover", params, handler)
+    -- end
+
     -- UI border
     require("lspconfig.ui.windows").default_options.border = "rounded"
     --: }}}
 
     --: Capabilities {{{
-    local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-    -- local capabilities = require("blink.cmp").get_lsp_capabilities()
+    -- local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+    local capabilities = require("blink.cmp").get_lsp_capabilities()
 
     capabilities.textDocument.foldingRange = {
       dynamicRegistration = false,

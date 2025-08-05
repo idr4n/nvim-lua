@@ -344,6 +344,7 @@ aucmd("ColorScheme", {
       set_hl("BufferLineIndicatorSelected", palette.bg0, palette.bg0)
       set_hl("insertcursor", palette.fg0, { "#F34B00", "NONE" })
       set_hl("WinSeparator", { "#e26a75", "NONE" }, palette.bg0)
+      set_hl("NvimTreeCursorLine", palette.none, { lighter_bg, "NONE" })
     end
 
     -- vim.api.nvim_set_hl(0, "WinSeparator", { fg = winsep })

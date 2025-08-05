@@ -1,6 +1,6 @@
 return {
   "saghen/blink.cmp",
-  enabled = false,
+  -- enabled = false,
   event = { "InsertEnter", "BufReadPost" },
   dependencies = { "L3MON4D3/LuaSnip", version = "v2.*" },
   build = "cargo build --release",
@@ -8,6 +8,13 @@ return {
   opts = {
     snippets = {
       preset = "luasnip",
+    },
+    cmdline = {
+      enabled = true,
+      completion = {
+        menu = { auto_show = true },
+        list = { selection = { preselect = false, auto_insert = true } },
+      },
     },
     sources = {
       default = { "lsp", "path", "snippets", "buffer", "codecompanion" },
@@ -18,6 +25,7 @@ return {
           score_offset = 100,
           enabled = true,
         },
+        lsp = { opts = { tailwind_color_icon = "󱓻" } },
       },
     },
 
@@ -28,25 +36,15 @@ return {
         border = "rounded",
         draw = {
           gap = 2,
-          components = {
-            kind_icon = {
-              text = function(ctx)
-                if require("blink.cmp.completion.windows.render.tailwind").get_hex_color(ctx.item) then
-                  return "󱓻"
-                end
-                return ctx.kind_icon .. ctx.icon_gap
-              end,
-            },
-          },
         },
-        -- winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
+        winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
       },
       documentation = {
         auto_show = true,
         auto_show_delay_ms = 200,
         window = {
           border = "rounded",
-          -- winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpDocCursorLine,Search:None",
+          winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpDocCursorLine,Search:None",
         },
       },
     },
