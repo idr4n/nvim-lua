@@ -92,9 +92,6 @@ opt.fillchars = {
 
 vim.o.cursorlineopt = "number"
 
--- Statuscolumn
-vim.opt.statuscolumn = "%s%{v:lnum == line('.') ? v:lnum : ''}%=%{v:lnum != line('.') ? v:relnum : ''}   "
-
 if vim.fn.has("nvim-0.10") == 1 then
   opt.smoothscroll = true
 end

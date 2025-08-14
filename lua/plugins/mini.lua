@@ -123,29 +123,4 @@ return {
     version = false,
     opts = {},
   },
-
-  {
-    "echasnovski/mini.diff",
-    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-    config = function()
-      local minidiff = require("mini.diff")
-      minidiff.setup({
-        view = {
-          signs = { add = " ┃", change = " ┃", delete = " _" },
-          style = "sign",
-        },
-        mappings = {
-          apply = "<leader>hs",
-          reset = "<leader>hS",
-          textobject = "<leader>hs",
-          goto_first = "[C",
-          goto_prev = "[c",
-          goto_next = "]c",
-          goto_last = "]C",
-        },
-      })
-      vim.keymap.set("n", "<leader>gt", minidiff.toggle, { desc = "Toggle Mini Diff" })
-      vim.keymap.set("n", "<leader>go", minidiff.toggle_overlay, { desc = "Toggle Mini Diff" })
-    end,
-  },
 }

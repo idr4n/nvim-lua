@@ -129,20 +129,15 @@ keymap("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 keymap("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 --: }}}
 
--- Line number toggle with statuscolumn
+--: toggle line numbers {{{
 keyset("n", "<leader>tl", function()
-  if vim.opt.statuscolumn:get() == "" then
-    vim.opt.statuscolumn = "%s%{v:lnum == line('.') ? v:lnum : ''}%=%{v:lnum != line('.') ? v:relnum : ''}   "
-    vim.opt.number = true
-    vim.opt.relativenumber = true
-    vim.opt.cursorline = true
-  else
-    vim.opt.statuscolumn = ""
-    vim.opt.number = false
-    vim.opt.relativenumber = false
-    vim.opt.cursorline = false
-  end
+  vim.cmd([[
+    set invnumber
+    set invrelativenumber
+    set invcursorline
+    ]])
 end, { desc = "Toggle Line Numbers" })
+--: }}}
 
 --: search for word under cursor and stays there {{{
 -- searches exact word (* forward, # backwards)
