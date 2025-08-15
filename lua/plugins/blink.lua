@@ -1,6 +1,6 @@
 return {
   "saghen/blink.cmp",
-  -- enabled = false,
+  enabled = false,
   event = { "InsertEnter", "BufReadPost" },
   dependencies = { "L3MON4D3/LuaSnip", version = "v2.*" },
   build = "cargo build --release",
