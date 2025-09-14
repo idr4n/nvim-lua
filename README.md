@@ -84,3 +84,7 @@ You should be able to clone this repo in `~/.config/nvim`, and start Neovim, for
 - `:ShuffleParagraphs<cr>` with selection (the last paragraph should be followed by an empty line)
 - `:CopyNoBullets<cr>` with selection, to copy a markdown list but each line without '-'
 
+```lua
+print('hello')
+```
+

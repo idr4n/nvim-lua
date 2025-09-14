@@ -32,6 +32,7 @@ M.ensure_installed = {
   "vtsls",
   -- "typescript-language-server",
   "vue-language-server",
+  "zk",
   "zls",
 }
 

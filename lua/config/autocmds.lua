@@ -212,6 +212,81 @@ aucmd("VimLeave", {
   end,
 })
 
+-- Setup ZK backlinks for markdown files
+aucmd("FileType", {
+  group = augroup("ZK_Setup"),
+  pattern = "markdown",
+  callback = function()
+    local zk = require("zk")
+    if zk.is_zk_note() then
+      zk.setup_auto_backlinks()
+    end
+  end,
+})
+
+-- Auto-save session on exit
+aucmd("VimLeavePre", {
+  group = augroup("SessionManagement"),
+  callback = function()
+    if vim.fn.argc() == 0 then -- Only if no file arguments were passed
+      -- Helper function to check if buffer should be included in session
+      local function is_valid_session_buffer(buf)
+        if not vim.api.nvim_buf_is_loaded(buf) or not vim.bo[buf].buflisted then
+          return false
+        end
+
+        local buf_name = vim.api.nvim_buf_get_name(buf)
+        local buftype = vim.bo[buf].buftype
+        local modifiable = vim.bo[buf].modifiable
+        local readonly = vim.bo[buf].readonly
+        local filetype = vim.bo[buf].filetype
+
+        -- Exclude special buffer types and non-modifiable/readonly buffers
+        if buftype ~= "" then
+          return false
+        end
+        if not modifiable or readonly then
+          return false
+        end
+
+        -- Exclude specific filetypes that shouldn't be in sessions
+        if filetype == "netrw" or filetype == "help" or filetype == "qf" then
+          return false
+        end
+
+        -- Exclude startup buffer and other named special buffers
+        if buf_name == "" or buf_name:match("%[.*%]$") then
+          return false
+        end
+
+        return true
+      end
+
+      -- Get all valid file buffers
+      local valid_buffers = vim.tbl_filter(is_valid_session_buffer, vim.api.nvim_list_bufs())
+
+      if #valid_buffers > 0 then
+        local cwd = vim.fn.getcwd()
+
+        -- Close buffers that are not part of the current working directory
+        for _, buf in ipairs(valid_buffers) do
+          local buf_name = vim.api.nvim_buf_get_name(buf)
+          local buf_dir = vim.fn.fnamemodify(buf_name, ":h")
+          if not buf_dir:match("^" .. vim.pesc(cwd)) then
+            pcall(vim.api.nvim_buf_delete, buf, { force = false })
+          end
+        end
+
+        -- Check if there are still valid buffers after CWD filtering
+        local remaining_buffers = vim.tbl_filter(is_valid_session_buffer, vim.api.nvim_list_bufs())
+        if #remaining_buffers > 0 then
+          require("sessions").save_session(nil, false)
+        end
+      end
+    end
+  end,
+})
+
 -- Convert JSON filetype to JSON with comments (jsonc)
 vim.cmd([[
   augroup jsonFtdetect

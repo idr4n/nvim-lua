@@ -82,8 +82,8 @@ keymap("n", "<leader>;", ":RevealInFinder<cr>", { desc = "Custom command: Reveal
 
 -- Code Run Script
 command("CodeRun", function()
-  -- vim.cmd("execute '!~/scripts/code_run \"%\"'")
-  require("noice").redirect("execute '!~/scripts/code_run \"%\"'")
+  vim.cmd("execute '!~/scripts/code_run \"%\"'")
+  -- require("noice").redirect("execute '!~/scripts/code_run \"%\"'")
 end, {})
 keymap("n", "<leader>cr", ":CodeRun<cr>", { desc = "Custom command: Run code - own script" })
 

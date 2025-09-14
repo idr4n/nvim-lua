@@ -33,12 +33,12 @@ return {
 
       return {
         {
-          -- "<C-Space>",
-          "<C-P>",
+          "<C-Space>",
+          -- "<C-P>",
           -- "<leader>ff",
           function()
-            -- require("telescope.builtin").find_files()
-            require("telescope.builtin").find_files(dropdown_theme())
+            require("telescope.builtin").find_files()
+            -- require("telescope.builtin").find_files(dropdown_theme())
           end,
           noremap = true,
           silent = true,
@@ -58,7 +58,7 @@ return {
           silent = true,
           desc = "Switch buffers",
         },
-        -- { "<leader>sh", "<cmd>Telescope help_tags<cr>", noremap = true, silent = true, desc = "Help pages" },
+        { "<leader>sh", "<cmd>Telescope help_tags<cr>", noremap = true, silent = true, desc = "Help pages" },
         {
           "<leader>sh",
           function()
@@ -89,8 +89,8 @@ return {
             ".DS_Store",
           },
 
+          path_display = { "filename_first" },
           prompt_prefix = "  ",
-          -- selection_caret = " ",
           selection_caret = "• ",
 
           results_title = false,
@@ -100,7 +100,7 @@ return {
           },
 
           winblend = 0,
-          sorting_strategy = "ascending",
+          sorting_strategy = "descending",
           layout_strategy = "flex",
 
           layout_config = {
@@ -112,25 +112,11 @@ return {
             },
             vertical = {
               preview_cutoff = 40,
-              prompt_position = "top",
+              prompt_position = "bottom",
               preview_height = 0.4,
-              -- width = function(_, max_columns, _)
-              --     return math.min(max_columns, 90)
-              -- end,
-
-              -- height = function(_, _, max_lines)
-              --     return math.min(max_lines, 40)
-              -- end,
             },
             horizontal = {
-              -- width = 0.9,
-              -- width = function(_, max_columns, _)
-              --     return math.min(max_columns, 140)
-              -- end,
-              -- height = function(_, _, max_lines)
-              --     return math.min(max_lines, 35)
-              -- end,
-              prompt_position = "top",
+              prompt_position = "bottom",
               preview_width = 0.50,
             },
           },
@@ -224,7 +210,7 @@ return {
               "--follow",
               "--no-ignore",
               "-g",
-              "!{node_modules,.git,**/_build,deps,.elixir_ls,**/target,**/assets/node_modules,**/assets/vendor,**/.next,**/.vercel,**/build,**/out}",
+              "!{node_modules,.git,**/_build,deps,.elixir_ls,**/target,**/assets/node_modules,**/assets/vendor,**/.next,**/.vercel,**/build,**/out,*.class}",
             },
           },
           live_grep = {

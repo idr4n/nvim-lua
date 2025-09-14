@@ -106,6 +106,10 @@ M.snips.pfm = p(
   },
   [[
 ---
+title: "$1"
+author: |
+    ${2:Course Code} - Prince Sultan University \
+    Dr. Ivan Duran
 output: 
     pdf_document:
       pandoc_args: ["--filter", "pandoc-eqnos"]

@@ -14,7 +14,7 @@ local function lsp_keymaps(client, bufnr)
 
   local keys = {
     { "K", vim.lsp.buf.hover, desc = "Hover" },
-    { "gd", vim.lsp.buf.definition, desc = "Go to definition" },
+    -- { "gd", vim.lsp.buf.definition, desc = "Go to definition" },
     { "<F2>", vim.lsp.buf.rename, desc = "LSP Rename" },
     { "<leader>cR", vim.lsp.buf.rename, desc = "LSP Rename" },
     -- { "<leader>cf", vim.lsp.buf.format, desc = "Format" },
@@ -50,7 +50,7 @@ M.on_attach = function(client, bufnr)
     end
   end
 
-  -- client.server_capabilities.semanticTokensProvider = nil
+  client.server_capabilities.semanticTokensProvider = nil
 
   lsp_keymaps(client, bufnr)
 

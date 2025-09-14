@@ -206,7 +206,7 @@ return {
     local function setup(server)
       local server_opts = vim.tbl_deep_extend("force", {
         on_attach = lsp_conf.on_attach,
-        capabilities = vim.deepcopy(capabilities),
+        -- capabilities = vim.deepcopy(capabilities),
       }, opts.custom_server_settings[server] or {})
 
       if opts.custom_server_setup[server] then

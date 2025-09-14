@@ -42,7 +42,6 @@ opt.pumheight = 15 -- pop up menu height
 opt.relativenumber = true -- set relative numbered lines
 opt.ruler = false
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
-opt.signcolumn = "yes:2"
 opt.scrolloff = 8 -- Lines of context
 opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
 -- opt.showbreak = "↪ "
@@ -79,7 +78,7 @@ vim.cmd([[set iskeyword+=-]])
 -- vim.o.fillchars = [[msgsep: ,eob: ,diff:╱,fold: ,foldopen:,foldclose:,]]
 -- vim.o.fillchars = [[msgsep: ,eob: ,vert: ,diff:╱,fold: ,foldopen:,foldsep: ,foldclose:,]]
 -- vim.o.listchars = [[tab:──,trail:·,nbsp:␣,precedes:«,extends:»,]]
-opt.listchars = { trail = "·", tab = "> ", nbsp = "␣" }
+opt.listchars = { trail = "·", tab = "  ", nbsp = "␣" }
 opt.fillchars = {
   foldopen = "",
   foldclose = "",

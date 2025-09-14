@@ -136,21 +136,6 @@ function M.get_bufs()
   end, vim.api.nvim_list_bufs())
 end
 
----@param cur_bufnr integer -- buffer number
----@param t table -- buffer number list
----@return boolean
-function M.buf_in_buflist(t, cur_bufnr)
-  local buf_name = function(bufnr)
-    return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":t")
-  end
-  for _, value in ipairs(t) do
-    if buf_name(value) == buf_name(cur_bufnr) and value ~= cur_bufnr then
-      return true
-    end
-  end
-  return false
-end
-
 --- function to close all other buffers but the current one
 ---@param opts? {close_current:boolean} --default: { close_current = true }
 function M.close_all_bufs(opts)
@@ -332,6 +317,20 @@ function M.get_hl_hex(hl_group)
     fg = hl.fg and ("#%06x"):format(hl.fg) or nil,
     bg = hl.bg and ("#%06x"):format(hl.bg) or nil,
   }
+end
+
+-- Lazy loading utilities
+function M.lazy_require(module_name)
+  local loaded = false
+  local module = nil
+
+  return function()
+    if not loaded then
+      module = require(module_name)
+      loaded = true
+    end
+    return module
+  end
 end
 
 return M

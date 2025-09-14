@@ -102,21 +102,28 @@ keymap("n", "gcy", "gcc:t.<cr>gcc", { noremap = false, desc = "Duplicate-comment
 --: Switch buffers {{{
 keymap("n", "<S-l>", ":bnext<CR>")
 keymap("n", "<S-h>", ":bprevious<CR>")
-keymap("n", "ga", ":b#<CR>zz", { desc = "Last buffer" })
--- keymap("n", "ga", "<cmd>e#<cr>zz", { desc = "Reopen buffer" })
+-- keymap("n", "ga", ":b#<CR>zz", { desc = "Last buffer" })
+keymap("n", "ga", "<cmd>e#<cr>zz", { desc = "Reopen buffer" })
 -- keymap("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 -- keymap("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 --: }}}
 
 --: Close current buffer {{{
 keyset("n", "<leader>x", function()
-  vim.cmd("bdelete")
+  if vim.bo.filetype == "gitcommit" then
+    vim.cmd("bdelete")
+  else
+    require("snacks").bufdelete()
+  end
 end, { desc = "Close (delete) Buffer" })
 keymap("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete Buffer and Window" })
-keymap("n", "<leader>bD", ":bdelete!<CR>", { desc = "Force Close Buffer!" })
+keymap("n", "<leader>bD", ":Bdelete!<CR>", { desc = "Force Close Buffer!" })
+--: }}}
 -- wipeout current buffer
 keymap("n", "<leader>bw", ":bwipeout<CR>", { desc = "Wipeout Buffer" })
-keyset("n", "<leader>bo", require("utils").close_all_bufs, { desc = "Close all buffers" })
+keyset("n", "<leader>bo", function()
+  require("utils").close_all_bufs({ close_current = false })
+end, { desc = "Close all buffers" })
 --: }}}
 
 --: tabs {{{
@@ -413,6 +420,7 @@ keyset({ "n", "t" }, "<A-,>", toggle_maximize_buffer, { desc = "Maximize buffer"
 keyset("n", "z0", ":set foldlevel=0<cr>", { desc = "Fold level 0" })
 keyset("n", "z1", ":set foldlevel=1<cr>", { desc = "Fold level 1" })
 keyset("n", "z2", ":set foldlevel=2<cr>", { desc = "Fold level 2" })
+keyset("n", "z3", ":set foldlevel=3<cr>", { desc = "Fold level 3" })
 keyset("n", "z9", ":set foldlevel=99<cr>", { desc = "Fold level 99" })
 keyset("n", "<leader>fi", ":set foldmethod=indent<cr>", { desc = "Set fold indent" })
 keyset("n", "<leader>fm", ":set foldmethod=marker<cr>", { desc = "Set fold marker" })
@@ -449,6 +457,24 @@ local function compare_to_clipboard()
   ))
 end
 keyset("x", "<Space>D", compare_to_clipboard, { desc = "Compare to clipboard" })
+--: }}}
+
+--: Utility mappings {{{
+keyset("n", "<space>y", "<cmd>let @+ = expand('%:p')<CR>")
+keyset("n", "<C-P>", function()
+  local peek = require("utils").lazy_require("peek")
+  peek().peek_definition()
+end, { desc = "Peek Definition" })
+keyset("n", ",d", function()
+  local peek = require("utils").lazy_require("peek")
+  peek().peek_diagnostics()
+end, { desc = "Peek Diagnostics" })
+keyset("n", ",f", function()
+  local peek = require("utils").lazy_require("peek")
+  peek().peek_symbols("Function")
+end, { desc = "Peek Functions" })
+keyset("n", "<leader>nn", require("zk").new_note, { desc = "ZK - Create New Note" })
+keyset("n", "<leader>qs", require("sessions").load_session, { desc = "Session - Load" })
 --: }}}
 
 --: Delete default mappings {{{

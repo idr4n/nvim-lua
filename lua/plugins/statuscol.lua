@@ -73,8 +73,8 @@ return {
             " ",
           },
         },
-        { text = { " ", builtin.foldfunc } },
         { sign = { namespace = { "gitsign*" } }, click = "v:lua.ScSa" },
+        { text = { " ", builtin.foldfunc } },
       },
     }
   end,

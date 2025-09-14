@@ -28,7 +28,7 @@ return {
         desc = "Fzf-Lua Resume",
       },
       -- { "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", desc = "Find files - FzfLua" },
-      { "<C-Space>", "<cmd>lua require('fzf-lua').files()<CR>", desc = "Find files - FzfLua" },
+      -- { "<C-Space>", "<cmd>lua require('fzf-lua').files()<CR>", desc = "Find files - FzfLua" },
       -- { "<leader>r", "<cmd>FzfLua live_grep_glob<cr>", desc = "Live Grep" },
       { "<leader>r", "<cmd>FzfLua grep_project<cr>", desc = "Grep Project" },
       { "<leader>fw", "<cmd>FzfLua grep_cword<cr>", desc = "Grep Project" },
@@ -74,18 +74,18 @@ return {
         silent = true,
         desc = "Help current word",
       },
-      {
-        "<leader>fr",
-        function()
-          -- Read from ShaDa to include files that were already deleted from the buffer list.
-          vim.cmd("rshada!")
-          require("fzf-lua").oldfiles()
-        end,
-        silent = true,
-        desc = "Recently opened files",
-      },
+      -- {
+      --   "<leader>fr",
+      --   function()
+      --     -- Read from ShaDa to include files that were already deleted from the buffer list.
+      --     vim.cmd("rshada!")
+      --     require("fzf-lua").oldfiles()
+      --   end,
+      --   silent = true,
+      --   desc = "Recently opened files",
+      -- },
       { "<leader>sk", "<cmd>FzfLua keymaps<cr>", desc = "Key maps" },
-      -- { "gd", "<cmd>FzfLua lsp_definitions<cr>", silent = true, desc = "Go to LSP definition" },
+      { "gd", "<cmd>FzfLua lsp_definitions<cr>", silent = true, desc = "Go to LSP definition" },
       {
         "<leader>ls",
         function()

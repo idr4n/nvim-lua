@@ -164,7 +164,7 @@ return {
       adaptive_size = false,
       -- side = "left",
       side = "right",
-      width = 27,
+      width = 29,
       preserve_window_proportions = true,
       signcolumn = "no",
       float = {

@@ -123,4 +123,18 @@ return {
     version = false,
     opts = {},
   },
+
+  {
+    "echasnovski/mini.indentscope",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {
+      draw = {
+        delay = 50,
+        animation = function()
+          return 0
+        end,
+      },
+      symbol = "│",
+    },
+  },
 }

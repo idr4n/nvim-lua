@@ -1,6 +1,6 @@
 return {
   "gbprod/nord.nvim",
-  -- enabled = false,
+  enabled = false,
   lazy = true,
   opts = function()
     return {
@@ -38,6 +38,7 @@ return {
         hl.MiniDiffSignAdd = { fg = c.aurora.green }
         hl.MiniDiffSignChange = { fg = c.aurora.yellow }
         hl.MiniDiffSignDelete = { fg = c.aurora.red }
+        hl.TreesitterContextBottom = { underline = true, sp = c.aurora.purple }
       end,
     }
   end,
