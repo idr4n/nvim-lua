@@ -33,9 +33,9 @@ return {
       ["<C-s>"] = false,
       -- ["<C-h>"] = false,
       ["q"] = "actions.close",
-      ["h"] = "actions.parent",
-      ["l"] = "actions.select",
-      ["s"] = "actions.close",
+      -- ["h"] = "actions.parent",
+      -- ["l"] = "actions.select",
+      -- ["s"] = "actions.close",
       ["Y"] = "actions.yank_entry",
       ["<C-p>"] = {
         callback = function()

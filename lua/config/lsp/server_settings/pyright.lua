@@ -1,5 +1,5 @@
 return {
-  -- root_dir = require("lspconfig").util.root_pattern("pyrightconfig.json", ".git", "."),
+  -- root_dir = require("lspconfig.util").root_pattern("pyrightconfig.json", ".git", "."),
   settings = {
     python = {
       analysis = {

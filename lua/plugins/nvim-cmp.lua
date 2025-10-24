@@ -3,6 +3,7 @@ return {
   -- enabled = false,
   event = { "InsertEnter", "BufReadPost" },
   dependencies = {
+    "R-nvim/cmp-r",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
@@ -157,6 +158,7 @@ return {
         { name = "otter" },
         { name = "crates" },
         { name = "natdat" },
+        { name = "cmp_r" },
       },
       confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,

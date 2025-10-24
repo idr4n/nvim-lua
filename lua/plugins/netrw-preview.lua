@@ -6,7 +6,7 @@ return {
   cmd = { "NetrwReveal", "NetrwRevealFile" },
   keys = {
     { ",,", "<cmd>NetrwRevealToggle<cr>", desc = "Toggle Netrw - Reveal" },
-    { ",l", "<cmd>NetrwRevealLexToggle<cr>", desc = "Toggle Netrw (Lex) - Reveal" },
+    -- { ",l", "<cmd>NetrwRevealLexToggle<cr>", desc = "Toggle Netrw (Lex) - Reveal" },
   },
   opts = {
     preview_width = 65,

@@ -71,4 +71,4 @@ require("lazy").setup("plugins", {
 })
 
 -- Load colorscheme
-vim.cmd("colorscheme minimal")
+vim.cmd("colorscheme tokyonight")

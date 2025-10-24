@@ -3,14 +3,14 @@ return {
   lazy = true,
   opts = function()
     return {
-      -- style = "moon",
-      style = "night",
+      style = "moon",
+      -- style = "night",
       -- transparent = true,
       styles = {
         -- functions = { italic = true },
         sidebars = "transparent",
         keywords = { italic = false },
-        comments = { italic = false },
+        -- comments = { italic = false },
         floats = "transparent",
       },
       on_colors = function(colors)
@@ -52,6 +52,7 @@ return {
         hl.IlluminatedWordWrite = { bg = c.bg_highlight }
         hl.floatermborder = { fg = c.magenta }
         hl.insertcursor = { bg = c.yellow }
+        hl.MiniIndentscopeSymbol = { fg = c.blue1 }
       end,
     }
   end,

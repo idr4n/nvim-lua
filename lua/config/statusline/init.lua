@@ -41,7 +41,7 @@ function Status_line()
 
   local components = {
     -- "%#SLNormal#",
-    c.padding(),
+    -- c.padding(),
     -- c.mode(),
     c.fileinfo({ add_icon = true }),
     c.BacklinkCount(),

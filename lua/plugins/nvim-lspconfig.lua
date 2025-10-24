@@ -1,6 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
-  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+  event = { "BufReadPre", "BufNewFile", "BufWritePre" },
   dependencies = {
     "mason.nvim",
     -- "saghen/blink.cmp",
@@ -39,12 +39,12 @@ return {
   },
   config = function()
     local lsp_conf = require("config.lsp")
-    local lspconfig = require("lspconfig")
+    local lsp_util = require("lspconfig.util")
     local icons = require("utils").diagnostic_icons
     local x = vim.diagnostic.severity
 
     local function is_deno_project(filename)
-      local denoRootDir = lspconfig.util.root_pattern("deno.json", "deno.jsonc")(filename)
+      local denoRootDir = lsp_util.root_pattern("deno.json", "deno.jsonc")(filename)
       return denoRootDir ~= nil
     end
 
@@ -78,7 +78,7 @@ return {
         vtsls = {
           single_file_support = not is_deno_project(vim.fn.expand("%:p")),
         },
-        denols = { root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc") },
+        denols = { root_dir = lsp_util.root_pattern("deno.json", "deno.jsonc") },
         ruff = { init_options = { settings = { lint = { enable = false } } } },
       },
 
@@ -95,11 +95,12 @@ return {
 
         -- tailwindcss
         tailwindcss = function(_, opts)
-          local tw = require("lspconfig.configs.tailwindcss")
+          local tw = vim.lsp.config["tailwindcss"]
           opts.filetypes = opts.filetypes or {}
 
           -- Add default filetypes
-          vim.list_extend(opts.filetypes, tw.default_config.filetypes)
+          local default_filetypes = tw and tw.filetypes or {}
+          vim.list_extend(opts.filetypes, default_filetypes)
 
           -- Remove excluded filetypes
           --- @param ft string
@@ -183,7 +184,8 @@ return {
     -- end
 
     -- UI border
-    require("lspconfig.ui.windows").default_options.border = "rounded"
+    local lsp_windows = require("lspconfig.ui.windows")
+    lsp_windows.default_options.border = "rounded"
     --: }}}
 
     --: Capabilities {{{
@@ -214,7 +216,8 @@ return {
           return
         end
       end
-      require("lspconfig")[server].setup(server_opts)
+      vim.lsp.config(server, server_opts)
+      vim.lsp.enable(server)
     end
 
     local servers_lists = require("config.lsp.server_names")
@@ -230,11 +233,29 @@ return {
 
     --: Servers not in Mason {{{
     -- Swift (sourcekit)
-    require("lspconfig").sourcekit.setup({
+    vim.lsp.config("sourcekit", {
       on_attach = lsp_conf.on_attach,
       capabilities = capabilities,
       filetypes = { "swift" },
     })
+    vim.lsp.enable("sourcekit")
     --: }}}
+
+    vim.api.nvim_create_autocmd("LspAttach", {
+      callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        local bufnr = args.buf
+
+        -- Disable diagnostics for Quarto files to avoid otter.nvim conflicts
+        if client.name == "r_language_server" then
+          vim.g.LanguageClient_serverCommands = {
+            r = { "R", "--slave", "-e", "languageserver::run()" },
+          }
+        end
+        if vim.bo[bufnr].filetype == "quarto" and client.name == "r_language_server" then
+          vim.diagnostic.enable(false, { bufnr = bufnr })
+        end
+      end,
+    })
   end,
 }

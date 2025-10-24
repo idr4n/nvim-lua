@@ -4,7 +4,7 @@ return {
   keys = {
     { ",b", "<cmd>Broot<cr>", desc = "Broot (CWD)" },
     { ",B", "<cmd>BrootCWD<cr>", desc = "Broot" },
-    { ",r", "<cmd>BrootSearch<cr>", desc = "Broot (Sarch Content)" },
+    -- { ",r", "<cmd>BrootSearch<cr>", desc = "Broot (Sarch Content)" },
   },
   config = function()
     vim.g.floaterm_opener = "edit"

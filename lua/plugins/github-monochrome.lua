@@ -30,6 +30,7 @@ return {
         -- hl["@keyword.function"] = { bold = true }
         hl.floatermborder = { fg = c.red }
         hl.insertcursor = { bg = c.red }
+        hl.MiniIndentscopeSymbol = { fg = c.magenta }
 
         if s == "solarized" then
           hl.IblScope = { fg = "#62868C" }
