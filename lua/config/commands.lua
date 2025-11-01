@@ -28,6 +28,49 @@ command(
   'execute \'silent !pandoc "%" --listings -H ~/.config/pandoc/listings-setup.tex -o "%:r.pdf" --number-sections\'',
   {}
 )
+
+-- Markdown preview commands using `gh-markdown-preview`
+command("MarkdownPreviewStart", function()
+  vim.cmd("MarkdownPreviewStop")
+  local file = vim.fn.expand("%")
+
+  -- Check if file is markdown
+  if vim.bo.filetype ~= "markdown" then
+    vim.notify("Not a markdown file", vim.log.levels.WARN)
+    return
+  end
+
+  _G.md_preview_job = vim.fn.jobstart("gh markdown-preview " .. file, {
+    detach = false,
+    on_exit = function()
+      _G.md_preview_job = nil
+      vim.notify("Markdown preview exited", vim.log.levels.INFO)
+    end,
+  })
+  vim.notify("Markdown preview started at http://localhost:3333", vim.log.levels.INFO)
+end, {})
+command("MarkdownPreviewStop", function()
+  if _G.md_preview_job then
+    vim.fn.jobstop(_G.md_preview_job)
+    _G.md_preview_job = nil
+    vim.notify("Markdown preview stopped", vim.log.levels.INFO)
+  end
+end, {})
+command("MarkdownPreviewToggle", function()
+  if _G.md_preview_job then
+    vim.cmd("MarkdownPreviewStop")
+  else
+    vim.cmd("MarkdownPreviewStart")
+  end
+end, {})
+vim.keymap.set(
+  "n",
+  "<leader>mp",
+  "<cmd>MarkdownPreviewToggle<cr>",
+  { desc = "Custom Command: Toggle markdown preview" }
+)
+
+-- Convert Markdown to PDF
 command("MdToPdfWatch", function()
   if _G.fswatch_job_id then
     print("Fswatch job already running.")
