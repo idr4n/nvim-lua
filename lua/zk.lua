@@ -20,6 +20,25 @@ function M.get_backlinks(path, callback)
   end)
 end
 
+function M.get_forwardlinks(path, callback)
+  vim.system({ "zk", "list", "-q", "-f", "json", "-L", path }, {}, function(result)
+    local paths = {}
+
+    if result.code == 0 and result.stdout and result.stdout ~= "" then
+      local ok, json_data = pcall(vim.json.decode, result.stdout)
+      if ok and json_data and type(json_data) == "table" then
+        for _, note in ipairs(json_data) do
+          if note and note.path then
+            table.insert(paths, note.path)
+          end
+        end
+      end
+    end
+
+    callback(paths)
+  end)
+end
+
 -- Check if current buffer is in ZK directory
 function M.is_zk_note(bufnr)
   if not zk_dir then
@@ -33,8 +52,9 @@ end
 -- Namespace for our virtual text
 local ns_id = vim.api.nvim_create_namespace("zk_backlinks")
 
--- Store backlink data for navigation
-local backlink_data = {}
+-- Store link data for navigation
+-- Structure: { [bufnr] = { backlinks = {...}, forwardlinks = {...} } }
+local link_data = {}
 
 -- Buffer utilities
 local function get_current_buffer_info()
@@ -47,61 +67,99 @@ local function get_zk_file_path(relative_path)
   return zk_dir and (zk_dir .. "/" .. relative_path) or relative_path
 end
 
-local function create_backlink_virtual_lines(backlinks)
+local function create_link_virtual_lines(backlinks, forwardlinks)
   local virt_lines = {}
 
-  -- empty line between title and backlinks
+  -- empty line between title and links
   table.insert(virt_lines, { { "", "Normal" } })
 
-  -- Add header
-  local header_text = string.format("🔗 Backlinks (%d) - Press <Enter> or number to navigate:", #backlinks)
-  table.insert(virt_lines, { { header_text, "Comment" } })
+  -- Add backlinks section if any exist
+  if #backlinks > 0 then
+    local header_text = string.format("🔗 Backlinks (%d) - Press <Enter> or number to navigate:", #backlinks)
+    table.insert(virt_lines, { { header_text, "Comment" } })
 
-  -- Add each backlink
-  for i, link in ipairs(backlinks) do
-    local display_text = string.format("  %d. %s", i, link)
-    table.insert(virt_lines, { { display_text, "Directory" } })
+    -- Add each backlink
+    for i, link in ipairs(backlinks) do
+      local display_text = string.format("  %d. %s", i, link)
+      table.insert(virt_lines, { { display_text, "Directory" } })
+    end
+
+    -- Add separator after backlinks
+    table.insert(virt_lines, { { "", "Normal" } })
   end
 
-  -- Add separator after backlinks
-  table.insert(virt_lines, { { "", "Normal" } })
+  -- Add forward links section if any exist
+  if #forwardlinks > 0 then
+    local header_text = string.format("→ Forward Links (%d) - Press <Enter> or number to navigate:", #forwardlinks)
+    table.insert(virt_lines, { { header_text, "Special" } })
+
+    -- Add each forward link
+    for i, link in ipairs(forwardlinks) do
+      local display_text = string.format("  %d. %s", i, link)
+      table.insert(virt_lines, { { display_text, "String" } })
+    end
+
+    -- Add separator after forward links
+    table.insert(virt_lines, { { "", "Normal" } })
+  end
 
   return virt_lines
 end
 
 local function setup_navigation_keymaps(bufnr)
-  -- Enter key navigation
+  -- Enter key navigation - navigates to first link of active section
   vim.keymap.set("n", "<CR>", function()
-    if M.is_in_backlinks_area() and M.navigate_to_backlink(1) then
-      return
+    local section = M.get_active_link_section()
+    if section == "backlinks" then
+      if M.navigate_to_backlink(1) then
+        return
+      end
+    elseif section == "forwardlinks" then
+      if M.navigate_to_forwardlink(1) then
+        return
+      end
     end
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<CR>", true, false, true), "n", false)
-  end, { buffer = bufnr, silent = true, desc = "Navigate to first backlink or normal enter" })
+  end, { buffer = bufnr, silent = true, desc = "Navigate to first link or normal enter" })
 
-  -- Number keys 1-9 for specific backlink navigation
+  -- Number keys 1-9 for navigation (section depends on cursor position)
   for i = 1, 9 do
     vim.keymap.set("n", tostring(i), function()
-      local links = backlink_data[bufnr]
-      if links and links[i] and M.is_in_backlinks_area() then
+      local section = M.get_active_link_section()
+      local links = link_data[bufnr]
+
+      if section == "backlinks" and links and links.backlinks and links.backlinks[i] then
         M.navigate_to_backlink(i)
+      elseif section == "forwardlinks" and links and links.forwardlinks and links.forwardlinks[i] then
+        M.navigate_to_forwardlink(i)
       else
         vim.api.nvim_feedkeys(tostring(i), "n", false)
       end
-    end, { buffer = bufnr, silent = true, desc = "Navigate to backlink " .. i .. " or insert number" })
+    end, { buffer = bufnr, silent = true, desc = "Navigate to link " .. i .. " or insert number" })
   end
 end
 
--- Add backlinks as virtual text at top of buffer
+-- Add links as virtual text at top of buffer
 function M.show_backlinks()
   local bufnr, current_file = get_current_buffer_info()
   if not M.is_zk_note(bufnr) then
     return
   end
 
-  -- Clear existing backlinks first
+  -- Clear existing links first
   vim.api.nvim_buf_clear_namespace(bufnr, ns_id, 0, -1)
 
-  M.get_backlinks(current_file, function(backlinks)
+  -- We need to fetch both backlinks and forwardlinks
+  local backlinks_done = false
+  local forwardlinks_done = false
+  local backlinks_result = {}
+  local forwardlinks_result = {}
+
+  local function maybe_display()
+    if not backlinks_done or not forwardlinks_done then
+      return
+    end
+
     vim.schedule(function()
       -- Check if buffer is still valid (user might have switched)
       if not vim.api.nvim_buf_is_valid(bufnr) then
@@ -113,33 +171,49 @@ function M.show_backlinks()
         return
       end
 
-      if #backlinks == 0 then
+      -- Only display if we have at least one type of link
+      if #backlinks_result == 0 and #forwardlinks_result == 0 then
         return
       end
 
-      -- Store backlink data for this buffer
-      backlink_data[bufnr] = backlinks
+      -- Store link data for this buffer
+      link_data[bufnr] = {
+        backlinks = backlinks_result,
+        forwardlinks = forwardlinks_result,
+      }
 
       -- Create and display virtual lines
-      local virt_lines = create_backlink_virtual_lines(backlinks)
+      local virt_lines = create_link_virtual_lines(backlinks_result, forwardlinks_result)
       vim.api.nvim_buf_set_extmark(bufnr, ns_id, 0, 0, {
         virt_lines = virt_lines,
         virt_lines_above = false,
       })
     end)
+  end
+
+  M.get_backlinks(current_file, function(backlinks)
+    backlinks_result = backlinks
+    backlinks_done = true
+    maybe_display()
+  end)
+
+  M.get_forwardlinks(current_file, function(forwardlinks)
+    forwardlinks_result = forwardlinks
+    forwardlinks_done = true
+    maybe_display()
   end)
 end
 
 -- Navigate to specific backlink by index
 function M.navigate_to_backlink(index)
   local bufnr = vim.api.nvim_get_current_buf()
-  local links = backlink_data[bufnr]
-  if not links or #links == 0 then
+  local links = link_data[bufnr]
+  if not links or not links.backlinks or #links.backlinks == 0 then
     return false
   end
 
   index = index or 1
-  local selected_link = links[index]
+  local selected_link = links.backlinks[index]
   if selected_link then
     local full_path = get_zk_file_path(selected_link)
     vim.cmd("edit " .. vim.fn.fnameescape(full_path))
@@ -149,29 +223,67 @@ function M.navigate_to_backlink(index)
   return false
 end
 
--- Check if cursor is near backlinks area
-function M.is_in_backlinks_area()
-  local cursor_line = vim.fn.line(".")
+-- Navigate to specific forward link by index
+function M.navigate_to_forwardlink(index)
   local bufnr = vim.api.nvim_get_current_buf()
-
-  -- Check if we have backlinks for this buffer
-  local links = backlink_data[bufnr]
-  if not links or #links == 0 then
+  local links = link_data[bufnr]
+  if not links or not links.forwardlinks or #links.forwardlinks == 0 then
     return false
   end
 
-  -- Virtual text appears after line 1 (title), so backlinks area is:
-  -- Line 1: title (navigation works here)
-  -- Line 2: where virtual backlinks appear (cursor can't actually be here)
-  -- We allow navigation when cursor is on the title line
-  return cursor_line == 1
+  index = index or 1
+  local selected_link = links.forwardlinks[index]
+  if selected_link then
+    local full_path = get_zk_file_path(selected_link)
+    vim.cmd("edit " .. vim.fn.fnameescape(full_path))
+    return true
+  end
+
+  return false
 end
 
--- Clear backlinks display
+-- Check which link section the cursor is in
+-- Returns: "backlinks", "forwardlinks", or nil
+function M.get_active_link_section()
+  local cursor_line = vim.fn.line(".")
+  local bufnr = vim.api.nvim_get_current_buf()
+
+  -- Check if we have any links for this buffer
+  local links = link_data[bufnr]
+  if not links then
+    return nil
+  end
+
+  local has_backlinks = links.backlinks and #links.backlinks > 0
+  local has_forwardlinks = links.forwardlinks and #links.forwardlinks > 0
+
+  if not has_backlinks and not has_forwardlinks then
+    return nil
+  end
+
+  -- Line 1: Backlinks navigation zone
+  if cursor_line == 1 then
+    return has_backlinks and "backlinks" or (has_forwardlinks and "forwardlinks" or nil)
+  end
+
+  -- Lines 2-4: Forward links navigation zone
+  if cursor_line >= 2 and cursor_line <= 4 then
+    return has_forwardlinks and "forwardlinks" or nil
+  end
+
+  return nil
+end
+
+-- Check if cursor is in any link area (for backward compatibility)
+function M.is_in_links_area()
+  return M.get_active_link_section() ~= nil
+end
+
+-- Clear links display
 function M.hide_backlinks()
   local bufnr = vim.api.nvim_get_current_buf()
   vim.api.nvim_buf_clear_namespace(bufnr, ns_id, 0, -1)
-  backlink_data[bufnr] = nil
+  link_data[bufnr] = nil
 end
 
 local function zk_completion(arg_lead)
