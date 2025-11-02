@@ -21,6 +21,17 @@ function M.get_backlinks(path, callback)
 end
 
 function M.get_forwardlinks(path, callback)
+  -- First, read the file to identify valid wiki-links and exclude anchor links
+  local file_content = vim.fn.readfile(path)
+  local valid_links = {}
+
+  -- Find all wiki-links [[note]]
+  for _, line in ipairs(file_content) do
+    for link in line:gmatch("%[%[([^%]]+)%]%]") do
+      valid_links[link] = true
+    end
+  end
+
   vim.system({ "zk", "list", "-q", "-f", "json", "-L", path }, {}, function(result)
     local paths = {}
 
@@ -29,7 +40,15 @@ function M.get_forwardlinks(path, callback)
       if ok and json_data and type(json_data) == "table" then
         for _, note in ipairs(json_data) do
           if note and note.path then
-            table.insert(paths, note.path)
+            -- Extract the note ID from the path (e.g., "qelc-enia-variable-mappings" from "qelc-enia-variable-mappings.md")
+            local note_id = note.path:match("([^/]+)%.md$") or note.path
+            note_id = note_id:gsub("%.md$", "")
+
+            -- Only include this note if it's referenced via a wiki-link
+            -- This excludes false matches from anchor links
+            if valid_links[note_id] or valid_links[note.path] then
+              table.insert(paths, note.path)
+            end
           end
         end
       end

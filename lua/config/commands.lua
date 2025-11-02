@@ -563,3 +563,41 @@ vim.keymap.set("n", "<leader>sg", function()
   end)
 end, { desc = "Search Project - ScratchToQuickfix" })
 --: }}}
+
+-- Follow internal markdown links
+command("FollowMarkdownLink", function()
+  -- Get current line
+  local line = vim.api.nvim_get_current_line()
+
+  -- Extract the link target from [text](#target) format
+  local target = line:match("%[.-%]%(#([^%)]+)%)")
+
+  if not target then
+    vim.notify("No markdown link found on current line", vim.log.levels.WARN)
+    return
+  end
+
+  -- Convert anchor to heading text (replace - with space and _ with space)
+  local heading_text = target:gsub("[-_]", " ")
+
+  -- Escape special characters for vim regex
+  heading_text = vim.fn.escape(heading_text, "\\")
+
+  -- Search for the heading (any level) - case insensitive
+  -- \c makes the search case insensitive
+  local pattern = "\\c^#\\+\\s\\+" .. heading_text
+
+  local found = vim.fn.search(pattern, "w")
+
+  if found == 0 then
+    vim.notify("Heading not found: #" .. target, vim.log.levels.WARN)
+  end
+end, {})
+
+-- Set up Enter key mapping only for markdown buffers
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.keymap.set("n", "<leader>ga", ":FollowMarkdownLink<cr>", { buffer = true, desc = "Follow markdown link" })
+  end,
+})
