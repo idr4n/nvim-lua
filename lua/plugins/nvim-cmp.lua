@@ -3,7 +3,6 @@ return {
   -- enabled = false,
   event = { "InsertEnter", "BufReadPost" },
   dependencies = {
-    "R-nvim/cmp-r",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",

@@ -1,5 +1,12 @@
 return {
   "MeanderingProgrammer/render-markdown.nvim",
+  cond = function()
+    local cwd = vim.fn.getcwd()
+    local disabled_dirs = {
+      vim.fn.expand("~/Dropbox/Notes-Database"),
+    }
+    return not vim.tbl_contains(disabled_dirs, cwd)
+  end,
   ft = { "markdown", "Avante", "codecompanion", "copilot-chat" },
   opts = {
     file_types = { "markdown", "Avante", "codecompanion", "copilot-chat" },

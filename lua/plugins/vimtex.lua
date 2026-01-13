@@ -1,6 +1,6 @@
 return {
   "lervag/vimtex",
-  lazy = false,
+  ft = "tex",
   init = function()
     vim.g.vimtex_view_method = vim.fn.has("mac") == 1 and "sioyek" or "zathura"
     vim.g.vimtex_compiler_silent = 1

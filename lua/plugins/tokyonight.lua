@@ -3,8 +3,8 @@ return {
   lazy = true,
   opts = function()
     return {
-      style = "moon",
-      -- style = "night",
+      -- style = "moon",
+      style = "night",
       -- transparent = true,
       styles = {
         -- functions = { italic = true },

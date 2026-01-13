@@ -1,44 +1,33 @@
 return {
-  -- "epwalsh/obsidian.nvim",
   "obsidian-nvim/obsidian.nvim",
   cond = function()
     local cwd = vim.fn.getcwd()
     local enabled_dirs = {
-      vim.fn.expand("~/pCloud/Notes-Database"),
+      vim.fn.expand("~/Dropbox/Notes-Database"),
     }
     return vim.tbl_contains(enabled_dirs, cwd)
   end,
 
   version = "*", -- recommended, use latest release instead of latest commit
   ft = "markdown",
-  dependencies = {
-    -- Required.
-    "nvim-lua/plenary.nvim",
-  },
   opts = {
-    ui = { enable = false },
+    -- ui = { enable = false },
+    legacy_commands = false,
     workspaces = {
       {
         name = "personal",
-        path = "~/pCloud/Notes-Database",
+        path = "~/Dropbox/Notes-Database",
         overrides = {
           notes_subdir = "00-Inbox",
         },
       },
       {
-        name = "work",
-        path = "~/pCloud/Notes-zk",
-      },
-      -- Usage outside of a workspace or vault
-      {
         name = "no-vault",
         path = function()
-          -- alternatively use the CWD:
-          -- return assert(vim.fn.getcwd())
           return assert(vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
         end,
         overrides = {
-          notes_subdir = vim.NIL, -- have to use 'vim.NIL' instead of 'nil'
+          notes_subdir = vim.NIL,
           new_notes_location = "current_dir",
           templates = {
             subdir = vim.NIL,
@@ -46,43 +35,30 @@ return {
         },
       },
     },
-    -- ui = { enable = false },
     new_notes_location = "notes_subdir",
     wiki_link_func = "use_alias_only",
-    disable_frontmatter = true,
-    mappings = {
-      -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
-      ["gf"] = {
-        action = function()
-          return require("obsidian").util.gf_passthrough()
-        end,
-        opts = { noremap = false, expr = true, buffer = true, desc = "Obsidian Follow Link" },
-      },
-      -- Toggle check-boxes.
-      ["<leader>tt"] = {
-        action = function()
-          return require("obsidian").util.toggle_checkbox()
-        end,
-        opts = { buffer = true, desc = "Toggle check-box (Obsidian)" },
-      },
+    frontmatter = { enable = false },
+    callbacks = {
+      enter_note = function(_)
+        vim.keymap.set("n", "<leader>tt", "<cmd>Obsidian toggle_checkbox<cr>", {
+          buffer = true,
+          desc = "Toggle checkbox",
+        })
+      end,
     },
 
-    -- Optional, customize how note file names are generated given the ID, target directory, and title.
-    ---@alias obsidian.Path string
-    ---@param spec { id: string, dir: obsidian.Path, title: string|? }
-    ---@return string|obsidian.Path The full path to the new note.
     note_path_func = function(spec)
-      -- This is equivalent to the default behavior.
       local path = spec.dir / spec.title
       return path:with_suffix(".md")
     end,
+
+    daily_notes = { folder = "Daily-Notes" },
 
     -- Templates
     templates = {
       subdir = "templates",
       date_format = "%Y-%m-%d-%a",
       time_format = "%I:%M%p",
-      -- A map for custom variables, the key should be the variable and the value a function
       substitutions = {},
     },
   },

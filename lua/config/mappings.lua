@@ -461,7 +461,7 @@ keyset("x", "<Space>D", compare_to_clipboard, { desc = "Compare to clipboard" })
 
 --: Utility mappings {{{
 keyset("n", "<space>y", "<cmd>let @+ = expand('%:p')<CR>")
-keyset("n", "<C-P>", function()
+keyset("n", ",p", function()
   local peek = require("utils").lazy_require("peek")
   peek().peek_definition()
 end, { desc = "Peek Definition" })

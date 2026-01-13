@@ -18,7 +18,7 @@ return {
     -- cmd = { "CccPick" },
     keys = {
       -- { ",c", "<cmd>CccHighlighterToggle<cr>", silent = true, desc = "Toggle colorizer" },
-      { ",p", "<cmd>CccPick<cr>", silent = true, desc = "Pick color" },
+      { ",C", "<cmd>CccPick<cr>", silent = true, desc = "Pick color" },
     },
     opts = function()
       local ccc = require("ccc")
