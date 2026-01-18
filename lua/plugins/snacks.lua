@@ -21,6 +21,7 @@ return {
       "*.class",
     }
     return {
+      notifier = { enabled = true },
       image = {
         enabled = false,
         doc = { inline = false },
