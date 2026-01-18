@@ -6,9 +6,9 @@ return {
   opts = function()
     -- local flavour = "macchiato"
     -- local flavour = "mocha"
-    -- local flavour = "frappe"
-    -- local cp = require("catppuccin.palettes").get_palette(flavour)
-    local cp = require("catppuccin.palettes").get_palette()
+    local flavour = "frappe"
+    local cp = require("catppuccin.palettes").get_palette(flavour)
+    -- local cp = require("catppuccin.palettes").get_palette()
     return {
       no_italic = true,
       -- transparent_background = true,
@@ -38,6 +38,7 @@ return {
         TSNamespace = { fg = cp.blue, style = {} },
         -- StatusLine = { bg = cp.mantle },
         -- StatusLine = { fg = cp.overlay1, bg = "NONE", style = { "underline" } },
+        NormalFloat = { bg = "NONE" },
         NeoTreeNormal = { bg = cp.mantle },
         NeoTreeNormalNC = { bg = cp.mantle },
         NotifyBackground = { bg = "#000000" },

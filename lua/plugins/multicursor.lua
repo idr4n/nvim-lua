@@ -1,6 +1,7 @@
 return {
   "jake-stewart/multicursor.nvim",
   branch = "1.0",
+  event = { "BufReadPost", "BufNewFile" },
   keys = function()
     local wk = require("which-key")
     wk.add({

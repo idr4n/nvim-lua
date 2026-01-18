@@ -1,12 +1,15 @@
 return {
   "gbprod/nord.nvim",
-  enabled = false,
+  -- enabled = false,
   lazy = true,
   opts = function()
     return {
       styles = {
         comments = { italic = false },
       },
+      on_colors = function(colors)
+        colors.polar_night.origin = "#282C34"
+      end,
       on_highlights = function(hl, c)
         hl.CursorLine = { bg = "#343A46" }
         -- hl.NvimTreeNormal = { bg = nvimtree_bg }
@@ -20,8 +23,10 @@ return {
         hl.RenderMarkdownH5Bg = { fg = c.aurora.orange }
         hl.RenderMarkdownH6Bg = { fg = c.aurora.orange }
         hl.RenderMarkdownCode = { bg = c.polar_night.bright }
-        hl.NoiceCmdlinePopUp = { bg = "#363E4C" }
-        hl.StatusLine = { bg = c.polar_night.bright }
+        -- hl.NoiceCmdlinePopUp = { bg = "#363E4C" }
+        hl.NoiceCmdlinePopUp = { bg = c.polar_night.origin }
+        -- hl.StatusLine = { bg = c.polar_night.bright }
+        hl.StatusLine = { bg = c.polar_night.origin }
         hl.Substitute = { bg = c.aurora.red }
         hl.BufferLineFill = { bg = c.polar_night.origin }
         -- hl.BufferLineIndicatorSelected = { fg = c.aurora.yellow, bg = c.polar_night.origin }

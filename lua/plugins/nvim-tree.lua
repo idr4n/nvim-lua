@@ -162,8 +162,8 @@ return {
 
     view = {
       adaptive_size = false,
-      -- side = "left",
-      side = "right",
+      side = "left",
+      -- side = "right",
       width = 29,
       preserve_window_proportions = true,
       signcolumn = "no",
