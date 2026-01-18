@@ -94,6 +94,58 @@ M.snips.lt = p(
 ]]
 )
 
+M.snips.lt = p(
+  {
+    trig = "quiz",
+    name = "Typst 'quiz' template",
+    dscr = "Typst 'quiz' template",
+  },
+  [[
+#set page(
+  paper: "a4",
+  margin: (x: 2cm, top: 2.5cm, bottom: 2cm),
+  header: align(left)[
+    Name: #box()[#line(length: 6cm, stroke: 0.5pt)] #h(2cm) Student ID: #box()[#line(length: 4cm, stroke: 0.5pt)]
+  ],
+  header-ascent: 20pt,
+)
+
+#set text(
+  font: "New Computer Modern",
+  size: 11pt
+)
+
+#set par(
+  spacing: 0.65em,
+  justify: true
+)
+
+#set enum(full: true, numbering: (..n) => {
+  let format = if n.pos().len() > 1 {"(a)"} else {"1."}
+  numbering(format, n.pos().last())
+})
+
+#align(center, text(13pt)[
+  *Quiz ${1} - ${2:Econ207}* \
+  *${3:Fall 2025}*
+])
+
+\
+
++ (2.5 marks)
+
+\
+
+#align(center)[
+  #line(length: 100%, stroke: 0.3pt)
+  WRITE YOUR ANSWERS IN ORDER BELOW THIS LINE \
+  YOU CAN ALSO USE THE BACK OF THE SHEET
+  #line(length: 100%, stroke: 0.3pt)
+]
+
+]]
+)
+
 -- autosnippets
 M.autosnips.bb = p({
   trig = ";bb",
