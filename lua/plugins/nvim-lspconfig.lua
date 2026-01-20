@@ -48,6 +48,14 @@ return {
       return denoRootDir ~= nil
     end
 
+    local vue_plugin = {
+      name = "@vue/typescript-plugin",
+      -- location = vue_language_server_path,
+      location = vim.fn.expand("$MASON/packages") .. "/vue-language-server" .. "/node_modules/@vue/language-server",
+      languages = { "vue" },
+      configNamespace = "typescript",
+    }
+
     local opts = {
       diagnostics = {
         update_in_insert = false,
@@ -76,6 +84,10 @@ return {
         -- solargraph = require("config.lsp.server_settings.solargraph"),
         tailwindcss = require("config.lsp.server_settings.tailwindcss"),
         vtsls = {
+          settings = {
+            vtsls = { tsserver = { globalPlugins = { vue_plugin } } },
+          },
+          filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
           single_file_support = not is_deno_project(vim.fn.expand("%:p")),
         },
         denols = { root_dir = lsp_util.root_pattern("deno.json", "deno.jsonc") },
