@@ -9,6 +9,7 @@ return {
     { "<M-\\>", ":ToggleTerm<cr>", mode = { "n", "t" }, desc = "Toggle Horizontal Term" },
     { "<M-`>", '<cmd>ToggleTerm dir="%:p:h"<cr>', mode = { "n", "t" }, desc = "Toggle Horizontal Term" },
     { "<C-\\>", "<cmd>2ToggleTerm direction=vertical<cr>", mode = { "n", "t" }, desc = "Toggle Vertical Term" },
+    { "<C-f>", "<cmd>TmuxSessionizer<cr>", mode = { "n", "t" }, desc = "TmuxSessionizer" },
   },
   opts = {
     -- size = 25,
@@ -54,6 +55,16 @@ return {
     local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float", float_opts = float_opts })
     local gitu = Terminal:new({ cmd = "gitu", hidden = true, direction = "float", float_opts = float_opts })
     local tig = Terminal:new({ cmd = "tig", hidden = true, direction = "float", float_opts = float_opts })
+    local tmuxsessionizer = Terminal:new({
+      cmd = "tmux-sessionizer",
+      hidden = true,
+      direction = "float",
+      float_opts = {
+        border = "",
+        width = math.floor(vim.fn.winwidth(0) * 0.7),
+        height = math.floor(vim.fn.winheight(0) * 0.35),
+      },
+    })
 
     -- :Lazygit
     vim.api.nvim_create_user_command("LazyGit", function()
@@ -63,13 +74,17 @@ return {
         lazygit:toggle()
       end
     end, {})
-    -- :GitUI
+    -- :Gitu
     vim.api.nvim_create_user_command("Gitu", function()
       if os.getenv("TERM_PROGRAM") == "tmux" then
         vim.cmd("execute 'silent !tmux split-window -v -l 80\\% gitu'")
       else
         gitu:toggle()
       end
+    end, {})
+    -- :TmuxSessionizer
+    vim.api.nvim_create_user_command("TmuxSessionizer", function()
+      tmuxsessionizer:toggle()
     end, {})
     -- :Tig
     vim.api.nvim_create_user_command("Tig", function()
