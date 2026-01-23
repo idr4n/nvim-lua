@@ -31,9 +31,17 @@ function Status_line()
   local filetypes = { "neo-tree", "minifiles", "NvimTree", "oil", "TelescopePrompt", "fzf", "snacks_picker_input" }
   if vim.tbl_contains(filetypes, filetype) then
     local home_dir = os.getenv("HOME")
-    local api = require("nvim-tree.api")
-    local node = api.tree.get_node_under_cursor()
-    local dir = filetype == "NvimTree" and node.absolute_path or vim.fn.getcwd()
+    local dir
+    if filetype == "NvimTree" then
+      local ok, api = pcall(require, "nvim-tree.api")
+      if not ok then
+        return ""
+      end
+      local node = api.tree.get_node_under_cursor()
+      dir = node and node.absolute_path or vim.fn.getcwd()
+    else
+      dir = vim.fn.getcwd()
+    end
     dir = dir:gsub("^" .. home_dir, "~")
     local ft = filetype:sub(1, 1):upper() .. filetype:sub(2)
     return c.decorator({ name = ft .. ": " .. dir, align = "left" })

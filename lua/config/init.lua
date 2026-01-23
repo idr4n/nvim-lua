@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd("User", {
     -- load mappings
     require("config.mappings")
     -- load statusline
-    require("config.statusline")
+    -- require("config.statusline")
   end,
 })
 
@@ -71,4 +71,4 @@ require("lazy").setup("plugins", {
 })
 
 -- Load colorscheme
-vim.cmd("colorscheme andromeda")
+vim.cmd("colorscheme gruvbox-dark-hard")

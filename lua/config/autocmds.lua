@@ -298,7 +298,7 @@ vim.cmd([[
 -- After loading zenbones, wind, etc. colorschemes
 aucmd("ColorScheme", {
   group = augroup("ColorsCustomization"),
-  pattern = { "zenbones", "wind", "seoul256", "gruvbox-material", "gruvbox" },
+  pattern = { "zenbones", "wind", "seoul256", "gruvbox-material", "gruvbox", "gruvbox-dark-hard" },
   callback = function()
     local ut = require("utils")
     local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
@@ -387,6 +387,32 @@ aucmd("ColorScheme", {
       vim.api.nvim_set_hl(0, "WhichKeyNormal", { bg = "#282828" })
     end
 
+    if vim.g.colors_name == "gruvbox-dark-hard" then
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
+      vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#3c3836" })
+      vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = "#3c3836" })
+      vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE" })
+      vim.api.nvim_set_hl(0, "FoldColumn", { bg = "NONE" })
+      vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "NONE" })
+      vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#b8bb26", bg = "NONE" })
+      vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#83a598", bg = "NONE" })
+      vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#fb4934", bg = "NONE" })
+      vim.api.nvim_set_hl(0, "GitGutterAdd", { fg = "#b8bb26", bg = "NONE" })
+      vim.api.nvim_set_hl(0, "GitGutterChange", { fg = "#83a598", bg = "NONE" })
+      vim.api.nvim_set_hl(0, "GitGutterDelete", { fg = "#fb4934", bg = "NONE" })
+      vim.api.nvim_set_hl(0, "SignifySignAdd", { fg = "#b8bb26", bg = "NONE" })
+      vim.api.nvim_set_hl(0, "SignifySignChange", { fg = "#83a598", bg = "NONE" })
+      vim.api.nvim_set_hl(0, "SignifySignDelete", { fg = "#fb4934", bg = "NONE" })
+      vim.api.nvim_set_hl(0, "StatusLine", { fg = "#bdae93", bg = "NONE" })
+      vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#3c3836" })
+      vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bg = "#3c3836" })
+      vim.api.nvim_set_hl(0, "IlluminatedWordText", { bg = "#3c3836" })
+      vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { bg = "#3c3836" })
+      vim.api.nvim_set_hl(0, "illuminatedCurWord", { bg = "#3c3836" })
+      vim.api.nvim_set_hl(0, "illuminatedWord", { bg = "#3c3836" })
+      vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#3c3836" })
+    end
+
     if vim.g.colors_name == "gruvbox-material" then
       local config = vim.fn["gruvbox_material#get_configuration"]()
       local palette =
@@ -434,3 +460,31 @@ aucmd("ColorScheme", {
     vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = "#FF87D7" })
   end,
 })
+
+-- - Base16 colors.
+-- local gui00 = "#1d2021"
+-- local gui01 = "#3c3836"
+-- local gui02 = "#504945"
+-- local gui03 = "#665c54"
+-- local gui04 = "#bdae93"
+-- local gui05 = "#d5c4a1"
+-- local gui06 = "#ebdbb2"
+-- local gui07 = "#fbf1c7"
+-- local gui08 = "#fb4934"
+-- local gui09 = "#fe8019"
+-- local gui0A = "#fabd2f"
+-- local gui0B = "#b8bb26"
+-- local gui0C = "#8ec07c"
+-- local gui0D = "#83a598"
+-- local gui0E = "#d3869b"
+-- local gui0F = "#d65d0e"
+--
+-- -- Base24 colors.
+-- local gui10 = "#1d2021"
+-- local gui11 = "#1d2021"
+-- local gui12 = "#fb4934"
+-- local gui13 = "#fabd2f"
+-- local gui14 = "#b8bb26"
+-- local gui15 = "#8ec07c"
+-- local gui16 = "#83a598"
+-- local gui17 = "#d3869b"
