@@ -411,6 +411,7 @@ aucmd("ColorScheme", {
       vim.api.nvim_set_hl(0, "illuminatedCurWord", { bg = "#3c3836" })
       vim.api.nvim_set_hl(0, "illuminatedWord", { bg = "#3c3836" })
       vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#3c3836" })
+      vim.api.nvim_set_hl(0, "TreesitterContextBottom", { sp = "#83a598", underline = true })
     end
 
     if vim.g.colors_name == "gruvbox-material" then
