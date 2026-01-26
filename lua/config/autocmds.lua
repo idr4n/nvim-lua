@@ -461,31 +461,3 @@ aucmd("ColorScheme", {
     vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = "#FF87D7" })
   end,
 })
-
--- - Base16 colors.
--- local gui00 = "#1d2021"
--- local gui01 = "#3c3836"
--- local gui02 = "#504945"
--- local gui03 = "#665c54"
--- local gui04 = "#bdae93"
--- local gui05 = "#d5c4a1"
--- local gui06 = "#ebdbb2"
--- local gui07 = "#fbf1c7"
--- local gui08 = "#fb4934"
--- local gui09 = "#fe8019"
--- local gui0A = "#fabd2f"
--- local gui0B = "#b8bb26"
--- local gui0C = "#8ec07c"
--- local gui0D = "#83a598"
--- local gui0E = "#d3869b"
--- local gui0F = "#d65d0e"
---
--- -- Base24 colors.
--- local gui10 = "#1d2021"
--- local gui11 = "#1d2021"
--- local gui12 = "#fb4934"
--- local gui13 = "#fabd2f"
--- local gui14 = "#b8bb26"
--- local gui15 = "#8ec07c"
--- local gui16 = "#83a598"
--- local gui17 = "#d3869b"

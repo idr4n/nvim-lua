@@ -3,14 +3,14 @@ return {
   lazy = true,
   opts = function()
     return {
-      -- style = "moon",
-      style = "night",
+      style = "moon",
+      -- style = "night",
       -- transparent = true,
       styles = {
         -- functions = { italic = true },
         sidebars = "transparent",
         keywords = { italic = false },
-        -- comments = { italic = false },
+        comments = { italic = false },
         floats = "transparent",
       },
       on_colors = function(colors)
@@ -45,7 +45,7 @@ return {
         hl.MiniTablineCurrent = { bg = c.bg }
         hl.MiniTablineVisible = { fg = c.magenta, bg = c.bg_highlight }
         hl.MiniTablineModifiedCurrent = { fg = c.yellow, bg = c.bg }
-        hl.StatusLine = { fg = c.fg_dark, bg = c.none }
+        -- hl.StatusLine = { fg = c.fg_dark, bg = c.bg_dark }
         -- hl.NoiceCmdlinePopUp = { bg = c.bg_dark }
         hl.IlluminatedWordText = { bg = c.bg_highlight }
         hl.IlluminatedWordRead = { bg = c.bg_highlight }
