@@ -54,7 +54,7 @@ function M.load_session(name)
   local session_file = session_dir .. "/" .. name .. ".vim"
   if vim.fn.filereadable(session_file) == 1 then
     vim.cmd("silent! source " .. vim.fn.fnameescape(session_file))
-    print("Session loaded for " .. cwd)
+    -- print("Session loaded for " .. cwd)
   else
     print("Session not found for " .. cwd)
   end
