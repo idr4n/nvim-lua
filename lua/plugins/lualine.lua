@@ -196,8 +196,10 @@ return {
         theme = vim.g.colors_name == "minimal" and minimal or theme,
         globalstatus = vim.o.laststatus == 3,
         disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter", "telescope" } },
-        section_separators = vim.env.TERM == "alacritty" and { left = "", right = "" }
-          or { left = "", right = "" },
+        -- section_separators = vim.env.TERM == "alacritty" and { left = "", right = "" }
+        --   or { left = "", right = "" },
+        section_separators = { left = "", right = "" },
+        component_separators = { left = "", right = "" },
       },
       sections = {
         lualine_a = {
