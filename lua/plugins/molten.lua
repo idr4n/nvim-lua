@@ -1,6 +1,7 @@
 return {
   {
     "benlubas/molten-nvim",
+    enabled = false,
     -- dependencies = { "3rd/image.nvim" },
     build = ":UpdateRemotePlugins",
     keys = { { "<localleader>mi", ":MoltenInit<cr>", desc = "Molten - init kernel" } },

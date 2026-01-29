@@ -2,6 +2,7 @@ return {
   "folke/snacks.nvim",
   opts = function()
     local exclude_pattern = {
+      ".obsidian",
       "node_modules",
       ".DS_Store",
       ".next",
@@ -63,7 +64,7 @@ return {
   keys = function()
     local snacks = require("snacks")
     local default_opts =
-      { layout = { preset = "select", layout = { width = 0.6, min_width = 100, height = 0.3, min_height = 17 } } }
+      { layout = { preset = "select", layout = { width = 0.5, min_width = 90, height = 0.3, min_height = 15 } } }
 
     -- stylua: ignore
     local buffers_opts = {

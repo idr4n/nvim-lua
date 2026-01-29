@@ -1,6 +1,7 @@
 return {
   "quarto-dev/quarto-nvim",
   dev = false,
+  enabled = false,
   ft = { "quarto" },
   dependencies = {
     {

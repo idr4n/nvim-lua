@@ -187,22 +187,6 @@ aucmd("BufWinEnter", {
   end,
 })
 
--- Before saving session with Shatur/neovim-session-manager
-aucmd("User", {
-  pattern = "SessionSavePre",
-  group = augroup("Session"),
-  callback = function()
-    -- remove buffers whose files are located outside of cwd
-    local cwd = vim.fn.getcwd() .. "/"
-    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-      local bufpath = vim.api.nvim_buf_get_name(buf) .. "/"
-      if not bufpath:match("^" .. vim.pesc(cwd)) then
-        vim.api.nvim_buf_delete(buf, {})
-      end
-    end
-  end,
-})
-
 -- Reset cursor shape on exit (needed in Fish within Tmux somehow)
 aucmd("VimLeave", {
   group = augroup("CursorShape"),
