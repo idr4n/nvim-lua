@@ -37,7 +37,7 @@ return {
     },
     new_notes_location = "notes_subdir",
     wiki_link_func = "use_alias_only",
-    frontmatter = { enable = false },
+    frontmatter = { enabled = false },
     callbacks = {
       enter_note = function(_)
         vim.keymap.set("n", "<leader>tt", "<cmd>Obsidian toggle_checkbox<cr>", {
@@ -56,7 +56,7 @@ return {
 
     -- Templates
     templates = {
-      subdir = "templates",
+      subdir = "Templates",
       date_format = "%Y-%m-%d-%a",
       time_format = "%I:%M%p",
       substitutions = {},
