@@ -105,15 +105,15 @@ return {
       --   silent = true,
       --   desc = "LSP workspace symbols (FzfLua)",
       -- },
-      {
-        "<leader>gs",
-        -- "<cmd>FzfLua git_status<cr>",
-        function()
-          require("fzf-lua").git_status(fzflua_theme())
-        end,
-        silent = true,
-        desc = "Git Status",
-      },
+      -- {
+      --   "<leader>gs",
+      --   -- "<cmd>FzfLua git_status<cr>",
+      --   function()
+      --     require("fzf-lua").git_status(fzflua_theme())
+      --   end,
+      --   silent = true,
+      --   desc = "Git Status",
+      -- },
     }
   end,
   opts = function()
