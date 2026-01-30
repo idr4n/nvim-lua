@@ -8,5 +8,8 @@ return {
       comments = { italic = false },
       keywords = { italic = false },
     },
+    on_highlights = function(hl, c)
+      hl.Bold = { fg = c.fg, bg = c.bg_highlight, bold = true }
+    end,
   },
 }
