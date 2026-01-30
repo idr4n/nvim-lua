@@ -92,8 +92,8 @@ local dracula_custom = {
 -- }
 
 local utils = require("utils")
--- local theme = vim.g.colors_name == "dracula" and dracula_custom or "auto"
-local theme = "powerline"
+local theme = vim.g.colors_name == "dracula" and dracula_custom or "auto"
+-- local theme = "powerline"
 
 local function fileinfo()
   local dir = utils.pretty_dirpath()()
@@ -101,7 +101,7 @@ local function fileinfo()
   -- local name = (path == "" and "Empty ") or path:match("([^/\\]+)[/\\]*$")
   local name = path:match("([^/\\]+)[/\\]*$")
 
-  return dir .. "/" .. name .. " %m%r%h%w "
+  return dir .. "/" .. "%#Bold#" .. name .. "%#lualine_c_normal#" .. " %m%r%h%w "
 end
 
 local function show_macro_recording()
@@ -162,6 +162,7 @@ end
 return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
+  -- cond = false,
   init = function()
     vim.g.lualine_laststatus = vim.o.laststatus
     if vim.fn.argc(-1) > 0 then
@@ -257,11 +258,6 @@ return {
           {
             function()
               return require("lsp-progress").progress()
-            end,
-            color = function()
-              return utils.get_fg("Added") and utils.get_fg("Added")
-                or utils.get_fg("DiffAdded") and utils.get_fg("DiffAdded")
-                or utils.get_fg("DiffAdd")
             end,
           },
           "searchcount",
