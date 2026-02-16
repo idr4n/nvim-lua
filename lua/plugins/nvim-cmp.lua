@@ -166,7 +166,7 @@ return {
       window = {
         completion = {
           border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-          winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
+          winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None,FloatBorder:CmpBorder",
           side_padding = 0,
           -- For oxocarbon style (comment out border and use winhighlight below)
           -- winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,FloatBorder:Pmenu,Search:None",

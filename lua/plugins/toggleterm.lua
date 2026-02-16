@@ -3,9 +3,10 @@ return {
   -- enabled = false,
   cmd = { "ToggleTerm" },
   keys = {
-    { "<leader>gl", ":LazyGit<cr>", desc = "LazyGit" },
-    { "<leader>gu", ":Gitu<cr>", desc = "Gitu" },
-    { "<leader>gt", ":Tig<cr>", desc = "Tig" },
+    { "<leader>gl", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+    { "<leader>gu", "<cmd>Gitu<cr>", desc = "Gitu" },
+    { "<leader>gg", "<cmd>Gitui<cr>", desc = "Gitui" },
+    { "<leader>gt", "<cmd>Tig<cr>", desc = "Tig" },
     { "<M-\\>", ":ToggleTerm<cr>", mode = { "n", "t" }, desc = "Toggle Horizontal Term" },
     { "<M-`>", '<cmd>ToggleTerm dir="%:p:h"<cr>', mode = { "n", "t" }, desc = "Toggle Horizontal Term" },
     { "<C-\\>", "<cmd>2ToggleTerm direction=vertical<cr>", mode = { "n", "t" }, desc = "Toggle Vertical Term" },
@@ -54,6 +55,7 @@ return {
     local Terminal = require("toggleterm.terminal").Terminal
     local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float", float_opts = float_opts })
     local gitu = Terminal:new({ cmd = "gitu", hidden = true, direction = "float", float_opts = float_opts })
+    local gitui = Terminal:new({ cmd = "gitui", hidden = true, direction = "float", float_opts = float_opts })
     local tig = Terminal:new({ cmd = "tig", hidden = true, direction = "float", float_opts = float_opts })
     local tmuxsessionizer = Terminal:new({
       cmd = "tmux-sessionizer",
@@ -80,6 +82,14 @@ return {
         vim.cmd("execute 'silent !tmux split-window -v -l 80\\% gitu'")
       else
         gitu:toggle()
+      end
+    end, {})
+    -- :Gitui
+    vim.api.nvim_create_user_command("Gitui", function()
+      if os.getenv("TERM_PROGRAM") == "tmux" then
+        vim.cmd("execute 'silent !tmux split-window -v -l 80\\% gitui'")
+      else
+        gitui:toggle()
       end
     end, {})
     -- :TmuxSessionizer

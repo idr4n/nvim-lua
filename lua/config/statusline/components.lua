@@ -146,8 +146,9 @@ local statusline_hls = {}
 
 ---@param hl_bg? string
 ---@param hl_fg string
+---@param bold? boolean
 ---@return string
-function M.get_or_create_hl(hl_fg, hl_bg)
+function M.get_or_create_hl(hl_fg, hl_bg, bold)
   hl_bg = hl_bg or "Normal"
   local sanitized_hl_fg = hl_fg:gsub("#", "")
   local sanitized_hl_bg = hl_bg:gsub("#", "")
@@ -183,6 +184,7 @@ function M.get_or_create_hl(hl_fg, hl_bg)
     vim.api.nvim_set_hl(0, hl_name, {
       bg = bg_hl.bg and (type(bg_hl.bg) == "string" and bg_hl.bg or ("#%06x"):format(bg_hl.bg)) or "none",
       fg = fg_hl.fg and (type(fg_hl.fg) == "string" and fg_hl.fg or ("#%06x"):format(fg_hl.fg)) or "none",
+      bold = bold,
     })
     statusline_hls[hl_name] = true
   end
@@ -239,7 +241,9 @@ function M.fileinfo(opts)
   return " "
     .. (dir ~= "" and pretty_dir .. "  " or "")
     .. (opts.add_icon and icon .. " " or "")
+    .. M.get_or_create_hl("", "", true)
     .. name
+    .. "%*"
     .. modified
     .. " %r%h%w "
 end

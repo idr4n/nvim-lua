@@ -77,11 +77,13 @@ return {
     return {
       { "<C-Space>", function() snacks.picker.files(default_opts) end, desc = "Find Files" },
       -- { "<C-P>", function() snacks.picker.files(default_opts) end, desc = "Find Files" },
+      { "<leader>r", function() snacks.picker.grep() end, desc = "Grep" },
+      { "<leader>r", function() snacks.picker.grep_word() end, desc = "Visual selection", mode = { "x" } },
       { "<leader>so", function() snacks.picker.buffers(buffers_opts) end, desc = "Buffers" },
       { "<leader>:", function() snacks.picker.command_history() end, desc = "Command History" },
       { "<leader>'", function() snacks.picker.resume() end, desc = "Resume" },
       { "<leader>u", function() snacks.picker.undo() end, desc = "Undo Tree" },
-      -- { "<C-P>", function() snacks.picker() end, desc = "Show all pickers" },
+      { "<leader>sp", function() snacks.picker() end, desc = "Show all pickers" },
       -- find
       { "<leader>fb", function() snacks.picker.buffers() end, desc = "Buffers" },
       { "<leader>fg", function() snacks.picker.git_files() end, desc = "Find Git Files" },
@@ -100,7 +102,7 @@ return {
       { "<leader>sk", function() snacks.picker.keymaps() end, desc = "Keymaps" },
       { "<leader>sM", function() snacks.picker.man() end, desc = "Man Pages" },
       { "<leader>sm", function() snacks.picker.marks() end, desc = "Marks" },
-      { "<leader>sR", function() snacks.picker.resume() end, desc = "Resume Snacks Picker" },
+      { "<leader>or", function() snacks.picker.resume() end, desc = "Resume Snacks Picker" },
       { "<leader>sq", function() snacks.picker.qflist() end, desc = "Quickfix List" },
       { "<leader>qp", function() snacks.picker.projects() end, desc = "Projects" },
       -- LSP

@@ -94,6 +94,10 @@ local dracula_custom = {
 local utils = require("utils")
 local theme = vim.g.colors_name == "dracula" and dracula_custom or "auto"
 -- local theme = "powerline"
+-- local custom_theme = require("lualine.themes.github-monochrome-light")
+-- local custom_theme = require("lualine.themes.base").get({ style = "light" })
+-- custom_theme.normal.c.fg = "#000000"
+-- custom_theme.normal.c.bg = "#ff0000"
 
 local function fileinfo()
   local dir = utils.pretty_dirpath()()
@@ -162,7 +166,7 @@ end
 return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
-  -- cond = false,
+  cond = false,
   init = function()
     vim.g.lualine_laststatus = vim.o.laststatus
     if vim.fn.argc(-1) > 0 then

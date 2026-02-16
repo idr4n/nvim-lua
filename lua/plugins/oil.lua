@@ -11,7 +11,8 @@ return {
     end
   end,
   keys = {
-    { "-", "<cmd>Oil<cr>", desc = "Oil - Parent Dir" },
+    { ",,", "<cmd>Oil<cr>", desc = "Oil - Parent Dir" },
+    -- { "-", "<cmd>Oil<cr>", desc = "Oil - Parent Dir" },
     { "<leader>oo", "<cmd>Oil --float<cr>", desc = "Oil Float - Parent Dir" },
   },
   opts = {
