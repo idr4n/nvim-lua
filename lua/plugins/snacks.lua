@@ -75,10 +75,10 @@ return {
 
     -- stylua: ignore
     return {
-      { "<C-Space>", function() snacks.picker.files(default_opts) end, desc = "Find Files" },
-      -- { "<C-P>", function() snacks.picker.files(default_opts) end, desc = "Find Files" },
-      { "<leader>r", function() snacks.picker.grep() end, desc = "Grep" },
-      { "<leader>r", function() snacks.picker.grep_word() end, desc = "Visual selection", mode = { "x" } },
+      -- { "<C-Space>", function() snacks.picker.files(default_opts) end, desc = "Find Files" },
+      { "<C-P>", function() snacks.picker.files(default_opts) end, desc = "Find Files" },
+      -- { "<leader>r", function() snacks.picker.grep() end, desc = "Grep" },
+      -- { "<leader>r", function() snacks.picker.grep_word() end, desc = "Visual selection", mode = { "x" } },
       { "<leader>so", function() snacks.picker.buffers(buffers_opts) end, desc = "Buffers" },
       { "<leader>:", function() snacks.picker.command_history() end, desc = "Command History" },
       { "<leader>'", function() snacks.picker.resume() end, desc = "Resume" },
