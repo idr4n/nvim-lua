@@ -66,7 +66,7 @@ opt.updatetime = 300 -- control CursorHold event waiting time (4000ms default)
 opt.wrap = false -- display lines as one long line
 opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 
-opt.shortmess:append({ I = true, c = true, C = true, S = true, W = true, s = true }) -- uncomment if not using noice
+opt.shortmess:append({ I = false, c = true, C = true, S = true, W = true, s = true }) -- uncomment if not using noice
 -- opt.shortmess:append({ W = true, I = true, c = true, C = true }) -- comment if not using noice
 opt.nrformats:append("alpha") -- increments letters sequences as well with <c-a>
 

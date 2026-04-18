@@ -208,6 +208,36 @@ aucmd("FileType", {
   end,
 })
 
+-- Bind 's' to restore session on the startup empty buffer
+aucmd("VimEnter", {
+  group = augroup("SessionRestoreOnStartup"),
+  once = true,
+  callback = function(args)
+    local buf = args.buf
+    if vim.fn.argc() ~= 0 then
+      return
+    end
+    if vim.api.nvim_buf_get_name(buf) ~= "" then
+      return
+    end
+    if vim.bo[buf].buftype ~= "" or vim.bo[buf].filetype ~= "" then
+      return
+    end
+    if vim.api.nvim_buf_line_count(buf) ~= 1 then
+      return
+    end
+    if vim.api.nvim_buf_get_lines(buf, 0, 1, false)[1] ~= "" then
+      return
+    end
+
+    vim.keymap.set("n", "s", function()
+      require("sessions").load_session()
+    end, { buffer = buf, nowait = true, desc = "Restore session" })
+    vim.keymap.set("n", "l", ":Lazy<cr>", { buffer = buf, nowait = true, desc = "Restore session" })
+    vim.keymap.set("n", "q", ":qa<cr>", { buffer = buf, nowait = true, desc = "Quit Neovim" })
+  end,
+})
+
 -- Auto-save session on exit
 aucmd("VimLeavePre", {
   group = augroup("SessionManagement"),
