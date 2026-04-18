@@ -11,7 +11,7 @@ return {
     -- local cp = require("catppuccin.palettes").get_palette()
     return {
       no_italic = true,
-      -- transparent_background = true,
+      transparent_background = true,
       -- flavour = flavour,
       styles = {
         -- functions = { "italic" },
@@ -39,8 +39,8 @@ return {
         -- StatusLine = { bg = cp.mantle },
         -- StatusLine = { fg = cp.overlay1, bg = "NONE", style = { "underline" } },
         NormalFloat = { bg = "NONE" },
-        NeoTreeNormal = { bg = cp.mantle },
-        NeoTreeNormalNC = { bg = cp.mantle },
+        -- NeoTreeNormal = { bg = cp.mantle },
+        -- NeoTreeNormalNC = { bg = cp.mantle },
         NotifyBackground = { bg = "#000000" },
         NvimTreeIndentMarker = { fg = cp.surface0 },
         NvimTreeFolderIcon = { fg = cp.mauve },

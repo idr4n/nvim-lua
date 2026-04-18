@@ -19,6 +19,9 @@ return {
         border = "FloatBorder",
         -- border = "Normal",
       },
+      grep = {
+        modes = { "fuzzy", "regex", "plain" },
+      },
     })
   end,
   keys = {

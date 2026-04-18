@@ -7,15 +7,15 @@ return {
     opts = {
       -- style = "dark",
       -- alternate_style = "rosepine",
-      -- transparent = true,
+      transparent = true,
       styles = {
         comments = { italic = false },
         -- keywords = { bold = false },
         -- functions = { bold = false },
         -- statements = { bold = false }, -- e.g., try/except statements, but also if, for, etc.
-        -- sidebars = "transparent", -- "dark", "transparent" or "normal"
+        sidebars = "transparent", -- "dark", "transparent" or "normal"
         -- sidebars = "dark", -- "dark", "transparent" or "normal"
-        -- floats = "transparent", -- "dark", "transparent" or "normal"
+        floats = "transparent", -- "dark", "transparent" or "normal"
       },
       on_highlights = function(hl, c, s)
         -- hl.FloatBorder = { fg = c.magenta }
@@ -52,7 +52,7 @@ return {
         hl.FloatBoarder = { fg = c.border_highlight, bg = new_bg }
         hl.CmpBorder = { fg = c.border_highlight, bg = new_bg }
         hl.NoicePopupBorder = { bg = new_bg }
-        hl.StatusLine = { bg = new_bg }
+        -- hl.StatusLine = { bg = new_bg }
         hl.TelescopeNormal = { bg = new_bg }
         hl.TelescopeBorder = { fg = c.border_highlight, bg = new_bg }
         hl.TelescopePromptTitle = { bg = new_bg }
@@ -60,8 +60,8 @@ return {
         hl.SnacksPickerBorder = { fg = c.border_highlight, bg = new_bg }
         hl.SnacksPickerTitle = { bg = new_bg }
         hl.SnacksPickerInputBorder = { fg = c.magenta, bg = new_bg }
-        hl.NeoTreeNormal = { bg = new_bg }
-        hl.NeoTreeNormalNC = { bg = new_bg }
+        -- hl.NeoTreeNormal = { bg = new_bg }
+        -- hl.NeoTreeNormalNC = { bg = new_bg }
       end,
 
       on_colors = function(c, s)

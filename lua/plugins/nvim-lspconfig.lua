@@ -92,6 +92,11 @@ return {
         },
         denols = { root_dir = lsp_util.root_pattern("deno.json", "deno.jsonc") },
         ruff = { init_options = { settings = { lint = { enable = false } } } },
+        tinymist = {
+          settings = {
+            rootPath = os.getenv("HOME"),
+          },
+        },
       },
 
       custom_server_setup = {

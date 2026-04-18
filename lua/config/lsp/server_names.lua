@@ -8,6 +8,7 @@ M.ensure_installed = {
   "css-lsp",
   "cssmodules-language-server",
   -- "emmet-ls",
+  "elixir-ls",
   "flake8",
   "gofumpt",
   "goimports",
