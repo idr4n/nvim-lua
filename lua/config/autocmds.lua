@@ -233,8 +233,12 @@ aucmd("VimEnter", {
     vim.keymap.set("n", "s", function()
       require("sessions").load_session()
     end, { buffer = buf, nowait = true, desc = "Restore session" })
-    vim.keymap.set("n", "l", ":Lazy<cr>", { buffer = buf, nowait = true, desc = "Restore session" })
-    vim.keymap.set("n", "q", ":qa<cr>", { buffer = buf, nowait = true, desc = "Quit Neovim" })
+    vim.keymap.set("n", "l", function()
+      vim.cmd("Lazy")
+    end, { buffer = buf, nowait = true, desc = "Restore session" })
+    vim.keymap.set("n", "q", function()
+      vim.cmd("silent qa")
+    end, { buffer = buf, nowait = true, desc = "Quit Neovim" })
   end,
 })
 
