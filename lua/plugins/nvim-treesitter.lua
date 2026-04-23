@@ -1,25 +1,17 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    -- version = false,
+    branch = "main",
     build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-    cmd = { "TSUpdateSync", "TSUpdate", "TSInstall", "TSUninstall" },
-    dependencies = {
-      -- Additional Nushell parser
-      { "nushell/tree-sitter-nu", build = ":TSUpdate nu" },
-    },
-    opts = {
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<leader>a",
-          scope_incremental = false,
-          node_incremental = "<leader>a",
-          node_decremental = "<bs>",
-        },
-      },
-      ensure_installed = {
+    -- lazy = false,
+    cmd = { "TSUpdate", "TSInstall", "TSUninstall", "TSLog" },
+    config = function()
+      require("nvim-treesitter").setup({
+        -- optional: where parsers get installed
+        install_dir = vim.fn.stdpath("data") .. "/site",
+      })
+
+      local ensure_installed = {
         "bash",
         "cpp",
         "css",
@@ -36,6 +28,7 @@ return {
         "lua",
         "luap",
         "markdown",
+        "markdown_inline",
         "nu",
         "python",
         "regex",
@@ -50,24 +43,79 @@ return {
         "vimdoc",
         "vue",
         "zig",
-      },
-      -- autopairs = { enable = true },
-      highlight = { enable = true, additional_vim_regex_highlighting = false },
-      indent = { enable = true },
-      -- context_commentstring = { enable = true, enable_autocmd = false },
-      playground = { enabled = true },
+      }
+
+      -- Install parsers asynchronously on startup
+      require("nvim-treesitter").install(ensure_installed)
+
+      -- Enable highlight + indent per filetype
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function(args)
+          local buf = args.buf
+          local ft = vim.bo[buf].filetype
+          -- Map filetype -> parser language if they differ
+          local lang = vim.treesitter.language.get_lang(ft)
+          if not lang then
+            return
+          end
+          -- Only start if parser is available
+          if not pcall(vim.treesitter.start, buf, lang) then
+            return
+          end
+          -- Indent via treesitter
+          vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          -- Folds (optional)
+          -- vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+          -- vim.wo.foldmethod = "expr"
+        end,
+      })
+    end,
+    dependencies = {
+      { "nushell/tree-sitter-nu" },
     },
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
-      require("ts_context_commentstring").setup({})
-      vim.g.skip_ts_context_commentstring_module = true
+  },
+
+  -- Textobjects: also on `main`, also rewritten
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
+    event = "VeryLazy",
+    config = function()
+      require("nvim-treesitter-textobjects").setup({
+        select = {
+          lookahead = true,
+        },
+        -- move / swap submodules also exist; see :h nvim-treesitter-textobjects
+      })
+
+      local map = vim.keymap.set
+      local ts_select = require("nvim-treesitter-textobjects.select").select_textobject
+
+      map({ "x", "o" }, "af", function()
+        ts_select("@function.outer", "textobjects")
+      end, { desc = "outer function" })
+      map({ "x", "o" }, "if", function()
+        ts_select("@function.inner", "textobjects")
+      end, { desc = "inner function" })
+      map({ "x", "o" }, "ac", function()
+        ts_select("@conditional.outer", "textobjects")
+      end, { desc = "outer conditional" })
+      map({ "x", "o" }, "ic", function()
+        ts_select("@conditional.inner", "textobjects")
+      end, { desc = "inner conditional" })
+      map({ "x", "o" }, "al", function()
+        ts_select("@loop.outer", "textobjects")
+      end, { desc = "outer loop" })
+      map({ "x", "o" }, "il", function()
+        ts_select("@loop.inner", "textobjects")
+      end, { desc = "inner loop" })
     end,
   },
 
+  -- Context: still works, but verify it supports main-branch treesitter
   {
     "nvim-treesitter/nvim-treesitter-context",
-    -- enabled = false,
-    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+    event = { "BufReadPost", "BufNewFile" },
     opts = {
       max_lines = 3,
       multiline_threshold = 1,
@@ -83,7 +131,6 @@ return {
       {
         "<leader>lc",
         function()
-          -- Jump to previous change when in diffview.
           vim.schedule(function()
             require("treesitter-context").go_to_context()
           end)
@@ -94,41 +141,4 @@ return {
       },
     },
   },
-
-  {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    event = "LspAttach",
-    opts = {
-      textobjects = {
-        select = {
-          enable = true,
-
-          -- Automatically jump forward to textobj, similar to targets.vim
-          lookahead = true,
-
-          keymaps = {
-            -- You can use the capture groups defined in textobjects.scm
-            ["af"] = "@function.outer",
-            ["if"] = "@function.inner",
-            ["ac"] = "@conditional.outer",
-            ["ic"] = "@conditional.inner",
-            ["al"] = "@loop.outer",
-            ["il"] = "@loop.inner",
-          },
-        },
-        lsp_interop = {
-          enable = true,
-          border = "rounded",
-          peek_definition_code = {
-            ["<leader>dp"] = "@function.outer",
-          },
-        },
-      },
-    },
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
-    end,
-  },
-
-  { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
 }
