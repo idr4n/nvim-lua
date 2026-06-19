@@ -7,6 +7,7 @@ return {
   end,
   config = function()
     require("fff").setup({
+      follow_symlinks = true,
       preview = { enabled = true },
       -- debug = { show_scores = true, }, -- Toggle with F2 or :FFFDebug
       keymaps = {
