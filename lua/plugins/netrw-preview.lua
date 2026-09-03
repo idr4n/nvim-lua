@@ -1,6 +1,6 @@
 return {
   "idr4n/netrw-preview.nvim",
-  -- dev = false,
+  dev = false,
   -- cond = false,
   ft = "netrw",
   cmd = { "NetrwReveal", "NetrwRevealFile" },

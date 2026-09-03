@@ -4,8 +4,13 @@ return {
   lazy = true,
   opts = function()
     return {
+      -- transparent = true,
       styles = {
         comments = { italic = false },
+      },
+      colorblind = {
+        enable = true,
+        preserve_background = true,
       },
       on_colors = function(colors)
         colors.polar_night.origin = "#282C34"
@@ -25,8 +30,8 @@ return {
         hl.RenderMarkdownCode = { bg = c.polar_night.bright }
         -- hl.NoiceCmdlinePopUp = { bg = "#363E4C" }
         hl.NoiceCmdlinePopUp = { bg = c.polar_night.origin }
-        -- hl.StatusLine = { bg = c.polar_night.bright }
-        hl.StatusLine = { bg = c.polar_night.origin }
+        hl.StatusLine = { bg = c.polar_night.bright }
+        -- hl.StatusLine = { bg = c.polar_night.origin }
         hl.Substitute = { bg = c.aurora.red }
         hl.BufferLineFill = { bg = c.polar_night.origin }
         -- hl.BufferLineIndicatorSelected = { fg = c.aurora.yellow, bg = c.polar_night.origin }
