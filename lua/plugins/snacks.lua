@@ -24,7 +24,7 @@ return {
     return {
       notifier = { enabled = true },
       image = {
-        enabled = false,
+        enabled = true,
         doc = { inline = false },
         math = {
           enabled = false,

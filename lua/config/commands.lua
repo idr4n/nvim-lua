@@ -32,7 +32,7 @@ command(
 -- Markdown preview commands using `gh-markdown-preview`
 command("MarkdownPreviewStart", function()
   vim.cmd("MarkdownPreviewStop")
-  local file = vim.fn.expand("%")
+  local file = vim.fn.expand("%:p")
 
   -- Check if file is markdown
   if vim.bo.filetype ~= "markdown" then
@@ -40,13 +40,41 @@ command("MarkdownPreviewStart", function()
     return
   end
 
-  _G.md_preview_job = vim.fn.jobstart("gh markdown-preview " .. file, {
+  -- argv list (no shell) so paths with spaces/special chars survive;
+  -- keep the output so a failed start shows why.
+  local output = {}
+  local function collect(_, data)
+    for _, line in ipairs(data) do
+      if line ~= "" then
+        table.insert(output, line)
+      end
+    end
+  end
+  local job
+  job = vim.fn.jobstart({ "gh", "markdown-preview", file }, {
+    cwd = vim.fn.fnamemodify(file, ":h"),
     detach = false,
-    on_exit = function()
-      _G.md_preview_job = nil
-      vim.notify("Markdown preview exited", vim.log.levels.INFO)
+    on_stdout = collect,
+    on_stderr = collect,
+    on_exit = function(_, code)
+      if _G.md_preview_job == job then
+        _G.md_preview_job = nil
+      end
+      if code ~= 0 and code ~= 143 then
+        vim.notify(
+          "Markdown preview exited (" .. code .. "):\n" .. table.concat(vim.list_slice(output, #output - 9), "\n"),
+          vim.log.levels.ERROR
+        )
+      else
+        vim.notify("Markdown preview exited", vim.log.levels.INFO)
+      end
     end,
   })
+  if job <= 0 then
+    vim.notify("Could not start gh markdown-preview (is gh on PATH?)", vim.log.levels.ERROR)
+    return
+  end
+  _G.md_preview_job = job
   vim.notify("Markdown preview started at http://localhost:3333", vim.log.levels.INFO)
 end, {})
 command("MarkdownPreviewStop", function()

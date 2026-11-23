@@ -71,4 +71,46 @@ require("lazy").setup("plugins", {
 })
 
 -- Load colorscheme
-vim.cmd("colorscheme nord")
+-- Match the colorscheme to the active Omarchy theme.
+local state_home = vim.env.XDG_STATE_HOME
+if not state_home or state_home == "" then
+  state_home = vim.env.HOME .. "/.local/state"
+end
+
+local omarchy_current = state_home .. "/omarchy/current"
+
+local file = io.open(omarchy_current .. "/theme.name", "r")
+local omarchy_theme = file and file:read("*l") or nil
+if file then
+  file:close()
+end
+
+-- Light/dark mode of the Omarchy theme: `mode = "light"` in colors.toml,
+-- or a legacy `light.mode` marker file. Defaults to dark.
+local function omarchy_mode()
+  local colors = io.open(omarchy_current .. "/theme/colors.toml", "r")
+  if colors then
+    for line in colors:lines() do
+      local mode = line:match('^%s*mode%s*=%s*"(%a+)"') or line:match('^%s*theme_type%s*=%s*"(%a+)"')
+      if mode then
+        colors:close()
+        return mode
+      end
+    end
+    colors:close()
+  end
+  if vim.uv.fs_stat(omarchy_current .. "/theme/light.mode") then
+    return "light"
+  end
+  return "dark"
+end
+
+local colorschemes = {
+  snow = "github-monochrome-light",
+  nord = "nord",
+  ["tokyo-night"] = "tokyonight",
+  lupine = "github-monochrome-light",
+}
+local colorscheme = colorschemes[omarchy_theme]
+  or (omarchy_mode() == "light" and "github-monochrome-light" or "tokyonight")
+vim.cmd.colorscheme(colorscheme)
